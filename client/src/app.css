@@ -1,0 +1,159 @@
+/* ----   html & body styles    ---- */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 0.75vw;
+}
+body {
+  color: black !important;
+  font-family: "Baloo Thambi 2";
+}
+
+#root {
+  align-items: start;
+  height: 100vh;
+}
+/* ----   ****    ---- */
+
+
+/* ----   App component styles    ---- */
+.app {
+  padding: 0 0;
+  margin: 0 0;
+  height: 100vh;
+}
+
+.app__sidebar {
+  width: 385px !important;
+  max-width: 75% !important;
+  border-right: 10px rgb(98, 102, 74);
+  box-shadow: inset 1px 0px 2.5vh 2.5vh rgba(132, 138, 101, 0.925);
+  background-color: #aab185;
+}
+
+.panelSection {
+  margin: 2.85vh 0;
+}
+
+.app__canvas {
+  box-shadow: inset 1px 0px 20px 20px rgba(132, 138, 101, 0.514);
+  background-size: cover;
+  background: radial-gradient(rgba(121, 126, 92, 0.1) 15%, transparent 16%) 0 0,
+  radial-gradient(rgba(121, 126, 92, 0.1) 15%, transparent 16%) 8px 8px,
+  radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 0 1px,
+  radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 20%) 8px 9px;
+  background-color: #959b74;
+  background-size: 16px 16px;
+  display: inline-block;
+}
+
+
+.app__display {
+  margin: 0 0;
+  padding: 0 0;
+  width: 100%;
+  height: 100%;
+}
+/* ----   ****    ---- */
+
+/* ----   Sidebar component styles    ---- */
+.sidebar__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  height: 100%;
+}
+
+.sidebar__row {
+  max-width: 510px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.sidebar__row-header {
+  margin-left: 1px;
+}
+
+.sidebar__row-content {
+  flex: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+/* ----   ****    ---- */
+
+/* ----   Header component styles    ---- */
+.header__title {
+  font-size: 3.75rem;
+}
+
+.form__heading {
+  max-width: 400px;
+  margin: 1vh 1.75vh;
+  font-size: 1.65vh;
+}
+
+.form__step {
+  margin-bottom: 10%;
+}
+
+.step__icon {
+  display: inline-block;
+  color: #494b4d;
+  font-size: 0.9rem;
+}
+
+.step__icon-active {
+  display: inline-block;
+  color: #1f2225;
+  border-bottom: 1px solid #1f2225;
+  border-radius: 0.5px;
+  font-size: 1.2rem;
+}
+
+/* ----   ****    ---- */
+
+/* ----   Canvas component styles    ---- */
+
+/* ----   ****    ---- */
+
+/* ----   form styles    ---- */
+
+/* ----   ****    ---- */
+
+/* ----   button styles    ---- */
+
+.game__button {
+  font-size: 1.15vw;
+  color: white;
+  background-color: #494b4d;
+  border: 1px solid #494b4d;
+  border-radius: 50%;
+  height: 115px;
+  width: 115px;
+}
+
+/* ----   ****    ---- */
+
+
+
+
+
+
+
+
+/* ----   App component styles    ---- */
+/* ----   ****    ---- */
+/* ----   App component styles    ---- */
+/* ----   ****    ---- */
+/* ----   App component styles    ---- */
+/* ----   ****    ---- */
+/* ----   App component styles    ---- */
+/* ----   ****    ---- */
+/* ----   App component styles    ---- */
+/* ----   ****    ---- */
+

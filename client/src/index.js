@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import './app.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -8,6 +10,6 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.querySelector('root'));
+  document.querySelector('#root'));
 
 
