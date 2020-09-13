@@ -57,6 +57,7 @@ body {
 }
 /* ----   ****    ---- */
 
+
 /* ----   Sidebar component styles    ---- */
 .sidebar__content {
   display: flex;
@@ -66,6 +67,8 @@ body {
 }
 
 .sidebar__row {
+  display: flex;
+  flex-direction: column;
   max-width: 510px;
   width: 100%;
   margin: 0 auto;
@@ -77,14 +80,18 @@ body {
 
 .sidebar__row-content {
   flex: max-content;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 5%;
 }
 
+.sidebar__row-buttons {
+  flex-direction: row;
+  margin-bottom: 5%;
+
+}
 /* ----   ****    ---- */
+
 
 /* ----   Header component styles    ---- */
 .header__title {
@@ -114,19 +121,37 @@ body {
   border-radius: 0.5px;
   font-size: 1.2rem;
 }
-
 /* ----   ****    ---- */
+
 
 /* ----   Canvas component styles    ---- */
 
 /* ----   ****    ---- */
 
-/* ----   form styles    ---- */
 
+/* ----   form styles    ---- */
+.form__group {
+  text-align: left;
+  width: 75%
+}
+
+.form__label {
+  margin-bottom: 0.2rem;
+  font-size: 1.15rem;
+}
+
+.form__control {
+  margin-bottom: 0.7rem;
+}
+
+.form__option {
+  color: #495057;
+  background-color: rgba(128, 128, 128, 0.034);
+}
 /* ----   ****    ---- */
 
-/* ----   button styles    ---- */
 
+/* ----   button styles    ---- */
 .game__button {
   font-size: 1.15vw;
   color: white;
@@ -137,6 +162,44 @@ body {
   width: 115px;
 }
 
+.sidebar__btn {
+  text-align: center;
+  font-weight: 100;
+  font-size: 0.8vw;
+  padding: 0.75vh 1vw;
+  color: white;
+  background-color: #494b4d;
+  border: 1px solid #494b4d;
+  border-radius: 5px;
+  line-height: 0.8vw;
+  min-width: 60%;
+}
+
+.sidebar__btn:hover {
+  cursor: pointer;
+  background-color: #1f2225;
+  border-color: #1f2225;
+}
+
+.sidebar__btn:disabled {
+  pointer-events: none;
+  color: #494b4d;
+  background-color: #898c8d;
+  background: none;
+  border: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sidebar__btn-next {
+
+}
+
+.sidebar__btn-prev {
+
+}
 /* ----   ****    ---- */
 
 

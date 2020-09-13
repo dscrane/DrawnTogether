@@ -100,18 +100,20 @@ export const nextForm = (currentForm) => async dispatch => {
     payload: {updateCircles: true}
   })
 
+  const newForm = currentForm + 1;
   await dispatch({
     type: NEXT_FORM,
-    payload: {currentForm: currentForm++, updateCircles: false}
+    payload: {currentForm: newForm, updateCircles: false}
   })
 }
 /* ----   ****    ---- */
 
 /* ----   PREV_FORM ACTION CREATOR    ---- */
 export const prevForm = currentForm => dispatch => {
+  const newForm = currentForm - 1;
   dispatch({
     type: PREV_FORM,
-    payload: {currentForm: currentForm--}
+    payload: {currentForm: newForm}
   })
 }
 /* ----   ****    ---- */

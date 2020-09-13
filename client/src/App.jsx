@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
-import {Sidebar} from "./components/sidebar/Sidebar";
+import { default as Sidebar } from "./components/sidebar/Sidebar";
 
 export const App = () => {
   return (

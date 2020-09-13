@@ -90,6 +90,7 @@ export default (state=INITIAL_STATE, action) => {
         ...action.payload
       }
     case NEXT_FORM:
+      console.log('[NEXT_FORM]', action.payload)
       return {
         ...state,
         ...action.payload

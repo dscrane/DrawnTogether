@@ -1,13 +1,10 @@
 import React from "react";
-import { connect } from 'react-redux';
 
-export const Header = ({ players, currentForm, displayCircles, formNames }) => {
-  console.log(players,displayCircles)
 
+export const Header = ({ currentForm, formNames }) => {
   const createFormSteps = () => {
-    const formSteps = [];
-    formNames.forEach((heading, i) => {
-      formSteps.push(
+    return formNames.map((heading, i) => {
+      return (
         i === currentForm ? (
           <span key={`${heading}-active`}>
             <span className="step__icon step__icon-active">{heading}</span>
@@ -21,8 +18,6 @@ export const Header = ({ players, currentForm, displayCircles, formNames }) => {
         )
       );
     })
-
-    return formSteps;
   };
 
   const formHeaderOne =
@@ -53,3 +48,4 @@ export const Header = ({ players, currentForm, displayCircles, formNames }) => {
     </>
   );
 };
+

@@ -1,21 +1,23 @@
 import React from 'react';
+import { connect } from "react-redux";
 import { Header } from './Header';
 import SidebarContent from "./SidebarContent";
-import { connect } from "react-redux";
+import { default as SidebarButtons } from './SidebarButtons'
 
-const formNames = [
-  "",
-  "Interest",
-  "Players",
-  "Physical",
-  "Personal",
-  "Financial",
-  "Natural",
-  "Cultural",
-  "Visual",
-];
 
-export const Sidebar = ({ currentForm }) => {
+const Sidebar = ({ players, currentForm }) => {
+  const formNames = [
+    "",
+    "Interest",
+    "Players",
+    "Physical",
+    "Personal",
+    "Financial",
+    "Natural",
+    "Cultural",
+    "Visual",
+  ];
+  console.log(currentForm)
   return (
     <div className='sidebar__content'>
       <div className='sidebar__row sidebar__row-header'>
@@ -24,15 +26,18 @@ export const Sidebar = ({ currentForm }) => {
       <div className='sidebar__row sidebar__row-content'>
         <SidebarContent />
       </div>
+      <div className='sidebar__row sidebar__row-buttons'>
+        {currentForm !== 0 ? <SidebarButtons currentForm={currentForm}/> : ''}
+      </div>
     </div>
   )
 }
 
-const mapStateToProps = ({ game: {players, ...rest} }) => {
+const mapStateToProps = ({ game: {players, ...rest }}) => {
   return {
     players: players,
     ...rest
   }
 }
 
-export default connect(mapStateToProps, {  })(Sidebar)
+export default connect(mapStateToProps)(Sidebar)
