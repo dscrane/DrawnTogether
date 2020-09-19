@@ -21,6 +21,10 @@ const INITIAL_STATE = {
   displayCircles: false,
   updateCircles: false,
 };
+/* NOTES */
+// change list of players to an array not object
+// 
+
 
 export default (state=INITIAL_STATE, action) => {
   switch(action.type) {

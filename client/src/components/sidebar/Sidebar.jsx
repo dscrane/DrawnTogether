@@ -5,7 +5,7 @@ import SidebarContent from "./SidebarContent";
 import { default as SidebarButtons } from './SidebarButtons'
 
 
-const Sidebar = ({ players, currentForm }) => {
+const Sidebar = ({ currentForm }) => {
   const formNames = [
     "",
     "Interest",
@@ -33,10 +33,9 @@ const Sidebar = ({ players, currentForm }) => {
   )
 }
 
-const mapStateToProps = ({ game: {players, ...rest }}) => {
+const mapStateToProps = ({ game }) => {
   return {
-    players: players,
-    ...rest
+    currentForm: game.currentForm
   }
 }
 
