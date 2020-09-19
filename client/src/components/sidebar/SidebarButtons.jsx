@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { nextForm, prevForm } from "../../redux/actions";
 
 const SidebarButtons = ({ nextForm, prevForm, currentForm }) => {

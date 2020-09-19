@@ -17,7 +17,7 @@ const Sidebar = ({ currentForm }) => {
     "Cultural",
     "Visual",
   ];
-  console.log(currentForm)
+  // console.log(currentForm)
   return (
     <div className='sidebar__content'>
       <div className='sidebar__row sidebar__row-header'>

@@ -23,7 +23,7 @@ const INITIAL_STATE = {
 };
 /* NOTES */
 // change list of players to an array not object
-// 
+// */
 
 
 export default (state=INITIAL_STATE, action) => {

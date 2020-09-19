@@ -1,3 +1,4 @@
+// Game Action Types
 export const START_GAME = 'NEW_GAME';
 export const END_GAME = 'END_GAME';
 export const NEXT_FORM = 'NEXT_FORM'
@@ -9,3 +10,7 @@ export const UPDATE_PLAYER = 'UPDATE_PLAYER';
 export const DISPLAY_CIRCLES = 'DISPLAY_CIRCLES';
 export const UPDATE_CIRCLES = 'UPDATE_CIRCLES';
 export const SET_INTEREST = 'SET_INTEREST';
+
+
+// Display Action Types
+export const UPDATE_DISPLAY_GRID = 'UPDATE_DISPLAY_GRID'

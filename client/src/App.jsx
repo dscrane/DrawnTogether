@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
 import { default as Sidebar } from "./components/sidebar/Sidebar";
+import { default as Canvas } from './components/display/Canvas';
 
 export const App = () => {
   return (
@@ -10,7 +11,7 @@ export const App = () => {
           <Sidebar />
         </Col>
         <Col className='app__canvas text-center'>
-          <p>Canvas will go here</p>
+         <Canvas />
         </Col>
       </Row>
     </Container>
