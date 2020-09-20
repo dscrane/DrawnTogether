@@ -6,22 +6,11 @@ import { default as SidebarButtons } from './SidebarButtons'
 
 
 const Sidebar = ({ currentForm }) => {
-  const formNames = [
-    "",
-    "Interest",
-    "Players",
-    "Physical",
-    "Personal",
-    "Financial",
-    "Natural",
-    "Cultural",
-    "Visual",
-  ];
   // console.log(currentForm)
   return (
     <div className='sidebar__content'>
       <div className='sidebar__row sidebar__row-header'>
-        <Header currentForm={currentForm} formNames={formNames} />
+        <Header currentForm={currentForm} />
       </div>
       <div className='sidebar__row sidebar__row-content'>
         <SidebarContent />

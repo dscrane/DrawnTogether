@@ -3,7 +3,7 @@ import { reduxForm } from "redux-form";
 
 const RenderForm = (props) => {
   const handleForm = formValues => {
-    props.handleForm(formValues);
+    return props.handleForm(formValues);
   }
 
   return (

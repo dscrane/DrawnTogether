@@ -25,8 +25,7 @@ const SidebarButtons = ({ nextForm, prevForm, currentForm }) => {
           onClick={() => nextForm(currentForm)}
         >
           <span>
-            {" "}
-            Next <br /> Form
+            {currentForm === 8 ? <>Finish <br /> Game</> : <>Next <br /> Form</>}
           </span>
         </button>
       </Col>

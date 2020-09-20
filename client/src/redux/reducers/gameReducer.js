@@ -46,21 +46,24 @@ export default (state=INITIAL_STATE, action) => {
     case NEW_PLAYER:
       return {
         ...state,
-        players: {
-          ...state.players,
-          [action.payload.id]: {
+        players: [
+          ...state.players[action.payload.currentPlayer],
+          {
             id: action.payload.id,
-            responses:{},
+            name: action.payload.name,
+            responses:{
+              association: action.payload.association
+            },
             circle: {}
           }
-        }
+        ]
       }
     case UPDATE_PLAYER:
       return {
         ...state,
-        players: {
-          ...state.players,
-          [action.payload.id]: {
+        players: [
+          ...state.players[action.payload.currentPlayer],
+          {
             ...state.players[action.payload.id],
             responses: {
               ...state.players[action.payload.id].responses,
@@ -71,7 +74,7 @@ export default (state=INITIAL_STATE, action) => {
               ...action.payload.circle
             }
           }
-        }
+        ]
       }
     case NEXT_PLAYER:
       return {

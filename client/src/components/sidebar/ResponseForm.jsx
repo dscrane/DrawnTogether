@@ -274,9 +274,8 @@ const formData = {
 }
 
 export const ResponseForm = (props) => {
-  console.log(props.formFields)
   const handleForm = (formValues) => {
-    props.handleForm(formValues)
+    props.handleForm('SET_INTEREST', formValues)
   }
 
   const renderInputs = ({input, label, type, options, values }) => {
@@ -302,10 +301,8 @@ export const ResponseForm = (props) => {
     )
   }
 
-
   const createFields = () => {
     return props.formFields.map(field => {
-      console.log(formData[field])
       return (
         <Field
           key={field}
@@ -319,7 +316,7 @@ export const ResponseForm = (props) => {
       )
     })
   }
-  console.log(createFields())
+
   return (
     <FormGroup className='form__group'>
       <RenderForm handleForm={handleForm}>

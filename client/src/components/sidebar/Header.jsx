@@ -1,7 +1,19 @@
 import React from "react";
 
 
-export const Header = ({ currentForm, formNames }) => {
+const formNames = [
+  "",
+  "Interest",
+  "Players",
+  "Physical",
+  "Personal",
+  "Financial",
+  "Natural",
+  "Cultural",
+  "Visual",
+];
+
+export const Header = ({ currentForm }) => {
   const createFormSteps = () => {
     return formNames.map((heading, i) => {
       return (
