@@ -33,4 +33,6 @@ const SidebarButtons = ({ nextForm, prevForm, currentForm }) => {
   )
 }
 
+
+
 export default connect(null, { nextForm, prevForm })(SidebarButtons)

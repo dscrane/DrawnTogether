@@ -29,7 +29,7 @@ export const startGame = () => dispatch => {
 export const setInterest = interest => dispatch => {
   dispatch({
     type: SET_INTEREST,
-    payload: { interest }
+    payload: interest
   })
 }
 /* ----   ****    ---- */
@@ -54,29 +54,47 @@ export const newPlayer = (formValues, id) => dispatch => {
 
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
 export const nextPlayer = (formValues, id) =>  dispatch => {
+  const nextPlayer = id + 1
   dispatch({
     type:NEXT_PLAYER,
-    payload: {currentPlayer: id++}
+    payload: nextPlayer
   })
 }
 /* ----   ****    ---- */
 
 /* ----    PREV_PLAYER ACTION CREATOR    ---- */
 export const prevPlayer = id => dispatch => {
+  const prevPlayer = id - 1
   dispatch({
     type: PREV_PLAYER,
-    payload: {currentPlayer: id--}
+    payload: prevPlayer
   })
 }
 /* ----   ****    ---- */
 
 /* ----    SUBMIT_FORM ACTION CREATOR    ---- */
-export const submitForm = (formValues, id) => async dispatch => {
-  const newCircle = await updateCircle(formValues);
+export const submitForm = (formValues, id, currentForm) => async dispatch => {
+  const newPlayer = id + 1
 
+  if (currentForm === 2) {
+    console.log(formValues);
+    return dispatch({
+      type: NEW_PLAYER,
+      payload: {
+        id,
+        newPlayer,
+        name: formValues.name,
+        association: formValues.association
+      }
+    })
+  }
+
+  const newCircle = await updateCircle(formValues);
+  console.log(formValues)
   dispatch({
     type: UPDATE_PLAYER,
     payload: {
+      newPlayer,
       id,
       responses: {...formValues},
       circle: {...newCircle}
@@ -87,7 +105,7 @@ export const submitForm = (formValues, id) => async dispatch => {
 
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
 export const nextForm = (currentForm) => async dispatch => {
-
+  console.log('currentForm', currentForm, '[nextform]')
   if (currentForm === 3) {
     await dispatch({
       type: DISPLAY_CIRCLES,

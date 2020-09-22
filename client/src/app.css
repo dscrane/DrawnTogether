@@ -88,8 +88,12 @@ body {
 .sidebar__row-buttons {
   flex-direction: row;
   margin-bottom: 5%;
-
 }
+
+.sidebar__row-icons {
+  height: fit-content;
+}
+
 /* ----   ****    ---- */
 
 
@@ -129,6 +133,33 @@ body {
 /* ----   ****    ---- */
 
 
+/* ----   player icon styles    ---- */
+.player__icon_row {
+  display: flex;
+  justify-content: center;
+  height: 15px;
+  margin: 20px auto 0 auto;
+
+
+}
+
+.player__icon {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.player__icon-active {
+  background-color: #8c9299;
+}
+/* ----   ****    ---- */
+
+
 /* ----   form styles    ---- */
 .form__group {
   text-align: left;
@@ -151,7 +182,7 @@ body {
 /* ----   ****    ---- */
 
 
-/* ----   button styles    ---- */
+/* ----   form button styles    ---- */
 .game__button {
   font-size: 1.15vw;
   color: white;
@@ -173,6 +204,10 @@ body {
   border-radius: 5px;
   line-height: 0.8vw;
   min-width: 60%;
+}
+
+.sidebar__btn-form {
+
 }
 
 .sidebar__btn:hover {
@@ -203,14 +238,72 @@ body {
 /* ----   ****    ---- */
 
 
+/* ----   player button styles    ---- */
+
+.player__buttons {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.player__button-row {
+  height: 40px;
+  width: 100%;
+}
+
+.player__buttons-col {
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+
+}
+
+.player__button {
+  margin: auto auto;
+  font-family: "Cormorant";
+  font-size: 2vw;
+  height: 40px;
+  color: #494b4d;
+  background-color: transparent;
+  background: none;
+  border: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.player__button:hover {
+  cursor: pointer;
+  color: #1f2225;
+}
+
+.player__button:focus {
+  outline: none;
+}
+
+.player__button-disabled {
+  pointer-events: none;
+  color: #898c8d;
+}
 
 
+.player__button_text {
+  font-family: "Baloo Thambi 2";
+  font-size: 1.25vw;
+  vertical-align: middle;
+}
 
+.player__button-icon {
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+}
 
-
-
-/* ----   App component styles    ---- */
 /* ----   ****    ---- */
+
+
+
 /* ----   App component styles    ---- */
 /* ----   ****    ---- */
 /* ----   App component styles    ---- */

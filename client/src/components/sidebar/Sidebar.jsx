@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Header } from './Header';
 import SidebarContent from "./SidebarContent";
 import { default as SidebarButtons } from './SidebarButtons'
+import { nextPlayer, prevPlayer } from "../../redux/actions";
 
 
-const Sidebar = ({ currentForm }) => {
+const Sidebar = ({ currentForm, currentPlayer, numPlayers, prevPlayer, nextPlayer }) => {
   // console.log(currentForm)
   return (
     <div className='sidebar__content'>
@@ -22,10 +23,10 @@ const Sidebar = ({ currentForm }) => {
   )
 }
 
-const mapStateToProps = ({ game }) => {
+const mapStateToProps = (state) => {
   return {
-    currentForm: game.currentForm
+    ...state.game
   }
 }
 
-export default connect(mapStateToProps)(Sidebar)
+export default connect(mapStateToProps, { prevPlayer, nextPlayer})(Sidebar)

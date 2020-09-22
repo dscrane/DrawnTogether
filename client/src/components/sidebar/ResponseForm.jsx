@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import RenderForm from "./RenderForm";
+import {PlayerButtons} from "./PlayerButtons";
 
 const formData = {
   /* Interest Form */
@@ -275,8 +276,48 @@ const formData = {
 
 export const ResponseForm = (props) => {
   const handleForm = (formValues) => {
-    props.handleForm('SET_INTEREST', formValues)
+    props.currentForm === 1 ? props.handleForm({ type: 'SET_INTEREST', formValues }) : props.handleForm({ formValues })
   }
+
+  const createPlayerIcons = () => {
+    const playerIcons = [];
+    if (props.numPlayers === 0) {
+      for (let i = 0; i < 5; i++) {
+        playerIcons.push(
+          i === props.currentPlayer ? (
+            <span className="player__icon player__icon-active" key={i} />
+          ) : (
+            <span className="player__icon" key={i} />
+          )
+        );
+      }
+    } else {
+      for (let i = 0; i < props.numPlayers; i++) {
+        playerIcons.push(
+          i === props.currentPlayer ? (
+            <span className="player__icon-active" key={i} />
+          ) : (
+            <span className="player__icon" key={i} />
+          )
+        );
+      }
+    }
+    console.log('playerIcons', playerIcons)
+
+    return playerIcons;
+  };
+
+  const playerIconsAndButtons =
+    props.currentForm > 1 ? (
+      <>
+        <div className="player__icon_row">
+          {createPlayerIcons()}
+        </div>
+        <PlayerButtons currentPlayer={props.currentPlayer} prevPlayer={props.prevPlayer} nextPlayer={props.nextPlayer} />
+      </>
+    ) : (
+      <></>
+    );
 
   const renderInputs = ({input, label, type, options, values }) => {
     if (type === 'select') {
@@ -319,7 +360,7 @@ export const ResponseForm = (props) => {
 
   return (
     <FormGroup className='form__group'>
-      <RenderForm handleForm={handleForm}>
+      <RenderForm currentForm={props.currentForm} handleForm={handleForm} playerIconsAndButtons={playerIconsAndButtons}>
         {createFields()}
       </RenderForm>
     </FormGroup>
