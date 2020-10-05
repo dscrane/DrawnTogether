@@ -52,6 +52,7 @@ export default (state=INITIAL_STATE, action) => {
       return {
         ...state,
         numPlayers: state.numPlayers++,
+        currentPlayer: action.payload.newPlayer,
         players: [
           ...state.players,
           {
@@ -113,7 +114,8 @@ export default (state=INITIAL_STATE, action) => {
       console.log('[NEXT_FORM]', action.payload)
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        currentPlayer: 0
       }
     case PREV_FORM:
       console.log('[PREV_FORM]: ', action.payload)

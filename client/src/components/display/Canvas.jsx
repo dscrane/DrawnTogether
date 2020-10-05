@@ -7,7 +7,7 @@ const Canvas = ({ display, game, updateGridDisplay }) => {
 
   return (
     <div>
-      This is the canvas
+      This is the canvas!
     </div>
   )
 }
