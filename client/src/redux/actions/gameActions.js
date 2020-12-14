@@ -56,7 +56,7 @@ export const newPlayer = (formValues, id) => dispatch => {
 export const nextPlayer = (formValues, id) =>  dispatch => {
   const nextPlayer = id + 1
   dispatch({
-    type:NEXT_PLAYER,
+    type: NEXT_PLAYER,
     payload: nextPlayer
   })
 }

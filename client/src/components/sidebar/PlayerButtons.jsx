@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-export const PlayerButtons = ({ prevPlayer, currentPlayer }) => {
+export const PlayerButtons = ({ nextPlayer, prevPlayer, currentPlayer }) => {
   return (
     <div className='player__buttons'>
       <Row className='player__buttons-row'>
@@ -21,6 +21,7 @@ export const PlayerButtons = ({ prevPlayer, currentPlayer }) => {
             className='player__button'
             id='next-player-button'
             type='submit'
+            onClick={() => nextPlayer()}
           >
             <span className='player__button_text'>Next </span>
             <span className='player__button-icon'>&#8250;</span>

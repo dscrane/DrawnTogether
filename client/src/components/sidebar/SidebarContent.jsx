@@ -21,7 +21,7 @@ const SidebarContent = ({ currentForm, currentPlayer, startGame, submitForm, set
   ]
 
   const handleForm = ({ type, formValues }) => {
-    console.log('sidebarContent',type, formValues)
+    console.log('sidebarContent', type, formValues)
     type==='SET_INTEREST' ? setInterest(formValues) : submitForm(formValues, currentPlayer, currentForm);
   }
 

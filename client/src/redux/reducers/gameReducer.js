@@ -51,7 +51,7 @@ export default (state=INITIAL_STATE, action) => {
       console.log('[NEW_PLAYER]: ', action.payload)
       return {
         ...state,
-        numPlayers: state.numPlayers++,
+        numPlayers: state.numPlayers + 1,
         currentPlayer: action.payload.newPlayer,
         players: [
           ...state.players,
