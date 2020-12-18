@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { setInterest } from '../../redux/actions';
+import { setInterest, newPlayer } from '../../redux/actions';
 import {
   InterestForm,
   PlayerForm,
@@ -13,12 +13,13 @@ import {
   Results,
 } from "../../utils/forms";
 
-const DisplayForm = ({ form, setInterest }) => {
+const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
+  console.log('responses', responses)
   switch (form) {
     case 1:
       return <InterestForm setInterest={setInterest} />;
     case 2:
-      return <PlayerForm />;
+      return <PlayerForm responses={responses} setResponses={setResponses}/>;
     case 3:
       return <OneForm />;
     case 4:

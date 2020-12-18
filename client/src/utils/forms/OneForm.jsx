@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 import { nextPlayer } from '../../redux/actions';
 
-export const OneForm = () => {
-  const [ response, setResponse ] = useState([]);
+export const OneForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
-    response.push(event.target.value);
-    console.log(response)
+    setResponses({...responses, [event.target.name]: event.target.value})
   };
+
   return (
     <FormGroup>
       <FormLabel>Height</FormLabel>

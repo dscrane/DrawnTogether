@@ -110,6 +110,21 @@ export default (state=INITIAL_STATE, action) => {
         }
 
       }
+    case NEXT_PLAYER:
+      console.log('[NEXT_PLAYER]: ', action.payload)
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          currentPlayer: action.payload
+        }
+      }
+    case PREV_PLAYER:
+      console.log('[PREV_PLAYER]: ', action.payload)
+      return {
+        ...state.config,
+        currentPlayer: action.payload
+      }
     /* --- END GAME REDUCERS ---*/
     /* *** */
     /* *** */
@@ -119,15 +134,15 @@ export default (state=INITIAL_STATE, action) => {
       console.log('[NEW_PLAYER]: ', action.payload)
       return {
         ...state,
-        numPlayers: state.numPlayers + 1,
+        config: {
+          ...state.config,
+          numPlayers: state.config.numPlayers + 1,
+        },
         players: [
           ...state.players,
-          {
-            id: action.payload.id,
-            name: action.payload.name,
-            responses: {
-              association: parseInt(action.payload.association)
-            },
+          state.players[action.payload.currentPlayer] = {
+            ...state.players[action.payload.currentPlayer],
+            ...action.payload.responses,
             circle: {}
           }
         ]
@@ -138,30 +153,15 @@ export default (state=INITIAL_STATE, action) => {
         ...state,
         players: [
           ...state.players,
-          {
-            id: action.payload.id,
-            responses: {
-              ...state.players[action.payload.id].responses,
-              ...action.payload.responses
-            },
+          state.players[action.payload.currentPlayer] = {
+            ...state.players[action.payload.currentPlayer],
+            ...action.payload.responses,
             circle: {
               ...state.players[action.payload.id].circle,
               ...action.payload.circle
             }
           }
         ]
-      }
-    case NEXT_PLAYER:
-      console.log('[NEXT_PLAYER]: ', action.payload)
-      return {
-        ...state,
-        currentPlayer: action.payload
-      }
-    case PREV_PLAYER:
-      console.log('[PREV_PLAYER]: ', action.payload)
-      return {
-        ...state,
-        currentPlayer: action.payload
       }
     /* --- END PLAYER REDUCERS ---*/
     /* *** */

@@ -1,19 +1,19 @@
 /* ----   NEW_PLAYER ACTION CREATOR    ---- */
-import {NEW_PLAYER, NEXT_PLAYER, PREV_PLAYER} from "../types";
+import {NEW_PLAYER, NEXT_PLAYER, PREV_PLAYER, UPDATE_PLAYER} from "../types";
 
-export const newPlayer = (formValues, id) => dispatch => {
+export const newPlayer = (responses, id) => dispatch => {
   dispatch({
              type: NEW_PLAYER,
              payload: {
                id,
-               data: {...formValues}
+               ...responses
              }
            })
 }
 /* ----   ****    ---- */
 
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
-export const nextPlayer = (response, id) =>  dispatch => {
+export const nextPlayer = (id) =>  dispatch => {
   const nextPlayer = id + 1
   dispatch({
              type: NEXT_PLAYER,
@@ -33,29 +33,32 @@ export const prevPlayer = id => dispatch => {
 /* ----   ****    ---- */
 
 /* ----    SUBMIT_FORM ACTION CREATOR    ---- */
-export const submitForm = (responses, id, currentForm) => async dispatch => {
-  console.log(responses)
-  // if (currentForm === 2) {
-  //   console.log(formValues);
-  //   return dispatch({
-  //     type: NEW_PLAYER,
-  //     payload: {
-  //       id,
-  //       name: formValues.name,
-  //       association: formValues.association
-  //     }
-  //   })
-  // }
-  //
-  // const newCircle = await updateCircle(formValues);
-  // console.log(formValues)
-  // dispatch({
-  //   type: UPDATE_PLAYER,
-  //   payload: {
-  //     id,
-  //     responses: {...formValues},
-  //     circle: {...newCircle}
-  //   }
-  // })
+export const submitForm = (currentPlayer, currentForm, responses) => async dispatch => {
+  console.log('responses', responses)
+  if (currentForm === 1) { return }
+
+  if (currentForm === 2) {
+    console.log(currentPlayer)
+   await dispatch({
+      type: NEW_PLAYER,
+      payload: {
+        currentPlayer,
+        responses: {
+          id: currentPlayer,
+          ...responses
+        }
+      }
+    })
+    return;
+  }
+  await dispatch({
+    type: UPDATE_PLAYER,
+    payload: {
+      currentPlayer,
+      responses: {
+        ...responses
+      }
+    }
+  })
 }
 /* ----   ****    ---- */
