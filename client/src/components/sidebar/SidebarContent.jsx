@@ -1,12 +1,14 @@
 import React from 'react';
 import { StartButton } from './StartButton';
 import { connect } from "react-redux";
-import {setInterest, startGame, submitForm } from "../../redux/actions";
-import { ResponseForm } from './ResponseForm';
+import {setInterest, startGame, submitForm, nextPlayer, prevPlayer } from "../../redux/actions";
+import FormContainer from './FormContainer';
 
 
 
-const SidebarContent = ({ currentForm, currentPlayer, startGame, submitForm, setInterest, numPlayers }) => {
+const SidebarContent = ({ game, startGame, nextPlayer, prevPlayer }) => {
+  const { currentForm, currentPlayer, numPlayers } = game.config;
+
   console.log('currentForm', currentForm)
   const formFields = [
     [],
@@ -20,21 +22,17 @@ const SidebarContent = ({ currentForm, currentPlayer, startGame, submitForm, set
     ['hue']
   ]
 
-  const handleForm = ({ type, formValues }) => {
-    console.log('sidebarContent', type, formValues)
-    type==='SET_INTEREST' ? setInterest(formValues) : submitForm(formValues, currentPlayer, currentForm);
-  }
 
   const contentDisplay = currentForm === 0
     ? <StartButton
           startGame={startGame}
       />
-    : <ResponseForm
+    : <FormContainer
           currentForm={currentForm}
-          formFields={formFields[currentForm]}
-          handleForm={handleForm}
           currentPlayer={currentPlayer}
           numPlayers={numPlayers}
+          nextPlayer={nextPlayer}
+          prevPlayer={prevPlayer}
       />
 
 
@@ -45,11 +43,10 @@ const SidebarContent = ({ currentForm, currentPlayer, startGame, submitForm, set
   )
 }
 
-const mapStateToProps = ({ game: {players, ...rest} }) => {
+const mapStateToProps = ({ game }) => {
   return {
-    players: players,
-    ...rest
+    game
   }
 }
 
-export default connect(mapStateToProps, { startGame, submitForm, setInterest })(SidebarContent)
+export default connect(mapStateToProps, { startGame, submitForm, setInterest, nextPlayer, prevPlayer })(SidebarContent)

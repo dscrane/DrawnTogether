@@ -40,69 +40,6 @@ export const endGame = () => dispatch => {
 }
 /* ----   ****    ---- */
 
-/* ----   NEW_PLAYER ACTION CREATOR    ---- */
-export const newPlayer = (formValues, id) => dispatch => {
-  dispatch({
-    type: NEW_PLAYER,
-    payload: {
-       id,
-      data: {...formValues}
-    }
-  })
-}
-/* ----   ****    ---- */
-
-/* ----   NEXT_PLAYER ACTION CREATOR    ---- */
-export const nextPlayer = (formValues, id) =>  dispatch => {
-  const nextPlayer = id + 1
-  dispatch({
-    type: NEXT_PLAYER,
-    payload: nextPlayer
-  })
-}
-/* ----   ****    ---- */
-
-/* ----    PREV_PLAYER ACTION CREATOR    ---- */
-export const prevPlayer = id => dispatch => {
-  const prevPlayer = id - 1
-  dispatch({
-    type: PREV_PLAYER,
-    payload: prevPlayer
-  })
-}
-/* ----   ****    ---- */
-
-/* ----    SUBMIT_FORM ACTION CREATOR    ---- */
-export const submitForm = (formValues, id, currentForm) => async dispatch => {
-  const newPlayer = id + 1
-
-  if (currentForm === 2) {
-    console.log(formValues);
-    return dispatch({
-      type: NEW_PLAYER,
-      payload: {
-        id,
-        newPlayer,
-        name: formValues.name,
-        association: formValues.association
-      }
-    })
-  }
-
-  const newCircle = await updateCircle(formValues);
-  console.log(formValues)
-  dispatch({
-    type: UPDATE_PLAYER,
-    payload: {
-      newPlayer,
-      id,
-      responses: {...formValues},
-      circle: {...newCircle}
-    }
-  })
-}
-/* ----   ****    ---- */
-
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
 export const nextForm = (currentForm) => async dispatch => {
   console.log('currentForm', currentForm, '[nextform]')

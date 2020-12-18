@@ -9,18 +9,36 @@ import {
   PREV_PLAYER,
   UPDATE_CIRCLES,
   DISPLAY_CIRCLES,
-  SET_INTEREST
+  SET_INTEREST, UPDATE_DISPLAY_GRID
 } from '../types';
 
 const INITIAL_STATE = {
-  interest: null,
-  inProgress: false,
-  currentForm: 0,
-  currentPlayer: 0,
-  numPlayers: 0,
+  config: {
+    interest: '',
+    inProgress: false,
+    currentForm: 0,
+    currentPlayer: 0,
+    numPlayers: 0,
+    displayCircles: false,
+    updateCircles: false,
+  },
   players: [],
-  displayCircles: false,
-  updateCircles: false,
+  display: {
+    windowDimensions: {
+      height: 0,
+      width: 0
+    },
+    grid: {
+      stage: 0,
+      svgDim: 0,
+      radius: 0,
+      axis: 0,
+      cross: 0,
+      cx: 0,
+      cy: 0,
+      step: 0,
+    }
+  }
 };
 /* NOTES */
 // change list of players to an array not object
@@ -29,11 +47,15 @@ const INITIAL_STATE = {
 
 export default (state=INITIAL_STATE, action) => {
   switch(action.type) {
+    /* --- GAME REDUCERS --- */
     case START_GAME:
       console.log('[START_GAME]: ', action.payload)
       return {
         ...state,
-        ...action.payload
+        config: {
+          ...state.config,
+          ...action.payload
+        },
       }
     case END_GAME:
       console.log('[END_GAME]: ', action.payload)
@@ -45,21 +67,66 @@ export default (state=INITIAL_STATE, action) => {
       console.log('[SET_INTEREST]: ', action.payload)
       return {
         ...state,
-        ...action.payload
+        config: {
+          ...state.config,
+          ...action.payload
+        }
       }
+    case UPDATE_CIRCLES:
+      console.log('[UPDATE_CIRCLES]: ', action.payload)
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload
+        }
+      }
+    case DISPLAY_CIRCLES:
+      console.log('[DISPLAY_CIRCLES]: ', action.payload)
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload
+        }
+      }
+    case NEXT_FORM:
+      console.log('[NEXT_FORM]: ', action.payload)
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload,
+          currentPlayer: 0
+        }
+      }
+    case PREV_FORM:
+      console.log('[PREV_FORM]: ', action.payload)
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload
+        }
+
+      }
+    /* --- END GAME REDUCERS ---*/
+    /* *** */
+    /* *** */
+    /* *** */
+    /* --- PLAYER REDUCERS --- */
     case NEW_PLAYER:
       console.log('[NEW_PLAYER]: ', action.payload)
       return {
         ...state,
         numPlayers: state.numPlayers + 1,
-        currentPlayer: action.payload.newPlayer,
         players: [
           ...state.players,
           {
             id: action.payload.id,
             name: action.payload.name,
             responses: {
-             association: parseInt(action.payload.association)
+              association: parseInt(action.payload.association)
             },
             circle: {}
           }
@@ -69,7 +136,6 @@ export default (state=INITIAL_STATE, action) => {
       console.log('[UPDATE_PLAYER]: ', action.payload)
       return {
         ...state,
-        currentPlayer: action.payload.newPlayer,
         players: [
           ...state.players,
           {
@@ -97,32 +163,25 @@ export default (state=INITIAL_STATE, action) => {
         ...state,
         currentPlayer: action.payload
       }
-    case UPDATE_CIRCLES:
-      console.log('[UPDATE_CIRCLES]: ', action.payload)
+    /* --- END PLAYER REDUCERS ---*/
+    /* *** */
+    /* *** */
+    /* *** */
+    /* --- DISPLAY REDUCERS --- */
+    case UPDATE_DISPLAY_GRID:
+      console.log(action.type)
       return {
         ...state,
-        ...action.payload
+        windowDimensions: {
+          ...state.windowDimensions,
+          ...action.payload.windowDimensions
+        },
+        grid: {
+          ...state.grid,
+          ...action.payload.grid
+        }
       }
-    case DISPLAY_CIRCLES:
-      console.log('[DISPLAY_CIRCLES]: ', action.payload)
-      return {
-        ...state,
-        ...action.payload
-      }
-    case NEXT_FORM:
-      console.log('[NEXT_FORM]: ', action.payload)
-      console.log('[NEXT_FORM]', action.payload)
-      return {
-        ...state,
-        ...action.payload,
-        currentPlayer: 0
-      }
-    case PREV_FORM:
-      console.log('[PREV_FORM]: ', action.payload)
-      return {
-        ...state,
-        ...action.payload
-      }
+    /* --- END DISPLAY REDUCERS ---*/
     default:
       return state;
   }
