@@ -1,5 +1,5 @@
 /* ----   NEW_PLAYER ACTION CREATOR    ---- */
-import {NEW_PLAYER, NEXT_PLAYER, PREV_PLAYER, UPDATE_PLAYER} from "../types";
+import {NEW_PLAYER, NEXT_PLAYER, PREV_PLAYER, UPDATE_CIRCLES, UPDATE_PLAYER} from "../types";
 
 export const newPlayer = (responses, id) => dispatch => {
   dispatch({
@@ -13,8 +13,8 @@ export const newPlayer = (responses, id) => dispatch => {
 /* ----   ****    ---- */
 
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
-export const nextPlayer = (id) =>  dispatch => {
-  const nextPlayer = id + 1
+export const nextPlayer = (currentPlayer) =>  dispatch => {
+  const nextPlayer = currentPlayer + 1
   dispatch({
              type: NEXT_PLAYER,
              payload: nextPlayer
@@ -23,8 +23,8 @@ export const nextPlayer = (id) =>  dispatch => {
 /* ----   ****    ---- */
 
 /* ----    PREV_PLAYER ACTION CREATOR    ---- */
-export const prevPlayer = id => dispatch => {
-  const prevPlayer = id - 1
+export const prevPlayer = currentPlayer => dispatch => {
+  const prevPlayer = currentPlayer - 1
   dispatch({
              type: PREV_PLAYER,
              payload: prevPlayer
@@ -33,20 +33,21 @@ export const prevPlayer = id => dispatch => {
 /* ----   ****    ---- */
 
 /* ----    SUBMIT_FORM ACTION CREATOR    ---- */
-export const submitForm = (currentPlayer, currentForm, responses) => async dispatch => {
-  console.log('responses', responses)
+export const submitForm = (currentPlayer, currentForm, circle, responses ) => async dispatch => {
+  console.log('responses', responses, circle)
   if (currentForm === 1) { return }
 
   if (currentForm === 2) {
-    console.log(currentPlayer)
+    console.log('respsssss', responses)
    await dispatch({
       type: NEW_PLAYER,
       payload: {
         currentPlayer,
+        circle,
         responses: {
           id: currentPlayer,
           ...responses
-        }
+        },
       }
     })
     return;
@@ -55,10 +56,16 @@ export const submitForm = (currentPlayer, currentForm, responses) => async dispa
     type: UPDATE_PLAYER,
     payload: {
       currentPlayer,
+      circle,
       responses: {
         ...responses
-      }
+      },
     }
   })
 }
 /* ----   ****    ---- */
+
+
+export const updateCircle = () => {
+
+}

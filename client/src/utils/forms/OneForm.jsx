@@ -13,6 +13,7 @@ export const OneForm = ({ responses, setResponses }) => {
     <FormGroup>
       <FormLabel>Height</FormLabel>
       <FormControl
+        name='height'
         onChange={onChange}
         id="formHeight"
         as="select"
@@ -25,6 +26,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Interest</FormLabel>
       <FormControl
+        name='interest'
         onChange={onChange}
         id="formInterest"
         as="select"
@@ -39,6 +41,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Gender</FormLabel>
       <FormControl
+        name='gender'
         onChange={onChange}
         id="formGender"
         as="select"
@@ -51,6 +54,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Age</FormLabel>
       <FormControl
+        name='age'
         onChange={onChange}
         id="formAge"
         as="select"
@@ -70,6 +74,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Diet</FormLabel>
       <FormControl
+        name='diet'
         onChange={onChange}
         id="formDiet"
         as="select"

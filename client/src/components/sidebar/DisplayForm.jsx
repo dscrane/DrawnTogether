@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux'
-import { setInterest, newPlayer } from '../../redux/actions';
+import { setInterest } from '../../redux/actions';
 import {
   InterestForm,
   PlayerForm,
@@ -19,19 +19,19 @@ const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
     case 1:
       return <InterestForm setInterest={setInterest} />;
     case 2:
-      return <PlayerForm responses={responses} setResponses={setResponses}/>;
+      return <PlayerForm responses={responses} setResponses={setResponses} />;
     case 3:
-      return <OneForm />;
+      return <OneForm responses={responses} setResponses={setResponses} />;
     case 4:
-      return <TwoForm />;
+      return <TwoForm responses={responses} setResponses={setResponses} />;
     case 5:
-      return <ThreeForm />;
+      return <ThreeForm responses={responses} setResponses={setResponses} />;
     case 6:
-      return <FourForm />;
+      return <FourForm responses={responses} setResponses={setResponses} />;
     case 7:
-      return <FiveForm />;
+      return <FiveForm responses={responses} setResponses={setResponses} />;
     case 8:
-      return <SixForm />;
+      return <SixForm responses={responses} setResponses={setResponses} />;
     case 9:
       return <Results />;
     default:

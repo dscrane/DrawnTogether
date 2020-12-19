@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
-export const TwoForm = ({ formData, setFormData }) => {
- const [ response, setResponse ] = useState([]);
+export const TwoForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
-    response.push(event.target.value);
-    console.log(response)
+    setResponses({...responses, [event.target.name]: event.target.value})
   };
 
   return (
     <FormGroup>
       <FormLabel>Time</FormLabel>
       <FormControl
+        name='time'
         onChange={onChange}
         id="formTemporal"
         as="select"
@@ -25,6 +23,7 @@ export const TwoForm = ({ formData, setFormData }) => {
       </FormControl>
       <FormLabel>Personality</FormLabel>
       <FormControl
+        name='personality'
         onChange={onChange}
         id="formPersonality"
         as="select"
@@ -36,6 +35,7 @@ export const TwoForm = ({ formData, setFormData }) => {
       </FormControl>
       <FormLabel>Hair</FormLabel>
       <FormControl
+        name='hair'
         onChange={onChange}
         id="formHair"
         as="select"

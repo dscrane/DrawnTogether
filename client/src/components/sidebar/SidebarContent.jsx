@@ -7,7 +7,7 @@ import FormContainer from './FormContainer';
 
 
 const SidebarContent = ({ game, startGame, nextPlayer, prevPlayer }) => {
-  const { currentForm, currentPlayer, numPlayers } = game.config;
+  const { currentForm, currentPlayer, numPlayers } = game;
 
   console.log('currentForm', currentForm)
   const formFields = [

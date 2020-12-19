@@ -25,7 +25,7 @@ const Sidebar = ({ currentForm }) => {
 const mapStateToProps = ({ game }) => {
   console.log(game)
   return {
-    currentForm: game.config.currentForm
+    currentForm: game.currentForm,
   }
 }
 

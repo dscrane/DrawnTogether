@@ -9,7 +9,7 @@ export const PlayerForm = ({ responses, setResponses }) => {
   };
 
   const handleAssociation = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     setResponses({ ...responses, [event.target.name]: parseInt(event.target.value) });
   };
 

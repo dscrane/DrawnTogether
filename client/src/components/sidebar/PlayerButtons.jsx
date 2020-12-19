@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-export const PlayerButtons = ({ currentForm, nextPlayer, prevPlayer, currentPlayer, players }) => {
+export const PlayerButtons = ({ currentForm, currentPlayer, players, numPlayers }) => {
   console.log('button players', players, currentPlayer)
   return (
     <div className='player__buttons'>
@@ -13,16 +13,16 @@ export const PlayerButtons = ({ currentForm, nextPlayer, prevPlayer, currentPlay
             type='button'
           >
             <span className='player__button-icon'>&#8249;</span>
-            <span className='player__button_text'> {currentForm > 2 ? players[currentPlayer - 1].name : 'Prev'}</span>
+            <span className='player__button_text'> {currentForm > 2 && players[currentPlayer - 1] ? players[currentPlayer - 1].name : 'Prev'}</span>
           </button>
         </Col>
         <Col className='player__buttons-col'>
           <button
-            className={`player__button ${!players[currentPlayer + 1] && currentForm > 2 ? 'player__button-disabled' : ''}`}
+            className={`player__button ${ currentPlayer === numPlayers + 1 ? 'player__button-disabled' : ''}`}
             id='next-player-button'
             type='submit'
           >
-            <span className='player__button_text'>{currentForm > 2 ? players[currentPlayer + 1].name : 'Next'}  </span>
+            <span className='player__button_text'>{currentForm > 2 && players[currentPlayer + 1] ? players[currentPlayer + 1].name : 'Next'}  </span>
             <span className='player__button-icon'>&#8250;</span>
           </button>
         </Col>

@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { store } from '../../store';
-import {FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import { submitForm, nextPlayer, prevPlayer } from '../../redux/actions';
 import DisplayForm from "./DisplayForm";
 import {PlayerButtons} from "./PlayerButtons";
 
-const FormContainer = ({ game, submitForm, nextPlayer, prevPlayer }) => {
-  const { currentForm, currentPlayer, numPlayers } = game.config;
-  const defaultResponses = {
-    name: null,
-    association: null,
-  }
-  const [ responses, setResponses ] = useState({
-    ...defaultResponses
-  })
+const FormContainer = ({ game, submitForm, nextPlayer, players}) => {
+  const { currentForm, currentPlayer, numPlayers } = game;
+
+  console.log('form cont players', currentPlayer,  players[currentPlayer])
+
+  const [ responses, setResponses ] = useState({})
 
   const createPlayerIcons = () => {
     const playerIcons = [];
@@ -51,7 +46,8 @@ const FormContainer = ({ game, submitForm, nextPlayer, prevPlayer }) => {
           {createPlayerIcons()}
         </div>
         <PlayerButtons
-          players={game.players}
+          players={players}
+          numPlayers={numPlayers}
           currentForm={currentForm}
           currentPlayer={currentPlayer}
         />
@@ -60,31 +56,50 @@ const FormContainer = ({ game, submitForm, nextPlayer, prevPlayer }) => {
       <></>
     );
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     console.log('onsubmit', currentPlayer)
-    submitForm(
+    const circle = { radius: 1, slice: 4 }; /*|| await updateCircle(currentForm, responses)*/
+    await submitForm(
       currentPlayer,
       currentForm,
-      {
-        ...responses,
-      }
+      circle,
+      { ...responses },
     )
-    setResponses({...defaultResponses})
+    setResponses({})
     nextPlayer(currentPlayer)
+  }
+
+  const showForms = () => {
+    if (currentForm > 2) {
+      return currentPlayer === numPlayers + 1
+        ?  <div className="text-center">
+          Click
+          <br /> "Submit Form"
+          <br /> to
+          <br /> continue
+        </div>
+        : <DisplayForm responses={responses} setResponses={setResponses} form={currentForm} />
+    } else {
+      return <DisplayForm responses={responses} setResponses={setResponses} form={currentForm} />
+    }
+
+
   }
 
   return (
     <form onSubmit={onSubmit} className='form-signin mt-2'>
-      <DisplayForm responses={responses} setResponses={setResponses} form={currentForm} />
+      {players[currentPlayer] ? <div>{players[currentPlayer].name}</div> : ''}
+      {showForms()}
       {playerIconsAndButtons}
     </form>
   )
 }
 
-const mapStateToProps = ({ game }) => {
+const mapStateToProps = ({ game, players }) => {
   return {
-    game
+    game,
+    players
   }
 }
 

@@ -58,7 +58,7 @@ export const nextForm = (currentForm) => async dispatch => {
   const newForm = currentForm + 1;
   await dispatch({
     type: NEXT_FORM,
-    payload: {currentForm: newForm, updateCircles: false}
+    payload: {currentPlayer: 0, currentForm: newForm, updateCircles: false}
   })
 }
 /* ----   ****    ---- */
