@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
-import { nextPlayer } from '../../redux/actions';
+import { nextPlayer } from "../../redux/actions";
 
 export const OneForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    setResponses({...responses, [event.target.name]: event.target.value})
+    setResponses({ ...responses, [event.target.name]: event.target.value });
   };
 
   return (
     <FormGroup>
       <FormLabel>Height</FormLabel>
       <FormControl
-        name='height'
+        name="height"
         onChange={onChange}
         id="formHeight"
         as="select"
@@ -26,7 +26,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Interest</FormLabel>
       <FormControl
-        name='interest'
+        name="interest"
         onChange={onChange}
         id="formInterest"
         as="select"
@@ -41,7 +41,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Gender</FormLabel>
       <FormControl
-        name='gender'
+        name="gender"
         onChange={onChange}
         id="formGender"
         as="select"
@@ -54,7 +54,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Age</FormLabel>
       <FormControl
-        name='age'
+        name="age"
         onChange={onChange}
         id="formAge"
         as="select"
@@ -74,7 +74,7 @@ export const OneForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Diet</FormLabel>
       <FormControl
-        name='diet'
+        name="diet"
         onChange={onChange}
         id="formDiet"
         as="select"

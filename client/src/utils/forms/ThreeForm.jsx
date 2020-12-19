@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const ThreeForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    setResponses({...responses, [event.target.name]: event.target.value})
+    setResponses({ ...responses, [event.target.name]: event.target.value });
   };
 
   return (
     <FormGroup>
       <FormLabel>Relationship to Money</FormLabel>
       <FormControl
-        name='money'
+        name="money"
         onChange={onChange}
         id="formMoney"
         as="select"
@@ -25,7 +25,7 @@ export const ThreeForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Relationship to Food</FormLabel>
       <FormControl
-        name='food'
+        name="food"
         onChange={onChange}
         id="formFood"
         as="select"

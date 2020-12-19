@@ -1,18 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const FourForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    setResponses({...responses, [event.target.name]: event.target.value})
+    setResponses({ ...responses, [event.target.name]: event.target.value });
   };
-
 
   return (
     <FormGroup>
       <FormLabel>Relationship to Nature</FormLabel>
       <FormControl
-        name='nature'
+        name="nature"
         onChange={onChange}
         id="formNature"
         as="select"
@@ -26,7 +25,7 @@ export const FourForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Relationship to Social Media</FormLabel>
       <FormControl
-        name='media'
+        name="media"
         onChange={onChange}
         id="formMedia"
         as="select"

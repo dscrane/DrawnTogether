@@ -4,14 +4,14 @@ import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 export const TwoForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    setResponses({...responses, [event.target.name]: event.target.value})
+    setResponses({ ...responses, [event.target.name]: event.target.value });
   };
 
   return (
     <FormGroup>
       <FormLabel>Time</FormLabel>
       <FormControl
-        name='time'
+        name="time"
         onChange={onChange}
         id="formTemporal"
         as="select"
@@ -23,7 +23,7 @@ export const TwoForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Personality</FormLabel>
       <FormControl
-        name='personality'
+        name="personality"
         onChange={onChange}
         id="formPersonality"
         as="select"
@@ -35,7 +35,7 @@ export const TwoForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Hair</FormLabel>
       <FormControl
-        name='hair'
+        name="hair"
         onChange={onChange}
         id="formHair"
         as="select"

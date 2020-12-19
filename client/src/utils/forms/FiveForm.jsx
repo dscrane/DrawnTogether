@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const FiveForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    setResponses({...responses, [event.target.name]: event.target.value})
+    setResponses({ ...responses, [event.target.name]: event.target.value });
   };
 
   return (
     <FormGroup>
       <FormLabel>Relationship to Religion</FormLabel>
       <FormControl
-        name='religion'
+        name="religion"
         onChange={onChange}
         id="formReligion"
         as="select"
@@ -26,7 +26,7 @@ export const FiveForm = ({ responses, setResponses }) => {
       </FormControl>
       <FormLabel>Relationship to Culture</FormLabel>
       <FormControl
-        name='culture'
+        name="culture"
         onChange={onChange}
         id="formCulture"
         as="select"

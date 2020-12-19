@@ -1,17 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const SixForm = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
-    setResponses({...responses, [event.target.name]: event.target.value})
+    setResponses({ ...responses, [event.target.name]: event.target.value });
   };
 
   return (
     <FormGroup>
       <FormLabel>Choose a Color</FormLabel>
       <FormControl
-        name='color'
+        name="color"
         onChange={onChange}
         id="formColor"
         as="select"
