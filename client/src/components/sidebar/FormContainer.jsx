@@ -7,8 +7,6 @@ import { PlayerButtons } from "./PlayerButtons";
 const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
   const { currentForm, currentPlayer, numPlayers } = game;
 
-  console.log("form cont players", currentPlayer, players[currentPlayer]);
-
   const [responses, setResponses] = useState({});
 
   const createPlayerIcons = () => {
@@ -34,8 +32,6 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
         );
       }
     }
-    console.log("playerIcons", playerIcons);
-
     return playerIcons;
   };
 
@@ -56,7 +52,6 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("onsubmit", currentPlayer);
     const circle = {
       radius: 1,
       slice: 4,

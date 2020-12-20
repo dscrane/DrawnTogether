@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
-import { nextPlayer } from "../../redux/actions";
 
 export const OneForm = ({ responses, setResponses }) => {
   const onChange = (event) => {

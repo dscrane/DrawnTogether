@@ -1,6 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux'
-import { setInterest } from '../../redux/actions';
+import { connect } from "react-redux";
+import { setInterest } from "../../redux/actions";
 import {
   InterestForm,
   PlayerForm,
@@ -14,7 +14,6 @@ import {
 } from "../../utils/forms";
 
 const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
-  console.log('responses', responses)
   switch (form) {
     case 1:
       return <InterestForm setInterest={setInterest} />;
@@ -38,6 +37,5 @@ const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
       throw new Error("FormArea switch has failed");
   }
 };
-
 
 export default connect(null, { setInterest })(DisplayForm);

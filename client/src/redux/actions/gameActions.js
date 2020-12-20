@@ -2,10 +2,6 @@ import { updateCircle } from "../../utils/circleUtils";
 import {
   START_GAME,
   END_GAME,
-  NEW_PLAYER,
-  UPDATE_PLAYER,
-  NEXT_PLAYER,
-  PREV_PLAYER,
   NEXT_FORM,
   PREV_FORM,
   UPDATE_CIRCLES,
@@ -42,7 +38,6 @@ export const endGame = () => (dispatch) => {
 
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
 export const nextForm = (currentForm) => async (dispatch) => {
-  console.log("currentForm", currentForm, "[nextform]");
   if (currentForm === 3) {
     await dispatch({
       type: DISPLAY_CIRCLES,

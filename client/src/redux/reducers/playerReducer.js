@@ -5,7 +5,7 @@ const INITIAL_STATE = [];
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case NEW_PLAYER:
-      console.log("[NEW_PLAYER]: ", action.payload);
+      console.info("%c[NEW_PLAYER]: ", "color: yellow", action.payload);
       return [
         ...state,
         {
@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
       ];
 
     case UPDATE_PLAYER:
-      console.log("[UPDATE_PLAYER]: ", action.payload);
+      console.info("%c[UPDATE_PLAYER]: ", "color: yellow", action.payload);
       return state.map((el, i) => {
         return i === action.payload.currentPlayer
           ? {

@@ -45,13 +45,11 @@ export const submitForm = (
   circle,
   responses
 ) => async (dispatch) => {
-  console.log("responses", responses, circle);
   if (currentForm === 1) {
     return;
   }
 
   if (currentForm === 2) {
-    console.log("respsssss", responses);
     await dispatch({
       type: NEW_PLAYER,
       payload: {

@@ -30,55 +30,55 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     /* --- GAME REDUCERS --- */
     case START_GAME:
-      console.log("[START_GAME]: ", action.payload);
+      console.info("%c[START_GAME]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case END_GAME:
-      console.log("[END_GAME]: ", action.payload);
+      console.info("%c[END_GAME]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...INITIAL_STATE,
       };
     case SET_INTEREST:
-      console.log("[SET_INTEREST]: ", action.payload);
+      console.info("%c[SET_INTEREST]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case UPDATE_CIRCLES:
-      console.log("[UPDATE_CIRCLES]: ", action.payload);
+      console.info("%c[UPDATE_CIRCLES]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case DISPLAY_CIRCLES:
-      console.log("[DISPLAY_CIRCLES]: ", action.payload);
+      console.info("%c[DISPLAY_CIRCLES]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_FORM:
-      console.log("[NEXT_FORM]: ", action.payload);
+      console.info("%c[NEXT_FORM]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_FORM:
-      console.log("[PREV_FORM]: ", action.payload);
+      console.info("%c[PREV_FORM]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_PLAYER:
-      console.log("[NEXT_PLAYER]: ", action.payload);
+      console.info("%c[NEXT_PLAYER]: ", "color: yellow", action.payload);
       return {
         ...state,
         currentPlayer: action.payload,
       };
     case PREV_PLAYER:
-      console.log("[PREV_PLAYER]: ", action.payload);
+      console.info("%c[PREV_PLAYER]: ", "color: yellow", action.payload);
       return {
         ...state.config,
         currentPlayer: action.payload,

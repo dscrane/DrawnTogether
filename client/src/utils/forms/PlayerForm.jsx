@@ -2,22 +2,24 @@ import React from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const PlayerForm = ({ responses, setResponses }) => {
-  console.log('form one res', responses)
   const handlePlayer = (event) => {
     event.preventDefault();
     setResponses({ ...responses, [event.target.name]: event.target.value });
   };
 
   const handleAssociation = (event) => {
-    // event.preventDefault();
-    setResponses({ ...responses, [event.target.name]: parseInt(event.target.value) });
+    event.preventDefault();
+    setResponses({
+      ...responses,
+      [event.target.name]: parseInt(event.target.value),
+    });
   };
 
   return (
     <FormGroup id="form2">
       <FormLabel>Player</FormLabel>
       <FormControl
-        name='name'
+        name="name"
         onChange={handlePlayer}
         value={responses.name}
         placeholder="Enter name..."
@@ -25,7 +27,7 @@ export const PlayerForm = ({ responses, setResponses }) => {
 
       <FormLabel>Association</FormLabel>
       <FormControl
-        name='association'
+        name="association"
         onChange={handleAssociation}
         value={responses.association}
         placeholder="Enter time associated..."
