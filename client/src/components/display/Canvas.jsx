@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { updateGridDisplay, updateView } from "../../redux/actions";
 import * as circleUtils from "../../utils/circleUtils";
 
 const Canvas = ({ display, game, updateGridDisplay }) => {
   const [svg, setSvg] = useState({ d: <svg /> });
+  const canvasRef = useRef(null);
   useEffect(() => {
     setSvg({
       d: (
@@ -25,6 +26,7 @@ const Canvas = ({ display, game, updateGridDisplay }) => {
         updateView({
           view: { height: window.innerHeight, width: window.innerWidth },
         });
+        circleUtils.fixDPI(canvasRef);
         setSvg({
           d: (
             <svg height={display.display.svgDim} width={display.display.svgDim}>
@@ -38,7 +40,7 @@ const Canvas = ({ display, game, updateGridDisplay }) => {
     });
   }, [display.view]);
 
-  return <div style={{ height: "100vh" }}>{svg.d}</div>;
+  return <div ref={canvasRef}>{svg.d}</div>;
 };
 
 const mapStateToProps = (state) => {

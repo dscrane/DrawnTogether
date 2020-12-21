@@ -1,5 +1,18 @@
 import React from "react";
 
+export function fixDPI(canvas) {
+  let dpi = window.devicePixelRatio;
+  let styleHeight = +getComputedStyle(canvas)
+    .getPropertyValue("height")
+    .slice(0, -2);
+  let styleWidth = +getComputedStyle(canvas)
+    .getPropertyValue("width")
+    .slice(0, -2);
+
+  canvas.setAttribute("height", styleHeight * dpi);
+  canvas.setAttribute("width", styleWidth * dpi);
+}
+
 function polarGrid(display) {
   const gridLines = [];
   gridLines.push(
