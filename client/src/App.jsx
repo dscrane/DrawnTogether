@@ -10,8 +10,10 @@ export const App = () => {
         <Col xl={3} xs={4} className="app__sidebar">
           <Sidebar />
         </Col>
-        <Col xl={9} className="app__canvas text-center">
-          <Canvas />
+        <Col height={100} xl={9} className="app__canvas text-center">
+          <div className="canvas__container">
+            <Canvas />
+          </div>
         </Col>
       </Row>
     </Container>

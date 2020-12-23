@@ -3,28 +3,29 @@ import { UPDATE_DISPLAY_GRID, UPDATE_VIEW } from "../types";
 export const updateView = (dimensions) => (dispatch) => {
   dispatch({
     type: UPDATE_VIEW,
-    payload: { ...dimensions },
+    payload: {
+      height: dimensions.height * 0.85,
+      width: dimensions.width * 0.85,
+    },
   });
 };
 
-export const updateGridDisplay = ({ height, width }) => (
-  dispatch,
-  getState
-) => {
+export const updateGridDisplay = (view) => (dispatch, getState) => {
   console.log("update happened");
   let displayGrid = getState().display.grid;
-  let axis =
-    displayGrid.radius === 0 ? width * 0.41 * 1.08 : displayGrid.radius * 1.08;
-  let cross = height * 0.41 * 1.08 * 0.7;
-  let center =
-    displayGrid.svgDim === 0 ? height * 0.95 : displayGrid.svgDim / 2;
-  let step =
-    displayGrid.radius === 0 ? (height * 0.41) / 16 : displayGrid.radius / 16;
+  const { height, width } = view;
+  console.log("view: ", view);
+  console.log("displayGrid:", getState().display);
+  let axis = displayGrid.radius === 0 ? (height / 2) * 1.2 : displayGrid.radius;
+  let cross = height;
+  console.log("cross: ", height);
+  let center = displayGrid.svgDim === 0 ? height / 2 : displayGrid.svgDim / 2;
+  let step = displayGrid.radius === 0 ? height / 32 : displayGrid.radius / 32;
 
   dispatch({
     type: UPDATE_DISPLAY_GRID,
     payload: {
-      windowDimensions: {
+      view: {
         width,
         height,
       },
@@ -34,8 +35,8 @@ export const updateGridDisplay = ({ height, width }) => (
         step,
         cx: center,
         cy: center,
-        svgDim: height * 0.95,
-        radius: height * 0.41,
+        svgDim: height < width ? height : width,
+        radius: height < width ? height / 2 : width / 2,
       },
     },
   });

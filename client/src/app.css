@@ -129,6 +129,18 @@ body {
 
 
 /* ----   Canvas component styles    ---- */
+.canvas__container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas__display {
+  height: 100%;
+  width: 100%;
+}
+
 
 /* ----   ****    ---- */
 
