@@ -1,5 +1,15 @@
 import { UPDATE_DISPLAY_GRID, UPDATE_VIEW } from "../types";
 
+const resizeGrid = (height, width, svgDim = 0) => {
+  if (svgDim > height || svgDim > width) {
+    return height > width ? height : width;
+  } else if (svgDim < height && svgDim > width) {
+    return width;
+  } else if (svgDim < width && svgDim > height) {
+    return height;
+  }
+};
+
 export const updateView = (dimensions) => (dispatch) => {
   dispatch({
     type: UPDATE_VIEW,
@@ -10,10 +20,11 @@ export const updateView = (dimensions) => (dispatch) => {
   });
 };
 
-export const updateGridDisplay = (view) => (dispatch, getState) => {
+export const updateGridDisplay = (view) => async (dispatch, getState) => {
   console.log("update happened");
   let displayGrid = getState().display.grid;
   const { height, width } = view;
+  await resizeGrid(height, width, displayGrid.svgDim);
   console.log("view: ", view);
   console.log("displayGrid:", getState().display);
   let axis = displayGrid.radius === 0 ? (height / 2) * 1.2 : displayGrid.radius;

@@ -136,9 +136,11 @@ body {
   align-items: center;
 }
 
-.canvas__display {
-  height: 100%;
+.canvas__svg {
+  border: 1px solid red;
+  flex-grow: 1;
   width: 100%;
+  height: 100%;
 }
 
 
