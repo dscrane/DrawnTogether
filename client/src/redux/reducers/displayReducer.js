@@ -27,13 +27,9 @@ export default (state = INITIAL_STATE, action) => {
       );
       return {
         ...state,
-        view: {
-          ...state.view,
-          ...action.payload.view,
-        },
         grid: {
-          ...state.display,
-          ...action.payload.grid,
+          ...state.grid,
+          ...action.payload,
         },
       };
 

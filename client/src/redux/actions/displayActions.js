@@ -14,41 +14,33 @@ export const updateView = (dimensions) => (dispatch) => {
   dispatch({
     type: UPDATE_VIEW,
     payload: {
-      height: dimensions.height * 0.85,
-      width: dimensions.width * 0.85,
+      height: dimensions.height,
+      width: dimensions.width,
     },
   });
 };
 
-export const updateGridDisplay = (view) => async (dispatch, getState) => {
-  console.log("update happened");
-  let displayGrid = getState().display.grid;
+export const updateGridDisplay = (view) => async (dispatch) => {
   const { height, width } = view;
-  await resizeGrid(height, width, displayGrid.svgDim);
-  console.log("view: ", view);
-  console.log("displayGrid:", getState().display);
-  let axis = displayGrid.radius === 0 ? (height / 2) * 1.2 : displayGrid.radius;
-  let cross = height;
-  console.log("cross: ", height);
-  let center = displayGrid.svgDim === 0 ? height / 2 : displayGrid.svgDim / 2;
-  let step = displayGrid.radius === 0 ? height / 32 : displayGrid.radius / 32;
+
+  const svgDim = height > width ? height : width;
+  const radius = height < width ? (height * 0.85) / 2 : (width * 0.85) / 2;
+  const axis = radius * 1.1;
+  const cross = radius * 0.75;
+  const centerY = height / 2;
+  const centerX = width / 2;
+  const step = radius / 16;
 
   dispatch({
     type: UPDATE_DISPLAY_GRID,
     payload: {
-      view: {
-        width,
-        height,
-      },
-      grid: {
-        axis,
-        cross,
-        step,
-        cx: center,
-        cy: center,
-        svgDim: height < width ? height : width,
-        radius: height < width ? height / 2 : width / 2,
-      },
+      axis,
+      cross,
+      step,
+      radius,
+      svgDim,
+      cx: centerX,
+      cy: centerY,
     },
   });
 };

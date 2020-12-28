@@ -1,4 +1,4 @@
-import { updateCircle } from "../../utils/circleUtils";
+import { updateCircle } from "../../utils/displayUtils";
 import {
   START_GAME,
   END_GAME,
@@ -45,16 +45,17 @@ export const nextForm = (currentForm) => async (dispatch) => {
     });
   }
 
-  await dispatch({
-    type: UPDATE_CIRCLES,
-    payload: { updateCircles: true },
-  });
-
   const newForm = currentForm + 1;
   await dispatch({
     type: NEXT_FORM,
     payload: { currentPlayer: 0, currentForm: newForm, updateCircles: false },
   });
+  if (currentForm > 2) {
+    await dispatch({
+      type: UPDATE_CIRCLES,
+      payload: { updateCircles: true },
+    });
+  }
 };
 /* ----   ****    ---- */
 

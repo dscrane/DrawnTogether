@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { submitForm, nextPlayer, prevPlayer } from "../../redux/actions";
 import DisplayForm from "./DisplayForm";
 import { PlayerButtons } from "./PlayerButtons";
+import * as circleUtils from "../../utils/circleUtils";
 
 const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
   const { currentForm, currentPlayer, numPlayers } = game;
@@ -52,11 +53,9 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    const circle = {
-      radius: 1,
-      slice: 4,
-    }; /*|| await updateCircle(currentForm, responses)*/
-    await submitForm(currentPlayer, currentForm, circle, { ...responses });
+    console.log("resopnses", responses);
+
+    await submitForm(currentPlayer, currentForm, responses);
     setResponses({});
     nextPlayer(currentPlayer);
   };

@@ -3,7 +3,7 @@ import {
   NEW_PLAYER,
   NEXT_PLAYER,
   PREV_PLAYER,
-  UPDATE_CIRCLES,
+  UPDATE_PLAYER_CIRCLE,
   UPDATE_PLAYER,
 } from "../types";
 
@@ -39,22 +39,19 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 /* ----   ****    ---- */
 
 /* ----    SUBMIT_FORM ACTION CREATOR    ---- */
-export const submitForm = (
-  currentPlayer,
-  currentForm,
-  circle,
-  responses
-) => async (dispatch) => {
+export const submitForm = (currentPlayer, currentForm, responses) => async (
+  dispatch
+) => {
   if (currentForm === 1) {
     return;
   }
 
   if (currentForm === 2) {
+    console.log(responses);
     await dispatch({
       type: NEW_PLAYER,
       payload: {
         currentPlayer,
-        circle,
         responses: {
           id: currentPlayer,
           ...responses,
@@ -67,7 +64,6 @@ export const submitForm = (
     type: UPDATE_PLAYER,
     payload: {
       currentPlayer,
-      circle,
       responses: {
         ...responses,
       },
@@ -76,4 +72,12 @@ export const submitForm = (
 };
 /* ----   ****    ---- */
 
-export const updateCircle = () => {};
+export const updatePlayerCircle = (circle, currentPlayer) => (dispatch) => {
+  dispatch({
+    type: UPDATE_PLAYER_CIRCLE,
+    payload: {
+      currentPlayer,
+      circle: { ...circle },
+    },
+  });
+};

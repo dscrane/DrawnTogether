@@ -1,13 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { updateGridDisplay, updateView } from "../../redux/actions";
+import {
+  updateGridDisplay,
+  updateView,
+  updatePlayerCircle,
+} from "../../redux/actions";
+import * as displayUtils from "../../utils/displayUtils";
 import * as circleUtils from "../../utils/circleUtils";
 
-const Canvas = ({ display, game, updateGridDisplay, updateView }) => {
-  const [svg, setSvg] = useState({ d: <svg /> });
-  const canvasSvg = useRef(null);
-  console.log("canvasSvg", canvasSvg);
+function debounce(fn, ms) {
+  let timer;
+  return (_) => {
+    clearTimeout(timer);
+    timer = setTimeout((_) => {
+      timer = null;
+      fn.apply(this, arguments);
+    }, ms);
+  };
+}
 
+const Canvas = ({
+  display,
+  game,
+  players,
+  updateGridDisplay,
+  updateView,
+  updatePlayerCircle,
+}) => {
+  const [circles, setCircles] = useState([]);
+  const canvasSvg = useRef(null);
+
+  /* Initial rendering of the circle grid */
   useEffect(() => {
     const asyncUpdate = async () => {
       await updateView({
@@ -22,32 +45,42 @@ const Canvas = ({ display, game, updateGridDisplay, updateView }) => {
     asyncUpdate();
   }, []);
 
+  /* Debounced view dimensions event handler */
   useEffect(() => {
-    let delay;
-    window.addEventListener("resize", () => {
-      clearTimeout(delay);
-      delay = setTimeout(async () => {
-        await updateView({
-          height: canvasSvg.current.height.baseVal.value || null,
-          width: canvasSvg.current.width.baseVal.value || null,
-        });
-        await updateGridDisplay(display.view);
-      }, 250);
-    });
-  }, [display.view]);
+    const debounceHandleResize = debounce(function handleResize() {
+      updateView({
+        height: canvasSvg.current.height.baseVal.value,
+        width: canvasSvg.current.width.baseVal.value,
+      });
+    }, 500);
 
-  if (canvasSvg.current !== null) {
-    console.log(
-      "canvas ref",
-      canvasSvg.current.height.baseVal.value || null,
-      canvasSvg.current.width.baseVal.value || null
-    );
-  }
+    window.addEventListener("resize", debounceHandleResize);
+    return (_) => window.removeEventListener("resize", debounceHandleResize);
+  }, [display.view, updateView]);
+
+  /* Update the display grid based on new view dimensions */
+  useEffect(() => {
+    updateGridDisplay(display.view);
+  }, [display.view, updateGridDisplay]);
+
+  useEffect(() => {
+    const handleCircleUpdate = async () => {
+      let circle;
+      console.log(players);
+      if (game.updateCircles) {
+        circle = circleUtils.circleVariables(players[game.currentPlayer]);
+      }
+      await updatePlayerCircle(circle, game.currentPlayer);
+      setCircles([...circles, game.currentPlayer.circle]);
+    };
+    handleCircleUpdate();
+  }, [game.updateCircles]);
+
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
-      {circleUtils.darkPolarRings(display.grid)};
-      {circleUtils.bluePolarRings(display.grid)};
-      {circleUtils.polarGrid(display.grid)};
+      {displayUtils.darkPolarRings(display.grid)};
+      {displayUtils.bluePolarRings(display.grid)};
+      {displayUtils.polarGrid(display.grid)};
     </svg>
   );
 };
@@ -60,6 +93,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateGridDisplay, updateView })(
-  Canvas
-);
+export default connect(mapStateToProps, {
+  updateGridDisplay,
+  updateView,
+  updatePlayerCircle,
+})(Canvas);

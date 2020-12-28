@@ -1,4 +1,4 @@
-import { NEW_PLAYER, UPDATE_PLAYER } from "../types";
+import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER } from "../types";
 
 const INITIAL_STATE = [];
 
@@ -21,7 +21,21 @@ export default (state = INITIAL_STATE, action) => {
           ? {
               ...el,
               ...action.payload.responses,
-              ...action.payload.circle,
+              circle: {
+                ...action.payload.circle,
+              },
+            }
+          : el;
+      });
+
+    case UPDATE_PLAYER_CIRCLE:
+      return state.map((el, i) => {
+        return i === action.payload.currentPlayer
+          ? {
+              ...el,
+              circle: {
+                ...action.payload.circle,
+              },
             }
           : el;
       });
