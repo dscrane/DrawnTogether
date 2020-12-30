@@ -77,7 +77,7 @@ export const updatePlayerCircle = (circle, currentPlayer) => (dispatch) => {
     type: UPDATE_PLAYER_CIRCLE,
     payload: {
       currentPlayer,
-      circle: { ...circle },
+      circle,
     },
   });
 };

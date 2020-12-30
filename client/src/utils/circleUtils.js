@@ -1,13 +1,12 @@
+import React from "react";
+
 let Player;
 let degree;
-function circleVariables(currentPlayer) {
-  Player = currentPlayer;
+function circleVariables(playerCircleValues, currentPlayerId) {
+  Player = playerCircleValues;
   console.log("player", Player);
 
-  const fillColor =
-    Player.circle === undefined ? createFillColor() : Player.circle.fillColor;
-
-  return {
+  const playerCircle = {
     circleRadius: setPlayerRadius(),
     circleRadiusAlt: altRadius(),
     degree: setPlayerDegree().degree,
@@ -22,6 +21,9 @@ function circleVariables(currentPlayer) {
     xCartesianAlt: altCartesian().altXCord,
     yCartesianAlt: altCartesian().altYCord,
   };
+
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId);
+  return playerCircle;
 }
 
 function setPlayerRadius() {
@@ -38,10 +40,10 @@ function setPlayerRadius() {
 }
 
 function setPlayerDegree() {
-  if (!Player.interest || !Player.gender || Player.diet) {
+  if (!Player.interest || !Player.gender || !Player.diet) {
     return { degree: 0, slice: 0 };
   }
-  const slice = Math.floor(Math.random() * 9) + Player.interest;
+  const slice = Math.floor(Math.random() * 9) + parseInt(Player.interest);
   switch (Player.diet) {
     case "carnivore":
       if (Player.gender === 0) {
@@ -156,6 +158,18 @@ function altCartesian() {
     return { altXCord, altYCord };
   }
   return { altXCord, altYCord };
+}
+
+function createCircleSVG(playerCircle, currentPlayerId) {
+  return (
+    <circle
+      key={`circle_${currentPlayerId}`}
+      cx={playerCircle.cx}
+      cy={playerCircle.cy}
+      r={playerCircle.radius}
+      fill={playerCircle.fillColor}
+    />
+  );
 }
 
 export { circleVariables };

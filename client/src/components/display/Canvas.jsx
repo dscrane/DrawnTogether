@@ -68,19 +68,23 @@ const Canvas = ({
       let circle;
       console.log(players);
       if (game.updateCircles) {
-        circle = circleUtils.circleVariables(players[game.currentPlayer]);
+        circle = circleUtils.circleVariables(
+          players[game.currentPlayer],
+          game.currentPlayer
+        );
       }
       await updatePlayerCircle(circle, game.currentPlayer);
       setCircles([...circles, game.currentPlayer.circle]);
     };
     handleCircleUpdate();
-  }, [game.updateCircles]);
-
+  }, [game.updateCircles, game.currentPlayer.circle]);
+  console.log("circles", circles);
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
       {displayUtils.darkPolarRings(display.grid)};
       {displayUtils.bluePolarRings(display.grid)};
       {displayUtils.polarGrid(display.grid)};
+      {circles.forEach((circle) => circle)}
     </svg>
   );
 };
