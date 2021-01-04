@@ -63,8 +63,12 @@ const Canvas = ({
     updateGridDisplay(display.view);
   }, [display.view, updateGridDisplay]);
 
+  /* Update the player circles when the form is submitted */
   useEffect(() => {
     const handleCircleUpdate = async () => {
+      if (game.currentForm < 2) {
+        return;
+      }
       let circle;
       console.log(players);
       if (game.updateCircles) {
@@ -74,17 +78,20 @@ const Canvas = ({
         );
       }
       await updatePlayerCircle(circle, game.currentPlayer);
-      setCircles([...circles, game.currentPlayer.circle]);
     };
     handleCircleUpdate();
   }, [game.updateCircles, game.currentPlayer.circle]);
-  console.log("circles", circles);
+
+  const testCircles =
+    game.currentForm > 2 ? circleUtils.drawPlayerCircles(players) : "NULLY";
+  console.log("circles", testCircles);
+
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
       {displayUtils.darkPolarRings(display.grid)};
       {displayUtils.bluePolarRings(display.grid)};
       {displayUtils.polarGrid(display.grid)};
-      {circles.forEach((circle) => circle)}
+      {/*{circles.length > 0 ? circleUtils.drawPlayerCircles(players) : null}*/}
     </svg>
   );
 };

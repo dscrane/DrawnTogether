@@ -2,6 +2,17 @@ import React from "react";
 
 let Player;
 let degree;
+
+function drawPlayerCircles(players) {
+  console.log(players);
+  const playerCircles = [];
+  players.forEach((player) => {
+    const circleSVG = createCircleSVG(players.circle, players.id);
+    playerCircles.push(circleSVG);
+  });
+  return playerCircles;
+}
+
 function circleVariables(playerCircleValues, currentPlayerId) {
   Player = playerCircleValues;
   console.log("player", Player);
@@ -22,7 +33,7 @@ function circleVariables(playerCircleValues, currentPlayerId) {
     yCartesianAlt: altCartesian().altYCord,
   };
 
-  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId);
+  // playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId);
   return playerCircle;
 }
 
@@ -172,4 +183,4 @@ function createCircleSVG(playerCircle, currentPlayerId) {
   );
 }
 
-export { circleVariables };
+export { circleVariables, drawPlayerCircles };
