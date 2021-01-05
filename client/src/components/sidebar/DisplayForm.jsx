@@ -34,7 +34,7 @@ const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
     case 9:
       return <Results />;
     default:
-      throw new Error("FormArea switch has failed");
+      console.log("FormArea switch has failed");
   }
 };
 

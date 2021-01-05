@@ -7,6 +7,8 @@ import {
   UPDATE_CIRCLES,
   DISPLAY_CIRCLES,
   SET_INTEREST,
+  NEXT_PLAYER,
+  PREV_PLAYER,
 } from "../types";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
@@ -37,7 +39,20 @@ export const endGame = () => (dispatch) => {
 /* ----   ****    ---- */
 
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
-export const nextForm = (currentForm) => async (dispatch) => {
+export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
+  const newForm = currentForm + 1;
+  if (currentForm === 2) {
+    await dispatch({
+      type: NEXT_FORM,
+      payload: {
+        currentPlayer: 0,
+        currentForm: newForm,
+        updateCircles: false,
+        numPlayers: currentPlayer,
+      },
+    });
+  }
+
   if (currentForm === 3) {
     await dispatch({
       type: DISPLAY_CIRCLES,
@@ -45,7 +60,6 @@ export const nextForm = (currentForm) => async (dispatch) => {
     });
   }
 
-  const newForm = currentForm + 1;
   await dispatch({
     type: NEXT_FORM,
     payload: { currentPlayer: 0, currentForm: newForm, updateCircles: false },
@@ -53,7 +67,7 @@ export const nextForm = (currentForm) => async (dispatch) => {
   if (currentForm > 2) {
     await dispatch({
       type: UPDATE_CIRCLES,
-      payload: { updateCircles: true },
+      payload: { displayCircles: true },
     });
   }
 };
@@ -69,7 +83,24 @@ export const prevForm = (currentForm) => (dispatch) => {
 };
 /* ----   ****    ---- */
 
-/* ----   App component styles    ---- */
+/* ----   NEXT_PLAYER ACTION CREATOR    ---- */
+export const nextPlayer = (currentPlayer) => (dispatch) => {
+  const nextPlayer = currentPlayer + 1;
+  dispatch({
+    type: NEXT_PLAYER,
+    payload: nextPlayer,
+  });
+};
+/* ----   ****    ---- */
+
+/* ----    PREV_PLAYER ACTION CREATOR    ---- */
+export const prevPlayer = (currentPlayer) => (dispatch) => {
+  const prevPlayer = currentPlayer - 1;
+  dispatch({
+    type: PREV_PLAYER,
+    payload: prevPlayer,
+  });
+};
 /* ----   ****    ---- */
 
 /* ----   App component styles    ---- */

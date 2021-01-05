@@ -15,7 +15,7 @@ export const SixForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formColor"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.color || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="chartreuse">Chartreuse</option>

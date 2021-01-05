@@ -21,7 +21,7 @@ export const PlayerForm = ({ responses, setResponses }) => {
       <FormControl
         name="name"
         onChange={handlePlayer}
-        value={responses.name}
+        value={responses.name || ""}
         placeholder="Enter name..."
       />
 
@@ -29,7 +29,7 @@ export const PlayerForm = ({ responses, setResponses }) => {
       <FormControl
         name="association"
         onChange={handleAssociation}
-        value={responses.association}
+        value={responses.association || ""}
         placeholder="Enter time associated..."
       />
       <small id="interestHelp" className="form-text text-muted">

@@ -80,7 +80,7 @@ export default (state = INITIAL_STATE, action) => {
     case PREV_PLAYER:
       console.info("%c[PREV_PLAYER]: ", "color: yellow", action.payload);
       return {
-        ...state.config,
+        ...state,
         currentPlayer: action.payload,
       };
     /* --- END GAME REDUCERS ---*/

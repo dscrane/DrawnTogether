@@ -5,39 +5,33 @@ let degree;
 
 function drawPlayerCircles(players) {
   console.log(players);
-  const playerCircles = [];
-  players.forEach((player) => {
-    const circleSVG = createCircleSVG(players.circle, players.id);
-    playerCircles.push(circleSVG);
-  });
-  return playerCircles;
+  return players.map((player) => createCircleSVG(player.circle, players.id));
 }
 
-function circleVariables(playerCircleValues, currentPlayerId) {
+function circleVariables(playerCircleValues, displayGrid, currentPlayerId) {
   Player = playerCircleValues;
   console.log("player", Player);
 
   const playerCircle = {
-    circleRadius: setPlayerRadius(),
+    circleRadius: setCircleRadius(),
     circleRadiusAlt: altRadius(),
     degree: setPlayerDegree().degree,
     fillColor: createFillColor().color,
     hue: createFillColor().hue,
     lightness: createFillColor().lightness,
-    radius: Player.age,
+    radian: Player.age,
     slice: setPlayerDegree().slice,
     saturation: createFillColor().saturation,
-    xCartesian: convertToCartesian().xCord /* max +- 400 */,
-    yCartesian: convertToCartesian().yCord /* max +- 400 */,
+    xCartesian: convertToCartesian(displayGrid).xCord /* max +- 400 */,
+    yCartesian: convertToCartesian(displayGrid).yCord /* max +- 400 */,
     xCartesianAlt: altCartesian().altXCord,
     yCartesianAlt: altCartesian().altYCord,
   };
-
-  // playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId);
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId);
   return playerCircle;
 }
 
-function setPlayerRadius() {
+function setCircleRadius() {
   if (!Player.association) {
     return Math.floor(Math.random() * 45) + 10;
   }
@@ -116,15 +110,15 @@ function createStrokeColor() {}
 
 function createSecondaryColor() {}
 
-function convertToCartesian() {
+function convertToCartesian(displayGrid) {
   if (!Player.age) {
     return { xCord: 0, yCord: 0 };
   }
-  const radius = Player.age; //initialXLocation();
+  const radian = Player.age; //initialXLocation();
   const theta = degree * (Math.PI / 180); //initialYLocation();
 
-  let xCord = Math.round(radius * -Math.cos(theta));
-  let yCord = Math.round(radius * Math.sin(theta));
+  let xCord = displayGrid.cx + Math.round(radian * -Math.cos(theta));
+  let yCord = displayGrid.cy + Math.round(radian * Math.sin(theta));
 
   return { xCord, yCord };
 }
@@ -134,12 +128,12 @@ function altRadius() {
     let radius = Player.circle.radius;
 
     const timeShift = radius * (Player.time / 100);
-    console.log(timeShift);
+    // console.log(timeShift);
 
     Player.time % 2 === 0 ? (radius += timeShift) : (radius -= timeShift);
 
     const personalityShift = radius * (Player.personality / 100);
-    console.log(personalityShift);
+    // console.log(personalityShift);
     Player.personality % 2 === 0
       ? (radius += personalityShift)
       : (radius -= personalityShift);
@@ -172,12 +166,13 @@ function altCartesian() {
 }
 
 function createCircleSVG(playerCircle, currentPlayerId) {
+  console.log("player circle passed:", playerCircle);
   return (
     <circle
       key={`circle_${currentPlayerId}`}
-      cx={playerCircle.cx}
-      cy={playerCircle.cy}
-      r={playerCircle.radius}
+      cx={playerCircle.xCartesian}
+      cy={playerCircle.yCartesian}
+      r={playerCircle.circleRadius}
       fill={playerCircle.fillColor}
     />
   );

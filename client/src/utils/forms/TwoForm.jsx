@@ -15,7 +15,7 @@ export const TwoForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formTemporal"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.time || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="18">Morning</option>
@@ -27,7 +27,7 @@ export const TwoForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formPersonality"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.personality || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="60">Introvert</option>
@@ -39,7 +39,7 @@ export const TwoForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formHair"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.hair || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="10">Curly</option>

@@ -6,31 +6,39 @@ export const PlayerButtons = ({
   currentPlayer,
   players,
   numPlayers,
+  prevPlayer,
 }) => {
   return (
     <div className="player__buttons">
       <Row className="player__buttons-row">
         <Col className="player__buttons-col">
-          <button
-            className={`player__button ${
-              currentPlayer === 0 ? "player__button-disabled" : ""
-            }`}
-            id="prev-player-button"
-            type="button"
-          >
-            <span className="player__button-icon">&#8249;</span>
-            <span className="player__button_text">
-              {" "}
-              {currentForm > 2 && players[currentPlayer - 1]
-                ? players[currentPlayer - 1].name
-                : "Prev"}
-            </span>
-          </button>
+          {currentPlayer === 0 ? (
+            ""
+          ) : (
+            <button
+              className={"player__button"}
+              id="prev-player-button"
+              type="button"
+              onClick={() => {
+                prevPlayer(currentPlayer);
+              }}
+            >
+              <span className="player__button-icon">&#8249;</span>
+              <span className="player__button_text">
+                {" "}
+                {currentForm > 2 && players[currentPlayer - 1]
+                  ? players[currentPlayer - 1].name
+                  : "Prev"}
+              </span>
+            </button>
+          )}
         </Col>
         <Col className="player__buttons-col">
           <button
             className={`player__button ${
-              currentPlayer === numPlayers + 1 ? "player__button-disabled" : ""
+              currentPlayer === numPlayers + 1 && currentForm > 2
+                ? "player__button-disabled"
+                : ""
             }`}
             id="next-player-button"
             type="submit"

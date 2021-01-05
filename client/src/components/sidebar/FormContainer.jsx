@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitForm, nextPlayer, prevPlayer } from "../../redux/actions";
+import {
+  submitForm,
+  nextPlayer,
+  prevPlayer,
+  updatePlayerCircle,
+} from "../../redux/actions";
 import DisplayForm from "./DisplayForm";
 import { PlayerButtons } from "./PlayerButtons";
-import * as circleUtils from "../../utils/circleUtils";
 
-const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
+const FormContainer = ({
+  game,
+  players,
+  submitForm,
+  nextPlayer,
+  updatePlayerCircle,
+  prevPlayer,
+}) => {
   const { currentForm, currentPlayer, numPlayers } = game;
 
   const [responses, setResponses] = useState({});
+  console.log("RESPONSES", responses);
+  useEffect(() => {
+    setResponses({});
+  }, [submitForm]);
 
   const createPlayerIcons = () => {
     const playerIcons = [];
@@ -26,7 +41,7 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
       for (let i = 0; i < numPlayers; i++) {
         playerIcons.push(
           i === currentPlayer ? (
-            <span className="player__icon-active" key={i} />
+            <span className="player__icon player__icon-active" key={i} />
           ) : (
             <span className="player__icon" key={i} />
           )
@@ -42,6 +57,7 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
         <div className="player__icon_row">{createPlayerIcons()}</div>
         <PlayerButtons
           players={players}
+          prevPlayer={prevPlayer}
           numPlayers={numPlayers}
           currentForm={currentForm}
           currentPlayer={currentPlayer}
@@ -56,13 +72,16 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
     console.log("resopnses", responses);
 
     await submitForm(currentPlayer, currentForm, responses);
+    if (currentForm > 2) {
+      await updatePlayerCircle(currentPlayer);
+    }
     setResponses({});
     nextPlayer(currentPlayer);
   };
 
   const showForms = () => {
     if (currentForm > 2) {
-      return currentPlayer === numPlayers + 1 ? (
+      return currentPlayer === numPlayers ? (
         <div className="text-center">
           Click
           <br /> "Submit Form"
@@ -88,7 +107,7 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="form-signin mt-2">
+    <form onSubmit={onSubmit} className="sidebar__form form-signin mt-2">
       {players[currentPlayer] ? <div>{players[currentPlayer].name}</div> : ""}
       {showForms()}
       {playerIconsAndButtons}
@@ -96,13 +115,17 @@ const FormContainer = ({ game, submitForm, nextPlayer, players }) => {
   );
 };
 
-const mapStateToProps = ({ game, players }) => {
+const mapStateToProps = ({ game, players, display }) => {
   return {
     game,
     players,
+    display,
   };
 };
 
-export default connect(mapStateToProps, { submitForm, nextPlayer, prevPlayer })(
-  FormContainer
-);
+export default connect(mapStateToProps, {
+  submitForm,
+  nextPlayer,
+  prevPlayer,
+  updatePlayerCircle,
+})(FormContainer);

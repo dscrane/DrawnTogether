@@ -15,7 +15,7 @@ export const OneForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formHeight"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.height || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="16">Tall</option>
@@ -28,7 +28,7 @@ export const OneForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formInterest"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.interest || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="27">Numbers</option>
@@ -43,7 +43,7 @@ export const OneForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formGender"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.gender || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="2">Male</option>
@@ -56,7 +56,7 @@ export const OneForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formAge"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.age || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="400">0-10</option>
@@ -76,7 +76,7 @@ export const OneForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formDiet"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.diet || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="carnivore">Carnivore</option>

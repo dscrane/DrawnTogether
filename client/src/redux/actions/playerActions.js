@@ -6,6 +6,7 @@ import {
   UPDATE_PLAYER_CIRCLE,
   UPDATE_PLAYER,
 } from "../types";
+import * as circleUtils from "../../utils/circleUtils";
 
 export const newPlayer = (responses, id) => (dispatch) => {
   dispatch({
@@ -14,26 +15,6 @@ export const newPlayer = (responses, id) => (dispatch) => {
       id,
       ...responses,
     },
-  });
-};
-/* ----   ****    ---- */
-
-/* ----   NEXT_PLAYER ACTION CREATOR    ---- */
-export const nextPlayer = (currentPlayer) => (dispatch) => {
-  const nextPlayer = currentPlayer + 1;
-  dispatch({
-    type: NEXT_PLAYER,
-    payload: nextPlayer,
-  });
-};
-/* ----   ****    ---- */
-
-/* ----    PREV_PLAYER ACTION CREATOR    ---- */
-export const prevPlayer = (currentPlayer) => (dispatch) => {
-  const prevPlayer = currentPlayer - 1;
-  dispatch({
-    type: PREV_PLAYER,
-    payload: prevPlayer,
   });
 };
 /* ----   ****    ---- */
@@ -60,19 +41,27 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (
     });
     return;
   }
-  await dispatch({
-    type: UPDATE_PLAYER,
-    payload: {
-      currentPlayer,
-      responses: {
-        ...responses,
+  if (currentForm >= 3) {
+    await dispatch({
+      type: UPDATE_PLAYER,
+      payload: {
+        currentPlayer,
+        responses: {
+          ...responses,
+        },
       },
-    },
-  });
+    });
+  }
 };
 /* ----   ****    ---- */
 
-export const updatePlayerCircle = (circle, currentPlayer) => (dispatch) => {
+export const updatePlayerCircle = (currentPlayer) => (dispatch, getState) => {
+  const { players, display, game } = getState();
+  const circle = circleUtils.circleVariables(
+    players[currentPlayer],
+    display.grid,
+    game.currentPlayer
+  );
   dispatch({
     type: UPDATE_PLAYER_CIRCLE,
     payload: {

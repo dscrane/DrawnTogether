@@ -15,7 +15,7 @@ export const FiveForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formReligion"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.religion || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="1">Practitioner</option>
@@ -30,7 +30,7 @@ export const FiveForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formCulture"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.culture || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="1">People Magazine reader</option>

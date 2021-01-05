@@ -15,7 +15,7 @@ export const ThreeForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formMoney"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.money || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="0">Miserly</option>
@@ -29,7 +29,7 @@ export const ThreeForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formFood"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.food || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="45">I will try anything</option>

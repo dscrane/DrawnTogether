@@ -15,7 +15,7 @@ export const FourForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formNature"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.nature || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="1">Video Gamer</option>
@@ -29,7 +29,7 @@ export const FourForm = ({ responses, setResponses }) => {
         onChange={onChange}
         id="formMedia"
         as="select"
-        defaultValue={"DEFAULT"}
+        value={responses.media || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="1">What is social media</option>

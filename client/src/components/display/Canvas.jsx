@@ -44,7 +44,6 @@ const Canvas = ({
     };
     asyncUpdate();
   }, []);
-
   /* Debounced view dimensions event handler */
   useEffect(() => {
     const debounceHandleResize = debounce(function handleResize() {
@@ -57,41 +56,22 @@ const Canvas = ({
     window.addEventListener("resize", debounceHandleResize);
     return (_) => window.removeEventListener("resize", debounceHandleResize);
   }, [display.view, updateView]);
-
   /* Update the display grid based on new view dimensions */
   useEffect(() => {
     updateGridDisplay(display.view);
   }, [display.view, updateGridDisplay]);
 
   /* Update the player circles when the form is submitted */
-  useEffect(() => {
-    const handleCircleUpdate = async () => {
-      if (game.currentForm < 2) {
-        return;
-      }
-      let circle;
-      console.log(players);
-      if (game.updateCircles) {
-        circle = circleUtils.circleVariables(
-          players[game.currentPlayer],
-          game.currentPlayer
-        );
-      }
-      await updatePlayerCircle(circle, game.currentPlayer);
-    };
-    handleCircleUpdate();
-  }, [game.updateCircles, game.currentPlayer.circle]);
-
-  const testCircles =
-    game.currentForm > 2 ? circleUtils.drawPlayerCircles(players) : "NULLY";
-  console.log("circles", testCircles);
+  useEffect(() => {}, [game.updateCircles]);
 
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
       {displayUtils.darkPolarRings(display.grid)};
       {displayUtils.bluePolarRings(display.grid)};
       {displayUtils.polarGrid(display.grid)};
-      {/*{circles.length > 0 ? circleUtils.drawPlayerCircles(players) : null}*/}
+      {game.currentForm >= 3 && game.displayCircles
+        ? circleUtils.drawPlayerCircles(players)
+        : null}
     </svg>
   );
 };
