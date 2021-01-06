@@ -107,11 +107,17 @@ const FormContainer = ({
   };
 
   return (
-    <form onSubmit={onSubmit} className="sidebar__form form-signin mt-2">
-      {players[currentPlayer] ? <div>{players[currentPlayer].name}</div> : ""}
-      {showForms()}
-      {playerIconsAndButtons}
-    </form>
+    <div className="content__container">
+      {players[currentPlayer] && currentForm > 2 ? (
+        <div className="content__name">{players[currentPlayer].name}</div>
+      ) : (
+        ""
+      )}
+      <form onSubmit={onSubmit} className="content__form form-signin mt-2">
+        {showForms()}
+        {playerIconsAndButtons}
+      </form>
+    </div>
   );
 };
 

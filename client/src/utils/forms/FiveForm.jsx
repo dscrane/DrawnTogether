@@ -8,9 +8,10 @@ export const FiveForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup>
-      <FormLabel>Relationship to Religion</FormLabel>
+    <FormGroup className="form__group">
+      <FormLabel className="form__label">Relationship to Religion</FormLabel>
       <FormControl
+        className="form__control"
         name="religion"
         onChange={onChange}
         id="formReligion"
@@ -24,8 +25,9 @@ export const FiveForm = ({ responses, setResponses }) => {
         <option value="4">Wiccin</option>
         <option value="5">Undecided</option>
       </FormControl>
-      <FormLabel>Relationship to Culture</FormLabel>
+      <FormLabel className="form__label">Relationship to Culture</FormLabel>
       <FormControl
+        className="form__control"
         name="culture"
         onChange={onChange}
         id="formCulture"

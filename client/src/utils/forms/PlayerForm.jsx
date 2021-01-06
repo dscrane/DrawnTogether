@@ -17,16 +17,18 @@ export const PlayerForm = ({ responses, setResponses }) => {
 
   return (
     <FormGroup id="form2">
-      <FormLabel>Player</FormLabel>
+      <FormLabel className="form__label">Player</FormLabel>
       <FormControl
+        className="form__control"
         name="name"
         onChange={handlePlayer}
         value={responses.name || ""}
         placeholder="Enter name..."
       />
 
-      <FormLabel>Association</FormLabel>
+      <FormLabel className="form__label">Association</FormLabel>
       <FormControl
+        className="form__control"
         name="association"
         onChange={handleAssociation}
         value={responses.association || ""}

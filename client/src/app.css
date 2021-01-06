@@ -3,7 +3,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  font-size: 0.75vw;
+  font-size: x-small;
 }
 body {
   color: black !important;
@@ -25,11 +25,15 @@ body {
 }
 
 .app__sidebar {
-  width: 385px !important;
-  max-width: 75% !important;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 20%;
+  width: 400px !important;
+  max-width: 20% !important;
   border-right: 10px rgb(98, 102, 74);
   box-shadow: inset 1px 0px 2.5vh 2.5vh rgba(132, 138, 101, 0.925);
   background-color: #aab185;
+  padding: 1% 1%;
 }
 
 .panelSection {
@@ -37,6 +41,8 @@ body {
 }
 
 .app__canvas {
+  /*display: flex;*/
+  /*flex: 1 1 80%;*/
   box-shadow: inset 1px 0px 20px 20px rgba(132, 138, 101, 0.514);
   background-size: cover;
   background: radial-gradient(rgba(121, 126, 92, 0.1) 15%, transparent 16%) 0 0,
@@ -94,12 +100,31 @@ body {
   height: fit-content;
 }
 
-.sidebar__form {
-  width: 80%;
-}
+
 
 /* ----   ****    ---- */
 
+/* ----   Content Area Styles   ---- */
+.content__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 65%;
+}
+
+.content__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+}
+
+.content__name {
+  font-size: x-large;
+}
+/* ----   ****    ---- */
 
 /* ----   Header component styles    ---- */
 .header__title {
@@ -180,21 +205,23 @@ body {
 
 /* ----   form styles    ---- */
 .form__group {
-  text-align: left;
-  width: 75%
+  width: 100%;
+  /*height: 60%;*/
 }
 
 .form__label {
-  margin-bottom: 0.2rem;
-  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
 }
 
 .form__control {
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
 }
 
 .form__option {
   color: #495057;
+  font-size: 1.15rem;
   background-color: rgba(128, 128, 128, 0.034);
 }
 /* ----   ****    ---- */
@@ -278,7 +305,7 @@ body {
 .player__button {
   margin: auto auto;
   font-family: "Cormorant";
-  font-size: 2vw;
+  font-size: 3.5rem;
   height: 40px;
   color: #494b4d;
   background-color: transparent;
@@ -307,7 +334,7 @@ body {
 
 .player__button_text {
   font-family: "Baloo Thambi 2";
-  font-size: 1.25vw;
+  font-size: 2rem;
   vertical-align: middle;
 }
 

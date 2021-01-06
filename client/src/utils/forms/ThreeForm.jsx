@@ -8,9 +8,10 @@ export const ThreeForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup>
-      <FormLabel>Relationship to Money</FormLabel>
+    <FormGroup className="form__group">
+      <FormLabel className="form__label">Relationship to Money</FormLabel>
       <FormControl
+        className="form__control"
         name="money"
         onChange={onChange}
         id="formMoney"
@@ -23,8 +24,9 @@ export const ThreeForm = ({ responses, setResponses }) => {
         <option value="3">Saver</option>
         <option value="1">Does not Apply</option>
       </FormControl>
-      <FormLabel>Relationship to Food</FormLabel>
+      <FormLabel className="form__label">Relationship to Food</FormLabel>
       <FormControl
+        className="form__control"
         name="food"
         onChange={onChange}
         id="formFood"

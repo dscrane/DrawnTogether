@@ -8,9 +8,10 @@ export const SixForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup>
-      <FormLabel>Choose a Color</FormLabel>
+    <FormGroup className="form__group">
+      <FormLabel className="form__label">Choose a Color</FormLabel>
       <FormControl
+        className="form__control"
         name="color"
         onChange={onChange}
         id="formColor"

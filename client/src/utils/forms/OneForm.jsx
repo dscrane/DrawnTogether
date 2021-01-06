@@ -8,9 +8,10 @@ export const OneForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup>
-      <FormLabel>Height</FormLabel>
+    <FormGroup className="form__group">
+      <FormLabel className="form__label">Height</FormLabel>
       <FormControl
+        className="form__control"
         name="height"
         onChange={onChange}
         id="formHeight"
@@ -22,8 +23,9 @@ export const OneForm = ({ responses, setResponses }) => {
         <option value="32">Average</option>
         <option value="48">Short</option>
       </FormControl>
-      <FormLabel>Interest</FormLabel>
+      <FormLabel className="form__label">Interest</FormLabel>
       <FormControl
+        className="form__control"
         name="interest"
         onChange={onChange}
         id="formInterest"
@@ -37,8 +39,9 @@ export const OneForm = ({ responses, setResponses }) => {
         <option value="9">Images</option>
         <option value="0">People</option>
       </FormControl>
-      <FormLabel>Gender</FormLabel>
+      <FormLabel className="form__label">Gender</FormLabel>
       <FormControl
+        className="form__control"
         name="gender"
         onChange={onChange}
         id="formGender"
@@ -50,8 +53,9 @@ export const OneForm = ({ responses, setResponses }) => {
         <option value="1">Female</option>
         <option value="0">Non Binary</option>
       </FormControl>
-      <FormLabel>Age</FormLabel>
+      <FormLabel className="form__label">Age</FormLabel>
       <FormControl
+        className="form__control"
         name="age"
         onChange={onChange}
         id="formAge"
@@ -70,8 +74,9 @@ export const OneForm = ({ responses, setResponses }) => {
         <option value="240">81-90</option>
         <option value="200">91-100</option>
       </FormControl>
-      <FormLabel>Diet</FormLabel>
+      <FormLabel className="form__label">Diet</FormLabel>
       <FormControl
+        className="form__control"
         name="diet"
         onChange={onChange}
         id="formDiet"

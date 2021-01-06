@@ -8,9 +8,10 @@ export const TwoForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup>
-      <FormLabel>Time</FormLabel>
+    <FormGroup className="form__group">
+      <FormLabel className="form__label">Time</FormLabel>
       <FormControl
+        className="form__control"
         name="time"
         onChange={onChange}
         id="formTemporal"
@@ -21,8 +22,9 @@ export const TwoForm = ({ responses, setResponses }) => {
         <option value="18">Morning</option>
         <option value="45">Evening</option>
       </FormControl>
-      <FormLabel>Personality</FormLabel>
+      <FormLabel className="form__label">Personality</FormLabel>
       <FormControl
+        className="form__control"
         name="personality"
         onChange={onChange}
         id="formPersonality"
@@ -33,8 +35,9 @@ export const TwoForm = ({ responses, setResponses }) => {
         <option value="60">Introvert</option>
         <option value="31">Extrovert</option>
       </FormControl>
-      <FormLabel>Hair</FormLabel>
+      <FormLabel className="form__label">Hair</FormLabel>
       <FormControl
+        className="form__control"
         name="hair"
         onChange={onChange}
         id="formHair"

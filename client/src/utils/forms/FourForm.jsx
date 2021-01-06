@@ -8,9 +8,10 @@ export const FourForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup>
-      <FormLabel>Relationship to Nature</FormLabel>
+    <FormGroup className="form__group">
+      <FormLabel className="form__label">Relationship to Nature</FormLabel>
       <FormControl
+        className="form__control"
         name="nature"
         onChange={onChange}
         id="formNature"
@@ -23,8 +24,11 @@ export const FourForm = ({ responses, setResponses }) => {
         <option value="3">Nature Lover</option>
         <option value="4">Climate activist</option>
       </FormControl>
-      <FormLabel>Relationship to Social Media</FormLabel>
+      <FormLabel className="form__label">
+        Relationship to Social Media
+      </FormLabel>
       <FormControl
+        className="form__control"
         name="media"
         onChange={onChange}
         id="formMedia"
