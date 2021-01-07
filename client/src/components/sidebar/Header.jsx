@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const formNames = [
   "",
   "Interest",
@@ -16,25 +15,23 @@ const formNames = [
 export const Header = ({ currentForm }) => {
   const createFormSteps = () => {
     return formNames.map((heading, i) => {
-      return (
-        i === currentForm ? (
-          <span key={`${heading}-active`}>
-            <span className="step__icon step__icon-active">{heading}</span>
-            &#8192;
-          </span>
-        ) : (
-          <span key={`${heading}`}>
-            <span className="step__icon">{heading}</span>
-            &#8192;
-          </span>
-        )
+      return i === currentForm ? (
+        <span key={`${heading}-active`}>
+          <span className="step__icon step__icon-active">{heading}</span>
+          &#8192;
+        </span>
+      ) : (
+        <span key={`${heading}`}>
+          <span className="step__icon">{heading}</span>
+          &#8192;
+        </span>
       );
-    })
+    });
   };
 
   const formHeaderOne =
     currentForm > 0 ? (
-      <>Directions: ....</>
+      <>Directions: Here are the directions....</>
     ) : (
       <>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -54,10 +51,7 @@ export const Header = ({ currentForm }) => {
         Generator
       </h1>
       <div className="form__heading">{formHeaderOne}</div>
-      <div className="form__steps">
-        {formSteps}
-      </div>
+      <div className="form__steps">{formSteps}</div>
     </>
   );
 };
-
