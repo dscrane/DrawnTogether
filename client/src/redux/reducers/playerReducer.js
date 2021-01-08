@@ -21,9 +21,6 @@ export default (state = INITIAL_STATE, action) => {
           ? {
               ...el,
               ...action.payload.responses,
-              circle: {
-                ...action.payload.circle,
-              },
             }
           : el;
       });

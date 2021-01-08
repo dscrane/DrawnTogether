@@ -55,13 +55,37 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (
 };
 /* ----   ****    ---- */
 
-export const updatePlayerCircle = (currentPlayer) => (dispatch, getState) => {
+export const updatePlayerCircle = (currentPlayer, currentForm) => (
+  dispatch,
+  getState
+) => {
   const { players, display, game } = getState();
-  const circle = circleUtils.circleVariables(
-    players[currentPlayer],
-    display.grid,
-    game.currentPlayer
-  );
+  let circle;
+  switch (currentForm) {
+    case 3:
+      circle = circleUtils.initialCircleVariables(
+        players[currentPlayer],
+        display.grid,
+        game.currentPlayer,
+        currentForm
+      );
+      break;
+    case 4:
+      circle = circleUtils.circleAlterationOne(
+        players[currentPlayer],
+        game.currentPlayer,
+        currentForm
+      );
+      break;
+    case 5:
+      circle = circleUtils.circleAlterationTwo(
+        players[currentPlayer],
+        game.currentPlayer,
+        currentForm
+      );
+      console.log(circle);
+  }
+
   dispatch({
     type: UPDATE_PLAYER_CIRCLE,
     payload: {

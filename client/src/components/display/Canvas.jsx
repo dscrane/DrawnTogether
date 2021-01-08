@@ -70,7 +70,7 @@ const Canvas = ({
       {displayUtils.bluePolarRings(display.grid)};
       {displayUtils.polarGrid(display.grid)};
       {game.currentForm >= 3 && game.displayCircles
-        ? circleUtils.drawPlayerCircles(players)
+        ? circleUtils.drawPlayerCircles(players, game.currentForm)
         : null}
     </svg>
   );

@@ -20,7 +20,6 @@ const FormContainer = ({
   const { currentForm, currentPlayer, numPlayers } = game;
 
   const [responses, setResponses] = useState({});
-  console.log("RESPONSES", responses);
   useEffect(() => {
     setResponses({});
   }, [submitForm]);
@@ -69,11 +68,9 @@ const FormContainer = ({
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("resopnses", responses);
-
     await submitForm(currentPlayer, currentForm, responses);
     if (currentForm > 2) {
-      await updatePlayerCircle(currentPlayer);
+      await updatePlayerCircle(currentPlayer, currentForm);
     }
     setResponses({});
     nextPlayer(currentPlayer);

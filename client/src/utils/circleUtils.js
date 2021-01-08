@@ -2,19 +2,65 @@ import React from "react";
 
 let Player;
 let degree;
+let centerX;
+let centerY;
 
-function drawPlayerCircles(players) {
-  console.log(players);
-  return players.map((player) => createCircleSVG(player.circle, players.id));
+function createCircleSVG(playerCircle, currentPlayerId, currentForm) {
+  console.log("player circle passed:", playerCircle);
+  switch (currentForm) {
+    case 3:
+      return (
+        <circle
+          key={`circle_${currentPlayerId}`}
+          cx={playerCircle.xCartesian}
+          cy={playerCircle.yCartesian}
+          r={playerCircle.circleRadius}
+          fill={playerCircle.fillColor}
+        />
+      );
+    case 4:
+      return (
+        <circle
+          key={`circle_${currentPlayerId}`}
+          cx={playerCircle.xCartesian}
+          cy={playerCircle.yCartesian}
+          r={playerCircle.altRadius}
+          fill={playerCircle.fillColor}
+        />
+      );
+    case 5:
+      return (
+        <circle
+          key={`circle_${currentPlayerId}`}
+          cx={playerCircle.altXCartesian}
+          cy={playerCircle.altYCartesian}
+          r={playerCircle.altRadius}
+          fill={playerCircle.fillColor}
+        />
+      );
+  }
 }
 
-function circleVariables(playerCircleValues, displayGrid, currentPlayerId) {
+/* Exported Draw Circle Function */
+function drawPlayerCircles(players) {
+  return players.map((player) => {
+    return player.circle.circleSVG;
+  });
+}
+
+/* Exported Initial Circle Variable Function */
+function initialCircleVariables(
+  playerCircleValues,
+  displayGrid,
+  currentPlayerId,
+  currentForm
+) {
   Player = playerCircleValues;
-  console.log("player", Player);
+  centerX = displayGrid.cx;
+  centerY = displayGrid.cy;
 
   const playerCircle = {
     circleRadius: setCircleRadius(),
-    circleRadiusAlt: altRadius(),
     degree: setPlayerDegree().degree,
     fillColor: createFillColor().color,
     hue: createFillColor().hue,
@@ -22,15 +68,53 @@ function circleVariables(playerCircleValues, displayGrid, currentPlayerId) {
     radian: Player.age,
     slice: setPlayerDegree().slice,
     saturation: createFillColor().saturation,
-    xCartesian: convertToCartesian(displayGrid).xCord /* max +- 400 */,
-    yCartesian: convertToCartesian(displayGrid).yCord /* max +- 400 */,
-    xCartesianAlt: altCartesian().altXCord,
-    yCartesianAlt: altCartesian().altYCord,
   };
-  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId);
+  const cords = convertToCartesian(centerX, centerY);
+  playerCircle.xCartesian = cords.xCord;
+  playerCircle.yCartesian = cords.yCord;
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
   return playerCircle;
 }
 
+/* Exported Second Alterations Function */
+function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
+  Player = playerCircleValues;
+  console.log("player", Player);
+  const playerCircle = {
+    ...playerCircleValues.circle,
+    altRadius: altRadius(),
+  };
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+  return playerCircle;
+}
+
+function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
+  Player = playerCircleValues;
+  const playerCircle = {
+    ...playerCircleValues.circle,
+  };
+  const altCords = altCartesian();
+  playerCircle.altXCartesian = altCords.altXCord;
+  playerCircle.altYCartesian = altCords.altYCord;
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+  return playerCircle;
+}
+
+function circleAlterationThree() {}
+
+/* Initial Circle Variable Functions */
 function setCircleRadius() {
   if (!Player.association) {
     return Math.floor(Math.random() * 45) + 10;
@@ -106,10 +190,6 @@ function createFillColor() {
   return { hue, lightness, saturation, color };
 }
 
-function createStrokeColor() {}
-
-function createSecondaryColor() {}
-
 function convertToCartesian(displayGrid) {
   if (!Player.age) {
     return { xCord: 0, yCord: 0 };
@@ -117,23 +197,24 @@ function convertToCartesian(displayGrid) {
   const radian = Player.age; //initialXLocation();
   const theta = degree * (Math.PI / 180); //initialYLocation();
 
-  let xCord = displayGrid.cx + Math.round(radian * -Math.cos(theta));
-  let yCord = displayGrid.cy + Math.round(radian * Math.sin(theta));
+  let xCord = centerX + Math.round(radian * -Math.cos(theta));
+  let yCord = centerY + Math.round(radian * Math.sin(theta));
 
   return { xCord, yCord };
 }
 
+/* === END INITIAL VARIABLES === */
+
+function createStrokeColor() {}
+
+function createSecondaryColor() {}
+
 function altRadius() {
   if (Player.circle !== undefined) {
-    let radius = Player.circle.radius;
-
+    let radius = Player.circle.circleRadius;
     const timeShift = radius * (Player.time / 100);
-    // console.log(timeShift);
-
     Player.time % 2 === 0 ? (radius += timeShift) : (radius -= timeShift);
-
     const personalityShift = radius * (Player.personality / 100);
-    // console.log(personalityShift);
     Player.personality % 2 === 0
       ? (radius += personalityShift)
       : (radius -= personalityShift);
@@ -144,38 +225,31 @@ function altRadius() {
 }
 
 function altCartesian() {
-  let altXCord = 0;
-  let altYCord = 0;
   if (Player.circle !== undefined) {
-    const radius = Player.circle.radius;
+    const radian = Player.circle.radian;
     const degree = Player.circle.degree;
     const circulation = Player.food;
     const multiplier = Player.hair;
 
     const shiftDegree = circulation * multiplier;
     const newDegree = degree + shiftDegree;
-
     const theta = newDegree * (Math.PI / 180);
 
-    altXCord = Math.round(radius * -Math.cos(theta));
-    altYCord = Math.round(radius * Math.sin(theta));
+    console.log("shiftDegree", shiftDegree);
+    console.log("newDegree", newDegree);
+    console.log("theta", theta);
 
-    return { altXCord, altYCord };
+    return {
+      altXCord: centerX + Math.round(radian * -Math.cos(theta)),
+      altYCord: centerY + Math.round(radian * Math.sin(theta)),
+    };
   }
-  return { altXCord, altYCord };
 }
 
-function createCircleSVG(playerCircle, currentPlayerId) {
-  console.log("player circle passed:", playerCircle);
-  return (
-    <circle
-      key={`circle_${currentPlayerId}`}
-      cx={playerCircle.xCartesian}
-      cy={playerCircle.yCartesian}
-      r={playerCircle.circleRadius}
-      fill={playerCircle.fillColor}
-    />
-  );
-}
-
-export { circleVariables, drawPlayerCircles };
+export {
+  initialCircleVariables,
+  drawPlayerCircles,
+  circleAlterationOne,
+  circleAlterationTwo,
+  circleAlterationThree,
+};
