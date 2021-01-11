@@ -1,5 +1,5 @@
 import React from "react";
-
+import { PolarGrid } from "./PolarGrid";
 export function fixDPI(canvas) {
   let dpi = window.devicePixelRatio;
   let styleHeight = +getComputedStyle(canvas)
@@ -13,6 +13,57 @@ export function fixDPI(canvas) {
   canvas.setAttribute("width", styleWidth * dpi);
 }
 
+function polarGrid({ grid, view }) {
+  return <PolarGrid grid={grid} view={view} />;
+}
+
+function interestText(interest) {
+  return interest !== undefined ? (
+    <>
+      <text x="5%" y="4%" className="interestTitle">
+        Interest:
+      </text>
+      <text
+        x="5%"
+        y="8%"
+        className="interestText"
+        lengthAdjust="spacingAndGlyphs"
+      >
+        {interest}
+      </text>
+    </>
+  ) : null;
+}
+
+function playerNamesDisplay(playerNames) {
+  const namesArray = Object.values(playerNames);
+  const namesDisplay = [];
+  if (namesArray.length !== 0) {
+    namesArray.forEach((name, i) => {
+      namesDisplay.push(
+        <text
+          x="81%"
+          y={`${7 + 2.5 * i}%`}
+          key={name}
+          text-anchor="start"
+          className="playerNameDisplay"
+        >
+          {`${name}`}
+        </text>
+      );
+    });
+    return (
+      <>
+        <text x="80%" y="4%" text-anchor="start" className="playerTitle">
+          Players:
+        </text>
+        {namesDisplay}
+      </>
+    );
+  }
+}
+
+/*
 function polarGrid(display) {
   const gridLines = [];
   gridLines.push(
@@ -146,51 +197,6 @@ function darkPolarRings(display) {
 
   return darkDisplay;
 }
+*/
 
-function interestText(interest) {
-  return interest !== undefined ? (
-    <>
-      <text x="5%" y="4%" className="interestTitle">
-        Interest:
-      </text>
-      <text
-        x="5%"
-        y="8%"
-        className="interestText"
-        lengthAdjust="spacingAndGlyphs"
-      >
-        {interest}
-      </text>
-    </>
-  ) : null;
-}
-
-function playerNamesDisplay(playerNames) {
-  const namesArray = Object.values(playerNames);
-  const namesDisplay = [];
-  if (namesArray.length !== 0) {
-    namesArray.forEach((name, i) => {
-      namesDisplay.push(
-        <text
-          x="81%"
-          y={`${7 + 2.5 * i}%`}
-          key={name}
-          text-anchor="start"
-          className="playerNameDisplay"
-        >
-          {`${name}`}
-        </text>
-      );
-    });
-    return (
-      <>
-        <text x="80%" y="4%" text-anchor="start" className="playerTitle">
-          Players:
-        </text>
-        {namesDisplay}
-      </>
-    );
-  }
-}
-
-export { bluePolarRings, darkPolarRings, polarGrid };
+export { polarGrid };

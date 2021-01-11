@@ -19,10 +19,10 @@ export const FourForm = ({ responses, setResponses }) => {
         value={responses.nature || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
-        <option value="1">Video Gamer</option>
-        <option value="2">Happy on the porch</option>
-        <option value="3">Nature Lover</option>
-        <option value="4">Climate activist</option>
+        <option value="hollow">Video Gamer</option>
+        <option value="stroke">Happy on the porch</option>
+        <option value="ring">Nature Lover</option>
+        <option value="none">Climate activist</option>
       </FormControl>
       <FormLabel className="form__label">
         Relationship to Social Media
@@ -36,10 +36,24 @@ export const FourForm = ({ responses, setResponses }) => {
         value={responses.media || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
-        <option value="1">What is social media</option>
-        <option value="2">Lurker</option>
-        <option value="3">Regular poster</option>
-        <option value="4">Influencer</option>
+        <option value="thinner">What is social media</option>
+        <option value="thicker">Lurker</option>
+        <option value="thin">Regular poster</option>
+        <option value="thick">Influencer</option>
+      </FormControl>
+      <FormLabel className="form__label">Relationship to Progress</FormLabel>
+      <FormControl
+        className="form__control"
+        name="progress"
+        onChange={onChange}
+        id="formProgress"
+        as="select"
+        value={responses.progress || "DEFAULT"}
+      >
+        <option value="">Curmudgeon</option>
+        <option value="">C'est Le Vie</option>
+        <option value="">Reluctant Participant</option>
+        <option value="">Activist</option>
       </FormControl>
     </FormGroup>
   );

@@ -48,7 +48,9 @@ function drawPlayerCircles(players) {
   });
 }
 
-/* Exported Initial Circle Variable Function */
+/* === Exported Circle Creation and Alteration Functions === */
+// Initial Circle Variable Function
+// Sets the circle's initial position, size, and color
 function initialCircleVariables(
   playerCircleValues,
   displayGrid,
@@ -80,7 +82,8 @@ function initialCircleVariables(
   return playerCircle;
 }
 
-/* Exported Second Alterations Function */
+// First Alterations Function
+// Changes the circles radius based on the personality and time responses
 function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
   Player = playerCircleValues;
   console.log("player", Player);
@@ -96,6 +99,8 @@ function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
   return playerCircle;
 }
 
+// Second Alterations Function
+// Changes the circle's position along the original radian based on the food and hair responses
 function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
   Player = playerCircleValues;
   const playerCircle = {
@@ -104,6 +109,7 @@ function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
   const altCords = altCartesian();
   playerCircle.altXCartesian = altCords.altXCord;
   playerCircle.altYCartesian = altCords.altYCord;
+  playerCircle.altDegree = altCords.altDegree;
   playerCircle.circleSVG = createCircleSVG(
     playerCircle,
     currentPlayerId,
@@ -112,9 +118,24 @@ function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
   return playerCircle;
 }
 
+// Third Alterations Function
+//
 function circleAlterationThree() {}
 
-/* Initial Circle Variable Functions */
+// Fourth Alterations Function
+//
+function circleAlterationFour() {}
+
+// Fifth Alterations Function
+//
+function circleAlterationFive() {}
+
+// Sixth Alterations Function
+//
+function circleAlterationSix() {}
+/* === END EXPORTED FUNCTIONS === */
+
+/* === Initial Circle Variable Functions === */
 function setCircleRadius() {
   if (!Player.association) {
     return Math.floor(Math.random() * 45) + 10;
@@ -136,11 +157,11 @@ function setPlayerDegree() {
   switch (Player.diet) {
     case "carnivore":
       if (Player.gender === 0) {
-        degree = 0 + slice;
+        degree = slice;
       } else if (Player.gender % 2 === 0) {
         degree = 136 + slice;
       } else {
-        degree = 0 + slice;
+        degree = slice;
       }
       break;
     case "vegetarian":
@@ -190,7 +211,7 @@ function createFillColor() {
   return { hue, lightness, saturation, color };
 }
 
-function convertToCartesian(displayGrid) {
+function convertToCartesian() {
   if (!Player.age) {
     return { xCord: 0, yCord: 0 };
   }
@@ -202,13 +223,9 @@ function convertToCartesian(displayGrid) {
 
   return { xCord, yCord };
 }
-
 /* === END INITIAL VARIABLES === */
 
-function createStrokeColor() {}
-
-function createSecondaryColor() {}
-
+/* === Circle Radius Alteration Function === */
 function altRadius() {
   if (Player.circle !== undefined) {
     let radius = Player.circle.circleRadius;
@@ -223,7 +240,9 @@ function altRadius() {
   }
   return 0;
 }
+/* === END RADIUS ALTERATION === */
 
+/* === Circle Position Alteration Function === */
 function altCartesian() {
   if (Player.circle !== undefined) {
     const radian = Player.circle.radian;
@@ -232,19 +251,21 @@ function altCartesian() {
     const multiplier = Player.hair;
 
     const shiftDegree = circulation * multiplier;
-    const newDegree = degree + shiftDegree;
-    const theta = newDegree * (Math.PI / 180);
-
-    console.log("shiftDegree", shiftDegree);
-    console.log("newDegree", newDegree);
-    console.log("theta", theta);
+    const altDegree = degree + shiftDegree;
+    const theta = altDegree * (Math.PI / 180);
 
     return {
+      altDegree,
       altXCord: centerX + Math.round(radian * -Math.cos(theta)),
       altYCord: centerY + Math.round(radian * Math.sin(theta)),
     };
   }
 }
+/* === END POSITION ALTERATION === */
+
+function createStrokeColor() {}
+
+function createSecondaryColor() {}
 
 export {
   initialCircleVariables,
@@ -252,4 +273,7 @@ export {
   circleAlterationOne,
   circleAlterationTwo,
   circleAlterationThree,
+  circleAlterationFour,
+  circleAlterationFive,
+  circleAlterationSix,
 };

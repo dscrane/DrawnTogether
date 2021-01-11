@@ -66,9 +66,7 @@ const Canvas = ({
 
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
-      {displayUtils.darkPolarRings(display.grid)};
-      {displayUtils.bluePolarRings(display.grid)};
-      {displayUtils.polarGrid(display.grid)};
+      {displayUtils.polarGrid(display)};
       {game.currentForm >= 3 && game.displayCircles
         ? circleUtils.drawPlayerCircles(players, game.currentForm)
         : null}
