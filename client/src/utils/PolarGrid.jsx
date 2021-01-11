@@ -25,20 +25,22 @@ export const PolarGrid = ({ grid, view }) => {
   };
   const createBlueRings = () => {
     let ring;
+    let lightRing = false;
     const rings = [];
     const svgRadius = view.width / 2;
     for (let i = ringSpacing * 5; i < svgRadius; i += ringSpacing * 5) {
-      if (i % 2 === 0) {
+      if (!lightRing) {
         ring = (
           <circle
             fill="none"
-            style={{ stroke: "rgba(85, 153, 238, .25)" }}
+            style={{ stroke: "rgba(85, 153, 238, .20)" }}
             r={i}
             cy={grid.cy}
             cx={grid.cx}
-            strokeWidth=".5"
+            strokeWidth="1"
           />
         );
+        lightRing = true;
       } else {
         ring = (
           <circle
@@ -50,6 +52,7 @@ export const PolarGrid = ({ grid, view }) => {
             strokeWidth="1.5"
           />
         );
+        lightRing = false;
       }
       rings.push(ring);
     }
@@ -95,7 +98,7 @@ export const PolarGrid = ({ grid, view }) => {
   const createShortBlueLines = () => {
     const shortLines = [];
     for (let i = 0; i < 360; i += 5) {
-      if (i % 10 === 0) {
+      if (i % 10 === 0 || i % 5 === 0) {
         continue;
       }
       const theta = i * (Math.PI / 180);
