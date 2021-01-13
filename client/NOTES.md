@@ -18,3 +18,51 @@ color <---> alter color palette
 saturation = Math.floor(Math.random(height, 100)) - height
 lightness = Math.floor(Math.random(10, height)) + height 
 hue = degree 
+
+
+alternate design examples
+hollow circle: 
+    <circle
+        cx=altXCord
+        cy=altYCord
+        r=circleRadius - (.5 * designStroke)
+        strokeWidth=designStroke
+        stroke=designColor
+        fill="none"
+    />
+    
+stroked circle:
+    <circle
+        cx=altXCord
+        cy=altYCord
+        r=circleRadius - (.5 * designStroke)
+        strokeWidth=designStroke
+        stroke=designColor
+        fill=fillColor
+    />
+    
+ringed circle: 
+    <circle
+        cx=altXCord
+        cy=altYCord
+        r=circleRadius - (2 * designStroke)
+        fill=fillColor
+    />
+    <circle
+        cx=altXCord
+        cy=altYCord
+        r=circleRadius - (.5 * designStroke)
+        strokeWidth=designStroke
+        stroke=designColor
+        fill="none"
+    />
+    
+dot circle:
+    <circle
+        cx=altXCord
+        cy=altYCord
+        r=circleRadius - (.5 * designStroke)
+        strokeWidth=designStroke
+        stroke=fillColor
+        fill=designColor
+    />

@@ -5,18 +5,20 @@ let degree;
 let centerX;
 let centerY;
 
-function createCircleSVG(playerCircle, currentPlayerId, currentForm) {
+function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
   console.log("player circle passed:", playerCircle);
   switch (currentForm) {
     case 3:
       return (
-        <circle
-          key={`circle_${currentPlayerId}`}
-          cx={playerCircle.xCartesian}
-          cy={playerCircle.yCartesian}
-          r={playerCircle.circleRadius}
-          fill={playerCircle.fillColor}
-        />
+        <>
+          <circle
+            key={`circle_${currentPlayerId}`}
+            cx={playerCircle.xCartesian}
+            cy={playerCircle.yCartesian}
+            r={playerCircle.circleRadius}
+            fill={playerCircle.fillColor}
+          />
+        </>
       );
     case 4:
       return (
@@ -38,6 +40,66 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm) {
           fill={playerCircle.fillColor}
         />
       );
+    case 6:
+      switch (nature) {
+        case "hollow":
+          return (
+            <circle
+              key={`circle_${currentPlayerId}`}
+              cx={playerCircle.altXCartesian}
+              cy={playerCircle.altYCartesian}
+              r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+              strokeWidth={playerCircle.designThickness}
+              stroke={playerCircle.fillColor}
+              fill="none"
+            />
+          );
+        case "stroke":
+          return (
+            <circle
+              key={`circle_${currentPlayerId}`}
+              cx={playerCircle.altXCartesian}
+              cy={playerCircle.altYCartesian}
+              r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+              strokeWidth={playerCircle.designThickness}
+              stroke={playerCircle.secondaryColor}
+              fill={playerCircle.fillColor}
+            />
+          );
+        case "ring":
+          return (
+            <>
+              <circle
+                key={`circle_${currentPlayerId}_inner`}
+                cx={playerCircle.altXCartesian}
+                cy={playerCircle.altYCartesian}
+                r={playerCircle.altRadius - 2 * playerCircle.designThickness}
+                fill={playerCircle.fillColor}
+              />
+              <circle
+                key={`circle_${currentPlayerId}_outer`}
+                cx={playerCircle.altXCartesian}
+                cy={playerCircle.altYCartesian}
+                r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+                strokeWidth={playerCircle.designThickness}
+                stroke={playerCircle.secondaryColor}
+                fill="none"
+              />
+            </>
+          );
+        case "dot":
+          return (
+            <circle
+              key={`circle_${currentPlayerId}`}
+              cx={playerCircle.altXCartesian}
+              cy={playerCircle.altYCartesian}
+              r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+              strokeWidth={playerCircle.designThickness}
+              stroke={playerCircle.fillColor}
+              fill={playerCircle.secondaryColor}
+            />
+          );
+      }
   }
 }
 
@@ -67,7 +129,7 @@ function initialCircleVariables(
     fillColor: createFillColor().color,
     hue: createFillColor().hue,
     lightness: createFillColor().lightness,
-    radian: Player.age,
+    radian: parseInt(Player.age),
     slice: setPlayerDegree().slice,
     saturation: createFillColor().saturation,
   };
@@ -120,7 +182,28 @@ function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
 
 // Third Alterations Function
 //
-function circleAlterationThree() {}
+function circleAlterationThree(
+  playerCircleValues,
+  currentPlayerId,
+  currentForm
+) {
+  console.log("alteration 3 ran");
+  Player = playerCircleValues;
+  const playerCircle = {
+    ...playerCircleValues.circle,
+  };
+  const secondaryColors = createSecondaryColor();
+  playerCircle.secondaryColor = secondaryColors.secondaryColor;
+  playerCircle.altHue = secondaryColors.altHue;
+  playerCircle.designThickness = createAlternateDesignVariables();
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm,
+    Player.nature
+  );
+  return playerCircle;
+}
 
 // Fourth Alterations Function
 //
@@ -148,7 +231,6 @@ function setCircleRadius() {
     return Player.association * 2;
   }
 }
-
 function setPlayerDegree() {
   if (!Player.interest || !Player.gender || !Player.diet) {
     return { degree: 0, slice: 0 };
@@ -198,7 +280,6 @@ function setPlayerDegree() {
 
   return { degree, slice };
 }
-
 function createFillColor() {
   if (!Player.height) {
     return { hue: 0, lightness: 0, saturation: 0, color: "" };
@@ -210,7 +291,6 @@ function createFillColor() {
   const color = `hsl(${hue}, ${lightness}%, ${saturation}%)`;
   return { hue, lightness, saturation, color };
 }
-
 function convertToCartesian() {
   if (!Player.age) {
     return { xCord: 0, yCord: 0 };
@@ -263,9 +343,54 @@ function altCartesian() {
 }
 /* === END POSITION ALTERATION === */
 
-function createStrokeColor() {}
-
-function createSecondaryColor() {}
+/* === Circle Design Alteration Function === */
+function createAlternateDesignVariables() {
+  switch (Player.media) {
+    case "thicker":
+      return Player.circle.circleRadius * 0.2;
+    case "thick":
+      return Player.circle.circleRadius * 0.15;
+    case "thin":
+      return Player.circle.circleRadius * 0.08;
+    case "thinner":
+      return Player.circle.circleRadius * 0.02;
+  }
+}
+function createSecondaryColor() {
+  let altHue, secondaryColor;
+  switch (Player.progress) {
+    case "complimentary":
+      altHue = Player.circle.hue + 180;
+      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      break;
+    case "analogous":
+      altHue =
+        Math.random() * (Player.circle.hue + 75 - Player.circle.hue - 75) +
+        Player.circle.hue -
+        75;
+      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      console.log("secCol altHue", secondaryColor, altHue);
+      break;
+    case "triadic":
+      altHue =
+        ((Player.circle.hue + 120) *
+          (Player.circle.hue - 120) *
+          Player.circle.hue) /
+        3;
+      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      break;
+    case "monochromatic":
+      altHue =
+        Math.random() * (Player.circle.hue + 15 - Player.circle.hue - 15) +
+        Player.circle.hue -
+        15;
+      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      break;
+  }
+  console.log("secCol altHue", secondaryColor, altHue);
+  return { secondaryColor, altHue };
+}
+/* === END DESIGN ALTERATION === */
 
 export {
   initialCircleVariables,

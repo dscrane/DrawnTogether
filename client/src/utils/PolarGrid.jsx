@@ -1,20 +1,19 @@
 import React from "react";
 
 export const PolarGrid = ({ grid, view }) => {
-  console.log("polargrid", grid, view);
   const svgRadius = view.width / 2;
-  const ringSpacing = view.width / 100;
+  const ringSpacing = Math.round(view.width / 100);
+  console.info("%c[ringSpacing]: ", "color: yellow", ringSpacing);
   const createWhiteRings = () => {
     const rings = [];
-    const svgRadius = view.width / 2;
     for (let i = ringSpacing; i < svgRadius; i += ringSpacing) {
-      if (i % 25 === 0) {
+      if (i % (ringSpacing * 5) === 0) {
         continue;
       }
       rings.push(
         <circle
           fill="none"
-          style={{ stroke: "rgba(204, 204, 238, .25)" }}
+          style={{ stroke: "rgba(170,177,133,.35)" }}
           r={i}
           cy={grid.cy}
           cx={grid.cx}
@@ -27,13 +26,13 @@ export const PolarGrid = ({ grid, view }) => {
     let ring;
     let lightRing = false;
     const rings = [];
-    const svgRadius = view.width / 2;
-    for (let i = ringSpacing * 5; i < svgRadius; i += ringSpacing * 5) {
+    let i;
+    for (i = ringSpacing * 5; i < svgRadius; i += ringSpacing * 5) {
       if (!lightRing) {
         ring = (
           <circle
             fill="none"
-            style={{ stroke: "rgba(85, 153, 238, .20)" }}
+            style={{ stroke: "rgb(98, 102, 74)" }}
             r={i}
             cy={grid.cy}
             cx={grid.cx}
@@ -45,7 +44,7 @@ export const PolarGrid = ({ grid, view }) => {
         ring = (
           <circle
             fill="none"
-            style={{ stroke: "rgba(85, 153, 238, .25)" }}
+            style={{ stroke: "rgb(98, 102, 74)" }}
             r={i}
             cy={grid.cy}
             cx={grid.cx}
@@ -65,11 +64,11 @@ export const PolarGrid = ({ grid, view }) => {
       fullLines.push(
         <line
           strokeWidth="1.5"
-          style={{ stroke: "rgba(85, 153, 238, .25)" }}
+          style={{ stroke: "rgb(98, 102, 74)" }}
           x1={grid.cx}
           y1={grid.cy}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
+          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
+          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
         />
       );
     }
@@ -85,11 +84,11 @@ export const PolarGrid = ({ grid, view }) => {
       longLines.push(
         <line
           strokeWidth="1"
-          style={{ stroke: "rgba(85, 153, 238, .25)" }}
+          style={{ stroke: "rgb(98, 102, 74)" }}
           x1={grid.cx + ringSpacing * 10 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 10 * Math.sin(theta)}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
+          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
+          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
         />
       );
     }
@@ -105,11 +104,11 @@ export const PolarGrid = ({ grid, view }) => {
       shortLines.push(
         <line
           strokeWidth="1"
-          style={{ stroke: "rgba(85, 153, 238, .25)" }}
+          style={{ stroke: "rgb(98, 102, 74)" }}
           x1={grid.cx + ringSpacing * 25 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 25 * Math.sin(theta)}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
+          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
+          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
         />
       );
     }
@@ -126,11 +125,11 @@ export const PolarGrid = ({ grid, view }) => {
       longWhiteLines.push(
         <line
           strokeWidth="1"
-          style={{ stroke: "rgba(204, 204, 238, .25)" }}
+          style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 15 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 15 * Math.sin(theta)}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
+          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
+          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
         />
       );
     }
@@ -147,11 +146,11 @@ export const PolarGrid = ({ grid, view }) => {
       shortWhiteLines.push(
         <line
           strokeWidth="1"
-          style={{ stroke: "rgba(204, 204, 238, .25)" }}
+          style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 35 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 35 * Math.sin(theta)}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
+          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
+          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
         />
       );
     }
@@ -160,7 +159,7 @@ export const PolarGrid = ({ grid, view }) => {
 
   return (
     <>
-      <title xmlns="http://www.w3.org/2000/svg">Layer 1</title>
+      <title>Polar Grid Background</title>
       {createFullBlueLines()}
       {createLongBlueLines()}
       {createShortBlueLines()}

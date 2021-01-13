@@ -83,6 +83,13 @@ export const updatePlayerCircle = (currentPlayer, currentForm) => (
         game.currentPlayer,
         currentForm
       );
+      break;
+    case 6:
+      circle = circleUtils.circleAlterationThree(
+        players[currentPlayer],
+        game.currentPlayer,
+        currentForm
+      );
       console.log(circle);
   }
 

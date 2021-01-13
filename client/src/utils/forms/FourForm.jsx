@@ -22,7 +22,7 @@ export const FourForm = ({ responses, setResponses }) => {
         <option value="hollow">Video Gamer</option>
         <option value="stroke">Happy on the porch</option>
         <option value="ring">Nature Lover</option>
-        <option value="none">Climate activist</option>
+        <option value="dot">Climate activist</option>
       </FormControl>
       <FormLabel className="form__label">
         Relationship to Social Media
@@ -50,10 +50,11 @@ export const FourForm = ({ responses, setResponses }) => {
         as="select"
         value={responses.progress || "DEFAULT"}
       >
-        <option value="">Curmudgeon</option>
-        <option value="">C'est Le Vie</option>
-        <option value="">Reluctant Participant</option>
-        <option value="">Activist</option>
+        <option value="DEFAULT">Choose...</option>
+        <option value="complimentary">Curmudgeon</option>
+        <option value="triadic">C'est Le Vie</option>
+        <option value="monochromatic">Reluctant Participant</option>
+        <option value="analogous">Activist</option>
       </FormControl>
     </FormGroup>
   );
