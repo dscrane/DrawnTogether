@@ -34,11 +34,12 @@ export const Header = ({ currentForm }) => {
       <>Directions: Here are the directions....</>
     ) : (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
+        Circle Generator is the artistic brainchild of Carrie Crane. Moving
+        through the sections of the game will create and alter a collection of
+        circles based on your groups common interest and a variety of
+        personality factors. By the end you will have unique visual of how the
+        members of your group are connected to the common interest that brought
+        you together.
       </>
     );
 
