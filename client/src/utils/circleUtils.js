@@ -7,7 +7,6 @@ let centerY;
 
 function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
   console.log("player circle passed:", playerCircle);
-  let circle;
   switch (currentForm) {
     // Handles the initial circle display
     case 3:
@@ -17,7 +16,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
             playerCircle.xCartesian,
             playerCircle.yCartesian,
             playerCircle.circleRadius,
-            playerCircle.fillColor
+            playerCircle.hue,
+            playerCircle.saturation,
+            playerCircle.lightness,
+            currentPlayerId
           )}
           <circle
             key={`circle_${currentPlayerId}`}
@@ -25,7 +27,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
             cy={playerCircle.yCartesian}
             r={playerCircle.circleRadius}
             style={{
-              fill: "url(#radialGradient)",
+              fill: `url(#radialGradient${currentPlayerId})`,
               opacity: 1,
               fillRule: "evenodd",
               stroke: "none",
@@ -42,7 +44,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
             playerCircle.xCartesian,
             playerCircle.yCartesian,
             playerCircle.altRadius,
-            playerCircle.fillColor
+            playerCircle.hue,
+            playerCircle.saturation,
+            playerCircle.lightness,
+            currentPlayerId
           )}
           <circle
             key={`circle_${currentPlayerId}`}
@@ -50,7 +55,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
             cy={playerCircle.yCartesian}
             r={playerCircle.altRadius}
             style={{
-              fill: "url(#radialGradient)",
+              fill: `url(#radialGradient${currentPlayerId})`,
               opacity: 1,
               fillRule: "evenodd",
               stroke: "none",
@@ -67,7 +72,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
             playerCircle.altXCartesian,
             playerCircle.altYCartesian,
             playerCircle.altRadius,
-            playerCircle.fillColor
+            playerCircle.hue,
+            playerCircle.saturation,
+            playerCircle.lightness,
+            currentPlayerId
           )}
           <circle
             key={`circle_${currentPlayerId}`}
@@ -75,7 +83,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
             cy={playerCircle.altYCartesian}
             r={playerCircle.altRadius}
             style={{
-              fill: "url(#radialGradient)",
+              fill: `url(#radialGradient${currentPlayerId})`,
               opacity: 1,
               fillRule: "evenodd",
               stroke: "none",
@@ -94,7 +102,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 playerCircle.altXCartesian,
                 playerCircle.altYCartesian,
                 playerCircle.altRadius,
-                playerCircle.fillColor
+                playerCircle.hue,
+                playerCircle.saturation,
+                playerCircle.lightness,
+                currentPlayerId
               )}
               <circle
                 key={`circle_${currentPlayerId}`}
@@ -114,7 +125,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 playerCircle.altXCartesian,
                 playerCircle.altYCartesian,
                 playerCircle.altRadius,
-                playerCircle.fillColor
+                playerCircle.hue,
+                playerCircle.saturation,
+                playerCircle.lightness,
+                currentPlayerId
               )}
               <circle
                 key={`circle_${currentPlayerId}`}
@@ -124,7 +138,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 strokeWidth={playerCircle.designThickness}
                 stroke={playerCircle.secondaryColor}
                 style={{
-                  fill: "url(#radialGradient)",
+                  fill: `url(#radialGradient${currentPlayerId})`,
                   opacity: 1,
                   fillRule: "evenodd",
                   strokeLinecap: "round",
@@ -139,7 +153,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 playerCircle.altXCartesian,
                 playerCircle.altYCartesian,
                 playerCircle.altRadius,
-                playerCircle.fillColor
+                playerCircle.hue,
+                playerCircle.saturation,
+                playerCircle.lightness,
+                currentPlayerId
               )}
               <circle
                 key={`circle_${currentPlayerId}_inner`}
@@ -147,7 +164,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 cy={playerCircle.altYCartesian}
                 r={playerCircle.altRadius - 2 * playerCircle.designThickness}
                 style={{
-                  fill: "url(#radialGradient)",
+                  fill: `url(#radialGradient${currentPlayerId})`,
                   opacity: 1,
                   fillRule: "evenodd",
                   strokeLinecap: "round",
@@ -171,7 +188,10 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 playerCircle.altXCartesian,
                 playerCircle.altYCartesian,
                 playerCircle.altRadius,
-                playerCircle.fillColor
+                playerCircle.hue,
+                playerCircle.saturation,
+                playerCircle.lightness,
+                currentPlayerId
               )}
               <circle
                 key={`circle_${currentPlayerId}`}
@@ -314,17 +334,23 @@ function finalCircleDisplay() {}
 /* === END EXPORTED FUNCTIONS === */
 
 /* === Create the sphere gradient for each circle === */
-function createGradient(x, y, r, fill) {
+function createGradient(x, y, r, hue, saturation, lightness, id) {
   return (
     <defs>
-      <linearGradient id="linearGradient">
+      <linearGradient id={`linearGradient${id}`}>
         <stop
-          style={{ stopColor: "#ffffff", stopOpacity: 1.0 }}
+          style={{
+            stopColor: `hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`,
+            stopOpacity: 1.0,
+          }}
           offset="0.0000000"
           id="stop6457"
         />
         <stop
-          style={{ stopColor: fill, stopOpacity: 1.0 }}
+          style={{
+            stopColor: `hsl(${hue}, ${saturation}%, ${lightness}%`,
+            stopOpacity: 1.0,
+          }}
           offset="1.00000000"
           id="stop6455"
         />
@@ -335,8 +361,8 @@ function createGradient(x, y, r, fill) {
         r={r}
         fx={x}
         fy={y}
-        xlinkHref={"#linearGradient"}
-        id="radialGradient"
+        xlinkHref={`#linearGradient${id}`}
+        id={`radialGradient${id}`}
         gradientUnits="userSpaceOnUse"
         gradientTransform="matrix(1.040418,0.796229,-0.814518,1.064316,153.4218,-15"
       />
