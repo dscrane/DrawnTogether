@@ -7,74 +7,151 @@ let centerY;
 
 function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
   console.log("player circle passed:", playerCircle);
+  let circle;
   switch (currentForm) {
+    // Handles the initial circle display
     case 3:
       return (
         <>
+          {createGradient(
+            playerCircle.xCartesian,
+            playerCircle.yCartesian,
+            playerCircle.circleRadius,
+            playerCircle.fillColor
+          )}
           <circle
             key={`circle_${currentPlayerId}`}
             cx={playerCircle.xCartesian}
             cy={playerCircle.yCartesian}
             r={playerCircle.circleRadius}
-            fill={playerCircle.fillColor}
+            style={{
+              fill: "url(#radialGradient)",
+              opacity: 1,
+              fillRule: "evenodd",
+              stroke: "none",
+              strokeLinecap: "round",
+            }}
           />
         </>
       );
+    // Handles the first circle alteration display
     case 4:
       return (
-        <circle
-          key={`circle_${currentPlayerId}`}
-          cx={playerCircle.xCartesian}
-          cy={playerCircle.yCartesian}
-          r={playerCircle.altRadius}
-          fill={playerCircle.fillColor}
-        />
+        <>
+          {createGradient(
+            playerCircle.xCartesian,
+            playerCircle.yCartesian,
+            playerCircle.altRadius,
+            playerCircle.fillColor
+          )}
+          <circle
+            key={`circle_${currentPlayerId}`}
+            cx={playerCircle.xCartesian}
+            cy={playerCircle.yCartesian}
+            r={playerCircle.altRadius}
+            style={{
+              fill: "url(#radialGradient)",
+              opacity: 1,
+              fillRule: "evenodd",
+              stroke: "none",
+              strokeLinecap: "round",
+            }}
+          />
+        </>
       );
+    // Handles the second circle alteration display
     case 5:
       return (
-        <circle
-          key={`circle_${currentPlayerId}`}
-          cx={playerCircle.altXCartesian}
-          cy={playerCircle.altYCartesian}
-          r={playerCircle.altRadius}
-          fill={playerCircle.fillColor}
-        />
+        <>
+          {createGradient(
+            playerCircle.altXCartesian,
+            playerCircle.altYCartesian,
+            playerCircle.altRadius,
+            playerCircle.fillColor
+          )}
+          <circle
+            key={`circle_${currentPlayerId}`}
+            cx={playerCircle.altXCartesian}
+            cy={playerCircle.altYCartesian}
+            r={playerCircle.altRadius}
+            style={{
+              fill: "url(#radialGradient)",
+              opacity: 1,
+              fillRule: "evenodd",
+              stroke: "none",
+              strokeLinecap: "round",
+            }}
+          />
+        </>
       );
+    // Handles the third circle alteration display
     case 6:
       switch (nature) {
         case "hollow":
           return (
-            <circle
-              key={`circle_${currentPlayerId}`}
-              cx={playerCircle.altXCartesian}
-              cy={playerCircle.altYCartesian}
-              r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
-              strokeWidth={playerCircle.designThickness}
-              stroke={playerCircle.fillColor}
-              fill="none"
-            />
+            <>
+              {createGradient(
+                playerCircle.altXCartesian,
+                playerCircle.altYCartesian,
+                playerCircle.altRadius,
+                playerCircle.fillColor
+              )}
+              <circle
+                key={`circle_${currentPlayerId}`}
+                cx={playerCircle.altXCartesian}
+                cy={playerCircle.altYCartesian}
+                r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+                strokeWidth={playerCircle.designThickness}
+                stroke={playerCircle.fillColor}
+                fill="none"
+              />
+            </>
           );
         case "stroke":
           return (
-            <circle
-              key={`circle_${currentPlayerId}`}
-              cx={playerCircle.altXCartesian}
-              cy={playerCircle.altYCartesian}
-              r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
-              strokeWidth={playerCircle.designThickness}
-              stroke={playerCircle.secondaryColor}
-              fill={playerCircle.fillColor}
-            />
+            <>
+              {createGradient(
+                playerCircle.altXCartesian,
+                playerCircle.altYCartesian,
+                playerCircle.altRadius,
+                playerCircle.fillColor
+              )}
+              <circle
+                key={`circle_${currentPlayerId}`}
+                cx={playerCircle.altXCartesian}
+                cy={playerCircle.altYCartesian}
+                r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+                strokeWidth={playerCircle.designThickness}
+                stroke={playerCircle.secondaryColor}
+                style={{
+                  fill: "url(#radialGradient)",
+                  opacity: 1,
+                  fillRule: "evenodd",
+                  strokeLinecap: "round",
+                }}
+              />
+            </>
           );
         case "ring":
           return (
             <>
+              {createGradient(
+                playerCircle.altXCartesian,
+                playerCircle.altYCartesian,
+                playerCircle.altRadius,
+                playerCircle.fillColor
+              )}
               <circle
                 key={`circle_${currentPlayerId}_inner`}
                 cx={playerCircle.altXCartesian}
                 cy={playerCircle.altYCartesian}
                 r={playerCircle.altRadius - 2 * playerCircle.designThickness}
-                fill={playerCircle.fillColor}
+                style={{
+                  fill: "url(#radialGradient)",
+                  opacity: 1,
+                  fillRule: "evenodd",
+                  strokeLinecap: "round",
+                }}
               />
               <circle
                 key={`circle_${currentPlayerId}_outer`}
@@ -89,17 +166,35 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
           );
         case "dot":
           return (
-            <circle
-              key={`circle_${currentPlayerId}`}
-              cx={playerCircle.altXCartesian}
-              cy={playerCircle.altYCartesian}
-              r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
-              strokeWidth={playerCircle.designThickness}
-              stroke={playerCircle.fillColor}
-              fill={playerCircle.secondaryColor}
-            />
+            <>
+              {createGradient(
+                playerCircle.altXCartesian,
+                playerCircle.altYCartesian,
+                playerCircle.altRadius,
+                playerCircle.fillColor
+              )}
+              <circle
+                key={`circle_${currentPlayerId}`}
+                cx={playerCircle.altXCartesian}
+                cy={playerCircle.altYCartesian}
+                r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+                strokeWidth={playerCircle.designThickness}
+                stroke={playerCircle.fillColor}
+                fill={playerCircle.secondaryColor}
+              />
+            </>
           );
       }
+      break;
+    // Handles the fourth circle alteration display
+    case 7:
+      return <></>;
+    // Handles the fifth circle alteration display
+    case 8:
+      return <></>;
+    // Handles the final circle display
+    case 9:
+      return <></>;
   }
 }
 
@@ -181,7 +276,7 @@ function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
 }
 
 // Third Alterations Function
-//
+// Changes the design of the circle -- adding ring, dot, stroke or hollow design to each circle
 function circleAlterationThree(
   playerCircleValues,
   currentPlayerId,
@@ -215,8 +310,40 @@ function circleAlterationFive() {}
 
 // Sixth Alterations Function
 //
-function circleAlterationSix() {}
+function finalCircleDisplay() {}
 /* === END EXPORTED FUNCTIONS === */
+
+/* === Create the sphere gradient for each circle === */
+function createGradient(x, y, r, fill) {
+  return (
+    <defs>
+      <linearGradient id="linearGradient">
+        <stop
+          style={{ stopColor: "#ffffff", stopOpacity: 1.0 }}
+          offset="0.0000000"
+          id="stop6457"
+        />
+        <stop
+          style={{ stopColor: fill, stopOpacity: 1.0 }}
+          offset="1.00000000"
+          id="stop6455"
+        />
+      </linearGradient>
+      <radialGradient
+        cx={x}
+        cy={y}
+        r={r}
+        fx={x}
+        fy={y}
+        xlinkHref={"#linearGradient"}
+        id="radialGradient"
+        gradientUnits="userSpaceOnUse"
+        gradientTransform="matrix(1.040418,0.796229,-0.814518,1.064316,153.4218,-15"
+      />
+    </defs>
+  );
+}
+/* === END GRADIENT CREATION FUNCTION === */
 
 /* === Initial Circle Variable Functions === */
 function setCircleRadius() {
@@ -400,5 +527,5 @@ export {
   circleAlterationThree,
   circleAlterationFour,
   circleAlterationFive,
-  circleAlterationSix,
+  finalCircleDisplay,
 };
