@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const SixForm = ({ responses, setResponses }) => {

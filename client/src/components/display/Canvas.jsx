@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import {
   updateGridDisplay,
@@ -27,7 +27,6 @@ const Canvas = ({
   updateView,
   updatePlayerCircle,
 }) => {
-  const [circles, setCircles] = useState([]);
   const canvasSvg = useRef(null);
 
   /* Initial rendering of the circle grid */

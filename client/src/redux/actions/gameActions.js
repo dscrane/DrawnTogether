@@ -1,4 +1,3 @@
-import { updateCircle } from "../../utils/displayUtils";
 import {
   START_GAME,
   END_GAME,

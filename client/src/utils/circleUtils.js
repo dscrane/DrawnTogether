@@ -188,7 +188,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 playerCircle.altXCartesian,
                 playerCircle.altYCartesian,
                 playerCircle.altRadius,
-                playerCircle.hue,
+                playerCircle.altHue,
                 playerCircle.saturation,
                 playerCircle.lightness,
                 currentPlayerId
@@ -198,23 +198,46 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
                 cx={playerCircle.altXCartesian}
                 cy={playerCircle.altYCartesian}
                 r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
-                strokeWidth={playerCircle.designThickness}
-                stroke={playerCircle.fillColor}
-                fill={playerCircle.secondaryColor}
+                style={{
+                  fill: playerCircle.secondaryColor,
+                  opacity: 1,
+                  fillRule: "evenodd",
+                  stroke: `url(#radialGradient${currentPlayerId})`,
+                  strokeWidth: playerCircle.designThickness,
+                }}
               />
             </>
+          );
+        default:
+          console.info(
+            "%c[ERROR]: Switch - circle design creation",
+            "color: red"
           );
       }
       break;
     // Handles the fourth circle alteration display
     case 7:
-      return <></>;
+      return playerCircle.circleSVG;
     // Handles the fifth circle alteration display
     case 8:
-      return <></>;
+      return (
+        <>
+          {createGradient(
+            playerCircle.xCartesian,
+            playerCircle.yCartesian,
+            playerCircle.circleRadius,
+            playerCircle.averageHue,
+            playerCircle.averageSaturation,
+            playerCircle.averageLightness,
+            currentPlayerId
+          )}
+        </>
+      );
     // Handles the final circle display
     case 9:
       return <></>;
+    default:
+      console.info("%c[ERROR]: Switch - createCircleDisplay", "color: red");
   }
 }
 
@@ -325,8 +348,27 @@ function circleAlterationThree(
 function circleAlterationFour() {}
 
 // Fifth Alterations Function
-//
-function circleAlterationFive() {}
+// Averages the chosen color with the current players fill color
+function circleAlterationFive(
+  playerCircleValues,
+  currentPlayerId,
+  currentForm
+) {
+  Player = playerCircleValues;
+  const playerCircle = {
+    ...playerCircleValues.circle,
+  };
+  const { averageHue, averageSaturation, averageLightness } = averageColors();
+  playerCircle.averageHue = averageLightness;
+  playerCircle.averageSaturation = averageSaturation;
+  playerCircle.averageLightness = averageLightness;
+  playerCircle.averageColor = `hsl(${averageHue}, ${averageSaturation}%, ${averageLightness}%`;
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+}
 
 // Sixth Alterations Function
 //
@@ -507,6 +549,11 @@ function createAlternateDesignVariables() {
       return Player.circle.circleRadius * 0.08;
     case "thinner":
       return Player.circle.circleRadius * 0.02;
+    default:
+      console.info(
+        "%c[ERROR]: Switch - createAlternateDesignVariables",
+        "color: red"
+      );
   }
 }
 function createSecondaryColor() {
@@ -539,9 +586,52 @@ function createSecondaryColor() {
         15;
       secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
       break;
+    default:
+      console.info("%c[ERROR]: Switch - createSecondaryColor", "color: red");
   }
   console.log("secCol altHue", secondaryColor, altHue);
   return { secondaryColor, altHue };
+}
+/* === END DESIGN ALTERATION === */
+
+/* === Circle Color Alteration Function === */
+function averageColors() {
+  let averageHue, averageSaturation, averageLightness;
+  switch (Player.color) {
+    case "chartreuse":
+      averageHue = (Player.altHue + 90) / 2;
+      averageSaturation = (Player.saturation + 100) / 2;
+      averageLightness = (Player.lightness + 50) / 2;
+      break;
+    case "vermilion":
+      averageHue = (Player.altHue + 8) / 2;
+      averageSaturation = (Player.saturation + 76) / 2;
+      averageLightness = (Player.lightness + 58) / 2;
+      break;
+    case "cobalt":
+      averageHue = (Player.altHue + 215) / 2;
+      averageSaturation = (Player.saturation + 100) / 2;
+      averageLightness = (Player.lightness + 34) / 2;
+      break;
+    case "teal":
+      averageHue = (Player.altHue + 180) / 2;
+      averageSaturation = (Player.saturation + 100) / 2;
+      averageLightness = (Player.lightness + 25) / 2;
+      break;
+    case "kellyGreen":
+      averageHue = (Player.altHue + 101) / 2;
+      averageSaturation = (Player.saturation + 78) / 2;
+      averageLightness = (Player.lightness + 41) / 2;
+      break;
+    case "aubergine":
+      averageHue = (Player.altHue + 315) / 2;
+      averageSaturation = (Player.saturation + 27) / 2;
+      averageLightness = (Player.lightness + 30) / 2;
+      break;
+    default:
+      console.info("%c[ERROR]: Switch - averageColors", "color: red");
+  }
+  return { averageHue, averageSaturation, averageLightness };
 }
 /* === END DESIGN ALTERATION === */
 

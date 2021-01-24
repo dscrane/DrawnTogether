@@ -1,11 +1,5 @@
 /* ----   NEW_PLAYER ACTION CREATOR    ---- */
-import {
-  NEW_PLAYER,
-  NEXT_PLAYER,
-  PREV_PLAYER,
-  UPDATE_PLAYER_CIRCLE,
-  UPDATE_PLAYER,
-} from "../types";
+import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER } from "../types";
 import * as circleUtils from "../../utils/circleUtils";
 
 export const newPlayer = (responses, id) => (dispatch) => {
@@ -91,6 +85,9 @@ export const updatePlayerCircle = (currentPlayer, currentForm) => (
         currentForm
       );
       console.log(circle);
+      break;
+    default:
+      console.info("%c[ERROR]: Switch - updatePlayerDisplay", "color: red");
   }
 
   dispatch({
