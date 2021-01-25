@@ -159,7 +159,6 @@ export const PolarGrid = ({ grid, view }) => {
 
   return (
     <>
-      <title>Polar Grid Background</title>
       {createFullBlueLines()}
       {createLongBlueLines()}
       {createShortBlueLines()}

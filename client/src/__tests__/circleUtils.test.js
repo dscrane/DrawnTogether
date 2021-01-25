@@ -1,4 +1,5 @@
-import * as circleUtils from "../utils/circleUtils";
+const circleUtils = require("../utils/circleUtils");
+
 const players = [
   {
     id: 0,
@@ -24,35 +25,44 @@ const players = [
   },
 ];
 
-test("Creates initial player circle", () => {
-  const expectedObject = {
-    circleRadius: 40,
-    degree: 201,
-    fillColor: "hsl(201, 26%, 65%)",
-    hue: 201,
-    lightness: 37,
-    radian: 120,
-    slice: 18,
-    saturation: 66,
-    xCartesian: 513,
-    yCartesian: 361,
-  };
+const expectedCircle = {
+  circleRadius: expect.any(Number),
+  degree: expect.any(Number),
+  fillColor: expect.any(String),
+  hue: expect.any(Number),
+  lightness: expect.any(Number),
+  radian: expect.any(Number),
+  slice: expect.any(Number),
+  saturation: expect.any(Number),
+  xCartesian: expect.any(Number),
+  yCartesian: expect.any(Number),
+};
+
+const alterationOneCircle = {
+  ...expectedCircle,
+  altDegree: expect.any(Number),
+  altXCartesian: expect.any(Number),
+  altYCartesian: expect.any(Number),
+};
+
+test("CREATE INITIAL PLAYER CIRCLE", () => {
   const initialCircle = circleUtils.initialCircleVariables(
     players[0],
     { cx: 400, cy: 400 },
     0,
-    1
+    3
   );
-  expect(initialCircle).toEqual({
-    circleRadius: expect.toBeInstanceOf(Number),
-    degree: expect.toBeInstanceOf(Number),
-    fillColor: expect.toBeInstanceOf(String),
-    hue: expect.toBeInstanceOf(Number),
-    lightness: expect.toBeInstanceOf(Number),
-    radian: expect.toBeInstanceOf(Number),
-    slice: expect.toBeInstanceOf(Number),
-    saturation: expect.toBeInstanceOf(Number),
-    xCartesian: expect.toBeInstanceOf(Number),
-    yCartesian: expect.toBeInstanceOf(Number),
-  });
+  console.log("initialCircle", initialCircle);
+  expect(initialCircle).toEqual(expect.objectContaining(expectedCircle));
+});
+
+test("FIRST CIRCLE ALTERATION", () => {
+  const initialCircle = circleUtils.initialCircleVariables(
+    players[0],
+    { cx: 400, cy: 400 },
+    0,
+    4
+  );
+  console.log("initialCircle", initialCircle);
+  expect(initialCircle).toEqual(expect.objectContaining(alterationOneCircle));
 });

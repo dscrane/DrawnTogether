@@ -5,8 +5,140 @@ let degree;
 let centerX;
 let centerY;
 
+/* Exported Draw Circle Function */
+function drawPlayerCircles(players) {
+  return players.map((player) => {
+    return player.circle.circleSVG;
+  });
+}
+
+/* === Exported Circle Creation and Alteration Functions === */
+// Initial Circle Variable Function
+// Sets the circle's initial position, size, and color
+function initialCircleVariables(
+  playerCircleValues,
+  displayGrid,
+  currentPlayerId,
+  currentForm
+) {
+  Player = playerCircleValues;
+  centerX = displayGrid.cx;
+  centerY = displayGrid.cy;
+
+  const playerCircle = {
+    circleRadius: setCircleRadius(),
+    degree: setPlayerDegree().degree,
+    fillColor: createFillColor().color,
+    hue: createFillColor().hue,
+    lightness: createFillColor().lightness,
+    radian: parseInt(Player.age),
+    slice: setPlayerDegree().slice,
+    saturation: createFillColor().saturation,
+  };
+  const cords = convertToCartesian(centerX, centerY);
+  playerCircle.xCartesian = cords.xCord;
+  playerCircle.yCartesian = cords.yCord;
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+  return playerCircle;
+}
+
+// First Alterations Function
+// Changes the circles radius based on the personality and time responses
+function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
+  Player = playerCircleValues;
+  console.log("player", Player);
+  const playerCircle = {
+    ...playerCircleValues.circle,
+    altRadius: altRadius(),
+  };
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+  return playerCircle;
+}
+
+// Second Alterations Function
+// Changes the circle's position along the original radian based on the food and hair responses
+function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
+  Player = playerCircleValues;
+  const playerCircle = {
+    ...playerCircleValues.circle,
+  };
+  const altCords = altCartesian();
+  playerCircle.altXCartesian = altCords.altXCord;
+  playerCircle.altYCartesian = altCords.altYCord;
+  playerCircle.altDegree = altCords.altDegree;
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+  return playerCircle;
+}
+
+// Third Alterations Function
+// Changes the design of the circle -- adding ring, dot, stroke or hollow design to each circle
+function circleAlterationThree(
+  playerCircleValues,
+  currentPlayerId,
+  currentForm
+) {
+  console.log("alteration 3 ran");
+  Player = playerCircleValues;
+  const playerCircle = {
+    ...playerCircleValues.circle,
+  };
+  const secondaryColors = createSecondaryColor();
+  playerCircle.secondaryColor = secondaryColors.secondaryColor;
+  playerCircle.altHue = secondaryColors.altHue;
+  playerCircle.designThickness = createAlternateDesignVariables();
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm,
+    Player.nature
+  );
+  return playerCircle;
+}
+
+// Fourth Alterations Function
+//
+function circleAlterationFour() {}
+
+// Fifth Alterations Function
+// Averages the chosen color with the current players fill color
+function circleAlterationFive(
+  playerCircleValues,
+  currentPlayerId,
+  currentForm
+) {
+  Player = playerCircleValues;
+  const playerCircle = {
+    ...playerCircleValues.circle,
+  };
+  const { averageHue, averageSaturation, averageLightness } = averageColors();
+  playerCircle.averageHue = averageLightness;
+  playerCircle.averageSaturation = averageSaturation;
+  playerCircle.averageLightness = averageLightness;
+  playerCircle.averageColor = `hsl(${averageHue}, ${averageSaturation}%, ${averageLightness}%`;
+  playerCircle.circleSVG = createCircleSVG(
+    playerCircle,
+    currentPlayerId,
+    currentForm
+  );
+}
+
+// Sixth Alterations Function
+//
+function finalCircleDisplay() {}
+/* === END EXPORTED FUNCTIONS === */
 function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
-  console.log("player circle passed:", playerCircle);
   switch (currentForm) {
     // Handles the initial circle display
     case 3:
@@ -217,6 +349,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
       break;
     // Handles the fourth circle alteration display
     case 7:
+      console.log(playerCircle.circleSVG);
       return playerCircle.circleSVG;
     // Handles the fifth circle alteration display
     case 8:
@@ -240,140 +373,6 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
       console.info("%c[ERROR]: Switch - createCircleDisplay", "color: red");
   }
 }
-
-/* Exported Draw Circle Function */
-function drawPlayerCircles(players) {
-  return players.map((player) => {
-    return player.circle.circleSVG;
-  });
-}
-
-/* === Exported Circle Creation and Alteration Functions === */
-// Initial Circle Variable Function
-// Sets the circle's initial position, size, and color
-function initialCircleVariables(
-  playerCircleValues,
-  displayGrid,
-  currentPlayerId,
-  currentForm
-) {
-  Player = playerCircleValues;
-  centerX = displayGrid.cx;
-  centerY = displayGrid.cy;
-
-  const playerCircle = {
-    circleRadius: setCircleRadius(),
-    degree: setPlayerDegree().degree,
-    fillColor: createFillColor().color,
-    hue: createFillColor().hue,
-    lightness: createFillColor().lightness,
-    radian: parseInt(Player.age),
-    slice: setPlayerDegree().slice,
-    saturation: createFillColor().saturation,
-  };
-  const cords = convertToCartesian(centerX, centerY);
-  playerCircle.xCartesian = cords.xCord;
-  playerCircle.yCartesian = cords.yCord;
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
-  return playerCircle;
-}
-
-// First Alterations Function
-// Changes the circles radius based on the personality and time responses
-function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
-  Player = playerCircleValues;
-  console.log("player", Player);
-  const playerCircle = {
-    ...playerCircleValues.circle,
-    altRadius: altRadius(),
-  };
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
-  return playerCircle;
-}
-
-// Second Alterations Function
-// Changes the circle's position along the original radian based on the food and hair responses
-function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
-  Player = playerCircleValues;
-  const playerCircle = {
-    ...playerCircleValues.circle,
-  };
-  const altCords = altCartesian();
-  playerCircle.altXCartesian = altCords.altXCord;
-  playerCircle.altYCartesian = altCords.altYCord;
-  playerCircle.altDegree = altCords.altDegree;
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
-  return playerCircle;
-}
-
-// Third Alterations Function
-// Changes the design of the circle -- adding ring, dot, stroke or hollow design to each circle
-function circleAlterationThree(
-  playerCircleValues,
-  currentPlayerId,
-  currentForm
-) {
-  console.log("alteration 3 ran");
-  Player = playerCircleValues;
-  const playerCircle = {
-    ...playerCircleValues.circle,
-  };
-  const secondaryColors = createSecondaryColor();
-  playerCircle.secondaryColor = secondaryColors.secondaryColor;
-  playerCircle.altHue = secondaryColors.altHue;
-  playerCircle.designThickness = createAlternateDesignVariables();
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm,
-    Player.nature
-  );
-  return playerCircle;
-}
-
-// Fourth Alterations Function
-//
-function circleAlterationFour() {}
-
-// Fifth Alterations Function
-// Averages the chosen color with the current players fill color
-function circleAlterationFive(
-  playerCircleValues,
-  currentPlayerId,
-  currentForm
-) {
-  Player = playerCircleValues;
-  const playerCircle = {
-    ...playerCircleValues.circle,
-  };
-  const { averageHue, averageSaturation, averageLightness } = averageColors();
-  playerCircle.averageHue = averageLightness;
-  playerCircle.averageSaturation = averageSaturation;
-  playerCircle.averageLightness = averageLightness;
-  playerCircle.averageColor = `hsl(${averageHue}, ${averageSaturation}%, ${averageLightness}%`;
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
-}
-
-// Sixth Alterations Function
-//
-function finalCircleDisplay() {}
-/* === END EXPORTED FUNCTIONS === */
 
 /* === Create the sphere gradient for each circle === */
 function createGradient(x, y, r, hue, saturation, lightness, id) {
