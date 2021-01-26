@@ -1,11 +1,11 @@
 const circleUtils = require("../utils/circleUtils");
-
+let circle;
 const players = [
   {
+    circle: circle,
     id: 0,
     name: "test_user",
     association: 5,
-    circle: {},
     height: "16",
     interest: "18",
     gender: "1",
@@ -39,30 +39,61 @@ const expectedCircle = {
 };
 
 const alterationOneCircle = {
-  ...expectedCircle,
+  circleRadius: expect.any(Number),
+  degree: expect.any(Number),
+  fillColor: expect.any(String),
+  hue: expect.any(Number),
+  lightness: expect.any(Number),
+  radian: expect.any(Number),
+  slice: expect.any(Number),
+  saturation: expect.any(Number),
+  xCartesian: expect.any(Number),
+  yCartesian: expect.any(Number),
+  circleSVG: expect.any(Object),
+  altRadius: expect.any(Number),
+};
+
+const alterationTwoCircle = {
+  ...alterationOneCircle,
   altDegree: expect.any(Number),
   altXCartesian: expect.any(Number),
   altYCartesian: expect.any(Number),
 };
 
+test("CREATE CIRCLE SVG REACT COMPONENT", () => {});
+
+test("CREATE SVG GRADIENT REACT COMPONENT", () => {});
+
+test("SET PLAYER CIRCLE'S RADIUS", () => {});
+
+test("SET PLAYER CIRCLE'S DEGREE", () => {});
+
+test("CREATE PLAYER CIRCLE'S FILL COLOR", () => {});
+
+test("CONVERT PLAYER CIRCLE'S COORDINATES TO CARTESIAN", () => {});
+
+test("ALTER PLAYER CIRCLE'S RADIUS", () => {});
+
+test("ALTER PLAYER CIRCLE'S CARTESIAN COORDINATES", () => {});
+
+test("SET PLAYER CIRCLE'S DESIGN VARIABLE", () => {});
+
+test("CREATE PLAYER CIRCLE'S SECONDARY COLOR", () => {});
+
+test("AVERAGE PLAYER CIRCLE'S FILL COLOR AND CHOSEN COLOR", () => {});
+
 test("CREATE INITIAL PLAYER CIRCLE", () => {
-  const initialCircle = circleUtils.initialCircleVariables(
+  circle = circleUtils.initialCircleVariables(
     players[0],
     { cx: 400, cy: 400 },
     0,
     3
   );
-  console.log("initialCircle", initialCircle);
-  expect(initialCircle).toEqual(expect.objectContaining(expectedCircle));
+
+  expect(circle).toEqual(expect.objectContaining(expectedCircle));
 });
 
 test("FIRST CIRCLE ALTERATION", () => {
-  const initialCircle = circleUtils.initialCircleVariables(
-    players[0],
-    { cx: 400, cy: 400 },
-    0,
-    4
-  );
-  console.log("initialCircle", initialCircle);
-  expect(initialCircle).toEqual(expect.objectContaining(alterationOneCircle));
+  circle = circleUtils.circleAlterationOne(players[0], { cx: 400, cy: 400 }, 4);
+  expect(circle).toEqual(expect.objectContaining(alterationOneCircle));
 });

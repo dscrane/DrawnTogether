@@ -43,6 +43,7 @@ function initialCircleVariables(
     currentPlayerId,
     currentForm
   );
+  console.log("[circleSVG]: ", playerCircle.circleSVG);
   return playerCircle;
 }
 
@@ -138,6 +139,8 @@ function circleAlterationFive(
 //
 function finalCircleDisplay() {}
 /* === END EXPORTED FUNCTIONS === */
+
+/* === Create the SVG for the player circle === */
 function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
   switch (currentForm) {
     // Handles the initial circle display
@@ -373,6 +376,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
       console.info("%c[ERROR]: Switch - createCircleDisplay", "color: red");
   }
 }
+/* === END SVG CREATION FUNCTION === */
 
 /* === Create the sphere gradient for each circle === */
 function createGradient(x, y, r, hue, saturation, lightness, id) {
