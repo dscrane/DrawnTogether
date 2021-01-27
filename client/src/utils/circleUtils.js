@@ -6,7 +6,7 @@ let centerX;
 let centerY;
 
 /* Exported Draw Circle Function */
-function drawPlayerCircles(players) {
+export function drawPlayerCircles(players) {
   return players.map((player) => {
     return player.circle.circleSVG;
   });
@@ -15,7 +15,7 @@ function drawPlayerCircles(players) {
 /* === Exported Circle Creation and Alteration Functions === */
 // Initial Circle Variable Function
 // Sets the circle's initial position, size, and color
-function initialCircleVariables(
+export function initialCircleVariables(
   playerCircleValues,
   displayGrid,
   currentPlayerId,
@@ -26,8 +26,8 @@ function initialCircleVariables(
   centerY = displayGrid.cy;
 
   const playerCircle = {
-    circleRadius: setCircleRadius(),
-    degree: setPlayerDegree().degree,
+    circleRadius: setCircleRadius(Player.association),
+    degree: setPlayerDegree(Player.interest, Player.gender, Player.diet).degree,
     fillColor: createFillColor().color,
     hue: createFillColor().hue,
     lightness: createFillColor().lightness,
@@ -49,7 +49,11 @@ function initialCircleVariables(
 
 // First Alterations Function
 // Changes the circles radius based on the personality and time responses
-function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
+export function circleAlterationOne(
+  playerCircleValues,
+  currentPlayerId,
+  currentForm
+) {
   Player = playerCircleValues;
   console.log("player", Player);
   const playerCircle = {
@@ -66,7 +70,11 @@ function circleAlterationOne(playerCircleValues, currentPlayerId, currentForm) {
 
 // Second Alterations Function
 // Changes the circle's position along the original radian based on the food and hair responses
-function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
+export function circleAlterationTwo(
+  playerCircleValues,
+  currentPlayerId,
+  currentForm
+) {
   Player = playerCircleValues;
   const playerCircle = {
     ...playerCircleValues.circle,
@@ -85,7 +93,7 @@ function circleAlterationTwo(playerCircleValues, currentPlayerId, currentForm) {
 
 // Third Alterations Function
 // Changes the design of the circle -- adding ring, dot, stroke or hollow design to each circle
-function circleAlterationThree(
+export function circleAlterationThree(
   playerCircleValues,
   currentPlayerId,
   currentForm
@@ -110,11 +118,11 @@ function circleAlterationThree(
 
 // Fourth Alterations Function
 //
-function circleAlterationFour() {}
+export function circleAlterationFour() {}
 
 // Fifth Alterations Function
 // Averages the chosen color with the current players fill color
-function circleAlterationFive(
+export function circleAlterationFive(
   playerCircleValues,
   currentPlayerId,
   currentForm
@@ -137,11 +145,16 @@ function circleAlterationFive(
 
 // Sixth Alterations Function
 //
-function finalCircleDisplay() {}
+export function finalCircleDisplay() {}
 /* === END EXPORTED FUNCTIONS === */
 
 /* === Create the SVG for the player circle === */
-function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
+export function createCircleSVG(
+  playerCircle,
+  currentPlayerId,
+  currentForm,
+  nature
+) {
   switch (currentForm) {
     // Handles the initial circle display
     case 3:
@@ -379,7 +392,7 @@ function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
 /* === END SVG CREATION FUNCTION === */
 
 /* === Create the sphere gradient for each circle === */
-function createGradient(x, y, r, hue, saturation, lightness, id) {
+export function createGradient(x, y, r, hue, saturation, lightness, id) {
   return (
     <defs>
       <linearGradient id={`linearGradient${id}`}>
@@ -417,55 +430,55 @@ function createGradient(x, y, r, hue, saturation, lightness, id) {
 /* === END GRADIENT CREATION FUNCTION === */
 
 /* === Initial Circle Variable Functions === */
-function setCircleRadius() {
-  if (!Player.association) {
+export function setCircleRadius(association) {
+  if (!association) {
     return Math.floor(Math.random() * 45) + 10;
   }
-  if (Player.association * 10 < 75) {
-    return Player.association * 8;
-  } else if (Player.association * 2 < 75) {
-    return Player.association * 4;
+  if (association * 10 < 75) {
+    return association * 8;
+  } else if (association * 2 < 75) {
+    return association * 4;
   } else {
-    return Player.association * 2;
+    return association * 2;
   }
 }
-function setPlayerDegree() {
-  if (!Player.interest || !Player.gender || !Player.diet) {
+export function setPlayerDegree(interest, gender, diet) {
+  if (!interest || !gender || !diet) {
     return { degree: 0, slice: 0 };
   }
-  const slice = Math.floor(Math.random() * 9) + parseInt(Player.interest);
-  switch (Player.diet) {
+  const slice = Math.floor(Math.random() * 9) + parseInt(interest);
+  switch (diet) {
     case "carnivore":
-      if (Player.gender === 0) {
+      if (gender === 0) {
         degree = slice;
-      } else if (Player.gender % 2 === 0) {
+      } else if (gender % 2 === 0) {
         degree = 136 + slice;
       } else {
         degree = slice;
       }
       break;
     case "vegetarian":
-      if (Player.gender === 0) {
+      if (gender === 0) {
         degree = 181 + slice;
-      } else if (Player.gender % 2 === 0) {
+      } else if (gender % 2 === 0) {
         degree = 316 + slice;
       } else {
         degree = 181 + slice;
       }
       break;
     case "pescatarian":
-      if (Player.gender === 0) {
+      if (gender === 0) {
         degree = 226 + slice;
-      } else if (Player.gender % 2 === 0) {
+      } else if (gender % 2 === 0) {
         degree = 226 + slice;
       } else {
         degree = 91 + slice;
       }
       break;
     case "vegan":
-      if (Player.gender === 0) {
+      if (gender === 0) {
         degree = 46 + slice;
-      } else if (Player.gender % 2 === 0) {
+      } else if (gender % 2 === 0) {
         degree = 46 + slice;
       } else {
         degree = 271 + slice;
@@ -478,18 +491,18 @@ function setPlayerDegree() {
 
   return { degree, slice };
 }
-function createFillColor() {
-  if (!Player.height) {
+export function createFillColor(height, degree) {
+  if (!height) {
     return { hue: 0, lightness: 0, saturation: 0, color: "" };
   }
   const hue = degree;
-  const lightness = Math.floor(Math.random() * Player.height) + 25;
-  const saturation = 100 - (Math.floor(Math.random() * Player.height) + 25);
+  const lightness = Math.floor(Math.random() * height) + 25;
+  const saturation = 100 - (Math.floor(Math.random() * height) + 25);
 
-  const color = `hsl(${hue}, ${lightness}%, ${saturation}%)`;
+  const color = `hsl(${hue},${lightness}%,${saturation}%)`;
   return { hue, lightness, saturation, color };
 }
-function convertToCartesian() {
+export function convertToCartesian() {
   if (!Player.age) {
     return { xCord: 0, yCord: 0 };
   }
@@ -504,7 +517,7 @@ function convertToCartesian() {
 /* === END INITIAL VARIABLES === */
 
 /* === Circle Radius Alteration Function === */
-function altRadius() {
+export function altRadius() {
   if (Player.circle !== undefined) {
     let radius = Player.circle.circleRadius;
     const timeShift = radius * (Player.time / 100);
@@ -521,7 +534,7 @@ function altRadius() {
 /* === END RADIUS ALTERATION === */
 
 /* === Circle Position Alteration Function === */
-function altCartesian() {
+export function altCartesian() {
   if (Player.circle !== undefined) {
     const radian = Player.circle.radian;
     const degree = Player.circle.degree;
@@ -542,7 +555,7 @@ function altCartesian() {
 /* === END POSITION ALTERATION === */
 
 /* === Circle Design Alteration Function === */
-function createAlternateDesignVariables() {
+export function createAlternateDesignVariables() {
   switch (Player.media) {
     case "thicker":
       return Player.circle.circleRadius * 0.2;
@@ -559,7 +572,7 @@ function createAlternateDesignVariables() {
       );
   }
 }
-function createSecondaryColor() {
+export function createSecondaryColor() {
   let altHue, secondaryColor;
   switch (Player.progress) {
     case "complimentary":
@@ -598,7 +611,7 @@ function createSecondaryColor() {
 /* === END DESIGN ALTERATION === */
 
 /* === Circle Color Alteration Function === */
-function averageColors() {
+export function averageColors() {
   let averageHue, averageSaturation, averageLightness;
   switch (Player.color) {
     case "chartreuse":
@@ -637,14 +650,3 @@ function averageColors() {
   return { averageHue, averageSaturation, averageLightness };
 }
 /* === END DESIGN ALTERATION === */
-
-export {
-  initialCircleVariables,
-  drawPlayerCircles,
-  circleAlterationOne,
-  circleAlterationTwo,
-  circleAlterationThree,
-  circleAlterationFour,
-  circleAlterationFive,
-  finalCircleDisplay,
-};

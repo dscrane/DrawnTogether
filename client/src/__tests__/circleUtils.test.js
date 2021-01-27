@@ -1,29 +1,28 @@
-const circleUtils = require("../utils/circleUtils");
+import { circleUtils } from "../utils/";
+
 let circle;
-const players = [
-  {
-    circle: circle,
-    id: 0,
-    name: "test_user",
-    association: 5,
-    height: "16",
-    interest: "18",
-    gender: "1",
-    age: "120",
-    diet: "vegetarian",
-    time: "45",
-    personality: "31",
-    hair: "10",
-    money: "2",
-    food: "45",
-    nature: "hollow",
-    media: "thick",
-    progress: "monochromatic",
-    religion: "1",
-    culture: "4",
-    color: "kellyGreen",
-  },
-];
+const testPlayer = {
+  circle: circle,
+  id: 0,
+  name: "test_user",
+  association: 5,
+  height: 16,
+  interest: 18,
+  gender: 1,
+  age: 120,
+  diet: "vegetarian",
+  time: 45,
+  personality: 31,
+  hair: 10,
+  money: 2,
+  food: 45,
+  nature: "hollow",
+  media: "thick",
+  progress: "monochromatic",
+  religion: 1,
+  culture: 4,
+  color: "kellyGreen",
+};
 
 const expectedCircle = {
   circleRadius: expect.any(Number),
@@ -59,41 +58,85 @@ const alterationTwoCircle = {
   altXCartesian: expect.any(Number),
   altYCartesian: expect.any(Number),
 };
+describe("Circle Utility Test Suite", () => {
+  test("SET PLAYER CIRCLE'S RADIUS", () => {
+    const radius = circleUtils.setCircleRadius(testPlayer.association);
+    expect(radius).toEqual(testPlayer.association * 8);
+  });
 
-test("CREATE CIRCLE SVG REACT COMPONENT", () => {});
+  test("SET PLAYER CIRCLE'S DEGREE", () => {
+    const result = circleUtils.setPlayerDegree(
+      testPlayer.interest,
+      testPlayer.gender,
+      testPlayer.diet
+    );
+    expect(result).toEqual(
+      expect.objectContaining({
+        slice: expect.any(Number),
+        degree: expect.any(Number),
+      })
+    );
+  });
 
-test("CREATE SVG GRADIENT REACT COMPONENT", () => {});
+  test("CREATE PLAYER CIRCLE'S FILL COLOR", () => {
+    const degree = Math.floor(Math.random() * 360);
+    const result = circleUtils.createFillColor(testPlayer.height, degree);
+    expect(result).toEqual(
+      expect.objectContaining({
+        hue: expect.any(Number),
+        lightness: expect.any(Number),
+        saturation: expect.any(Number),
+        color: expect.any(String),
+      })
+    );
+    expect(result.color).toMatch(/^hsl\([0-9]{1,3},([0-9]{1,3}%,?){1,3}\)$/g);
+  });
 
-test("SET PLAYER CIRCLE'S RADIUS", () => {});
+  test("CONVERT PLAYER CIRCLE'S COORDINATES TO CARTESIAN", () => {
+    expect(result);
+  });
 
-test("SET PLAYER CIRCLE'S DEGREE", () => {});
+  test("ALTER PLAYER CIRCLE'S RADIUS", () => {
+    expect(result);
+  });
 
-test("CREATE PLAYER CIRCLE'S FILL COLOR", () => {});
+  test("ALTER PLAYER CIRCLE'S CARTESIAN COORDINATES", () => {
+    expect(result);
+  });
 
-test("CONVERT PLAYER CIRCLE'S COORDINATES TO CARTESIAN", () => {});
+  test("SET PLAYER CIRCLE'S DESIGN VARIABLE", () => {
+    expect(result);
+  });
 
-test("ALTER PLAYER CIRCLE'S RADIUS", () => {});
+  test("CREATE PLAYER CIRCLE'S SECONDARY COLOR", () => {
+    expect(result);
+  });
 
-test("ALTER PLAYER CIRCLE'S CARTESIAN COORDINATES", () => {});
+  test("AVERAGE PLAYER CIRCLE'S FILL COLOR AND CHOSEN COLOR", () => {
+    expect(result);
+  });
 
-test("SET PLAYER CIRCLE'S DESIGN VARIABLE", () => {});
+  test("CREATE CIRCLE SVG REACT COMPONENT", () => {
+    expect(result);
+  });
 
-test("CREATE PLAYER CIRCLE'S SECONDARY COLOR", () => {});
-
-test("AVERAGE PLAYER CIRCLE'S FILL COLOR AND CHOSEN COLOR", () => {});
-
-test("CREATE INITIAL PLAYER CIRCLE", () => {
-  circle = circleUtils.initialCircleVariables(
-    players[0],
-    { cx: 400, cy: 400 },
-    0,
-    3
-  );
-
-  expect(circle).toEqual(expect.objectContaining(expectedCircle));
+  test("CREATE SVG GRADIENT REACT COMPONENT", () => {
+    expect(result);
+  });
 });
 
-test("FIRST CIRCLE ALTERATION", () => {
+// test("CREATE INITIAL PLAYER CIRCLE", () => {
+//   circle = circleUtils.initialCircleVariables(
+//     testPlayer,
+//     { cx: 400, cy: 400 },
+//     0,
+//     3
+//   );
+//
+//   expect(circle).toEqual(expect.objectContaining(expectedCircle));
+// });
+
+/*test("FIRST CIRCLE ALTERATION", () => {
   circle = circleUtils.circleAlterationOne(players[0], { cx: 400, cy: 400 }, 4);
   expect(circle).toEqual(expect.objectContaining(alterationOneCircle));
-});
+});*/
