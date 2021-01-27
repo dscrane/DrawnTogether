@@ -1,7 +1,5 @@
 import React from "react";
 
-// let Player;
-// let degree;
 let centerX;
 let centerY;
 
@@ -15,12 +13,7 @@ export function drawPlayerCircles(players) {
 /* === Exported Circle Creation and Alteration Functions === */
 // Initial Circle Variable Function
 // Sets the circle's initial position, size, and color
-export function initialCircleVariables(
-  player,
-  displayGrid,
-  currentPlayerId,
-  currentForm
-) {
+export function initialCircleVariables(player, displayGrid, currentPlayerId, currentForm) {
   centerX = displayGrid.cx;
   centerY = displayGrid.cy;
 
@@ -34,11 +27,7 @@ export function initialCircleVariables(
     ...createFillColor(player.height, playerCircle.degree),
     ...convertToCartesian(centerX, centerY, player.age, playerCircle.degree),
   };
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm);
   return playerCircle;
 }
 
@@ -49,11 +38,7 @@ export function circleAlterationOne(player, currentPlayerId, currentForm) {
     ...player.circle,
     altRadius: altRadius(player.circle.radius, player.time, player.personality),
   };
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm);
   return playerCircle;
 }
 
@@ -62,20 +47,9 @@ export function circleAlterationOne(player, currentPlayerId, currentForm) {
 export function circleAlterationTwo(player, currentPlayerId, currentForm) {
   const playerCircle = {
     ...player.circle,
-    ...altCartesian(
-      centerX,
-      centerY,
-      player.circle.degree,
-      player.circle.radian,
-      player.food,
-      player.hair
-    ),
+    ...altCartesian(centerX, centerY, player.circle.degree, player.circle.radian, player.food, player.hair),
   };
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm);
   return playerCircle;
 }
 
@@ -93,17 +67,9 @@ export function circleAlterationThree(player, currentPlayerId, currentForm) {
   playerCircle = {
     ...playerCircle,
     ...secondaryColor,
-    designThickness: createAlternateDesignVariables(
-      playerCircle.radius,
-      player.media
-    ),
+    designThickness: createAlternateDesignVariables(playerCircle.radius, player.media),
   };
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm,
-    player.nature
-  );
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm, player.nature);
   return playerCircle;
 }
 
@@ -117,18 +83,9 @@ export function circleAlterationFive(player, currentPlayerId, currentForm) {
   let playerCircle = player.circle;
   playerCircle = {
     ...playerCircle,
-    ...averageColors(
-      player.color,
-      playerCircle.altHue,
-      playerCircle.saturation,
-      playerCircle.lightness
-    ),
+    ...averageColors(player.color, playerCircle.altHue, playerCircle.saturation, playerCircle.lightness),
   };
-  playerCircle.circleSVG = createCircleSVG(
-    playerCircle,
-    currentPlayerId,
-    currentForm
-  );
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm);
 }
 
 // Sixth Alterations Function
@@ -137,12 +94,7 @@ export function finalCircleDisplay() {}
 /* === END EXPORTED FUNCTIONS === */
 
 /* === Create the SVG for the player circle === */
-export function createCircleSVG(
-  playerCircle,
-  currentPlayerId,
-  currentForm,
-  nature
-) {
+export function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
   switch (currentForm) {
     // Handles the initial circle display
     case 3:
@@ -345,10 +297,7 @@ export function createCircleSVG(
             </>
           );
         default:
-          console.info(
-            "%c[ERROR]: Switch - circle design creation",
-            "color: red"
-          );
+          console.info("%c[ERROR]: Switch - circle design creation", "color: red");
       }
       break;
     // Handles the fourth circle alteration display
@@ -511,9 +460,7 @@ export function altRadius(radius, time, personality) {
   const timeShift = radius * (time / 100);
   time % 2 === 0 ? (radius += timeShift) : (radius -= timeShift);
   const personalityShift = radius * (personality / 100);
-  personality % 2 === 0
-    ? (altRadius += personalityShift)
-    : (altRadius -= personalityShift);
+  personality % 2 === 0 ? (altRadius += personalityShift) : (altRadius -= personalityShift);
 
   return altRadius;
 }
@@ -545,10 +492,7 @@ export function createAlternateDesignVariables(radius, media) {
     case "thinner":
       return radius * 0.02;
     default:
-      console.info(
-        "%c[ERROR]: Switch - createAlternateDesignVariables",
-        "color: red"
-      );
+      console.info("%c[ERROR]: Switch - createAlternateDesignVariables", "color: red");
   }
 }
 export function createSecondaryColor(progress, hue, saturation, lightness) {
