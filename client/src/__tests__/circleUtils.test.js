@@ -1,8 +1,29 @@
-import { circleUtils } from "../utils/";
+import {
+  setCircleRadius,
+  setPlayerDegree,
+  createFillColor,
+  convertToCartesian,
+  altRadius,
+  altCartesian,
+  createAlternateDesignVariables,
+  createSecondaryColor,
+  averageColors,
+} from "../utils/circleUtils";
 
-let circle;
 const testPlayer = {
-  circle: circle,
+  circle: {
+    radius: 50,
+    degree: 275,
+    radian: 15,
+    hue: 168,
+    saturation: 55,
+    lightness: 40,
+    altHue: 75,
+    altLightness: 53,
+    altSaturation: 71,
+    xCord: 375,
+    yCord: 120,
+  },
   id: 0,
   name: "test_user",
   association: 5,
@@ -24,48 +45,13 @@ const testPlayer = {
   color: "kellyGreen",
 };
 
-const expectedCircle = {
-  circleRadius: expect.any(Number),
-  degree: expect.any(Number),
-  fillColor: expect.any(String),
-  hue: expect.any(Number),
-  lightness: expect.any(Number),
-  radian: expect.any(Number),
-  slice: expect.any(Number),
-  saturation: expect.any(Number),
-  xCartesian: expect.any(Number),
-  yCartesian: expect.any(Number),
-};
-
-const alterationOneCircle = {
-  circleRadius: expect.any(Number),
-  degree: expect.any(Number),
-  fillColor: expect.any(String),
-  hue: expect.any(Number),
-  lightness: expect.any(Number),
-  radian: expect.any(Number),
-  slice: expect.any(Number),
-  saturation: expect.any(Number),
-  xCartesian: expect.any(Number),
-  yCartesian: expect.any(Number),
-  circleSVG: expect.any(Object),
-  altRadius: expect.any(Number),
-};
-
-const alterationTwoCircle = {
-  ...alterationOneCircle,
-  altDegree: expect.any(Number),
-  altXCartesian: expect.any(Number),
-  altYCartesian: expect.any(Number),
-};
-describe("Circle Utility Test Suite", () => {
+describe("Circle Variables Suite", () => {
   test("SET PLAYER CIRCLE'S RADIUS", () => {
-    const radius = circleUtils.setCircleRadius(testPlayer.association);
+    const radius = setCircleRadius(testPlayer.association);
     expect(radius).toEqual(testPlayer.association * 8);
   });
-
   test("SET PLAYER CIRCLE'S DEGREE", () => {
-    const result = circleUtils.setPlayerDegree(
+    const result = setPlayerDegree(
       testPlayer.interest,
       testPlayer.gender,
       testPlayer.diet
@@ -77,10 +63,9 @@ describe("Circle Utility Test Suite", () => {
       })
     );
   });
-
   test("CREATE PLAYER CIRCLE'S FILL COLOR", () => {
     const degree = Math.floor(Math.random() * 360);
-    const result = circleUtils.createFillColor(testPlayer.height, degree);
+    const result = createFillColor(testPlayer.height, degree);
     expect(result).toEqual(
       expect.objectContaining({
         hue: expect.any(Number),
@@ -91,31 +76,88 @@ describe("Circle Utility Test Suite", () => {
     );
     expect(result.color).toMatch(/^hsl\([0-9]{1,3},([0-9]{1,3}%,?){1,3}\)$/g);
   });
-
   test("CONVERT PLAYER CIRCLE'S COORDINATES TO CARTESIAN", () => {
-    expect(result);
+    const result = convertToCartesian(
+      400,
+      400,
+      testPlayer.age,
+      testPlayer.circle.degree
+    );
+    expect(result).toEqual(
+      expect.objectContaining({
+        xCartesian: expect.any(Number),
+        yCartesian: expect.any(Number),
+      })
+    );
   });
-
   test("ALTER PLAYER CIRCLE'S RADIUS", () => {
-    expect(result);
+    const result = altRadius(
+      testPlayer.circle.radius,
+      testPlayer.time,
+      testPlayer.personality
+    );
+    expect(result).toEqual(expect.any(Number));
   });
-
   test("ALTER PLAYER CIRCLE'S CARTESIAN COORDINATES", () => {
-    expect(result);
+    const result = altCartesian(
+      400,
+      400,
+      testPlayer.circle.degree,
+      testPlayer.circle.radian,
+      testPlayer.food,
+      testPlayer.hair
+    );
+    expect(result).toEqual(
+      expect.objectContaining({
+        altDegree: expect.any(Number),
+        altXCartesian: expect.any(Number),
+        altYCartesian: expect.any(Number),
+      })
+    );
   });
-
   test("SET PLAYER CIRCLE'S DESIGN VARIABLE", () => {
-    expect(result);
+    const result = createAlternateDesignVariables(
+      testPlayer.circle.radius,
+      testPlayer.media
+    );
+    expect(result).toEqual(expect.any(Number));
   });
-
   test("CREATE PLAYER CIRCLE'S SECONDARY COLOR", () => {
-    expect(result);
+    const result = createSecondaryColor(
+      testPlayer.progress,
+      testPlayer.circle.hue,
+      testPlayer.circle.saturation,
+      testPlayer.circle.lightness
+    );
+    expect(result).toEqual(
+      expect.objectContaining({
+        secondaryColor: expect.any(String),
+        altHue: expect.any(Number),
+      })
+    );
+    expect(result.secondaryColor).toMatch(
+      /^hsl\([0-9]{1,3},([0-9]{1,3}%,?){1,3}\)$/g
+    );
   });
-
   test("AVERAGE PLAYER CIRCLE'S FILL COLOR AND CHOSEN COLOR", () => {
+    const result = averageColors(
+      testPlayer.color,
+      testPlayer.circle.altHue,
+      testPlayer.circle.saturation,
+      testPlayer.circle.lightness
+    );
+    expect(result).toEqual(
+      expect.objectContaining({
+        averageHue: expect.any(Number),
+        averageSaturation: expect.any(Number),
+        averageLightness: expect.any(Number),
+      })
+    );
     expect(result);
   });
+});
 
+describe("Circle SVG Suite", () => {
   test("CREATE CIRCLE SVG REACT COMPONENT", () => {
     expect(result);
   });
@@ -125,18 +167,12 @@ describe("Circle Utility Test Suite", () => {
   });
 });
 
-// test("CREATE INITIAL PLAYER CIRCLE", () => {
-//   circle = circleUtils.initialCircleVariables(
-//     testPlayer,
-//     { cx: 400, cy: 400 },
-//     0,
-//     3
-//   );
-//
-//   expect(circle).toEqual(expect.objectContaining(expectedCircle));
-// });
+describe("Alteration Step Suite", () => {
+  test("CREATE INITIAL PLAYER CIRCLE", () => {
+    expect(result);
+  });
 
-/*test("FIRST CIRCLE ALTERATION", () => {
-  circle = circleUtils.circleAlterationOne(players[0], { cx: 400, cy: 400 }, 4);
-  expect(circle).toEqual(expect.objectContaining(alterationOneCircle));
-});*/
+  test("FIRST CIRCLE ALTERATION", () => {
+    expect(result);
+  });
+});

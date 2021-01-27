@@ -1,7 +1,7 @@
 import React from "react";
 
-let Player;
-let degree;
+// let Player;
+// let degree;
 let centerX;
 let centerY;
 
@@ -16,49 +16,38 @@ export function drawPlayerCircles(players) {
 // Initial Circle Variable Function
 // Sets the circle's initial position, size, and color
 export function initialCircleVariables(
-  playerCircleValues,
+  player,
   displayGrid,
   currentPlayerId,
   currentForm
 ) {
-  Player = playerCircleValues;
   centerX = displayGrid.cx;
   centerY = displayGrid.cy;
 
-  const playerCircle = {
-    circleRadius: setCircleRadius(Player.association),
-    degree: setPlayerDegree(Player.interest, Player.gender, Player.diet).degree,
-    fillColor: createFillColor().color,
-    hue: createFillColor().hue,
-    lightness: createFillColor().lightness,
-    radian: parseInt(Player.age),
-    slice: setPlayerDegree().slice,
-    saturation: createFillColor().saturation,
+  let playerCircle = {
+    ...setPlayerDegree(player.interest, player.gender, player.diet),
+    radius: setCircleRadius(player.association),
+    radian: parseInt(player.age),
   };
-  const cords = convertToCartesian(centerX, centerY);
-  playerCircle.xCartesian = cords.xCord;
-  playerCircle.yCartesian = cords.yCord;
+  playerCircle = {
+    ...playerCircle,
+    ...createFillColor(player.height, playerCircle.degree),
+    ...convertToCartesian(centerX, centerY, player.age, playerCircle.degree),
+  };
   playerCircle.circleSVG = createCircleSVG(
     playerCircle,
     currentPlayerId,
     currentForm
   );
-  console.log("[circleSVG]: ", playerCircle.circleSVG);
   return playerCircle;
 }
 
 // First Alterations Function
 // Changes the circles radius based on the personality and time responses
-export function circleAlterationOne(
-  playerCircleValues,
-  currentPlayerId,
-  currentForm
-) {
-  Player = playerCircleValues;
-  console.log("player", Player);
+export function circleAlterationOne(player, currentPlayerId, currentForm) {
   const playerCircle = {
-    ...playerCircleValues.circle,
-    altRadius: altRadius(),
+    ...player.circle,
+    altRadius: altRadius(player.circle.radius, player.time, player.personality),
   };
   playerCircle.circleSVG = createCircleSVG(
     playerCircle,
@@ -70,19 +59,18 @@ export function circleAlterationOne(
 
 // Second Alterations Function
 // Changes the circle's position along the original radian based on the food and hair responses
-export function circleAlterationTwo(
-  playerCircleValues,
-  currentPlayerId,
-  currentForm
-) {
-  Player = playerCircleValues;
+export function circleAlterationTwo(player, currentPlayerId, currentForm) {
   const playerCircle = {
-    ...playerCircleValues.circle,
+    ...player.circle,
+    ...altCartesian(
+      centerX,
+      centerY,
+      player.circle.degree,
+      player.circle.radian,
+      player.food,
+      player.hair
+    ),
   };
-  const altCords = altCartesian();
-  playerCircle.altXCartesian = altCords.altXCord;
-  playerCircle.altYCartesian = altCords.altYCord;
-  playerCircle.altDegree = altCords.altDegree;
   playerCircle.circleSVG = createCircleSVG(
     playerCircle,
     currentPlayerId,
@@ -93,25 +81,28 @@ export function circleAlterationTwo(
 
 // Third Alterations Function
 // Changes the design of the circle -- adding ring, dot, stroke or hollow design to each circle
-export function circleAlterationThree(
-  playerCircleValues,
-  currentPlayerId,
-  currentForm
-) {
-  console.log("alteration 3 ran");
-  Player = playerCircleValues;
-  const playerCircle = {
-    ...playerCircleValues.circle,
+export function circleAlterationThree(player, currentPlayerId, currentForm) {
+  let playerCircle = player.circle;
+  const secondaryColor = createSecondaryColor(
+    playerCircle.degree,
+    playerCircle.hue,
+    playerCircle.saturation,
+    playerCircle.lightness,
+    player.progress
+  );
+  playerCircle = {
+    ...playerCircle,
+    ...secondaryColor,
+    designThickness: createAlternateDesignVariables(
+      playerCircle.radius,
+      player.media
+    ),
   };
-  const secondaryColors = createSecondaryColor();
-  playerCircle.secondaryColor = secondaryColors.secondaryColor;
-  playerCircle.altHue = secondaryColors.altHue;
-  playerCircle.designThickness = createAlternateDesignVariables();
   playerCircle.circleSVG = createCircleSVG(
     playerCircle,
     currentPlayerId,
     currentForm,
-    Player.nature
+    player.nature
   );
   return playerCircle;
 }
@@ -122,20 +113,17 @@ export function circleAlterationFour() {}
 
 // Fifth Alterations Function
 // Averages the chosen color with the current players fill color
-export function circleAlterationFive(
-  playerCircleValues,
-  currentPlayerId,
-  currentForm
-) {
-  Player = playerCircleValues;
-  const playerCircle = {
-    ...playerCircleValues.circle,
+export function circleAlterationFive(player, currentPlayerId, currentForm) {
+  let playerCircle = player.circle;
+  playerCircle = {
+    ...playerCircle,
+    ...averageColors(
+      player.color,
+      playerCircle.altHue,
+      playerCircle.saturation,
+      playerCircle.lightness
+    ),
   };
-  const { averageHue, averageSaturation, averageLightness } = averageColors();
-  playerCircle.averageHue = averageLightness;
-  playerCircle.averageSaturation = averageSaturation;
-  playerCircle.averageLightness = averageLightness;
-  playerCircle.averageColor = `hsl(${averageHue}, ${averageSaturation}%, ${averageLightness}%`;
   playerCircle.circleSVG = createCircleSVG(
     playerCircle,
     currentPlayerId,
@@ -163,7 +151,7 @@ export function createCircleSVG(
           {createGradient(
             playerCircle.xCartesian,
             playerCircle.yCartesian,
-            playerCircle.circleRadius,
+            playerCircle.radius,
             playerCircle.hue,
             playerCircle.saturation,
             playerCircle.lightness,
@@ -173,7 +161,7 @@ export function createCircleSVG(
             key={`circle_${currentPlayerId}`}
             cx={playerCircle.xCartesian}
             cy={playerCircle.yCartesian}
-            r={playerCircle.circleRadius}
+            r={playerCircle.radius}
             style={{
               fill: `url(#radialGradient${currentPlayerId})`,
               opacity: 1,
@@ -374,7 +362,7 @@ export function createCircleSVG(
           {createGradient(
             playerCircle.xCartesian,
             playerCircle.yCartesian,
-            playerCircle.circleRadius,
+            playerCircle.radius,
             playerCircle.averageHue,
             playerCircle.averageSaturation,
             playerCircle.averageLightness,
@@ -443,6 +431,7 @@ export function setCircleRadius(association) {
   }
 }
 export function setPlayerDegree(interest, gender, diet) {
+  let degree;
   if (!interest || !gender || !diet) {
     return { degree: 0, slice: 0 };
   }
@@ -502,69 +491,59 @@ export function createFillColor(height, degree) {
   const color = `hsl(${hue},${lightness}%,${saturation}%)`;
   return { hue, lightness, saturation, color };
 }
-export function convertToCartesian() {
-  if (!Player.age) {
-    return { xCord: 0, yCord: 0 };
+export function convertToCartesian(centerX, centerY, age, degree) {
+  if (!age) {
+    return { xCartesian: 0, yCartesian: 0 };
   }
-  const radian = Player.age; //initialXLocation();
+  const radian = age; //initialXLocation();
   const theta = degree * (Math.PI / 180); //initialYLocation();
 
-  let xCord = centerX + Math.round(radian * -Math.cos(theta));
-  let yCord = centerY + Math.round(radian * Math.sin(theta));
+  let xCartesian = centerX + Math.round(radian * -Math.cos(theta));
+  let yCartesian = centerY + Math.round(radian * Math.sin(theta));
 
-  return { xCord, yCord };
+  return { xCartesian, yCartesian };
 }
 /* === END INITIAL VARIABLES === */
 
 /* === Circle Radius Alteration Function === */
-export function altRadius() {
-  if (Player.circle !== undefined) {
-    let radius = Player.circle.circleRadius;
-    const timeShift = radius * (Player.time / 100);
-    Player.time % 2 === 0 ? (radius += timeShift) : (radius -= timeShift);
-    const personalityShift = radius * (Player.personality / 100);
-    Player.personality % 2 === 0
-      ? (radius += personalityShift)
-      : (radius -= personalityShift);
+export function altRadius(radius, time, personality) {
+  let altRadius = radius;
+  const timeShift = radius * (time / 100);
+  time % 2 === 0 ? (radius += timeShift) : (radius -= timeShift);
+  const personalityShift = radius * (personality / 100);
+  personality % 2 === 0
+    ? (altRadius += personalityShift)
+    : (altRadius -= personalityShift);
 
-    return radius;
-  }
-  return 0;
+  return altRadius;
 }
 /* === END RADIUS ALTERATION === */
 
 /* === Circle Position Alteration Function === */
-export function altCartesian() {
-  if (Player.circle !== undefined) {
-    const radian = Player.circle.radian;
-    const degree = Player.circle.degree;
-    const circulation = Player.food;
-    const multiplier = Player.hair;
+export function altCartesian(centerX, centerY, degree, radian, food, hair) {
+  const shiftDegree = food * hair;
+  const altDegree = degree + shiftDegree;
+  const theta = altDegree * (Math.PI / 180);
 
-    const shiftDegree = circulation * multiplier;
-    const altDegree = degree + shiftDegree;
-    const theta = altDegree * (Math.PI / 180);
-
-    return {
-      altDegree,
-      altXCord: centerX + Math.round(radian * -Math.cos(theta)),
-      altYCord: centerY + Math.round(radian * Math.sin(theta)),
-    };
-  }
+  return {
+    altDegree,
+    altXCartesian: centerX + Math.round(radian * -Math.cos(theta)),
+    altYCartesian: centerY + Math.round(radian * Math.sin(theta)),
+  };
 }
 /* === END POSITION ALTERATION === */
 
 /* === Circle Design Alteration Function === */
-export function createAlternateDesignVariables() {
-  switch (Player.media) {
+export function createAlternateDesignVariables(radius, media) {
+  switch (media) {
     case "thicker":
-      return Player.circle.circleRadius * 0.2;
+      return radius * 0.2;
     case "thick":
-      return Player.circle.circleRadius * 0.15;
+      return radius * 0.15;
     case "thin":
-      return Player.circle.circleRadius * 0.08;
+      return radius * 0.08;
     case "thinner":
-      return Player.circle.circleRadius * 0.02;
+      return radius * 0.02;
     default:
       console.info(
         "%c[ERROR]: Switch - createAlternateDesignVariables",
@@ -572,77 +551,65 @@ export function createAlternateDesignVariables() {
       );
   }
 }
-export function createSecondaryColor() {
+export function createSecondaryColor(progress, hue, saturation, lightness) {
   let altHue, secondaryColor;
-  switch (Player.progress) {
+  switch (progress) {
     case "complimentary":
-      altHue = Player.circle.hue + 180;
-      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      altHue = hue + 180;
+      secondaryColor = `hsl(${altHue},${saturation}%,${lightness}%)`;
       break;
     case "analogous":
-      altHue =
-        Math.random() * (Player.circle.hue + 75 - Player.circle.hue - 75) +
-        Player.circle.hue -
-        75;
-      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
-      console.log("secCol altHue", secondaryColor, altHue);
+      altHue = Math.random() * (hue + 75 - hue - 75) + hue - 75;
+      secondaryColor = `hsl(${altHue},${saturation}%,${lightness}%)`;
       break;
     case "triadic":
-      altHue =
-        ((Player.circle.hue + 120) *
-          (Player.circle.hue - 120) *
-          Player.circle.hue) /
-        3;
-      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      altHue = ((hue + 120) * (hue - 120) * hue) / 3;
+      secondaryColor = `hsl(${altHue},${saturation}%,${lightness}%)`;
       break;
     case "monochromatic":
-      altHue =
-        Math.random() * (Player.circle.hue + 15 - Player.circle.hue - 15) +
-        Player.circle.hue -
-        15;
-      secondaryColor = `hsl(${altHue},${Player.circle.saturation}%,${Player.circle.lightness}%)`;
+      altHue = Math.random() * (hue + 15 - hue - 15) + hue - 15;
+      secondaryColor = `hsl(${altHue},${saturation}%,${lightness}%)`;
       break;
     default:
       console.info("%c[ERROR]: Switch - createSecondaryColor", "color: red");
   }
-  console.log("secCol altHue", secondaryColor, altHue);
   return { secondaryColor, altHue };
 }
 /* === END DESIGN ALTERATION === */
 
 /* === Circle Color Alteration Function === */
-export function averageColors() {
+export function averageColors(color, altHue, saturation, lightness) {
   let averageHue, averageSaturation, averageLightness;
-  switch (Player.color) {
+  switch (color) {
     case "chartreuse":
-      averageHue = (Player.altHue + 90) / 2;
-      averageSaturation = (Player.saturation + 100) / 2;
-      averageLightness = (Player.lightness + 50) / 2;
+      averageHue = (altHue + 90) / 2;
+      averageSaturation = (saturation + 100) / 2;
+      averageLightness = (lightness + 50) / 2;
       break;
     case "vermilion":
-      averageHue = (Player.altHue + 8) / 2;
-      averageSaturation = (Player.saturation + 76) / 2;
-      averageLightness = (Player.lightness + 58) / 2;
+      averageHue = (altHue + 8) / 2;
+      averageSaturation = (saturation + 76) / 2;
+      averageLightness = (lightness + 58) / 2;
       break;
     case "cobalt":
-      averageHue = (Player.altHue + 215) / 2;
-      averageSaturation = (Player.saturation + 100) / 2;
-      averageLightness = (Player.lightness + 34) / 2;
+      averageHue = (altHue + 215) / 2;
+      averageSaturation = (saturation + 100) / 2;
+      averageLightness = (lightness + 34) / 2;
       break;
     case "teal":
-      averageHue = (Player.altHue + 180) / 2;
-      averageSaturation = (Player.saturation + 100) / 2;
-      averageLightness = (Player.lightness + 25) / 2;
+      averageHue = (altHue + 180) / 2;
+      averageSaturation = (saturation + 100) / 2;
+      averageLightness = (lightness + 25) / 2;
       break;
     case "kellyGreen":
-      averageHue = (Player.altHue + 101) / 2;
-      averageSaturation = (Player.saturation + 78) / 2;
-      averageLightness = (Player.lightness + 41) / 2;
+      averageHue = (altHue + 101) / 2;
+      averageSaturation = (saturation + 78) / 2;
+      averageLightness = (lightness + 41) / 2;
       break;
     case "aubergine":
-      averageHue = (Player.altHue + 315) / 2;
-      averageSaturation = (Player.saturation + 27) / 2;
-      averageLightness = (Player.lightness + 30) / 2;
+      averageHue = (altHue + 315) / 2;
+      averageSaturation = (saturation + 27) / 2;
+      averageLightness = (lightness + 30) / 2;
       break;
     default:
       console.info("%c[ERROR]: Switch - averageColors", "color: red");
