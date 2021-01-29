@@ -51,11 +51,7 @@ describe("Circle Variables Suite", () => {
     expect(radius).toEqual(testPlayer.association * 8);
   });
   test("SET PLAYER CIRCLE'S DEGREE", () => {
-    const result = setPlayerDegree(
-      testPlayer.interest,
-      testPlayer.gender,
-      testPlayer.diet
-    );
+    const result = setPlayerDegree(testPlayer.interest, testPlayer.gender, testPlayer.diet);
     expect(result).toEqual(
       expect.objectContaining({
         slice: expect.any(Number),
@@ -77,12 +73,7 @@ describe("Circle Variables Suite", () => {
     expect(result.color).toMatch(/^hsl\([0-9]{1,3},([0-9]{1,3}%,?){1,3}\)$/g);
   });
   test("CONVERT PLAYER CIRCLE'S COORDINATES TO CARTESIAN", () => {
-    const result = convertToCartesian(
-      400,
-      400,
-      testPlayer.age,
-      testPlayer.circle.degree
-    );
+    const result = convertToCartesian(400, 400, testPlayer.age, testPlayer.circle.degree);
     expect(result).toEqual(
       expect.objectContaining({
         xCartesian: expect.any(Number),
@@ -91,11 +82,7 @@ describe("Circle Variables Suite", () => {
     );
   });
   test("ALTER PLAYER CIRCLE'S RADIUS", () => {
-    const result = altRadius(
-      testPlayer.circle.radius,
-      testPlayer.time,
-      testPlayer.personality
-    );
+    const result = altRadius(testPlayer.circle.radius, testPlayer.time, testPlayer.personality);
     expect(result).toEqual(expect.any(Number));
   });
   test("ALTER PLAYER CIRCLE'S CARTESIAN COORDINATES", () => {
@@ -116,10 +103,7 @@ describe("Circle Variables Suite", () => {
     );
   });
   test("SET PLAYER CIRCLE'S DESIGN VARIABLE", () => {
-    const result = createAlternateDesignVariables(
-      testPlayer.circle.radius,
-      testPlayer.media
-    );
+    const result = createAlternateDesignVariables(testPlayer.circle.radius, testPlayer.media);
     expect(result).toEqual(expect.any(Number));
   });
   test("CREATE PLAYER CIRCLE'S SECONDARY COLOR", () => {
@@ -135,9 +119,7 @@ describe("Circle Variables Suite", () => {
         altHue: expect.any(Number),
       })
     );
-    expect(result.secondaryColor).toMatch(
-      /^hsl\([0-9]{1,3},([0-9]{1,3}%,?){1,3}\)$/g
-    );
+    expect(result.secondaryColor).toMatch(/^hsl\([0-9]{1,3},([0-9]{1,3}%,?){1,3}\)$/g);
   });
   test("AVERAGE PLAYER CIRCLE'S FILL COLOR AND CHOSEN COLOR", () => {
     const result = averageColors(
@@ -158,21 +140,21 @@ describe("Circle Variables Suite", () => {
 });
 
 describe("Circle SVG Suite", () => {
-  test("CREATE CIRCLE SVG REACT COMPONENT", () => {
+  test.skip("CREATE CIRCLE SVG REACT COMPONENT", () => {
     expect(result);
   });
 
-  test("CREATE SVG GRADIENT REACT COMPONENT", () => {
+  test.skip("CREATE SVG GRADIENT REACT COMPONENT", () => {
     expect(result);
   });
 });
 
 describe("Alteration Step Suite", () => {
-  test("CREATE INITIAL PLAYER CIRCLE", () => {
+  test.skip("CREATE INITIAL PLAYER CIRCLE", () => {
     expect(result);
   });
 
-  test("FIRST CIRCLE ALTERATION", () => {
+  test.skip("FIRST CIRCLE ALTERATION", () => {
     expect(result);
   });
 });
