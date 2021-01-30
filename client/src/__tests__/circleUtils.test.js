@@ -8,6 +8,7 @@ import {
   createAlternateDesignVariables,
   createSecondaryColor,
   averageColors,
+  createCircleSVG,
 } from "../utils/circleUtils";
 
 const testPlayer = {
@@ -21,8 +22,8 @@ const testPlayer = {
     altHue: 75,
     altLightness: 53,
     altSaturation: 71,
-    xCord: 375,
-    yCord: 120,
+    xCartesian: 375,
+    yCartesian: 120,
   },
   id: 0,
   name: "test_user",
@@ -140,10 +141,22 @@ describe("Circle Variables Suite", () => {
 });
 
 describe("Circle SVG Suite", () => {
-  test.skip("CREATE CIRCLE SVG REACT COMPONENT", () => {
-    expect(result);
+  test("CREATE CIRCLE SVG REACT COMPONENT", () => {
+    const result = createCircleSVG(testPlayer.circle, 0, 3).props.children[1].props;
+    expect(result).toContainAllKeys(["cx", "cy", "r", "style"]);
+    expect(result).toContainEntries([
+      ["cx", testPlayer.circle.xCartesian],
+      ["cy", testPlayer.circle.yCartesian],
+      ["r", testPlayer.circle.radius],
+    ]);
+    expect(result.style).toContainEntries([
+      ["fill", `url(#radialGradient${testPlayer.id})`],
+      ["fillRule", "evenodd"],
+      ["opacity", 1],
+      ["stroke", "none"],
+      ["strokeLinecap", "round"],
+    ]);
   });
-
   test.skip("CREATE SVG GRADIENT REACT COMPONENT", () => {
     expect(result);
   });

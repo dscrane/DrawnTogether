@@ -94,7 +94,7 @@ export function finalCircleDisplay() {}
 /* === END EXPORTED FUNCTIONS === */
 
 /* === Create the SVG for the player circle === */
-export function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature) {
+export function createCircleSVG(playerCircle, currentPlayerId, currentForm, nature = null) {
   switch (currentForm) {
     // Handles the initial circle display
     case 3:
