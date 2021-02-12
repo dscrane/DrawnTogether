@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PolarGrid = ({ grid, view }) => {
+const PolarGrid = ({ grid, view }) => {
   const svgRadius = view.width / 2;
   const ringSpacing = Math.round(view.width / 100);
   console.info("%c[ringSpacing]: ", "color: yellow", ringSpacing);
@@ -10,15 +10,7 @@ export const PolarGrid = ({ grid, view }) => {
       if (i % (ringSpacing * 5) === 0) {
         continue;
       }
-      rings.push(
-        <circle
-          fill="none"
-          style={{ stroke: "rgba(170,177,133,.35)" }}
-          r={i}
-          cy={grid.cy}
-          cx={grid.cx}
-        />
-      );
+      rings.push(<circle fill="none" style={{ stroke: "rgba(170,177,133,.35)" }} r={i} cy={grid.cy} cx={grid.cx} />);
     }
     return rings;
   };
@@ -30,14 +22,7 @@ export const PolarGrid = ({ grid, view }) => {
     for (i = ringSpacing * 5; i < svgRadius; i += ringSpacing * 5) {
       if (!lightRing) {
         ring = (
-          <circle
-            fill="none"
-            style={{ stroke: "rgb(98, 102, 74)" }}
-            r={i}
-            cy={grid.cy}
-            cx={grid.cx}
-            strokeWidth="1"
-          />
+          <circle fill="none" style={{ stroke: "rgb(98, 102, 74)" }} r={i} cy={grid.cy} cx={grid.cx} strokeWidth="1" />
         );
         lightRing = true;
       } else {
@@ -169,3 +154,5 @@ export const PolarGrid = ({ grid, view }) => {
     </>
   );
 };
+
+export default PolarGrid;

@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import {
-  updateGridDisplay,
-  updateView,
-  updatePlayerCircle,
-} from "../../redux/actions";
-import * as displayUtils from "../../utils/displayUtils";
+import { PolarGrid } from "../polarGrid";
+import { updateGridDisplay, updateView, updatePlayerCircle } from "../../redux/actions";
 import * as circleUtils from "../../utils/circleUtils";
 
 function debounce(fn, ms) {
@@ -19,14 +15,7 @@ function debounce(fn, ms) {
   };
 }
 
-const Canvas = ({
-  display,
-  game,
-  players,
-  updateGridDisplay,
-  updateView,
-  updatePlayerCircle,
-}) => {
+const Canvas = ({ display, game, players, updateGridDisplay, updateView, updatePlayerCircle }) => {
   const canvasSvg = useRef(null);
 
   /* Initial rendering of the circle grid */
@@ -43,6 +32,7 @@ const Canvas = ({
     };
     asyncUpdate();
   }, []);
+
   /* Debounced view dimensions event handler */
   useEffect(() => {
     const debounceHandleResize = debounce(function handleResize() {
@@ -51,10 +41,10 @@ const Canvas = ({
         width: canvasSvg.current.width.baseVal.value,
       });
     }, 500);
-
     window.addEventListener("resize", debounceHandleResize);
     return (_) => window.removeEventListener("resize", debounceHandleResize);
   }, [display.view, updateView]);
+
   /* Update the display grid based on new view dimensions */
   useEffect(() => {
     updateGridDisplay(display.view);
@@ -65,10 +55,8 @@ const Canvas = ({
 
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
-      {displayUtils.polarGrid(display)};
-      {game.currentForm >= 3 && game.displayCircles
-        ? circleUtils.drawPlayerCircles(players, game.currentForm)
-        : null}
+      <PolarGrid {...display} />
+      {game.currentForm >= 3 && game.displayCircles ? circleUtils.drawPlayerCircles(players, game.currentForm) : null}
     </svg>
   );
 };
