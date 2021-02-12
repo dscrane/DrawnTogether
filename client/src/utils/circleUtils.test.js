@@ -9,7 +9,7 @@ import {
   createSecondaryColor,
   averageColors,
   createCircleSVG,
-} from "../utils/circleUtils";
+} from "./circleUtils";
 
 const testPlayer = {
   circle: {

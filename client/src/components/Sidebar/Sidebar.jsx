@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Header } from "../header";
-import { SidebarContent } from "../sidebarContent";
-import { SidebarButtons } from "../sidebarButtons";
+import { Header } from "../Header";
+import { SidebarContent } from "../SidebarContent";
+import { SidebarButtons } from "../SidebarButtons";
 
 const Sidebar = ({ currentForm, currentPlayer }) => {
   return (

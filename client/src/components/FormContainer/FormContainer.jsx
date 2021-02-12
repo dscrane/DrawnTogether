@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle } from "../../redux/actions";
-import { FormDisplay } from "../formDisplay";
-import { PlayerButtons } from "../playerButtons";
+import { FormDisplay } from "../FormDisplay";
+import { PlayerButtons } from "../PlayerButtons";
 
 const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCircle, prevPlayer }) => {
   const { currentForm, currentPlayer, numPlayers } = game;

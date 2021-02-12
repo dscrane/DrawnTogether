@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { PolarGrid } from "../polarGrid";
+import { PolarGrid } from "../PolarGrid";
 import { updateGridDisplay, updateView, updatePlayerCircle } from "../../redux/actions";
 import * as circleUtils from "../../utils/circleUtils";
 

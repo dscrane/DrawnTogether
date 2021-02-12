@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setInterest } from "../../redux/actions";
-import { DisplayResults } from "../displayResults";
+import { DisplayResults } from "../DisplayResults";
 import { InterestForm, PlayerForm, FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../../userForms";
 
 const FormDisplay = ({ form, setInterest, responses, setResponses }) => {

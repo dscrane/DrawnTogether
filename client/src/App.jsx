@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { Sidebar } from "./components/sidebar";
-import { Canvas } from "./components/canvas";
+import { Sidebar } from "./components/Sidebar";
+import { Canvas } from "./components/Canvas";
 
 export const App = () => {
   return (
