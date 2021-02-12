@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 
 const PlayerButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPlayer }) => {
   return (
-    <div className="player__buttons">
+    <div className="player__buttons" data-testid="component-PlayerButtons">
       <Row className="player__buttons-row">
         <Col className="player__buttons-col">
           {currentPlayer === 0 ? (

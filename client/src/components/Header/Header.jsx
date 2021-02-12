@@ -34,14 +34,14 @@ const Header = ({ currentForm }) => {
   const formSteps = currentForm > 0 ? createFormSteps() : null;
 
   return (
-    <>
+    <div data-testid="component-Header">
       <h1 className="header__title">
         Circle <br />
         Generator
       </h1>
       <div className="form__heading">{formHeaderOne}</div>
       <div className="form__steps">{formSteps}</div>
-    </>
+    </div>
   );
 };
 

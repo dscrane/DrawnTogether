@@ -5,7 +5,7 @@ import { Canvas } from "./components/Canvas";
 
 export const App = () => {
   return (
-    <Container fluid className="app">
+    <Container fluid className="app" data-testid="component-App">
       <Row className="app__display">
         <Col className="app__sidebar">
           <Sidebar />

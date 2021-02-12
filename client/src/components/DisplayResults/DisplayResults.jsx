@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 const DisplayResults = ({ resetGame }) => {
   document.getElementById("nextButton").style.display = "none";
   return (
-    <Fragment>
+    <div data-testid="component-DisplayResults">
       <div id="landing" className="col-11">
         <div className="row">
           <div id="resultsMessage">Thank you for playing see your results displayed to the right!!</div>
@@ -16,7 +16,7 @@ const DisplayResults = ({ resetGame }) => {
           </span>
         </button>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

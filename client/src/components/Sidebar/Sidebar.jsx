@@ -6,7 +6,7 @@ import { SidebarButtons } from "../SidebarButtons";
 
 const Sidebar = ({ currentForm, currentPlayer }) => {
   return (
-    <div className="sidebar__content">
+    <div className="sidebar__content" data-testid="component-Sidebar">
       <div className="sidebar__row sidebar__row-header">
         <Header currentForm={currentForm} />
       </div>

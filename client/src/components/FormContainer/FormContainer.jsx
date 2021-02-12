@@ -82,7 +82,7 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   };
 
   return (
-    <div className="content__container">
+    <div className="content__container" data-testid="component-FormContainer">
       {players[currentPlayer] && currentForm > 2 ? (
         <div className="content__name">{players[currentPlayer].name}</div>
       ) : (
