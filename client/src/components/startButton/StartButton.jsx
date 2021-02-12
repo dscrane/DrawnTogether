@@ -1,6 +1,6 @@
 import React from "react";
 
-export const StartButton = ({ startGame }) => {
+const StartButton = ({ startGame }) => {
   return (
     <button className="game__button" onClick={() => startGame()}>
       <span>
@@ -9,3 +9,5 @@ export const StartButton = ({ startGame }) => {
     </button>
   );
 };
+
+export default StartButton;

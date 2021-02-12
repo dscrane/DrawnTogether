@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
-import { default as Sidebar } from "./components/sidebar/Sidebar";
-import { default as Canvas } from "./components/display/Canvas";
+import { Sidebar } from "./components/sidebar";
+import { Canvas } from "./components/canvas";
 
 export const App = () => {
   return (

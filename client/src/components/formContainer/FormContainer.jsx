@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  submitForm,
-  nextPlayer,
-  prevPlayer,
-  updatePlayerCircle,
-} from "../../redux/actions";
-import DisplayForm from "./DisplayForm";
-import { PlayerButtons } from "./PlayerButtons";
+import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle } from "../../redux/actions";
+import { FormDisplay } from "../formDisplay";
+import { PlayerButtons } from "../playerButtons";
 
-const FormContainer = ({
-  game,
-  players,
-  submitForm,
-  nextPlayer,
-  updatePlayerCircle,
-  prevPlayer,
-}) => {
+const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCircle, prevPlayer }) => {
   const { currentForm, currentPlayer, numPlayers } = game;
 
   const [responses, setResponses] = useState({});
@@ -86,20 +74,10 @@ const FormContainer = ({
           <br /> continue
         </div>
       ) : (
-        <DisplayForm
-          responses={responses}
-          setResponses={setResponses}
-          form={currentForm}
-        />
+        <FormDisplay responses={responses} setResponses={setResponses} form={currentForm} />
       );
     } else {
-      return (
-        <DisplayForm
-          responses={responses}
-          setResponses={setResponses}
-          form={currentForm}
-        />
-      );
+      return <FormDisplay responses={responses} setResponses={setResponses} form={currentForm} />;
     }
   };
 

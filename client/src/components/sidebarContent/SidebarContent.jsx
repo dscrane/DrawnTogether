@@ -1,14 +1,8 @@
 import React from "react";
-import { StartButton } from "./StartButton";
+import { StartButton } from "../startButton";
 import { connect } from "react-redux";
-import {
-  setInterest,
-  startGame,
-  submitForm,
-  nextPlayer,
-  prevPlayer,
-} from "../../redux/actions";
-import FormContainer from "./FormContainer";
+import { setInterest, startGame, submitForm, nextPlayer, prevPlayer } from "../../redux/actions";
+import { FormContainer } from "../formContainer";
 
 const SidebarContent = ({ game, startGame, nextPlayer, prevPlayer }) => {
   const { currentForm, currentPlayer, numPlayers } = game;

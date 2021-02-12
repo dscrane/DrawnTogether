@@ -13,7 +13,7 @@ import {
   Results,
 } from "../../utils/forms";
 
-const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
+const FormDisplay = ({ form, setInterest, responses, setResponses }) => {
   switch (form) {
     case 1:
       return <InterestForm setInterest={setInterest} />;
@@ -38,4 +38,4 @@ const DisplayForm = ({ form, setInterest, responses, setResponses }) => {
   }
 };
 
-export default connect(null, { setInterest })(DisplayForm);
+export default connect(null, { setInterest })(FormDisplay);

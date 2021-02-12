@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Header } from "./Header";
-import SidebarContent from "./SidebarContent";
-import { default as SidebarButtons } from "./SidebarButtons";
+import { Header } from "../header";
+import { SidebarContent } from "../sidebarContent";
+import { SidebarButtons } from "../sidebarButtons";
 
 const Sidebar = ({ currentForm, currentPlayer }) => {
   return (
@@ -14,14 +14,7 @@ const Sidebar = ({ currentForm, currentPlayer }) => {
         <SidebarContent />
       </div>
       <div className="sidebar__row sidebar__row-buttons">
-        {currentForm !== 0 ? (
-          <SidebarButtons
-            currentForm={currentForm}
-            currentPlayer={currentPlayer}
-          />
-        ) : (
-          ""
-        )}
+        {currentForm !== 0 ? <SidebarButtons currentForm={currentForm} currentPlayer={currentPlayer} /> : ""}
       </div>
     </div>
   );
