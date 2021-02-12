@@ -1,7 +1,7 @@
 import React from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
-export const SixForm = ({ responses, setResponses }) => {
+export const FormSix = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
     setResponses({ ...responses, [event.target.name]: event.target.value });

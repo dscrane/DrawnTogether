@@ -1,14 +1,12 @@
 import React, { Fragment } from "react";
 
-export const Results = ({ resetGame }) => {
+const DisplayResults = ({ resetGame }) => {
   document.getElementById("nextButton").style.display = "none";
   return (
     <Fragment>
       <div id="landing" className="col-11">
         <div className="row">
-          <div id="resultsMessage">
-            Thank you for playing see your results displayed to the right!!
-          </div>
+          <div id="resultsMessage">Thank you for playing see your results displayed to the right!!</div>
         </div>
       </div>
       <div id="landing" className="col-11">
@@ -21,3 +19,5 @@ export const Results = ({ resetGame }) => {
     </Fragment>
   );
 };
+
+export default DisplayResults;

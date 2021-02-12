@@ -1,7 +1,7 @@
 import React from "react";
 import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
-export const FourForm = ({ responses, setResponses }) => {
+export const FormFour = ({ responses, setResponses }) => {
   const onChange = (event) => {
     event.preventDefault();
     setResponses({ ...responses, [event.target.name]: event.target.value });
@@ -24,9 +24,7 @@ export const FourForm = ({ responses, setResponses }) => {
         <option value="ring">Nature Lover</option>
         <option value="dot">Climate activist</option>
       </FormControl>
-      <FormLabel className="form__label">
-        Relationship to Social Media
-      </FormLabel>
+      <FormLabel className="form__label">Relationship to Social Media</FormLabel>
       <FormControl
         className="form__control"
         name="media"

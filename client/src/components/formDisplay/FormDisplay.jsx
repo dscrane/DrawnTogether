@@ -1,17 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setInterest } from "../../redux/actions";
-import {
-  InterestForm,
-  PlayerForm,
-  OneForm,
-  TwoForm,
-  ThreeForm,
-  FourForm,
-  FiveForm,
-  SixForm,
-  Results,
-} from "../../utils/forms";
+import { DisplayResults } from "../displayResults";
+import { InterestForm, PlayerForm, FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../../userForms";
 
 const FormDisplay = ({ form, setInterest, responses, setResponses }) => {
   switch (form) {
@@ -20,19 +11,19 @@ const FormDisplay = ({ form, setInterest, responses, setResponses }) => {
     case 2:
       return <PlayerForm responses={responses} setResponses={setResponses} />;
     case 3:
-      return <OneForm responses={responses} setResponses={setResponses} />;
+      return <FormOne responses={responses} setResponses={setResponses} />;
     case 4:
-      return <TwoForm responses={responses} setResponses={setResponses} />;
+      return <FormTwo responses={responses} setResponses={setResponses} />;
     case 5:
-      return <ThreeForm responses={responses} setResponses={setResponses} />;
+      return <FormThree responses={responses} setResponses={setResponses} />;
     case 6:
-      return <FourForm responses={responses} setResponses={setResponses} />;
+      return <FormFour responses={responses} setResponses={setResponses} />;
     case 7:
-      return <FiveForm responses={responses} setResponses={setResponses} />;
+      return <FormFive responses={responses} setResponses={setResponses} />;
     case 8:
-      return <SixForm responses={responses} setResponses={setResponses} />;
+      return <FormSix responses={responses} setResponses={setResponses} />;
     case 9:
-      return <Results />;
+      return <DisplayResults />;
     default:
       console.log("FormArea switch has failed");
   }
