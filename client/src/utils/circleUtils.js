@@ -122,7 +122,6 @@ export function circleAlterationFour(player, currentPlayerId, currentForm) {}
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
  * */
-
 export function circleAlterationFive(player, currentPlayerId, currentForm) {
   let playerCircle = player.circle;
   playerCircle = {
@@ -143,6 +142,8 @@ export function circleAlterationFive(player, currentPlayerId, currentForm) {
 export function finalCircleDisplay(player, currentPlayerId, currentForm) {}
 
 /* === END FUNCTIONS EXPORTED FOR PRODUCTION PURPOSES === */
+
+/* =================================================== */
 
 /* === FUNCTIONS EXPORTED FOR TESTING PURPOSES === */
 
