@@ -5,7 +5,7 @@ import {
   convertToCartesian,
   altRadius,
   altCartesian,
-  createAlternateDesignVariables,
+  setAlternateDesignWeight,
   createSecondaryColor,
   averageColors,
   createCircleSVG,
@@ -104,7 +104,7 @@ describe("Circle Variables Suite", () => {
     );
   });
   test("SET PLAYER CIRCLE'S DESIGN VARIABLE", () => {
-    const result = createAlternateDesignVariables(testPlayer.circle.radius, testPlayer.media);
+    const result = setAlternateDesignWeight(testPlayer.circle.radius, testPlayer.media);
     expect(result).toEqual(expect.any(Number));
   });
   test("CREATE PLAYER CIRCLE'S SECONDARY COLOR", () => {

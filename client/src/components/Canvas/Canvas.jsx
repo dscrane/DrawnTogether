@@ -56,7 +56,7 @@ const Canvas = ({ display, game, players, updateGridDisplay, updateView, updateP
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
       <PolarGrid {...display} />
-      {game.currentForm >= 3 && game.displayCircles ? circleUtils.drawPlayerCircles(players, game.currentForm) : null}
+      {game.currentForm >= 3 && game.displayCircles ? circleUtils.updatePlayerCircles(players) : null}
     </svg>
   );
 };
