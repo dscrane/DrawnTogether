@@ -15,7 +15,7 @@ function debounce(fn, ms) {
   };
 }
 
-const Canvas = ({ display, game, players, updateGridDisplay, updateView, updatePlayerCircle }) => {
+const Canvas = ({ display, game, players, updateGridDisplay, updateView }) => {
   const canvasSvg = useRef(null);
 
   /* Initial rendering of the circle grid */
@@ -72,5 +72,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   updateGridDisplay,
   updateView,
-  updatePlayerCircle,
 })(Canvas);
