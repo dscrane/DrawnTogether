@@ -12,6 +12,7 @@ const PolarGrid = ({ grid, view }) => {
       }
       rings.push(<circle fill="none" style={{ stroke: "rgba(170,177,133,.35)" }} r={i} cy={grid.cy} cx={grid.cx} />);
     }
+    rings.pop();
     return rings;
   };
   const createBlueRings = () => {

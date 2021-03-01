@@ -1,11 +1,10 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
 
 const PlayerButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPlayer }) => {
   return (
     <div className="player__buttons" data-testid="component-PlayerButtons">
-      <Row className="player__buttons-row">
-        <Col className="player__buttons-col">
+      <div className="player__buttons-row">
+        <div className="player__buttons-col">
           {currentPlayer === 0 ? (
             ""
           ) : (
@@ -24,8 +23,8 @@ const PlayerButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPl
               </span>
             </button>
           )}
-        </Col>
-        <Col className="player__buttons-col">
+        </div>
+        <div className="player__buttons-col">
           <button
             className={`player__button ${
               currentPlayer === numPlayers + 1 && currentForm > 2 ? "player__button-disabled" : ""
@@ -34,12 +33,12 @@ const PlayerButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPl
             type="submit"
           >
             <span className="player__button_text">
-              {currentForm > 2 && players[currentPlayer + 1] ? players[currentPlayer + 1].name : "Next"}{" "}
+              {currentForm > 2 && players[currentPlayer + 1] ? players[currentPlayer + 1].name : "Update"}{" "}
             </span>
             <span className="player__button-icon">&#8250;</span>
           </button>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };

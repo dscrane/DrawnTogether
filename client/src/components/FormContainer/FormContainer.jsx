@@ -67,11 +67,12 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   const showForms = () => {
     if (currentForm > 2) {
       return currentPlayer === numPlayers ? (
-        <div className="text-center">
-          Click
-          <br /> "Submit Form"
-          <br /> to
-          <br /> continue
+        <div className="content__updateMessage">
+          Click "Next Form"
+          <br /> to continue
+          <br /> or
+          <br /> go back
+          <br /> to change responses
         </div>
       ) : (
         <FormDisplay responses={responses} setResponses={setResponses} form={currentForm} />

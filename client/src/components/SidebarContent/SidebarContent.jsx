@@ -20,7 +20,11 @@ const SidebarContent = ({ game, startGame, nextPlayer, prevPlayer }) => {
       />
     );
 
-  return <div data-testid="component-SidebarContent">{contentDisplay}</div>;
+  return (
+    <div data-testid="component-SidebarContent" className="row__content">
+      {contentDisplay}
+    </div>
+  );
 };
 
 const mapStateToProps = ({ game }) => {

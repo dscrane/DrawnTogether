@@ -1,21 +1,21 @@
 import React from "react";
-import { Col, Row, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Sidebar } from "./components/Sidebar";
 import { Canvas } from "./components/Canvas";
 
 export const App = () => {
   return (
-    <Container fluid className="app" data-testid="component-App">
-      <Row className="app__display">
-        <Col className="app__sidebar">
+    <div className="app" data-testid="component-App">
+      <div className="app__display">
+        <div className="app__sidebar">
           <Sidebar />
-        </Col>
-        <Col height={100} className="app__canvas text-center">
+        </div>
+        <div className="app__canvas">
           <div className="canvas__container">
             <Canvas />
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
