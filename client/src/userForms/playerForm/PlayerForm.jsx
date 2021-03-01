@@ -15,7 +15,7 @@ export const PlayerForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <div classNam="form__group" id="form2">
+    <div className="form__group">
       <label className="form__label">Player</label>
       <input
         className="form__control"

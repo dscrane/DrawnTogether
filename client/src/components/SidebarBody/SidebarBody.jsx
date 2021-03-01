@@ -1,15 +1,17 @@
 import React from "react";
 import { StartButton } from "../StartButton";
 import { connect } from "react-redux";
-import { setInterest, startGame, submitForm, nextPlayer, prevPlayer } from "../../redux/actions";
+import { nextPlayer, prevPlayer, setInterest, startGame, submitForm } from "../../redux/actions";
 import { FormContainer } from "../FormContainer";
 
-const SidebarContent = ({ game, startGame, nextPlayer, prevPlayer }) => {
+const SidebarBody = ({ game, startGame, nextPlayer, prevPlayer }) => {
   const { currentForm, currentPlayer, numPlayers } = game;
 
-  const contentDisplay =
+  const sidebarBodyDisplay =
     currentForm === 0 ? (
-      <StartButton startGame={startGame} />
+      <div className="body__container body__container-start">
+        <StartButton startGame={startGame} />
+      </div>
     ) : (
       <FormContainer
         currentForm={currentForm}
@@ -21,8 +23,8 @@ const SidebarContent = ({ game, startGame, nextPlayer, prevPlayer }) => {
     );
 
   return (
-    <div data-testid="component-SidebarContent" className="row__content">
-      {contentDisplay}
+    <div data-testid="component-SidebarBody" className="body__display">
+      {sidebarBodyDisplay}
     </div>
   );
 };
@@ -39,4 +41,4 @@ export default connect(mapStateToProps, {
   setInterest,
   nextPlayer,
   prevPlayer,
-})(SidebarContent);
+})(SidebarBody);

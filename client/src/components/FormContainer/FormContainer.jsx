@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle } from "../../redux/actions";
 import { FormDisplay } from "../FormDisplay";
-import { PlayerButtons } from "../PlayerButtons";
+import { FormButtons } from "../FormButtons";
 
 const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCircle, prevPlayer }) => {
   const { currentForm, currentPlayer, numPlayers } = game;
@@ -18,9 +18,9 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
       for (let i = 0; i < 5; i++) {
         playerIcons.push(
           i === currentPlayer ? (
-            <span className="player__icon player__icon-active" key={i} />
+            <span className="form__icon form__icon-active" key={i} />
           ) : (
-            <span className="player__icon" key={i} />
+            <span className="form__icon" key={i} />
           )
         );
       }
@@ -28,9 +28,9 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
       for (let i = 0; i < numPlayers; i++) {
         playerIcons.push(
           i === currentPlayer ? (
-            <span className="player__icon player__icon-active" key={i} />
+            <span className="form__icon form__icon-active" key={i} />
           ) : (
-            <span className="player__icon" key={i} />
+            <span className="form__icon" key={i} />
           )
         );
       }
@@ -41,18 +41,30 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   const playerIconsAndButtons =
     currentForm > 1 ? (
       <>
-        <div className="player__icon_row">{createPlayerIcons()}</div>
-        <PlayerButtons
-          players={players}
-          prevPlayer={prevPlayer}
-          numPlayers={numPlayers}
-          currentForm={currentForm}
-          currentPlayer={currentPlayer}
-        />
+        <div className="form__row form__row-icons">{createPlayerIcons()}</div>
+        <div className="form__row form__row-buttons">
+          <FormButtons
+            players={players}
+            prevPlayer={prevPlayer}
+            numPlayers={numPlayers}
+            currentForm={currentForm}
+            currentPlayer={currentPlayer}
+          />
+        </div>
       </>
     ) : (
       <></>
     );
+
+  const displayInstructions = () => {
+    if (currentForm === 0) {
+      return "What is a common interest or relationship that connects your group?";
+    } else if (currentForm === 1) {
+      return "What is your name and how long have you, individually, been associated with the groups common interest?";
+    } else {
+      return "Answer the following questions with the most appropriate answer for you as an individual.";
+    }
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -67,7 +79,7 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   const showForms = () => {
     if (currentForm > 2) {
       return currentPlayer === numPlayers ? (
-        <div className="content__updateMessage">
+        <div className="body__updateMessage">
           Click "Next Form"
           <br /> to continue
           <br /> or
@@ -83,14 +95,15 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   };
 
   return (
-    <div className="content__container" data-testid="component-FormContainer">
+    <div className="body__container" data-testid="component-FormContainer">
       {players[currentPlayer] && currentForm > 2 ? (
         <div className="content__name">{players[currentPlayer].name}</div>
       ) : (
         ""
       )}
-      <form onSubmit={onSubmit} className="content__form form-signin mt-2">
-        {showForms()}
+      <form onSubmit={onSubmit} className="form form-signin mt-2">
+        <div className="form__row form__row-instructions">{displayInstructions()}</div>
+        <div className="form__row form__row-content">{showForms()}</div>
         {playerIconsAndButtons}
       </form>
     </div>
