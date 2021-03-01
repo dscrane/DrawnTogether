@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const InterestForm = ({ setInterest }) => {
   const [interest] = useState();
@@ -10,9 +9,9 @@ export const InterestForm = ({ setInterest }) => {
 
   return (
     <div id="interestForm" className="col-11">
-      <FormGroup className="form__group">
-        <FormLabel className="form__label">Interest</FormLabel>
-        <FormControl
+      <div className="form__group">
+        <label className="form__label">Interest</label>
+        <input
           className="form__control"
           id="commonInterest"
           type="name"
@@ -20,7 +19,7 @@ export const InterestForm = ({ setInterest }) => {
           value={interest}
           placeholder="Enter common interest..."
         />
-      </FormGroup>
+      </div>
       <small id="interestHelp" className="form-text text-muted">
         What brought your group together?
       </small>

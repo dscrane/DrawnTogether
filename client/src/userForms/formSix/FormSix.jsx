@@ -1,5 +1,4 @@
 import React from "react";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const FormSix = ({ responses, setResponses }) => {
   const onChange = (event) => {
@@ -8,14 +7,13 @@ export const FormSix = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup className="form__group">
-      <FormLabel className="form__label">Choose a Color</FormLabel>
-      <FormControl
+    <div className="form__group">
+      <label className="form__label">Choose a Color</label>
+      <select
         className="form__control"
         name="color"
         onChange={onChange}
         id="formColor"
-        as="select"
         value={responses.color || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -25,7 +23,7 @@ export const FormSix = ({ responses, setResponses }) => {
         <option value="teal">Teal</option>
         <option value="kellyGreen">Kelly Green</option>
         <option value="aubergine">Aubergine</option>
-      </FormControl>
-    </FormGroup>
+      </select>
+    </div>
   );
 };

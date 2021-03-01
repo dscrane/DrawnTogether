@@ -20,9 +20,7 @@ const Header = ({ currentForm }) => {
   };
 
   const formHeaderOne =
-    currentForm > 0 ? (
-      <>Directions: Here are the directions....</>
-    ) : (
+    currentForm > 0 ? null : (
       <>
         Circle Generator is the artistic brainchild of Carrie Crane. Moving through the sections of the game will create
         and alter a collection of circles based on your groups common interest and a variety of personality factors. By
@@ -34,12 +32,12 @@ const Header = ({ currentForm }) => {
   const formSteps = currentForm > 0 ? createFormSteps() : null;
 
   return (
-    <div data-testid="component-Header">
+    <div className="header" data-testid="component-Header">
       <h1 className="header__title">
-        Circle <br />
-        Generator
+        Spherical <br />
+        Impressions
       </h1>
-      <div className="form__heading">{formHeaderOne}</div>
+      <h3 className="form__heading">{formHeaderOne}</h3>
       <div className="form__steps">{formSteps}</div>
     </div>
   );

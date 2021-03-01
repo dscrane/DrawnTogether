@@ -1,5 +1,4 @@
 import React from "react";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const PlayerForm = ({ responses, setResponses }) => {
   const handlePlayer = (event) => {
@@ -16,9 +15,9 @@ export const PlayerForm = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup id="form2">
-      <FormLabel className="form__label">Player</FormLabel>
-      <FormControl
+    <div classNam="form__group" id="form2">
+      <label className="form__label">Player</label>
+      <input
         className="form__control"
         name="name"
         onChange={handlePlayer}
@@ -26,8 +25,8 @@ export const PlayerForm = ({ responses, setResponses }) => {
         placeholder="Enter name..."
       />
 
-      <FormLabel className="form__label">Association</FormLabel>
-      <FormControl
+      <label className="form__label">Association</label>
+      <input
         className="form__control"
         name="association"
         onChange={handleAssociation}
@@ -38,6 +37,6 @@ export const PlayerForm = ({ responses, setResponses }) => {
         Please only enter the number of years <br />
         ie 5 years enter 5
       </small>
-    </FormGroup>
+    </div>
   );
 };

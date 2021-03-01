@@ -1,5 +1,4 @@
 import React from "react";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const FormOne = ({ responses, setResponses }) => {
   const onChange = (event) => {
@@ -8,28 +7,26 @@ export const FormOne = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup className="form__group">
-      <FormLabel className="form__label">Height</FormLabel>
-      <FormControl
+    <div className="form__group">
+      <label className="form__label">Height</label>
+      <select
         className="form__control"
         name="height"
         onChange={onChange}
         id="formHeight"
-        as="select"
         value={responses.height || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="16">Tall</option>
         <option value="32">Average</option>
         <option value="48">Short</option>
-      </FormControl>
-      <FormLabel className="form__label">Interest</FormLabel>
-      <FormControl
+      </select>
+      <label className="form__label">Interest</label>
+      <select
         className="form__control"
         name="interest"
         onChange={onChange}
         id="formInterest"
-        as="select"
         value={responses.interest || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -38,30 +35,22 @@ export const FormOne = ({ responses, setResponses }) => {
         <option value="18">Ideas</option>
         <option value="9">Images</option>
         <option value="0">People</option>
-      </FormControl>
-      <FormLabel className="form__label">Gender</FormLabel>
-      <FormControl
+      </select>
+      <label className="form__label">Gender</label>
+      <select
         className="form__control"
         name="gender"
         onChange={onChange}
         id="formGender"
-        as="select"
         value={responses.gender || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
         <option value="2">Male</option>
         <option value="1">Female</option>
         <option value="0">Non Binary</option>
-      </FormControl>
-      <FormLabel className="form__label">Age</FormLabel>
-      <FormControl
-        className="form__control"
-        name="age"
-        onChange={onChange}
-        id="formAge"
-        as="select"
-        value={responses.age || "DEFAULT"}
-      >
+      </select>
+      <label className="form__label">Age</label>
+      <select className="form__control" name="age" onChange={onChange} id="formAge" value={responses.age || "DEFAULT"}>
         <option value="DEFAULT">Choose...</option>
         <option value="400">0-10</option>
         <option value="40">11-20</option>
@@ -73,14 +62,13 @@ export const FormOne = ({ responses, setResponses }) => {
         <option value="160">71-80</option>
         <option value="240">81-90</option>
         <option value="200">91-100</option>
-      </FormControl>
-      <FormLabel className="form__label">Diet</FormLabel>
-      <FormControl
+      </select>
+      <label className="form__label">Diet</label>
+      <select
         className="form__control"
         name="diet"
         onChange={onChange}
         id="formDiet"
-        as="select"
         value={responses.diet || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -88,7 +76,7 @@ export const FormOne = ({ responses, setResponses }) => {
         <option value="vegetarian">Vegetarian</option>
         <option value="pescatarian">Pescatarian</option>
         <option value="vegan">Vegan</option>
-      </FormControl>
-    </FormGroup>
+      </select>
+    </div>
   );
 };

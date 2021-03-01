@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { PolarGrid } from "../PolarGrid";
-import { updateGridDisplay, updateView, updatePlayerCircle } from "../../redux/actions";
+import { updateGridDisplay, updateView } from "../../redux/actions";
 import * as circleUtils from "../../utils/circleUtils";
 
 function debounce(fn, ms) {

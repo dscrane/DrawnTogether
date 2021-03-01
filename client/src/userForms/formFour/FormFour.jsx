@@ -1,5 +1,4 @@
 import React from "react";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const FormFour = ({ responses, setResponses }) => {
   const onChange = (event) => {
@@ -8,14 +7,13 @@ export const FormFour = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup className="form__group">
-      <FormLabel className="form__label">Relationship to Nature</FormLabel>
-      <FormControl
+    <div className="form__group">
+      <label className="form__label">Relationship to Nature</label>
+      <select
         className="form__control"
         name="nature"
         onChange={onChange}
         id="formNature"
-        as="select"
         value={responses.nature || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -23,14 +21,13 @@ export const FormFour = ({ responses, setResponses }) => {
         <option value="stroke">Happy on the porch</option>
         <option value="ring">Nature Lover</option>
         <option value="dot">Climate activist</option>
-      </FormControl>
-      <FormLabel className="form__label">Relationship to Social Media</FormLabel>
-      <FormControl
+      </select>
+      <label className="form__label">Relationship to Social Media</label>
+      <select
         className="form__control"
         name="media"
         onChange={onChange}
         id="formMedia"
-        as="select"
         value={responses.media || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -38,14 +35,13 @@ export const FormFour = ({ responses, setResponses }) => {
         <option value="thicker">Lurker</option>
         <option value="thin">Regular poster</option>
         <option value="thick">Influencer</option>
-      </FormControl>
-      <FormLabel className="form__label">Relationship to Progress</FormLabel>
-      <FormControl
+      </select>
+      <label className="form__label">Relationship to Progress</label>
+      <select
         className="form__control"
         name="progress"
         onChange={onChange}
         id="formProgress"
-        as="select"
         value={responses.progress || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -53,7 +49,7 @@ export const FormFour = ({ responses, setResponses }) => {
         <option value="triadic">C'est Le Vie</option>
         <option value="monochromatic">Reluctant Participant</option>
         <option value="analogous">Activist</option>
-      </FormControl>
-    </FormGroup>
+      </select>
+    </div>
   );
 };

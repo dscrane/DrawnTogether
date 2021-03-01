@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { Sidebar } from "./components/Sidebar";
 import { Canvas } from "./components/Canvas";
 

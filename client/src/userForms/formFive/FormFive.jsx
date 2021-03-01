@@ -1,5 +1,4 @@
 import React from "react";
-import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
 export const FormFive = ({ responses, setResponses }) => {
   const onChange = (event) => {
@@ -8,14 +7,13 @@ export const FormFive = ({ responses, setResponses }) => {
   };
 
   return (
-    <FormGroup className="form__group">
-      <FormLabel className="form__label">Relationship to Religion</FormLabel>
-      <FormControl
+    <div className="form__group">
+      <label className="form__label">Relationship to Religion</label>
+      <select
         className="form__control"
         name="religion"
         onChange={onChange}
         id="formReligion"
-        as="select"
         value={responses.religion || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -24,14 +22,13 @@ export const FormFive = ({ responses, setResponses }) => {
         <option value="3">God-fearing</option>
         <option value="4">Wiccin</option>
         <option value="5">Undecided</option>
-      </FormControl>
-      <FormLabel className="form__label">Relationship to Culture</FormLabel>
-      <FormControl
+      </select>
+      <label className="form__label">Relationship to Culture</label>
+      <select
         className="form__control"
         name="culture"
         onChange={onChange}
         id="formCulture"
-        as="select"
         value={responses.culture || "DEFAULT"}
       >
         <option value="DEFAULT">Choose...</option>
@@ -39,7 +36,7 @@ export const FormFive = ({ responses, setResponses }) => {
         <option value="2">Netflix binger</option>
         <option value="3">Museum attendee</option>
         <option value="4">Cultural practitioner</option>
-      </FormControl>
-    </FormGroup>
+      </select>
+    </div>
   );
 };
