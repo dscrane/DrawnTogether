@@ -89,11 +89,10 @@ export function circleAlterationTwo(player, currentPlayerId, currentForm) {
 export function circleAlterationThree(player, currentPlayerId, currentForm) {
   let playerCircle = player.circle;
   const secondaryColor = createSecondaryColor(
-    playerCircle.degree,
+    player.progress,
     playerCircle.hue,
     playerCircle.saturation,
-    playerCircle.lightness,
-    player.progress
+    playerCircle.lightness
   );
   playerCircle = {
     ...playerCircle,
@@ -112,7 +111,11 @@ export function circleAlterationThree(player, currentPlayerId, currentForm) {
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
  * */
-export function circleAlterationFour(player, currentPlayerId, currentForm) {}
+export function circleAlterationFour(player, currentPlayerId, currentForm) {
+  let playerCircle = player.circle;
+  playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm);
+  return playerCircle;
+}
 
 /**
  * Circle Alteration #5
@@ -129,6 +132,7 @@ export function circleAlterationFive(player, currentPlayerId, currentForm) {
     ...averageColors(player.color, playerCircle.altHue, playerCircle.saturation, playerCircle.lightness),
   };
   playerCircle.circleSVG = createCircleSVG(playerCircle, currentPlayerId, currentForm);
+  return playerCircle;
 }
 
 /**
@@ -263,7 +267,7 @@ export function createCircleSVG(playerCircle, currentPlayerId, currentForm, natu
                 cy={playerCircle.altYCartesian}
                 r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
                 strokeWidth={playerCircle.designThickness}
-                stroke={playerCircle.fillColor}
+                stroke={playerCircle.color}
                 fill="none"
               />
             </>
@@ -364,21 +368,44 @@ export function createCircleSVG(playerCircle, currentPlayerId, currentForm, natu
       break;
     // Handles the fourth circle alteration display
     case 7:
-      console.log(playerCircle.circleSVG);
-      return playerCircle.circleSVG;
+      switch (nature) {
+        case "hollow":
+          return createHollowCircle(playerCircle, currentPlayerId);
+        case "stroke":
+          return createStrokeCircle(playerCircle, currentPlayerId);
+        case "ring":
+          return createRingCircle(playerCircle, currentPlayerId);
+        case "dot":
+          return createDotCircle(playerCircle, currentPlayerId);
+        default:
+          console.info("%c[ERROR]: Switch - circle design creation", "color: red");
+      }
     // Handles the fifth circle alteration display
     case 8:
       return (
         <>
           {createGradient(
-            playerCircle.xCartesian,
-            playerCircle.yCartesian,
-            playerCircle.radius,
+            playerCircle.altXCartesian,
+            playerCircle.altYCartesian,
+            playerCircle.altRadius,
             playerCircle.averageHue,
             playerCircle.averageSaturation,
             playerCircle.averageLightness,
             currentPlayerId
           )}
+          <circle
+            key={`circle_${currentPlayerId}`}
+            cx={playerCircle.altXCartesian}
+            cy={playerCircle.altYCartesian}
+            r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+            style={{
+              fill: `url(#radialGradient${currentPlayerId})`,
+              opacity: 1,
+              fillRule: "evenodd",
+              stroke: playerCircle.secondaryColor,
+              strokeWidth: playerCircle.designThickness,
+            }}
+          />
         </>
       );
     // Handles the final circle display
@@ -411,7 +438,7 @@ export function createGradient(x, y, r, hue, saturation, lightness, id) {
             stopColor: `hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`,
             stopOpacity: 1.0,
           }}
-          offset="0.0000000"
+          offset="0.00"
           id="stop6457"
         />
         <stop
@@ -419,7 +446,7 @@ export function createGradient(x, y, r, hue, saturation, lightness, id) {
             stopColor: `hsl(${hue}, ${saturation}%, ${lightness}%`,
             stopOpacity: 1.0,
           }}
-          offset="1.00000000"
+          offset="1.00"
           id="stop6455"
         />
       </linearGradient>
@@ -702,4 +729,196 @@ export function averageColors(color, altHue, saturation, lightness) {
   return { averageHue, averageSaturation, averageLightness };
 }
 
+/**
+ * Creates the hollow circle design
+ * @param {Object} playerCircle -- Current player's circle object
+ * @param {number} currentPlayerId -- Current player's id number
+ * @returns {JSX.Element}
+ */
+export function createHollowCircle(playerCircle, currentPlayerId) {
+  const gradient =
+    playerCircle.averageHue && playerCircle.averageSaturation && playerCircle.averageLightness
+      ? createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.averageHue,
+          playerCircle.averageSaturation,
+          playerCircle.averageLightness,
+          currentPlayerId
+        )
+      : createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.hue,
+          playerCircle.saturation,
+          playerCircle.lightness,
+          currentPlayerId
+        );
+  return (
+    <>
+      {gradient}
+      <circle
+        key={`circle_${currentPlayerId}`}
+        cx={playerCircle.altXCartesian}
+        cy={playerCircle.altYCartesian}
+        r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+        strokeWidth={playerCircle.designThickness}
+        stroke={playerCircle.color}
+        fill="none"
+      />
+    </>
+  );
+}
+
+/**
+ * Creates the stroke circle design
+ * @param {Object} playerCircle -- Current player's circle object
+ * @param {number} currentPlayerId -- Current player's id number
+ * @returns {JSX.Element}
+ */
+export function createStrokeCircle(playerCircle, currentPlayerId) {
+  const gradient =
+    playerCircle.averageHue && playerCircle.averageSaturation && playerCircle.averageLightness
+      ? createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.averageHue,
+          playerCircle.averageSaturation,
+          playerCircle.averageLightness,
+          currentPlayerId
+        )
+      : createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.hue,
+          playerCircle.saturation,
+          playerCircle.lightness,
+          currentPlayerId
+        );
+  return (
+    <>
+      {gradient}
+      <circle
+        key={`circle_${currentPlayerId}`}
+        cx={playerCircle.altXCartesian}
+        cy={playerCircle.altYCartesian}
+        r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+        strokeWidth={playerCircle.designThickness}
+        stroke={playerCircle.secondaryColor}
+        style={{
+          fill: `url(#radialGradient${currentPlayerId})`,
+          opacity: 1,
+          fillRule: "evenodd",
+          strokeLinecap: "round",
+        }}
+      />
+    </>
+  );
+}
+
+/**
+ * Creates the ring circle design
+ * @param {Object} playerCircle -- Current player's circle object
+ * @param {number} currentPlayerId -- Current player's id number
+ * @returns {JSX.Element}
+ */
+export function createRingCircle(playerCircle, currentPlayerId) {
+  const gradient =
+    playerCircle.averageHue && playerCircle.averageSaturation && playerCircle.averageLightness
+      ? createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.averageHue,
+          playerCircle.averageSaturation,
+          playerCircle.averageLightness,
+          currentPlayerId
+        )
+      : createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.hue,
+          playerCircle.saturation,
+          playerCircle.lightness,
+          currentPlayerId
+        );
+  return (
+    <>
+      {gradient}
+      <circle
+        key={`circle_${currentPlayerId}_inner`}
+        cx={playerCircle.altXCartesian}
+        cy={playerCircle.altYCartesian}
+        r={playerCircle.altRadius - 2 * playerCircle.designThickness}
+        style={{
+          fill: `url(#radialGradient${currentPlayerId})`,
+          opacity: 1,
+          fillRule: "evenodd",
+          strokeLinecap: "round",
+        }}
+      />
+      <circle
+        key={`circle_${currentPlayerId}_outer`}
+        cx={playerCircle.altXCartesian}
+        cy={playerCircle.altYCartesian}
+        r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+        strokeWidth={playerCircle.designThickness}
+        stroke={playerCircle.secondaryColor}
+        fill="none"
+      />
+    </>
+  );
+}
+
+/**
+ * Creates the dot circle design
+ * @param {Object} playerCircle -- Current player's circle object
+ * @param {number} currentPlayerId -- Current player's id number
+ * @returns {JSX.Element}
+ */
+export function createDotCircle(playerCircle, currentPlayerId) {
+  const gradient =
+    playerCircle.averageHue && playerCircle.averageSaturation && playerCircle.averageLightness
+      ? createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.averageHue,
+          playerCircle.averageSaturation,
+          playerCircle.averageLightness,
+          currentPlayerId
+        )
+      : createGradient(
+          playerCircle.altXCartesian,
+          playerCircle.altYCartesian,
+          playerCircle.altRadius,
+          playerCircle.hue,
+          playerCircle.saturation,
+          playerCircle.lightness,
+          currentPlayerId
+        );
+  return (
+    <>
+      {gradient}
+      <circle
+        key={`circle_${currentPlayerId}`}
+        cx={playerCircle.altXCartesian}
+        cy={playerCircle.altYCartesian}
+        r={playerCircle.altRadius - 0.5 * playerCircle.designThickness}
+        style={{
+          fill: playerCircle.secondaryColor,
+          opacity: 1,
+          fillRule: "evenodd",
+          stroke: `url(#radialGradient${currentPlayerId})`,
+          strokeWidth: playerCircle.designThickness,
+        }}
+      />
+    </>
+  );
+}
 /* === END FUNCTIONS EXPORTED FOR TESTING PURPOSES === */

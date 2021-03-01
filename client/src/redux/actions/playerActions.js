@@ -14,9 +14,7 @@ export const newPlayer = (responses, id) => (dispatch) => {
 /* ----   ****    ---- */
 
 /* ----    SUBMIT_FORM ACTION CREATOR    ---- */
-export const submitForm = (currentPlayer, currentForm, responses) => async (
-  dispatch
-) => {
+export const submitForm = (currentPlayer, currentForm, responses) => async (dispatch) => {
   if (currentForm === 1) {
     return;
   }
@@ -49,42 +47,29 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (
 };
 /* ----   ****    ---- */
 
-export const updatePlayerCircle = (currentPlayer, currentForm) => (
-  dispatch,
-  getState
-) => {
+export const updatePlayerCircle = (currentPlayer, currentForm) => (dispatch, getState) => {
+  console.log("currentPlayer", currentPlayer);
   const { players, display, game } = getState();
   let circle;
   switch (currentForm) {
     case 3:
-      circle = circleUtils.initialCircleVariables(
-        players[currentPlayer],
-        display.grid,
-        game.currentPlayer,
-        currentForm
-      );
+      circle = circleUtils.initialCircleVariables(players[currentPlayer], display.grid, currentPlayer, currentForm);
       break;
     case 4:
-      circle = circleUtils.circleAlterationOne(
-        players[currentPlayer],
-        game.currentPlayer,
-        currentForm
-      );
+      circle = circleUtils.circleAlterationOne(players[currentPlayer], game.currentPlayer, currentForm);
       break;
     case 5:
-      circle = circleUtils.circleAlterationTwo(
-        players[currentPlayer],
-        game.currentPlayer,
-        currentForm
-      );
+      circle = circleUtils.circleAlterationTwo(players[currentPlayer], game.currentPlayer, currentForm);
       break;
     case 6:
-      circle = circleUtils.circleAlterationThree(
-        players[currentPlayer],
-        game.currentPlayer,
-        currentForm
-      );
+      circle = circleUtils.circleAlterationThree(players[currentPlayer], game.currentPlayer, currentForm);
+      break;
+    case 7:
+      circle = circleUtils.circleAlterationFour(players[currentPlayer], game.currentPlayer, currentForm);
       console.log(circle);
+      break;
+    case 8:
+      circle = circleUtils.circleAlterationFive(players[currentPlayer], game.currentPlayer, currentForm);
       break;
     default:
       console.info("%c[ERROR]: Switch - updatePlayerDisplay", "color: red");
