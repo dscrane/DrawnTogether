@@ -1,45 +1,27 @@
 import React from "react";
 
 const PolarGrid = ({ grid, view }) => {
-  const svgRadius = view.width / 2;
-  const ringSpacing = Math.round(view.width / 100);
+  const svgRadius = Math.round(view.width / 2) * 0.99;
+  console.log(svgRadius);
+  const ringSpacing = svgRadius / 50;
   console.info("%c[ringSpacing]: ", "color: yellow", ringSpacing);
-  const createWhiteRings = () => {
+  const createThinRings = () => {
     const rings = [];
-    for (let i = ringSpacing; i < svgRadius; i += ringSpacing) {
-      if (i % (ringSpacing * 5) === 0) {
-        continue;
-      }
+    let i = ringSpacing;
+    while (i < svgRadius) {
       rings.push(<circle fill="none" style={{ stroke: "rgba(170,177,133,.35)" }} r={i} cy={grid.cy} cx={grid.cx} />);
+      i += ringSpacing;
     }
-    rings.pop();
     return rings;
   };
-  const createBlueRings = () => {
-    let ring;
-    let lightRing = false;
+  const createThickRings = () => {
     const rings = [];
-    let i;
-    for (i = ringSpacing * 5; i < svgRadius; i += ringSpacing * 5) {
-      if (!lightRing) {
-        ring = (
-          <circle fill="none" style={{ stroke: "rgb(98, 102, 74)" }} r={i} cy={grid.cy} cx={grid.cx} strokeWidth="1" />
-        );
-        lightRing = true;
-      } else {
-        ring = (
-          <circle
-            fill="none"
-            style={{ stroke: "rgb(98, 102, 74)" }}
-            r={i}
-            cy={grid.cy}
-            cx={grid.cx}
-            strokeWidth="1.5"
-          />
-        );
-        lightRing = false;
-      }
-      rings.push(ring);
+    let i = ringSpacing * 10;
+    while (i < svgRadius + ringSpacing) {
+      rings.push(
+        <circle fill="none" style={{ stroke: "rgb(94,109,74)" }} r={i} cy={grid.cy} cx={grid.cx} strokeWidth="1.5" />
+      );
+      i += ringSpacing * 10;
     }
     return rings;
   };
@@ -50,11 +32,11 @@ const PolarGrid = ({ grid, view }) => {
       fullLines.push(
         <line
           strokeWidth="1.5"
-          style={{ stroke: "rgb(98, 102, 74)" }}
+          style={{ stroke: "rgb(94,109,74)" }}
           x1={grid.cx}
           y1={grid.cy}
-          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
-          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
+          x2={grid.cx + svgRadius * -Math.cos(theta)}
+          y2={grid.cy + svgRadius * Math.sin(theta)}
         />
       );
     }
@@ -70,11 +52,11 @@ const PolarGrid = ({ grid, view }) => {
       longLines.push(
         <line
           strokeWidth="1"
-          style={{ stroke: "rgb(98, 102, 74)" }}
+          style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 10 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 10 * Math.sin(theta)}
-          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
-          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
+          x2={grid.cx + svgRadius * -Math.cos(theta)}
+          y2={grid.cy + svgRadius * Math.sin(theta)}
         />
       );
     }
@@ -90,11 +72,11 @@ const PolarGrid = ({ grid, view }) => {
       shortLines.push(
         <line
           strokeWidth="1"
-          style={{ stroke: "rgb(98, 102, 74)" }}
+          style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 25 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 25 * Math.sin(theta)}
-          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
-          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
+          x2={grid.cx + svgRadius * -Math.cos(theta)}
+          y2={grid.cy + svgRadius * Math.sin(theta)}
         />
       );
     }
@@ -150,8 +132,8 @@ const PolarGrid = ({ grid, view }) => {
       {createShortBlueLines()}
       {createLongWhiteLines()}
       {createShortWhiteLines()}
-      {createWhiteRings()}
-      {createBlueRings()}
+      {createThinRings()}
+      {createThickRings()}
     </>
   );
 };
