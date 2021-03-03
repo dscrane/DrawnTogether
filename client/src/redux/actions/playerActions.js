@@ -1,6 +1,6 @@
 /* ----   NEW_PLAYER ACTION CREATOR    ---- */
 import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER } from "../types";
-import * as circleUtils from "../../utils/circleUtils";
+import * as circleUtils from "../../utilities/circleUtilities";
 
 export const newPlayer = (responses, id) => (dispatch) => {
   dispatch({

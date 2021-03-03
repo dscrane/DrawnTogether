@@ -16,27 +16,30 @@ export const PlayerForm = ({ responses, setResponses }) => {
 
   return (
     <div className="form__group">
-      <label className="form__label">Player</label>
-      <input
-        className="form__control"
-        name="name"
-        onChange={handlePlayer}
-        value={responses.name || ""}
-        placeholder="Enter name..."
-      />
+      <div className="form__item">
+        <label className="form__label">Player Name</label>
+        <input
+          className="form__control"
+          name="name"
+          onChange={handlePlayer}
+          value={responses.name || ""}
+          placeholder="John Doe"
+        />
+      </div>
 
-      <label className="form__label">Association</label>
-      <input
-        className="form__control"
-        name="association"
-        onChange={handleAssociation}
-        value={responses.association || ""}
-        placeholder="Enter time associated..."
-      />
-      <small id="interestHelp" className="form-text text-muted">
-        Please only enter the number of years <br />
-        ie 5 years enter 5
-      </small>
+      <div className="form__item">
+        <label className="form__label">Time Associated to Common Interest</label>
+        <input
+          className="form__control"
+          name="association"
+          onChange={handleAssociation}
+          value={responses.association || ""}
+          placeholder="7"
+        />
+        <small id="interestHelp" className="form-text text-muted">
+          Only enter a whole number <br /> (round up if less that 1)
+        </small>
+      </div>
     </div>
   );
 };

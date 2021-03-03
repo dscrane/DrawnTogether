@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setInterest } from "../../redux/actions";
+import { setInterest, startGame } from "../../redux/actions";
 import { DisplayResults } from "../DisplayResults";
 import { InterestForm, PlayerForm, FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../../userForms";
+import { StartButton } from "../StartButton";
 
-const FormDisplay = ({ form, setInterest, responses, setResponses }) => {
+const FormDisplay = ({ form, setInterest, startGame, responses, setResponses }) => {
   switch (form) {
+    case 0:
+      return <StartButton startGame={startGame} />;
     case 1:
       return <InterestForm setInterest={setInterest} />;
     case 2:
@@ -29,4 +32,4 @@ const FormDisplay = ({ form, setInterest, responses, setResponses }) => {
   }
 };
 
-export default connect(null, { setInterest })(FormDisplay);
+export default connect(null, { setInterest, startGame })(FormDisplay);

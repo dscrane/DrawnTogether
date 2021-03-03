@@ -9,15 +9,16 @@ export const InterestForm = ({ setInterest }) => {
 
   return (
     <div className="form__group">
-      <label className="form__label">Interest</label>
-      <input
-        className="form__control"
-        id="commonInterest"
-        type="name"
-        onChange={handleInterest}
-        value={interest}
-        placeholder="Enter common interest..."
-      />
+      <div className="form__item">
+        <input
+          className="form__control"
+          id="commonInterest"
+          type="name"
+          onChange={handleInterest}
+          value={interest}
+          placeholder="Common interest..."
+        />
+      </div>
     </div>
   );
 };

@@ -15,11 +15,11 @@ const FormButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPlay
               prevPlayer(currentPlayer);
             }}
           >
-            <span className="player__button--icon">&#8249;</span>
-            <span className="player__button--text">
+            <div className="player__button--icon">&#8249;</div>
+            <div className="player__button--text">
               {" "}
               {currentForm > 2 && players[currentPlayer - 1] ? players[currentPlayer - 1].name : "Prev"}
-            </span>
+            </div>
           </button>
         )}
       </div>
@@ -31,10 +31,10 @@ const FormButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPlay
           id="next-player-button"
           type="submit"
         >
-          <span className="player__button--text">
+          <div className="player__button--text">
             {currentForm > 2 && players[currentPlayer + 1] ? players[currentPlayer + 1].name : "Update"}{" "}
-          </span>
-          <span className="player__button--icon">&#8250;</span>
+          </div>
+          <div className="player__button--icon">&#8250;</div>
         </button>
       </div>
     </div>

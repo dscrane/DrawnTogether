@@ -1,15 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import { nextForm, prevForm } from "../../redux/actions";
+import { endGame, nextForm, prevForm } from "../../redux/actions";
 
-const SidebarButtons = ({ nextForm, prevForm, currentForm, currentPlayer }) => {
-  return (
-    <div className="sidebar__buttons" data-testid="component-SidebarButtons">
-      <div id="prevCol" className="sidebar__buttons--col">
+const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlayer }) => {
+  const prevButton = () => {
+    if (currentForm === 1) {
+      return (
         <button
-          className={`sidebar__button sidebar__button--game sidebar__button--game-next ${
-            currentForm < 2 ? "sidebar__button--game-disabled" : ""
-          }`}
+          className="sidebar__button sidebar__button--game sidebar__button--game-prev"
+          id="prevButton"
+          onClick={() => endGame()}
+        >
+          <span>
+            Restart <br /> Game
+          </span>
+        </button>
+      );
+    } else {
+      return (
+        <button
+          className="sidebar__button sidebar__button--game sidebar__button--game-prev"
           id="prevButton"
           onClick={() => prevForm(currentForm)}
         >
@@ -17,6 +27,13 @@ const SidebarButtons = ({ nextForm, prevForm, currentForm, currentPlayer }) => {
             Previous <br /> Form
           </span>
         </button>
+      );
+    }
+  };
+  return (
+    <div className="sidebar__buttons" data-testid="component-SidebarButtons">
+      <div id="prevCol" className="sidebar__buttons--col">
+        {prevButton()}
       </div>
       <div id="nextCol" className="sidebar__buttons--col">
         <button
@@ -42,4 +59,4 @@ const SidebarButtons = ({ nextForm, prevForm, currentForm, currentPlayer }) => {
   );
 };
 
-export default connect(null, { nextForm, prevForm })(SidebarButtons);
+export default connect(null, { nextForm, prevForm, endGame })(SidebarButtons);

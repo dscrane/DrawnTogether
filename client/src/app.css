@@ -56,7 +56,7 @@ body {
   flex: 2 2 20%;
   max-width: 20%;
   border-right: 10px rgb(98, 102, 74);
-  box-shadow: inset 1px 0px 2.5vh 2.5vh rgba(132, 138, 101, 0.925);
+  box-shadow: inset 1px 0 8vh 2vh rgba(132, 138, 101, 0.925);
   background-color: #aab185;
   padding: .5%;
 }
@@ -97,12 +97,25 @@ body {
   margin: 0 auto;
 }
 
+.sidebar__row-landing {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.landing__text {
+  text-align: center;
+  font-size: large;
+  width: 90%;
+}
+
 .sidebar__row-header {
   flex: 2 1;
 }
 
 .sidebar__row-body {
-  flex: 9 1;
+  flex: 8 1;
   justify-content: center;
   align-items: center;
 }
@@ -123,9 +136,11 @@ body {
   display: flex;
   flex: .33 1;
   flex-direction: column;
+  justify-content: stretch;
 }
 
 .sidebar__button {
+  width: 100%;
   color: white;
   background-color: #454545;
   border: none;
@@ -139,11 +154,15 @@ body {
 
 .sidebar__button--player {
   font-family: "Cormorant";
-  font-size: 3.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
   height: 40px;
   color: #454545;
   background: transparent none;
   border: none;
+  padding: 0 0;
 }
 
 .sidebar__button--player:hover {
@@ -168,7 +187,8 @@ body {
 .player__button--text {
   font-family: "Baloo Thambi 2";
   font-size: 2rem;
-  vertical-align: middle;
+  margin: 0 0;
+  padding: 0 0;
 }
 
 .player__button--icon {
@@ -269,9 +289,18 @@ body {
 /* ----   ****    ---- */
 
 /* ----   Sidebar body styles    ---- */
+.body__display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 90%
+}
+
 .body__container {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -279,13 +308,6 @@ body {
 
 .body__container-start {
   justify-content: center;
-}
-
-.body__display {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 90%
 }
 
 .body__updateMessage {
@@ -312,29 +334,32 @@ body {
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 100%;
 }
 
 .form__row {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
+  font-size: large;
+  text-align: center;
 }
 
 .form__row-instructions {
-  flex: 2 1;
-  flex-direction: row;
-  text-align: center;
-  font-size: large;
+  font-size: medium;
   width: 75%;
 }
 
+.form__row-introduction {
+  text-align: center;
+  width: 90%;
+}
+
 .form__row-content {
-  flex: 8 2;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -342,14 +367,12 @@ body {
 }
 
 .form__row-icons {
-  flex: 1 1;
   flex-direction: row;
   height: 15px;
   margin: 20px auto 0 auto;
 }
 
 .form__row-buttons {
-  flex: 2 1;
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -360,14 +383,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
-  min-height: 350px;
+  min-height: 300px;
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
 }
 
 .form__label {
   margin-bottom: 0.5rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 400;
   width: 75%;
 }

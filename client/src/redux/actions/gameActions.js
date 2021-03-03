@@ -33,7 +33,7 @@ export const setInterest = (interest) => (dispatch) => {
 
 /* ----   END_GAME ACTION CREATOR    ---- */
 export const endGame = () => (dispatch) => {
-  dispatch({ type: END_GAME });
+  dispatch({ type: END_GAME, payload: "Game Ended" });
 };
 /* ----   ****    ---- */
 
