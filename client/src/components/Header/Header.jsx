@@ -1,25 +1,23 @@
 import React from "react";
-
-const formNames = ["", "Interest", "Players", "Physical", "Personal", "Financial", "Natural", "Cultural", "Visual"];
+import { headerIcons } from "./headerIcons";
 
 const Header = ({ currentForm }) => {
+  const formNames = ["Interest", "Players", "Physical", "Personal", "Financial", "Natural", "Cultural", "Visual"];
   const createHeaderIcons = () => {
-    return formNames.map((heading, i) => {
-      return i === currentForm ? (
-        <span key={`${heading}-active`}>
-          <span className="header__icon header__icon-active">{heading}</span>
-          &#8192;
-        </span>
+    return headerIcons.map((icon, i) => {
+      return i === currentForm - 1 ? (
+        <div key={`${formNames[i]}-active`}>
+          <span className="header__icon header__icon-active">{icon}</span>
+        </div>
       ) : (
-        <span key={`${heading}`}>
-          <span className="header__icon">{heading}</span>
-          &#8192;
-        </span>
+        <div key={`${formNames[i]}`}>
+          <span className="header__icon">{icon}</span>
+        </div>
       );
     });
   };
 
-  const headerText =
+  const displayHeaderText =
     currentForm > 0 ? null : (
       <>
         Circle Generator is the artistic brainchild of Carrie Crane. Moving through the sections of the game will create
@@ -29,7 +27,7 @@ const Header = ({ currentForm }) => {
       </>
     );
 
-  const headerIcons = currentForm > 0 ? createHeaderIcons() : null;
+  const displayHeaderIcons = currentForm > 0 ? createHeaderIcons() : null;
 
   return (
     <div className="header" data-testid="component-Header">
@@ -37,8 +35,8 @@ const Header = ({ currentForm }) => {
         Spherical <br />
         Impressions
       </h1>
-      <h3 className="header__text">{headerText}</h3>
-      <div className="header__icons">{headerIcons}</div>
+      <h3 className="header__text">{displayHeaderText}</h3>
+      <div className="header__icons">{displayHeaderIcons}</div>
     </div>
   );
 };
