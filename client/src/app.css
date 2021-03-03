@@ -1,3 +1,28 @@
+/*  Mobile Devices  */
+@media screen and (max-width: 480px) {
+
+}
+
+/*  Tablet Devices  */
+@media screen and (max-width: 768px) {
+
+}
+
+/*  Small Screens / Laptops  */
+@media screen and (max-width: 1024px) {
+
+}
+
+/*  Desktops / Large Screens  */
+@media screen and (max-width: 1200px) {
+
+}
+
+/* Extra Large Screens */
+@media screen and (min-width: 1201px) {
+
+}
+
 /* ----   html & body styles    ---- */
 html,
 body {
@@ -43,10 +68,6 @@ body {
   flex-direction: column;
   flex: 10 3;
   background-color: #454545;
-}
-
-.panelSection {
-  margin: 2.85vh 0;
 }
 
 .app__display {
@@ -96,7 +117,152 @@ body {
   height: fit-content;
 }
 
+.sidebar__buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar__buttons--col {
+  display: flex;
+  flex: .33 1;
+  flex-direction: column;
+}
+
+.sidebar__button {
+  color: white;
+  background-color: #454545;
+  border: none;
+  text-align: center;
+  font-weight: 100;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sidebar__button--player {
+  font-family: "Cormorant";
+  font-size: 3.5rem;
+  height: 40px;
+  color: #454545;
+  background: transparent none;
+  border: none;
+}
+
+.sidebar__button--player:hover {
+  cursor: pointer;
+  color: #1f2225;
+}
+
+.sidebar__button--player:focus {
+  outline: none;
+}
+
+.sidebar__button--player-disabled {
+  pointer-events: none;
+  color: #898c8d;
+  border: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.player__button--text {
+  font-family: "Baloo Thambi 2";
+  font-size: 2rem;
+  vertical-align: middle;
+}
+
+.player__button--icon {
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar__button--game {
+  font-size: 0.8vw;
+  padding: 0.75vh 1vw;
+  border-radius: 5px;
+  line-height: 0.8vw;
+}
+
+.sidebar__button--game-disabled {
+  pointer-events: none;
+  background-color: #899289;
+  color: #b1b1b1;
+  border: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sidebar__button--game:hover {
+  cursor: pointer;
+  background-color: #1f2225;
+  border-color: #1f2225;
+}
+
+.sidebar__button--start{
+  justify-self: center;
+  font-size: 1.15vw;
+  border-radius: 50%;
+  height: 115px;
+  width: 115px;
+}
+
+.sidebar__button--start:hover {
+  cursor: pointer;
+  background-color: #1f2225;
+  border-color: #1f2225;
+}
+
 /* ----   ****    ---- */
+
+/* ----   Sidebar Header styles    ---- */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__title {
+  text-align: center;
+  font-size: 3.75rem;
+  margin: 0;
+}
+
+.header__text {
+  max-width: 400px;
+  margin: 1vh 0;
+  font-size: 1.65vh;
+}
+
+.header__icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header__icon {
+  display: inline-block;
+  color: #454545;
+  font-size: 1.1rem;
+}
+
+.header__icon-active {
+  display: inline-block;
+  color: #1f2225;
+  border-bottom: 1px solid #1f2225;
+  border-radius: 0.5px;
+  font-size: 1.4rem;
+}
+/* ----   ****    ---- */
+
+/* ----   Sidebar body styles    ---- */
 .body__container {
   display: flex;
   flex-direction: column;
@@ -120,59 +286,7 @@ body {
   text-align: center;
   font-size: large;
 }
-/* ----   Content Area Styles   ---- */
-
-
-
-
-
-
-.content__name {
-  font-size: x-large;
-}
-
-
 /* ----   ****    ---- */
-
-/* ----   Header component styles    ---- */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header__title {
-  text-align: center;
-  font-size: 3.75rem;
-  margin: 0;
-}
-
-.form__heading {
-  max-width: 400px;
-  margin: 1vh 0;
-  font-size: 1.65vh;
-}
-
-.form__steps {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.step__icon {
-  display: inline-block;
-  color: #454545;
-  font-size: 1.1rem;
-}
-
-.step__icon-active {
-  display: inline-block;
-  color: #1f2225;
-  border-bottom: 1px solid #1f2225;
-  border-radius: 0.5px;
-  font-size: 1.4rem;
-}
-/* ----   ****    ---- */
-
 
 /* ----   Canvas component styles    ---- */
 .canvas__container {
@@ -186,17 +300,7 @@ body {
   width: 100%;
   height: 100%;
 }
-
-
 /* ----   ****    ---- */
-
-
-/* ----   player icon styles    ---- */
-
-
-
-
-
 
 /* ----   form styles    ---- */
 .form {
@@ -255,7 +359,6 @@ body {
   min-height: 350px;
 }
 
-
 .form__label {
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
@@ -286,7 +389,6 @@ body {
   background-color: rgba(128, 128, 128, 0.034);
 }
 
-
 .form__icon {
   height: 15px;
   width: 15px;
@@ -301,148 +403,7 @@ body {
 .form__icon-active {
   background-color: #8c9299;
 }
-
-.form__buttons {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-
-}
-
-.button__col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.form__button {
-  margin: auto auto;
-  font-family: "Cormorant";
-  font-size: 3.5rem;
-  height: 40px;
-  color: #454545;
-  background-color: transparent;
-  background: none;
-  border: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.form__button:hover {
-  cursor: pointer;
-  color: #1f2225;
-}
-
-.form__button:focus {
-  outline: none;
-}
-
-.form__button-disabled {
-  pointer-events: none;
-  color: #898c8d;
-}
-
-.form__button_text {
-  font-family: "Baloo Thambi 2";
-  font-size: 2rem;
-  vertical-align: middle;
-}
-
-.form__button-icon {
-  height: 40px;
-  line-height: 40px;
-  margin: 0;
-  padding: 0;
-}
 /* ----   ****    ---- */
-
-
-/* ----   form button styles    ---- */
-.game__button {
-  justify-self: center;
-  font-size: 1.15vw;
-  color: white;
-  background-color: #454545;
-  border: 1px solid #454545;
-  border-radius: 50%;
-  height: 115px;
-  width: 115px;
-}
-
-.game__button:hover {
-  cursor: pointer;
-  background-color: #1f2225;
-  border-color: #1f2225;
-}
-
-.sidebar__btn-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.sidebar__btn-col {
-  display: flex;
-  flex-direction: column;
-  flex: .33;
-
-}
-
-.sidebar__btn {
-  text-align: center;
-  font-weight: 100;
-  font-size: 0.8vw;
-  padding: 0.75vh 1vw;
-  color: white;
-  background-color: #454545;
-  border: 1px solid #454545;
-  border-radius: 5px;
-  line-height: 0.8vw;
-  min-width: 60%;
-}
-
-.sidebar__btn-form {
-
-}
-
-.sidebar__btn:hover {
-  cursor: pointer;
-  background-color: #1f2225;
-  border-color: #1f2225;
-}
-
-.sidebar__btn:disabled {
-  pointer-events: none;
-  color: #454545;
-  background-color: #898c8d;
-  background: none;
-  border: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.sidebar__btn-next {
-
-}
-
-.sidebar__btn-prev {
-
-}
-/* ----   ****    ---- */
-
-
-/* ----   player button styles    ---- */
-
-
-
-/* ----   ****    ---- */
-
-
 
 /* ----   App component styles    ---- */
 /* ----   ****    ---- */
