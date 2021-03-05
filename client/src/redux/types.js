@@ -11,6 +11,7 @@ export const SET_INTEREST = "SET_INTEREST";
 // Display Action Types
 export const UPDATE_DISPLAY_GRID = "UPDATE_DISPLAY_GRID";
 export const UPDATE_VIEW = "UPDATE_VIEW";
+export const RESIZE_PLAYER_CIRCLES = "RESIZE_PLAYER_CIRCLES";
 
 // Player Action Types
 export const NEW_PLAYER = "NEW_PLAYER";

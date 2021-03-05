@@ -1,4 +1,4 @@
-import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER } from "../types";
+import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER, RESIZE_PLAYER_CIRCLES } from "../types";
 
 const INITIAL_STATE = [];
 
@@ -36,6 +36,12 @@ export default (state = INITIAL_STATE, action) => {
             }
           : el;
       });
+
+    case RESIZE_PLAYER_CIRCLES:
+      console.info("%c[RESIZE_PLAYER_CIRCLES]: ", "color: yellow", action.payload);
+      return {
+        ...state,
+      };
 
     default:
       return state;

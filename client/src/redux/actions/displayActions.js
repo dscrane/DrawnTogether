@@ -1,4 +1,11 @@
-import { UPDATE_DISPLAY_GRID, UPDATE_VIEW } from "../types";
+import { UPDATE_DISPLAY_GRID, UPDATE_VIEW, RESIZE_PLAYER_CIRCLES } from "../types";
+
+export const resizePlayerCircles = (players) => (dispatch) => {
+  dispatch({
+    type: RESIZE_PLAYER_CIRCLES,
+    payload: "PAYLOAD",
+  });
+};
 
 export const updateView = (dimensions) => (dispatch) => {
   dispatch({

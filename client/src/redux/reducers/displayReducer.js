@@ -1,6 +1,7 @@
 import { UPDATE_DISPLAY_GRID, UPDATE_VIEW } from "../types";
 
 const INITIAL_STATE = {
+  adjustmentMultiplier: 1,
   view: {
     height: 0,
     width: 0,
@@ -20,11 +21,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_DISPLAY_GRID:
-      console.info(
-        "%c[UPDATE_DISPLAY_GRID]: ",
-        "color: yellow",
-        action.payload
-      );
+      console.info("%c[UPDATE_DISPLAY_GRID]: ", "color: yellow", action.payload);
       return {
         ...state,
         grid: {
@@ -39,6 +36,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         view: {
           ...state.view,
+          oldHeight: state.view.height,
+          oldWidth: state.view.width,
           ...action.payload,
         },
       };
