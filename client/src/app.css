@@ -1,5 +1,442 @@
 /*  Mobile Devices  */
 @media screen and (max-width: 480px) {
+  /* ----   html & body styles    ---- */
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    font-size: x-small;
+  }
+  body {
+    color: black !important;
+    font-family: "Baloo Thambi 2";
+  }
+
+  #root {
+    align-items: start;
+    height: 100vh;
+  }
+  /* ----   ****    ---- */
+
+
+  /* ----   App component styles    ---- */
+  .app {
+    padding: 0 0;
+    margin: 0 0;
+    height: 100vh;
+  }
+
+  .app__sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 4 2 33%;
+    max-width: 33%;
+    border-right: 10px rgb(98, 102, 74);
+    box-shadow: inset 1px 0 8vh 2vh rgba(132, 138, 101, 0.925);
+    background-color: #aab185;
+    padding: .5%;
+  }
+
+  .app__canvas {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 8 3;
+    background-color: #454545;
+  }
+
+  .app__display {
+    margin: 0 0;
+    padding: 0 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  /* ----   ****    ---- */
+
+
+  /* ----   Sidebar component styles    ---- */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    height: 100%;
+  }
+
+  .sidebar__row {
+    display: flex;
+    flex-direction: column;
+    max-width: 510px;
+    width: 100%;
+    margin: 0 0;
+    padding: 0 0;
+    overflow: hidden;
+  }
+
+  .sidebar__row-landing {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+
+  .landing__text {
+    text-align: center;
+    font-size: small;
+    width: 90%;
+  }
+
+  .sidebar__row-header {
+    flex: 1 1;
+    margin-bottom: 5px;
+  }
+
+  .sidebar__row-body {
+    flex: 8 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar__row-buttons {
+    flex: 1 1;
+    flex-direction: row;
+  }
+
+  .sidebar__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+  }
+
+  .sidebar__buttons--col {
+    display: flex;
+    flex: .33 1;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+
+  .sidebar__button {
+    width: 100%;
+    color: white;
+    background-color: #454545;
+    border: none;
+    text-align: center;
+    font-weight: 100;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .sidebar__button--player {
+    font-family: "Cormorant";
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20px;
+    color: #454545;
+    background: transparent none;
+    border: none;
+    padding: 0 0;
+  }
+
+  .sidebar__button--player:hover {
+    cursor: pointer;
+    color: #1f2225;
+  }
+
+  .sidebar__button--player:focus {
+    outline: none;
+  }
+
+  .sidebar__button--player-disabled {
+    pointer-events: none;
+    color: #898c8d;
+    border: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .player__button--text {
+    font-family: "Baloo Thambi 2";
+    font-size: 1.5rem;
+    margin: 0 0;
+    padding: 0 0;
+  }
+
+  .player__button--icon {
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar__button--game {
+    font-size: 1.8vw;
+    padding: 1px 1px;
+    border-radius: 5px;
+    line-height: 2vw;
+  }
+
+  .sidebar__button--game-disabled {
+    pointer-events: none;
+    background-color: #899289;
+    color: #b1b1b1;
+    border: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .sidebar__button--game:hover {
+    cursor: pointer;
+    background-color: #1f2225;
+    border-color: #1f2225;
+  }
+
+  .sidebar__button--start{
+    justify-self: center;
+    font-size: 1.15vw;
+    border-radius: 50%;
+    height: 115px;
+    width: 115px;
+  }
+
+  .sidebar__button--start:hover {
+    cursor: pointer;
+    background-color: #1f2225;
+    border-color: #1f2225;
+  }
+
+  /* ----   ****    ---- */
+
+  /* ----   Sidebar Header styles    ---- */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header__title {
+    text-align: center;
+    font-size: large;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .header__text {
+    width: 90%;
+    margin: 1vh 0;
+    font-size: 1.65vh;
+    text-align: center;
+  }
+
+  .header__icons {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header__icon {
+    flex: 1 1;
+    display: flex;
+    color: #7a7a7a;
+    font-size: 1.5rem;
+    overflow: hidden;
+  }
+
+  .bi {
+    width: 1.75vw !important;
+    height: auto;
+  }
+
+  .header__icon-active {
+    display: flex;
+    color: #1f2225;
+    border-bottom: 1px solid #1f2225;
+    border-radius: 0.5px;
+    font-size: 1.4rem;
+  }
+  /* ----   ****    ---- */
+
+  /* ----   Sidebar body styles    ---- */
+  .body__display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%
+  }
+
+  .body__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .body__row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .body__row-instructions {
+    font-size: small;
+    width: 90%;
+    flex: 1 1;
+  }
+
+  .body__row-introduction {]
+  text-align: center;
+    width: 90%;
+  }
+
+  .body__row-username {
+
+  }
+
+  .body__row-form {
+    flex: 4 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .body__container-start {
+    justify-content: center;
+  }
+
+  .body__updateMessage {
+    text-align: center;
+    font-size: large;
+  }
+  /* ----   ****    ---- */
+
+  /* ----   Canvas component styles    ---- */
+  .canvas__container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .canvas__svg {
+    width: 100%;
+    height: 100%;
+  }
+  /* ----   ****    ---- */
+
+  /* ----   form styles    ---- */
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 98%;
+    overflow: hidden;
+  }
+
+  .form__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    font-size: small;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .form__row-icons {
+    flex-direction: row;
+    height: 15px;
+  }
+
+  .form__row-buttons {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .form__group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    /*min-height: 300px;*/
+  }
+
+  .form__item {
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .form__label {
+    margin-bottom: 0.5rem;
+    font-size: small;
+    font-weight: 400;
+    width: 75%;
+  }
+
+  .form__control {
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    display: block;
+    width: 75%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .form__option {
+    color: #495057;
+    font-size: 1.15rem;
+    background-color: rgba(128, 128, 128, 0.034);
+  }
+
+  .form__icon {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+
+  .form__icon-active {
+    background-color: #8c9299;
+  }
+  /* ----   ****    ---- */
 
 }
 
@@ -20,428 +457,446 @@
 
 /* Extra Large Screens */
 @media screen and (min-width: 1201px) {
+  /* ----   html & body styles    ---- */
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    font-size: x-small;
+  }
+  body {
+    color: black !important;
+    font-family: "Baloo Thambi 2";
+  }
 
+  #root {
+    align-items: start;
+    height: 100vh;
+  }
+  /* ----   ****    ---- */
+
+
+  /* ----   App component styles    ---- */
+  .app {
+    padding: 0 0;
+    margin: 0 0;
+    height: 100vh;
+  }
+
+  .app__sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 2 2 20%;
+    max-width: 20%;
+    border-right: 10px rgb(98, 102, 74);
+    box-shadow: inset 1px 0 8vh 2vh rgba(132, 138, 101, 0.925);
+    background-color: #aab185;
+    padding: .5%;
+  }
+
+  .app__canvas {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 10 3;
+    background-color: #454545;
+  }
+
+  .app__display {
+    margin: 0 0;
+    padding: 0 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  /* ----   ****    ---- */
+
+
+  /* ----   Sidebar component styles    ---- */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    height: 95%;
+  }
+
+  .sidebar__row {
+    display: flex;
+    flex-direction: column;
+    max-width: 510px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .sidebar__row-landing {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+
+  .landing__text {
+    text-align: center;
+    font-size: large;
+    width: 90%;
+  }
+
+  .sidebar__row-header {
+    flex: 2 1;
+  }
+
+  .sidebar__row-body {
+    flex: 8 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sidebar__row-buttons {
+    flex: 1 1;
+    flex-direction: row;
+  }
+
+  .sidebar__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+  }
+
+  .sidebar__buttons--col {
+    display: flex;
+    flex: .33 1;
+    flex-direction: column;
+    justify-content: stretch;
+  }
+
+  .sidebar__button {
+    width: 100%;
+    color: white;
+    background-color: #454545;
+    border: none;
+    text-align: center;
+    font-weight: 100;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .sidebar__button--player {
+    font-family: "Cormorant";
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40px;
+    color: #454545;
+    background: transparent none;
+    border: none;
+    padding: 0 0;
+  }
+
+  .sidebar__button--player:hover {
+    cursor: pointer;
+    color: #1f2225;
+  }
+
+  .sidebar__button--player:focus {
+    outline: none;
+  }
+
+  .sidebar__button--player-disabled {
+    pointer-events: none;
+    color: #898c8d;
+    border: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .player__button--text {
+    font-family: "Baloo Thambi 2";
+    font-size: 2rem;
+    margin: 0 0;
+    padding: 0 0;
+  }
+
+  .player__button--icon {
+    height: 40px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidebar__button--game {
+    font-size: 0.8vw;
+    padding: 0.75vh 1vw;
+    border-radius: 5px;
+    line-height: 0.8vw;
+  }
+
+  .sidebar__button--game-disabled {
+    pointer-events: none;
+    background-color: #899289;
+    color: #b1b1b1;
+    border: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .sidebar__button--game:hover {
+    cursor: pointer;
+    background-color: #1f2225;
+    border-color: #1f2225;
+  }
+
+  .sidebar__button--start{
+    justify-self: center;
+    font-size: 1.15vw;
+    border-radius: 50%;
+    height: 115px;
+    width: 115px;
+  }
+
+  .sidebar__button--start:hover {
+    cursor: pointer;
+    background-color: #1f2225;
+    border-color: #1f2225;
+  }
+
+  /* ----   ****    ---- */
+
+  /* ----   Sidebar Header styles    ---- */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header__title {
+    text-align: center;
+    font-size: 3.75rem;
+    margin: 0;
+  }
+
+  .header__text {
+    width: 90%;
+    margin: 1vh 0;
+    font-size: 1.65vh;
+    text-align: center;
+  }
+
+  .header__icons {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header__icon {
+    flex: 1 1;
+    display: flex;
+    color: #7a7a7a;
+    font-size: 1.5rem;
+    overflow: hidden;
+  }
+
+  .bi {
+    width: 1.75vw !important;
+    height: auto;
+  }
+
+  .header__icon-active {
+    display: flex;
+    color: #1f2225;
+    border-bottom: 1px solid #1f2225;
+    border-radius: 0.5px;
+    font-size: 1.4rem;
+  }
+  /* ----   ****    ---- */
+
+  /* ----   Sidebar body styles    ---- */
+  .body__display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 90%
+  }
+
+  .body__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .body__row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .body__row-instructions {
+    flex: 1 1;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    text-align: center;
+    width: 75%
+  }
+
+  .body__row-introduction {
+    flex: 8 2;
+    text-align: center;
+    width: 50%;
+  }
+
+  .body__row-username {
+    font-size: x-large;
+    text-align: center;
+  }
+
+  .body__row-form {
+    flex: 4 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .body__container-start {
+    justify-content: center;
+  }
+
+  .body__updateMessage {
+    text-align: center;
+    font-size: large;
+  }
+  /* ----   ****    ---- */
+
+  /* ----   Canvas component styles    ---- */
+  .canvas__container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .canvas__svg {
+    width: 100%;
+    height: 100%;
+  }
+  /* ----   ****    ---- */
+
+  /* ----   form styles    ---- */
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+
+  .form__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: large;
+    text-align: center;
+  }
+
+  .form__row-icons {
+    flex-direction: row;
+    height: 3vh;
+
+  }
+
+  .form__row-buttons {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .form__group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    min-height: 300px;
+  }
+
+  .form__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+  }
+
+  .form__label {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    width: 75%;
+  }
+
+  .form__control {
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    display: block;
+    width: 75%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .form__option {
+    color: #495057;
+    font-size: 1.15rem;
+    background-color: rgba(128, 128, 128, 0.034);
+  }
+
+  .form__icon {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+
+  .form__icon-active {
+    background-color: #8c9299;
+  }
+  /* ----   ****    ---- */
 }
 
-/* ----   html & body styles    ---- */
-html,
-body {
-  height: 100%;
-  width: 100%;
-  font-size: x-small;
-}
-body {
-  color: black !important;
-  font-family: "Baloo Thambi 2";
-}
 
-#root {
-  align-items: start;
-  height: 100vh;
-}
-/* ----   ****    ---- */
-
-
-/* ----   App component styles    ---- */
-.app {
-  padding: 0 0;
-  margin: 0 0;
-  height: 100vh;
-}
-
-.app__sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex: 2 2 20%;
-  max-width: 20%;
-  border-right: 10px rgb(98, 102, 74);
-  box-shadow: inset 1px 0 8vh 2vh rgba(132, 138, 101, 0.925);
-  background-color: #aab185;
-  padding: .5%;
-}
-
-.app__canvas {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  flex: 10 3;
-  background-color: #454545;
-}
-
-.app__display {
-  margin: 0 0;
-  padding: 0 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-/* ----   ****    ---- */
-
-
-/* ----   Sidebar component styles    ---- */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  height: 95%;
-}
-
-.sidebar__row {
-  display: flex;
-  flex-direction: column;
-  max-width: 510px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.sidebar__row-landing {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 100%;
-}
-
-.landing__text {
-  text-align: center;
-  font-size: large;
-  width: 90%;
-}
-
-.sidebar__row-header {
-  flex: 2 1;
-}
-
-.sidebar__row-body {
-  flex: 8 1;
-  justify-content: center;
-  align-items: center;
-}
-
-.sidebar__row-buttons {
-  flex: 1 1;
-  flex-direction: row;
-}
-
-.sidebar__buttons {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-}
-
-.sidebar__buttons--col {
-  display: flex;
-  flex: .33 1;
-  flex-direction: column;
-  justify-content: stretch;
-}
-
-.sidebar__button {
-  width: 100%;
-  color: white;
-  background-color: #454545;
-  border: none;
-  text-align: center;
-  font-weight: 100;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.sidebar__button--player {
-  font-family: "Cormorant";
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 40px;
-  color: #454545;
-  background: transparent none;
-  border: none;
-  padding: 0 0;
-}
-
-.sidebar__button--player:hover {
-  cursor: pointer;
-  color: #1f2225;
-}
-
-.sidebar__button--player:focus {
-  outline: none;
-}
-
-.sidebar__button--player-disabled {
-  pointer-events: none;
-  color: #898c8d;
-  border: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.player__button--text {
-  font-family: "Baloo Thambi 2";
-  font-size: 2rem;
-  margin: 0 0;
-  padding: 0 0;
-}
-
-.player__button--icon {
-  height: 40px;
-  line-height: 40px;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar__button--game {
-  font-size: 0.8vw;
-  padding: 0.75vh 1vw;
-  border-radius: 5px;
-  line-height: 0.8vw;
-}
-
-.sidebar__button--game-disabled {
-  pointer-events: none;
-  background-color: #899289;
-  color: #b1b1b1;
-  border: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.sidebar__button--game:hover {
-  cursor: pointer;
-  background-color: #1f2225;
-  border-color: #1f2225;
-}
-
-.sidebar__button--start{
-  justify-self: center;
-  font-size: 1.15vw;
-  border-radius: 50%;
-  height: 115px;
-  width: 115px;
-}
-
-.sidebar__button--start:hover {
-  cursor: pointer;
-  background-color: #1f2225;
-  border-color: #1f2225;
-}
-
-/* ----   ****    ---- */
-
-/* ----   Sidebar Header styles    ---- */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.header__title {
-  text-align: center;
-  font-size: 3.75rem;
-  margin: 0;
-}
-
-.header__text {
-  width: 90%;
-  margin: 1vh 0;
-  font-size: 1.65vh;
-  text-align: center;
-}
-
-.header__icons {
-  display: flex;
-  width: 90%;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header__icon {
-  flex: 1 1;
-  display: flex;
-  color: #7a7a7a;
-  font-size: 1.5rem;
-  overflow: hidden;
-}
-
-.bi {
-  width: 1.75vw !important;
-  height: auto;
-}
-
-.header__icon-active {
-  display: flex;
-  color: #1f2225;
-  border-bottom: 1px solid #1f2225;
-  border-radius: 0.5px;
-  font-size: 1.4rem;
-}
-/* ----   ****    ---- */
-
-/* ----   Sidebar body styles    ---- */
-.body__display {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 90%
-}
-
-.body__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.body__container-start {
-  justify-content: center;
-}
-
-.body__updateMessage {
-  text-align: center;
-  font-size: large;
-}
-/* ----   ****    ---- */
-
-/* ----   Canvas component styles    ---- */
-.canvas__container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.canvas__svg {
-  width: 100%;
-  height: 100%;
-}
-/* ----   ****    ---- */
-
-/* ----   form styles    ---- */
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-}
-
-.form__row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-size: large;
-  text-align: center;
-}
-
-.form__row-instructions {
-  font-size: medium;
-  width: 75%;
-}
-
-.form__row-introduction {
-  text-align: center;
-  width: 90%;
-}
-
-.form__row-content {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.form__row-icons {
-  flex-direction: row;
-  height: 15px;
-  margin: 20px auto 0 auto;
-}
-
-.form__row-buttons {
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.form__group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  min-height: 300px;
-}
-
-.form__item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-}
-
-.form__label {
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 400;
-  width: 75%;
-}
-
-.form__control {
-  margin-bottom: 1rem;
-  font-size: 1.15rem;
-  display: block;
-  width: 75%;
-  height: calc(1.5em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.form__option {
-  color: #495057;
-  font-size: 1.15rem;
-  background-color: rgba(128, 128, 128, 0.034);
-}
-
-.form__icon {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #eeeeee;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
-
-.form__icon-active {
-  background-color: #8c9299;
-}
-/* ----   ****    ---- */
 
 /* ----   App component styles    ---- */
 /* ----   ****    ---- */

@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { nextPlayer, prevPlayer, setInterest, startGame, submitForm } from "../../redux/actions";
+import { endGame, nextPlayer, prevPlayer, setInterest, startGame, submitForm } from "../../redux/actions";
 import { FormContainer } from "../FormContainer";
 import { StartButton } from "../StartButton";
+import { ResetButton } from "../ResetButton";
 
-const SidebarBody = ({ game, startGame, nextPlayer, prevPlayer }) => {
+const SidebarBody = ({ game, startGame, endGame, nextPlayer, prevPlayer }) => {
   const { currentForm, currentPlayer, numPlayers } = game;
 
   const displayBody = () => {
@@ -18,6 +19,16 @@ const SidebarBody = ({ game, startGame, nextPlayer, prevPlayer }) => {
             interest that brought you together.
           </p>
           <StartButton startGame={startGame} />
+        </div>
+      );
+    } else if (currentForm === 9) {
+      return (
+        <div className="sidebar__row sidebar__row-landing">
+          <p className="landing__text">
+            The final results of your group are displayed to the right. If you would like to play again please hit the
+            'reset' button!
+          </p>
+          <ResetButton endGame={endGame} />
         </div>
       );
     } else {
@@ -50,6 +61,7 @@ export default connect(mapStateToProps, {
   submitForm,
   setInterest,
   startGame,
+  endGame,
   nextPlayer,
   prevPlayer,
 })(SidebarBody);

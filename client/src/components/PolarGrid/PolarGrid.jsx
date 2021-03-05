@@ -2,9 +2,7 @@ import React from "react";
 
 const PolarGrid = ({ grid, view }) => {
   const svgRadius = Math.round(view.width / 2) * 0.99;
-  console.log(svgRadius);
   const ringSpacing = svgRadius / 50;
-  console.info("%c[ringSpacing]: ", "color: yellow", ringSpacing);
   const createThinRings = () => {
     const rings = [];
     let i = ringSpacing;

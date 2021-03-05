@@ -26,7 +26,7 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   const playerIconsAndButtons =
     currentForm > 1 ? (
       <>
-        <div className="form__row form__row-icons">{createPlayerIcons()}</div>
+        <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>
         <div className="form__row form__row-buttons">
           <FormButtons
             players={players}
@@ -45,7 +45,7 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
     if (currentForm === 1) {
       return "What is a common interest or relationship that connects your group?";
     } else if (currentForm === 2) {
-      return "What is your name and how long have you, individually, been associated with the groups common interest?";
+      return "What is your name and how long have you been associated the common interest?";
     }
   };
 
@@ -73,13 +73,13 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
 
   return (
     <div className="body__container" data-testid="component-FormContainer">
-      {currentForm < 3 ? <div className={"form__row form__row-instructions"}>{displayInstructions()}</div> : ""}
+      {currentForm < 3 ? <div className={"body__row body__row-instructions"}>{displayInstructions()}</div> : ""}
       {players[currentPlayer] && currentForm > 2 ? (
-        <div className="form__row form__row-username">{players[currentPlayer].name}</div>
+        <div className="body__row body__row-username">{players[currentPlayer].name}</div>
       ) : (
         ""
       )}
-      <form onSubmit={onSubmit} className="form form-signin mt-2">
+      <form onSubmit={onSubmit} className="form body__row body__row-form form-signin mt-2">
         <div className="form__row form__row-content">{showForms()}</div>
         {playerIconsAndButtons}
       </form>
