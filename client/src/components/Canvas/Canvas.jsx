@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { PolarGrid } from "../PolarGrid";
 import { updateGridDisplay, updateView } from "../../redux/actions";
-import * as circleUtils from "../../utilities/circleUtilities";
+import * as circleUtils from "../../utils/circleUtilities";
 
 function debounce(fn, ms) {
   let timer;

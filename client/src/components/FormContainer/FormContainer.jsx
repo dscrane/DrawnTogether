@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle } from "../../redux/actions";
 import { FormDisplay } from "../FormDisplay";
 import { FormButtons } from "../FormButtons";
-import { createPlayerIcons } from "../../utilities";
+import { createPlayerIcons } from "../../utils";
 
 const updateMessage = (
   <div className="body__updateMessage">
