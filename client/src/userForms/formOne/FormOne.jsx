@@ -75,6 +75,16 @@ export const FormOne = ({ responses, setResponses }) => {
           <option value="160">71-80</option>
           <option value="240">81-90</option>
           <option value="200">91-100</option>
+          {/*<option value="30">0-10</option>
+          <option value="10">11-20</option>
+          <option value="45">21-30</option>
+          <option value="15">31-40</option>
+          <option value="50">41-50</option>
+          <option value="25">51-60</option>
+          <option value="5">61-70</option>
+          <option value="35">71-80</option>
+          <option value="20">81-90</option>
+          <option value="40">91-100</option>*/}
         </select>
       </div>
       <div className="form__item">

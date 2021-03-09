@@ -1,5 +1,16 @@
 import React from "react";
 
+export const debounce = (callback, wait) => {
+  let timeoutID = null;
+
+  return (...args) => {
+    window.clearTimeout(timeoutID);
+    timeoutID = window.setTimeout(() => {
+      callback.apply(null, args);
+    }, wait);
+  };
+};
+
 export const createPlayerIcons = (numPlayers, currentPlayer) => {
   const playerIcons = [];
   if (numPlayers === 0) {
