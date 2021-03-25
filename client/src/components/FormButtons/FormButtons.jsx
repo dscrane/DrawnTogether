@@ -32,7 +32,7 @@ const FormButtons = ({ currentForm, currentPlayer, players, numPlayers, prevPlay
           type="submit"
         >
           <div className="player__button--text">
-            {currentForm > 2 && players[currentPlayer + 1] ? players[currentPlayer + 1].name : "Update"}{" "}
+            {currentForm > 2 && players[currentPlayer + 1] ? players[currentPlayer + 1].name : "Submit"}{" "}
           </div>
           <div className="player__button--icon">&#8250;</div>
         </button>
