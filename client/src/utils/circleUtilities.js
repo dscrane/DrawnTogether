@@ -33,7 +33,7 @@ export function updatePlayerCircles(players) {
 }
 
 /**
- * Circle Initial Creation
+ * Initial circle creation
  * @function initialCircleVariable
  * @param {object} player -- Current player object
  * @param {object} displayGrid -- Current size of the display grid
@@ -62,9 +62,8 @@ export function initialCircleVariables(player, displayGrid, currentPlayerId, cur
 }
 
 /**
- * Circle Alteration #1
+ * CA#1 -- radius
  * @function circleAlterationOne
- * @description Alteration to circle radius
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
@@ -79,9 +78,8 @@ export function circleAlterationOne(player, currentPlayerId, currentForm) {
 }
 
 /**
- * Circle Alteration #2
+ * CA#2 -- position
  * @function circleAlterationTwo
- * @description Alteration to circle position
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
@@ -96,9 +94,8 @@ export function circleAlterationTwo(player, currentPlayerId, currentForm) {
 }
 
 /**
- * Circle Alteration #3
+ * CA#3 -- design and color
  * @function circleAlterationThree
- * @description Alteration to circle design and color
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
@@ -121,9 +118,8 @@ export function circleAlterationThree(player, currentPlayerId, currentForm) {
 }
 
 /**
- * Circle Alteration #4
+ * CA#4 -- animation path
  * @function circleAlterationFour
- * @description Alteration to circle
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
@@ -135,9 +131,8 @@ export function circleAlterationFour(player, currentPlayerId, currentForm) {
 }
 
 /**
- * Circle Alteration #5
+ * CA#5 -- average color
  * @function circleAlterationFive
- * @description Alteration to circle color
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
@@ -153,9 +148,8 @@ export function circleAlterationFive(player, currentPlayerId, currentForm) {
 }
 
 /**
- * Circle Alteration #6
+ * CA#6 -- final display
  * @function circleAlterationSix
- * @description Alteration to circle
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered

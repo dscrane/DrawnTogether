@@ -1,7 +1,7 @@
 import React from "react";
 
 /**
- * Creates a new playerCircle SVG after each alteration
+ * Creates a updated SVG for a playerCircle when it is altered
  * @function createCircleSVG
  * @param {Object} playerCircle -- Player circle object
  * @param {Object} centerPoint -- display grid's center position along x and y axis
@@ -16,16 +16,23 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
     case 3:
       return (
         <>
-          {createSVGDefs(
-            playerCircle.xCartesian,
-            playerCircle.yCartesian,
-            playerCircle.radius,
-            playerCircle.hue,
-            playerCircle.saturation,
-            playerCircle.lightness,
-            currentPlayerId,
-            centerPoint
-          )}
+          <defs>
+            {createRadialGradient(
+              playerCircle.hue,
+              playerCircle.saturation,
+              playerCircle.lightness,
+              currentPlayerId,
+              centerPoint,
+              currentForm
+            )}
+            {createCirclePath(
+              playerCircle.xCartesian,
+              playerCircle.yCartesian,
+              playerCircle.radius,
+              currentPlayerId,
+              centerPoint
+            )}
+          </defs>
           <circle
             id={`circle_${currentPlayerId}`}
             key={`circle_${currentPlayerId}`}
@@ -46,20 +53,27 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
           </circle>
         </>
       );
-    // Handles the first circle alteration display
+    // Handles CA#1 -- radius
     case 4:
       return (
         <>
-          {createSVGDefs(
-            playerCircle.xCartesian,
-            playerCircle.yCartesian,
-            playerCircle.altRadius,
-            playerCircle.hue,
-            playerCircle.saturation,
-            playerCircle.lightness,
-            currentPlayerId,
-            centerPoint
-          )}
+          <defs>
+            {createRadialGradient(
+              playerCircle.hue,
+              playerCircle.saturation,
+              playerCircle.lightness,
+              currentPlayerId,
+              centerPoint,
+              currentForm
+            )}
+            {createCirclePath(
+              playerCircle.xCartesian,
+              playerCircle.yCartesian,
+              playerCircle.altRadius,
+              currentPlayerId,
+              centerPoint
+            )}
+          </defs>
           <circle
             id={`circle_${currentPlayerId}`}
             key={`circle_${currentPlayerId}`}
@@ -80,20 +94,26 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
           </circle>
         </>
       );
-    // Handles the second circle alteration display
+    // Handles CA#2 -- position
     case 5:
       return (
         <>
-          {createSVGDefs(
-            playerCircle.altXCartesian,
-            playerCircle.altYCartesian,
-            playerCircle.altRadius,
-            playerCircle.hue,
-            playerCircle.saturation,
-            playerCircle.lightness,
-            currentPlayerId,
-            centerPoint
-          )}
+          <defs>
+            {createRadialGradient(
+              playerCircle.hue,
+              playerCircle.saturation,
+              playerCircle.lightness,
+              currentPlayerId,
+              centerPoint
+            )}
+            {createCirclePath(
+              playerCircle.altXCartesian,
+              playerCircle.altYCartesian,
+              playerCircle.altRadius,
+              currentPlayerId,
+              centerPoint
+            )}
+          </defs>
           <circle
             id={`circle_${currentPlayerId}`}
             key={`circle_${currentPlayerId}`}
@@ -114,52 +134,78 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
           </circle>
         </>
       );
-    // Handles the third circle alteration display
+    // Handles CA#3 -- design and color
     case 6:
-      switch (nature) {
-        case "hollow":
-          return createHollowCircle(playerCircle, currentPlayerId, centerPoint);
-        case "stroke":
-          return createStrokeCircle(playerCircle, currentPlayerId, centerPoint);
-        case "ring":
-          return createRingCircle(playerCircle, currentPlayerId, centerPoint);
-        case "dot":
-          return createDotCircle(playerCircle, currentPlayerId, centerPoint);
-        default:
-          console.info("%c[ERROR]: Switch - circle design creation", "color: red");
-      }
-      break;
-    // Handles the fourth circle alteration display
+      return (
+        <>
+          <defs>
+            {createRadialGradient(
+              playerCircle.hue,
+              playerCircle.saturation,
+              playerCircle.lightness,
+              currentPlayerId,
+              centerPoint
+            )}
+            {createCirclePath(
+              playerCircle.altXCartesian,
+              playerCircle.altYCartesian,
+              playerCircle.altRadius,
+              currentPlayerId,
+              centerPoint
+            )}
+          </defs>
+          {createCircleDesign(nature, playerCircle, currentPlayerId, centerPoint, currentForm)}
+        </>
+      );
+    // Handles CA#4 -- animation path
     case 7:
-      switch (nature) {
-        case "hollow":
-          return createHollowCircle(playerCircle, currentPlayerId, centerPoint);
-        case "stroke":
-          return createStrokeCircle(playerCircle, currentPlayerId, centerPoint);
-        case "ring":
-          return createRingCircle(playerCircle, currentPlayerId, centerPoint);
-        case "dot":
-          return createDotCircle(playerCircle, currentPlayerId, centerPoint);
-        default:
-          console.info("%c[ERROR]: Switch - circle design creation", "color: red");
-      }
-      break;
-    // Handles the fifth circle alteration display
+      return (
+        <>
+          <defs>
+            {createRadialGradient(
+              playerCircle.hue,
+              playerCircle.saturation,
+              playerCircle.lightness,
+              currentPlayerId,
+              centerPoint
+            )}
+            {altCirclePath(
+              playerCircle.altXCartesian,
+              playerCircle.altYCartesian,
+              playerCircle.altRadius,
+              currentPlayerId,
+              centerPoint
+            )}
+          </defs>
+          <use href={`#animationPath${currentPlayerId}`} fill="red" />
+          {createCircleDesign(nature, playerCircle, currentPlayerId, centerPoint, currentForm)}
+        </>
+      );
+    // Handles CA#5 -- average color
     case 8:
-      switch (nature) {
-        case "hollow":
-          return createHollowCircle(playerCircle, currentPlayerId, centerPoint, true);
-        case "stroke":
-          return createStrokeCircle(playerCircle, currentPlayerId, centerPoint, true);
-        case "ring":
-          return createRingCircle(playerCircle, currentPlayerId, centerPoint, true);
-        case "dot":
-          return createDotCircle(playerCircle, currentPlayerId, centerPoint, true);
-        default:
-          console.info("%c[ERROR]: Switch - circle design creation", "color: red");
-      }
-      break;
-    // Handles the final circle display
+      return (
+        <>
+          <defs>
+            {createRadialGradient(
+              playerCircle.averageHue,
+              playerCircle.averageSaturation,
+              playerCircle.averageLightness,
+              currentPlayerId,
+              centerPoint
+            )}
+            {altCirclePath(
+              playerCircle.altXCartesian,
+              playerCircle.altYCartesian,
+              playerCircle.altRadius,
+              currentPlayerId,
+              centerPoint
+            )}
+          </defs>
+          <use href={`#animationPath${currentPlayerId}`} fill="red" />
+          {createCircleDesign(nature, playerCircle, currentPlayerId, centerPoint, currentForm)}
+        </>
+      );
+    // Handles CA#6 -- final display
     case 9:
       return <></>;
     // Default case indicated error in Switch functionality
@@ -169,34 +215,66 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
 }
 
 /**
- * Creates the playerCircle's SVG fill gradient
- * @function createSVGDefs
- * @param {number} x -- playerCircle's x location
- * @param {number} y - playerCircle's y location
- * @param {number} r -- playerCircle's radius
+ * Creates the playerCircle's radial gradient
+ * @function createRadialGradient
  * @param {number} hue -- playerCircle's hue
  * @param {number} saturation -- playerCircle's saturation
  * @param {number} lightness -- playerCircle's lightness
  * @param {number} id -- playerCircle's player id
  * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @returns {JSX.Element} <defs />
+ * @returns {JSX.Element} <radialGradient />
  * */
-export function createSVGDefs(x, y, r, hue, saturation, lightness, id, centerPoint) {
+export function createRadialGradient(hue, saturation, lightness, id, centerPoint) {
   return (
-    <defs>
-      <radialGradient id={`radialGradient${id}`}>
-        <stop offset="10%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`} />
-        <stop offset="90%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} />
-      </radialGradient>
-      />
-      <path
-        id={`animationPath${id}`}
-        d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
-        stroke="red"
-        strokeWidth="2px"
-      />
-    </defs>
+    <radialGradient id={`radialGradient${id}`}>
+      <stop offset="10%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`} />
+      <stop offset="90%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} />
+    </radialGradient>
   );
+}
+
+/**
+ * Creates the animation path for the player's circle
+ * @param {number} x -- playerCircle's x location
+ * @param {number} y - playerCircle's y location
+ * @param {number} r -- playerCircle's radius
+ * @param {number} id -- playerCircle's player id
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @returns {JSX.Element} <path />
+ */
+export function createCirclePath(x, y, r, id, centerPoint) {
+  return (
+    <path
+      id={`animationPath${id}`}
+      d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
+      stroke="red"
+      strokeWidth="2px"
+    />
+  );
+}
+
+/**
+ * Creates the complex SVG design for each playerCircle
+ * @param {string|null} nature -- Value of nature variable (only needed for case 6)
+ * @param {Object} playerCircle -- Player circle object
+ * @param {number} currentPlayerId -- Id of the current player
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} currentForm -- Number of the current form being answered
+ * @returns {JSX.Element}
+ */
+export function createCircleDesign(nature, playerCircle, currentPlayerId, centerPoint, currentForm) {
+  switch (nature) {
+    case "hollow":
+      return createHollowCircle(playerCircle, currentPlayerId, centerPoint, currentForm);
+    case "stroke":
+      return createStrokeCircle(playerCircle, currentPlayerId, centerPoint, currentForm);
+    case "ring":
+      return createRingCircle(playerCircle, currentPlayerId, centerPoint, currentForm);
+    case "dot":
+      return createDotCircle(playerCircle, currentPlayerId, centerPoint, currentForm);
+    default:
+      console.info("%c[ERROR]: Switch - circle design creation", "color: red");
+  }
 }
 
 /**
@@ -415,6 +493,26 @@ export function createSecondaryColor(progress, hue, saturation, lightness) {
 }
 
 /**
+ * Alters the animation path for the player's circle
+ * @param {number} x -- playerCircle's x location
+ * @param {number} y - playerCircle's y location
+ * @param {number} r -- playerCircle's radius
+ * @param {number} id -- playerCircle's player id
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @returns {JSX.Element} <path />
+ */
+export function altCirclePath(x, y, r, id, centerPoint) {
+  return (
+    <path
+      id={`animationPath${id}`}
+      d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
+      stroke="red"
+      strokeWidth="2px"
+    />
+  );
+}
+
+/**
  * Creates an average between playerCircle's fill color and the color chosen by the player
  * @function averageColors
  * @param {string} color -- Current player's color value
@@ -467,22 +565,13 @@ export function averageColors(color, altHue, saturation, lightness) {
  * @param {Object} playerCircle -- Current player's circle object
  * @param {number} currentPlayerId -- Current player's id number
  * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} currentForm -- Number of the current form being answered
  * @param {boolean} hasAverageColor -- Indicates if an average color should be used
  * @returns {JSX.Element}
  */
-export function createHollowCircle(playerCircle, currentPlayerId, centerPoint, hasAverageColor = false) {
+export function createHollowCircle(playerCircle, currentPlayerId, centerPoint, currentForm, hasAverageColor = false) {
   return (
     <>
-      {createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.hue,
-        playerCircle.saturation,
-        playerCircle.lightness,
-        currentPlayerId,
-        centerPoint
-      )}
       <circle
         id={`circle_${currentPlayerId}`}
         key={`circle_${currentPlayerId}`}
@@ -510,34 +599,13 @@ export function createHollowCircle(playerCircle, currentPlayerId, centerPoint, h
  * @param {Object} playerCircle -- Current player's circle object
  * @param {number} currentPlayerId -- Current player's id number
  * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} currentForm -- Number of the current form being answered
  * @param {boolean} hasAverageColor -- Indicates if an average color should be used
  * @returns {JSX.Element}
  */
-export function createStrokeCircle(playerCircle, currentPlayerId, centerPoint, hasAverageColor = false) {
-  const gradient = hasAverageColor
-    ? createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.averageHue,
-        playerCircle.averageSaturation,
-        playerCircle.averageLightness,
-        currentPlayerId,
-        centerPoint
-      )
-    : createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.hue,
-        playerCircle.saturation,
-        playerCircle.lightness,
-        currentPlayerId,
-        centerPoint
-      );
+export function createStrokeCircle(playerCircle, currentPlayerId, centerPoint, currentForm, hasAverageColor = false) {
   return (
     <>
-      {gradient}
       <circle
         id={`circle_${currentPlayerId}`}
         key={`circle_${currentPlayerId}`}
@@ -566,34 +634,13 @@ export function createStrokeCircle(playerCircle, currentPlayerId, centerPoint, h
  * @param {Object} playerCircle -- Current player's circle object
  * @param {number} currentPlayerId -- Current player's id number
  * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} currentForm -- Number of the current form being answered
  * @param {boolean} hasAverageColor -- Indicates if an average color should be used
  * @returns {JSX.Element}
  */
-export function createRingCircle(playerCircle, currentPlayerId, centerPoint, hasAverageColor = false) {
-  const gradient = hasAverageColor
-    ? createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.averageHue,
-        playerCircle.averageSaturation,
-        playerCircle.averageLightness,
-        currentPlayerId,
-        centerPoint
-      )
-    : createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.hue,
-        playerCircle.saturation,
-        playerCircle.lightness,
-        currentPlayerId,
-        centerPoint
-      );
+export function createRingCircle(playerCircle, currentPlayerId, centerPoint, currentForm, hasAverageColor = false) {
   return (
     <>
-      {gradient}
       <circle
         id={`circle_${currentPlayerId}`}
         key={`circle_${currentPlayerId}_inner`}
@@ -633,34 +680,13 @@ export function createRingCircle(playerCircle, currentPlayerId, centerPoint, has
  * @param {Object} playerCircle -- Current player's circle object
  * @param {number} currentPlayerId -- Current player's id number
  * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} currentForm -- Number of the current form being answered
  * @param {boolean} hasAverageColor -- Indicates if an average color should be used
  * @returns {JSX.Element}
  */
-export function createDotCircle(playerCircle, currentPlayerId, centerPoint, hasAverageColor = false) {
-  const gradient = hasAverageColor
-    ? createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.averageHue,
-        playerCircle.averageSaturation,
-        playerCircle.averageLightness,
-        currentPlayerId,
-        centerPoint
-      )
-    : createSVGDefs(
-        playerCircle.altXCartesian,
-        playerCircle.altYCartesian,
-        playerCircle.altRadius,
-        playerCircle.hue,
-        playerCircle.saturation,
-        playerCircle.lightness,
-        currentPlayerId,
-        centerPoint
-      );
+export function createDotCircle(playerCircle, currentPlayerId, centerPoint, currentForm, hasAverageColor = false) {
   return (
     <>
-      {gradient}
       <circle
         id={`circle_${currentPlayerId}`}
         key={`circle_${currentPlayerId}`}
