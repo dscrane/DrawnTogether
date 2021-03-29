@@ -18,8 +18,6 @@ const centerPoint = {
   y: 0,
 };
 
-/* === FUNCTIONS EXPORTED FOR PRODUCTION USE === */
-
 /**
  * Function that draws the player circles
  * @function drawPlayerCircles
@@ -154,4 +152,9 @@ export function circleAlterationFive(player, currentPlayerId, currentForm) {
  * @param {number} currentPlayerId -- Id of the current player
  * @param {number} currentForm -- Number of the current form being answered
  * */
-export function finalCircleDisplay(player, currentPlayerId, currentForm) {}
+export function finalCircleDisplay(player, currentPlayerId, currentForm) {
+  // TODO:
+  //  - Have background grid fade away leaving on the circles
+  //  - Remove all animations from design
+  //  - Display the paths the animations followed (in the secondary circle color)
+}
