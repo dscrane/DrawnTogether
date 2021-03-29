@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { PolarGrid } from "../PolarGrid";
 import { updateGridDisplay, updateView, resizePlayerCircles } from "../../redux/actions";
-import { debounce } from "../../utils";
+import { debounce, CircleSVG } from "../../utils";
 import { CircleDisplay } from "../CircleDisplay";
 
 const Canvas = ({ display, game, players, updateGridDisplay, updateView, resizePlayerCircles }) => {

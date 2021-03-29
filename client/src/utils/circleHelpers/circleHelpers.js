@@ -1,4 +1,5 @@
 import React from "react";
+import { CircleSVG } from "../CircleSVG";
 
 /**
  * Creates an updated SVG for a playerCircle when it is altered
@@ -31,6 +32,7 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
               currentPlayerId,
               centerPoint
             )}
+            {<CircleSVG id={currentPlayerId} />}
           </defs>
           <circle
             id={`circle_${currentPlayerId}`}
@@ -38,6 +40,7 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
             cx={0}
             cy={0}
             r={playerCircle.radius}
+            mask={`url(#circleMask${currentPlayerId})`}
             style={{
               fill: `url(#radialGradient${currentPlayerId})`,
               opacity: 1,
@@ -266,7 +269,7 @@ export function createEssPath(x, y, r, id, centerPoint) {
   return (
     <path
       id={`essPath${id}`}
-      d={`m${x},${y} Q ${p},${1} ${centerPoint.x} ${centerPoint.y}`}
+      d={`m${x},${y} Q ${1},${1} ${centerPoint.x} ${centerPoint.y}`}
       stroke="grey"
       strokeWidth="2px"
     />
