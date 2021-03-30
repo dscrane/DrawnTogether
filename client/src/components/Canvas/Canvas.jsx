@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { PolarGrid } from "../PolarGrid";
 import { updateGridDisplay, updateView, resizePlayerCircles } from "../../redux/actions";
@@ -39,7 +39,7 @@ const Canvas = ({ display, game, players, updateGridDisplay, updateView, resizeP
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
       <PolarGrid {...display} />
-      <CircleDisplay game={game} players={players} />
+      <CircleDisplay currentForm={game.currentForm} updateCircles={game.updateCircles} players={players} />
     </svg>
   );
 };

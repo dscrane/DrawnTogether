@@ -11,6 +11,7 @@ export default (state = INITIAL_STATE, action) => {
         {
           ...action.payload.responses,
           circle: { ...action.payload.circle },
+          circles: [null, null, null],
         },
       ];
 
@@ -31,8 +32,9 @@ export default (state = INITIAL_STATE, action) => {
           ? {
               ...el,
               circle: {
-                ...action.payload.circle,
+                ...action.payload.playerCircle,
               },
+              circles: [...el.circles, action.payload.circleSVG],
             }
           : el;
       });

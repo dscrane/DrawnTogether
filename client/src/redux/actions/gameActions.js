@@ -39,36 +39,35 @@ export const endGame = () => (dispatch) => {
 
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
 export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
-  const newForm = currentForm + 1;
+  const nextForm = currentForm + 1;
   if (currentForm === 2) {
     await dispatch({
       type: NEXT_FORM,
       payload: {
         currentPlayer: 0,
-        currentForm: newForm,
+        currentForm: nextForm,
         updateCircles: false,
         numPlayers: currentPlayer,
       },
     });
+    return;
   }
-
   if (currentForm === 3) {
     await dispatch({
       type: DISPLAY_CIRCLES,
       payload: true,
     });
   }
-
-  await dispatch({
-    type: NEXT_FORM,
-    payload: { currentPlayer: 0, currentForm: newForm, updateCircles: false },
-  });
   if (currentForm > 2) {
     await dispatch({
       type: UPDATE_CIRCLES,
-      payload: { displayCircles: true },
+      payload: { updateCircles: true },
     });
   }
+  await dispatch({
+    type: NEXT_FORM,
+    payload: { currentPlayer: 0, currentForm: nextForm, updateCircles: false },
+  });
 };
 /* ----   ****    ---- */
 

@@ -32,7 +32,6 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
               currentPlayerId,
               centerPoint
             )}
-            {<CircleSVG id={currentPlayerId} />}
           </defs>
           <circle
             id={`circle_${currentPlayerId}`}
@@ -40,7 +39,6 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
             cx={0}
             cy={0}
             r={playerCircle.radius}
-            mask={`url(#circleMask${currentPlayerId})`}
             style={{
               fill: `url(#radialGradient${currentPlayerId})`,
               opacity: 1,
