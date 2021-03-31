@@ -33,24 +33,30 @@ export function createCircleSVG(playerCircle, centerPoint, currentPlayerId, curr
               centerPoint
             )}
           </defs>
-          <circle
-            id={`circle_${currentPlayerId}`}
-            key={`circle_${currentPlayerId}`}
-            cx={0}
-            cy={0}
-            r={playerCircle.radius}
-            style={{
-              fill: `url(#radialGradient${currentPlayerId})`,
-              opacity: 1,
-              fillRule: "evenodd",
-              stroke: "none",
-              strokeLinecap: "round",
-            }}
-          >
-            <animateMotion dur="10s" repeatCount="indefinite">
-              <mpath href={`#linearPath${currentPlayerId}`} />
-            </animateMotion>
-          </circle>
+          <CircleSVG
+            id={currentPlayerId}
+            radius={playerCircle.radius}
+            x={playerCircle.xCartesian}
+            y={playerCircle.yCartesian}
+          />
+          {/*<circle*/}
+          {/*  id={`circle_${currentPlayerId}`}*/}
+          {/*  key={`circle_${currentPlayerId}`}*/}
+          {/*  cx={0}*/}
+          {/*  cy={0}*/}
+          {/*  r={playerCircle.radius}*/}
+          {/*  style={{*/}
+          {/*    fill: `url(#radialGradient${currentPlayerId})`,*/}
+          {/*    opacity: 1,*/}
+          {/*    fillRule: "evenodd",*/}
+          {/*    stroke: "none",*/}
+          {/*    strokeLinecap: "round",*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <animateMotion dur="10s" repeatCount="indefinite">*/}
+          {/*    <mpath href={`#linearPath${currentPlayerId}`} />*/}
+          {/*  </animateMotion>*/}
+          {/*</circle>*/}
         </>
       );
     // Handles CA#1 -- radius
