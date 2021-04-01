@@ -5,6 +5,7 @@ import {
   PREV_FORM,
   UPDATE_CIRCLES,
   DISPLAY_CIRCLES,
+  DISPLAY_GRID,
   SET_INTEREST,
   NEXT_PLAYER,
   PREV_PLAYER,
@@ -17,6 +18,7 @@ export const startGame = () => (dispatch) => {
     payload: {
       inProgress: true,
       currentForm: 1,
+      displayGrid: true,
     },
   });
 };
@@ -56,6 +58,13 @@ export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
     await dispatch({
       type: DISPLAY_CIRCLES,
       payload: true,
+    });
+  }
+
+  if (currentForm === 8) {
+    await dispatch({
+      type: DISPLAY_GRID,
+      payload: { displayGrid: false },
     });
   }
 

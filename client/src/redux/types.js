@@ -6,6 +6,7 @@ export const PREV_FORM = "PREV_FORM";
 export const UPDATE_PLAYER = "UPDATE_PLAYER";
 export const DISPLAY_CIRCLES = "DISPLAY_CIRCLES";
 export const UPDATE_CIRCLES = "UPDATE_CIRCLES";
+export const DISPLAY_GRID = "DISPLAY_GRID";
 export const SET_INTEREST = "SET_INTEREST";
 
 // Display Action Types

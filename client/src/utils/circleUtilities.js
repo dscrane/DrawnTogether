@@ -11,7 +11,6 @@ import {
   createSecondaryColor,
   setAlternateDesignWeight,
 } from "./circleHelpers";
-import { CircleSVG } from "./CircleSVG";
 
 const centerPoint = {
   x: 0,

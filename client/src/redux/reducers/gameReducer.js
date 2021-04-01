@@ -7,6 +7,7 @@ import {
   PREV_PLAYER,
   UPDATE_CIRCLES,
   DISPLAY_CIRCLES,
+  DISPLAY_GRID,
   SET_INTEREST,
 } from "../types";
 
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
   currentForm: 0,
   currentPlayer: 0,
   numPlayers: 0,
+  displayGrid: false,
   displayCircles: false,
   updateCircles: false,
 };
@@ -52,6 +54,12 @@ export default (state = INITIAL_STATE, action) => {
       };
     case DISPLAY_CIRCLES:
       console.info("%c[DISPLAY_CIRCLES]: ", "color: yellow", action.payload);
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case DISPLAY_GRID:
+      console.info("%c[DISPLAY_GRID]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
