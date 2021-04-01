@@ -64,7 +64,7 @@ export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
   if (currentForm === 8) {
     await dispatch({
       type: DISPLAY_GRID,
-      payload: { displayGrid: false },
+      payload: { displayGrid: false, inProgress: false },
     });
   }
 
@@ -72,12 +72,6 @@ export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
     type: NEXT_FORM,
     payload: { currentPlayer: 0, currentForm: newForm, updateCircles: false },
   });
-  if (currentForm > 2) {
-    await dispatch({
-      type: UPDATE_CIRCLES,
-      payload: { displayCircles: true },
-    });
-  }
 };
 /* ----   ****    ---- */
 

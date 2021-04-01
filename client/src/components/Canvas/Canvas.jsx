@@ -36,7 +36,6 @@ const Canvas = ({ display, game, players, updateGridDisplay, updateView, resizeP
     updateGridDisplay(display.view, true);
   }, [display.view]);
 
-  console.log(game);
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
       {game.displayGrid ? <PolarGrid {...display} /> : null}

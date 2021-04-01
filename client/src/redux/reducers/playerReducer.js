@@ -26,6 +26,7 @@ export default (state = INITIAL_STATE, action) => {
       });
 
     case UPDATE_PLAYER_CIRCLE:
+      console.info("%c[UPDATE_PLAYER_CIRCLE]: ", "color: yellow", action.payload);
       return state.map((el, i) => {
         return i === action.payload.currentPlayer
           ? {

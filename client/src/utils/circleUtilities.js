@@ -3,7 +3,7 @@ import {
   altRadius,
   altCartesian,
   averageColors,
-  createCircleSVG,
+  createCircleDesign,
   createFillColor,
   setCircleRadius,
   setPlayerDegree,
@@ -25,7 +25,7 @@ const centerPoint = {
  */
 export function updatePlayerCircles(players) {
   return players.map((player) => {
-    return player.circle.circleSVG;
+    return player.circleSVG;
   });
 }
 
@@ -35,26 +35,35 @@ export function updatePlayerCircles(players) {
  * @param {object} player -- Current player object
  * @param {object} displayGrid -- Current size of the display grid
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
- * @param {number} ringSpacing -- proportional positioning of the circles
- * @return {{saturation: number, yCartesian: number, color: string, slice: number, xCartesian: number, lightness: number, degree: number, hue: number, radius: number, radian: number}} Updated player circle object
+ * @return {Object} playerCircle -- Updated player circle object
  * */
-export function initialCircleVariables(player, displayGrid, currentPlayerId, currentForm, ringSpacing) {
+export function initialCircleVariables(player, displayGrid, currentPlayerId) {
   centerPoint.x = displayGrid.cx;
   centerPoint.y = displayGrid.cy;
+  const { init_degree, init_slice } = setPlayerDegree(player.interest, player.gender, player.diet);
+
+  const initial = {
+    init_degree,
+    init_slice,
+    init_radius: setCircleRadius(player.association),
+    init_radian: parseInt(player.age),
+    ...createFillColor(player.height, init_degree),
+    ...convertToCartesian(centerPoint, player.age, init_degree),
+  };
 
   let playerCircle = {
-    ...setPlayerDegree(player.interest, player.gender, player.diet),
-    radius: setCircleRadius(player.association),
-    radian: parseInt(player.age),
+    initial: { ...initial },
+    isAnimated: true,
+    design: "defaultCircle",
   };
 
-  playerCircle = {
-    ...playerCircle,
-    ...createFillColor(player.height, playerCircle.degree),
-    ...convertToCartesian(centerPoint, player.age, playerCircle.degree, ringSpacing),
-  };
-  playerCircle.circleSVG = createCircleSVG(playerCircle, centerPoint, currentPlayerId, currentForm);
+  for (let key in initial) {
+    let parsedKey = key.substring(5);
+    playerCircle[parsedKey] = initial[key];
+  }
+
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
+  console.log(player.circleSVG);
   return playerCircle;
 }
 
@@ -63,14 +72,13 @@ export function initialCircleVariables(player, displayGrid, currentPlayerId, cur
  * @function circleAlterationOne
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
  * */
-export function circleAlterationOne(player, currentPlayerId, currentForm) {
+export function circleAlterationOne(player, currentPlayerId) {
   const playerCircle = {
     ...player.circle,
-    altRadius: altRadius(player.circle.radius, player.time, player.personality),
+    radius: altRadius(player.circle.initial.init_radius, player.time, player.personality),
   };
-  playerCircle.circleSVG = createCircleSVG(playerCircle, centerPoint, currentPlayerId, currentForm);
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
 
@@ -79,14 +87,19 @@ export function circleAlterationOne(player, currentPlayerId, currentForm) {
  * @function circleAlterationTwo
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
  * */
-export function circleAlterationTwo(player, currentPlayerId, currentForm) {
+export function circleAlterationTwo(player, currentPlayerId) {
   const playerCircle = {
     ...player.circle,
-    ...altCartesian(centerPoint, player.circle.degree, player.circle.radian, player.food, player.hair),
+    ...altCartesian(
+      centerPoint,
+      player.circle.initial.init_degree,
+      player.circle.initial.init_radian,
+      player.food,
+      player.hair
+    ),
   };
-  playerCircle.circleSVG = createCircleSVG(playerCircle, centerPoint, currentPlayerId, currentForm);
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
 
@@ -95,22 +108,22 @@ export function circleAlterationTwo(player, currentPlayerId, currentForm) {
  * @function circleAlterationThree
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
  * */
-export function circleAlterationThree(player, currentPlayerId, currentForm) {
+export function circleAlterationThree(player, currentPlayerId) {
   let playerCircle = player.circle;
   const secondaryColor = createSecondaryColor(
     player.progress,
-    playerCircle.hue,
+    playerCircle.initial.init_hue,
     playerCircle.saturation,
     playerCircle.lightness
   );
   playerCircle = {
     ...playerCircle,
-    ...secondaryColor,
+    secondaryColor,
+    design: player.nature,
     designThickness: setAlternateDesignWeight(playerCircle.radius, player.media),
   };
-  playerCircle.circleSVG = createCircleSVG(playerCircle, centerPoint, currentPlayerId, currentForm, player.nature);
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
 
@@ -119,11 +132,11 @@ export function circleAlterationThree(player, currentPlayerId, currentForm) {
  * @function circleAlterationFour
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
  * */
-export function circleAlterationFour(player, currentPlayerId, currentForm) {
+export function circleAlterationFour(player, currentPlayerId) {
   let playerCircle = player.circle;
-  playerCircle.circleSVG = createCircleSVG(playerCircle, centerPoint, currentPlayerId, currentForm, player.nature);
+  playerCircle = { ...playerCircle };
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
 
@@ -132,15 +145,14 @@ export function circleAlterationFour(player, currentPlayerId, currentForm) {
  * @function circleAlterationFive
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
  * */
-export function circleAlterationFive(player, currentPlayerId, currentForm) {
+export function circleAlterationFive(player, currentPlayerId) {
   let playerCircle = player.circle;
   playerCircle = {
     ...playerCircle,
-    ...averageColors(player.color, playerCircle.altHue, playerCircle.saturation, playerCircle.lightness),
+    ...averageColors(player.color, playerCircle.hue, playerCircle.saturation, playerCircle.lightness),
   };
-  playerCircle.circleSVG = createCircleSVG(playerCircle, centerPoint, currentPlayerId, currentForm, player.nature);
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
 
@@ -149,11 +161,14 @@ export function circleAlterationFive(player, currentPlayerId, currentForm) {
  * @function circleAlterationSix
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
- * @param {number} currentForm -- Number of the current form being answered
  * */
-export function finalCircleDisplay(player, currentPlayerId, currentForm) {
-  // TODO:
-  //  - Have background grid fade away leaving on the circles
-  //  - Remove all animations from design
-  //  - Display the paths the animations followed (in the secondary circle color)
+export function finalCircleDisplay(player, currentPlayerId) {
+  let playerCircle = player.circle;
+  playerCircle = {
+    ...playerCircle,
+    isAnimated: false,
+  };
+
+  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
+  return playerCircle;
 }

@@ -20,7 +20,6 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (disp
   }
 
   if (currentForm === 2) {
-    console.log(responses);
     await dispatch({
       type: NEW_PLAYER,
       payload: {
@@ -48,29 +47,29 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (disp
 /* ----   ****    ---- */
 
 export const updatePlayerCircle = (currentPlayer, currentForm) => (dispatch, getState) => {
-  console.log("currentPlayer", currentPlayer);
   const { players, display, game } = getState();
   let circle;
   switch (currentForm) {
     case 3:
-      circle = circleUtils.initialCircleVariables(players[currentPlayer], display.grid, currentPlayer, currentForm);
+      circle = circleUtils.initialCircleVariables(players[currentPlayer], display.grid, currentPlayer);
       break;
     case 4:
-      circle = circleUtils.circleAlterationOne(players[currentPlayer], game.currentPlayer, currentForm);
+      circle = circleUtils.circleAlterationOne(players[currentPlayer], game.currentPlayer);
       break;
     case 5:
-      circle = circleUtils.circleAlterationTwo(players[currentPlayer], game.currentPlayer, currentForm);
+      circle = circleUtils.circleAlterationTwo(players[currentPlayer], game.currentPlayer);
       break;
     case 6:
-      circle = circleUtils.circleAlterationThree(players[currentPlayer], game.currentPlayer, currentForm);
+      circle = circleUtils.circleAlterationThree(players[currentPlayer], game.currentPlayer);
       break;
     case 7:
-      circle = circleUtils.circleAlterationFour(players[currentPlayer], game.currentPlayer, currentForm);
-      console.log(circle);
+      circle = circleUtils.circleAlterationFour(players[currentPlayer], game.currentPlayer);
       break;
     case 8:
-      circle = circleUtils.circleAlterationFive(players[currentPlayer], game.currentPlayer, currentForm);
+      circle = circleUtils.circleAlterationFive(players[currentPlayer], game.currentPlayer);
       break;
+    case 9:
+      circle = circleUtils.finalCircleDisplay(players[currentPlayer], game.currentPlayer);
     default:
       console.info("%c[ERROR]: Switch - updatePlayerDisplay", "color: red");
   }
