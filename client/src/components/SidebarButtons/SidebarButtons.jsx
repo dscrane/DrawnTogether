@@ -43,15 +43,7 @@ const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlaye
           onClick={() => nextForm(currentForm, currentPlayer)}
         >
           <span>
-            {currentForm === 8 ? (
-              <>
-                Finish <br /> Game
-              </>
-            ) : (
-              <>
-                Next <br /> Form
-              </>
-            )}
+            Next <br /> Form
           </span>
         </button>
       </div>

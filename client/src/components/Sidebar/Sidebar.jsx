@@ -14,7 +14,11 @@ const Sidebar = ({ currentForm, currentPlayer }) => {
         <SidebarBody />
       </div>
       <div className="sidebar__row sidebar__row-buttons">
-        {currentForm !== 0 ? <SidebarButtons currentForm={currentForm} currentPlayer={currentPlayer} /> : ""}
+        {currentForm !== 0 && currentForm !== 9 ? (
+          <SidebarButtons currentForm={currentForm} currentPlayer={currentPlayer} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
