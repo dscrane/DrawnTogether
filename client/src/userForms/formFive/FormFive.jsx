@@ -18,11 +18,11 @@ export const FormFive = ({ responses, setResponses }) => {
           value={responses.religion || "DEFAULT"}
         >
           <option value="DEFAULT">Choose...</option>
-          <option value="1">Practitioner</option>
-          <option value="2">Agnostic</option>
-          <option value="3">God-fearing</option>
-          <option value="4">Wiccin</option>
-          <option value="5">Undecided</option>
+          <option value="solid">Practitioner</option>
+          <option value="round">Agnostic</option>
+          <option value="dotted">God-fearing</option>
+          <option value="uneven">Wiccin</option>
+          <option value="dashed">Undecided</option>
         </select>
       </div>
       <div className="form__item">

@@ -4,18 +4,26 @@ import { createLinearPath, createRadialGradient } from "../utils/circleHelpers";
 /* ------ */
 
 export const RingCircle = ({ id, playerCircle, centerPoint }) => {
-  const animation = (
+  const animation = playerCircle.isAnimated ? (
     <animateMotion dur="10s" repeatCount="indefinite">
       <mpath href={`#linearPath${id}`} />
     </animateMotion>
-  );
+  ) : null;
 
   return (
     <>
       <defs>
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
-        {createLinearPath(id, centerPoint, playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius)}
+        {createLinearPath(
+          id,
+          centerPoint,
+          playerCircle.xCartesian,
+          playerCircle.yCartesian,
+          playerCircle.radius,
+          playerCircle.lineDesign
+        )}
       </defs>
+      {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <g id={`circle_${id}`}>
         <circle
           key={`circle_${id}_inner`}
@@ -38,7 +46,7 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
           stroke={playerCircle.secondaryColor}
           fill="none"
         />
-        {playerCircle.isAnimated ? animation : null}
+        {animation}
       </g>
     </>
   );

@@ -10,6 +10,7 @@ import {
   convertToCartesian,
   createSecondaryColor,
   setAlternateDesignWeight,
+  createLineDesign,
 } from "./circleHelpers";
 
 const centerPoint = {
@@ -21,12 +22,22 @@ const centerPoint = {
  * Function that draws the player circles
  * @function drawPlayerCircles
  * @param {players[]} players -- Array of player objects
+ * @param {boolean} displayInitial -- display initial circles as well
  * @return {players[]} Array of player objects with newly created circleSVGs
  */
-export function updatePlayerCircles(players) {
-  return players.map((player) => {
-    return player.circleSVG;
+export function updatePlayerCircles(players, currentForm) {
+  if (currentForm <= 8) {
+    console.info("less than 9");
+    return players.map((player) => {
+      return player.circleSVG;
+    });
+  }
+  const allCircles = [];
+  players.forEach((player) => {
+    allCircles.push(player.circleSVG, player.initialCircleSVG);
   });
+  console.log(allCircles);
+  return allCircles;
 }
 
 /**
@@ -40,30 +51,27 @@ export function updatePlayerCircles(players) {
 export function initialCircleVariables(player, displayGrid, currentPlayerId) {
   centerPoint.x = displayGrid.cx;
   centerPoint.y = displayGrid.cy;
-  const { init_degree, init_slice } = setPlayerDegree(player.interest, player.gender, player.diet);
+  const { degree, slice } = setPlayerDegree(player.interest, player.gender, player.diet);
 
   const initial = {
-    init_degree,
-    init_slice,
-    init_radius: setCircleRadius(player.association),
-    init_radian: parseInt(player.age),
-    ...createFillColor(player.height, init_degree),
-    ...convertToCartesian(centerPoint, player.age, init_degree),
+    degree,
+    slice,
+    radius: setCircleRadius(player.association),
+    radian: parseInt(player.age),
+    ...createFillColor(player.height, degree),
+    ...convertToCartesian(centerPoint, player.age, degree),
+    design: "initialCircle",
   };
 
   let playerCircle = {
     initial: { ...initial },
+    ...initial,
     isAnimated: true,
     design: "defaultCircle",
   };
 
-  for (let key in initial) {
-    let parsedKey = key.substring(5);
-    playerCircle[parsedKey] = initial[key];
-  }
-
+  player.initialCircleSVG = createCircleDesign(currentPlayerId, initial, centerPoint);
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
-  console.log(player.circleSVG);
   return playerCircle;
 }
 
@@ -76,7 +84,7 @@ export function initialCircleVariables(player, displayGrid, currentPlayerId) {
 export function circleAlterationOne(player, currentPlayerId) {
   const playerCircle = {
     ...player.circle,
-    radius: altRadius(player.circle.initial.init_radius, player.time, player.personality),
+    radius: altRadius(player.circle.initial.radius, player.time, player.personality),
   };
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
@@ -91,13 +99,7 @@ export function circleAlterationOne(player, currentPlayerId) {
 export function circleAlterationTwo(player, currentPlayerId) {
   const playerCircle = {
     ...player.circle,
-    ...altCartesian(
-      centerPoint,
-      player.circle.initial.init_degree,
-      player.circle.initial.init_radian,
-      player.food,
-      player.hair
-    ),
+    ...altCartesian(centerPoint, player.circle.initial.degree, player.circle.initial.radian, player.food, player.hair),
   };
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
@@ -113,7 +115,7 @@ export function circleAlterationThree(player, currentPlayerId) {
   let playerCircle = player.circle;
   const secondaryColor = createSecondaryColor(
     player.progress,
-    playerCircle.initial.init_hue,
+    playerCircle.initial.hue,
     playerCircle.saturation,
     playerCircle.lightness
   );
@@ -135,7 +137,10 @@ export function circleAlterationThree(player, currentPlayerId) {
  * */
 export function circleAlterationFour(player, currentPlayerId) {
   let playerCircle = player.circle;
-  playerCircle = { ...playerCircle };
+  playerCircle = {
+    ...playerCircle,
+  };
+  playerCircle.lineDesign = createLineDesign(player.religion, "hsl(0, 0%, 50%)");
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
@@ -168,7 +173,7 @@ export function finalCircleDisplay(player, currentPlayerId) {
     ...playerCircle,
     isAnimated: false,
   };
-
+  playerCircle.lineDesign = createLineDesign(player.religion, playerCircle.initial.color);
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }

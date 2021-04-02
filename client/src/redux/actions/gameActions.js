@@ -72,6 +72,13 @@ export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
     type: NEXT_FORM,
     payload: { currentPlayer: 0, currentForm: newForm, updateCircles: false },
   });
+
+  if (currentForm > 2) {
+    await dispatch({
+      type: UPDATE_CIRCLES,
+      payload: { displayCircles: true },
+    });
+  }
 };
 /* ----   ****    ---- */
 

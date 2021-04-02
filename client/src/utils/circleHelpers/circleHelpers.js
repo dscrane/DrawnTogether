@@ -22,23 +22,27 @@ export function createRadialGradient(id, centerPoint, hue, saturation, lightness
 
 /**
  * Creates the animation path for the player's circle
+ * @param {number} id -- playerCircle's player id
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @param {number} x -- playerCircle's x location
  * @param {number} y - playerCircle's y location
  * @param {number} r -- playerCircle's radius
- * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {Object} lineDesign -- playerCircle's stroke properties
  * @returns {JSX.Element} <path />
  */
-export function createLinearPath(id, centerPoint, x, y, r) {
-  return (
-    <path
-      id={`linearPath${id}`}
-      d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
-      stroke="grey"
-      strokeWidth="2px"
-      style={{ strokeDasharray: "10, 30" }}
-    />
-  );
+export function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
+  console.log(lineDesign);
+  if (lineDesign !== null) {
+    return (
+      <path
+        id={`linearPath${id}`}
+        d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
+        style={{ ...lineDesign }}
+      />
+    );
+  }
+
+  return <path id={`linearPath${id}`} d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`} />;
 }
 
 /**
@@ -67,16 +71,16 @@ export function createEssPath(x, y, r, id, centerPoint) {
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @param {number} age -- Current player's age value
  * @param {number} degree -- Current player's circle position in degrees
- * @returns {{init_yCartesian: number, init_xCartesian: number}} Cartesian coordinates for current player's circle on grid
+ * @returns {{yCartesian: number, xCartesian: number}} Cartesian coordinates for current player's circle on grid
  */
 export function convertToCartesian(centerPoint, age, degree) {
   const radian = age; //initialXLocation();
   const theta = degree * (Math.PI / 180); //initialYLocation();
 
-  let init_xCartesian = centerPoint.x + Math.round(radian * -Math.cos(theta));
-  let init_yCartesian = centerPoint.y + Math.round(radian * Math.sin(theta));
+  let xCartesian = centerPoint.x + Math.round(radian * -Math.cos(theta));
+  let yCartesian = centerPoint.y + Math.round(radian * Math.sin(theta));
 
-  return { init_xCartesian, init_yCartesian };
+  return { xCartesian, yCartesian };
 }
 
 /**
@@ -107,49 +111,49 @@ export function altCartesian(centerPoint, degree, radian, food, hair) {
  * @param {string} interest -- Current player's interest value
  * @param {number} gender -- Current player's gender value
  * @param {string} diet -- Current player's diet value
- * @returns {{init_slice: number, init_degree: number}} playerCircle's positional values
+ * @returns {{slice: number, degree: number}} playerCircle's positional values
  */
 export function setPlayerDegree(interest, gender, diet) {
-  let init_degree;
+  let degree;
   if (!interest || !gender || !diet) {
-    return { init_degree: 0, init_slice: 0 };
+    return { degree: 0, slice: 0 };
   }
-  const init_slice = Math.floor(Math.random() * 9) + parseInt(interest);
+  const slice = Math.floor(Math.random() * 9) + parseInt(interest);
   switch (diet) {
     case "carnivore":
       if (gender === 0) {
-        init_degree = init_slice;
+        degree = slice;
       } else if (gender % 2 === 0) {
-        init_degree = 136 + init_slice;
+        degree = 136 + slice;
       } else {
-        init_degree = init_slice;
+        degree = slice;
       }
       break;
     case "vegetarian":
       if (gender === 0) {
-        init_degree = 181 + init_slice;
+        degree = 181 + slice;
       } else if (gender % 2 === 0) {
-        init_degree = 316 + init_slice;
+        degree = 316 + slice;
       } else {
-        init_degree = 181 + init_slice;
+        degree = 181 + slice;
       }
       break;
     case "pescatarian":
       if (gender === 0) {
-        init_degree = 226 + init_slice;
+        degree = 226 + slice;
       } else if (gender % 2 === 0) {
-        init_degree = 226 + init_slice;
+        degree = 226 + slice;
       } else {
-        init_degree = 91 + init_slice;
+        degree = 91 + slice;
       }
       break;
     case "vegan":
       if (gender === 0) {
-        init_degree = 46 + init_slice;
+        degree = 46 + slice;
       } else if (gender % 2 === 0) {
-        init_degree = 46 + init_slice;
+        degree = 46 + slice;
       } else {
-        init_degree = 271 + init_slice;
+        degree = 271 + slice;
       }
       break;
     default:
@@ -157,7 +161,7 @@ export function setPlayerDegree(interest, gender, diet) {
       break;
   }
 
-  return { init_degree, init_slice };
+  return { degree, slice };
 }
 
 /**
@@ -201,18 +205,18 @@ export function altRadius(radius, time, personality) {
  * @function createFillColor
  * @param {number} height -- Current player's height value
  * @param {number} degree -- Current player's circle position in degrees
- * @returns {{init_hue: number, init_lightness: number, init_saturation: number, init_color: string}} Components to create hsl() color and complete hsl() string
+ * @returns {{hue: number, lightness: number, saturation: number, color: string}} Components to create hsl() color and complete hsl() string
  */
 export function createFillColor(height, degree) {
   if (!height) {
     return { hue: 0, lightness: 0, saturation: 0, color: "" };
   }
-  const init_hue = degree;
-  const init_lightness = Math.floor(Math.random() * height) + 25;
-  const init_saturation = 100 - (Math.floor(Math.random() * height) + 25);
+  const hue = degree;
+  const lightness = Math.floor(Math.random() * height) + 25;
+  const saturation = 100 - (Math.floor(Math.random() * height) + 25);
 
-  const init_color = `hsl(${init_hue},${init_lightness}%,${init_saturation}%)`;
-  return { init_hue, init_lightness, init_saturation, init_color };
+  const color = `hsl(${hue},${lightness}%,${saturation}%)`;
+  return { hue, lightness, saturation, color };
 }
 
 /**
@@ -249,6 +253,53 @@ export function createSecondaryColor(progress, hue, saturation, lightness) {
       console.info("%c[ERROR]: Switch - createSecondaryColor", "color: red");
   }
   return secondaryColor;
+}
+
+/**
+ * Creates stroke design for playerCircle linear path
+ * @param religion -- Current player's religion value
+ * @param strokeColor -- Stroke color for current player
+ * @returns {{strokeWidth: string, strokeLinecap: string, stroke, strokeDasharray: string}|{strokeWidth: string, strokeLinecap: string, stroke}}
+ */
+export function createLineDesign(religion, strokeColor) {
+  switch (religion) {
+    case "dotted":
+      return {
+        strokeDasharray: ".01% .5%",
+        strokeLinecap: "round",
+        stroke: strokeColor,
+        strokeWidth: "3px",
+      };
+    case "dashed":
+      return {
+        strokeDasharray: "2% 3%",
+        strokeLinecap: "square",
+        stroke: strokeColor,
+        strokeWidth: "3px",
+      };
+    case "uneven":
+      return {
+        strokeDasharray: "1% .5% 2%",
+        strokeLinecap: "square",
+        stroke: strokeColor,
+        strokeWidth: "3px",
+      };
+    case "solid":
+      return {
+        strokeLinecap: "square",
+        stroke: strokeColor,
+        strokeWidth: "3px",
+      };
+    case "round":
+      return {
+        strokeDasharray: "8% 3%",
+        strokeLinecap: "round",
+        stroke: strokeColor,
+        strokeWidth: "3px",
+      };
+    default:
+      console.info("%c[ERROR]: Switch - createLineDesign", "color: red");
+  }
 }
 
 /**
@@ -335,8 +386,14 @@ export function setAlternateDesignWeight(radius, media) {
  */
 export function createCircleDesign(currentPlayerId, playerCircle, centerPoint) {
   switch (playerCircle.design) {
+    case "initialCircle": {
+      console.log("initial hit");
+      return <DefaultCircle id={currentPlayerId} playerCircle={playerCircle} centerPoint={centerPoint} isInit={true} />;
+    }
     case "defaultCircle":
-      return <DefaultCircle id={currentPlayerId} playerCircle={playerCircle} centerPoint={centerPoint} />;
+      return (
+        <DefaultCircle id={currentPlayerId} playerCircle={playerCircle} centerPoint={centerPoint} isInit={false} />
+      );
     case "hollow":
       return <HollowCircle id={currentPlayerId} playerCircle={playerCircle} centerPoint={centerPoint} />;
     case "stroke":
