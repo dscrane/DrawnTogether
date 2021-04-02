@@ -22,12 +22,11 @@ const centerPoint = {
  * Function that draws the player circles
  * @function drawPlayerCircles
  * @param {players[]} players -- Array of player objects
- * @param {boolean} displayInitial -- display initial circles as well
+ * @param {number} currentForm -- Current form
  * @return {players[]} Array of player objects with newly created circleSVGs
  */
 export function updatePlayerCircles(players, currentForm) {
   if (currentForm <= 8) {
-    console.info("less than 9");
     return players.map((player) => {
       return player.circleSVG;
     });

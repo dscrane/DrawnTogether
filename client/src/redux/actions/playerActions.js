@@ -11,7 +11,6 @@ export const newPlayer = (responses, id) => (dispatch) => {
     },
   });
 };
-/* ----   ****    ---- */
 
 /* ----    SUBMIT_FORM ACTION CREATOR    ---- */
 export const submitForm = (currentPlayer, currentForm, responses) => async (dispatch) => {
@@ -44,7 +43,6 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (disp
     });
   }
 };
-/* ----   ****    ---- */
 
 export const updatePlayerCircle = (currentPlayer, currentForm) => (dispatch, getState) => {
   const { players, display, game } = getState();
@@ -70,6 +68,7 @@ export const updatePlayerCircle = (currentPlayer, currentForm) => (dispatch, get
       break;
     case 9:
       circle = circleUtils.finalCircleDisplay(players[currentPlayer], game.currentPlayer);
+      break;
     default:
       console.info("%c[ERROR]: Switch - updatePlayerDisplay", "color: red");
   }

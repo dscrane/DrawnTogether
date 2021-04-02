@@ -22,7 +22,6 @@ export const startGame = () => (dispatch) => {
     },
   });
 };
-/* ----   ****    ---- */
 
 /* ----   SET_INTEREST ACTION CREATOR    ---- */
 export const setInterest = (interest) => (dispatch) => {
@@ -31,13 +30,11 @@ export const setInterest = (interest) => (dispatch) => {
     payload: interest,
   });
 };
-/* ----   ****    ---- */
 
 /* ----   END_GAME ACTION CREATOR    ---- */
 export const endGame = () => (dispatch) => {
   dispatch({ type: END_GAME, payload: "Game Ended" });
 };
-/* ----   ****    ---- */
 
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
 export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
@@ -80,7 +77,6 @@ export const nextForm = (currentForm, currentPlayer) => async (dispatch) => {
     });
   }
 };
-/* ----   ****    ---- */
 
 /* ----   PREV_FORM ACTION CREATOR    ---- */
 export const prevForm = (currentForm) => (dispatch) => {
@@ -90,7 +86,6 @@ export const prevForm = (currentForm) => (dispatch) => {
     payload: { currentForm: newForm },
   });
 };
-/* ----   ****    ---- */
 
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
 export const nextPlayer = (currentPlayer) => (dispatch) => {
@@ -100,7 +95,6 @@ export const nextPlayer = (currentPlayer) => (dispatch) => {
     payload: nextPlayer,
   });
 };
-/* ----   ****    ---- */
 
 /* ----    PREV_PLAYER ACTION CREATOR    ---- */
 export const prevPlayer = (currentPlayer) => (dispatch) => {
@@ -110,13 +104,3 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
     payload: prevPlayer,
   });
 };
-/* ----   ****    ---- */
-
-/* ----   App component styles    ---- */
-/* ----   ****    ---- */
-
-/* ----   App component styles    ---- */
-/* ----   ****    ---- */
-
-/* ----   App component styles    ---- */
-/* ----   ****    ---- */

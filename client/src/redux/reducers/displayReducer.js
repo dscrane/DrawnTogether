@@ -21,7 +21,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_DISPLAY_GRID:
-      console.info("%c[UPDATE_DISPLAY_GRID]: ", "color: yellow", action.payload);
       return {
         ...state,
         grid: {
@@ -29,9 +28,7 @@ export default (state = INITIAL_STATE, action) => {
           ...action.payload,
         },
       };
-
     case UPDATE_VIEW:
-      console.info("%c[UPDATE_VIEW]: ", "color: yellow", action.payload);
       return {
         ...state,
         view: {
@@ -41,7 +38,6 @@ export default (state = INITIAL_STATE, action) => {
           ...action.payload,
         },
       };
-
     default:
       return state;
   }

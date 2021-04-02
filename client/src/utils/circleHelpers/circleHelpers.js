@@ -157,8 +157,7 @@ export function setPlayerDegree(interest, gender, diet) {
       }
       break;
     default:
-      console.log("there was an error with the Diet switch");
-      break;
+      console.info("%c[ERROR]: Switch - setPlayerDegree", "color: red");
   }
 
   return { degree, slice };
@@ -373,7 +372,7 @@ export function setAlternateDesignWeight(radius, media) {
     case "thinner":
       return radius * 0.5;
     default:
-      console.info("%c[ERROR]: Switch - createAlternateDesignVariables", "color: red");
+      console.info("%c[ERROR]: Switch - setAlternateDesignWeight", "color: red");
   }
 }
 
@@ -403,7 +402,6 @@ export function createCircleDesign(currentPlayerId, playerCircle, centerPoint) {
     case "dot":
       return <DotCircle id={currentPlayerId} playerCircle={playerCircle} centerPoint={centerPoint} />;
     default:
-      console.info("%c[ERROR]: Switch - circle design creation", "color: red");
-      console.log(playerCircle);
+      console.info("%c[ERROR]: Switch - createCircleDesign", "color: red");
   }
 }

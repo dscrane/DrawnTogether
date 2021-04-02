@@ -5,7 +5,6 @@ const INITIAL_STATE = [];
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case NEW_PLAYER:
-      console.info("%c[NEW_PLAYER]: ", "color: yellow", action.payload);
       return [
         ...state,
         {
@@ -13,9 +12,7 @@ export default (state = INITIAL_STATE, action) => {
           circle: { ...action.payload.circle },
         },
       ];
-
     case UPDATE_PLAYER:
-      console.info("%c[UPDATE_PLAYER]: ", "color: yellow", action.payload);
       return state.map((el, i) => {
         return i === action.payload.currentPlayer
           ? {
@@ -24,9 +21,7 @@ export default (state = INITIAL_STATE, action) => {
             }
           : el;
       });
-
     case UPDATE_PLAYER_CIRCLE:
-      console.info("%c[UPDATE_PLAYER_CIRCLE]: ", "color: yellow", action.payload);
       return state.map((el, i) => {
         return i === action.payload.currentPlayer
           ? {
@@ -37,13 +32,10 @@ export default (state = INITIAL_STATE, action) => {
             }
           : el;
       });
-
     case RESIZE_PLAYER_CIRCLES:
-      console.info("%c[RESIZE_PLAYER_CIRCLES]: ", "color: yellow", action.payload);
       return {
         ...state,
       };
-
     default:
       return state;
   }

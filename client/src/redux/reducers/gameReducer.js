@@ -29,61 +29,51 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     /* --- GAME REDUCERS --- */
     case START_GAME:
-      console.info("%c[START_GAME]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case END_GAME:
-      console.info("%c[END_GAME]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...INITIAL_STATE,
       };
     case SET_INTEREST:
-      console.info("%c[SET_INTEREST]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case UPDATE_CIRCLES:
-      console.info("%c[UPDATE_CIRCLES]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case DISPLAY_CIRCLES:
-      console.info("%c[DISPLAY_CIRCLES]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case DISPLAY_GRID:
-      console.info("%c[DISPLAY_GRID]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_FORM:
-      console.info("%c[NEXT_FORM]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_FORM:
-      console.info("%c[PREV_FORM]: ", "color: yellow", action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_PLAYER:
-      console.info("%c[NEXT_PLAYER]: ", "color: yellow", action.payload);
       return {
         ...state,
         currentPlayer: action.payload,
       };
     case PREV_PLAYER:
-      console.info("%c[PREV_PLAYER]: ", "color: yellow", action.payload);
       return {
         ...state,
         currentPlayer: action.payload,
