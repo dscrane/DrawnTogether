@@ -2,7 +2,24 @@ import React from "react";
 import { connect } from "react-redux";
 import { endGame, nextForm, prevForm } from "../../redux/actions";
 
-const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlayer }) => {
+const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlayer, numPlayers }) => {
+  const nextButton = () => {
+    return (
+      <button
+        type="submit"
+        className={`sidebar__button sidebar__button--game sidebar__button--game-next ${
+          currentPlayer !== numPlayers && currentForm > 2 ? "sidebar__button--game-disabled" : ""
+        }`}
+        id="nextButton"
+        onClick={() => nextForm(currentForm, currentPlayer)}
+      >
+        <span>
+          Next <br /> Form
+        </span>
+      </button>
+    );
+  };
+
   const prevButton = () => {
     if (currentForm === 1) {
       return (
@@ -36,16 +53,7 @@ const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlaye
         {prevButton()}
       </div>
       <div id="nextCol" className="sidebar__buttons--col">
-        <button
-          type="submit"
-          className="sidebar__button sidebar__button--game sidebar__button--game-next"
-          id="nextButton"
-          onClick={() => nextForm(currentForm, currentPlayer)}
-        >
-          <span>
-            Next <br /> Form
-          </span>
-        </button>
+        {nextButton()}
       </div>
     </div>
   );

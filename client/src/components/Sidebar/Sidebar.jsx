@@ -4,7 +4,7 @@ import { Header } from "../Header";
 import { SidebarBody } from "../SidebarBody";
 import { SidebarButtons } from "../SidebarButtons";
 
-const Sidebar = ({ currentForm, currentPlayer }) => {
+const Sidebar = ({ currentForm, currentPlayer, numPlayers }) => {
   return (
     <div className="sidebar" data-testid="component-Sidebar">
       <div className="sidebar__row sidebar__row-header">
@@ -15,7 +15,7 @@ const Sidebar = ({ currentForm, currentPlayer }) => {
       </div>
       <div className="sidebar__row sidebar__row-buttons">
         {currentForm !== 0 && currentForm !== 9 ? (
-          <SidebarButtons currentForm={currentForm} currentPlayer={currentPlayer} />
+          <SidebarButtons currentForm={currentForm} currentPlayer={currentPlayer} numPlayers={numPlayers} />
         ) : (
           ""
         )}
@@ -28,6 +28,7 @@ const mapStateToProps = ({ game }) => {
   return {
     currentForm: game.currentForm,
     currentPlayer: game.currentPlayer,
+    numPlayers: game.numPlayers,
   };
 };
 

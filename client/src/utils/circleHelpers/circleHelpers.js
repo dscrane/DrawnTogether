@@ -31,7 +31,6 @@ export function createRadialGradient(id, centerPoint, hue, saturation, lightness
  * @returns {JSX.Element} <path />
  */
 export function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
-  console.log(lineDesign);
   if (lineDesign !== null) {
     return (
       <path
@@ -278,7 +277,7 @@ export function createLineDesign(religion, strokeColor) {
       };
     case "uneven":
       return {
-        strokeDasharray: "1% .5% 2%",
+        strokeDasharray: "2% .5% 1.75%",
         strokeLinecap: "square",
         stroke: strokeColor,
         strokeWidth: "3px",
@@ -291,7 +290,7 @@ export function createLineDesign(religion, strokeColor) {
       };
     case "round":
       return {
-        strokeDasharray: "8% 3%",
+        strokeDasharray: "2% 3.5%",
         strokeLinecap: "round",
         stroke: strokeColor,
         strokeWidth: "3px",
@@ -364,13 +363,13 @@ export function averageColors(color, hue, saturation, lightness) {
 export function setAlternateDesignWeight(radius, media) {
   switch (media) {
     case "thicker":
-      return radius * 0.5;
+      return radius * 0.45;
     case "thick":
       return radius * 0.35;
     case "thin":
       return radius * 0.2;
     case "thinner":
-      return radius * 0.5;
+      return radius * 0.05;
     default:
       console.info("%c[ERROR]: Switch - setAlternateDesignWeight", "color: red");
   }
@@ -386,7 +385,6 @@ export function setAlternateDesignWeight(radius, media) {
 export function createCircleDesign(currentPlayerId, playerCircle, centerPoint) {
   switch (playerCircle.design) {
     case "initialCircle": {
-      console.log("initial hit");
       return <DefaultCircle id={currentPlayerId} playerCircle={playerCircle} centerPoint={centerPoint} isInit={true} />;
     }
     case "defaultCircle":

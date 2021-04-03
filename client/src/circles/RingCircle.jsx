@@ -9,7 +9,8 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
       <mpath href={`#linearPath${id}`} />
     </animateMotion>
   ) : null;
-
+  console.log("inner radius", playerCircle.radius - 2 * playerCircle.designThickness);
+  console.log("outer radius", playerCircle.radius - 0.5 * playerCircle.designThickness);
   return (
     <>
       <defs>

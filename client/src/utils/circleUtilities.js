@@ -155,6 +155,7 @@ export function circleAlterationFive(player, currentPlayerId) {
   playerCircle = {
     ...playerCircle,
     ...averageColors(player.color, playerCircle.hue, playerCircle.saturation, playerCircle.lightness),
+    isAnimated: false,
   };
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
@@ -170,9 +171,9 @@ export function finalCircleDisplay(player, currentPlayerId) {
   let playerCircle = player.circle;
   playerCircle = {
     ...playerCircle,
-    isAnimated: false,
   };
   playerCircle.lineDesign = createLineDesign(player.religion, playerCircle.initial.color);
+  console.log(playerCircle.lineDesign);
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }

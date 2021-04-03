@@ -45,6 +45,7 @@ export const submitForm = (currentPlayer, currentForm, responses) => async (disp
 };
 
 export const updatePlayerCircle = (currentPlayer, currentForm) => (dispatch, getState) => {
+  console.log(currentForm);
   const { players, display, game } = getState();
   let circle;
   switch (currentForm) {

@@ -1,4 +1,4 @@
-import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER, RESIZE_PLAYER_CIRCLES } from "../types";
+import { NEW_PLAYER, UPDATE_PLAYER_CIRCLE, UPDATE_PLAYER, RESIZE_PLAYER_CIRCLES, END_GAME } from "../types";
 
 const INITIAL_STATE = [];
 
@@ -36,6 +36,9 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
       };
+    case END_GAME:
+      return INITIAL_STATE;
+
     default:
       return state;
   }
