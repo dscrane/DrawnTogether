@@ -20,8 +20,8 @@ export const FormThree = ({ responses, setResponses }) => {
           <option value="DEFAULT">Choose...</option>
           <option value="0">Miserly</option>
           <option value="2">Spend-thrift</option>
-          <option value="3">Saver</option>
-          <option value="1">Does not Apply</option>
+          <option value="1">What's mine is yours</option>
+          <option value="3">Frugal</option>
         </select>
       </div>
       <div className="form__item">
@@ -36,8 +36,8 @@ export const FormThree = ({ responses, setResponses }) => {
           <option value="DEFAULT">Choose...</option>
           <option value="45">I will try anything</option>
           <option value="135">A foodie</option>
+          <option value="45">See it, Eat it</option>
           <option value="270">A picky eater</option>
-          <option value="45">See-food Dieter</option>
         </select>
       </div>
     </div>

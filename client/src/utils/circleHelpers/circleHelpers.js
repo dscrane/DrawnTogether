@@ -119,7 +119,7 @@ export function setPlayerDegree(interest, gender, diet) {
   }
   const slice = Math.floor(Math.random() * 9) + parseInt(interest);
   switch (diet) {
-    case "carnivore":
+    case "omnivore":
       if (gender === 0) {
         degree = slice;
       } else if (gender % 2 === 0) {

@@ -51,6 +51,10 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    if (JSON.stringify(responses) === "{}") {
+      alert("Please complete the form before continuing.");
+      return;
+    }
     await submitForm(currentPlayer, currentForm, responses);
     if (currentForm > 2) {
       await updatePlayerCircle(currentPlayer, currentForm);
