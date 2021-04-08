@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle } from "../../redux/actions";
+import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle, initializeUserGroup } from "../../redux/actions";
 import { FormDisplay } from "../FormDisplay";
 import { FormButtons } from "../FormButtons";
 import { createPlayerIcons } from "../../utils";
+import { SidebarButtons } from "../SidebarButtons";
+import { setInterestAndPlayers } from "../../redux_v2/actions/gameActions";
 
 const updateMessage = (
   <div className="body__updateMessage">
@@ -15,8 +17,8 @@ const updateMessage = (
   </div>
 );
 
-const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCircle, prevPlayer }) => {
-  const { currentForm, currentPlayer, numPlayers } = game;
+const FormContainer = ({ session, players, submitForm, nextPlayer, setInterestAndPlayers, prevPlayer }) => {
+  const { currentForm, currentPlayer, numPlayers } = session;
 
   const [responses, setResponses] = useState({});
   useEffect(() => {
@@ -24,11 +26,11 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   }, [submitForm]);
 
   const playerIconsAndButtons =
-    currentForm > 1 ? (
+    currentForm > 0 ? (
       <>
         <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>
         <div className="form__row form__row-buttons">
-          <FormButtons
+          <SidebarButtons
             players={players}
             prevPlayer={prevPlayer}
             numPlayers={numPlayers}
@@ -55,12 +57,7 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
       alert("Please complete the form before continuing.");
       return;
     }
-    await submitForm(currentPlayer, currentForm, responses);
-    if (currentForm > 2) {
-      await updatePlayerCircle(currentPlayer, currentForm);
-    }
-    setResponses({});
-    nextPlayer(currentPlayer);
+    await setInterestAndPlayers(responses);
   };
 
   const showForms = () => {
@@ -91,11 +88,11 @@ const FormContainer = ({ game, players, submitForm, nextPlayer, updatePlayerCirc
   );
 };
 
-const mapStateToProps = ({ game, players, display }) => {
+const mapStateToProps = ({ canvasDisplay, players, ...rest }) => {
   return {
-    game,
+    canvasDisplay,
     players,
-    display,
+    session: rest,
   };
 };
 
@@ -104,4 +101,5 @@ export default connect(mapStateToProps, {
   nextPlayer,
   prevPlayer,
   updatePlayerCircle,
+  setInterestAndPlayers,
 })(FormContainer);

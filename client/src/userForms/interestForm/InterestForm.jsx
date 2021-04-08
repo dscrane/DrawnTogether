@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const InterestForm = ({ setInterest }) => {
-  const [interest] = useState();
-
+export const InterestForm = ({ responses, setResponses }) => {
   const handleInterest = (event) => {
-    setInterest({ interest: event.target.value });
+    event.preventDefault();
+    setResponses({ ...responses, [event.target.name]: event.target.value });
+  };
+
+  const handleNumPlayers = (event) => {
+    event.preventDefault();
+    setResponses({ ...responses, [event.target.name]: parseInt(event.target.value) });
   };
 
   return (
@@ -13,10 +17,20 @@ export const InterestForm = ({ setInterest }) => {
         <input
           className="form__control"
           id="commonInterest"
-          type="name"
+          name="interest"
           onChange={handleInterest}
-          value={interest}
+          value={responses.interest || ""}
           placeholder="Common interest..."
+        />
+      </div>
+      <div className="form__item">
+        <input
+          className="form__control"
+          id="numPlayers"
+          name="numPlayers"
+          onChange={handleNumPlayers}
+          value={responses.numPlayers || ""}
+          placeholder="How many players are there..."
         />
       </div>
     </div>

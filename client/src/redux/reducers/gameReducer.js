@@ -8,7 +8,7 @@ import {
   UPDATE_CIRCLES,
   DISPLAY_CIRCLES,
   DISPLAY_GRID,
-  SET_INTEREST,
+  INITIALIZE_GROUP,
 } from "../types";
 
 const INITIAL_STATE = {
@@ -27,7 +27,6 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    /* --- GAME REDUCERS --- */
     case START_GAME:
       return {
         ...state,
@@ -38,7 +37,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...INITIAL_STATE,
       };
-    case SET_INTEREST:
+    case INITIALIZE_GROUP:
       return {
         ...state,
         ...action.payload,
@@ -78,7 +77,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         currentPlayer: action.payload,
       };
-    /* --- END GAME REDUCERS ---*/
     default:
       return state;
   }

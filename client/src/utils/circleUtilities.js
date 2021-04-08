@@ -18,6 +18,16 @@ const centerPoint = {
   y: 0,
 };
 
+export const circleAlterations = {
+  3: initialCircleVariables,
+  4: circleAlterationOne,
+  5: circleAlterationTwo,
+  6: circleAlterationThree,
+  7: circleAlterationFour,
+  8: circleAlterationFive,
+  9: finalCircleDisplay,
+};
+
 /**
  * Function that draws the player circles
  * @function drawPlayerCircles

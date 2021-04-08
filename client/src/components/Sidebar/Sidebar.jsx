@@ -13,22 +13,22 @@ const Sidebar = ({ currentForm, currentPlayer, numPlayers }) => {
       <div className="sidebar__row sidebar__row-body">
         <SidebarBody />
       </div>
-      <div className="sidebar__row sidebar__row-buttons">
+      {/*<div className="sidebar__row sidebar__row-buttons">
         {currentForm !== 0 && currentForm !== 9 ? (
           <SidebarButtons currentForm={currentForm} currentPlayer={currentPlayer} numPlayers={numPlayers} />
         ) : (
           ""
         )}
-      </div>
+      </div>*/}
     </div>
   );
 };
 
-const mapStateToProps = ({ game }) => {
+const mapStateToProps = ({ currentForm, currentPlayer, numPlayers }) => {
   return {
-    currentForm: game.currentForm,
-    currentPlayer: game.currentPlayer,
-    numPlayers: game.numPlayers,
+    currentForm,
+    currentPlayer,
+    numPlayers,
   };
 };
 

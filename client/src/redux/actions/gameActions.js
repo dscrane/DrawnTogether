@@ -6,7 +6,7 @@ import {
   UPDATE_CIRCLES,
   DISPLAY_CIRCLES,
   DISPLAY_GRID,
-  SET_INTEREST,
+  INITIALIZE_GROUP,
   NEXT_PLAYER,
   PREV_PLAYER,
 } from "../types";
@@ -24,10 +24,10 @@ export const startGame = () => (dispatch) => {
 };
 
 /* ----   SET_INTEREST ACTION CREATOR    ---- */
-export const setInterest = (interest) => (dispatch) => {
+export const initializeUserGroup = (responses) => (dispatch) => {
   dispatch({
-    type: SET_INTEREST,
-    payload: interest,
+    type: INITIALIZE_GROUP,
+    payload: responses,
   });
 };
 

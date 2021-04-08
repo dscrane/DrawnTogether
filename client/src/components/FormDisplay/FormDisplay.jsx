@@ -1,14 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setInterest, startGame, endGame } from "../../redux/actions";
+
 import { InterestForm, PlayerForm, FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../../userForms";
 
-const FormDisplay = ({ form, setInterest, startGame, endGame, responses, setResponses }) => {
+const FormDisplay = ({ form, responses, setResponses, numPlayers }) => {
   switch (form) {
     case 1:
-      return <InterestForm setInterest={setInterest} />;
+      return <InterestForm responses={responses} setResponses={setResponses} />;
     case 2:
-      return <PlayerForm responses={responses} setResponses={setResponses} />;
+      let displayPlayerForms = [];
+      for (let i = 0; i < numPlayers; i++) {
+        displayPlayerForms.push(<PlayerForm responses={responses} setResponses={setResponses} />);
+      }
+      return <>{displayPlayerForms}</>;
     case 3:
       return <FormOne responses={responses} setResponses={setResponses} />;
     case 4:
@@ -26,4 +30,8 @@ const FormDisplay = ({ form, setInterest, startGame, endGame, responses, setResp
   }
 };
 
-export default connect(null, { setInterest, startGame, endGame })(FormDisplay);
+const mapStateToProps = ({ numPlayers }) => {
+  return numPlayers;
+};
+
+export default connect(mapStateToProps)(FormDisplay);

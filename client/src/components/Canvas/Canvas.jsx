@@ -5,7 +5,8 @@ import { updateGridDisplay, updateView, resizePlayerCircles } from "../../redux/
 import { debounce, CircleSVG } from "../../utils";
 import { CircleDisplay } from "../CircleDisplay";
 
-const Canvas = ({ display, game, players, updateGridDisplay, updateView, resizePlayerCircles }) => {
+const Canvas = ({ canvasDisplay, players, session, updateGridDisplay, updateView, resizePlayerCircles }) => {
+  console.info(canvasDisplay, players, session);
   const canvasSvg = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -29,26 +30,26 @@ const Canvas = ({ display, game, players, updateGridDisplay, updateView, resizeP
     }, 500);
     window.addEventListener("resize", debounceHandleResize);
     return (_) => window.removeEventListener("resize", debounceHandleResize);
-  }, [display.view, updateView]);
+  }, [canvasDisplay.view, updateView]);
 
-  /* Update the display grid based on new view dimensions */
+  /* Update the canvasDisplay grid based on new view dimensions */
   useEffect(() => {
-    updateGridDisplay(display.view, true);
-  }, [display.view]);
+    updateGridDisplay(canvasDisplay.view, true);
+  }, [canvasDisplay.view]);
 
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
-      {game.displayGrid ? <PolarGrid {...display} /> : null}
-      <CircleDisplay game={game} players={players} />
+      {session.displayGrid ? <PolarGrid {...canvasDisplay} /> : null}
+      <CircleDisplay session={session} players={players} />
     </svg>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ canvasDisplay, players, ...rest }) => {
   return {
-    display: state.display,
-    game: state.game,
-    players: state.players,
+    canvasDisplay,
+    players,
+    session: rest,
   };
 };
 

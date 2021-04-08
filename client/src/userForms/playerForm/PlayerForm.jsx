@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PlayerForm = ({ responses, setResponses }) => {
+export const PlayerForm = ({ responses, setResponses, numPlayers }) => {
   const handlePlayer = (event) => {
     event.preventDefault();
     setResponses({ ...responses, [event.target.name]: event.target.value });
@@ -36,9 +36,6 @@ export const PlayerForm = ({ responses, setResponses }) => {
           value={responses.association || ""}
           placeholder="7"
         />
-        <small id="interestHelp" className="form-text text-muted">
-          Only enter a whole number <br /> (round up if less that 1)
-        </small>
       </div>
     </div>
   );
