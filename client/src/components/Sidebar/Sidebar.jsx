@@ -4,7 +4,8 @@ import { Header } from "../Header";
 import { SidebarBody } from "../SidebarBody";
 import { SidebarButtons } from "../SidebarButtons";
 
-const Sidebar = ({ currentForm, currentPlayer, numPlayers }) => {
+const Sidebar = (gameState) => {
+  const { currentForm } = gameState;
   return (
     <div className="sidebar" data-testid="component-Sidebar">
       <div className="sidebar__row sidebar__row-header">
@@ -24,12 +25,8 @@ const Sidebar = ({ currentForm, currentPlayer, numPlayers }) => {
   );
 };
 
-const mapStateToProps = ({ currentForm, currentPlayer, numPlayers }) => {
-  return {
-    currentForm,
-    currentPlayer,
-    numPlayers,
-  };
+const mapStateToProps = ({ gameState }) => {
+  return { gameState: gameState };
 };
 
 export default connect(mapStateToProps)(Sidebar);

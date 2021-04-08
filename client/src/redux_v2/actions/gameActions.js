@@ -69,7 +69,7 @@ export const updatePlayer = (currentPlayer, responses) => (dispatch) => {
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
 export const updatePlayerCircle = (playerCircle) => (dispatch, getState) => {
-  const [currentForm, currentPlayer] = getState();
+  const [currentForm, currentPlayer] = getState().gameState;
   const updatedPlayerCircle = circleAlterations[currentForm](playerCircle);
   dispatch({
     type: UPDATE_PLAYER_CIRCLE,
@@ -78,9 +78,10 @@ export const updatePlayerCircle = (playerCircle) => (dispatch, getState) => {
 };
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
 export const nextForm = (currentForm) => async (dispatch, getState) => {
-  const [players] = getState();
+  console.log("next form", getState());
+  const { players, currentPlayer } = getState().gameState;
   const newForm = currentForm + 1;
-  const nextPlayer = players[0];
+  const nextPlayer = players.length === 0 ? currentPlayer : 0;
   await dispatch({
     type: NEXT_FORM,
     payload: { currentPlayer: nextPlayer, currentForm: newForm, updateCircles: true },

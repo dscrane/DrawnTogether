@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { endGame, nextPlayer, prevPlayer, startGame, submitForm } from "../../redux_v2/actions";
-import { FormContainer } from "../FormContainer";
+
 import { StartButton } from "../StartButton";
 import { ResetButton } from "../ResetButton";
+import { FormContainer } from "../FormContainer";
 
-const SidebarBody = ({ currentForm, currentPlayer, numPlayers, startGame, endGame, nextPlayer, prevPlayer }) => {
+const SidebarBody = ({ gameState, startGame, endGame }) => {
+  const { currentForm } = gameState;
   const landing = (
     <div className="sidebar__row sidebar__row-landing">
       <p className="landing__text">
@@ -33,15 +35,7 @@ const SidebarBody = ({ currentForm, currentPlayer, numPlayers, startGame, endGam
     } else if (currentForm === 9) {
       return reset;
     } else {
-      return (
-        <FormContainer
-          currentForm={currentForm}
-          currentPlayer={currentPlayer}
-          numPlayers={numPlayers}
-          nextPlayer={nextPlayer}
-          prevPlayer={prevPlayer}
-        />
-      );
+      return <FormContainer />;
     }
   };
 
@@ -52,8 +46,8 @@ const SidebarBody = ({ currentForm, currentPlayer, numPlayers, startGame, endGam
   );
 };
 
-const mapStateToProps = ({ currentForm, currentPlayer, numPlayers }) => {
-  return { currentForm, currentPlayer, numPlayers };
+const mapStateToProps = ({ gameState }) => {
+  return { gameState: gameState };
 };
 
 export default connect(mapStateToProps, {

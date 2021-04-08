@@ -11,14 +11,16 @@ import {
   INITIALIZE_GROUP,
   UPDATE_PLAYER,
   SET_INTEREST_AND_PLAYERS,
+  UPDATE_DISPLAY_GRID,
+  UPDATE_PLAYER_CIRCLE,
+  UPDATE_VIEW,
 } from "../types";
-import { UPDATE_DISPLAY_GRID, UPDATE_PLAYER_CIRCLE, UPDATE_VIEW } from "../../redux/types";
 
 const INITIAL_STATE = {
   inProgress: false,
   currentForm: 0,
   numPlayers: 0,
-  currentPlayer: null,
+  currentPlayer: 0,
   interest: "",
   displayGrid: false,
   updateCircles: false,
@@ -43,7 +45,10 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.info(action.type);
+  if (!action.type.startsWith("@@")) {
+    console.info(action.type, action.payload);
+  }
+
   switch (action.type) {
     case START_GAME:
       return {

@@ -1,42 +1,42 @@
 import React from "react";
+import { Field, FieldArray } from "redux-form";
 
-export const PlayerForm = ({ responses, setResponses, numPlayers }) => {
-  const handlePlayer = (event) => {
-    event.preventDefault();
-    setResponses({ ...responses, [event.target.name]: event.target.value });
-  };
-
-  const handleAssociation = (event) => {
-    event.preventDefault();
-    setResponses({
-      ...responses,
-      [event.target.name]: parseInt(event.target.value),
-    });
-  };
-
+const renderField = ({ input, label, placeholder, type, meta: { touched, error } }) => {
   return (
     <div className="form__group">
-      <div className="form__item">
-        <label className="form__label">Player Name</label>
-        <input
-          className="form__control"
-          name="name"
-          onChange={handlePlayer}
-          value={responses.name || ""}
-          placeholder="John Doe"
-        />
-      </div>
-
-      <div className="form__item">
-        <label className="form__label">Time Associated to Common Interest</label>
-        <input
-          className="form__control"
-          name="association"
-          onChange={handleAssociation}
-          value={responses.association || ""}
-          placeholder="7"
-        />
-      </div>
+      <label className="form__label">{label}</label>
+      <input className="form__control" {...input} type={type} placeholder={label + "..."} />
     </div>
   );
+};
+
+const addPlayerButton = (onClick) => {
+  return (
+    <button type="button" onClick={onClick}>
+      Add Player
+    </button>
+  );
+};
+
+const renderPlayers = ({ fields, meta: { error, submitFailed } }) => {
+  return (
+    <div>
+      {addPlayerButton(() => fields.push())}
+      {submitFailed && error && <span>{error}</span>}
+      {fields.map((player, index) => {
+        return (
+          <div key={index}>
+            <button type="button" title="Remove Player" onClick={() => fields.remove(index)} />
+            <h4>Player #{index + 1}</h4>
+            <Field name={`${player}.name`} type="text" component={renderField} label="Name" />
+            <Field name={`${player}.association`} type="text" component={renderField} label={"Association"} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export const PlayerForm = () => {
+  return <FieldArray name="players" component={renderPlayers} />;
 };

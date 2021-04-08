@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitForm, nextPlayer, prevPlayer, updatePlayerCircle, initializeUserGroup } from "../../redux/actions";
+import { submitForm, nextPlayer, prevPlayer, initializeUserGroup } from "../../redux/actions";
+import { FormArea } from "../FormArea";
 import { FormDisplay } from "../FormDisplay";
 import { FormButtons } from "../FormButtons";
-import { createPlayerIcons } from "../../utils";
+import { createPlayerIcons, handleFormSubmit } from "../../utils";
 import { SidebarButtons } from "../SidebarButtons";
-import { setInterestAndPlayers } from "../../redux_v2/actions/gameActions";
+import { setInterestAndPlayers, updatePlayerCircle, updatePlayer, nextForm } from "../../redux_v2/actions";
 
 const updateMessage = (
   <div className="body__updateMessage">
@@ -17,31 +18,13 @@ const updateMessage = (
   </div>
 );
 
-const FormContainer = ({ session, players, submitForm, nextPlayer, setInterestAndPlayers, prevPlayer }) => {
+const FormContainer = ({ session, players, updatePlayer, nextPlayer, setInterestAndPlayers, prevPlayer, nextForm }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
+  const [responses, setResponses] = useState([]);
 
-  const [responses, setResponses] = useState({});
   useEffect(() => {
-    setResponses({});
+    setResponses([]);
   }, [submitForm]);
-
-  const playerIconsAndButtons =
-    currentForm > 0 ? (
-      <>
-        <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>
-        <div className="form__row form__row-buttons">
-          <SidebarButtons
-            players={players}
-            prevPlayer={prevPlayer}
-            numPlayers={numPlayers}
-            currentForm={currentForm}
-            currentPlayer={currentPlayer}
-          />
-        </div>
-      </>
-    ) : (
-      <></>
-    );
 
   const displayInstructions = () => {
     if (currentForm === 1) {
@@ -51,44 +34,27 @@ const FormContainer = ({ session, players, submitForm, nextPlayer, setInterestAn
     }
   };
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    if (JSON.stringify(responses) === "{}") {
-      alert("Please complete the form before continuing.");
+  const iconRow = <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>;
+
+  const handleNext = async (formData) => {
+    console.log(formData);
+    if (currentForm === 1) {
+      await setInterestAndPlayers(formData);
+      await nextForm(currentForm);
       return;
     }
-    await setInterestAndPlayers(responses);
-  };
-
-  const showForms = () => {
-    if (currentForm > 2) {
-      return currentPlayer === numPlayers ? (
-        updateMessage
-      ) : (
-        <FormDisplay responses={responses} setResponses={setResponses} form={currentForm} />
-      );
-    } else {
-      return <FormDisplay responses={responses} setResponses={setResponses} form={currentForm} />;
-    }
+    nextForm(currentForm);
   };
 
   return (
     <div className="body__container" data-testid="component-FormContainer">
-      {currentForm < 3 ? <div className={"body__row body__row-instructions"}>{displayInstructions()}</div> : ""}
-      {players[currentPlayer] && currentForm > 2 ? (
-        <div className="body__row body__row-username">{players[currentPlayer].name}</div>
-      ) : (
-        ""
-      )}
-      <form onSubmit={onSubmit} className="form body__row body__row-form form-signin mt-2">
-        <div className="form__row form__row-content">{showForms()}</div>
-        {playerIconsAndButtons}
-      </form>
+      <FormArea onSubmit={handleNext} currentForm={currentForm} iconRow={iconRow} />
     </div>
   );
 };
 
-const mapStateToProps = ({ canvasDisplay, players, ...rest }) => {
+const mapStateToProps = ({ gameState }) => {
+  const { canvasDisplay, players, ...rest } = gameState;
   return {
     canvasDisplay,
     players,
@@ -97,9 +63,10 @@ const mapStateToProps = ({ canvasDisplay, players, ...rest }) => {
 };
 
 export default connect(mapStateToProps, {
-  submitForm,
+  updatePlayer,
   nextPlayer,
   prevPlayer,
+  nextForm,
   updatePlayerCircle,
   setInterestAndPlayers,
 })(FormContainer);

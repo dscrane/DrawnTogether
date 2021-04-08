@@ -1,37 +1,28 @@
 import React from "react";
-import { connect } from "react-redux";
-
 import { InterestForm, PlayerForm, FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../../userForms";
+import { FormSection } from "redux-form";
 
-const FormDisplay = ({ form, responses, setResponses, numPlayers }) => {
+const FormDisplay = ({ form, currentPlayer }) => {
   switch (form) {
     case 1:
-      return <InterestForm responses={responses} setResponses={setResponses} />;
+      return <InterestForm />;
     case 2:
-      let displayPlayerForms = [];
-      for (let i = 0; i < numPlayers; i++) {
-        displayPlayerForms.push(<PlayerForm responses={responses} setResponses={setResponses} />);
-      }
-      return <>{displayPlayerForms}</>;
+      console.log(<FormOne />);
+      return <FormOne />;
     case 3:
-      return <FormOne responses={responses} setResponses={setResponses} />;
+      return <FormTwo responses={null} setResponses={null} />;
     case 4:
-      return <FormTwo responses={responses} setResponses={setResponses} />;
+      return <FormThree responses={null} setResponses={null} />;
     case 5:
-      return <FormThree responses={responses} setResponses={setResponses} />;
+      return <FormFour responses={null} setResponses={null} />;
     case 6:
-      return <FormFour responses={responses} setResponses={setResponses} />;
+      return <FormFive responses={null} setResponses={null} />;
     case 7:
-      return <FormFive responses={responses} setResponses={setResponses} />;
-    case 8:
-      return <FormSix responses={responses} setResponses={setResponses} />;
+      return <FormSix responses={null} setResponses={null} />;
+
     default:
       console.log("FormArea switch has failed");
   }
 };
 
-const mapStateToProps = ({ numPlayers }) => {
-  return numPlayers;
-};
-
-export default connect(mapStateToProps)(FormDisplay);
+export default FormDisplay;

@@ -1,38 +1,21 @@
 import React from "react";
+import { Field } from "redux-form";
+import { PlayerForm } from "../playerForm";
 
-export const InterestForm = ({ responses, setResponses }) => {
-  const handleInterest = (event) => {
-    event.preventDefault();
-    setResponses({ ...responses, [event.target.name]: event.target.value });
-  };
-
-  const handleNumPlayers = (event) => {
-    event.preventDefault();
-    setResponses({ ...responses, [event.target.name]: parseInt(event.target.value) });
-  };
-
+export const InterestForm = () => {
   return (
     <div className="form__group">
       <div className="form__item">
-        <input
+        <Field
           className="form__control"
           id="commonInterest"
           name="interest"
-          onChange={handleInterest}
-          value={responses.interest || ""}
+          component="input"
+          type="text"
           placeholder="Common interest..."
         />
       </div>
-      <div className="form__item">
-        <input
-          className="form__control"
-          id="numPlayers"
-          name="numPlayers"
-          onChange={handleNumPlayers}
-          value={responses.numPlayers || ""}
-          placeholder="How many players are there..."
-        />
-      </div>
+      <PlayerForm />
     </div>
   );
 };

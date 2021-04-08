@@ -1,4 +1,5 @@
 import React from "react";
+import { updatePlayerCircle, updatePlayer, setInterestAndPlayers } from "../redux_v2/actions";
 
 export const debounce = (callback, wait) => {
   let timeoutID = null;
@@ -35,4 +36,11 @@ export const createPlayerIcons = (numPlayers, currentPlayer) => {
     }
   }
   return playerIcons;
+};
+
+export const handleFormSubmit = async (responses, currentPlayer, currentForm) => {
+  console.log("reached", currentForm, responses);
+
+  updatePlayer(responses, currentPlayer);
+  updatePlayerCircle();
 };
