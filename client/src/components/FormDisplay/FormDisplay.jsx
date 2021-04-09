@@ -5,10 +5,9 @@ import { FormSection } from "redux-form";
 const FormDisplay = ({ form, currentPlayer }) => {
   switch (form) {
     case 1:
-      return <InterestForm />;
+      return <PlayerForm />;
     case 2:
-      console.log(<FormOne />);
-      return <FormOne />;
+      return <FormOne currentPlayer={currentPlayer} />;
     case 3:
       return <FormTwo responses={null} setResponses={null} />;
     case 4:

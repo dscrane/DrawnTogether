@@ -51,7 +51,7 @@
   .sidebar {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     min-height: 100%;
   }
   .sidebar__row {
@@ -74,7 +74,7 @@
     width: 90%;
   }
   .sidebar__row-body {
-    justify-content: center;
+    justify-content: stretch;
     align-items: center;
   }
   .sidebar__row-buttons {
@@ -304,26 +304,66 @@
     justify-content: space-evenly;
     width: 100%;
   }
-  .form__item {
+  .formItem {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     overflow: hidden;
     margin: .5rem 0;
+    border-bottom: 1px solid lightgray;
   }
+
+  .formItem__interest {
+    border: none;
+  }
+
+  .formItem__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
+    margin: .25rem 0;
+
+  }
+
+  .formItem__name {
+    font-size: 1.75rem;
+    flex: 1;
+
+  }
+
+  .formItem__removeCTA {
+    margin: 0 0;
+    padding: 0 0;
+    background: none;
+    border-width: 0 0 1px 0;
+    border-color: red;
+    border-style: solid;
+    color: tomato;
+    font-size: 1.25rem;
+  }
+
+  .formItem__addCTA {
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+
+
+
   .form__label {
-    margin-bottom: 0.5rem;
+    margin: 0 0;
     font-size: 1.5rem;
     font-weight: 400;
     width: 75%;
+    flex: 1;
   }
   .form__control {
-    margin-bottom: 1rem;
+    flex: 2;
     font-size: 1.15rem;
     display: block;
     width: 75%;
-    height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
     font-weight: 400;
     line-height: 1.5;
@@ -334,6 +374,7 @@
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+
   .form__option {
     color: #495057;
     font-size: 1.15rem;

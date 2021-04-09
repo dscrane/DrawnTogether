@@ -1,1 +1,1 @@
-export * from "./FormOne";
+export { default as FormOne } from "./FormOne";

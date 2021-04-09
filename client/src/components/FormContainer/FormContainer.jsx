@@ -43,14 +43,13 @@ const FormContainer = ({ session, players, updatePlayer, nextPlayer, setInterest
       await nextForm(currentForm);
       return;
     }
-    nextForm(currentForm);
+
+    if (currentForm === 2) {
+      console.log(formData);
+    }
   };
 
-  return (
-    <div className="body__container" data-testid="component-FormContainer">
-      <FormArea onSubmit={handleNext} currentForm={currentForm} iconRow={iconRow} />
-    </div>
-  );
+  return <FormArea onSubmit={handleNext} currentForm={currentForm} iconRow={iconRow} />;
 };
 
 const mapStateToProps = ({ gameState }) => {

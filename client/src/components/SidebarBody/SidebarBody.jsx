@@ -39,11 +39,7 @@ const SidebarBody = ({ gameState, startGame, endGame }) => {
     }
   };
 
-  return (
-    <div data-testid="component-SidebarBody" className="body__display">
-      {displayBody()}
-    </div>
-  );
+  return <>{displayBody()}</>;
 };
 
 const mapStateToProps = ({ gameState }) => {
