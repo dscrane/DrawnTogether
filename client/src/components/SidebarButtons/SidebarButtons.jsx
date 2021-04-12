@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { endGame, nextForm, prevForm, submitForm } from "../../redux/actions";
+
 ///${ currentPlayer !== numPlayers && currentForm > 2 ? "sidebar__button--game-disabled" : ""}
-const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlayer, numPlayers }) => {
+const SidebarButtons = ({ nextText, prevText, handlePrevious }) => {
   const nextButton = () => {
     return (
       <button
@@ -10,9 +10,7 @@ const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlaye
         className={`sidebar__button sidebar__button--game sidebar__button--game-next `}
         id="nextButton"
       >
-        <span>
-          Next <br /> Form
-        </span>
+        <span>{nextText}</span>
       </button>
     );
   };
@@ -32,10 +30,13 @@ const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlaye
     //   );
     // } else {
     return (
-      <button className="sidebar__button sidebar__button--game sidebar__button--game-prev" id="prevButton">
-        <span>
-          Previous <br /> Form
-        </span>
+      <button
+        className="sidebar__button sidebar__button--game sidebar__button--game-prev"
+        id="prevButton"
+        type="button"
+        onClick={() => handlePrevious}
+      >
+        <span>{prevText}</span>
       </button>
     );
     // }
@@ -52,4 +53,4 @@ const SidebarButtons = ({ nextForm, prevForm, endGame, currentForm, currentPlaye
   );
 };
 
-export default connect(null, { nextForm, prevForm, endGame })(SidebarButtons);
+export default SidebarButtons;

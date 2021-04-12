@@ -1,55 +1,71 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitForm, nextPlayer, prevPlayer, initializeUserGroup } from "../../redux/actions";
 import { FormArea } from "../FormArea";
-import { FormDisplay } from "../FormDisplay";
-import { FormButtons } from "../FormButtons";
-import { createPlayerIcons, handleFormSubmit } from "../../utils";
-import { SidebarButtons } from "../SidebarButtons";
-import { setInterestAndPlayers, updatePlayerCircle, updatePlayer, nextForm } from "../../redux_v2/actions";
+import {
+  setInterestAndPlayers,
+  updatePlayerCircle,
+  updatePlayer,
+  nextForm,
+  prevForm,
+  nextPlayer,
+  prevPlayer,
+} from "../../redux_v2/actions";
 
-const updateMessage = (
-  <div className="body__updateMessage">
-    Click "Next Form"
-    <br /> to continue
-    <br /> or
-    <br /> go back
-    <br /> to change responses
-  </div>
-);
+const displayInstructions = (currentForm) => {
+  if (currentForm === 1) {
+    return "What is a common interest or relationship that connects your group?";
+  } else if (currentForm === 2) {
+    return "What is your name and how long have you been associated the common interest?";
+  }
+};
 
-const FormContainer = ({ session, players, updatePlayer, nextPlayer, setInterestAndPlayers, prevPlayer, nextForm }) => {
+const FormContainer = ({
+  session,
+  players,
+  updatePlayer,
+  nextPlayer,
+  setInterestAndPlayers,
+  prevPlayer,
+  nextForm,
+  prevForm,
+}) => {
   const { currentForm, currentPlayer, numPlayers } = session;
-  const [responses, setResponses] = useState([]);
 
-  useEffect(() => {
-    setResponses([]);
-  }, [submitForm]);
-
-  const displayInstructions = () => {
-    if (currentForm === 1) {
-      return "What is a common interest or relationship that connects your group?";
-    } else if (currentForm === 2) {
-      return "What is your name and how long have you been associated the common interest?";
+  const handlePrevious = async () => {
+    if (currentPlayer === 0) {
+      await prevForm(currentForm);
+    } else {
+      await prevPlayer(currentPlayer);
     }
   };
 
-  const iconRow = <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>;
-
   const handleNext = async (formData) => {
-    console.log("init", formData);
     if (currentForm === 1) {
       await setInterestAndPlayers(formData);
       await nextForm(currentForm);
       return;
     }
 
-    if (currentForm === 2) {
-      console.log(formData);
+    if (currentForm >= 2) {
+      if (currentPlayer < numPlayers) {
+        await updatePlayer(currentPlayer, formData[currentPlayer]);
+        await updatePlayerCircle(players[currentPlayer].circle);
+        await nextPlayer(currentPlayer);
+      } else {
+        await nextForm(currentForm);
+      }
     }
   };
 
-  return <FormArea onSubmit={handleNext} currentForm={currentForm} iconRow={iconRow} currentPlayer={currentPlayer} />;
+  return (
+    <FormArea
+      onSubmit={handleNext}
+      handlePrevious={handlePrevious}
+      currentForm={currentForm}
+      currentPlayer={currentPlayer}
+      numPlayers={numPlayers}
+    />
+  );
 };
 
 const mapStateToProps = ({ gameState }) => {
@@ -66,6 +82,7 @@ export default connect(mapStateToProps, {
   nextPlayer,
   prevPlayer,
   nextForm,
+  prevForm,
   updatePlayerCircle,
   setInterestAndPlayers,
 })(FormContainer);

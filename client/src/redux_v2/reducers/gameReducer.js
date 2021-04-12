@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   interest: "",
   displayGrid: false,
   updateCircles: false,
-  players: [],
+  players: {},
   canvasDisplay: {
     adjustmentMultiplier: 1,
     view: {
@@ -83,28 +83,40 @@ export default (state = INITIAL_STATE, action) => {
     case SET_INTEREST_AND_PLAYERS:
       return {
         ...state,
-        ...action.payload,
+        interest: action.payload.interest,
+        numPlayers: action.payload.numPlayers,
+        players: {
+          ...state.players,
+          ...action.payload.responses,
+          circle: {},
+        },
       };
     case UPDATE_PLAYER:
-      return state.players.map((el, i) => {
-        return i === action.payload.currentPlayer
-          ? {
-              ...el,
-              ...action.payload.responses,
-            }
-          : el;
-      });
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          [action.payload.currentPlayer]: {
+            ...state.players[action.payload.currentPlayer],
+            ...action.payload.responses,
+          },
+        },
+      };
     case UPDATE_PLAYER_CIRCLE:
-      return state.players.map((el, i) => {
-        return i === action.payload.currentPlayer
-          ? {
-              ...el,
-              circle: {
-                ...action.payload.updatedCircle,
-              },
-            }
-          : el;
-      });
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          [action.payload.currentPlayer]: {
+            ...state.players[action.payload.currentPlayer],
+            circle: {
+              ...state.players[action.payload.currentPlayer].circle,
+              ...action.payload.updatedCircle,
+            },
+          },
+        },
+      };
+
     case UPDATE_DISPLAY_GRID:
       return {
         ...state,

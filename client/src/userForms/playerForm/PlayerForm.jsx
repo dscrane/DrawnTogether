@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Field, FieldArray, FormSection } from "redux-form";
+import { Field, FormSection } from "redux-form";
 
+// Create the inputs for each player field
 const renderField = ({ input, label, type, meta: { touched, error } }) => {
   return (
     <div className="formItem__row">
@@ -10,32 +11,21 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
   );
 };
 
-const createInitialPlayerForms = () => {
-  // return (
-  //   <div key={i} className="formItem">
-  //     <div className="formItem__row">
-  //       <div className="formItem__name">Player #{index + 1}</div>
-  //     </div>
-  //     <Field name={`${i}.name`} type="text" component={renderField} label="Name" />
-  //     <Field name={`${i}.association`} type="text" component={renderField} label={"Association"} />
-  //   </div>
-  // );
-};
-
-const renderPlayerForm = (index, removeField, isInitial) => {
+// Create the player form fields
+const createPlayerFormField = (index, removeField, isInitial) => {
   if (isInitial) {
     return (
-      <div key={index} className="formItem">
+      <div key={index} className="formItem formItem__player">
         <div className="formItem__row">
           <div className="formItem__name">Player #{index + 1}</div>
         </div>
-        <Field name={`${index}.name`} type="text" component={renderField} label="Name" />
-        <Field name={`${index}.association`} type="text" component={renderField} label={"Association"} />
+        <Field name={"name"} type="text" component={renderField} label="Name" />
+        <Field name={"association"} type="text" component={renderField} label={"Association"} />
       </div>
     );
   } else {
     return (
-      <div key={index} className="formItem">
+      <div key={index} className="formItem formItem__player">
         <div className="formItem__row">
           <div className="formItem__name">Player #{index + 1}</div>
           <button
@@ -47,8 +37,8 @@ const renderPlayerForm = (index, removeField, isInitial) => {
             Remove
           </button>
         </div>
-        <Field name={`${index}.name`} type="text" component={renderField} label="Name" />
-        <Field name={`${index}.association`} type="text" component={renderField} label={"Association"} />
+        <Field name={"name"} type="text" component={renderField} label="Name" />
+        <Field name={"association"} type="text" component={renderField} label={"Association"} />
       </div>
     );
   }
@@ -57,24 +47,33 @@ const renderPlayerForm = (index, removeField, isInitial) => {
 export const PlayerForm = () => {
   const [formFields, setFormFields] = useState(null);
   const [additionalPlayerIndex, setAdditionalPlayerIndex] = useState(3);
+  // Display initial player sections
   useEffect(() => {
     let responseAreas = [];
     for (let i = 0; i < 3; i++) {
-      console.log("hello");
-      responseAreas.push(renderPlayerForm(i, null, true));
+      responseAreas.push(
+        <FormSection key={i} name={`${i}`}>
+          {createPlayerFormField(i, null, true)}
+        </FormSection>
+      );
     }
     setFormFields(responseAreas);
   }, []);
 
+  // Remove the current player field from display
   const removeField = (index) => {
     const newFormFieldArray = formFields.slice(index, 1);
-    console.log(newFormFieldArray);
     setFormFields(newFormFieldArray);
   };
 
+  // Add an additional player field to display
   const addField = () => {
-    console.log("adding field");
-    const newFormFieldArray = [...formFields, renderPlayerForm(additionalPlayerIndex, removeField, false)];
+    const newField = (
+      <FormSection name={`${additionalPlayerIndex}`}>
+        {createPlayerFormField(additionalPlayerIndex, removeField, false)}
+      </FormSection>
+    );
+    const newFormFieldArray = [...formFields, newField];
     setFormFields(newFormFieldArray);
     setAdditionalPlayerIndex(additionalPlayerIndex + 1);
   };

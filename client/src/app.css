@@ -311,6 +311,9 @@
     width: 100%;
     overflow: hidden;
     margin: .5rem 0;
+  }
+
+  .formItem__player {
     border-bottom: 1px solid lightgray;
   }
 
