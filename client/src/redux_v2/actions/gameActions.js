@@ -33,7 +33,6 @@ export const endGame = () => (dispatch) => {
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
 export const setInterestAndPlayers = ({ interest, ...responses }) => (dispatch) => {
-  console.log(interest);
   dispatch({
     type: SET_INTEREST_AND_PLAYERS,
     payload: { interest, responses, numPlayers: Object.keys(responses).length },
@@ -68,12 +67,14 @@ export const updatePlayer = (currentPlayer, responses) => (dispatch) => {
   });
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
-export const updatePlayerCircle = (playerCircle) => (dispatch, getState) => {
-  const [currentForm, currentPlayer] = getState().gameState;
-  const updatedPlayerCircle = circleAlterations[currentForm](playerCircle);
+export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
+  const { canvasDisplay } = getState().gameState;
+  console.log(player);
+  const updatedPlayerCircle = await circleAlterations[currentForm](player, currentPlayer, canvasDisplay.grid);
+  console.log(updatedPlayerCircle);
   dispatch({
     type: UPDATE_PLAYER_CIRCLE,
-    payload: { currentPlayer, updatedCircle: updatedPlayerCircle, updateCircles: true },
+    payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
   });
 };
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
@@ -88,9 +89,9 @@ export const nextForm = (currentForm) => async (dispatch, getState) => {
   });
 };
 /* ----   PREV_FORM ACTION CREATOR    ---- */
-export const prevForm = (currentForm) => (dispatch) => {
+export const prevForm = (currentForm) => async (dispatch) => {
   const newForm = currentForm - 1;
-  dispatch({
+  await dispatch({
     type: PREV_FORM,
     payload: { currentForm: newForm },
   });

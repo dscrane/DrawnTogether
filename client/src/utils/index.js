@@ -1,2 +1,2 @@
-export * from "./circleUtilities";
+export { circleAlterations, rerenderCircles } from "./circleUtilities";
 export * from "./utils";

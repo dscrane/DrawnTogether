@@ -45,42 +45,45 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  if (!action.type.startsWith("@@")) {
-    console.info(action.type, action.payload);
-  }
-
   switch (action.type) {
     case START_GAME:
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case END_GAME:
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...INITIAL_STATE,
       };
     case NEXT_FORM:
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_FORM:
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_PLAYER:
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_PLAYER:
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case SET_INTEREST_AND_PLAYERS:
+      console.info(action.type, action.payload);
       return {
         ...state,
         interest: action.payload.interest,
@@ -88,10 +91,10 @@ export default (state = INITIAL_STATE, action) => {
         players: {
           ...state.players,
           ...action.payload.responses,
-          circle: {},
         },
       };
     case UPDATE_PLAYER:
+      console.info(action.type, action.payload);
       return {
         ...state,
         players: {
@@ -102,7 +105,8 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
-    case UPDATE_PLAYER_CIRCLE:
+    /*    case CREATE_PLAYER_CIRCLE:
+    console.info(action.type, action.payload);
       return {
         ...state,
         players: {
@@ -110,14 +114,26 @@ export default (state = INITIAL_STATE, action) => {
           [action.payload.currentPlayer]: {
             ...state.players[action.payload.currentPlayer],
             circle: {
-              ...state.players[action.payload.currentPlayer].circle,
-              ...action.payload.updatedCircle,
+              ...action.payload.circle,
             },
+          },
+        },
+      };*/
+    case UPDATE_PLAYER_CIRCLE:
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          [action.payload.currentPlayer]: {
+            ...state.players[action.payload.currentPlayer],
+            ...action.payload.updatedPlayerCircle,
           },
         },
       };
 
     case UPDATE_DISPLAY_GRID:
+      console.info(action.type, action.payload);
       return {
         ...state,
         canvasDisplay: {
@@ -129,6 +145,7 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case UPDATE_VIEW:
+      console.info(action.type, action.payload);
       return {
         ...state,
         canvasDisplay: {

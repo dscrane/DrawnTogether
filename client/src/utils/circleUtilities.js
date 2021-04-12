@@ -18,37 +18,6 @@ const centerPoint = {
   y: 0,
 };
 
-export const circleAlterations = {
-  3: initialCircleVariables,
-  4: circleAlterationOne,
-  5: circleAlterationTwo,
-  6: circleAlterationThree,
-  7: circleAlterationFour,
-  8: circleAlterationFive,
-  9: finalCircleDisplay,
-};
-
-/**
- * Function that draws the player circles
- * @function drawPlayerCircles
- * @param {players[]} players -- Array of player objects
- * @param {number} currentForm -- Current form
- * @return {players[]} Array of player objects with newly created circleSVGs
- */
-export function updatePlayerCircles(players, currentForm) {
-  if (currentForm <= 8) {
-    return players.map((player) => {
-      return player.circleSVG;
-    });
-  }
-  const allCircles = [];
-  players.forEach((player) => {
-    allCircles.push(player.circleSVG, player.initialCircleSVG);
-  });
-  console.log(allCircles);
-  return allCircles;
-}
-
 /**
  * Initial circle creation
  * @function initialCircleVariable
@@ -57,7 +26,8 @@ export function updatePlayerCircles(players, currentForm) {
  * @param {number} currentPlayerId -- Id of the current player
  * @return {Object} playerCircle -- Updated player circle object
  * */
-export function initialCircleVariables(player, displayGrid, currentPlayerId) {
+function initialCircleVariables(player, currentPlayerId, displayGrid) {
+  console.log("even get here?", player);
   centerPoint.x = displayGrid.cx;
   centerPoint.y = displayGrid.cy;
   const { degree, slice } = setPlayerDegree(player.interest, player.gender, player.diet);
@@ -79,9 +49,9 @@ export function initialCircleVariables(player, displayGrid, currentPlayerId) {
     design: "defaultCircle",
   };
 
-  player.initialCircleSVG = createCircleDesign(currentPlayerId, initial, centerPoint);
-  player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
-  return playerCircle;
+  let initialCircleSVG = createCircleDesign(currentPlayerId, initial, centerPoint);
+  let circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
+  return { playerCircle, initialCircleSVG, circleSVG };
 }
 
 /**
@@ -90,7 +60,7 @@ export function initialCircleVariables(player, displayGrid, currentPlayerId) {
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * */
-export function circleAlterationOne(player, currentPlayerId) {
+function circleAlterationOne(player, currentPlayerId) {
   const playerCircle = {
     ...player.circle,
     radius: altRadius(player.circle.initial.radius, player.time, player.personality),
@@ -105,7 +75,7 @@ export function circleAlterationOne(player, currentPlayerId) {
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * */
-export function circleAlterationTwo(player, currentPlayerId) {
+function circleAlterationTwo(player, currentPlayerId) {
   const playerCircle = {
     ...player.circle,
     ...altCartesian(centerPoint, player.circle.initial.degree, player.circle.initial.radian, player.food, player.hair),
@@ -120,7 +90,7 @@ export function circleAlterationTwo(player, currentPlayerId) {
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * */
-export function circleAlterationThree(player, currentPlayerId) {
+function circleAlterationThree(player, currentPlayerId) {
   let playerCircle = player.circle;
   const secondaryColor = createSecondaryColor(
     player.progress,
@@ -144,7 +114,7 @@ export function circleAlterationThree(player, currentPlayerId) {
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * */
-export function circleAlterationFour(player, currentPlayerId) {
+function circleAlterationFour(player, currentPlayerId) {
   let playerCircle = player.circle;
   playerCircle = {
     ...playerCircle,
@@ -160,7 +130,7 @@ export function circleAlterationFour(player, currentPlayerId) {
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * */
-export function circleAlterationFive(player, currentPlayerId) {
+function circleAlterationFive(player, currentPlayerId) {
   let playerCircle = player.circle;
   playerCircle = {
     ...playerCircle,
@@ -177,7 +147,7 @@ export function circleAlterationFive(player, currentPlayerId) {
  * @param {object} player -- Current player object
  * @param {number} currentPlayerId -- Id of the current player
  * */
-export function finalCircleDisplay(player, currentPlayerId) {
+function finalCircleDisplay(player, currentPlayerId) {
   let playerCircle = player.circle;
   playerCircle = {
     ...playerCircle,
@@ -187,3 +157,36 @@ export function finalCircleDisplay(player, currentPlayerId) {
   player.circleSVG = createCircleDesign(currentPlayerId, playerCircle, centerPoint);
   return playerCircle;
 }
+
+const circleAlterations = {
+  2: initialCircleVariables,
+  3: circleAlterationOne,
+  4: circleAlterationTwo,
+  5: circleAlterationThree,
+  6: circleAlterationFour,
+  7: circleAlterationFive,
+  8: finalCircleDisplay,
+};
+
+/**
+ * Function that draws the player circles
+ * @function drawPlayerCircles
+ * @param {players[]} players -- Array of player objects
+ * @param {number} currentForm -- Current form
+ * @return {players[]} Array of player objects with newly created circleSVGs
+ */
+function rerenderCircles(players, currentForm) {
+  if (currentForm <= 8) {
+    return Object.keys(players).map((playerKey) => {
+      return players[playerKey].circleSVG;
+    });
+  }
+  const allCircles = [];
+  players.forEach((player) => {
+    allCircles.push(player.circleSVG, player.initialCircleSVG);
+  });
+  console.log(allCircles);
+  return allCircles;
+}
+
+export { circleAlterations, rerenderCircles };

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import * as circleUtils from "../../utils/circleUtilities";
+import { rerenderCircles } from "../../utils";
 
 const CircleDisplay = ({ session, players }) => {
   const [circleDisplay, setCircleDisplay] = useState(null);
   useEffect(() => {
-    setCircleDisplay(circleUtils.updatePlayerCircles(players, session.currentForm));
-  }, [session.currentForm]);
+    setCircleDisplay(rerenderCircles(players, session.currentPlayer));
+  }, [session.currentPlayer]);
 
   return <>{circleDisplay}</>;
 };

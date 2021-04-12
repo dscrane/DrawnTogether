@@ -6,7 +6,6 @@ import { debounce, CircleSVG } from "../../utils";
 import { CircleDisplay } from "../CircleDisplay";
 
 const Canvas = ({ canvasDisplay, players, session, updateGridDisplay, updateView, resizePlayerCircles }) => {
-  console.info(canvasDisplay, players, session);
   const canvasSvg = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -21,21 +20,21 @@ const Canvas = ({ canvasDisplay, players, session, updateGridDisplay, updateView
   }, []);
 
   /* Debounced handler for catching window resized and changing bounds for background grid */
-  // useEffect(() => {
-  //   const debounceHandleResize = debounce(function () {
-  //     updateView({
-  //       height: canvasSvg.current.height.baseVal.value,
-  //       width: canvasSvg.current.width.baseVal.value,
-  //     });
-  //   }, 500);
-  //   window.addEventListener("resize", debounceHandleResize);
-  //   return (_) => window.removeEventListener("resize", debounceHandleResize);
-  // }, [canvasDisplay.view, updateView]);
+  useEffect(() => {
+    const debounceHandleResize = debounce(function () {
+      updateView({
+        height: canvasSvg.current.height.baseVal.value,
+        width: canvasSvg.current.width.baseVal.value,
+      });
+    }, 500);
+    window.addEventListener("resize", debounceHandleResize);
+    return (_) => window.removeEventListener("resize", debounceHandleResize);
+  }, [canvasDisplay.view, updateView]);
 
   /* Update the canvasDisplay grid based on new view dimensions */
-  // useEffect(() => {
-  //   updateGridDisplay(canvasDisplay.view, true);
-  // }, [canvasDisplay.view]);
+  useEffect(() => {
+    updateGridDisplay(canvasDisplay.view, true);
+  }, [canvasDisplay.view]);
 
   return (
     <svg className="canvas__svg" ref={canvasSvg}>
@@ -45,9 +44,8 @@ const Canvas = ({ canvasDisplay, players, session, updateGridDisplay, updateView
   );
 };
 
-const mapStateToProps = (state) => {
-  console.log("ASDHFljkhaSLKDh", state);
-  const { canvasDisplay, players, ...rest } = state;
+const mapStateToProps = ({ gameState }) => {
+  const { canvasDisplay, players, ...rest } = gameState;
   return {
     canvasDisplay,
     players,

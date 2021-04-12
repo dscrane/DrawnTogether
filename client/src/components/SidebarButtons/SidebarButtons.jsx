@@ -34,7 +34,7 @@ const SidebarButtons = ({ nextText, prevText, handlePrevious }) => {
         className="sidebar__button sidebar__button--game sidebar__button--game-prev"
         id="prevButton"
         type="button"
-        onClick={() => handlePrevious}
+        onClick={() => handlePrevious()}
       >
         <span>{prevText}</span>
       </button>
