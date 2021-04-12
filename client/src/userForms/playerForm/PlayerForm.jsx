@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Field, FieldArray, FormSection } from "redux-form";
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => {
@@ -10,43 +10,75 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
   );
 };
 
-const addPlayerButton = (onClick) => {
-  return (
-    <button className="formItem__addCTA" type="button" onClick={onClick}>
-      Add Player
-    </button>
-  );
+const createInitialPlayerForms = () => {
+  // return (
+  //   <div key={i} className="formItem">
+  //     <div className="formItem__row">
+  //       <div className="formItem__name">Player #{index + 1}</div>
+  //     </div>
+  //     <Field name={`${i}.name`} type="text" component={renderField} label="Name" />
+  //     <Field name={`${i}.association`} type="text" component={renderField} label={"Association"} />
+  //   </div>
+  // );
 };
 
-const renderPlayers = ({ fields, meta: { error, submitFailed } }) => {
-  return (
-    <>
-      {addPlayerButton(() => fields.push())}
-      {submitFailed && error && <span>{error}</span>}
-      {fields.map((player, index) => {
-        return (
-          <div key={index} className="formItem">
-            <div className="formItem__row">
-              <div className="formItem__name">Player #{index + 1}</div>
-              <button
-                className="formItem__removeCTA"
-                type="button"
-                title="Remove Player"
-                onClick={() => fields.remove(index)}
-              >
-                Remove
-              </button>
-            </div>
-            <Field name={`${player}.name`} type="text" component={renderField} label="Name" />
-            <Field name={`${player}.association`} type="text" component={renderField} label={"Association"} />
-          </div>
-        );
-      })}
-    </>
-  );
+const renderPlayerForm = (index, removeField, isInitial) => {
+  if (isInitial) {
+    return (
+      <div key={index} className="formItem">
+        <div className="formItem__row">
+          <div className="formItem__name">Player #{index + 1}</div>
+        </div>
+        <Field name={`${index}.name`} type="text" component={renderField} label="Name" />
+        <Field name={`${index}.association`} type="text" component={renderField} label={"Association"} />
+      </div>
+    );
+  } else {
+    return (
+      <div key={index} className="formItem">
+        <div className="formItem__row">
+          <div className="formItem__name">Player #{index + 1}</div>
+          <button
+            className="formItem__removeCTA"
+            type="button"
+            title="Remove Player"
+            onClick={() => removeField(index)}
+          >
+            Remove
+          </button>
+        </div>
+        <Field name={`${index}.name`} type="text" component={renderField} label="Name" />
+        <Field name={`${index}.association`} type="text" component={renderField} label={"Association"} />
+      </div>
+    );
+  }
 };
 
 export const PlayerForm = () => {
+  const [formFields, setFormFields] = useState(null);
+  const [additionalPlayerIndex, setAdditionalPlayerIndex] = useState(3);
+  useEffect(() => {
+    let responseAreas = [];
+    for (let i = 0; i < 3; i++) {
+      console.log("hello");
+      responseAreas.push(renderPlayerForm(i, null, true));
+    }
+    setFormFields(responseAreas);
+  }, []);
+
+  const removeField = (index) => {
+    const newFormFieldArray = formFields.slice(index, 1);
+    console.log(newFormFieldArray);
+    setFormFields(newFormFieldArray);
+  };
+
+  const addField = () => {
+    console.log("adding field");
+    const newFormFieldArray = [...formFields, renderPlayerForm(additionalPlayerIndex, removeField, false)];
+    setFormFields(newFormFieldArray);
+    setAdditionalPlayerIndex(additionalPlayerIndex + 1);
+  };
+
   return (
     <div className="form__group">
       <div className="formItem formItem__interest">
@@ -59,7 +91,10 @@ export const PlayerForm = () => {
           placeholder="Common interest..."
         />
       </div>
-      <FieldArray name="players" /*fields={["0", "1", "2"]}*/ component={renderPlayers} />
+      {formFields}
+      <button className="formItem__addCTA" type="button" onClick={() => addField()}>
+        Add Player
+      </button>
     </div>
   );
 };

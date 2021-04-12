@@ -37,7 +37,7 @@ const FormContainer = ({ session, players, updatePlayer, nextPlayer, setInterest
   const iconRow = <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>;
 
   const handleNext = async (formData) => {
-    console.log(formData);
+    console.log("init", formData);
     if (currentForm === 1) {
       await setInterestAndPlayers(formData);
       await nextForm(currentForm);
@@ -49,7 +49,7 @@ const FormContainer = ({ session, players, updatePlayer, nextPlayer, setInterest
     }
   };
 
-  return <FormArea onSubmit={handleNext} currentForm={currentForm} iconRow={iconRow} />;
+  return <FormArea onSubmit={handleNext} currentForm={currentForm} iconRow={iconRow} currentPlayer={currentPlayer} />;
 };
 
 const mapStateToProps = ({ gameState }) => {

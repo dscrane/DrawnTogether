@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Field, formValues, FormSection } from "redux-form";
+import { Field, formValueSelector, FormSection } from "redux-form";
 
 const FormOne = ({ currentPlayer, playerForm }) => {
-  console.log(playerForm.fields.player == currentPlayer);
   return (
     <div className="form__group">
       <div className="form__item">
