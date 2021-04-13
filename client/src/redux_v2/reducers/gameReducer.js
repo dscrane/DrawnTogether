@@ -25,6 +25,15 @@ const INITIAL_STATE = {
   displayGrid: false,
   updateCircles: false,
   players: {},
+  circles: {
+    currentCircles: [],
+    fadeOneCircles: [],
+    fadeTwoCircles: [],
+    fadeThreeCircles: [],
+    fadeFourCircles: [],
+    fadeFiveCircles: [],
+    fadeSixCircles: [],
+  },
   canvasDisplay: {
     adjustmentMultiplier: 1,
     view: {
@@ -105,20 +114,6 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
-    /*    case CREATE_PLAYER_CIRCLE:
-    console.info(action.type, action.payload);
-      return {
-        ...state,
-        players: {
-          ...state.players,
-          [action.payload.currentPlayer]: {
-            ...state.players[action.payload.currentPlayer],
-            circle: {
-              ...action.payload.circle,
-            },
-          },
-        },
-      };*/
     case UPDATE_PLAYER_CIRCLE:
       console.info(action.type, action.payload);
       return {
@@ -131,7 +126,6 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
-
     case UPDATE_DISPLAY_GRID:
       console.info(action.type, action.payload);
       return {

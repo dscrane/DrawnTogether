@@ -35,7 +35,7 @@ const FormContainer = ({
   const { currentForm, currentPlayer, numPlayers } = session;
 
   useEffect(() => {
-    if (currentForm >= 2) {
+    if (currentForm >= 2 && currentPlayer > 0) {
       updatePlayerCircle(players[currentPlayer - 1], currentPlayer - 1, currentForm);
     }
   }, [currentPlayer]);

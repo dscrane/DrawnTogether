@@ -62,14 +62,14 @@ export const PlayerForm = () => {
 
   // Remove the current player field from display
   const removeField = (index) => {
-    const newFormFieldArray = formFields.slice(index, 1);
+    const newFormFieldArray = formFields.filter((field, i) => i !== index);
     setFormFields(newFormFieldArray);
   };
 
   // Add an additional player field to display
   const addField = () => {
     const newField = (
-      <FormSection name={`${additionalPlayerIndex}`}>
+      <FormSection key={`${additionalPlayerIndex}`} name={`${additionalPlayerIndex}`}>
         {createPlayerFormField(additionalPlayerIndex, removeField, false)}
       </FormSection>
     );
@@ -79,21 +79,25 @@ export const PlayerForm = () => {
   };
 
   return (
-    <div className="form__group">
-      <div className="formItem formItem__interest">
-        <Field
-          className="form__control form__control-interest"
-          id="commonInterest"
-          name="interest"
-          component="input"
-          type="text"
-          placeholder="Common interest..."
-        />
+    <>
+      <div className="form__group form__group-interest">
+        <div className="formItem formItem__interest">
+          <Field
+            className="form__control form__control-interest"
+            id="commonInterest"
+            name="interest"
+            component="input"
+            type="text"
+            placeholder="Common interest..."
+          />
+        </div>
       </div>
-      {formFields}
-      <button className="formItem__addCTA" type="button" onClick={() => addField()}>
-        Add Player
-      </button>
-    </div>
+      <div className="form__group form__group-content">
+        {formFields}
+        <button className="formItem__addCTA" type="button" onClick={() => addField()}>
+          Add Player
+        </button>
+      </div>
+    </>
   );
 };
