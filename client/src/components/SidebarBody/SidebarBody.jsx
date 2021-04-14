@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { endGame, nextPlayer, prevPlayer, startGame } from "../../redux_v2/actions";
+import { endGame, nextPlayer, prevPlayer, startGame } from "../../redux/actions";
 
 import { StartButton } from "../StartButton";
 import { ResetButton } from "../ResetButton";

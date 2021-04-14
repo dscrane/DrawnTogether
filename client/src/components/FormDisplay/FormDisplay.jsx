@@ -1,49 +1,56 @@
 import React from "react";
-import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../userForms";
-import { FormSection } from "redux-form";
+import { reduxForm } from "redux-form";
+import { SidebarButtons } from "../SidebarButtons";
+import { FormSwitch } from "../FormSwitch";
+import { PlayerForm } from "../userForms";
+import { createPlayerIcons } from "../../utils";
 
-const FormDisplay = ({ form, currentPlayer }) => {
-  switch (form) {
-    case 2:
-      return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormOne />
-        </FormSection>
-      );
-    case 3:
-      return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormTwo />
-        </FormSection>
-      );
-    case 4:
-      return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormThree />
-        </FormSection>
-      );
-    case 5:
-      return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormFour />
-        </FormSection>
-      );
-    case 6:
-      return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormFive />
-        </FormSection>
-      );
-    case 7:
-      return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormSix />
-        </FormSection>
-      );
+const FormDisplay = ({
+  handleSubmit,
+  handlePrevious,
+  pristine,
+  submitting,
+  currentForm,
+  currentPlayer,
+  numPlayers,
+}) => {
+  const renderPlayerFormOrNext =
+    currentPlayer !== numPlayers ? (
+      <>
+        <FormSwitch form={currentForm} currentPlayer={currentPlayer} numPlayers={numPlayers} />
+        <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>
+        <SidebarButtons prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
+      </>
+    ) : (
+      <>
+        <div className="body__updateMessage">
+          Click "Next Form"
+          <br /> to continue
+          <br /> or
+          <br /> go back
+          <br /> to change responses
+        </div>
+        <SidebarButtons prevText={"Back"} nextText={"Next Form"} handlePrevious={handlePrevious} />
+      </>
+    );
 
-    default:
-      console.log("FormArea switch has failed");
-  }
+  const renderFormElements =
+    currentForm !== 1 ? (
+      renderPlayerFormOrNext
+    ) : (
+      <>
+        <PlayerForm />
+        <SidebarButtons prevText={"Restart"} nextText={"Submit"} handlePrevious={handlePrevious} />
+      </>
+    );
+
+  return (
+    <form onSubmit={handleSubmit} className="form body__row body__row-form form-signin mt-2">
+      {renderFormElements}
+    </form>
+  );
 };
 
-export default FormDisplay;
+export default reduxForm({
+  form: "playerForm",
+})(FormDisplay);

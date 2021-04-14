@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
-import state from "../../redux_v2/reducers/gameReducer";
+import gameReducer from "./gameReducer";
 
-export default combineReducers({ state, form: formReducer });
+export default combineReducers({ gameState: gameReducer, form: formReducer });

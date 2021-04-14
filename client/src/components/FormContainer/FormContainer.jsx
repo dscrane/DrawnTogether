@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { FormArea } from "../FormArea";
+import { FormDisplay } from "../FormDisplay";
 import {
   setInterestAndPlayers,
   updatePlayerCircle,
@@ -10,7 +10,7 @@ import {
   nextPlayer,
   prevPlayer,
   endGame,
-} from "../../redux_v2/actions";
+} from "../../redux/actions";
 
 const FormContainer = ({
   session,
@@ -60,7 +60,7 @@ const FormContainer = ({
   };
 
   return (
-    <FormArea
+    <FormDisplay
       onSubmit={handleNext}
       handlePrevious={handlePrevious}
       currentForm={currentForm}
