@@ -307,7 +307,7 @@
   .formItem__name {
     font-size: 1.75rem;
     flex: 1;
-
+    text-align: center;
   }
 
   .formItem__removeCTA {
@@ -336,8 +336,11 @@
     width: 75%;
     flex: 1;
   }
+  .form__label-interest {
+    text-align: center;
+  }
   .form__control {
-    flex: 2;
+    flex: 2.75;
     font-size: 1.15rem;
     display: block;
     width: 75%;
@@ -350,6 +353,16 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+
+  .form__control-invalid {
+    border: 1px solid #ec7e49;
+  }
+  .form__message-error {
+    width: 15%;
+    text-align: right;
+    color: red;
   }
 
   .form__option {

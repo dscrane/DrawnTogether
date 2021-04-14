@@ -65,6 +65,10 @@ export { circleAlterations, rerenderCircles };
  * @return {Object} circle -- Updated player circle object
  * */
 function initialCircleVariables(player, currentPlayerId, displayGrid) {
+  if (player.circleSVG) {
+    console.log("initialization did not run");
+    return;
+  }
   centerPoint.x = displayGrid.cx;
   centerPoint.y = displayGrid.cy;
   const { degree, slice } = setPlayerDegree(player.interest, player.gender, player.diet);

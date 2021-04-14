@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Field, FormSection } from "redux-form";
+import { required, maxLength, number, maxValue, minValue } from "../../utils/validators";
 
 // Create the inputs for each player field
-const renderField = ({ input, label, type, meta: { touched, error } }) => {
+const renderField = ({ input, label, type, placeholder, meta: { touched, error, warning } }) => {
+  const toggleInvalidInput = touched && (warning || error) ? "form__control-invalid" : "";
+
   return (
-    <div className="formItem__row">
-      <label className="form__label">{label}</label>
-      <input className="form__control" {...input} type={type} placeholder={label + "..."} />
-    </div>
+    <>
+      <div className="formItem__row">
+        <label className="form__label">{label}</label>
+        <input
+          className={`form__control ${placeholder ? "form__control-interest" : ""} ${toggleInvalidInput}`}
+          {...input}
+          type={type}
+          placeholder={placeholder || label + "..."}
+        />
+        {touched &&
+          ((error && <div className="form__message-error">{error}</div>) || (warning && <div>{warning}</div>))}
+      </div>
+    </>
   );
 };
 
@@ -19,8 +31,22 @@ const createPlayerFormField = (index, removeField, isInitial) => {
         <div className="formItem__row">
           <div className="formItem__name">Player #{index + 1}</div>
         </div>
-        <Field name={"name"} type="text" component={renderField} label="Name" />
-        <Field name={"association"} type="text" component={renderField} label={"Association"} />
+        <Field
+          name={"name"}
+          type="text"
+          component={renderField}
+          label="Name"
+          validate={[required, maxLength]}
+          warn={maxLength}
+        />
+        <Field
+          name={"association"}
+          type="text"
+          component={renderField}
+          label={"Association"}
+          validate={[required, number, maxValue, minValue]}
+          warn={[number, maxValue, minValue]}
+        />
       </div>
     );
   } else {
@@ -37,8 +63,22 @@ const createPlayerFormField = (index, removeField, isInitial) => {
             Remove
           </button>
         </div>
-        <Field name={"name"} type="text" component={renderField} label="Name" />
-        <Field name={"association"} type="text" component={renderField} label={"Association"} />
+        <Field
+          name={"name"}
+          type="text"
+          component={renderField}
+          label="Name"
+          validate={[required, maxLength]}
+          warn={maxLength}
+        />
+        <Field
+          name={"association"}
+          type="text"
+          component={renderField}
+          label={"Association"}
+          validate={[required, number, maxValue, minValue]}
+          warn={[number, maxValue, minValue]}
+        />
       </div>
     );
   }
@@ -82,13 +122,15 @@ export const PlayerForm = () => {
     <>
       <div className="form__group form__group-interest">
         <div className="formItem formItem__interest">
+          <label className="form__label form__label-interest">Common Interest</label>
           <Field
-            className="form__control form__control-interest"
+            className={`form__control form__control-interest`}
             id="commonInterest"
             name="interest"
             component="input"
             type="text"
             placeholder="Common interest..."
+            validate={required}
           />
         </div>
       </div>

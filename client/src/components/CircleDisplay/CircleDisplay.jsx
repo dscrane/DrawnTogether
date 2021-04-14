@@ -3,12 +3,7 @@ import { connect } from "react-redux";
 import { rerenderCircles } from "../../utils";
 
 const CircleDisplay = ({ session, players, circles }) => {
-  const [circleDisplay, setCircleDisplay] = useState(null);
-  useEffect(() => {
-    setCircleDisplay(rerenderCircles(players, session.currentPlayer));
-  }, [session.currentPlayer]);
-
-  return <>{circleDisplay}</>;
+  return <>{rerenderCircles(players, session.currentPlayer)}</>;
 };
 
 const mapStateToProps = ({ gameState }) => {

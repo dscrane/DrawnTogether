@@ -43,7 +43,6 @@ const FormDisplay = ({
         <SidebarButtons prevText={"Restart"} nextText={"Submit"} handlePrevious={handlePrevious} />
       </>
     );
-
   return (
     <form onSubmit={handleSubmit} className="form body__row body__row-form form-signin mt-2">
       {renderFormElements}
