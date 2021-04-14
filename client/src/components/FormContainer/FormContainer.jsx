@@ -12,14 +12,6 @@ import {
   endGame,
 } from "../../redux_v2/actions";
 
-const displayInstructions = (currentForm) => {
-  if (currentForm === 1) {
-    return "What is a common interest or relationship that connects your group?";
-  } else if (currentForm === 2) {
-    return "What is your name and how long have you been associated the common interest?";
-  }
-};
-
 const FormContainer = ({
   session,
   players,
@@ -41,10 +33,9 @@ const FormContainer = ({
   }, [currentPlayer]);
 
   const handlePrevious = async () => {
-    console.log("handle previous");
     if (currentForm === 1) {
       await endGame();
-    } else if (currentPlayer < numPlayers) {
+    } else if (currentPlayer === 0) {
       await prevForm(currentForm);
     } else {
       await prevPlayer(currentPlayer);
@@ -58,7 +49,6 @@ const FormContainer = ({
       return;
     }
 
-    console.log("before if", formData[currentPlayer], players[currentPlayer]);
     if (currentForm >= 2) {
       if (currentPlayer < numPlayers) {
         await updatePlayer(currentPlayer, formData[currentPlayer]);

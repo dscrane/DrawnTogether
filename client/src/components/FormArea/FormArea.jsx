@@ -2,7 +2,7 @@ import React from "react";
 import { reduxForm } from "redux-form";
 import { SidebarButtons } from "../SidebarButtons";
 import { FormDisplay } from "../FormDisplay";
-import { PlayerForm } from "../../userForms";
+import { PlayerForm } from "../userForms";
 import { createPlayerIcons } from "../../utils";
 
 const FormArea = ({ handleSubmit, handlePrevious, pristine, submitting, currentForm, currentPlayer, numPlayers }) => {

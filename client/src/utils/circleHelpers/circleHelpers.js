@@ -1,5 +1,5 @@
 import React from "react";
-import { DefaultCircle, HollowCircle, StrokeCircle, RingCircle, DotCircle } from "../../circles";
+import { DefaultCircle, HollowCircle, StrokeCircle, RingCircle, DotCircle } from "../../components/circles";
 
 /**
  * Creates the playerCircle's radial gradient

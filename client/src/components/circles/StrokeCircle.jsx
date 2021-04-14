@@ -1,9 +1,9 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient } from "../utils/circleHelpers";
+import { createLinearPath, createRadialGradient } from "../../utils/circleHelpers";
 /* ------ */
 
-export const HollowCircle = ({ id, playerCircle, centerPoint }) => {
+export const StrokeCircle = ({ id, playerCircle, centerPoint }) => {
   const animation = playerCircle.isAnimated ? (
     <animateMotion dur="10s" repeatCount="indefinite">
       <mpath href={`#linearPath${id}`} />
@@ -30,8 +30,13 @@ export const HollowCircle = ({ id, playerCircle, centerPoint }) => {
         cy={playerCircle.isAnimated ? 0 : playerCircle.yCartesian}
         r={playerCircle.radius - 0.5 * playerCircle.designThickness}
         strokeWidth={playerCircle.designThickness}
-        stroke={playerCircle.color}
-        fill="none"
+        stroke={playerCircle.secondaryColor}
+        style={{
+          fill: `url(#radialGradient${id})`,
+          opacity: 1,
+          fillRule: "evenodd",
+          strokeLinecap: "round",
+        }}
       >
         {animation}
       </circle>

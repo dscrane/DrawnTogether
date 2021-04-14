@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { endGame, nextPlayer, prevPlayer, startGame, submitForm } from "../../redux_v2/actions";
+import { endGame, nextPlayer, prevPlayer, startGame } from "../../redux_v2/actions";
 
 import { StartButton } from "../StartButton";
 import { ResetButton } from "../ResetButton";
@@ -47,7 +47,6 @@ const mapStateToProps = ({ gameState }) => {
 };
 
 export default connect(mapStateToProps, {
-  submitForm,
   startGame,
   endGame,
   nextPlayer,

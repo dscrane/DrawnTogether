@@ -1,6 +1,6 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient } from "../utils/circleHelpers";
+import { createLinearPath, createRadialGradient } from "../../utils/circleHelpers";
 /* ------ */
 
 export const RingCircle = ({ id, playerCircle, centerPoint }) => {

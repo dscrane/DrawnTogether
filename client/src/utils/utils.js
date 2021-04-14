@@ -1,9 +1,8 @@
 import React from "react";
-import { updatePlayerCircle, updatePlayer, setInterestAndPlayers } from "../redux_v2/actions";
+import { headerIcons } from "../components/Header/headerIcons";
 
 export const debounce = (callback, wait) => {
   let timeoutID = null;
-
   return (...args) => {
     window.clearTimeout(timeoutID);
     timeoutID = window.setTimeout(() => {
@@ -38,9 +37,17 @@ export const createPlayerIcons = (numPlayers, currentPlayer) => {
   return playerIcons;
 };
 
-export const handleFormSubmit = async (responses, currentPlayer, currentForm) => {
-  console.log("reached", currentForm, responses);
-
-  updatePlayer(responses, currentPlayer);
-  updatePlayerCircle();
+export const createHeaderIcons = (headerIcons, currentForm) => {
+  const formNames = ["Interest", "Players", "Physical", "Personal", "Financial", "Natural", "Cultural", "Visual"];
+  return headerIcons.map((icon, i) => {
+    return i === currentForm - 1 ? (
+      <div key={`${formNames[i]}-active`}>
+        <span className="header__icon header__icon-active">{icon}</span>
+      </div>
+    ) : (
+      <div key={`${formNames[i]}`}>
+        <span className="header__icon">{icon}</span>
+      </div>
+    );
+  });
 };

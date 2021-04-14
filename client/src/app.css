@@ -106,47 +106,9 @@
     -ms-user-select: none;
     user-select: none;
   }
-  .sidebar__button--player {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: baseline;
-    color: #454545;
-    background: transparent none;
-    border: none;
-    padding: 0 0;
-    line-height: 3rem;
-  }
-  .sidebar__button--player:hover {
-    cursor: pointer;
-    color: #1f2225;
-  }
-  .sidebar__button--player:focus {
-    outline: none;
-  }
-  .sidebar__button--player-disabled {
-    pointer-events: none;
-    color: #898c8d;
-    border: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  .player__button--text {
-    margin: 0 .75rem 0 .75rem;
-    padding: 0 0;
-    font-size: 2rem;
-  }
-  .player__button--icon {
-    font-family: "Cormorant", serif;
-    font-size: 3rem;
-    margin: 0;
-    padding: 0;
-  }
   .sidebar__button--game {
-    font-size: 1.5rem;
-    padding: .5rem;
+    font-size: 1.75rem;
+    padding: 1rem;
     border-radius: 5px;
     line-height: 1.5rem;
   }

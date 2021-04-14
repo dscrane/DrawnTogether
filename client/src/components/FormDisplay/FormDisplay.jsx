@@ -1,5 +1,5 @@
 import React from "react";
-import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../../userForms";
+import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../userForms";
 import { FormSection } from "redux-form";
 
 const FormDisplay = ({ form, currentPlayer }) => {
