@@ -6,7 +6,10 @@ export const FormHeading = ({ currentPlayer, numPlayers, players }) => {
   let formTabs = [];
   for (let i = 0; i < numPlayers; i++) {
     formTabs.push(
-      <div key={`${players[i]}`} className={`heading__tab ${i === currentPlayer ? "heading__tab-active" : ""}`}>
+      <div
+        key={`${players[i].name}_${i}`}
+        className={`heading__tab ${i === currentPlayer ? "heading__tab-active" : ""}`}
+      >
         {players[i].name}
       </div>
     );
