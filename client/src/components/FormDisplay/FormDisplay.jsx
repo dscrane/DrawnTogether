@@ -18,7 +18,7 @@ const FormDisplay = ({
     currentPlayer !== numPlayers ? (
       <>
         <FormSwitch form={currentForm} currentPlayer={currentPlayer} numPlayers={numPlayers} />
-        <div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>
+        {/*<div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>*/}
         <SidebarButtons prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
       </>
     ) : (

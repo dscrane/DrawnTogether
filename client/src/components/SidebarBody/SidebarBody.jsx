@@ -39,7 +39,16 @@ const SidebarBody = ({ gameState, startGame, endGame }) => {
     }
   };
 
-  return <>{displayBody()}</>;
+  return (
+    <>
+      <div className="body__row body__row-instructions">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat.{" "}
+      </div>
+      {displayBody()}
+    </>
+  );
 };
 
 const mapStateToProps = ({ gameState }) => {

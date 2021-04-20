@@ -1,5 +1,5 @@
 import React from "react";
-import { headerIcons } from "../components/Header/headerIcons";
+import { HeaderIcon } from "../components/Header";
 
 export const debounce = (callback, wait) => {
   let timeoutID = null;
@@ -37,17 +37,13 @@ export const createPlayerIcons = (numPlayers, currentPlayer) => {
   return playerIcons;
 };
 
-export const createHeaderIcons = (headerIcons, currentForm) => {
-  const formNames = ["Interest", "Players", "Physical", "Personal", "Financial", "Natural", "Cultural", "Visual"];
-  return headerIcons.map((icon, i) => {
+export const createHeaderIcons = (currentForm) => {
+  const formNames = ["Participants", "Personal", "Mental", "Financial", "Natural", "Cultural", "Visual"];
+  return formNames.map((formName, i) => {
     return i === currentForm - 1 ? (
-      <div key={`${formNames[i]}-active`}>
-        <span className="header__icon header__icon-active">{icon}</span>
-      </div>
+      <HeaderIcon key={`${formName}-active`} formName={formName} isActive={true} />
     ) : (
-      <div key={`${formNames[i]}`}>
-        <span className="header__icon">{icon}</span>
-      </div>
+      <HeaderIcon key={`${formName}`} formName={formName} isActive={false} />
     );
   });
 };

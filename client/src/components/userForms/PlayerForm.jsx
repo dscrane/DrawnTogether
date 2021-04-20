@@ -24,98 +24,61 @@ const renderField = ({ input, label, type, placeholder, meta: { touched, error, 
 };
 
 // Create the player form fields
-const createPlayerFormField = (index, removeField, isInitial) => {
-  if (isInitial) {
-    return (
-      <div key={index} className="formItem formItem__player">
-        <div className="formItem__row">
-          <div className="formItem__name">Player #{index + 1}</div>
-        </div>
-        <Field
-          name={"name"}
-          type="text"
-          component={renderField}
-          label="Name"
-          validate={[required, maxLength]}
-          warn={maxLength}
-        />
-        <Field
-          name={"association"}
-          type="text"
-          component={renderField}
-          label={"Association"}
-          validate={[required, number, maxValue, minValue]}
-          warn={[number, maxValue, minValue]}
-        />
+const createPlayerFormField = (index, removeField) => {
+  return (
+    <div key={index} className="formItem formItem__player">
+      <div className="formItem__row">
+        <div className="formItem__name">Player #{index + 1}</div>
+        <button className="form__removeCTA" type="button" title="Remove Player" onClick={() => removeField(index)}>
+          Remove
+        </button>
       </div>
-    );
-  } else {
-    return (
-      <div key={index} className="formItem formItem__player">
-        <div className="formItem__row">
-          <div className="formItem__name">Player #{index + 1}</div>
-          <button
-            className="formItem__removeCTA"
-            type="button"
-            title="Remove Player"
-            onClick={() => removeField(index)}
-          >
-            Remove
-          </button>
-        </div>
-        <Field
-          name={"name"}
-          type="text"
-          component={renderField}
-          label="Name"
-          validate={[required, maxLength]}
-          warn={maxLength}
-        />
-        <Field
-          name={"association"}
-          type="text"
-          component={renderField}
-          label={"Association"}
-          validate={[required, number, maxValue, minValue]}
-          warn={[number, maxValue, minValue]}
-        />
-      </div>
-    );
-  }
+      <Field
+        name={"name"}
+        type="text"
+        component={renderField}
+        label="Name"
+        validate={[required, maxLength]}
+        warn={maxLength}
+      />
+      <Field
+        name={"association"}
+        type="text"
+        component={renderField}
+        label={"Association"}
+        validate={[required, number, maxValue, minValue]}
+        warn={[number, maxValue, minValue]}
+      />
+    </div>
+  );
 };
 
 export const PlayerForm = () => {
   const [formFields, setFormFields] = useState(null);
-  const [additionalPlayerIndex, setAdditionalPlayerIndex] = useState(3);
+  const [formFieldsDisplayed, setFormFieldsDisplayed] = useState(3);
   // Display initial player sections
   useEffect(() => {
     let responseAreas = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 6; i++) {
       responseAreas.push(
         <FormSection key={i} name={`${i}`}>
-          {createPlayerFormField(i, null, true)}
+          {createPlayerFormField(i, removeField)}
         </FormSection>
       );
     }
-    setFormFields(responseAreas);
-  }, []);
+    setFormFields(responseAreas.slice(0, formFieldsDisplayed));
+  }, [formFieldsDisplayed]);
 
   // Remove the current player field from display
-  const removeField = (index) => {
-    const newFormFieldArray = formFields.filter((field, i) => i !== index);
+  function removeField(index) {
+    const newFormFieldArray = formFields.filter((field) => Number(field.key) !== index);
+    setFormFieldsDisplayed(formFieldsDisplayed - 1);
     setFormFields(newFormFieldArray);
-  };
+  }
 
   // Add an additional player field to display
   const addField = () => {
-    const newField = (
-      <FormSection key={`${additionalPlayerIndex}`} name={`${additionalPlayerIndex}`}>
-        {createPlayerFormField(additionalPlayerIndex, removeField, false)}
-      </FormSection>
-    );
-    const newFormFieldArray = [...formFields, newField];
-    setFormFields(newFormFieldArray);
-    setAdditionalPlayerIndex(additionalPlayerIndex + 1);
+    setFormFieldsDisplayed(formFieldsDisplayed + 1);
   };
 
   return (
@@ -136,9 +99,11 @@ export const PlayerForm = () => {
       </div>
       <div className="form__group form__group-content">
         {formFields}
-        <button className="formItem__addCTA" type="button" onClick={() => addField()}>
-          Add Player
-        </button>
+        <div className="formItem formItem__addCTA">
+          <button className="form__addCTA" type="button" onClick={() => addField()}>
+            Add Player
+          </button>
+        </div>
       </div>
     </>
   );

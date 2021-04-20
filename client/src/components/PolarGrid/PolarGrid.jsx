@@ -17,7 +17,15 @@ const PolarGrid = ({ grid, view }) => {
     let i = ringSpacing * 10;
     while (i < svgRadius + ringSpacing) {
       rings.push(
-        <circle fill="none" style={{ stroke: "rgb(94,109,74)" }} r={i} cy={grid.cy} cx={grid.cx} strokeWidth="1.5" />
+        <circle
+          key={`circle_${i}`}
+          fill="none"
+          style={{ stroke: "#9DC88D", opacity: "50%" }}
+          r={i}
+          cy={grid.cy}
+          cx={grid.cx}
+          strokeWidth="1.5"
+        />
       );
       i += ringSpacing * 10;
     }
@@ -29,8 +37,9 @@ const PolarGrid = ({ grid, view }) => {
       const theta = i * (Math.PI / 180);
       fullLines.push(
         <line
+          key={`fullBlue_${i}`}
           strokeWidth="1.5"
-          style={{ stroke: "rgb(94,109,74)" }}
+          style={{ stroke: "#9DC88D", opacity: "50%" }}
           x1={grid.cx}
           y1={grid.cy}
           x2={grid.cx + svgRadius * -Math.cos(theta)}
@@ -49,6 +58,7 @@ const PolarGrid = ({ grid, view }) => {
       const theta = i * (Math.PI / 180);
       longLines.push(
         <line
+          key={`longBlue_${i}`}
           strokeWidth="1"
           style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 10 * -Math.cos(theta)}
@@ -69,6 +79,7 @@ const PolarGrid = ({ grid, view }) => {
       const theta = i * (Math.PI / 180);
       shortLines.push(
         <line
+          key={`shortBlue_${i}`}
           strokeWidth="1"
           style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 25 * -Math.cos(theta)}
@@ -90,6 +101,7 @@ const PolarGrid = ({ grid, view }) => {
       const theta = i * (Math.PI / 180);
       longWhiteLines.push(
         <line
+          key={`longWhite_${i}`}
           strokeWidth="1"
           style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 15 * -Math.cos(theta)}
@@ -111,6 +123,7 @@ const PolarGrid = ({ grid, view }) => {
       const theta = i * (Math.PI / 180);
       shortWhiteLines.push(
         <line
+          key={`shortWhite_${i}`}
           strokeWidth="1"
           style={{ stroke: "rgba(170,177,133,.35)" }}
           x1={grid.cx + ringSpacing * 35 * -Math.cos(theta)}

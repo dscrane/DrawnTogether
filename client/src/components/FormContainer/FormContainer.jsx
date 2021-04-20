@@ -11,6 +11,7 @@ import {
   prevPlayer,
   endGame,
 } from "../../redux/actions";
+import { FormHeading } from "../FormHeading";
 
 const FormContainer = ({
   session,
@@ -60,13 +61,17 @@ const FormContainer = ({
   };
 
   return (
-    <FormDisplay
-      onSubmit={handleNext}
-      handlePrevious={handlePrevious}
-      currentForm={currentForm}
-      currentPlayer={currentPlayer}
-      numPlayers={numPlayers}
-    />
+    <div className="form__container">
+      <i className="bi-alarm" role="img"></i>
+      {currentForm > 1 ? <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} /> : null}
+      <FormDisplay
+        onSubmit={handleNext}
+        handlePrevious={handlePrevious}
+        currentForm={currentForm}
+        currentPlayer={currentPlayer}
+        numPlayers={numPlayers}
+      />
+    </div>
   );
 };
 
