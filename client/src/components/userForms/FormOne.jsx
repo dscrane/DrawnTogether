@@ -3,10 +3,10 @@ import { Field } from "redux-form";
 
 export const FormOne = () => {
   return (
-    <div className="form__group">
+    <>
       <div className="formItem ">
         <label className="form__label">Height</label>
-        <Field className="form__control" name="height" id="formHeight" component="select">
+        <Field className="form__control form__control-select" name="height" id="formHeight" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="16">Tall</option>
           <option value="32">Average</option>
@@ -15,7 +15,7 @@ export const FormOne = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Interest</label>
-        <Field className="form__control" name="interest" id="formInterest" component="select">
+        <Field className="form__control form__control-select" name="interest" id="formInterest" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="27">Numbers</option>
           <option value="36">Words</option>
@@ -26,7 +26,7 @@ export const FormOne = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Gender</label>
-        <Field className="form__control" name="gender" id="formGender" component="select">
+        <Field className="form__control form__control-select" name="gender" id="formGender" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="2">Male</option>
           <option value="1">Female</option>
@@ -35,7 +35,7 @@ export const FormOne = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Age</label>
-        <Field className="form__control" name="age" id="formAge" component="select">
+        <Field className="form__control form__control-select" name="age" id="formAge" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="400">0-10</option>
           <option value="40">11-20</option>
@@ -51,7 +51,7 @@ export const FormOne = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Diet</label>
-        <Field className="form__control" name="diet" id="formDiet" component="select">
+        <Field className="form__control form__control-select" name="diet" id="formDiet" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="omnivore">Omnivore</option>
           <option value="vegetarian">Vegetarian</option>
@@ -59,6 +59,6 @@ export const FormOne = () => {
           <option value="vegan">Vegan</option>
         </Field>
       </div>
-    </div>
+    </>
   );
 };

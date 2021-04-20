@@ -16,11 +16,10 @@ const FormDisplay = ({
 }) => {
   const renderPlayerFormOrNext =
     currentPlayer !== numPlayers ? (
-      <>
+      <div className="form__group">
         <FormSwitch form={currentForm} currentPlayer={currentPlayer} numPlayers={numPlayers} />
-        {/*<div className="form__row form__row-icons">{createPlayerIcons(numPlayers, currentPlayer)}</div>*/}
         <SidebarButtons prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
-      </>
+      </div>
     ) : (
       <>
         <div className="body__updateMessage">
@@ -44,7 +43,10 @@ const FormDisplay = ({
       </>
     );
   return (
-    <form onSubmit={handleSubmit} className="form body__row body__row-form form-signin mt-2">
+    <form
+      onSubmit={handleSubmit}
+      className={`form ${currentForm > 1 ? "form-border" : ""} body__row body__row-form form-signin mt-2`}
+    >
       {renderFormElements}
     </form>
   );

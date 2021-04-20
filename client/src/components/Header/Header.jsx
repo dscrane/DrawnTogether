@@ -5,7 +5,6 @@ import { createHeaderIcons } from "../../utils";
 const Header = ({ currentForm }) => {
   const displayHeaderText = currentForm > 0 ? null : <></>;
   const displayHeaderIcons = currentForm > 0 ? createHeaderIcons(currentForm) : null;
-  console.log(displayHeaderIcons);
   return (
     <div className="header" data-testid="component-Header">
       <h1 className="header__title">

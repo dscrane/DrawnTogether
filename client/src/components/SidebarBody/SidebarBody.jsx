@@ -32,7 +32,7 @@ const SidebarBody = ({ gameState, startGame, endGame }) => {
   const displayBody = () => {
     if (currentForm === 0) {
       return landing;
-    } else if (currentForm === 9) {
+    } else if (currentForm === 8) {
       return reset;
     } else {
       return <FormContainer />;
@@ -44,7 +44,7 @@ const SidebarBody = ({ gameState, startGame, endGame }) => {
       <div className="body__row body__row-instructions">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.{" "}
+        consequat.
       </div>
       {displayBody()}
     </>

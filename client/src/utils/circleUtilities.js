@@ -38,7 +38,8 @@ const circleAlterations = {
  * @return {players[]} Array of player objects with newly created circleSVGs
  */
 function rerenderCircles(players, currentForm) {
-  if (currentForm <= 8) {
+  console.log("rerender ran", currentForm);
+  if (currentForm <= 7) {
     return Object.keys(players).map((playerKey) => {
       return players[playerKey].circleSVG;
     });
@@ -121,14 +122,12 @@ function circleAlterationOne(player, currentPlayerId) {
  * @param {number} currentPlayerId -- Id of the current player
  * */
 function circleAlterationTwo(player, currentPlayerId) {
-  let circles = player.circles;
   const circle = {
     ...player.circle,
     ...altCartesian(centerPoint, player.circle.initial.degree, player.circle.initial.radian, player.food, player.hair),
   };
   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  circles.push(circleSVG);
-  return { circle, circleSVG, circles };
+  return { circle, circleSVG };
 }
 
 /**
@@ -138,7 +137,7 @@ function circleAlterationTwo(player, currentPlayerId) {
  * @param {number} currentPlayerId -- Id of the current player
  * */
 function circleAlterationThree(player, currentPlayerId) {
-  let { circle, circles } = player;
+  let { circle } = player;
   const secondaryColor = createSecondaryColor(player.progress, circle.initial.hue, circle.saturation, circle.lightness);
   circle = {
     ...circle,
@@ -147,8 +146,7 @@ function circleAlterationThree(player, currentPlayerId) {
     designThickness: setAlternateDesignWeight(circle.radius, player.media),
   };
   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  circles.push(circleSVG);
-  return { circle, circleSVG, circles };
+  return { circle, circleSVG };
 }
 
 /**
@@ -158,14 +156,13 @@ function circleAlterationThree(player, currentPlayerId) {
  * @param {number} currentPlayerId -- Id of the current player
  * */
 function circleAlterationFour(player, currentPlayerId) {
-  let { circle, circles } = player;
+  let { circle } = player;
   circle = {
     ...circle,
   };
   circle.lineDesign = createLineDesign(player.religion, "hsl(0, 0%, 50%)");
   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  circles.push(circleSVG);
-  return { circle, circleSVG, circles };
+  return { circle, circleSVG };
 }
 
 /**
@@ -175,15 +172,14 @@ function circleAlterationFour(player, currentPlayerId) {
  * @param {number} currentPlayerId -- Id of the current player
  * */
 function circleAlterationFive(player, currentPlayerId) {
-  let { circle, circles } = player;
+  let { circle } = player;
   circle = {
     ...circle,
     ...averageColors(player.color, circle.hue, circle.saturation, circle.lightness),
     isAnimated: false,
   };
   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  circles.push(circleSVG);
-  return { circle, circleSVG, circles };
+  return { circle, circleSVG };
 }
 
 /**
@@ -201,5 +197,5 @@ function finalCircleDisplay(player, currentPlayerId) {
   console.log(circle.lineDesign);
   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
   circles.push(circleSVG);
-  return { circle, circleSVG, circles };
+  return circles;
 }

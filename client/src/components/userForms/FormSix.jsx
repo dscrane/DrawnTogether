@@ -3,10 +3,10 @@ import { Field } from "redux-form";
 
 export const FormSix = () => {
   return (
-    <div className="form__group">
+    <>
       <div className="formItem">
         <label className="form__label">Choose a Color</label>
-        <Field className="form__control" name="color" id="formColor" component="select">
+        <Field className="form__control form__control-select" name="color" id="formColor" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="chartreuse">Chartreuse</option>
           <option value="vermilion">Vermilion</option>
@@ -16,6 +16,6 @@ export const FormSix = () => {
           <option value="aubergine">Aubergine</option>
         </Field>
       </div>
-    </div>
+    </>
   );
 };

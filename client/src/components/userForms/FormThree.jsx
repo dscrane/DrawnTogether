@@ -3,10 +3,10 @@ import { Field } from "redux-form";
 
 export const FormThree = () => {
   return (
-    <div className="form__group">
+    <>
       <div className="formItem">
         <label className="form__label">Relationship to Money</label>
-        <Field className="form__control" name="money" id="formMoney" component="select">
+        <Field className="form__control form__control-select" name="money" id="formMoney" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="0">Miserly</option>
           <option value="2">Spend-thrift</option>
@@ -16,7 +16,7 @@ export const FormThree = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Relationship to Food</label>
-        <Field className="form__control" name="food" id="formFood" component="select">
+        <Field className="form__control form__control-select" name="food" id="formFood" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="45">I will try anything</option>
           <option value="135">A foodie</option>
@@ -24,6 +24,6 @@ export const FormThree = () => {
           <option value="270">A picky eater</option>
         </Field>
       </div>
-    </div>
+    </>
   );
 };

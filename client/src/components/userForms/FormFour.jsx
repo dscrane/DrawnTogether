@@ -3,10 +3,10 @@ import { Field } from "redux-form";
 
 export const FormFour = () => {
   return (
-    <div className="form__group">
+    <>
       <div className="formItem">
         <label className="form__label">Relationship to Nature</label>
-        <Field className="form__control" name="nature" id="formNature" component="select">
+        <Field className="form__control form__control-select" name="nature" id="formNature" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="hollow">Video Gamer</option>
           <option value="stroke">Happy on the porch</option>
@@ -16,7 +16,7 @@ export const FormFour = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Relationship to Social Media</label>
-        <Field className="form__control" name="media" id="formMedia" component="select">
+        <Field className="form__control form__control-select" name="media" id="formMedia" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="thinner">What is social media</option>
           <option value="thicker">Lurker</option>
@@ -26,7 +26,7 @@ export const FormFour = () => {
       </div>
       <div className="formItem">
         <label className="form__label">Relationship to Progress</label>
-        <Field className="form__control" name="progress" id="formProgress" component="select">
+        <Field className="form__control form__control-select" name="progress" id="formProgress" component="select">
           <option value="DEFAULT">Choose...</option>
           <option value="complimentary">Curmudgeon</option>
           <option value="triadic">C'est Le Vie</option>
@@ -34,6 +34,6 @@ export const FormFour = () => {
           <option value="analogous">Activist</option>
         </Field>
       </div>
-    </div>
+    </>
   );
 };

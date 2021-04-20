@@ -7,7 +7,16 @@ const PolarGrid = ({ grid, view }) => {
     const rings = [];
     let i = ringSpacing;
     while (i < svgRadius) {
-      rings.push(<circle fill="none" style={{ stroke: "rgba(170,177,133,.35)" }} r={i} cy={grid.cy} cx={grid.cx} />);
+      rings.push(
+        <circle
+          key={`thinCircle_${i}`}
+          fill="none"
+          style={{ stroke: "rgba(170,177,133,.35)" }}
+          r={i}
+          cy={grid.cy}
+          cx={grid.cx}
+        />
+      );
       i += ringSpacing;
     }
     return rings;
@@ -18,7 +27,7 @@ const PolarGrid = ({ grid, view }) => {
     while (i < svgRadius + ringSpacing) {
       rings.push(
         <circle
-          key={`circle_${i}`}
+          key={`thickCircle_${i}`}
           fill="none"
           style={{ stroke: "#9DC88D", opacity: "50%" }}
           r={i}

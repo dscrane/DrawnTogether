@@ -40,7 +40,8 @@ const FormSwitch = ({ form, currentPlayer }) => {
           <FormSix />
         </FormSection>
       );
-
+    case 8:
+      return <>hi</>;
     default:
       console.log("FormDisplay switch has failed");
   }

@@ -11,7 +11,7 @@ const renderField = ({ input, label, type, placeholder, meta: { touched, error, 
       <div className="formItem__row">
         <label className="form__label">{label}</label>
         <input
-          className={`form__control ${placeholder ? "form__control-interest" : ""} ${toggleInvalidInput}`}
+          className={`form__control form__control-input ${toggleInvalidInput}`}
           {...input}
           type={type}
           placeholder={placeholder || label + "..."}
@@ -55,7 +55,7 @@ const createPlayerFormField = (index, removeField) => {
 
 export const PlayerForm = () => {
   const [formFields, setFormFields] = useState(null);
-  const [formFieldsDisplayed, setFormFieldsDisplayed] = useState(3);
+  const [formFieldsDisplayed, setFormFieldsDisplayed] = useState(2);
   // Display initial player sections
   useEffect(() => {
     let responseAreas = [];
@@ -81,30 +81,31 @@ export const PlayerForm = () => {
     setFormFieldsDisplayed(formFieldsDisplayed + 1);
   };
 
+  const addFieldCTA =
+    formFields && formFields.length !== 5 ? (
+      <div className="formItem formItem__addCTA">
+        <button className="form__addCTA" type="button" onClick={() => addField()}>
+          Add Player
+        </button>
+      </div>
+    ) : null;
+
   return (
     <>
-      <div className="form__group form__group-interest">
-        <div className="formItem formItem__interest">
-          <label className="form__label form__label-interest">Common Interest</label>
-          <Field
-            className={`form__control form__control-interest`}
-            id="commonInterest"
-            name="interest"
-            component="input"
-            type="text"
-            placeholder="Common interest..."
-            validate={required}
-          />
-        </div>
+      <div className="formItem formItem__interest">
+        <label className="form__label form__label-interest">Common Interest</label>
+        <Field
+          className={`form__control form__control-input`}
+          id="commonInterest"
+          name="interest"
+          component="input"
+          type="text"
+          placeholder="Common interest..."
+          validate={required}
+        />
       </div>
-      <div className="form__group form__group-content">
-        {formFields}
-        <div className="formItem formItem__addCTA">
-          <button className="form__addCTA" type="button" onClick={() => addField()}>
-            Add Player
-          </button>
-        </div>
-      </div>
+      {formFields}
+      {addFieldCTA}
     </>
   );
 };

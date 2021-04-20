@@ -1,3 +1,4 @@
+import update from "react-addons-update";
 import {
   START_GAME,
   END_GAME,
@@ -14,6 +15,7 @@ import {
   UPDATE_DISPLAY_GRID,
   UPDATE_PLAYER_CIRCLE,
   UPDATE_VIEW,
+  FINAL_DISPLAY,
 } from "../types";
 
 const INITIAL_STATE = {
@@ -25,15 +27,8 @@ const INITIAL_STATE = {
   displayGrid: false,
   updateCircles: false,
   players: {},
-  circles: {
-    currentCircles: [],
-    fadeOneCircles: [],
-    fadeTwoCircles: [],
-    fadeThreeCircles: [],
-    fadeFourCircles: [],
-    fadeFiveCircles: [],
-    fadeSixCircles: [],
-  },
+  circles: [],
+  finalCircles: [],
   canvasDisplay: {
     adjustmentMultiplier: 1,
     view: {
@@ -97,6 +92,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         interest: action.payload.interest,
         numPlayers: action.payload.numPlayers,
+        circles: action.payload.circles,
         players: {
           ...state.players,
           ...action.payload.responses,
@@ -118,6 +114,11 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
+        circles: [
+          ...state.circles.map((circle, i) => {
+            return i !== action.payload.currentPlayer ? circle : action.payload.updatedPlayerCircle.circleSVG;
+          }),
+        ],
         players: {
           ...state.players,
           [action.payload.currentPlayer]: {
@@ -125,6 +126,12 @@ export default (state = INITIAL_STATE, action) => {
             ...action.payload.updatedPlayerCircle,
           },
         },
+      };
+    case FINAL_DISPLAY:
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        circles: action.payload.finalCircles,
       };
     case UPDATE_DISPLAY_GRID:
       console.info(action.type, action.payload);

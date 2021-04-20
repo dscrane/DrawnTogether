@@ -4,9 +4,7 @@ import {
   NEXT_FORM,
   PREV_FORM,
   UPDATE_PLAYER,
-  DISPLAY_CIRCLES,
-  DISPLAY_GRID,
-  INITIALIZE_GROUP,
+  FINAL_DISPLAY,
   SET_INTEREST_AND_PLAYERS,
   NEXT_PLAYER,
   PREV_PLAYER,
@@ -32,9 +30,11 @@ export const endGame = () => (dispatch) => {
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
 export const setInterestAndPlayers = ({ interest, ...responses }) => (dispatch) => {
+  const numPlayers = Object.keys(responses).length;
+  const circles = new Array(numPlayers).fill({});
   dispatch({
     type: SET_INTEREST_AND_PLAYERS,
-    payload: { interest, responses, numPlayers: Object.keys(responses).length },
+    payload: { interest, responses, numPlayers, circles },
   });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
@@ -73,6 +73,18 @@ export const updatePlayerCircle = (player, currentPlayer, currentForm) => async 
   dispatch({
     type: UPDATE_PLAYER_CIRCLE,
     payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
+  });
+};
+/* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
+export const finalDisplay = (players) => (dispatch, getState) => {
+  const allPlayerCircles = [...getState().gameState.circles];
+  console.log(players);
+  Object.keys(players).forEach((player) => {
+    allPlayerCircles.push(players[player].initialCircleSVG);
+  });
+  dispatch({
+    type: FINAL_DISPLAY,
+    payload: { finalCircles: allPlayerCircles },
   });
 };
 /* ----   NEXT_FORM ACTION CREATOR    ---- */

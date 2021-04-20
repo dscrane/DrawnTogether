@@ -41,9 +41,13 @@ export const createHeaderIcons = (currentForm) => {
   const formNames = ["Participants", "Personal", "Mental", "Financial", "Natural", "Cultural", "Visual"];
   return formNames.map((formName, i) => {
     return i === currentForm - 1 ? (
-      <HeaderIcon key={`${formName}-active`} formName={formName} isActive={true} />
+      <div key={`${formName}-active`} className="icon__container">
+        <HeaderIcon formName={formName} isActive={true} />
+      </div>
     ) : (
-      <HeaderIcon key={`${formName}`} formName={formName} isActive={false} />
+      <div key={`${formName}`} className="icon__container">
+        <HeaderIcon formName={formName} isActive={false} />
+      </div>
     );
   });
 };
