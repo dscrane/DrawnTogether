@@ -1,5 +1,6 @@
 import React from "react";
 
+const color = "hsla(104, 35%, 67%, .25)";
 const PolarGrid = ({ grid, view }) => {
   const svgRadius = Math.round(view.width / 2) * 0.99;
   const ringSpacing = svgRadius / 50;
@@ -8,14 +9,7 @@ const PolarGrid = ({ grid, view }) => {
     let i = ringSpacing;
     while (i < svgRadius) {
       rings.push(
-        <circle
-          key={`thinCircle_${i}`}
-          fill="none"
-          style={{ stroke: "rgba(170,177,133,.35)" }}
-          r={i}
-          cy={grid.cy}
-          cx={grid.cx}
-        />
+        <circle key={`thinCircle_${i}`} fill="none" style={{ stroke: `${color}` }} r={i} cy={grid.cy} cx={grid.cx} />
       );
       i += ringSpacing;
     }
@@ -29,7 +23,7 @@ const PolarGrid = ({ grid, view }) => {
         <circle
           key={`thickCircle_${i}`}
           fill="none"
-          style={{ stroke: "#9DC88D", opacity: "50%" }}
+          style={{ stroke: `${color}`, opacity: "50%" }}
           r={i}
           cy={grid.cy}
           cx={grid.cx}
@@ -48,7 +42,7 @@ const PolarGrid = ({ grid, view }) => {
         <line
           key={`fullBlue_${i}`}
           strokeWidth="1.5"
-          style={{ stroke: "#9DC88D", opacity: "50%" }}
+          style={{ stroke: `${color}`, opacity: "50%" }}
           x1={grid.cx}
           y1={grid.cy}
           x2={grid.cx + svgRadius * -Math.cos(theta)}
@@ -69,7 +63,7 @@ const PolarGrid = ({ grid, view }) => {
         <line
           key={`longBlue_${i}`}
           strokeWidth="1"
-          style={{ stroke: "rgba(170,177,133,.35)" }}
+          style={{ stroke: `${color}` }}
           x1={grid.cx + ringSpacing * 10 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 10 * Math.sin(theta)}
           x2={grid.cx + svgRadius * -Math.cos(theta)}
@@ -90,7 +84,7 @@ const PolarGrid = ({ grid, view }) => {
         <line
           key={`shortBlue_${i}`}
           strokeWidth="1"
-          style={{ stroke: "rgba(170,177,133,.35)" }}
+          style={{ stroke: `${color}` }}
           x1={grid.cx + ringSpacing * 25 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 25 * Math.sin(theta)}
           x2={grid.cx + svgRadius * -Math.cos(theta)}
@@ -112,7 +106,7 @@ const PolarGrid = ({ grid, view }) => {
         <line
           key={`longWhite_${i}`}
           strokeWidth="1"
-          style={{ stroke: "rgba(170,177,133,.35)" }}
+          style={{ stroke: `${color}` }}
           x1={grid.cx + ringSpacing * 15 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 15 * Math.sin(theta)}
           x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
@@ -134,7 +128,7 @@ const PolarGrid = ({ grid, view }) => {
         <line
           key={`shortWhite_${i}`}
           strokeWidth="1"
-          style={{ stroke: "rgba(170,177,133,.35)" }}
+          style={{ stroke: `${color}` }}
           x1={grid.cx + ringSpacing * 35 * -Math.cos(theta)}
           y1={grid.cy + ringSpacing * 35 * Math.sin(theta)}
           x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
