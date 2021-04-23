@@ -1,8 +1,14 @@
 :root {
   --black: #000000;
-  --white: #ffffff;
+  --white: ivory;
   --gray: #808080;
 
+  --darkblue: 237, 54%, 14%;
+  --darkblue-100: hsl(237, 54%, 14%);
+  --darkblue-500: hsl(237, 54%, 34%);
+  --darkblue-900: hsl(237, 54%, 54%);
+  --darkblue-fade-75: hsla(237, 54%, 14%, .75);
+  --darkblue-fade-50: hsla(237, 54%, 14%, .50);
 
   --darkgray: 0, 0%, 27%;
   --darkgray-100: hsl(0, 0%, 17%);
@@ -66,63 +72,13 @@
   --accent: var(--pink-500);
   --warning-red: var(--red-500);
   --notice-red: var(--red-900);
-
-
-
-/*  --background-panel:
-  --background-canvas:
-  --font-light:
-  --font-dark: ;
-
-  --background-canvas-shadow: hsla(0, 0%, 100%, 0.1);
-  --background-panel-shadow: hsla(122, 20%, 30%, 0.45);
-  --primary-light: hsl(104, 35%, 67%);
-  --secondary-light: hsl(169, 39%, 37%);
-  --accent: #B0729D;
-  --accent-faded: rgba(176, 114, 157, 0.63);*/
-}
-:root {
-  /*--background-canvas: hsl(219, 6%, 47%);*/
-  /*--secondary-light: hsl(200, 57%, 55%);*/
-  /*--background-panel: hsl(74, 13%, 67%) ;*/
-  /*--primary-light: hsl(105, 4%, 63%);*/
-
-  /*--accent: hsl(240, 29%, 16%);*/
-  /*--accent-faded: hsla(240, 29%, 16%, 0.67);*/
-  /*--font-dark: hsl(21, 55%, 45%);*/
-  /*--font-dark-fade: hsla(23, 55%, 52%, 0.76);*/
-  /*--font-light: hsl(90, 32%, 91%);*/
-  /*--red: hsl(9, 100%, 64%);*/
-
-  /*--black: hsl(0, 0%, 0%);*/
-  /*--white: hsl(0, 0%, 100%);*/
-  /*--gray: hsl(144, 11%, 65%);*/
 }
 
-/*:root {
-  --background-panel: hsl(0, 100%, 0%);
-  --primary-mid: hsl(0, 0%, 50%);
-  --primary-light: hsl(0, 0%, 100%);
-  --background-panel-shadow: hsla(0, 100%, 0%, 0.50);
-  --background-canvas: hsl(0, 0%, 100%);
-  --secondary-mid: hsl(0, 0%, 50%);
-  --secondary-light: hsl(0, 0%, 100%);
-  --background-canvas-shadow: hsla(0, 100%, 0%, 0.50);
-
-  --accent: hsl(240, 29%, 16%);
-  --accent-faded: hsla(240, 29%, 16%, 0.67);
-  --font-dark: hsl(92, 23%, 11%);
-  --font-light: hsl(90, 32%, 91%);
-  --red: hsl(9, 100%, 64%);
-
-  --black: hsl(0, 0%, 0%);
-  --white: hsl(0, 0%, 100%);
-  --gray: hsl(144, 11%, 65%);
-
-}*/
 
 @media screen and (min-width: 768px) {
+  .test {
 
+  }
   /* ----   html & body styles    ---- */
   html,
   body {
