@@ -1,6 +1,6 @@
 import React from "react";
-
 import { createHeaderIcons } from "../../utils";
+import "./header.css";
 
 const Header = ({ currentForm }) => {
   const displayHeaderText = currentForm > 0 ? null : <></>;

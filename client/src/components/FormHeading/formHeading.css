@@ -1,0 +1,16 @@
+.form__heading {
+  display:flex;
+}
+.heading__tab {
+  width: 100%;
+  background-color: var(--bg-tab);
+  font-size: 2rem;
+  border: 1px solid var(--bg-tab);
+  border-radius: .75rem .75rem 0 0;
+  text-align: center;
+  line-height: 1.75;
+}
+.heading__tab-active {
+  background: var(--bg-active);
+  color: var(--accent);
+}

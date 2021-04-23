@@ -1,0 +1,45 @@
+.p-buttons__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+.p-button__col {
+  display: flex;
+  flex: 0.33 1;
+  flex-direction: column;
+  justify-content: stretch;
+}
+.p-button {
+  width: 100%;
+  color: var(--font-light);
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  text-align: center;
+  font-weight: 100;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.p-button:hover {
+  cursor: pointer;
+  background-color: var(--bg-button-hover);
+  color: var(--accent)
+}
+.p-button__game {
+  font-size: 1.75rem;
+  padding: 1rem;
+  border-radius: 5px;
+  line-height: 1.5rem;
+  transition: background-color 750ms;
+}
+.p-button__start {
+  justify-self: center;
+  font-size: 1.15vw;
+  border-radius: 50%;
+  height: 115px;
+  width: 115px;
+  transition: background-color 750ms;
+}

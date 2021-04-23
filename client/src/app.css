@@ -74,11 +74,27 @@
   --notice-red: var(--red-900);
 }
 
+/*:root {
+  --background-panel: hsl(0, 100%, 0%);
+  --primary-mid: hsl(0, 0%, 50%);
+  --primary-light: hsl(0, 0%, 100%);
+  --background-panel-shadow: hsla(0, 100%, 0%, 0.50);
+  --background-canvas: hsl(0, 0%, 100%);
+  --secondary-mid: hsl(0, 0%, 50%);
+  --secondary-light: hsl(0, 0%, 100%);
+  --background-canvas-shadow: hsla(0, 100%, 0%, 0.50);
+  --accent: hsl(240, 29%, 16%);
+  --accent-faded: hsla(240, 29%, 16%, 0.67);
+  --font-dark: hsl(92, 23%, 11%);
+  --font-light: hsl(90, 32%, 91%);
+  --red: hsl(9, 100%, 64%);
+  --black: hsl(0, 0%, 0%);
+  --white: hsl(0, 0%, 100%);
+  --gray: hsl(144, 11%, 65%);
+}*/
 
 @media screen and (min-width: 768px) {
-  .test {
 
-  }
   /* ----   html & body styles    ---- */
   html,
   body {

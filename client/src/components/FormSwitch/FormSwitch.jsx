@@ -1,9 +1,11 @@
 import React from "react";
-import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix } from "../userForms";
+import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } from "../../lib/userForms";
 import { FormSection } from "redux-form";
 
 const FormSwitch = ({ form, currentPlayer }) => {
   switch (form) {
+    case 1:
+      return <PlayerForm />;
     case 2:
       return (
         <FormSection name={`${currentPlayer}`}>

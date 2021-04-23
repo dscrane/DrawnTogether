@@ -1,0 +1,10 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing__text {
+  text-align: center;
+  font-size: 1.75rem;
+  width: 90%;
+}

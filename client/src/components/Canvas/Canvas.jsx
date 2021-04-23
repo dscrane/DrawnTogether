@@ -4,6 +4,7 @@ import { PolarGrid } from "../PolarGrid";
 import { updateGridDisplay, updateView, resizePlayerCircles } from "../../redux/actions";
 import { debounce, CircleSVG } from "../../utils";
 import { CircleDisplay } from "../CircleDisplay";
+import "./canvas.css";
 
 const Canvas = ({ canvasDisplay, players, session, updateGridDisplay, updateView, resizePlayerCircles }) => {
   const canvasSvg = useRef(null);

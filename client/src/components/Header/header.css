@@ -1,0 +1,38 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header__title {
+  text-align: center;
+  font-size: 3.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+.header__text {
+  width: 90%;
+  margin: 1vh 0;
+  font-size: 1.65vh;
+  text-align: center;
+}
+.header__icons {
+  display: flex;
+  width: 75%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__icon {
+  font-size: 2.25rem !important;
+  display: flex;
+  color: var(--font-light);
+  overflow: hidden;
+  line-height: 1;
+}
+.header__icon-active {
+  color: var(--bg-active);
+  border-bottom: 1px solid var(--accent);
+  font-size: 3rem !important;
+  box-sizing: content-box;
+  padding-bottom: .5rem;
+}

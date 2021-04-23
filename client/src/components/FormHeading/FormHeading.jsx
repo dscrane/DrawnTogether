@@ -1,5 +1,6 @@
 /* IMPORTS */
 import React from "react";
+import "./formHeading.css";
 /* ------ */
 
 export const FormHeading = ({ currentPlayer, numPlayers, players }) => {

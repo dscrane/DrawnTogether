@@ -1,9 +1,8 @@
 import React from "react";
 import { reduxForm } from "redux-form";
-import { SidebarButtons } from "../SidebarButtons";
 import { FormSwitch } from "../FormSwitch";
-import { PlayerForm } from "../userForms";
-import { createPlayerIcons } from "../../utils";
+import { PanelButtonRow } from "../PanelButtonRow";
+import "./formDisplay.css";
 
 const FormDisplay = ({
   handleSubmit,
@@ -15,11 +14,13 @@ const FormDisplay = ({
   numPlayers,
 }) => {
   const renderPlayerFormOrNext =
-    currentPlayer !== numPlayers ? (
-      <div className="form__group">
-        <FormSwitch form={currentForm} currentPlayer={currentPlayer} numPlayers={numPlayers} />
-        <SidebarButtons prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
-      </div>
+    currentPlayer !== numPlayers || currentForm < 2 ? (
+      <>
+        <FormSwitch form={currentForm} currentPlayer={currentPlayer} />
+        <div className="form__row">
+          <PanelButtonRow prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
+        </div>
+      </>
     ) : (
       <>
         <div className="body__updateMessage">
@@ -29,25 +30,13 @@ const FormDisplay = ({
           <br /> go back
           <br /> to change responses
         </div>
-        <SidebarButtons prevText={"Back"} nextText={"Next Form"} handlePrevious={handlePrevious} />
+        <PanelButtonRow prevText={"Back"} nextText={"Next Form"} handlePrevious={handlePrevious} />
       </>
     );
 
-  const renderFormElements =
-    currentForm !== 1 ? (
-      renderPlayerFormOrNext
-    ) : (
-      <>
-        <PlayerForm />
-        <SidebarButtons prevText={"Restart"} nextText={"Submit"} handlePrevious={handlePrevious} />
-      </>
-    );
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`form ${currentForm > 1 ? "form-border" : ""} body__row body__row-form form-signin mt-2`}
-    >
-      {renderFormElements}
+    <form onSubmit={handleSubmit} className={`form ${currentForm > 1 ? "form-bordered" : ""} form-signin mt-2`}>
+      {renderPlayerFormOrNext}
     </form>
   );
 };

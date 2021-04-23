@@ -1,5 +1,5 @@
 import React from "react";
-import { Sidebar } from "./components/Sidebar";
+import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
 
 export const App = () => {
@@ -7,7 +7,7 @@ export const App = () => {
     <div className="app" data-testid="component-App">
       <div className="app__display">
         <div className="app__sidebar">
-          <Sidebar />
+          <Panel />
         </div>
         <div className="app__canvas">
           <div className="canvas__container">

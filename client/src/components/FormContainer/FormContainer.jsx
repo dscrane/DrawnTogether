@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { FormDisplay } from "../FormDisplay";
+import { connect } from "react-redux";
 import {
-  setInterestAndPlayers,
-  updatePlayerCircle,
-  updatePlayer,
-  nextForm,
-  prevForm,
-  nextPlayer,
-  prevPlayer,
   endGame,
   finalDisplay,
+  nextForm,
+  nextPlayer,
+  prevForm,
+  prevPlayer,
+  setInterestAndPlayers,
+  updatePlayer,
+  updatePlayerCircle,
 } from "../../redux/actions";
 import { FormHeading } from "../FormHeading";
 
@@ -60,19 +60,17 @@ const FormContainer = ({
 
     if (currentForm >= 2 && currentForm <= 7) {
       if (currentPlayer < numPlayers) {
-        console.log("nextplayer");
         await updatePlayer(currentPlayer, formData[currentPlayer]);
         await nextPlayer(currentPlayer);
       } else {
-        console.log("nextform");
         await nextForm(currentForm);
       }
     }
   };
 
   return (
-    <div className="form__container">
-      {currentForm > 1 ? <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} /> : null}
+    <>
+      <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
       <FormDisplay
         onSubmit={handleNext}
         handlePrevious={handlePrevious}
@@ -80,7 +78,7 @@ const FormContainer = ({
         currentPlayer={currentPlayer}
         numPlayers={numPlayers}
       />
-    </div>
+    </>
   );
 };
 
