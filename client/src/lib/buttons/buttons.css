@@ -15,7 +15,7 @@
   width: 100%;
   color: var(--font-light);
   background-color: transparent;
-  border: 1px solid var(--accent);
+  border: 1px solid red;
   text-align: center;
   font-weight: 100;
   -moz-user-select: none;
@@ -34,6 +34,7 @@
   border-radius: 5px;
   line-height: 1.5rem;
   transition: background-color 750ms;
+  box-shadow: 1rem 1rem 1rem red;
 }
 .p-button__start {
   justify-self: center;

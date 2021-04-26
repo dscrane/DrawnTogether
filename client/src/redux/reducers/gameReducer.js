@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   numPlayers: 0,
   currentPlayer: 0,
   interest: "",
-  displayGrid: false,
+  displayGrid: true,
   updateCircles: false,
   players: {},
   circles: [],

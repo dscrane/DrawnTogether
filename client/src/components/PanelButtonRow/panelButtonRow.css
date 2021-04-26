@@ -14,7 +14,7 @@
 .p-button {
   width: 100%;
   color: var(--font-light);
-  background-color: transparent;
+  background-color: var(--bg-button);
   border: 1px solid var(--accent);
   text-align: center;
   font-weight: 100;
@@ -22,6 +22,7 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  box-shadow: .25rem .25rem 1rem var(--font-dark);
 }
 .p-button:hover {
   cursor: pointer;

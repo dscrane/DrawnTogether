@@ -28,7 +28,7 @@
   width: auto;
 }
 .item__label {
-  color: var(--font-dark);
+  color: var(--font-light);
   margin: 0 0;
   font-size: 1.5rem;
   font-weight: 400;
@@ -57,17 +57,19 @@
   border: 1px solid var(--accent);
   color: var(--accent);
   background-color: var(--bg-button-hover);
+  padding: .5rem .75rem;
+  box-shadow: .25rem .25rem 1rem var(--font-dark);
+  transition: background-color 750ms;
 }
 .item__addCTA:hover {
   color: var(--font-light);
-  background-color: transparent;
+  background-color: var(--bg-button);
 }
 .form__control {
   flex: 2.75;
   font-size: 1.15rem;
   display: block;
   width: 75%;
-  /*border: 2px solid var(--font-dark);*/
   border-radius: 0.33rem;
   padding: 0.475rem 0.75rem;
   font-weight: 400;
@@ -75,6 +77,11 @@
   background-clip: padding-box;
   background-color: var(--bluegreen-fade-75);
   border: 2px solid var(--font-dark);
+  box-shadow: .2rem .2rem .25rem var(--font-dark);
+}
+.form__control:focus {
+  outline: none;
+  box-shadow: .1rem .1rem .5rem var(--font-light), -.1rem -.1rem .5rem var(--font-light);
 }
 .form__control-input {
   color: var(--font-light);
@@ -94,7 +101,7 @@ select > option {
   cursor:pointer;
 }
 .form__control-invalid {
-  border: 1px solid var(--warning-red);
+  box-shadow: .1rem .1rem .5rem var(--warning-red), -.1rem -.1rem .5rem var(--warning-red);
 }
 .form__message-error {
   width: 15%;

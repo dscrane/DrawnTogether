@@ -7,8 +7,10 @@
   --darkblue-100: hsl(237, 54%, 14%);
   --darkblue-500: hsl(237, 54%, 34%);
   --darkblue-900: hsl(237, 54%, 54%);
-  --darkblue-fade-75: hsla(237, 54%, 14%, .75);
-  --darkblue-fade-50: hsla(237, 54%, 14%, .50);
+  --darkblue-fade-75: hsla(237, 54%, 34%, .75);
+  --darkblue-fade-50: hsla(237, 54%, 34%, .50);
+  --darkblue-fade-20: hsla(237, 54%, 34%, .20);
+  --darkblue-fade-15: hsla(237, 54%, 34%, .15);
 
   --darkgray: 0, 0%, 27%;
   --darkgray-100: hsl(0, 0%, 17%);
@@ -16,6 +18,8 @@
   --darkgray-900: hsl(0, 0%, 47%);
   --darkgray-fade-75: hsla(0, 0%, 27%, .75);
   --darkgray-fade-50: hsla(0, 0%, 27%, .50);
+  --darkgray-fade-20: hsla(0, 0%, 27%, .20);
+  --darkgray-fade-15: hsla(0, 0%, 27%, .15);
 
   --bluegreen: 180, 25%, 30%;
   --bluegreen-100: hsl(180, 25%, 10%);
@@ -23,6 +27,8 @@
   --bluegreen-900: hsl(180, 25%, 50%);
   --bluegreen-fade-75: hsla(180, 25%, 30%, .95);
   --bluegreen-fade-50: hsla(180, 25%, 30%, .50);
+  --bluegreen-fade-20: hsla(180, 25%, 30%, .20);
+  --bluegreen-fade-15: hsla(180, 25%, 30%, .15);
 
   --green: 104, 35%, 67%;
   --green-100: hsl(104, 35%, 27%);
@@ -30,6 +36,8 @@
   --green-900: hsl(104, 35%, 67%);
   --green-fade-75: hsla(104, 35%, 67%, .75);
   --green-fade-50: hsla(104, 35%, 67%, .50);
+  --green-fade-20: hsla(104, 35%, 67%, .20);
+  --green-fade-15: hsla(104, 35%, 67%, .15);
 
   --pink: 318, 28%, 57%;
   --pink-100: hsl(318, 28%, 37%);
@@ -37,6 +45,8 @@
   --pink-900: hsl(318, 28%, 77%);
   --pink-fade-75: hsla(318, 28%, 57%, .75);
   --pink-fade-50: hsla(318, 28%, 57%, .50);
+  --pink-fade-20: hsla(318, 28%, 57%, .25);
+  --pink-fade-15: hsla(318, 28%, 57%, .15);
 
   --purple: 234, 13%, 58%;
   --purple-100: hsl(234, 13%, 38%);
@@ -44,6 +54,8 @@
   --purple-900: hsl(234, 13%, 78%);
   --purple-fade-75: hsla(234, 13%, 58%, .75);
   --purple-fade-50: hsla(234, 13%, 58%, .50);
+  --purple-fade-20: hsla(234, 13%, 58%, .20);
+  --purple-fade-15: hsla(234, 13%, 58%, .15);
 
   --cream: 0, 8%, 82%;
   --cream-100: hsl(0, 8%, 47%);
@@ -60,18 +72,59 @@
   --red-fade-50: hsla(9, 100%, 64%, .50);
 
 }
-:root{
+.blue_gray_pink {
   --bg-canvas: var(--darkgray-500);
   --bg-panel: var(--bluegreen-fade-75);
   --bg-tab: var(--darkgray-fade-50);
   --bg-active: var(--darkgray-500);
-  --bg-button: transparent;
+  --bg-input: var(--bluegreen-fade-75);
+  --bg-button: var(--bluegreen-fade-75);
   --bg-button-hover: var(--darkgray-500);
   --font-light: var(--cream-900);
   --font-dark: var(--darkgray-100);
   --accent: var(--pink-500);
+  --warning-red: var(--red-fade-50);
+  --notice-red: var(--red-900);
+  --svg-ring-thick: var(--pink-fade-20);
+  --svg-ring-thin: var(--pink-fade-15);
+  --svg-line: var(--pink-fade-20);
+
+}
+
+.purple_gray_blue {
+  --bg-canvas: var(--darkgray-900);
+  --bg-panel: var(--purple-500);
+  --bg-tab: var(--darkgray-fade-50);
+  --bg-active: var(--darkgray-500);
+  --bg-input: var(--bluegreen-fade-75);
+  --bg-button: transparent;
+  --bg-button-hover: var(--darkgray-500);
+  --font-light: var(--cream-900);
+  --font-dark: var(--darkgray-100);
+  --accent: var(--darkblue-900);
   --warning-red: var(--red-500);
   --notice-red: var(--red-900);
+  --svg-ring-thick: var(--darkblue-fade-20);
+  --svg-ring-thin: var(--darkblue-fade-15);
+  --svg-line: var(--darkblue-fade-20)
+}
+
+.premade_blue {
+  --bg-canvas: #56585d;
+  --bg-panel: #B1A296;
+  --bg-tab: rgba(93, 92, 97, 0.78);
+  --bg-active: #5D5C61;
+  --bg-input: var(--bluegreen-fade-75);
+  --bg-button: transparent;
+  --bg-button-hover: #5D5C61;
+  --font-light: var(--cream-900);
+  --font-dark: var(--darkgray-100);
+  --accent: #557A95;
+  --warning-red: var(--red-500);
+  --notice-red: var(--red-900);
+  --svg-ring-thick: rgba(85, 122, 149, 0.2);
+  --svg-ring-thin: rgba(85, 122, 149, 0.15);
+  --svg-line: rgba(85, 122, 149, 0.2);
 }
 
 /* ----   html & body styles    ---- */
@@ -89,6 +142,7 @@ body {
   align-items: start;
   height: 100vh;
 }
+
 /* ----   App component styles    ---- */
 .app {
   padding: 0 0;

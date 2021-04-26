@@ -1,0 +1,18 @@
+.svg__ring {
+  fill: transparent;
+  stroke-width: 1px;
+}
+.svg__ring-thick {
+  stroke: var(--svg-ring-thick);
+  stroke-width: 1px;
+}
+.svg__ring-thin {
+  stroke: var(--svg-ring-thin);
+}
+.svg__line {
+  stroke: var(--svg-line);
+  stroke-width: 1px;
+}
+.svg__line-full {
+  stroke-width: 1.5px;
+}
