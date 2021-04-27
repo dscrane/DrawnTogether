@@ -9,8 +9,12 @@ import {
   NEXT_PLAYER,
   PREV_PLAYER,
   UPDATE_PLAYER_CIRCLE,
+  RESIZE_PLAYER_CIRCLES,
+  UPDATE_VIEW,
+  UPDATE_DISPLAY_GRID,
 } from "../types";
-import { circleAlterations } from "../../utils";
+import { circleAlterations, handleGridUpdate } from "../../utils";
+import { resizeAllCircles } from "../../utils/circleUtilities";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
 export const startGame = () => (dispatch) => {
@@ -104,5 +108,33 @@ export const prevForm = (currentForm) => async (dispatch, getState) => {
   await dispatch({
     type: PREV_FORM,
     payload: { currentForm: newForm, currentPlayer: numPlayers },
+  });
+};
+/* ----   RESIZE_PLAYER_CIRCLES ACTION CREATOR    ---- */
+export const resizePlayerCircles = (players, multiplier) => (dispatch) => {
+  resizeAllCircles(players, multiplier);
+  dispatch({
+    type: RESIZE_PLAYER_CIRCLES,
+    payload: "PAYLOAD",
+  });
+};
+/* ----   UPDATE_VIEW ACTION CREATOR    ---- */
+export const updateView = (dimensions) => (dispatch) => {
+  dispatch({
+    type: UPDATE_VIEW,
+    payload: {
+      height: Math.round(dimensions.height),
+      width: Math.round(dimensions.width),
+    },
+  });
+};
+/* ----   UPDATE_DISPLAY_GRID ACTION CREATOR    ---- */
+export const updateGridDisplay = (view) => async (dispatch, getState) => {
+  const multiplier = getState().gameState.canvasDisplay.adjustmentMultiplier;
+  const updatedGrid = await handleGridUpdate(view, multiplier);
+
+  dispatch({
+    type: UPDATE_DISPLAY_GRID,
+    payload: { ...updatedGrid },
   });
 };

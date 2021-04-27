@@ -52,10 +52,12 @@ function rerenderCircles(players, currentForm) {
   return allCircles;
 }
 
+function resizeAllCircles(players, display) {}
+
 /**
  * Export necessary pieces
  */
-export { circleAlterations, rerenderCircles };
+export { circleAlterations, rerenderCircles, resizeAllCircles };
 
 /**
  * Initial circle creation

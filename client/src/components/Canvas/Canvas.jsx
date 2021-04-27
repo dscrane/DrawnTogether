@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { PolarGrid } from "../PolarGrid";
 import { updateGridDisplay, updateView, resizePlayerCircles } from "../../redux/actions";
-import { debounce, CircleSVG } from "../../utils";
+import { debounce } from "../../utils";
 import { CircleDisplay } from "../CircleDisplay";
 import "./canvas.css";
 
@@ -34,7 +34,11 @@ const Canvas = ({ canvasDisplay, players, session, updateGridDisplay, updateView
 
   /* Update the canvasDisplay grid based on new view dimensions */
   useEffect(() => {
-    updateGridDisplay(canvasDisplay.view, true);
+    const asyncGridUpdate = async () => {
+      await updateGridDisplay(canvasDisplay.view, true);
+      await resizePlayerCircles(players, canvasDisplay.adjustmentMultiplier);
+    };
+    asyncGridUpdate();
   }, [canvasDisplay.view]);
 
   return (

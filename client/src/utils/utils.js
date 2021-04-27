@@ -51,3 +51,48 @@ export const createHeaderIcons = (currentForm) => {
     );
   });
 };
+
+export const handleGridUpdate = (view, currentMultiplier) => {
+  console.log(currentMultiplier);
+  const { height, width, oldHeight, oldWidth } = view;
+  let newMultiplier;
+  if (view.oldHeight !== 0 || view.oldWidth !== 0) {
+    if (height > width) {
+      if (height > oldHeight) {
+        newMultiplier = height / oldHeight;
+      } else {
+        newMultiplier = oldHeight / height;
+      }
+    } else {
+      if (width > oldWidth) {
+        newMultiplier = width / oldWidth;
+      } else {
+        newMultiplier = oldWidth / width;
+      }
+    }
+  } else {
+    newMultiplier = currentMultiplier;
+  }
+
+  console.log("multiplier", newMultiplier);
+  const svgDim = height > width ? Math.round(height) : Math.round(width);
+  const radius = height < width ? Math.round(height / 2) : Math.round(width / 2);
+  const axis = parseFloat((radius * 1.1).toFixed(4));
+  const cross = parseFloat((radius * 0.75).toFixed(4));
+  const cy = parseFloat((height / 2).toFixed(4));
+  const cx = parseFloat((width / 2).toFixed(4));
+  const step = parseFloat((radius / 16).toFixed(4));
+
+  return {
+    adjustmentMultiplier: newMultiplier,
+    grid: {
+      svgDim,
+      radius,
+      axis,
+      cross,
+      cx,
+      cy,
+      step,
+    },
+  };
+};

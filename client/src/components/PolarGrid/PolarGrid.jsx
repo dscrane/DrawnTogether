@@ -2,127 +2,80 @@ import React from "react";
 import "./polarGrid.css";
 
 const PolarGrid = ({ grid, view }) => {
+  // Get the radius from the view width
   const svgRadius = (view.width * 0.99) / 2;
+  // Set the spacing of each ring
   const ringSpacing = svgRadius / 50;
-  const createThinRings = () => {
-    const rings = [];
-    let i = ringSpacing;
-    while (i < svgRadius) {
-      rings.push(
-        <circle key={`thinCircle_${i}`} className="svg__ring svg__ring-thin" r={i} cy={grid.cy} cx={grid.cx} />
-      );
-      i += ringSpacing;
-    }
-    return rings;
+  // Get the line starting x point
+  const xStartPoint = (radian, theta) => parseFloat((grid.cx + ringSpacing * radian * -Math.cos(theta)).toFixed(4));
+  // Get the line starting y point
+  const yStartPoint = (radian, theta) => parseFloat((grid.cy + ringSpacing * radian * Math.sin(theta)).toFixed(4));
+  // Get the line ending x point
+  const xEndPoint = (theta) => parseFloat((grid.cx + svgRadius * -Math.cos(theta)).toFixed(4));
+  // Get the line ending y point
+  const yEndPoint = (theta) => parseFloat((grid.cy + ringSpacing * 50 * Math.sin(theta)).toFixed(4));
+  // Template for the circle path string
+  const circlePathTemplate = (cx, cy, r) => {
+    return `M ${cx} ${cy} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0 `;
   };
-  const createThickRings = () => {
-    const rings = [];
+
+  // Add a center circle for the whole grid
+  let path = circlePathTemplate(grid.cx, grid.cy, 0.5 * ringSpacing);
+
+  // Creates the rings of the polar grid
+  const createRings = () => {
     let i = ringSpacing * 10;
     while (i < svgRadius + ringSpacing) {
-      rings.push(
-        <circle
-          key={`thickCircle_${i}`}
-          fill="none"
-          className="svg__ring svg__ring-thick"
-          r={i}
-          cy={grid.cy}
-          cx={grid.cx}
-        />
-      );
+      const radius = parseFloat(i.toFixed(4));
+      path = path + circlePathTemplate(grid.cx, grid.cy, radius);
       i += ringSpacing * 10;
     }
-    return rings;
   };
-  const createFullBlueLines = () => {
-    const fullLines = [];
+  // Create full lines at 30 degree increments
+  const createFullLines = () => {
     for (let i = 0; i < 360; i += 30) {
       const theta = i * (Math.PI / 180);
-      fullLines.push(
-        <line
-          key={`fullBlue_${i}`}
-          className="svg__line svg__line-full"
-          x1={grid.cx}
-          y1={grid.cy}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
-        />
-      );
+      path =
+        path + `M ${xStartPoint(0.5, theta)}, ${yStartPoint(0.5, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
-    return fullLines;
   };
-  const createLongBlueLines = () => {
-    const longLines = [];
+  const createLongLines = () => {
     for (let i = 0; i < 360; i += 10) {
       if (i % 30 === 0) {
         continue;
       }
       const theta = i * (Math.PI / 180);
-      longLines.push(
-        <line
-          key={`longBlue_${i}`}
-          className="svg__line"
-          x1={grid.cx + ringSpacing * 10 * -Math.cos(theta)}
-          y1={grid.cy + ringSpacing * 10 * Math.sin(theta)}
-          x2={grid.cx + svgRadius * -Math.cos(theta)}
-          y2={grid.cy + svgRadius * Math.sin(theta)}
-        />
-      );
+      path = path + `M ${xStartPoint(5, theta)}, ${yStartPoint(5, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
-    return longLines;
   };
-  const createLongWhiteLines = () => {
-    const longWhiteLines = [];
+  const createMediumLines = () => {
     for (let i = 0; i < 360; i += 2) {
       if (i % 30 === 0 || i % 10 === 0) {
         continue;
       }
-
       const theta = i * (Math.PI / 180);
-      longWhiteLines.push(
-        <line
-          key={`longWhite_${i}`}
-          className="svg__line"
-          x1={grid.cx + ringSpacing * 15 * -Math.cos(theta)}
-          y1={grid.cy + ringSpacing * 15 * Math.sin(theta)}
-          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
-          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
-        />
-      );
+      path =
+        path + `M ${xStartPoint(15, theta)}, ${yStartPoint(15, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
-    return longWhiteLines;
   };
-  const createShortWhiteLines = () => {
-    const shortWhiteLines = [];
-
+  const createShortLines = () => {
     for (let i = 0; i < 360; i += 1) {
       if (i % 30 === 0 || i % 10 === 0 || i % 2 === 0) {
         continue;
       }
       const theta = i * (Math.PI / 180);
-      shortWhiteLines.push(
-        <line
-          key={`shortWhite_${i}`}
-          className="svg__line"
-          x1={grid.cx + ringSpacing * 35 * -Math.cos(theta)}
-          y1={grid.cy + ringSpacing * 35 * Math.sin(theta)}
-          x2={grid.cx + ringSpacing * 50 * -Math.cos(theta)}
-          y2={grid.cy + ringSpacing * 50 * Math.sin(theta)}
-        />
-      );
+      path =
+        path + `M ${xStartPoint(35, theta)}, ${yStartPoint(35, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
-    return shortWhiteLines;
   };
 
-  return (
-    <>
-      {createThinRings()}
-      {createFullBlueLines()}
-      {createLongBlueLines()}
-      {createLongWhiteLines()}
-      {createShortWhiteLines()}
-      {createThickRings()}
-    </>
-  );
+  createRings();
+  createLongLines();
+  createMediumLines();
+  createShortLines();
+  createFullLines();
+
+  return <path className="polarGrid" d={path} />;
 };
 
 export default PolarGrid;

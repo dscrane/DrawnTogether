@@ -24,7 +24,7 @@ const INITIAL_STATE = {
   numPlayers: 0,
   currentPlayer: 0,
   interest: "",
-  displayGrid: true,
+  displayGrid: false,
   updateCircles: false,
   players: {},
   circles: [],
@@ -139,10 +139,9 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         canvasDisplay: {
           ...state.canvasDisplay,
-          grid: {
-            ...state.canvasDisplay.grid,
-            ...action.payload,
-          },
+          ...state.canvasDisplay.view,
+          adjustmentMultiplier: action.payload.adjustmentMultiplier,
+          grid: { ...action.payload.grid },
         },
       };
     case UPDATE_VIEW:

@@ -7,7 +7,8 @@
   stroke-width: 1px;
 }
 .svg__ring-thin {
-  stroke: var(--svg-ring-thin);
+  /*stroke: var(--svg-ring-thin);*/
+  stroke: red;
 }
 .svg__line {
   stroke: var(--svg-line);
@@ -15,4 +16,8 @@
 }
 .svg__line-full {
   stroke-width: 1.5px;
+}
+.polarGrid {
+  fill: transparent;
+  stroke: var(--svg-ring-thick);
 }
