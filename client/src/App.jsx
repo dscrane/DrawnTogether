@@ -10,9 +10,7 @@ export const App = () => {
           <Panel />
         </div>
         <div className="app__canvas">
-          <div className="canvas__container">
-            <Canvas />
-          </div>
+          <Canvas />
         </div>
       </div>
     </div>

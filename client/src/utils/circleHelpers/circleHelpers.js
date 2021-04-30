@@ -2,49 +2,6 @@ import React from "react";
 import { DefaultCircle, HollowCircle, StrokeCircle, RingCircle, DotCircle } from "../../lib/circles";
 
 /**
- * Creates the playerCircle's radial gradient
- * @function createRadialGradient
- * @param {number} hue -- playerCircle's hue
- * @param {number} saturation -- playerCircle's saturation
- * @param {number} lightness -- playerCircle's lightness
- * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @returns {JSX.Element} <radialGradient />
- * */
-export function createRadialGradient(id, centerPoint, hue, saturation, lightness) {
-  return (
-    <radialGradient id={`radialGradient${id}`}>
-      <stop offset="10%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`} />
-      <stop offset="90%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} />
-    </radialGradient>
-  );
-}
-
-/**
- * Creates the animation path for the player's circle
- * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @param {number} x -- playerCircle's x location
- * @param {number} y - playerCircle's y location
- * @param {number} r -- playerCircle's radius
- * @param {Object} lineDesign -- playerCircle's stroke properties
- * @returns {JSX.Element} <path />
- */
-export function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
-  if (lineDesign !== null) {
-    return (
-      <path
-        id={`linearPath${id}`}
-        d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
-        style={{ ...lineDesign }}
-      />
-    );
-  }
-
-  return <path id={`linearPath${id}`} d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`} />;
-}
-
-/**
  * Alters the animation path for the player's circle
  * @param {number} x -- playerCircle's x location
  * @param {number} y - playerCircle's y location
@@ -169,9 +126,6 @@ export function setPlayerDegree(interest, gender, diet) {
  * @return {number} Initial value for playerCircle's radius
  */
 export function setCircleRadius(association) {
-  if (!association) {
-    return Math.floor(Math.random() * 45) + 10;
-  }
   if (association * 10 < 75) {
     return association * 8;
   } else if (association * 2 < 75) {

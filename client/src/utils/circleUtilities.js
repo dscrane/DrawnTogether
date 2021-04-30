@@ -52,12 +52,89 @@ function rerenderCircles(players, currentForm) {
   return allCircles;
 }
 
-function resizeAllCircles(players, display) {}
+function resizeAllCircles(circles, display) {
+  console.log("resize all circles");
+  console.log(circles, display);
+}
+
+/**
+ * Creates the playerCircle's radial gradient
+ * @function createRadialGradient
+ * @param {number} hue -- playerCircle's hue
+ * @param {number} saturation -- playerCircle's saturation
+ * @param {number} lightness -- playerCircle's lightness
+ * @param {number} id -- playerCircle's player id
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @returns {JSX.Element} <radialGradient />
+ * */
+function createRadialGradient(id, centerPoint, hue, saturation, lightness) {
+  return (
+    <radialGradient id={`radialGradient${id}`}>
+      <stop offset="10%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`} />
+      <stop offset="90%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} />
+    </radialGradient>
+  );
+}
+
+/**
+ * Creates the animation path for the player's circle
+ * @param {number} id -- playerCircle's player id
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} x -- playerCircle's x location
+ * @param {number} y - playerCircle's y location
+ * @param {number} r -- playerCircle's radius
+ * @param {Object} lineDesign -- playerCircle's stroke properties
+ * @returns {JSX.Element} <path />
+ */
+function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
+  if (lineDesign !== null) {
+    return (
+      <path
+        id={`linearPath${id}`}
+        d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
+        style={{ ...lineDesign }}
+      />
+    );
+  }
+
+  return <path id={`linearPath${id}`} d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`} />;
+}
+
+function circlePathTemplate(cx, cy, r) {
+  return `M ${cx} ${cy} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0 `;
+}
+
+function createPathAndAnimation(playerCircle, id) {
+  let path;
+  let animation;
+
+  if (playerCircle.isAnimated) {
+    animation = (
+      <animateMotion dur="10s" repeatCount="indefinite">
+        <mpath href={`#linearPath${id}`} />
+      </animateMotion>
+    );
+    path = circlePathTemplate(0, 0, playerCircle.radius);
+  } else {
+    animation = null;
+    path = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius);
+  }
+
+  return { path, animation };
+}
 
 /**
  * Export necessary pieces
  */
-export { circleAlterations, rerenderCircles, resizeAllCircles };
+export {
+  circleAlterations,
+  rerenderCircles,
+  resizeAllCircles,
+  circlePathTemplate,
+  createPathAndAnimation,
+  createRadialGradient,
+  createLinearPath,
+};
 
 /**
  * Initial circle creation

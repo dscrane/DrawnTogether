@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { rerenderCircles } from "../../utils";
+import React from "react";
 
-const CircleDisplay = ({ circles, currentForm }) => {
-  return currentForm > 2 ? circles.map((circle) => <>{circle}</>) : <></>;
+const CircleDisplay = ({ session }) => {
+  return session.currentForm > 2 ? session.circles.map((circle) => <>{circle}</>) : <></>;
 };
 
-const mapStateToProps = ({ gameState }) => {
-  return {
-    currentForm: gameState.currentForm,
-    circles: gameState.circles,
-  };
-};
-
-export default connect(mapStateToProps)(CircleDisplay);
+export default CircleDisplay;

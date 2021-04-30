@@ -14,7 +14,6 @@ import {
   UPDATE_DISPLAY_GRID,
 } from "../types";
 import { circleAlterations, handleGridUpdate } from "../../utils";
-import { resizeAllCircles } from "../../utils/circleUtilities";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
 export const startGame = () => (dispatch) => {
@@ -111,11 +110,11 @@ export const prevForm = (currentForm) => async (dispatch, getState) => {
   });
 };
 /* ----   RESIZE_PLAYER_CIRCLES ACTION CREATOR    ---- */
-export const resizePlayerCircles = (players, multiplier) => (dispatch) => {
-  resizeAllCircles(players, multiplier);
+export const resizePlayerCircles = ({ cx, cy }) => (dispatch) => {
+  console.log("hit");
   dispatch({
     type: RESIZE_PLAYER_CIRCLES,
-    payload: "PAYLOAD",
+    payload: { cx, cy },
   });
 };
 /* ----   UPDATE_VIEW ACTION CREATOR    ---- */

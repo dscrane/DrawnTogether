@@ -1,16 +1,26 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient } from "../../utils/circleHelpers";
+import { createLinearPath, createRadialGradient, circlePathTemplate } from "../../utils";
 /* ------ */
 
 export const RingCircle = ({ id, playerCircle, centerPoint }) => {
-  const animation = playerCircle.isAnimated ? (
-    <animateMotion dur="10s" repeatCount="indefinite">
-      <mpath href={`#linearPath${id}`} />
-    </animateMotion>
-  ) : null;
-  console.log("inner radius", playerCircle.radius - 2 * playerCircle.designThickness);
-  console.log("outer radius", playerCircle.radius - 0.5 * playerCircle.designThickness);
+  let animation, innerPath, outerPath;
+  const innerRadius = playerCircle.radius - 2 * playerCircle.designThickness;
+  const outerRadius = playerCircle.radius - 0.5 * playerCircle.designThickness;
+  if (playerCircle.isAnimated) {
+    animation = (
+      <animateMotion dur="10s" repeatCount="indefinite">
+        <mpath href={`#linearPath${id}`} />
+      </animateMotion>
+    );
+    innerPath = circlePathTemplate(0, 0, innerRadius);
+    outerPath = circlePathTemplate(0, 0, outerRadius);
+  } else {
+    animation = null;
+    innerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, innerRadius);
+    outerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, outerRadius);
+  }
+
   return (
     <>
       <defs>
@@ -26,11 +36,9 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <g id={`circle_${id}`}>
-        <circle
+        <path
           key={`circle_${id}_inner`}
-          cx={playerCircle.isAnimated ? 0 : playerCircle.xCartesian}
-          cy={playerCircle.isAnimated ? 0 : playerCircle.yCartesian}
-          r={playerCircle.radius - 2 * playerCircle.designThickness}
+          d={innerPath}
           style={{
             fill: `url(#radialGradient${id})`,
             opacity: 1,
@@ -38,11 +46,9 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
             strokeLinecap: "round",
           }}
         />
-        <circle
+        <path
           key={`circle_${id}_outer`}
-          cx={playerCircle.isAnimated ? 0 : playerCircle.xCartesian}
-          cy={playerCircle.isAnimated ? 0 : playerCircle.yCartesian}
-          r={playerCircle.radius - 0.5 * playerCircle.designThickness}
+          d={outerPath}
           strokeWidth={playerCircle.designThickness}
           stroke={playerCircle.secondaryColor}
           fill="none"

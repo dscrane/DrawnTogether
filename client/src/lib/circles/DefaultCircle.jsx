@@ -1,26 +1,20 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient } from "../../utils/circleHelpers";
+import { createLinearPath, createRadialGradient, createPathAndAnimation } from "../../utils";
 /* ------ */
 
 export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
-  const animation = !isInit ? (
-    <animateMotion dur="10s" repeatCount="indefinite">
-      <mpath href={`#linearPath${id}`} />
-    </animateMotion>
-  ) : null;
+  const { path, animation } = createPathAndAnimation(playerCircle, id);
   return (
     <>
       <defs>
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, centerPoint, playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius, null)}
       </defs>
-      <circle
+      <path
         id={`circle_${id}${isInit ? "_init" : ""}`}
         key={`circle_${id}${isInit ? "_init" : ""}`}
-        cx={isInit ? playerCircle.xCartesian : 0}
-        cy={isInit ? playerCircle.yCartesian : 0}
-        r={playerCircle.radius}
+        d={path}
         style={{
           fill: `url(#radialGradient${id})`,
           opacity: `${isInit ? 0.2 : 1}`,
@@ -30,7 +24,7 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
         }}
       >
         {animation}
-      </circle>
+      </path>
     </>
   );
 };

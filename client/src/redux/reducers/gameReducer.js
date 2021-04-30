@@ -16,6 +16,7 @@ import {
   UPDATE_PLAYER_CIRCLE,
   UPDATE_VIEW,
   FINAL_DISPLAY,
+  RESIZE_PLAYER_CIRCLES,
 } from "../types";
 
 const INITIAL_STATE = {
@@ -139,11 +140,13 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         canvasDisplay: {
           ...state.canvasDisplay,
-          ...state.canvasDisplay.view,
           adjustmentMultiplier: action.payload.adjustmentMultiplier,
           grid: { ...action.payload.grid },
         },
       };
+    case RESIZE_PLAYER_CIRCLES:
+      console.info(action.type, action.payload);
+      return { ...state };
     case UPDATE_VIEW:
       console.info(action.type, action.payload);
       return {

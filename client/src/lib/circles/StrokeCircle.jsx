@@ -1,14 +1,11 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient } from "../../utils/circleHelpers";
+import { createLinearPath, createRadialGradient, createPathAndAnimation } from "../../utils";
 /* ------ */
 
 export const StrokeCircle = ({ id, playerCircle, centerPoint }) => {
-  const animation = playerCircle.isAnimated ? (
-    <animateMotion dur="10s" repeatCount="indefinite">
-      <mpath href={`#linearPath${id}`} />
-    </animateMotion>
-  ) : null;
+  const { path, animation } = createPathAndAnimation(playerCircle, id);
+
   return (
     <>
       <defs>
@@ -23,12 +20,10 @@ export const StrokeCircle = ({ id, playerCircle, centerPoint }) => {
         )}
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
-      <circle
+      <path
         id={`circle_${id}`}
         key={`circle_${id}`}
-        cx={playerCircle.isAnimated ? 0 : playerCircle.xCartesian}
-        cy={playerCircle.isAnimated ? 0 : playerCircle.yCartesian}
-        r={playerCircle.radius - 0.5 * playerCircle.designThickness}
+        d={path}
         strokeWidth={playerCircle.designThickness}
         stroke={playerCircle.secondaryColor}
         style={{
@@ -39,7 +34,7 @@ export const StrokeCircle = ({ id, playerCircle, centerPoint }) => {
         }}
       >
         {animation}
-      </circle>
+      </path>
     </>
   );
 };
