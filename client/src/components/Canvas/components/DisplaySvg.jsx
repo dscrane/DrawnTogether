@@ -4,9 +4,11 @@ import { connect } from "react-redux";
 import { updateGridDisplay, resizePlayerCircles } from "../../../redux/actions";
 import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
+import { Blob } from "../../Blob";
 /* ------ */
 
 const DisplaySvg = ({ canvasDisplay, session, updateGridDisplay, resizePlayerCircles }) => {
+  const { players } = session;
   /* Update the canvasDisplay grid based on new view dimensions */
   useEffect(() => {
     const asyncGridUpdate = async () => {
@@ -20,6 +22,9 @@ const DisplaySvg = ({ canvasDisplay, session, updateGridDisplay, resizePlayerCir
   return (
     <svg className="svg__canvas">
       {session.displayGrid ? <PolarGrid {...canvasDisplay} /> : null}
+      {!session.displayGrid && session.currentForm > 0 ? (
+        <Blob players={players} canvasDisplay={canvasDisplay} />
+      ) : null}
       <CircleDisplay session={session} />
     </svg>
   );

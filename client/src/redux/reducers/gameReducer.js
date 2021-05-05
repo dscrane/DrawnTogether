@@ -132,6 +132,7 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
+        displayGrid: action.payload.displayGrid,
         circles: action.payload.finalCircles,
       };
     case UPDATE_DISPLAY_GRID:

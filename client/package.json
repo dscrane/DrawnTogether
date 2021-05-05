@@ -6,6 +6,7 @@
     "printWidth": 120
   },
   "dependencies": {
+    "@georgedoescode/spline": "^1.0.1",
     "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -17,7 +18,8 @@
     "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "simplex-noise": "^2.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

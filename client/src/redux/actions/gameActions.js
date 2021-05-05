@@ -87,7 +87,7 @@ export const finalDisplay = (players) => (dispatch, getState) => {
   });
   dispatch({
     type: FINAL_DISPLAY,
-    payload: { finalCircles: allPlayerCircles },
+    payload: { finalCircles: allPlayerCircles, displayGrid: false },
   });
 };
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
