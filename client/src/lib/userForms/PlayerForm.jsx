@@ -55,7 +55,7 @@ const createPlayerFormField = (index, removeField) => {
 
 export const PlayerForm = () => {
   const [formFields, setFormFields] = useState(null);
-  const [formFieldsDisplayed, setFormFieldsDisplayed] = useState(2);
+  const [formFieldsDisplayed, setFormFieldsDisplayed] = useState(1);
   // Display initial player sections
   useEffect(() => {
     let responseAreas = [];

@@ -14,6 +14,7 @@ import {
   UPDATE_DISPLAY_GRID,
 } from "../types";
 import { circleAlterations, handleGridUpdate } from "../../utils";
+import axios from "axios";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
 export const startGame = () => (dispatch) => {
@@ -60,6 +61,7 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
 export const updatePlayer = (currentPlayer, responses) => (dispatch) => {
+  axios.post('http://localhost:5500/players/update', {_id: "THIS IS THE ID"})
   dispatch({
     type: UPDATE_PLAYER,
     payload: {
