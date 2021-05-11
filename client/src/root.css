@@ -69,19 +69,19 @@
   --red-500: hsl(9, 100%, 64%);
   --red-900: hsl(9, 100%, 84%);
   --red-fade-75: hsla(9, 100%, 64%, .75);
-  --red-fade-50: hsla(9, 100%, 64%, .50);
+  --red-fade-50: hsla(13, 100%, 50%, 0.5);
 
 }
 .blue_gray_pink {
   --bg-canvas: var(--darkgray-500);
   --bg-panel: var(--bluegreen-fade-75);
   --bg-tab: var(--darkgray-fade-50);
-  --bg-active: var(--darkgray-500);
-  --bg-input: var(--bluegreen-fade-75);
+  --bg-active: rgba(2, 29, 29, 0.95);
+  --bg-input: var(--bluegreen-900);
   --bg-button: var(--bluegreen-fade-75);
   --bg-button-hover: var(--darkgray-500);
-  --font-light: var(--cream-900);
-  --font-dark: var(--darkgray-100);
+  --font-light: rgb(144, 219, 219);
+  --font-dark: rgb(2, 29, 29);
   --accent: var(--pink-500);
   --warning-red: var(--red-fade-50);
   --notice-red: var(--red-900);
@@ -125,6 +125,14 @@
   --svg-ring-thick: rgba(85, 122, 149, 0.2);
   --svg-ring-thin: rgba(85, 122, 149, 0.15);
   --svg-line: rgba(85, 122, 149, 0.2);
+}
+
+.triadic {
+  --bg-canvas: var(--darkgray-900);
+  --bg-panel: #0d6760;
+  --bg-tab: #90B04F;
+  --accent: #c891be;
+
 }
 
 /* ----   html & body styles    ---- */

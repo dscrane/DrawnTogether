@@ -75,33 +75,35 @@
   font-weight: 400;
   line-height: 1.75;
   background-clip: padding-box;
-  background-color: var(--bluegreen-fade-75);
-  border: 2px solid var(--font-dark);
-  box-shadow: .2rem .2rem .25rem var(--font-dark);
+  background-color: var(--bluegreen-900);
+  border: none;
+  box-shadow: inset .2rem .2rem .25rem var(--font-dark);
 }
 .form__control:focus {
   outline: none;
-  box-shadow: .1rem .1rem .5rem var(--font-light), -.1rem -.1rem .5rem var(--font-light);
+  box-shadow: none;
 }
 .form__control-input {
-  color: var(--font-light);
-  background-color: var(--bluegreen-fade-75);
+  color: var(--font-dark);
   background-clip: padding-box;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
 }
 select {
   background-color: var(--bluegreen-fade-75);
   border: 2px solid var(--font-dark);
 }
 select > option {
-  background-color: var(--font-light);
+  background-color: var(--bluegreen-900);
   font-family: "Baloo Thambi 2", serif;
 }
 .form__control-select:hover {
   cursor:pointer;
 }
 .form__control-invalid {
-  box-shadow: .1rem .1rem .5rem var(--warning-red), -.1rem -.1rem .5rem var(--warning-red);
+  border: 2px solid var(--warning-red);
+}
+.form__control-invalid:focus {
+  border: none;
 }
 .form__message-error {
   width: 15%;

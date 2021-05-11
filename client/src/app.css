@@ -21,7 +21,7 @@
   --bluegreen-100: hsl(180, 25%, 10%);
   --bluegreen-500: hsl(180, 25%, 30%);
   --bluegreen-900: hsl(180, 25%, 50%);
-  --bluegreen-fade-75: hsla(180, 25%, 30%, .95);
+  --bluegreen-fade-75: hsla(180, 25%, 30%, 0.95);
   --bluegreen-fade-50: hsla(180, 25%, 30%, .50);
 
   --green: 104, 35%, 67%;
@@ -57,7 +57,7 @@
   --red-500: hsl(9, 100%, 64%);
   --red-900: hsl(9, 100%, 84%);
   --red-fade-75: hsla(9, 100%, 64%, .75);
-  --red-fade-50: hsla(9, 100%, 64%, .50);
+  --red-fade-50: hsla(0, 6%, 48%, 0.5);
 
 }
 :root{
