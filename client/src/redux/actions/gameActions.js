@@ -63,15 +63,20 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
   });
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
-export const updatePlayer = (currentPlayer, responses) => async (dispatch) => {
+export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch) => {
 
+  const { data } = await api.patch("/users/update", {
+    _id: playerId,
+    responses: formData,
+    formStep: currentForm
+  })
 
 
   dispatch({
     type: UPDATE_PLAYER,
     payload: {
-      responses,
-      currentPlayer,
+      responses: { ...data },
+      playerIndex,
     },
   });
 };

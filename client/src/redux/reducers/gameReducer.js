@@ -104,9 +104,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         players: {
           ...state.players,
-          [action.payload.currentPlayer]: {
-            ...state.players[action.payload.currentPlayer],
-            ...action.payload.responses,
+          [action.payload.playerIndex]: {
+            ...state.players[action.payload.playerIndex],
+            responses: {
+              ...state.players[action.payload.playerIndex].responses,
+              ...action.payload.responses,
+            },
           },
         },
       };

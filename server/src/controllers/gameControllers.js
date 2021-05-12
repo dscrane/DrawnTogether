@@ -11,7 +11,6 @@ router.get("/games/:id", async (req, res) => {
 
 router.post("/games/initializeGame", async (req, res) => {
   const { interest, responses } = req.body;
-
   const { players, playerIds, circles } = await initializePlayers(responses);
 
   const newGame = new Game({

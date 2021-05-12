@@ -1,6 +1,5 @@
 import { User } from "../models/user.js";
 export const initializePlayers = async (responses) => {
-  console.log(responses);
   const players = {};
   const playerIds = [];
 

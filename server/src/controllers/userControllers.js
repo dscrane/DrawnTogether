@@ -1,5 +1,6 @@
 import express from "express";
 import { User } from "../models/user.js";
+import { updatePlayers } from "../utils/updatePlayers.js";
 
 // create express router
 const router = new express.Router();
@@ -12,25 +13,29 @@ router.get("/users/:id", async (req, res) => {
 
 // create new user
 router.post("/users/create", async (req, res) => {
-  console.log(req.body);
   const newUser = new User(req.body);
   await newUser.save();
 
   res.send(newUser);
-  console.log(newUser);
 });
 
 // update user
 router.patch("/users/update", async (req, res) => {
-  const { _id, updates, updateStep } = res.body;
-  const toUpdate = Object.keys(updates);
+  const { _id, responses, updateStep } = req.body;
+  const toUpdate = Object.keys(responses);
+
   // validate updates here
   //
   try {
     const user = await User.findById(_id);
-    toUpdate.forEach((update) => (user[update] = updates[update]));
+
+    toUpdate.forEach((update) => {
+      user.responses[update] = responses[update];
+    });
+    console.log(user);
     await user.save();
-    res.send(user);
+    console.log(user.responses);
+    res.send(user.responses);
   } catch (e) {
     console.log(e);
   }
