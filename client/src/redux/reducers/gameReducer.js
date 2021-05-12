@@ -96,7 +96,7 @@ export default (state = INITIAL_STATE, action) => {
         circles: action.payload.circles,
         players: {
           ...state.players,
-          ...action.payload.responses,
+          ...action.payload.responses /*to change to players*/,
         },
       };
     case UPDATE_PLAYER:

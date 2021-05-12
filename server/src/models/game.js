@@ -1,15 +1,15 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
 
-const gameSchema = new Schema(
+const gameSchema = new mongoose.Schema(
   {
-    _id: Schema.Types.ObjectId,
     numPlayers: Number,
-    players: [Schema.types.ObjectId],
+    players: [mongoose.Schema.Types.ObjectId],
+    inProgress: Boolean,
     complete: Boolean,
     date: Date,
-    finalDisplay: Buffer
+    // finalDisplay: Buffer
   }
 )
 
-export const Game = model('Game', gameSchema);
+export const Game = mongoose.model('Game', gameSchema);

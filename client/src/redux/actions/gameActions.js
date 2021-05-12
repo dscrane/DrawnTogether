@@ -17,7 +17,9 @@ import { circleAlterations, handleGridUpdate } from "../../utils";
 import { api } from "../../utils";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
-export const startGame = () => (dispatch) => {
+export const startGame = () => async (dispatch) => {
+  await api.post("/games/create")
+
   dispatch({
     type: START_GAME,
     payload: {
@@ -36,14 +38,15 @@ export const endGame = () => (dispatch) => {
 export const setInterestAndPlayers = ({ interest, ...responses }) => async (dispatch) => {
   const numPlayers = Object.keys(responses).length;
   const circles = new Array(numPlayers).fill({});
+  const players = {};
   for (let i=0; i < numPlayers; i++) {
-  console.log(responses[i])
-    await api.post("/users/create", {name:responses[i].name, responses: {association: responses[i].association}})
+    const {data: {_id, ...rest}} = await api.post("/users/create", {name:responses[i].name, responses: {association: responses[i].association}})
+    players[_id] = {...rest}
   }
-
+  console.log(players)
   dispatch({
     type: SET_INTEREST_AND_PLAYERS,
-    payload: { interest, responses, numPlayers, circles },
+    payload: { interest, responses /*to change to players*/, numPlayers, circles },
   });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
@@ -65,7 +68,10 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
   });
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
-export const updatePlayer = (currentPlayer, responses) => (dispatch) => {
+export const updatePlayer = (currentPlayer, responses) => async (dispatch) => {
+
+
+
   dispatch({
     type: UPDATE_PLAYER,
     payload: {
