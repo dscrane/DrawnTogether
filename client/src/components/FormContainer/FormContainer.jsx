@@ -63,8 +63,10 @@ const FormContainer = ({
 
     if (currentForm >= 2 && currentForm <= 7) {
       if (currentPlayer < numPlayers) {
-        await updatePlayer(currentPlayer, session.playerIds[currentPlayer], formData[currentPlayer], currentForm);
-        await nextPlayer(currentPlayer);
+        const success = await updatePlayer(currentPlayer, session.playerIds[currentPlayer], formData[currentPlayer], currentForm);
+        if (/*success*/true) {
+          await nextPlayer(currentPlayer)
+        }
       } else {
         await nextForm(currentForm);
       }

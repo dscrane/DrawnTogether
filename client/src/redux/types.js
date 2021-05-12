@@ -3,6 +3,7 @@ export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
 export const NEXT_FORM = "NEXT_FORM";
 export const PREV_FORM = "PREV_FORM";
+export const RESET_FORM = "RESET_FORM";
 export const UPDATE_PLAYER = "UPDATE_PLAYER";
 export const DISPLAY_CIRCLES = "DISPLAY_CIRCLES";
 export const UPDATE_CIRCLES = "UPDATE_CIRCLES";

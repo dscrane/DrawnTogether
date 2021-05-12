@@ -3,6 +3,7 @@ import {
   END_GAME,
   NEXT_FORM,
   PREV_FORM,
+  RESET_FORM,
   NEXT_PLAYER,
   PREV_PLAYER,
   UPDATE_CIRCLES,
@@ -76,6 +77,13 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload,
       };
+    case RESET_FORM:
+      console.log(action.type, action.payload);
+      return {
+        ...state,
+        ...action.payload
+      }
+
     case NEXT_PLAYER:
       console.info(action.type, action.payload);
       return {

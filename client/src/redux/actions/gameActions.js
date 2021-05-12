@@ -3,6 +3,7 @@ import {
   END_GAME,
   NEXT_FORM,
   PREV_FORM,
+  RESET_FORM,
   UPDATE_PLAYER,
   FINAL_DISPLAY,
   INITIALIZE_GAME,
@@ -65,20 +66,35 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
 export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch) => {
 
-  const { data } = await api.patch("/users/update", {
+  const { data, error } = await api.patch("/users/update", {
     _id: playerId,
     responses: formData,
-    formStep: currentForm
+    updateStep: currentForm
   })
+  console.log(data, error)
+
+  if (error) {
+    await alert(data.error.message);
+    dispatch({
+      type: RESET_FORM,
+      payload: {currentPlayer: playerIndex}
+    });
+    return false;
+  }
 
 
-  dispatch({
-    type: UPDATE_PLAYER,
-    payload: {
-      responses: { ...data },
-      playerIndex,
-    },
-  });
+    dispatch({
+      type: UPDATE_PLAYER,
+      payload: {
+        responses: { ...data },
+        playerIndex,
+      },
+    });
+  return true;
+
+
+
+
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
 export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
