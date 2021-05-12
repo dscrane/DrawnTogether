@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from "cors";
-import { playerRouter } from "./controllers/players.js";
+import { userRouter } from "./controllers/users.js";
 import bodyParser from "body-parser";
 import { default as connectDatabase } from "./db/db.js";
 
@@ -14,7 +14,7 @@ const app = express();
 app.use(bodyParser.json())
 app.use(cors());
 // Connect routers
-app.use(playerRouter);
+app.use(userRouter);
 
 app.get('/', (req, res) => {
   res.send('HELLO WORLD')

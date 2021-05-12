@@ -14,7 +14,7 @@ import {
   UPDATE_DISPLAY_GRID,
 } from "../types";
 import { circleAlterations, handleGridUpdate } from "../../utils";
-import axios from "axios";
+import { api } from "../../utils";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
 export const startGame = () => (dispatch) => {
@@ -33,9 +33,14 @@ export const endGame = () => (dispatch) => {
   dispatch({ type: END_GAME });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
-export const setInterestAndPlayers = ({ interest, ...responses }) => (dispatch) => {
+export const setInterestAndPlayers = ({ interest, ...responses }) => async (dispatch) => {
   const numPlayers = Object.keys(responses).length;
   const circles = new Array(numPlayers).fill({});
+  for (let i=0; i < numPlayers; i++) {
+  console.log(responses[i])
+    await api.post("/users/create", {name:responses[i].name, responses: {association: responses[i].association}})
+  }
+
   dispatch({
     type: SET_INTEREST_AND_PLAYERS,
     payload: { interest, responses, numPlayers, circles },
@@ -61,7 +66,6 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
 export const updatePlayer = (currentPlayer, responses) => (dispatch) => {
-  axios.post('http://localhost:5500/players/update', {_id: "THIS IS THE ID"})
   dispatch({
     type: UPDATE_PLAYER,
     payload: {
