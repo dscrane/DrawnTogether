@@ -13,10 +13,10 @@ connectDatabase();
 const app = express();
 // Connect middlewares
 app.use(bodyParser.json())
-app.use(cors());
+app.use(cors({origin: "http://localhost:3000"} ));
 // Connect routers
-app.use(userRouter);
 app.use(gameRouter);
+app.use(userRouter);
 
 app.get('/', (req, res) => {
   res.send('HELLO WORLD')

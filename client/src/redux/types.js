@@ -1,5 +1,5 @@
 // Game Action Types
-export const START_GAME = "NEW_GAME";
+export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
 export const NEXT_FORM = "NEXT_FORM";
 export const PREV_FORM = "PREV_FORM";
@@ -8,7 +8,7 @@ export const DISPLAY_CIRCLES = "DISPLAY_CIRCLES";
 export const UPDATE_CIRCLES = "UPDATE_CIRCLES";
 export const DISPLAY_GRID = "DISPLAY_GRID";
 export const INITIALIZE_GROUP = "INITIALIZE_GROUP";
-export const SET_INTEREST_AND_PLAYERS = "SET_INTEREST_AND_PLAYERS";
+export const INITIALIZE_GAME = "INITIALIZE_GAME";
 
 // Display Action Types
 export const UPDATE_DISPLAY_GRID = "UPDATE_DISPLAY_GRID";

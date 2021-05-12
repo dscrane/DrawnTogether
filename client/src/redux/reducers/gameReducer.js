@@ -1,4 +1,3 @@
-import update from "react-addons-update";
 import {
   START_GAME,
   END_GAME,
@@ -11,7 +10,7 @@ import {
   DISPLAY_GRID,
   INITIALIZE_GROUP,
   UPDATE_PLAYER,
-  SET_INTEREST_AND_PLAYERS,
+  INITIALIZE_GAME,
   UPDATE_DISPLAY_GRID,
   UPDATE_PLAYER_CIRCLE,
   UPDATE_VIEW,
@@ -21,13 +20,15 @@ import {
 
 const INITIAL_STATE = {
   inProgress: false,
-  currentForm: 0,
+  complete: false,
   numPlayers: 0,
-  currentPlayer: 0,
   interest: "",
+  currentForm: 0,
+  currentPlayer: 0,
   displayGrid: false,
   updateCircles: false,
   players: {},
+  playerIds: [],
   circles: [],
   finalCircles: [],
   canvasDisplay: {
@@ -87,16 +88,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload,
       };
-    case SET_INTEREST_AND_PLAYERS:
+    case INITIALIZE_GAME:
       console.info(action.type, action.payload);
       return {
         ...state,
-        interest: action.payload.interest,
-        numPlayers: action.payload.numPlayers,
-        circles: action.payload.circles,
+        ...action.payload.game,
         players: {
           ...state.players,
-          ...action.payload.responses /*to change to players*/,
+          ...action.payload.players /*to change to players*/,
         },
       };
     case UPDATE_PLAYER:

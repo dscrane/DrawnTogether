@@ -5,7 +5,7 @@ import {
   PREV_FORM,
   UPDATE_PLAYER,
   FINAL_DISPLAY,
-  SET_INTEREST_AND_PLAYERS,
+  INITIALIZE_GAME,
   NEXT_PLAYER,
   PREV_PLAYER,
   UPDATE_PLAYER_CIRCLE,
@@ -18,11 +18,11 @@ import { api } from "../../utils";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
 export const startGame = () => async (dispatch) => {
-  await api.post("/games/create")
-
+  // const { data: { _id } } =  await api.post("/games/create")
   dispatch({
     type: START_GAME,
     payload: {
+      // gameId: _id,
       inProgress: true,
       currentForm: 1,
       displayGrid: true,
@@ -35,18 +35,13 @@ export const endGame = () => (dispatch) => {
   dispatch({ type: END_GAME });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
-export const setInterestAndPlayers = ({ interest, ...responses }) => async (dispatch) => {
-  const numPlayers = Object.keys(responses).length;
-  const circles = new Array(numPlayers).fill({});
-  const players = {};
-  for (let i=0; i < numPlayers; i++) {
-    const {data: {_id, ...rest}} = await api.post("/users/create", {name:responses[i].name, responses: {association: responses[i].association}})
-    players[_id] = {...rest}
-  }
-  console.log(players)
+export const initializeGame = (gameId, formData) => async (dispatch) => {
+  const { interest, ...responses } = formData;
+  const { data: { game, players }} = await api.post("/games/initializeGame", {interest, responses})
+
   dispatch({
-    type: SET_INTEREST_AND_PLAYERS,
-    payload: { interest, responses /*to change to players*/, numPlayers, circles },
+    type: INITIALIZE_GAME,
+    payload: { game, players },
   });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */

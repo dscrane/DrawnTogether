@@ -8,7 +8,7 @@ import {
   nextPlayer,
   prevForm,
   prevPlayer,
-  setInterestAndPlayers,
+  initializeGame,
   updatePlayer,
   updatePlayerCircle,
 } from "../../redux/actions";
@@ -16,11 +16,12 @@ import { FormHeading } from "../FormHeading";
 
 const FormContainer = ({
   session,
+  gameId,
   players,
   updatePlayer,
   updatePlayerCircle,
   nextPlayer,
-  setInterestAndPlayers,
+  initializeGame,
   prevPlayer,
   nextForm,
   prevForm,
@@ -47,7 +48,9 @@ const FormContainer = ({
 
   const handleNext = async (formData) => {
     if (currentForm === 1) {
-      await setInterestAndPlayers(formData);
+      console.log('game id', gameId)
+
+      await initializeGame(gameId, formData);
       nextForm(currentForm);
       return;
     }
@@ -83,10 +86,11 @@ const FormContainer = ({
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { canvasDisplay, players, ...rest } = gameState;
+  const { canvasDisplay, players, gameId, ...rest } = gameState;
   return {
     canvasDisplay,
     players,
+    gameId,
     session: rest,
   };
 };
@@ -99,6 +103,6 @@ export default connect(mapStateToProps, {
   prevForm,
   endGame,
   updatePlayerCircle,
-  setInterestAndPlayers,
+  initializeGame,
   finalDisplay,
 })(FormContainer);
