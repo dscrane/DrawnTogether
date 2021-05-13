@@ -20,6 +20,7 @@ router.post("/users/create", async (req, res) => {
 // update user
 router.patch("/users/update", async (req, res) => {
   const { _id, responses, updateStep } = req.body;
+  console.log(responses);
   const toUpdate = Object.keys(responses);
   // TODO: - change form behaviour from redux form
   //       - test for correct and fail behaviour

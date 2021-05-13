@@ -3,8 +3,6 @@ import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } 
 
 const FormSwitch = ({ form, currentPlayer, values, formProps }) => {
   switch (form) {
-    case 1:
-      return <PlayerForm values={values} formProps={formProps} />;
     case 2:
       return (
           <FormOne values={values} formProps={formProps} />

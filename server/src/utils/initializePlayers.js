@@ -9,8 +9,6 @@ export const initializePlayers = async (players) => {
   const circles = new Array(numPlayers).fill({});
 
   for (const player of players) {
-    console.log(player);
-    console.log(index);
     const newUser = await new User({
       name: player.name,
       responses: { association: player.association },

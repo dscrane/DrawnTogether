@@ -14,6 +14,52 @@ import {
 } from "../../redux/actions";
 import { FormHeading } from "../FormHeading";
 
+const formResponseSchema = [
+  null,
+  {
+    interest: "",
+    players: [
+      {
+        name: "",
+        association: ""
+      },
+      {
+        name: "",
+        association: ""
+      }
+    ],
+  },
+  {
+    age: "",
+    diet: "",
+    gender: "",
+    height: "",
+    interest: "",
+  },
+  {
+    time: "",
+    personality: "",
+    hair: "",
+  },
+  {
+    food: "",
+    money: "",
+  },
+  {
+    nature: "",
+    media: "",
+    progress: "",
+  },
+  {
+    religion: "",
+    culture: "",
+  },
+  {
+    color: "",
+  }
+
+]
+
 const FormContainer = ({
   session,
   gameId,
@@ -46,13 +92,12 @@ const FormContainer = ({
     }
   };
 
-  const handleNext = async (formData) => {
-    console.log(formData)
-
+  const handleNext = async (values, actions) => {
+    console.log(values)
     if (currentForm === 1) {
-      console.log('game id', gameId)
-      await initializeGame(gameId, formData);
-      nextForm(currentForm);
+      await initializeGame(gameId, values);
+      await nextForm(currentForm);
+      actions.resetForm(formResponseSchema[currentForm]);
       return;
     }
 
@@ -63,8 +108,10 @@ const FormContainer = ({
     }
 
     if (currentForm >= 2 && currentForm <= 7) {
+      console.log(values)
+
       if (currentPlayer < numPlayers) {
-        const success = await updatePlayer(currentPlayer, session.playerIds[currentPlayer], formData[currentPlayer], currentForm);
+        /*const success = */await updatePlayer(currentPlayer, session.playerIds[currentPlayer], values, currentForm);
         if (/*success*/true) {
           await nextPlayer(currentPlayer)
         }
@@ -72,6 +119,7 @@ const FormContainer = ({
         await nextForm(currentForm);
       }
     }
+        actions.resetForm(formResponseSchema[currentForm])
   };
 
   return (

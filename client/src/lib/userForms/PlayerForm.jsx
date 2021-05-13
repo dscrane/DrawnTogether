@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
-// import { Field, FormSection } from "redux-form";
-import {Field, FieldArray, Form, Formik} from "formik"
+import React from "react";
+import {Field, FieldArray, Formik, Form } from "formik";
 import {  validateString, validateNumber } from "../../utils/validators";
-import {FormSwitch} from "../../components/FormSwitch";
-import {PanelButtonRow} from "../../components/PanelButtonRow";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
@@ -21,21 +18,14 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   );
 };
 
-// Create the player form fields
-// const createPlayerFormField = (player, index, removeField, ...props) => {
-//   return (
-//
-//   );
-// };
-
-export const PlayerForm = ({ values }) => {
+export const PlayerForm = ({ values, ...formProps }) => {
   return (
     <>
       <div className="form__row">
         <div className="form__item form__item-interest">
           <label className="item__label item__label-interest">Common Interest</label>
           <Field
-            className={`form__control form__control-input ${1===2 ? "form__control-invalid" : ""}`}
+            className={`form__control form__control-input ${1 === 2 ? "form__control-invalid" : ""}`}
             id="commonInterest"
             name="interest"
             component="input"
@@ -54,13 +44,14 @@ export const PlayerForm = ({ values }) => {
                 <div key={`player_${index}`} className="form__row">
                   <div className="form__item">
                     <div className="item__name">Player #{index + 1}</div>
-                    <button className="item__removeCTA" type="button" title="Remove Player" onClick={() => arrayHelpers.remove(index)}>
+                    <button className="item__removeCTA" type="button" title="Remove Player"
+                            onClick={() => arrayHelpers.remove(index)}>
                       Remove
                     </button>
                   </div>
                   <div className="form__item">
                     <Field
-                      className={`form__control form__control-input ${1===2 ? "form__control-invalid" : ""}`}
+                      className={`form__control form__control-input ${1 === 2 ? "form__control-invalid" : ""}`}
                       name={`players.${index}.name`}
                       type="text"
                       component={renderField}
@@ -71,7 +62,7 @@ export const PlayerForm = ({ values }) => {
                   </div>
                   <div className="form__item">
                     <Field
-                      className={`form__control form__control-input ${1===2 ? "form__control-invalid" : ""}`}
+                      className={`form__control form__control-input ${1 === 2 ? "form__control-invalid" : ""}`}
                       name={`players.${index}.association`}
                       type="text"
                       component={renderField}
@@ -85,7 +76,8 @@ export const PlayerForm = ({ values }) => {
             }
             <div className="form__row">
               <div className="form__item form__item-addCTA">
-                <button className="item__addCTA" type="button" onClick={() => arrayHelpers.push({name: '', association: ''})}>
+                <button className="item__addCTA" type="button"
+                        onClick={() => arrayHelpers.push({name: '', association: ''})}>
                   Add Player
                 </button>
               </div>
@@ -94,4 +86,5 @@ export const PlayerForm = ({ values }) => {
         )}
       />
     </>
-)};
+)
+};
