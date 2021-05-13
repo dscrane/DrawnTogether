@@ -6,7 +6,7 @@ export const FormTwo = () => {
     <>
       <div className="form__row">
         <label className="item__label">Time</label>
-        <Field className="form__control form__control-select" name="time" id="formTemporal" component="select">
+        <Field className="form__control form__control-select" name="time" id="formTemporal" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="18">Morning</option>
           <option value="45">Evening</option>
@@ -18,7 +18,7 @@ export const FormTwo = () => {
           className="form__control form__control-select"
           name="personality"
           id="formPersonality"
-          component="select"
+          as="select"
         >
           <option value="DEFAULT">Choose...</option>
           <option value="60">Introvert</option>
@@ -27,7 +27,7 @@ export const FormTwo = () => {
       </div>
       <div className="form__row">
         <label className="item__label">Hair</label>
-        <Field className="form__control form__control-select" name="hair" id="formHair" component="select">
+        <Field className="form__control form__control-select" name="hair" id="formHair" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="10">Curly</option>
           <option value="18">Straight</option>

@@ -6,7 +6,7 @@ export const FormThree = () => {
     <>
       <div className="form__row">
         <label className="item__label">Relationship to Money</label>
-        <Field className="form__control form__control-select" name="money" id="formMoney" component="select">
+        <Field className="form__control form__control-select" name="money" id="formMoney" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="0">Miserly</option>
           <option value="2">Spend-thrift</option>
@@ -16,7 +16,7 @@ export const FormThree = () => {
       </div>
       <div className="form__row">
         <label className="item__label">Relationship to Food</label>
-        <Field className="form__control form__control-select" name="food" id="formFood" component="select">
+        <Field className="form__control form__control-select" name="food" id="formFood" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="45">I will try anything</option>
           <option value="135">A foodie</option>

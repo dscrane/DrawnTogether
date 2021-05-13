@@ -37,12 +37,12 @@ export const endGame = () => (dispatch) => {
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
 export const initializeGame = (gameId, formData) => async (dispatch) => {
-  const { interest, ...responses } = formData;
-  const { data: { game, players }} = await api.post("/games/initializeGame", {interest, responses})
-
+  console.log(formData)
+  const { interest, players } = formData;
+  const { data } = await api.post("/games/initializeGame", {interest, players})
   dispatch({
     type: INITIALIZE_GAME,
-    payload: { game, players },
+    payload: { game: data.game, players: data.players },
   });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */

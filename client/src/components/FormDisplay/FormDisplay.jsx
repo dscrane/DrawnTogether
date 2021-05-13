@@ -1,26 +1,36 @@
 import React from "react";
-import { reduxForm } from "redux-form";
+// import { reduxForm } from "redux-form";
+import {Formik, Form} from 'formik'
 import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";
 import "./formDisplay.css";
 
+
 const FormDisplay = ({
-  handleSubmit,
+  onSubmit,
   handlePrevious,
-  pristine,
-  submitting,
   currentForm,
   currentPlayer,
   numPlayers,
 }) => {
-  const renderPlayerFormOrNext =
+  const renderPlayerFormOrNext = (
     currentPlayer !== numPlayers || currentForm < 2 ? (
-      <>
-        <FormSwitch form={currentForm} currentPlayer={currentPlayer} />
-        <div className="form__row">
-          <PanelButtonRow prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
-        </div>
-      </>
+      <Formik
+        initialValues={{players: [{name: "", association: ""}]}}
+        onSubmit={(values) => onSubmit(values)}
+        className={`form ${currentForm > 1 ? "form-bordered" : ""} form-signin mt-2`}
+        >
+        {
+          ({ values, ...props}) => (
+            <Form>
+              <FormSwitch form={currentForm} currentPlayer={currentPlayer} values={values} formProps={props} />
+              <div className="form__row">
+                <PanelButtonRow prevText={"Back"} nextText={"Submit"} handlePrevious={handlePrevious} />
+              </div>
+            </Form>
+        )
+        }
+      </Formik>
     ) : (
       <>
         <div className="body__updateMessage">
@@ -32,15 +42,13 @@ const FormDisplay = ({
         </div>
         <PanelButtonRow prevText={"Back"} nextText={"Next Form"} handlePrevious={handlePrevious} />
       </>
-    );
-
+    )
+  )
   return (
-    <form onSubmit={handleSubmit} className={`form ${currentForm > 1 ? "form-bordered" : ""} form-signin mt-2`}>
-      {renderPlayerFormOrNext}
-    </form>
+    <>{renderPlayerFormOrNext}</>
   );
-};
 
-export default reduxForm({
+};
+export default /*reduxForm({
   form: "playerForm",
-})(FormDisplay);
+})*/(FormDisplay);

@@ -6,7 +6,7 @@ export const FormSix = () => {
     <>
       <div className="form__row">
         <label className="item__label">Choose a Color</label>
-        <Field className="form__control form__control-select" name="color" id="formColor" component="select">
+        <Field className="form__control form__control-select" name="color" id="formColor" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="chartreuse">Chartreuse</option>
           <option value="vermilion">Vermilion</option>

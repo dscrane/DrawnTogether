@@ -1,46 +1,33 @@
 import React from "react";
 import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } from "../../lib/userForms";
-import { FormSection } from "redux-form";
 
-const FormSwitch = ({ form, currentPlayer }) => {
+const FormSwitch = ({ form, currentPlayer, values, formProps }) => {
   switch (form) {
     case 1:
-      return <PlayerForm />;
+      return <PlayerForm values={values} formProps={formProps} />;
     case 2:
       return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormOne />
-        </FormSection>
+          <FormOne values={values} formProps={formProps} />
       );
     case 3:
       return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormTwo />
-        </FormSection>
+          <FormTwo values={values} formProps={formProps} />
       );
     case 4:
       return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormThree />
-        </FormSection>
+          <FormThree values={values} formProps={formProps} />
       );
     case 5:
       return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormFour />
-        </FormSection>
+          <FormFour values={values} formProps={formProps} />
       );
     case 6:
       return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormFive />
-        </FormSection>
+          <FormFive values={values} formProps={formProps} />
       );
     case 7:
       return (
-        <FormSection name={`${currentPlayer}`}>
-          <FormSix />
-        </FormSection>
+          <FormSix values={values} formProps={formProps} />
       );
     case 8:
       return <>hi</>;

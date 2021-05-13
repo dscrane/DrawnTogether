@@ -1,20 +1,25 @@
 import { User } from "../models/user.js";
-export const initializePlayers = async (responses) => {
-  const players = {};
+export const initializePlayers = async (players) => {
+  console.log(players);
+  let index = 0;
+  let playersObj = {};
   const playerIds = [];
+  const numPlayers = players.length;
 
-  const numPlayers = Object.keys(responses).length;
   const circles = new Array(numPlayers).fill({});
 
-  for (let i = 0; i < numPlayers; i++) {
+  for (const player of players) {
+    console.log(player);
+    console.log(index);
     const newUser = await new User({
-      name: responses[i].name,
-      responses: { association: responses[i].association },
+      name: player.name,
+      responses: { association: player.association },
     });
     await newUser.save();
-    players[i] = newUser;
+    playersObj[index] = newUser;
     playerIds.push(newUser._id);
+    index = index + 1;
   }
-
-  return { players, playerIds, circles };
+  console.log(playersObj);
+  return { playersObj, playerIds, circles };
 };

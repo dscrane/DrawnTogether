@@ -47,9 +47,10 @@ const FormContainer = ({
   };
 
   const handleNext = async (formData) => {
+    console.log(formData)
+
     if (currentForm === 1) {
       console.log('game id', gameId)
-
       await initializeGame(gameId, formData);
       nextForm(currentForm);
       return;

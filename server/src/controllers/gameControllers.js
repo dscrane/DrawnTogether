@@ -10,19 +10,24 @@ router.get("/games/:id", async (req, res) => {
 });
 
 router.post("/games/initializeGame", async (req, res) => {
-  const { interest, responses } = req.body;
-  const { players, playerIds, circles } = await initializePlayers(responses);
+  console.log(req.body);
+  const { interest, players } = req.body;
+  try {
+    const { playersObj, playerIds, circles } = await initializePlayers(players);
 
-  const newGame = new Game({
-    circles,
-    numPlayers: playerIds.length,
-    playerIds: playerIds,
-    inProgress: true,
-    complete: false,
-    interest: interest,
-  });
-  await newGame.save();
-  res.send({ game: newGame, players: players });
+    const newGame = new Game({
+      circles,
+      numPlayers: playerIds.length,
+      playerIds: playerIds,
+      inProgress: true,
+      complete: false,
+      interest: interest,
+    });
+    await newGame.save();
+    res.send({ game: newGame, players: playersObj });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 router.patch("/games/updateGame", async (req, res) => {

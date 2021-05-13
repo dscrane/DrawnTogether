@@ -6,7 +6,7 @@ export const FormFour = () => {
     <>
       <div className="form__row">
         <label className="item__label">Relationship to Nature</label>
-        <Field className="form__control form__control-select" name="nature" id="formNature" component="select">
+        <Field className="form__control form__control-select" name="nature" id="formNature" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="hollow">Video Gamer</option>
           <option value="stroke">Happy on the porch</option>
@@ -16,7 +16,7 @@ export const FormFour = () => {
       </div>
       <div className="form__row">
         <label className="item__label">Relationship to Social Media</label>
-        <Field className="form__control form__control-select" name="media" id="formMedia" component="select">
+        <Field className="form__control form__control-select" name="media" id="formMedia" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="thinner">What is social media</option>
           <option value="thicker">Lurker</option>
@@ -26,7 +26,7 @@ export const FormFour = () => {
       </div>
       <div className="form__row">
         <label className="item__label">Relationship to Progress</label>
-        <Field className="form__control form__control-select" name="progress" id="formProgress" component="select">
+        <Field className="form__control form__control-select" name="progress" id="formProgress" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="complimentary">Curmudgeon</option>
           <option value="triadic">C'est Le Vie</option>
