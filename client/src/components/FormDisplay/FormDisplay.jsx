@@ -1,5 +1,4 @@
 import React from "react";
-// import { reduxForm } from "redux-form";
 import {Formik, Form} from 'formik'
 import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";

@@ -1,6 +1,6 @@
 /*
 import React from "react";
-import { Field } from "redux-form";
+import { Field } from "formik";;
 import { PlayerForm } from "../playerForm";
 
 export const InterestForm = () => {

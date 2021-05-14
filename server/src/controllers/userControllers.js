@@ -1,6 +1,6 @@
 import express from "express";
 import { User } from "../models/user.js";
-import { validateResponses } from "../utils/validateResponses.js";
+import { validateUpdates } from "../middleware/updateValidation.js";
 
 // create express router
 const router = new express.Router();
@@ -18,32 +18,15 @@ router.post("/users/create", async (req, res) => {
 });
 
 // update user
-router.patch("/users/update", async (req, res) => {
-  const { _id, responses, updateStep } = req.body;
-  console.log(responses);
-  const toUpdate = Object.keys(responses);
-  // TODO: - change form behaviour from redux form
-  //       - test for correct and fail behaviour
-  // BROKEN
-  const isValid = await validateResponses(toUpdate, updateStep);
-  console.log(!isValid ? "invalid update" : "updates validated");
-  if (!isValid) {
-    return res.send({
-      error: {
-        message:
-          "An error has occurred, please try entering your responses again.",
-      },
-    });
-  }
+router.patch("/users/update", validateUpdates, async (req, res) => {
+  const { _id, responses, toUpdate } = req.body;
 
   try {
     const user = await User.findById(_id);
     toUpdate.forEach((update) => (user.responses[update] = responses[update]));
     await user.save();
-    res.send(user.responses);
-  } catch (e) {
-    console.log(e);
-  }
+    res.send({ data: user.responses });
+  } catch (e) {}
 });
 
 // delete user

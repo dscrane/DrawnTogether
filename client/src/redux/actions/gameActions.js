@@ -37,7 +37,6 @@ export const endGame = () => (dispatch) => {
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
 export const initializeGame = (gameId, formData) => async (dispatch) => {
-  console.log(formData)
   const { interest, players } = formData;
   const { data } = await api.post("/games/initializeGame", {interest, players})
   dispatch({
@@ -65,23 +64,20 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
 export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch) => {
-  console.log(formData)
-  const { data, error } = await api.patch("/users/update", {
+  const {data: { data, error }} = await api.patch("/users/update", {
     _id: playerId,
     responses: formData,
     updateStep: currentForm
   })
-  console.log(data, error)
 
   if (error) {
-    await alert(data.error.message);
+    await alert(error.message);
     dispatch({
       type: RESET_FORM,
       payload: {currentPlayer: playerIndex}
     });
     return false;
   }
-
 
     dispatch({
       type: UPDATE_PLAYER,
@@ -91,9 +87,6 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
       },
     });
   return true;
-
-
-
 
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
