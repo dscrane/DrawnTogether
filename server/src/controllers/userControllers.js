@@ -25,15 +25,16 @@ router.patch("/users/update", async (req, res) => {
   // TODO: - change form behaviour from redux form
   //       - test for correct and fail behaviour
   // BROKEN
-  // const isValid = await validateResponses(toUpdate, updateStep);
-  // if (!isValid) {
-  //   return res.send({
-  //     error: {
-  //       message:
-  //         "An error has occurred, please try entering your responses again.",
-  //     },
-  //   });
-  // }
+  const isValid = await validateResponses(toUpdate, updateStep);
+  console.log(!isValid ? "invalid update" : "updates validated");
+  if (!isValid) {
+    return res.send({
+      error: {
+        message:
+          "An error has occurred, please try entering your responses again.",
+      },
+    });
+  }
 
   try {
     const user = await User.findById(_id);

@@ -1,8 +1,12 @@
 import React from "react";
 import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } from "../../lib/userForms";
 
-const FormSwitch = ({ form, currentPlayer, values, formProps }) => {
+const FormSwitch = ({ form, values, formProps }) => {
   switch (form) {
+    case 1:
+      return (
+        <PlayerForm values={values} formProps={formProps}/>
+      )
     case 2:
       return (
           <FormOne values={values} formProps={formProps} />

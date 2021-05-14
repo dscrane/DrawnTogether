@@ -1,7 +1,7 @@
 const formResponses = [
   null,
   null,
-  ["diet", "age", "gender", "height", "personality", "hair"],
+  ["diet", "age", "gender", "height", "interest"],
 ];
 
 export const validateResponses = (responses, validator) => {

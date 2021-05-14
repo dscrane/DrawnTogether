@@ -76,11 +76,21 @@ const FormContainer = ({
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
 
-  useEffect(() => {
-    if (currentForm >= 2 && currentPlayer > 0) {
-      updatePlayerCircle(players[currentPlayer - 1], currentPlayer - 1, currentForm);
-    }
-  }, [currentPlayer]);
+  // useEffect(() => {
+  //   if (currentForm >= 2 && currentPlayer > 0) {
+  //     updatePlayerCircle(players[currentPlayer - 1], currentPlayer - 1, currentForm);
+  //   }
+  // }, [currentPlayer]);
+
+  // const initialSubmit = async (currentForm, gameId, values, actions) => {
+  //
+  // }
+  // const finalSubmit = async (players, currentForm) => {
+  //
+  // }
+  // const playerResponseSubmit = async (currentPlayer, session, values, actions, currentForm) => {
+  //
+  // }
 
   const handlePrevious = async () => {
     if (currentForm === 1) {
@@ -91,42 +101,52 @@ const FormContainer = ({
       await prevPlayer(currentPlayer);
     }
   };
-
-  const handleNext = async (values, actions) => {
-    console.log(values)
+  const handleSubmit = async (values, actions) => {
     if (currentForm === 1) {
       await initializeGame(gameId, values);
       await nextForm(currentForm);
-      actions.resetForm(formResponseSchema[currentForm]);
+      actions.resetForm({
+        values: {
+          ...formResponseSchema[currentForm + 1]
+        }
+      });
       return;
     }
-
     if (currentForm === 7 && currentPlayer === numPlayers) {
       await finalDisplay(players);
       await nextForm(currentForm);
       return;
     }
-
     if (currentForm >= 2 && currentForm <= 7) {
-      console.log(values)
-
       if (currentPlayer < numPlayers) {
-        /*const success = */await updatePlayer(currentPlayer, session.playerIds[currentPlayer], values, currentForm);
-        if (/*success*/true) {
+        const success = await updatePlayer(currentPlayer, session.playerIds[currentPlayer], values, currentForm);
+        if (success) {
           await nextPlayer(currentPlayer)
+        } else {
+          alert(success.error.message)
         }
+        actions.resetForm({
+          values: {
+            ...formResponseSchema[currentForm]
+          }
+        });
       } else {
         await nextForm(currentForm);
+        actions.resetForm({
+          values: {
+            ...formResponseSchema[currentForm + 1]
+          }
+        });
       }
     }
-        actions.resetForm(formResponseSchema[currentForm])
   };
 
   return (
     <>
       <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
       <FormDisplay
-        onSubmit={handleNext}
+        onSubmit={handleSubmit}
+        initialValues={formResponseSchema[currentForm]}
         handlePrevious={handlePrevious}
         currentForm={currentForm}
         currentPlayer={currentPlayer}
@@ -157,3 +177,6 @@ export default connect(mapStateToProps, {
   initializeGame,
   finalDisplay,
 })(FormContainer);
+
+
+
