@@ -92,12 +92,14 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
 export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
   const { canvasDisplay } = getState().gameState;
-  const updatedPlayerCircle = await circleAlterations[currentForm](player, currentPlayer, canvasDisplay.grid);
-
-  dispatch({
-    type: UPDATE_PLAYER_CIRCLE,
-    payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
-  });
+  // const updatedPlayerCircle = await circleAlterations[currentForm](player, currentPlayer, canvasDisplay.grid);
+  const { data, error } = await api.patch("/circles/update", { player, currentPlayer, currentForm, grid: canvasDisplay.grid })
+  console.log(data, error);
+  return;
+  // dispatch({
+  //   type: UPDATE_PLAYER_CIRCLE,
+  //   payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
+  // });
 };
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
 export const finalDisplay = (players) => (dispatch, getState) => {

@@ -1,9 +1,8 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 
-export const circleSchema = new Schema({
-  _id: Schema.Types.ObjectId,
-  playerID: Schema.Types.ObjectId,
-  gameID: Schema.Types.ObjectId,
+export const circleSchema = new mongoose.Schema({
+  playerId: String,
+  gameId: String,
   degree: Number,
   slice: Number,
   radius: Number,
@@ -16,7 +15,7 @@ export const circleSchema = new Schema({
   designThickness: Number,
   color: String,
   secondaryColor: String,
-  isAnimated: Boolean
-})
+  isAnimated: Boolean,
+});
 
-export const Circle = model("Circle", circleSchema);
+export const Circle = mongoose.model("Circle", circleSchema);

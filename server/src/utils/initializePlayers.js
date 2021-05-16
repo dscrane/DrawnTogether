@@ -1,6 +1,7 @@
 import { User } from "../models/user.js";
-export const initializePlayers = async (players) => {
-  console.log(players);
+import { Circle } from "../models/circle.js";
+
+export const initializePlayers = async (players, gameId) => {
   let index = 0;
   let playersObj = {};
   const playerIds = [];
@@ -13,11 +14,16 @@ export const initializePlayers = async (players) => {
       name: player.name,
       responses: { association: player.association },
     });
+    newUser.history.push({ gameId: gameId });
     await newUser.save();
+    const newUserCircle = await new Circle({
+      playerId: newUser._id,
+      gameId: gameId,
+    });
+    await newUserCircle.save();
     playersObj[index] = newUser;
     playerIds.push(newUser._id);
     index = index + 1;
   }
-  console.log(playersObj);
   return { playersObj, playerIds, circles };
 };

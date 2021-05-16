@@ -13,16 +13,21 @@ router.post("/games/initializeGame", async (req, res) => {
   console.log(req.body);
   const { interest, players } = req.body;
   try {
-    const { playersObj, playerIds, circles } = await initializePlayers(players);
-
-    const newGame = new Game({
-      circles,
-      numPlayers: playerIds.length,
-      playerIds: playerIds,
+    let newGame = await new Game({
       inProgress: true,
       complete: false,
       interest: interest,
     });
+    console.log(newGame);
+    const { playersObj, playerIds, circles } = await initializePlayers(
+      players,
+      newGame._id
+    );
+
+    newGame.numPlayers = playerIds.length;
+    newGame.playerIds = playerIds;
+    newGame.circles = circles;
+    console.log(newGame);
     await newGame.save();
     res.send({ game: newGame, players: playersObj });
   } catch (e) {
