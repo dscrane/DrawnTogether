@@ -8,8 +8,8 @@ export const FormTwo = () => {
         <label className="item__label">Time</label>
         <Field className="form__control form__control-select" name="time" id="formTemporal" as="select">
           <option value="DEFAULT">Choose...</option>
-          <option value="18">Morning</option>
-          <option value="45">Evening</option>
+          <option value={18}>Morning</option>
+          <option value={45}>Evening</option>
         </Field>
       </div>
       <div className="form__row">
@@ -21,17 +21,17 @@ export const FormTwo = () => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value="60">Introvert</option>
-          <option value="31">Extrovert</option>
+          <option value={60}>Introvert</option>
+          <option value={31}>Extrovert</option>
         </Field>
       </div>
       <div className="form__row">
         <label className="item__label">Hair</label>
         <Field className="form__control form__control-select" name="hair" id="formHair" as="select">
           <option value="DEFAULT">Choose...</option>
-          <option value="10">Curly</option>
-          <option value="18">Straight</option>
-          <option value="25">Wavy</option>
+          <option value={10}>Curly</option>
+          <option value={18}>Straight</option>
+          <option value={25}>Wavy</option>
         </Field>
       </div>
     </>

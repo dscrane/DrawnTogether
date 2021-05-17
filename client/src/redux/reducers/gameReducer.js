@@ -65,6 +65,16 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...INITIAL_STATE,
       };
+    case INITIALIZE_GAME:
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        ...action.payload.game,
+        players: {
+          ...state.players,
+          ...action.payload.players /*to change to players*/,
+        },
+      };
     case NEXT_FORM:
       console.info(action.type, action.payload);
       return {
@@ -83,7 +93,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload
       }
-
     case NEXT_PLAYER:
       console.info(action.type, action.payload);
       return {
@@ -96,16 +105,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload,
       };
-    case INITIALIZE_GAME:
-      console.info(action.type, action.payload);
-      return {
-        ...state,
-        ...action.payload.game,
-        players: {
-          ...state.players,
-          ...action.payload.players /*to change to players*/,
-        },
-      };
     case UPDATE_PLAYER:
       console.info(action.type, action.payload);
       return {
@@ -114,10 +113,7 @@ export default (state = INITIAL_STATE, action) => {
           ...state.players,
           [action.payload.playerIndex]: {
             ...state.players[action.payload.playerIndex],
-            responses: {
-              ...state.players[action.payload.playerIndex].responses,
-              ...action.payload.responses,
-            },
+            ...action.payload.circles
           },
         },
       };
@@ -138,6 +134,9 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
+    case RESIZE_PLAYER_CIRCLES:
+      console.info(action.type, action.payload);
+      return { ...state };
     case FINAL_DISPLAY:
       console.info(action.type, action.payload);
       return {
@@ -155,9 +154,6 @@ export default (state = INITIAL_STATE, action) => {
           grid: { ...action.payload.grid },
         },
       };
-    case RESIZE_PLAYER_CIRCLES:
-      console.info(action.type, action.payload);
-      return { ...state };
     case UPDATE_VIEW:
       console.info(action.type, action.payload);
       return {

@@ -1,5 +1,4 @@
 import { User } from "../models/user.js";
-import { Circle } from "../models/circle.js";
 
 export const initializePlayers = async (players, gameId) => {
   let index = 0;
@@ -14,13 +13,9 @@ export const initializePlayers = async (players, gameId) => {
       name: player.name,
       responses: { association: player.association },
     });
-    newUser.history.push({ gameId: gameId });
+    newUser.history.push({ gameId: gameId, circles: [] });
     await newUser.save();
-    const newUserCircle = await new Circle({
-      playerId: newUser._id,
-      gameId: gameId,
-    });
-    await newUserCircle.save();
+
     playersObj[index] = newUser;
     playerIds.push(newUser._id);
     index = index + 1;

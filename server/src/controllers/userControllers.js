@@ -1,6 +1,7 @@
 import express from "express";
 import { User } from "../models/user.js";
-import { validateUpdates } from "../middleware/updateValidation.js";
+import { validateAndUpdateResponses } from "../middleware/validateAndUpdateResponses.js";
+import { circleAlterations } from "../utils/circleModifiers.js";
 
 // create express router
 const router = new express.Router();
@@ -18,15 +19,24 @@ router.post("/users/create", async (req, res) => {
 });
 
 // update user
-router.patch("/users/update", validateUpdates, async (req, res) => {
-  const { _id, responses, toUpdate } = req.body;
+router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
+  const { updateStep, user, displayGrid } = req.body;
 
   try {
-    const user = await User.findById(_id);
-    toUpdate.forEach((update) => (user.responses[update] = responses[update]));
+    const alterations =
+      displayGrid === undefined
+        ? circleAlterations[updateStep](user.responses, user.circleData)
+        : circleAlterations[updateStep](user.responses, displayGrid);
+    user.circleData = alterations.circleData;
+    if (alterations.initialCircleData) {
+      user.initialCircleData = alterations.initialCircleData;
+    }
     await user.save();
-    res.send({ data: user.responses });
-  } catch (e) {}
+    res.send({ data: { ...alterations } });
+  } catch (e) {
+    console.log(e);
+    res.send({ error: { ...e } });
+  }
 });
 
 // delete user

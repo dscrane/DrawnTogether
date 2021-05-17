@@ -63,8 +63,10 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
   });
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
-export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch) => {
+export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch, getState) => {
+  const { grid } = getState().gameState.canvasDisplay
   const {data: { data, error }} = await api.patch("/users/update", {
+    grid,
     _id: playerId,
     responses: formData,
     updateStep: currentForm
@@ -82,7 +84,7 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
     dispatch({
       type: UPDATE_PLAYER,
       payload: {
-        responses: { ...data },
+        circles: { ...data },
         playerIndex,
       },
     });

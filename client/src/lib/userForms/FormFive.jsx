@@ -19,10 +19,10 @@ export const FormFive = () => {
         <label className="item__label">Relationship to Culture</label>
         <Field className="form__control form__control-select" name="culture" id="formCulture" as="select">
           <option value="DEFAULT">Choose...</option>
-          <option value="1">People Magazine reader</option>
-          <option value="2">Netflix binger</option>
-          <option value="3">Museum attendee</option>
-          <option value="4">Cultural practitioner</option>
+          <option value={1}>People Magazine reader</option>
+          <option value={2}>Netflix binger</option>
+          <option value={3}>Museum attendee</option>
+          <option value={4}>Cultural practitioner</option>
         </Field>
       </div>
     </>
