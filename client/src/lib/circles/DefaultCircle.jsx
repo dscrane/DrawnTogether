@@ -5,6 +5,7 @@ import { createLinearPath, createRadialGradient, createPathAndAnimation } from "
 
 export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
   const { path, animation } = createPathAndAnimation(playerCircle, id);
+  console.log(playerCircle)
   return (
     <>
       <defs>

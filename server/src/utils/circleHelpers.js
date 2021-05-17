@@ -1,32 +1,3 @@
-// import React from "react";
-// import {
-//   DefaultCircle,
-//   HollowCircle,
-//   StrokeCircle,
-//   RingCircle,
-//   DotCircle,
-// } from "../../lib/circles";
-
-/**
- * Alters the animation path for the player's circle
- * @param {number} x -- playerCircle's x location
- * @param {number} y - playerCircle's y location
- * @param {number} r -- playerCircle's radius
- * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @returns {JSX.Element} <path />
- */
-// export function createEssPath(x, y, r, id, centerPoint) {
-//   return (
-//     <path
-//       id={`essPath${id}`}
-//       d={`m${x},${y} Q ${1},${1} ${centerPoint.x} ${centerPoint.y}`}
-//       stroke="grey"
-//       strokeWidth="2px"
-//     />
-//   );
-// }
-
 /**
  * Converts initial player position to cartesian points for plotting
  * @function convertToCartesian
@@ -41,7 +12,7 @@ export function convertToCartesian(centerPoint, age, degree) {
 
   let xCartesian = centerPoint.x + Math.round(radian * -Math.cos(theta));
   let yCartesian = centerPoint.y + Math.round(radian * Math.sin(theta));
-  console.log("xCartesian: ", xCartesian, "yCartesian: ", yCartesian);
+
   return { xCartesian, yCartesian };
 }
 
@@ -76,8 +47,6 @@ export function altCartesian(centerPoint, degree, radian, food, hair) {
  * @returns {{slice: number, degree: number}} playerCircle's positional values
  */
 export function setPlayerDegree(interest, gender, diet) {
-  console.log(typeof diet);
-  console.log("SET PLAYER DEGREE");
   let degree;
   if (!interest || !gender || !diet) {
     return { degree: 0, slice: 0 };
@@ -123,7 +92,6 @@ export function setPlayerDegree(interest, gender, diet) {
     default:
       console.info("%c[ERROR]: Switch - setPlayerDegree", "color: red");
   }
-  console.log("degreeSlice", degree, slice);
   return { degree, slice };
 }
 

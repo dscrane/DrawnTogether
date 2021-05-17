@@ -20,19 +20,31 @@ router.post("/users/create", async (req, res) => {
 
 // update user
 router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
-  const { updateStep, user, displayGrid } = req.body;
-
+  const { updateStep, user, centerPoint } = req.body;
+  console.log(user);
   try {
+    console.log("Beginning circle alterations");
     const alterations =
-      displayGrid === undefined
-        ? circleAlterations[updateStep](user.responses, user.circleData)
-        : circleAlterations[updateStep](user.responses, displayGrid);
+      updateStep > 2
+        ? circleAlterations[updateStep](
+            user.responses,
+            user.circleData,
+            centerPoint
+          )
+        : circleAlterations[updateStep](user.responses, centerPoint);
     user.circleData = alterations.circleData;
+    console.log(user.circleData);
     if (alterations.initialCircleData) {
       user.initialCircleData = alterations.initialCircleData;
     }
     await user.save();
-    res.send({ data: { ...alterations } });
+    console.log("Circle alterations complete");
+    res.send({
+      data: {
+        circleData: user.circleData,
+        initialCircleData: user.initialCircleData,
+      },
+    });
   } catch (e) {
     console.log(e);
     res.send({ error: { ...e } });

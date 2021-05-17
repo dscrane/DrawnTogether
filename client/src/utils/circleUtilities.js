@@ -1,34 +1,5 @@
 import React from "react";
-import {
-  altRadius,
-  altCartesian,
-  averageColors,
-  createCircleDesign,
-  createFillColor,
-  setCircleRadius,
-  setPlayerDegree,
-  convertToCartesian,
-  createSecondaryColor,
-  setAlternateDesignWeight,
-  createLineDesign,
-} from "./circleHelpers";
-const centerPoint = {
-  x: 0,
-  y: 0,
-};
-
-/**
- * Variable to pass all functions for ease of use elsewhere
- */
-const circleAlterations = {
-  2: initialCircleVariables,
-  3: circleAlterationOne,
-  4: circleAlterationTwo,
-  5: circleAlterationThree,
-  6: circleAlterationFour,
-  7: circleAlterationFive,
-  8: finalCircleDisplay,
-};
+import {DefaultCircle, DotCircle, HollowCircle, RingCircle, StrokeCircle} from "../lib/circles";
 
 /**
  * Function that draws the player circles
@@ -100,6 +71,13 @@ function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
   return <path id={`linearPath${id}`} d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`} />;
 }
 
+/**
+ * Creates the circle path based on player's playerCircleData
+ * @param cx {number}
+ * @param cy {number}
+ * @param r {number}
+ * @returns {string}
+ */
 function circlePathTemplate(cx, cy, r) {
   return `M ${cx} ${cy} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0 `;
 }
@@ -124,157 +102,70 @@ function createPathAndAnimation(playerCircle, id) {
 }
 
 /**
+ * Alters the animation path for the player's circle
+ * @param {number} x -- playerCircle's x location
+ * @param {number} y - playerCircle's y location
+ * @param {number} r -- playerCircle's radius
+ * @param {number} id -- playerCircle's player id
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @returns {JSX.Element} <path />
+ */
+function createEssPath(x, y, r, id, centerPoint) {
+  return (
+    <path
+      id={`essPath${id}`}
+      d={`m${x},${y} Q ${1},${1} ${centerPoint.x} ${centerPoint.y}`}
+      stroke="grey"
+      strokeWidth="2px"
+    />
+  );
+}
+
+/**
+ * Creates the complex SVG design for each playerCircle
+ * @param {string} playerId -- Player ID
+ * @param {Object} playerCircleData -- Player circle object
+ * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @returns {JSX.Element}
+ */
+function createCircleDesign(playerId, playerCircleData, centerPoint) {
+  console.log("[playerCircleData]: ", playerCircleData)
+
+
+
+  switch (playerCircleData.design) {
+    case "initialCircle": {
+      return <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={true} />;
+    }
+    case "defaultCircle":
+      console.log("default circle hit")
+      return (
+        <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={false} />
+      );
+    case "hollow":
+      return <HollowCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+    case "stroke":
+      return <StrokeCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+    case "ring":
+      return <RingCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+    case "dot":
+      return <DotCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+    default:
+      console.info("%c[ERROR]: Switch - createCircleDesign", "color: red");
+  }
+}
+
+
+/**
  * Export necessary pieces
  */
 export {
-  circleAlterations,
   rerenderCircles,
   resizeAllCircles,
   circlePathTemplate,
   createPathAndAnimation,
   createRadialGradient,
   createLinearPath,
+  createEssPath,
+  createCircleDesign
 };
-
-/**
- * Initial circle creation
- * @function initialCircleVariable
- * @param {object} player -- Current player object
- * @param {object} displayGrid -- Current size of the display grid
- * @param {number} currentPlayerId -- Id of the current player
- * @return {Object} circle -- Updated player circle object
- * */
-function initialCircleVariables(player, currentPlayerId, displayGrid) {
-  if (player.circleSVG) {
-    console.log("initialization did not run");
-    return;
-  }
-  centerPoint.x = displayGrid.cx;
-  centerPoint.y = displayGrid.cy;
-  const { degree, slice } = setPlayerDegree(player.interest, player.gender, player.diet);
-
-  const initial = {
-    degree,
-    slice,
-    radius: setCircleRadius(player.association),
-    radian: parseInt(player.age),
-    ...createFillColor(player.height, degree),
-    ...convertToCartesian(centerPoint, player.age, degree),
-    design: "initialCircle",
-  };
-
-  let circle = {
-    initial: { ...initial },
-    ...initial,
-    isAnimated: true,
-    design: "defaultCircle",
-  };
-
-  let initialCircleSVG = createCircleDesign(currentPlayerId, initial, centerPoint);
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  let circles = [initialCircleSVG];
-  return { circle, initialCircleSVG, circleSVG, circles };
-}
-
-/**
- * CA#1 -- radius
- * @function circleAlterationOne
- * @param {object} player -- Current player object
- * @param {number} currentPlayerId -- Id of the current player
- * */
-function circleAlterationOne(player, currentPlayerId) {
-  let circles = player.circles;
-  const circle = {
-    ...player.circle,
-    radius: altRadius(player.circle.initial.radius, player.time, player.personality),
-  };
-
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  circles.push(circleSVG);
-  return { circle, circleSVG, circles };
-}
-
-/**
- * CA#2 -- position
- * @function circleAlterationTwo
- * @param {object} player -- Current player object
- * @param {number} currentPlayerId -- Id of the current player
- * */
-function circleAlterationTwo(player, currentPlayerId) {
-  const circle = {
-    ...player.circle,
-    ...altCartesian(centerPoint, player.circle.initial.degree, player.circle.initial.radian, player.food, player.hair),
-  };
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  return { circle, circleSVG };
-}
-
-/**
- * CA#3 -- design and color
- * @function circleAlterationThree
- * @param {object} player -- Current player object
- * @param {number} currentPlayerId -- Id of the current player
- * */
-function circleAlterationThree(player, currentPlayerId) {
-  let { circle } = player;
-  const secondaryColor = createSecondaryColor(player.progress, circle.initial.hue, circle.saturation, circle.lightness);
-  circle = {
-    ...circle,
-    secondaryColor,
-    design: player.nature,
-    designThickness: setAlternateDesignWeight(circle.radius, player.media),
-  };
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  return { circle, circleSVG };
-}
-
-/**
- * CA#4 -- animation path
- * @function circleAlterationFour
- * @param {object} player -- Current player object
- * @param {number} currentPlayerId -- Id of the current player
- * */
-function circleAlterationFour(player, currentPlayerId) {
-  let { circle } = player;
-  circle = {
-    ...circle,
-  };
-  circle.lineDesign = createLineDesign(player.religion, "hsl(0, 0%, 50%)");
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  return { circle, circleSVG };
-}
-
-/**
- * CA#5 -- average color
- * @function circleAlterationFive
- * @param {object} player -- Current player object
- * @param {number} currentPlayerId -- Id of the current player
- * */
-function circleAlterationFive(player, currentPlayerId) {
-  let { circle } = player;
-  circle = {
-    ...circle,
-    ...averageColors(player.color, circle.hue, circle.saturation, circle.lightness),
-    isAnimated: false,
-  };
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  return { circle, circleSVG };
-}
-
-/**
- * CA#6 -- final display
- * @function circleAlterationSix
- * @param {object} player -- Current player object
- * @param {number} currentPlayerId -- Id of the current player
- * */
-function finalCircleDisplay(player, currentPlayerId) {
-  let { circle, circles } = player;
-  circle = {
-    ...circle,
-  };
-  circle.lineDesign = createLineDesign(player.religion, circle.initial.color);
-  console.log(circle.lineDesign);
-  let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-  circles.push(circleSVG);
-  return circles;
-}

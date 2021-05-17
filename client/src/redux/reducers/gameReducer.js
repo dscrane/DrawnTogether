@@ -20,6 +20,7 @@ import {
 } from "../types";
 
 const INITIAL_STATE = {
+  _id: "",
   inProgress: false,
   complete: false,
   numPlayers: 0,
@@ -32,6 +33,7 @@ const INITIAL_STATE = {
   playerIds: [],
   circles: [],
   finalCircles: [],
+  centerPoint: {x: 0, y:0},
   canvasDisplay: {
     adjustmentMultiplier: 1,
     view: {
@@ -109,6 +111,11 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
+        circles: [
+          ...state.circles.map((circle, i) => {
+            return i !== action.payload.playerIndex ? circle : action.payload.circleSVG;
+          }),
+        ],
         players: {
           ...state.players,
           [action.payload.playerIndex]: {
@@ -148,6 +155,11 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
+        centerPoint: {
+          ...state.centerPoint,
+          x: Math.round(action.payload.grid.cx),
+          y: Math.round(action.payload.grid.cy)
+        },
         canvasDisplay: {
           ...state.canvasDisplay,
           adjustmentMultiplier: action.payload.adjustmentMultiplier,

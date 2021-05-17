@@ -35,20 +35,20 @@ router.post("/games/initializeGame", async (req, res) => {
   }
 });
 
-router.patch("/games/updateGame", async (req, res) => {
-  const { _id, updates } = req.body;
-  const toUpdate = Object.keys(updates);
-
-  try {
-    const game = await Game.findById(_id);
-    toUpdate.forEach((update) => {
-      game[update] = updates[update];
-    });
-    await game.save();
-    res.send(game);
-  } catch (e) {
-    console.log(e);
-  }
-});
+// router.patch("/games/updateGame", async (req, res) => {
+//   const { _id, updates } = req.body;
+//   const toUpdate = Object.keys(updates);
+//
+//   try {
+//     const game = await Game.findById(_id);
+//     toUpdate.forEach((update) => {
+//       game[update] = updates[update];
+//     });
+//     await game.save();
+//     res.send(game);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
 export { router as gameRouter };

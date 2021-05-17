@@ -14,7 +14,7 @@ import {
   UPDATE_VIEW,
   UPDATE_DISPLAY_GRID,
 } from "../types";
-import { circleAlterations, handleGridUpdate } from "../../utils";
+import { createCircleDesign, handleGridUpdate } from "../../utils";
 import { api } from "../../utils";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
@@ -64,9 +64,9 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
 export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch, getState) => {
-  const { grid } = getState().gameState.canvasDisplay
+  const { centerPoint } = getState().gameState
   const {data: { data, error }} = await api.patch("/users/update", {
-    grid,
+    centerPoint,
     _id: playerId,
     responses: formData,
     updateStep: currentForm
@@ -80,10 +80,13 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
     });
     return false;
   }
-
+    console.log("data", data)
+    const circleSVG = createCircleDesign(playerId,data.circleData, centerPoint)
+    console.log(circleSVG)
     dispatch({
       type: UPDATE_PLAYER,
       payload: {
+        circleSVG,
         circles: { ...data },
         playerIndex,
       },
@@ -93,10 +96,10 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
 export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
-  const { canvasDisplay } = getState().gameState;
-  // const updatedPlayerCircle = await circleAlterations[currentForm](player, currentPlayer, canvasDisplay.grid);
-  const { data, error } = await api.patch("/circles/update", { player, currentPlayer, currentForm, grid: canvasDisplay.grid })
-  console.log(data, error);
+  const { centerPoint } = getState().gameState;
+
+
+
   return;
   // dispatch({
   //   type: UPDATE_PLAYER_CIRCLE,

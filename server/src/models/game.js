@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const gameSchema = new mongoose.Schema({
   numPlayers: Number,
   playerIds: [mongoose.Schema.Types.ObjectId],
+  circles: Array,
   inProgress: Boolean,
   complete: Boolean,
   date: Date,
@@ -14,7 +15,6 @@ gameSchema.methods.toJSON = function () {
   const game = this;
   const userObject = game.toObject();
 
-  delete userObject._id;
   delete userObject.__v;
 
   return userObject;

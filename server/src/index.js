@@ -1,8 +1,8 @@
 import express from "express";
+import bodyParser from "body-parser";
 import cors from "cors";
 import { userRouter } from "./controllers/userControllers.js";
 import { gameRouter } from "./controllers/gameControllers.js";
-import bodyParser from "body-parser";
 import { default as connectDatabase } from "./db/db.js";
 
 // Set port
