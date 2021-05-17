@@ -108,11 +108,13 @@ export const updatePlayerCircle = (player, currentPlayer, currentForm) => async 
 };
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
 export const finalDisplay = (players) => (dispatch, getState) => {
-  const allPlayerCircles = [...getState().gameState.circles];
-  console.log(players);
-  Object.keys(players).forEach((player) => {
-    allPlayerCircles.push(players[player].initialCircleSVG);
-  });
+  const { circles, centerPoint} = getState().gameState
+  const allPlayerCircles = [...circles];
+  for (const player in players) {
+    console.log(player)
+    allPlayerCircles.push(createCircleDesign(player._id,players[player].initialCircleData, centerPoint));
+  };
+  console.log(allPlayerCircles)
   dispatch({
     type: FINAL_DISPLAY,
     payload: { finalCircles: allPlayerCircles, displayGrid: false },

@@ -131,14 +131,11 @@ function createEssPath(x, y, r, id, centerPoint) {
 function createCircleDesign(playerId, playerCircleData, centerPoint) {
   console.log("[playerCircleData]: ", playerCircleData)
 
-
-
   switch (playerCircleData.design) {
     case "initialCircle": {
       return <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={true} />;
     }
     case "defaultCircle":
-      console.log("default circle hit")
       return (
         <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={false} />
       );

@@ -22,9 +22,9 @@ const DisplaySvg = ({ canvasDisplay, session, updateGridDisplay, resizePlayerCir
   return (
     <svg className="svg__canvas">
       {session.displayGrid ? <PolarGrid {...canvasDisplay} /> : null}
-      {!session.displayGrid && session.currentForm > 0 ? (
-        <Blob players={players} canvasDisplay={canvasDisplay} />
-      ) : null}
+      {/*{!session.displayGrid && session.currentForm > 0 ? (*/}
+      {/*  <Blob players={players} canvasDisplay={canvasDisplay} />*/}
+      {/*) : null}*/}
       <CircleDisplay session={session} />
     </svg>
   );
