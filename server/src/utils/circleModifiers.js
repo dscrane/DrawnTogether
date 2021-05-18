@@ -60,9 +60,6 @@ function initialCircleVariables(responses, centerPoint) {
     isAnimated: true,
     design: "defaultCircle",
   };
-  console.log("circleData: ", circleData);
-  console.log("initialCircleData: ", initialCircleData);
-
   return { circleData, initialCircleData };
 }
 

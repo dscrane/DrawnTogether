@@ -23,9 +23,20 @@ function rerenderCircles(players, currentForm) {
   return allCircles;
 }
 
-function resizeAllCircles(circles, display) {
+/**
+ * Alter the size of the circles if the browser window resizes
+ * @param {object} players
+ * @param {object} display
+ */
+function resizeAllCircles(players, display) {
   console.log("resize all circles");
-  console.log(circles, display);
+  console.log(players, display);
+  for (const player of players) {
+    const playerCircleData = players[player].circleData;
+    for (const data of playerCircleData) {
+      playerCircleData[data] = playerCircleData[data] * display.multiplier;
+    }
+  }
 }
 
 /**
@@ -41,8 +52,11 @@ function resizeAllCircles(circles, display) {
 function createRadialGradient(id, centerPoint, hue, saturation, lightness) {
   return (
     <radialGradient id={`radialGradient${id}`}>
-      <stop offset="10%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.55}%`} />
-      <stop offset="90%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} />
+      <stop offset="0%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.60}%`} stopOpacity={1} />
+      <stop offset="25%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`} stopOpacity={1} />
+      <stop offset="50%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.30}%`} stopOpacity={1} />
+      <stop offset="75%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.15}%`} stopOpacity={1} />
+      <stop offset="100%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} stopOpacity={1} />
     </radialGradient>
   );
 }
@@ -82,6 +96,12 @@ function circlePathTemplate(cx, cy, r) {
   return `M ${cx} ${cy} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0 `;
 }
 
+/**
+ * Creates the path and adds animation if .isAnimated === true
+ * @param {object} playerCircle
+ * @param {string} id
+ * @returns {{path: string, animation: JSX.Element}}
+ */
 function createPathAndAnimation(playerCircle, id) {
   let path;
   let animation;
@@ -153,9 +173,7 @@ function createCircleDesign(playerId, playerCircleData, centerPoint) {
 }
 
 
-/**
- * Export necessary pieces
- */
+/* Export necessary pieces */
 export {
   rerenderCircles,
   resizeAllCircles,

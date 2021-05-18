@@ -10,7 +10,6 @@ router.get("/games/:id", async (req, res) => {
 });
 
 router.post("/games/initializeGame", async (req, res) => {
-  console.log(req.body);
   const { interest, players } = req.body;
   try {
     let newGame = await new Game({
@@ -18,7 +17,7 @@ router.post("/games/initializeGame", async (req, res) => {
       complete: false,
       interest: interest,
     });
-    console.log(newGame);
+
     const { playersObj, playerIds, circles } = await initializePlayers(
       players,
       newGame._id
@@ -27,7 +26,7 @@ router.post("/games/initializeGame", async (req, res) => {
     newGame.numPlayers = playerIds.length;
     newGame.playerIds = playerIds;
     newGame.circles = circles;
-    console.log(newGame);
+
     await newGame.save();
     res.send({ game: newGame, players: playersObj });
   } catch (e) {

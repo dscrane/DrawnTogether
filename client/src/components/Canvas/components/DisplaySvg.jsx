@@ -8,7 +8,6 @@ import { Blob } from "../../Blob";
 /* ------ */
 
 const DisplaySvg = ({ canvasDisplay, session, updateGridDisplay, resizePlayerCircles }) => {
-  const { players } = session;
   /* Update the canvasDisplay grid based on new view dimensions */
   useEffect(() => {
     const asyncGridUpdate = async () => {

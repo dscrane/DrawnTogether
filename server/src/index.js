@@ -4,6 +4,7 @@ import cors from "cors";
 import { userRouter } from "./controllers/userControllers.js";
 import { gameRouter } from "./controllers/gameControllers.js";
 import { default as connectDatabase } from "./db/db.js";
+import { log } from "./utils/logs.js";
 
 // Set port
 const PORT = process.env.port || 5500;
@@ -22,4 +23,4 @@ app.get("/", (req, res) => {
   res.send("HELLO WORLD");
 });
 
-app.listen(PORT, () => console.log(`[APP]: listening on localhost:${PORT}`));
+app.listen(PORT, () => log.yellow(`[APP]: Listening on localhost:${PORT}`));

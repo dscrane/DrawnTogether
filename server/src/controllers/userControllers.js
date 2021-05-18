@@ -2,6 +2,7 @@ import express from "express";
 import { User } from "../models/user.js";
 import { validateAndUpdateResponses } from "../middleware/validateAndUpdateResponses.js";
 import { circleAlterations } from "../utils/circleModifiers.js";
+import { log } from "../utils/logs.js";
 
 // create express router
 const router = new express.Router();
@@ -21,9 +22,8 @@ router.post("/users/create", async (req, res) => {
 // update user
 router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
   const { updateStep, user, centerPoint } = req.body;
-  console.log(user);
   try {
-    console.log("Beginning circle alterations");
+    log.yellow("[APP]: Beginning circle alterations...");
     const alterations =
       updateStep > 2
         ? circleAlterations[updateStep](
@@ -33,12 +33,11 @@ router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
           )
         : circleAlterations[updateStep](user.responses, centerPoint);
     user.circleData = alterations.circleData;
-    console.log(user.circleData);
     if (alterations.initialCircleData) {
       user.initialCircleData = alterations.initialCircleData;
     }
     await user.save();
-    console.log("Circle alterations complete");
+    log.green("[APP]: Circle alterations complete");
     res.send({
       data: {
         circleData: user.circleData,
@@ -46,7 +45,7 @@ router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    log.red(e.name);
     res.send({ error: { ...e } });
   }
 });
