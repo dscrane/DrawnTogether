@@ -12,7 +12,7 @@ import {
   updatePlayer,
   updatePlayerCircle,
 } from "../../redux/actions";
-import { FormHeading } from "../FormHeading";
+
 
 const formResponseSchema = [
   null,
@@ -142,8 +142,7 @@ const FormContainer = ({
   };
 
   return (
-    <>
-      <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
+    <div className="form__container">
       <FormDisplay
         onSubmit={handleSubmit}
         initialValues={formResponseSchema[currentForm]}
@@ -151,8 +150,9 @@ const FormContainer = ({
         currentForm={currentForm}
         currentPlayer={currentPlayer}
         numPlayers={numPlayers}
+        players={players}
       />
-    </>
+    </div>
   );
 };
 

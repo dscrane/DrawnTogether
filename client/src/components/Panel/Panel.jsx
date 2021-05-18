@@ -13,6 +13,11 @@ const Panel = ({ currentForm, inProgress, startGame }) => {
       <div className="panel__row panel__row-header">
         <Header currentForm={currentForm} />
       </div>
+      <div className="panel__row panel__row-instructions">
+        <span className="instructions">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </span>
+      </div>
       <div className="panel__row panel__row-content">{display}</div>
     </div>
   );

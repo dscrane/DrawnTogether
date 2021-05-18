@@ -1,14 +1,31 @@
-.form {
+.form__container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  height: 100%;
+
+}
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   width: 100%;
   height: 100%;
-}
-.form-bordered {
-  border: 1px solid var(--bg-active);
+  border: 1px solid var(--font-dark);
   border-radius:  0 0 .75rem .75rem;
+}
+
+.form__group {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.form__group-center {
+  justify-content: center;
+  height: 75%;
 }
 .form__row {
   display: flex;
@@ -16,6 +33,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin: 1rem 0;
+}
+.form__row-buttons {
+  margin-bottom: 2rem;
+  /*align-self: flex-end;*/
+  /*height: min-content;*/
 }
 .form__item {
   display: flex;
@@ -24,18 +47,31 @@
   width: 90%;
   margin: .25rem 0;
 }
+.form__item-interest {
+  flex-direction: column;
+  align-items: center;
+}
 .form__item-addCTA {
   width: auto;
 }
 .item__label {
-  color: var(--font-light);
+  color: var(--font-dark);
   margin: 0 0;
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: bold;
   width: 75%;
   flex: 1;
 }
+.item__label-interest {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+.item__label-select {
+  flex: 0;
+}
 .item__name {
+  color: var(--font-dark);
   font-size: 1.7rem;
   font-weight: bold;
   flex: 1;
@@ -61,10 +97,14 @@
   box-shadow: .25rem .25rem 1rem var(--font-dark);
   transition: background-color 750ms;
 }
+.invisible {
+  display: none;
+}
 .item__addCTA:hover {
   color: var(--font-light);
   background-color: var(--bg-button);
 }
+
 .form__control {
   flex: 2.75;
   font-size: 1.15rem;
@@ -75,16 +115,19 @@
   font-weight: 400;
   line-height: 1.75;
   background-clip: padding-box;
-  background-color: var(--bluegreen-900);
   border: none;
-  box-shadow: inset .2rem .2rem .25rem var(--font-dark);
+  box-shadow: inset .1rem .1rem .25rem var(--font-dark);
+}
+.form__control-select {
+  flex: 0;
 }
 .form__control:focus {
   outline: none;
-  box-shadow: none;
+  box-shadow: inset .1rem .1rem .25rem var(--font-light);
 }
 .form__control-input {
   color: var(--font-dark);
+  background-color: var(--bluegreen-500);
   background-clip: padding-box;
   transition: border-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
 }

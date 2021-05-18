@@ -6,21 +6,19 @@ import {  validateString, validateNumber } from "../../utils/validators";
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   return (
     <>
-      <div className="form__item">
         <label className="item__label">{label}</label>
         <input
           {...field}
           {...props}
           placeholder={placeholder || label + "..."}
         />
-      </div>
     </>
   );
 };
 
 export const PlayerForm = ({ values, ...formProps }) => {
   return (
-    <>
+<>
       <div className="form__row">
         <div className="form__item form__item-interest">
           <label className="item__label item__label-interest">Common Interest</label>
@@ -74,10 +72,9 @@ export const PlayerForm = ({ values, ...formProps }) => {
 
               ))
             }
-            <div className="form__row">
+            <div className={`form__row ${values.players.length === 5 ? 'invisible' : ''}`}>
               <div className="form__item form__item-addCTA">
-                <button className="item__addCTA" type="button"
-                        onClick={() => arrayHelpers.push({name: '', association: ''})}>
+                <button className="item__addCTA" type="button" onClick={() => arrayHelpers.push({name: '', association: ''})}>
                   Add Player
                 </button>
               </div>

@@ -5,7 +5,7 @@ export const FormFive = () => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label">Relationship to Religion</label>
+        <label className="item__label item__label-select">Relationship to Religion</label>
         <Field className="form__control form__control-select" name="religion" id="formReligion" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="solid">Practitioner</option>
@@ -16,7 +16,7 @@ export const FormFive = () => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label">Relationship to Culture</label>
+        <label className="item__label item__label-select">Relationship to Culture</label>
         <Field className="form__control form__control-select" name="culture" id="formCulture" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={1}>People Magazine reader</option>

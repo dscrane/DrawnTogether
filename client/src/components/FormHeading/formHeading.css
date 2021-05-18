@@ -9,8 +9,11 @@
   border-radius: .75rem .75rem 0 0;
   text-align: center;
   line-height: 1.75;
+  color: var(--gray);
+
 }
 .heading__tab-active {
   background: var(--bg-active);
   color: var(--accent);
+
 }

@@ -4,7 +4,11 @@ import "./formHeading.css";
 /* ------ */
 
 export const FormHeading = ({ currentPlayer, numPlayers, players }) => {
+  console.log(numPlayers)
   let formTabs = [];
+  if (numPlayers === 0) {
+
+  }
   for (let i = 0; i < numPlayers; i++) {
     formTabs.push(
       <div

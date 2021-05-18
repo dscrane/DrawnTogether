@@ -5,7 +5,7 @@ export const FormOne = () => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label">Height</label>
+        <label className="item__label item__label-select">Height</label>
         <Field className="form__control form__control-select" name="height" id="formHeight" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={16}>Tall</option>
@@ -14,7 +14,7 @@ export const FormOne = () => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label">Interest</label>
+        <label className="item__label item__label-select">Interest</label>
         <Field className="form__control form__control-select" name="interest" id="formInterest" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={27}>Numbers</option>
@@ -25,7 +25,7 @@ export const FormOne = () => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label">Gender</label>
+        <label className="item__label item__label-select">Gender</label>
         <Field className="form__control form__control-select" name="gender" id="formGender" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={2}>Male</option>
@@ -34,7 +34,7 @@ export const FormOne = () => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label">Age</label>
+        <label className="item__label item__label-select">Age</label>
         <Field className="form__control form__control-select" name="age" id="formAge" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={400}>0-10</option>
@@ -50,7 +50,7 @@ export const FormOne = () => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label">Diet</label>
+        <label className="item__label item__label-select">Diet</label>
         <Field className="form__control form__control-select" name="diet" id="formDiet" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="omnivore">Omnivore</option>

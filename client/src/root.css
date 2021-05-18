@@ -23,7 +23,7 @@
 
   --bluegreen: 180, 25%, 30%;
   --bluegreen-100: hsl(180, 25%, 10%);
-  --bluegreen-500: hsl(180, 25%, 30%);
+  --bluegreen-500: hsl(180, 25%, 37%);
   --bluegreen-900: hsl(180, 25%, 50%);
   --bluegreen-fade-75: hsla(180, 25%, 30%, .95);
   --bluegreen-fade-50: hsla(180, 25%, 30%, .50);
@@ -162,11 +162,13 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   flex: 3 3;
-  max-width: 40%;
+  max-width: 25%;
   background-color: var(--bg-panel);
   padding: 0.5%;
+  overflow: hidden;
 }
 .app__canvas {
+  overflow: hidden;
   text-align: center;
   display: flex;
   flex-direction: column;
