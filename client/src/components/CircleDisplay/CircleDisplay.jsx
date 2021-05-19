@@ -1,8 +1,11 @@
 import React from "react";
 
 
-const CircleDisplay = ({ session }) => {
-  return session.currentForm > 2 ? session.circles.map((circle) => <>{circle}</>) : <></>;
+const CircleDisplay = ({ currentForm, playerCircles, resizeRatio, resizeCircles }) => {
+
+  // const circles = resizePlayerCircles(playerCircles, resizeRatio) ;
+
+  return currentForm > 2 ? playerCircles.map((circle) => <>{circle}</>) : <></>;
 };
 
 export default CircleDisplay;

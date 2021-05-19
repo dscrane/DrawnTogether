@@ -18,7 +18,7 @@ export const handleGridUpdate = (view, currentMultiplier) => {
   const step = parseFloat((radius / 16).toFixed(4));
 
   return {
-    adjustmentMultiplier: newMultiplier,
+    resizeRatio: newMultiplier,
     grid: {
       svgDim,
       radius,

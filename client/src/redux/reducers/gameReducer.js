@@ -22,20 +22,21 @@ import {
 const INITIAL_STATE = {
   _id: "",
   inProgress: false,
+  updateCircles: false,
+  displayGrid: false,
   complete: false,
+  resizeCircles: false,
   numPlayers: 0,
   interest: "",
   currentForm: 0,
   currentPlayer: 0,
-  displayGrid: false,
-  updateCircles: false,
   players: {},
   playerIds: [],
   circles: [],
   finalCircles: [],
   centerPoint: {x: 0, y:0},
   canvasDisplay: {
-    adjustmentMultiplier: 1,
+    resizeRatio: 1,
     view: {
       height: 0,
       width: 0,
@@ -155,6 +156,7 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
+        resizeCircles: action.payload.resizeCircles,
         centerPoint: {
           ...state.centerPoint,
           x: Math.round(action.payload.grid.cx),
@@ -162,7 +164,7 @@ export default (state = INITIAL_STATE, action) => {
         },
         canvasDisplay: {
           ...state.canvasDisplay,
-          adjustmentMultiplier: action.payload.adjustmentMultiplier,
+          resizeRatio: action.payload.resizeRatio,
           grid: { ...action.payload.grid },
         },
       };
@@ -170,13 +172,14 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
+        resizeCircles: action.payload.resizeCircles,
         canvasDisplay: {
           ...state.canvasDisplay,
           view: {
             ...state.canvasDisplay.view,
             oldHeight: state.canvasDisplay.view.height,
             oldWidth: state.canvasDisplay.view.width,
-            ...action.payload,
+            ...action.payload.view,
           },
         },
       };

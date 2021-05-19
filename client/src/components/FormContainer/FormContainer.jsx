@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FormDisplay } from "../FormDisplay";
 import { connect } from "react-redux";
 import {
@@ -76,22 +76,6 @@ const FormContainer = ({
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
 
-  // useEffect(() => {
-  //   if (currentForm >= 2 && currentPlayer > 0) {
-  //     updatePlayerCircle(players[currentPlayer - 1], currentPlayer - 1, currentForm);
-  //   }
-  // }, [currentPlayer]);
-
-  // const initialSubmit = async (currentForm, gameId, values, actions) => {
-  //
-  // }
-  // const finalSubmit = async (players, currentForm) => {
-  //
-  // }
-  // const playerResponseSubmit = async (currentPlayer, session, values, actions, currentForm) => {
-  //
-  // }
-
   const handlePrevious = async () => {
     if (currentForm === 1) {
       await endGame();
@@ -142,7 +126,8 @@ const FormContainer = ({
   };
 
   return (
-    <div className="form__container">
+    <div className="form__container"
+    >
       <FormDisplay
         onSubmit={handleSubmit}
         initialValues={formResponseSchema[currentForm]}

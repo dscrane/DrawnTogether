@@ -152,18 +152,20 @@ export const updateView = (dimensions) => (dispatch) => {
   dispatch({
     type: UPDATE_VIEW,
     payload: {
-      height: Math.round(dimensions.height),
-      width: Math.round(dimensions.width),
+      view: {
+        height: Math.round(dimensions.height),
+        width: Math.round(dimensions.width),
+      }
     },
   });
 };
 /* ----   UPDATE_DISPLAY_GRID ACTION CREATOR    ---- */
 export const updateGridDisplay = (view) => async (dispatch, getState) => {
-  const multiplier = getState().gameState.canvasDisplay.adjustmentMultiplier;
-  const updatedGrid = await handleGridUpdate(view, multiplier);
+  const resizeRatio = getState().gameState.canvasDisplay.resizeRatio;
+  const updatedGrid = await handleGridUpdate(view, resizeRatio);
 
   dispatch({
     type: UPDATE_DISPLAY_GRID,
-    payload: { ...updatedGrid },
+    payload: { ...updatedGrid, resizeCircles: true, },
   });
 };
