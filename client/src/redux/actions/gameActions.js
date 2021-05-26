@@ -19,11 +19,9 @@ import { api } from "../../utils";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
 export const startGame = () => async (dispatch) => {
-  // const { data: { _id } } =  await api.post("/games/create")
   dispatch({
     type: START_GAME,
     payload: {
-      // gameId: _id,
       inProgress: true,
       currentForm: 1,
       displayGrid: true,
@@ -44,8 +42,6 @@ export const initializeGame = (gameId, formData) => async (dispatch) => {
     payload: { game: data.game, players: data.players },
   });
 };
-/* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
-export const createPlayers = (responses) => {};
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
 export const nextPlayer = (currentPlayer) => (dispatch) => {
   const newPlayer = currentPlayer + 1;
@@ -141,6 +137,12 @@ export const prevForm = (currentForm) => async (dispatch, getState) => {
 };
 /* ----   RESIZE_PLAYER_CIRCLES ACTION CREATOR    ---- */
 export const resizePlayerCircles = ({ cx, cy }) => (dispatch) => {
+  //TODO:
+  // find new way to resize circles
+  // return the new circles and correctly resize the display
+  // have alteration be constant after a resize until the next resize
+
+
   console.log("hit");
   dispatch({
     type: RESIZE_PLAYER_CIRCLES,
