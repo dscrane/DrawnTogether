@@ -4,7 +4,6 @@ import "./formHeading.css";
 /* ------ */
 
 export const FormHeading = ({ currentPlayer, numPlayers, players }) => {
-  console.log(numPlayers)
   let formTabs = [];
   if (numPlayers === 0) {
 

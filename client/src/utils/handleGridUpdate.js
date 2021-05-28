@@ -1,5 +1,4 @@
 export const handleGridUpdate = (view, currentMultiplier) => {
-  console.log(currentMultiplier);
   const { height, width, oldHeight, oldWidth } = view;
   let newMultiplier;
   if (view.oldHeight !== 0 || view.oldWidth !== 0) {

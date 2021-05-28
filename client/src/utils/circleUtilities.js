@@ -28,15 +28,29 @@ function rerenderCircles(players, currentForm) {
  * @param {object} players
  * @param {object} display
  */
-function resizeAllCircles(players, display) {
+function resizeAllCircles(playerCircles, resizeRatio) {
+  const toResize = ['radius', 'xCartesian', 'yCartesian']
   console.log("resize all circles");
-  console.log(players, display);
-  for (const player of players) {
-    const playerCircleData = players[player].circleData;
-    for (const data of playerCircleData) {
-      playerCircleData[data] = playerCircleData[data] * display.multiplier;
-    }
-  }
+  console.log(playerCircles, resizeRatio);
+  // playerCircles.forEach(playerCircle => {
+  //   console.log(playerCircle)
+  //   console.log(playerCircle.props.playerCircle)
+  //   for (const circleData in playerCircle.props.playerCircle) {
+  //     console.log(`${circleData}: ${playerCircle.props.playerCircle[circleData]}`)
+  //     if (toResize.includes(circleData)) {
+  //       playerCircle[circleData] = playerCircle[circleData] * resizeRatio
+  //     }
+  //   }
+  //
+  // })
+  // for (const circle of playerCircles) {
+  //   const playerCircleData = playerCircles[circle];
+  //   for (const data of playerCircleData) {
+  //     playerCircleData[data] = playerCircleData[data] * resizeRatio;
+  //   }
+  // }
+  console.log(playerCircles)
+  return playerCircles
 }
 
 /**

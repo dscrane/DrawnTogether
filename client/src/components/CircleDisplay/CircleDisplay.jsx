@@ -1,11 +1,16 @@
 import React from "react";
-
+import { resizeAllCircles } from "../../utils";
 
 const CircleDisplay = ({ currentForm, playerCircles, resizeRatio, resizeCircles }) => {
 
-  // const circles = resizePlayerCircles(playerCircles, resizeRatio) ;
+   let circles;
+   if (resizeCircles) {
+     circles = resizeAllCircles(playerCircles, resizeRatio) ;
+   } else {
+     circles = playerCircles
+   }
 
-  return currentForm > 2 ? playerCircles.map((circle) => <>{circle}</>) : <></>;
+  return currentForm > 2 ? circles.map((circle) => <>{circle}</>) : <></>;
 };
 
 export default CircleDisplay;
