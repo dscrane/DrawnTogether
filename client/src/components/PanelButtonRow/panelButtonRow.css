@@ -13,16 +13,17 @@
 }
 .p-button {
   width: 100%;
-  color: var(--font-light);
+  color: var(--bg-button-border);
   background-color: var(--bg-button);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--bg-button-border);
   text-align: center;
   font-weight: 100;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  box-shadow: .25rem .25rem 1rem var(--font-dark);
+  box-shadow: .20rem .25rem .5rem var(--darkgray-fade-75);
+  transition: background-color 750ms;
 }
 .p-button:hover {
   cursor: pointer;
@@ -34,7 +35,7 @@
   padding: 1rem;
   border-radius: 5px;
   line-height: 1.5rem;
-  transition: background-color 750ms;
+
 }
 .p-button__start {
   justify-self: center;
@@ -42,5 +43,12 @@
   border-radius: 50%;
   height: 115px;
   width: 115px;
-  transition: background-color 750ms;
+  /*transition: background-color 750ms;*/
+}
+.p-button__add {
+  font-size: 1.5rem;
+  border-radius: 5px;
+  padding: .5rem .75rem;
+  /*box-shadow: .25rem .25rem 1rem var(--font-dark);*/
+  /*transition: background-color 750ms;*/
 }
