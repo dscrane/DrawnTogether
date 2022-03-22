@@ -74,7 +74,7 @@ export const PlayerForm = ({ values, ...formProps }) => {
             }
             <div className={`form__row ${values.players.length === 5 ? 'invisible' : ''}`}>
               <div className="form__item form__item-addCTA">
-                <button className="item__addCTA" type="button" onClick={() => arrayHelpers.push({name: '', association: ''})}>
+                <button className="p-button p-button__add" type="button" onClick={() => arrayHelpers.push({name: '', association: ''})}>
                   Add Player
                 </button>
               </div>

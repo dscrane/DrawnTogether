@@ -13,7 +13,7 @@
 }
 .p-button {
   width: 100%;
-  color: var(--font-light);
+  color: var(--accent);
   background-color: transparent;
   border: 1px solid red;
   text-align: center;
@@ -29,6 +29,7 @@
   color: var(--accent)
 }
 .p-button__game {
+  color: var(--accent);
   font-size: 1.75rem;
   padding: 1rem;
   border-radius: 5px;
