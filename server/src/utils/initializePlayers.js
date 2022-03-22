@@ -12,6 +12,7 @@ export const initializePlayers = async (players, gameId) => {
     const newUser = await new User({
       name: player.name,
       responses: { association: player.association },
+      timestamp: Date.now(),
     });
     newUser.history.push({ gameId: gameId, circles: [] });
     await newUser.save();

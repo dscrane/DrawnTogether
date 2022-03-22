@@ -26,6 +26,7 @@ router.post("/games/initializeGame", async (req, res) => {
     newGame.numPlayers = playerIds.length;
     newGame.playerIds = playerIds;
     newGame.circles = circles;
+    newGame.timestamp = Date.now();
 
     await newGame.save();
     res.send({ game: newGame, players: playersObj });

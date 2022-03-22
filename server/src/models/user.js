@@ -67,6 +67,7 @@ export const userSchema = new mongoose.Schema({
       circles: [mongoose.Schema.Types.ObjectId],
     },
   ],
+  timestamp: Date,
 });
 
 userSchema.methods.toJSON = function () {

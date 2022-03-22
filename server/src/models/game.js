@@ -6,7 +6,7 @@ const gameSchema = new mongoose.Schema({
   circles: Array,
   inProgress: Boolean,
   complete: Boolean,
-  date: Date,
+  timestamp: Date,
   interest: String,
   // finalDisplay: Buffer
 });
