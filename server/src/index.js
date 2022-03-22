@@ -15,7 +15,7 @@ connectDatabase();
 const app = express();
 // Connect middlewares
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.join(__dirname, '/src/public')))
 app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3000" }));
 // Connect routers
@@ -23,7 +23,7 @@ app.use(gameRouter);
 app.use(userRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+  res.sendFile(path.join(__dirname, '/src/public/index.html'))
 })
 
 app.listen(PORT, () => log.yellow(`[APP]: Listening on localhost:${PORT}`));
