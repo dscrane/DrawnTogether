@@ -92,7 +92,7 @@
   border-radius: 5px;
   border: 1px solid var(--accent);
   color: var(--accent);
-  background-color: var(--bg-button-hover);
+  background-color: var(--bg-button);
   padding: .5rem .75rem;
   box-shadow: .25rem .25rem 1rem var(--font-dark);
   transition: background-color 750ms;
@@ -101,8 +101,8 @@
   display: none;
 }
 .item__addCTA:hover {
-  color: var(--font-light);
-  background-color: var(--bg-button);
+  color: var(--accent);
+  background-color: var(--bg-button-hover);
 }
 
 .form__control {
@@ -116,27 +116,30 @@
   line-height: 1.75;
   background-clip: padding-box;
   border: none;
-  box-shadow: inset .1rem .1rem .25rem var(--font-dark);
+  box-shadow: inset .1rem .1rem .25rem var(--bg-input-shadow);
 }
 .form__control-select {
   flex: 0;
 }
 .form__control:focus {
   outline: none;
-  box-shadow: inset .1rem .1rem .25rem var(--font-light);
+  box-shadow: 0 0 2px 2px var(--bg-input-outline);
 }
 .form__control-input {
   color: var(--font-dark);
-  background-color: var(--bluegreen-500);
+  background-color: var(--bg-input-background);
   background-clip: padding-box;
   transition: border-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
 }
+.form__control-input::placeholder {
+  color: var(--font-placeholder);
+}
 select {
-  background-color: var(--bluegreen-fade-75);
-  border: 2px solid var(--font-dark);
+  background-color: var(--bg-input-background);
+
 }
 select > option {
-  background-color: var(--bluegreen-900);
+  background-color: var(--bg-input-options);
   font-family: "Baloo Thambi 2", serif;
 }
 .form__control-select:hover {
