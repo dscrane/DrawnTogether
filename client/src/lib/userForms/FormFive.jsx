@@ -1,12 +1,17 @@
 import React from "react";
-import { Field } from "formik";;
+import { Field } from "formik";
 
-export const FormFive = () => {
+export const FormFive = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
         <label className="item__label item__label-select">Relationship to Religion</label>
-        <Field className="form__control form__control-select" name="religion" id="formReligion" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.religion`}
+          id="formReligion"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value="solid">Practitioner</option>
           <option value="round">Agnostic</option>
@@ -17,7 +22,12 @@ export const FormFive = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Relationship to Culture</label>
-        <Field className="form__control form__control-select" name="culture" id="formCulture" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.culture`}
+          id="formCulture"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value={1}>People Magazine reader</option>
           <option value={2}>Netflix binger</option>

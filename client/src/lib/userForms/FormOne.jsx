@@ -1,12 +1,12 @@
 import React from "react";
 import { Field } from "formik";
 
-export const FormOne = () => {
+export const FormOne = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
         <label className="item__label item__label-select">Height</label>
-        <Field className="form__control form__control-select" name="height" id="formHeight" as="select">
+        <Field className="form__control form__control-select" name={`players.${currentPlayer}.height`} id="formHeight" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={16}>Tall</option>
           <option value={32}>Average</option>
@@ -15,7 +15,7 @@ export const FormOne = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Interest</label>
-        <Field className="form__control form__control-select" name="interest" id="formInterest" as="select">
+        <Field className="form__control form__control-select" name={`players.${currentPlayer}.interest`} id="formInterest" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={27}>Numbers</option>
           <option value={36}>Words</option>
@@ -26,7 +26,7 @@ export const FormOne = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Gender</label>
-        <Field className="form__control form__control-select" name="gender" id="formGender" as="select">
+        <Field className="form__control form__control-select" name={`players.${currentPlayer}.gender`} id="formGender" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={2}>Male</option>
           <option value={1}>Female</option>
@@ -35,7 +35,7 @@ export const FormOne = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Age</label>
-        <Field className="form__control form__control-select" name="age" id="formAge" as="select">
+        <Field className="form__control form__control-select" name={`players.${currentPlayer}.age`} id="formAge" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value={400}>0-10</option>
           <option value={40}>11-20</option>
@@ -51,7 +51,7 @@ export const FormOne = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Diet</label>
-        <Field className="form__control form__control-select" name="diet" id="formDiet" as="select">
+        <Field className="form__control form__control-select" name={`players.${currentPlayer}.diet`} id="formDiet" as="select">
           <option value="DEFAULT">Choose...</option>
           <option value="omnivore">Omnivore</option>
           <option value="vegetarian">Vegetarian</option>

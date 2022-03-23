@@ -1,12 +1,17 @@
 import React from "react";
 import { Field } from "formik";
 
-export const FormTwo = () => {
+export const FormTwo = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
         <label className="item__label item__label-select">Time</label>
-        <Field className="form__control form__control-select" name="time" id="formTemporal" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.time`}
+          id="formTemporal"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value={18}>Morning</option>
           <option value={45}>Evening</option>
@@ -16,7 +21,7 @@ export const FormTwo = () => {
         <label className="item__label item__label-select">Personality</label>
         <Field
           className="form__control form__control-select"
-          name="personality"
+          name={`players.${currentPlayer}.personality`}
           id="formPersonality"
           as="select"
         >
@@ -27,7 +32,12 @@ export const FormTwo = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Hair</label>
-        <Field className="form__control form__control-select" name="hair" id="formHair" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.hair`}
+          id="formHair"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value={10}>Curly</option>
           <option value={18}>Straight</option>

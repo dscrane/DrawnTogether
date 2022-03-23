@@ -1,12 +1,17 @@
 import React from "react";
 import { Field } from "formik";
 
-export const FormFour = () => {
+export const FormFour = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
         <label className="item__label item__label-select">Relationship to Nature</label>
-        <Field className="form__control form__control-select" name="nature" id="formNature" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.nature`}
+          id="formNature"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value="hollow">Video Gamer</option>
           <option value="stroke">Happy on the porch</option>
@@ -16,7 +21,12 @@ export const FormFour = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Relationship to Social Media</label>
-        <Field className="form__control form__control-select" name="media" id="formMedia" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.media`}
+          id="formMedia"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value="thinner">What is social media</option>
           <option value="thicker">Lurker</option>
@@ -26,7 +36,12 @@ export const FormFour = () => {
       </div>
       <div className="form__row">
         <label className="item__label item__label-select">Relationship to Progress</label>
-        <Field className="form__control form__control-select" name="progress" id="formProgress" as="select">
+        <Field
+          className="form__control form__control-select"
+          name={`players.${currentPlayer}.progress`}
+          id="formProgress"
+          as="select"
+        >
           <option value="DEFAULT">Choose...</option>
           <option value="complimentary">Curmudgeon</option>
           <option value="triadic">C'est Le Vie</option>
