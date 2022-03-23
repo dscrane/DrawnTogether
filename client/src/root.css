@@ -1,6 +1,7 @@
 :root {
   --black: #000000;
   --white: ivory;
+  /*--cream: hsl(37, 13%, 81%);*/
   --gray: hsl(0, 0%, 50%);
 
   --darkblue: 237, 54%, 14%;
@@ -13,7 +14,7 @@
   --darkblue-fade-15: hsla(237, 54%, 34%, .15);
 
   --gray: 0, 0%, 27%;
-  --gray-100: hsl(0, 0%, 30%);
+  --gray-100: hsl(37, 13%, 81%);
   --gray-500: hsl(0, 0%, 50%);
   --gray-900: hsl(0, 0%, 70%);
   --gray-fade-75: hsla(0, 0%, 50%, .75);
@@ -31,13 +32,13 @@
   --darkgray-fade-15: hsla(0, 0%, 27%, .15);
 
   --bluegreen: 180, 25%, 30%;
-  --bluegreen-100: hsl(180, 25%, 10%);
-  --bluegreen-500: hsl(180, 25%, 37%);
-  --bluegreen-900: hsl(180, 25%, 50%);
-  --bluegreen-fade-75: hsla(180, 25%, 50%, .95);
-  --bluegreen-fade-50: hsla(180, 25%, 50%, .50);
-  --bluegreen-fade-20: hsla(180, 25%, 50%, .20);
-  --bluegreen-fade-15: hsla(180, 25%, 50%, .15);
+  --bluegreen-100: hsl(180, 51%, 51%);
+  --bluegreen-500: hsl(180, 51%, 71%);
+  --bluegreen-900: hsl(180, 51%, 91%);
+  --bluegreen-fade-75: hsla(180, 51%, 71%, .95);
+  --bluegreen-fade-50: hsla(180, 51%, 71%, .50);
+  --bluegreen-fade-20: hsla(180, 51%, 71%, .20);
+  --bluegreen-fade-15: hsla(180, 51%, 71%, .15);
 
   --green: 104, 35%, 67%;
   --green-100: hsl(104, 35%, 27%);
@@ -67,11 +68,11 @@
   --purple-fade-15: hsla(234, 13%, 58%, .15);
 
   --cream: 0, 8%, 82%;
-  --cream-100: hsl(0, 8%, 47%);
-  --cream-500: hsl(0, 8%, 67%);
-  --cream-900: hsl(0, 8%, 82%);
-  --cream-fade-75: hsla(0, 8%, 82%, .75);
-  --cream-fade-50: hsla(0, 8%, 82%, .50);
+
+  --cream-500: hsl(37, 13%, 61%);
+  --cream-900: hsl(37, 13%, 81%);
+  --cream-fade-75: hsla(37, 13%, 81%, .75);
+  --cream-fade-50: hsla(37, 13%, 81%, .50);
 
   --red: 9, 100%, 64%;
   --red-100: hsl(9, 100%, 44%);
@@ -83,27 +84,32 @@
 }
 .blue_gray_pink {
   --bg-canvas: var(--darkgray-500);
-  --bg-panel: var(--bluegreen-fade-75);
-  --bg-tab: var(--darkgray-fade-50);
+  --bg-panel: var(--darkgray-500);
+  --bg-sidebar: var(--bluegreen-900);
+  --bg-tab: var(--darkgray-100);
   --bg-active: var(--darkgray-500);
-  --bg-input-background: var(--gray-500);
+  --bg-input-background: var(--cream-900);
   --bg-input-options: var(--gray-500);
   --bg-input-shadow: var(--darkgray-100);
   --bg-input-outline: rgb(144, 219, 219);
   --bg-button: var(--darkgray-500);
   --bg-button-hover: var(--darkgray-100);
-  --bg-button-border: var(--pink-fade-75);
-  --font-light: var(--gray-100);
+  --bg-button-border: rgb(144, 219, 219);
+  /*--bg-button-border: var(--bluegreen-fade-75);*/
+  /*--font-light: var(--gray-100);*/
+  --font-light: var(--cream-900);
   --font-dark: var(--darkgray-100);
   --font-placeholder: var(--darkgray-fade-75);
-  --accent: var(--pink-500);
+  --accent: var(--bluegreen-500);
   --warning-red: var(--red-fade-50);
   --notice-red: var(--red-900);
-  --svg-ring-thick: var(--pink-fade-20);
-  --svg-ring-thin: var(--pink-fade-15);
-  --svg-line: var(--pink-fade-20);
+  --svg-ring-thick: hsla(180, 25%, 50%, .20);
+  --svg-ring-thin: hsla(180, 25%, 50%, .15);
+  --svg-line: hsla(180, 25%, 50%, .20);
 
 }
+
+
 
 /*.purple_gray_blue {
   --bg-canvas: var(--darkgray-900);
@@ -177,8 +183,6 @@ body {
   justify-content: space-evenly;
   flex: 3 3;
   max-width: 25%;
-  background-color: var(--bg-panel);
-  padding: 0.5%;
   overflow: hidden;
 }
 .app__canvas {

@@ -4,6 +4,7 @@
   align-items: center;
 }
 .header__title {
+  color: var(--font-light);
   text-align: center;
   font-size: 3.25rem;
   font-weight: 600;
@@ -30,7 +31,7 @@
   line-height: 1;
 }
 .header__icon-active {
-  color: var(--bg-active);
+  color: var(--accent);
   border-bottom: 1px solid var(--accent);
   font-size: 3rem !important;
   box-sizing: content-box;

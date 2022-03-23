@@ -4,6 +4,7 @@
   min-height: 100%;
   overflow: auto;
 }
+
 .panel__row {
   display: flex;
   flex-direction: column;
@@ -12,9 +13,11 @@
   padding: 0 0;
   justify-content: center;
   height: 100%;
+  background: var(--bg-panel);
 }
 .panel__row-header {
   flex: 1 3;
+  padding-top: 5%;
 }
 .panel__row-instructions {
   flex: 1 1;
@@ -24,15 +27,13 @@
 }
 .panel__row-content {
   flex: 5 2;
-}
-.instructions {
-  width: 75%;
-  font-size: 1.7rem;
-  text-align: center;
-  line-height: 1.8rem;
+  padding: 0 1% 1% 1%;
 }
 
+
 .landing__text {
+  color: var(--font-light);
+
   text-align: center;
   font-size: 1.75rem;
   width: 90%;

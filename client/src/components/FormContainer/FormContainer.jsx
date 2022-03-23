@@ -126,7 +126,7 @@ const FormContainer = ({
   };
 
   return (
-    <div className="form__container"
+    <div className={`form__container ${ currentForm == 1 ? "form__container-border" : ""}`}
     >
       <FormDisplay
         onSubmit={handleSubmit}
