@@ -7,7 +7,6 @@ export const handleGridUpdate = (view, currentMultiplier) => {
     newMultiplier = currentMultiplier;
   }
 
-  console.log("multiplier", newMultiplier);
   const svgDim = height > width ? Math.round(height) : Math.round(width);
   const radius = height < width ? Math.round(height / 2) : Math.round(width / 2);
   const axis = parseFloat((radius * 1.1).toFixed(4));

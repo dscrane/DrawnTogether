@@ -10,7 +10,6 @@ const Canvas = ({ canvasDisplay, session, updateView }) => {
 
   /* Sets initial bounds for background grid */
   useEffect(() => {
-    console.log(displaySVG);
     const asyncUpdate = async () => {
       await updateView({
         height: displaySVG.current.scrollHeight || null,
