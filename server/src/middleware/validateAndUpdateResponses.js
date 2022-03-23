@@ -8,7 +8,7 @@ export const validateAndUpdateResponses = async (req, res, next) => {
 
   log.yellow("[APP]: Validating responses...");
   try {
-    await validateResponses(toUpdate, updateStep);
+    validateResponses(toUpdate, updateStep);
     const user = await User.findById(_id);
     toUpdate.forEach((update) => (user.responses[update] = responses[update]));
     await user.save();

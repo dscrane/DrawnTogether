@@ -1,17 +1,27 @@
 const formResponses = [
-  null,
-  null,
-  ["diet", "age", "gender", "height", "interest"],
-  ["time", "personality", "hair"],
-  ["money", "food"],
-  ["nature", "media", "progress"],
-  ["culture", "religion"],
-  ["color"],
+  "name",
+  "association",
+  "age",
+  "diet",
+  "gender",
+  "height",
+  "interest",
+  "time",
+  "personality",
+  "hair",
+  "food",
+  "money",
+  "nature",
+  "media",
+  "progress",
+  "religion",
+  "culture",
+  "color",
 ];
 
-export const validateResponses = (responses, validator) => {
+export const validateResponses = (responses) => {
   const isValid = responses.every((response) =>
-    formResponses[validator].includes(response)
+    formResponses.includes(response)
   );
 
   if (!isValid) {
