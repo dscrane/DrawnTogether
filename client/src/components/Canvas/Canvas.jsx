@@ -18,7 +18,7 @@ const Canvas = ({ canvasDisplay, session, updateView }) => {
       });
     };
     asyncUpdate();
-  }, []);
+  }, [updateView]);
 
   /* Debounced handler for catching window resized and changing bounds for background grid */
   useEffect(() => {

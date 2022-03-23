@@ -47,7 +47,7 @@ const Blob = ({ players, canvasDisplay }) => {
   // .sort((a, b) => a.x - b.x));
   // .sort((a, b) => a.y - b.y));
   //.sort((a, b) => a.x + a.y - (b.x + b.y))
-  const blobPath = spline(blobPoints, 1, true);
+  // const blobPath = spline(blobPoints, 1, true);
 
   return <polygon points={blobPoints} />;
 };

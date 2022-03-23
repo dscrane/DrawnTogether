@@ -1,7 +1,7 @@
 export const handleGridUpdate = (view, currentMultiplier) => {
   const { height, width, oldHeight, oldWidth } = view;
   let newMultiplier;
-  if (view.oldHeight !== 0 || view.oldWidth !== 0) {
+  if (oldHeight !== 0 || oldWidth !== 0) {
     newMultiplier = parseFloat((width / oldWidth).toFixed(4));
   } else {
     newMultiplier = currentMultiplier;

@@ -22,3 +22,38 @@ export const NEXT_PLAYER = "NEXT_PLAYER";
 export const PREV_PLAYER = "PREV_PLAYER";
 export const UPDATE_PLAYER_CIRCLE = "UPDATE_PLAYER_CIRCLE";
 export const FINAL_DISPLAY = "FINAL_DISPLAY";
+
+export const INITIAL_STATE = {
+  _id: "",
+  inProgress: false,
+  updateCircles: false,
+  displayGrid: false,
+  complete: false,
+  resizeCircles: false,
+  numPlayers: 0,
+  interest: "",
+  currentForm: 0,
+  currentPlayer: 0,
+  players: {},
+  playerIds: [],
+  circles: [],
+  finalCircles: [],
+  centerPoint: { x: 0, y: 0 },
+  canvasDisplay: {
+    resizeRatio: 1,
+    view: {
+      height: 0,
+      width: 0,
+    },
+    grid: {
+      stage: 0,
+      svgDim: 0,
+      radius: 0,
+      axis: 0,
+      cross: 0,
+      cx: 0,
+      cy: 0,
+      step: 0,
+    },
+  },
+};

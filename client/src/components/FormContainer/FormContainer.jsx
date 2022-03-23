@@ -10,26 +10,19 @@ import {
   prevPlayer,
   initializeGame,
   updatePlayer,
-  updatePlayerCircle,
 } from "../../redux/actions";
 import { responseSchema } from "../../utils";
 
-
 const formResponseSchema = {
-    interest: "",
-    players: [
-      responseSchema,
-      responseSchema
-    ],
-  }
-
+  interest: "",
+  players: [responseSchema, responseSchema],
+};
 
 const FormContainer = ({
   session,
   gameId,
   players,
   updatePlayer,
-  updatePlayerCircle,
   nextPlayer,
   initializeGame,
   prevPlayer,
@@ -62,11 +55,16 @@ const FormContainer = ({
     }
     if (currentForm >= 2 && currentForm <= 7) {
       if (currentPlayer < numPlayers) {
-        const success = await updatePlayer(currentPlayer, session.playerIds[currentPlayer], values.players[currentPlayer], currentForm);
+        const success = await updatePlayer(
+          currentPlayer,
+          session.playerIds[currentPlayer],
+          values.players[currentPlayer],
+          currentForm
+        );
         if (success) {
-          await nextPlayer(currentPlayer)
+          await nextPlayer(currentPlayer);
         } else {
-          alert(success.error.message)
+          alert(success.error.message);
         }
       } else {
         await nextForm(currentForm);
@@ -75,8 +73,7 @@ const FormContainer = ({
   };
 
   return (
-    <div className={`form__container ${ currentForm === 1 ? "form__container-border" : ""}`}
-    >
+    <div className={`form__container ${currentForm === 1 ? "form__container-border" : ""}`}>
       <FormDisplay
         onSubmit={handleSubmit}
         initialValues={formResponseSchema}
@@ -107,10 +104,6 @@ export default connect(mapStateToProps, {
   nextForm,
   prevForm,
   endGame,
-  updatePlayerCircle,
   initializeGame,
   finalDisplay,
 })(FormContainer);
-
-
-

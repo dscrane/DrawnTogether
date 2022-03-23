@@ -1,5 +1,5 @@
 import React from "react";
-import {DefaultCircle, DotCircle, HollowCircle, RingCircle, StrokeCircle} from "../lib/circles";
+import { DefaultCircle, DotCircle, HollowCircle, RingCircle, StrokeCircle } from "../lib/circles";
 
 /**
  * Function that draws the player circles
@@ -29,7 +29,7 @@ function rerenderCircles(players, currentForm) {
  * @param {object} display
  */
 function resizeAllCircles(playerCircles, resizeRatio) {
-  const toResize = ['radius', 'xCartesian', 'yCartesian']
+  // const toResize = ['radius', 'xCartesian', 'yCartesian']
   console.log("resize all circles");
   console.log(playerCircles, resizeRatio);
   // playerCircles.forEach(playerCircle => {
@@ -49,8 +49,8 @@ function resizeAllCircles(playerCircles, resizeRatio) {
   //     playerCircleData[data] = playerCircleData[data] * resizeRatio;
   //   }
   // }
-  console.log(playerCircles)
-  return playerCircles
+  console.log(playerCircles);
+  return playerCircles;
 }
 
 /**
@@ -66,9 +66,9 @@ function resizeAllCircles(playerCircles, resizeRatio) {
 function createRadialGradient(id, centerPoint, hue, saturation, lightness) {
   return (
     <radialGradient id={`radialGradient${id}`}>
-      <stop offset="0%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.60}%`} stopOpacity={1} />
+      <stop offset="0%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`} stopOpacity={1} />
       <stop offset="25%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`} stopOpacity={1} />
-      <stop offset="50%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.30}%`} stopOpacity={1} />
+      <stop offset="50%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.3}%`} stopOpacity={1} />
       <stop offset="75%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.15}%`} stopOpacity={1} />
       <stop offset="100%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} stopOpacity={1} />
     </radialGradient>
@@ -163,16 +163,14 @@ function createEssPath(x, y, r, id, centerPoint) {
  * @returns {JSX.Element}
  */
 function createCircleDesign(playerId, playerCircleData, centerPoint) {
-  console.log("[playerCircleData]: ", playerCircleData)
+  console.log("[playerCircleData]: ", playerCircleData);
 
   switch (playerCircleData.design) {
     case "initialCircle": {
       return <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={true} />;
     }
     case "defaultCircle":
-      return (
-        <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={false} />
-      );
+      return <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={false} />;
     case "hollow":
       return <HollowCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
     case "stroke":
@@ -186,7 +184,6 @@ function createCircleDesign(playerId, playerCircleData, centerPoint) {
   }
 }
 
-
 /* Export necessary pieces */
 export {
   rerenderCircles,
@@ -196,5 +193,5 @@ export {
   createRadialGradient,
   createLinearPath,
   createEssPath,
-  createCircleDesign
+  createCircleDesign,
 };
