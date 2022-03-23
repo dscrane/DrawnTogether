@@ -1,7 +1,7 @@
 import React from "react";
 import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } from "../../lib/userForms";
 
-const FormSwitch = ({ form, values, formProps }) => {
+const FormSwitch = ({ form, values, formProps, currentPlayer }) => {
   switch (form) {
     case 1:
       return (
@@ -9,27 +9,27 @@ const FormSwitch = ({ form, values, formProps }) => {
       )
     case 2:
       return (
-          <FormOne values={values} formProps={formProps} />
+          <FormOne values={values} formProps={formProps} currentPlayer={currentPlayer} />
       );
     case 3:
       return (
-          <FormTwo values={values} formProps={formProps} />
+          <FormTwo values={values} formProps={formProps} currentPlayer={currentPlayer} />
       );
     case 4:
       return (
-          <FormThree values={values} formProps={formProps} />
+          <FormThree values={values} formProps={formProps} currentPlayer={currentPlayer} />
       );
     case 5:
       return (
-          <FormFour values={values} formProps={formProps} />
+          <FormFour values={values} formProps={formProps} currentPlayer={currentPlayer} />
       );
     case 6:
       return (
-          <FormFive values={values} formProps={formProps} />
+          <FormFive values={values} formProps={formProps} currentPlayer={currentPlayer} />
       );
     case 7:
       return (
-          <FormSix values={values} formProps={formProps} />
+          <FormSix values={values} formProps={formProps} currentPlayer={currentPlayer} />
       );
     case 8:
       return <>hi</>;

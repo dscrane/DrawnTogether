@@ -12,53 +12,17 @@ import {
   updatePlayer,
   updatePlayerCircle,
 } from "../../redux/actions";
+import { responseSchema } from "../../utils";
 
 
-const formResponseSchema = [
-  null,
-  {
+const formResponseSchema = {
     interest: "",
     players: [
-      {
-        name: "",
-        association: ""
-      },
-      {
-        name: "",
-        association: ""
-      }
+      responseSchema,
+      responseSchema
     ],
-  },
-  {
-    age: "",
-    diet: "",
-    gender: "",
-    height: "",
-    interest: "",
-  },
-  {
-    time: "",
-    personality: "",
-    hair: "",
-  },
-  {
-    food: "",
-    money: "",
-  },
-  {
-    nature: "",
-    media: "",
-    progress: "",
-  },
-  {
-    religion: "",
-    culture: "",
-  },
-  {
-    color: "",
   }
 
-]
 
 const FormContainer = ({
   session,
@@ -85,15 +49,10 @@ const FormContainer = ({
       await prevPlayer(currentPlayer);
     }
   };
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (values) => {
     if (currentForm === 1) {
       await initializeGame(gameId, values);
       await nextForm(currentForm);
-      actions.resetForm({
-        values: {
-          ...formResponseSchema[currentForm + 1]
-        }
-      });
       return;
     }
     if (currentForm === 7 && currentPlayer === numPlayers) {
@@ -103,34 +62,24 @@ const FormContainer = ({
     }
     if (currentForm >= 2 && currentForm <= 7) {
       if (currentPlayer < numPlayers) {
-        const success = await updatePlayer(currentPlayer, session.playerIds[currentPlayer], values, currentForm);
+        const success = await updatePlayer(currentPlayer, session.playerIds[currentPlayer], values.players[currentPlayer], currentForm);
         if (success) {
           await nextPlayer(currentPlayer)
         } else {
           alert(success.error.message)
         }
-        actions.resetForm({
-          values: {
-            ...formResponseSchema[currentForm]
-          }
-        });
       } else {
         await nextForm(currentForm);
-        actions.resetForm({
-          values: {
-            ...formResponseSchema[currentForm + 1]
-          }
-        });
       }
     }
   };
 
   return (
-    <div className={`form__container ${ currentForm == 1 ? "form__container-border" : ""}`}
+    <div className={`form__container ${ currentForm === 1 ? "form__container-border" : ""}`}
     >
       <FormDisplay
         onSubmit={handleSubmit}
-        initialValues={formResponseSchema[currentForm]}
+        initialValues={formResponseSchema}
         handlePrevious={handlePrevious}
         currentForm={currentForm}
         currentPlayer={currentPlayer}
