@@ -21,6 +21,7 @@ export const NEW_PLAYER = "NEW_PLAYER";
 export const NEXT_PLAYER = "NEXT_PLAYER";
 export const PREV_PLAYER = "PREV_PLAYER";
 export const UPDATE_PLAYER_CIRCLE = "UPDATE_PLAYER_CIRCLE";
+export const UPDATE_FINAL_CIRCLES = "UPDATE_FINAL_CIRCLES";
 export const FINAL_DISPLAY = "FINAL_DISPLAY";
 
 export const INITIAL_STATE = {

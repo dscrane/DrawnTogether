@@ -22,7 +22,7 @@ const DisplaySvg = ({ canvasDisplay, session, updateGridDisplay, resizePlayerCir
       {session.currentForm > 2 ? (
         <CircleDisplay
           currentForm={session.currentForm}
-          playerCircles={session.circles}
+          playerCircles={session.currentForm !== 8 ? session.circles : session.finalCircles}
           resizeRatio={canvasDisplay.resizeRatio}
           resizeCircles={session.resizeCircles}
           resizePlayerCircles={resizePlayerCircles}

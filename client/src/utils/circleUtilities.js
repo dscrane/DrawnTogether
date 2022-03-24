@@ -167,18 +167,57 @@ function createCircleDesign(playerId, playerCircleData, centerPoint) {
 
   switch (playerCircleData.design) {
     case "initialCircle": {
-      return <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={true} />;
+      return (
+        <DefaultCircle
+          key={`circle_${playerId}_init`}
+          id={playerId}
+          playerCircle={playerCircleData}
+          centerPoint={centerPoint}
+          isInit={true}
+        />
+      );
     }
     case "defaultCircle":
-      return <DefaultCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} isInit={false} />;
+      return (
+        <DefaultCircle
+          key={`circle_${playerId}`}
+          id={playerId}
+          playerCircle={playerCircleData}
+          centerPoint={centerPoint}
+          isInit={false}
+        />
+      );
     case "hollow":
-      return <HollowCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+      return (
+        <HollowCircle
+          key={`circle_${playerId}`}
+          id={playerId}
+          playerCircle={playerCircleData}
+          centerPoint={centerPoint}
+        />
+      );
     case "stroke":
-      return <StrokeCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+      return (
+        <StrokeCircle
+          key={`circle_${playerId}`}
+          id={playerId}
+          playerCircle={playerCircleData}
+          centerPoint={centerPoint}
+        />
+      );
     case "ring":
-      return <RingCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+      return (
+        <RingCircle
+          key={`circle_${playerId}`}
+          id={playerId}
+          playerCircle={playerCircleData}
+          centerPoint={centerPoint}
+        />
+      );
     case "dot":
-      return <DotCircle id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />;
+      return (
+        <DotCircle key={`circle_${playerId}`} id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />
+      );
     default:
       console.info("%c[ERROR]: Switch - createCircleDesign", "color: red");
   }

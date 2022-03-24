@@ -10,6 +10,7 @@ import {
   INITIALIZE_GAME,
   UPDATE_DISPLAY_GRID,
   UPDATE_PLAYER_CIRCLE,
+  UPDATE_FINAL_CIRCLES,
   UPDATE_VIEW,
   FINAL_DISPLAY,
   RESIZE_PLAYER_CIRCLES,
@@ -71,7 +72,7 @@ export default (state = INITIAL_STATE, action) => {
         ...action.payload,
       };
     case UPDATE_PLAYER:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         circles: [
@@ -107,12 +108,17 @@ export default (state = INITIAL_STATE, action) => {
     case RESIZE_PLAYER_CIRCLES:
       // console.info(action.type, action.payload);
       return { ...state };
+    case UPDATE_FINAL_CIRCLES:
+      return {
+        ...state,
+        finalCircles: [...state.finalCircles, action.payload.initialCircleSVG],
+      };
     case FINAL_DISPLAY:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         displayGrid: action.payload.displayGrid,
-        circles: action.payload.finalCircles,
+        finalCircles: [...state.finalCircles, ...action.payload.completeCircles],
       };
     case UPDATE_DISPLAY_GRID:
       // console.info(action.type, action.payload);

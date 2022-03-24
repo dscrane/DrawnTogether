@@ -12,6 +12,7 @@ import {
   RESIZE_PLAYER_CIRCLES,
   UPDATE_VIEW,
   UPDATE_DISPLAY_GRID,
+  UPDATE_FINAL_CIRCLES,
 } from "../types";
 import { createCircleDesign, handleGridUpdate } from "../../utils";
 import { api } from "../../utils";
@@ -59,7 +60,7 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
 export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch, getState) => {
-  const { centerPoint } = getState().gameState;
+  const { centerPoint, players } = getState().gameState;
   const {
     data: { data, error },
   } = await api.patch("/users/update", {
@@ -77,15 +78,26 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
     });
     return false;
   }
+
   const circleSVG = createCircleDesign(playerId, data.circleData, centerPoint);
   dispatch({
     type: UPDATE_PLAYER,
     payload: {
       circleSVG,
-      circles: { ...data },
+      circles: {
+        circleData: data.circleData,
+        initialCircleData: data.initialCircleData || players[playerIndex].initialCircleData,
+      },
       playerIndex,
     },
   });
+  if (data.initialCircleData) {
+    const initialCircleSVG = createCircleDesign(playerId, data.initialCircleData, centerPoint);
+    dispatch({
+      type: UPDATE_FINAL_CIRCLES,
+      payload: { initialCircleSVG },
+    });
+  }
   return true;
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
@@ -102,15 +114,11 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
 };*/
 
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
-export const finalDisplay = (players) => (dispatch, getState) => {
-  const { circles, centerPoint } = getState().gameState;
-  const allPlayerCircles = [...circles];
-  for (const player in players) {
-    allPlayerCircles.push(createCircleDesign(player._id, players[player].initialCircleData, centerPoint));
-  }
+export const finalDisplay = () => (dispatch, getState) => {
+  const { circles } = getState().gameState;
   dispatch({
     type: FINAL_DISPLAY,
-    payload: { finalCircles: allPlayerCircles, displayGrid: false },
+    payload: { completeCircles: circles, displayGrid: false },
   });
 };
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
