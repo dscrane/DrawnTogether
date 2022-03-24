@@ -32,6 +32,7 @@ export const circleAlterations = {
  * @return {Object} circle -- Updated player circle object
  * */
 function initialCircleVariables(responses, centerPoint) {
+  console.log("initialCircle created");
   const { degree, slice } = setPlayerDegree(
     responses.interest,
     responses.gender,
