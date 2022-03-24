@@ -22,7 +22,6 @@ router.post("/users/create", async (req, res) => {
 // update user
 router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
   const { updateStep, user, centerPoint } = req.body;
-  console.log(updateStep);
   try {
     log.yellow("[APP]: Beginning circle alterations...");
     const alterations =
