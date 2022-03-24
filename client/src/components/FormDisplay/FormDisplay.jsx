@@ -17,11 +17,11 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
             <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
             <Form className={`form ${currentForm === 1 ? "form__full-border" : ""}`}>
               <div className="form__row form__row-instructions">
-                <p className="instructions">
-                  {formInstructions[currentForm].split("\n").map((line) => (
-                    <p>{line}</p>
+                <div className="instructions">
+                  {formInstructions[currentForm].split("\n").map((line, i) => (
+                    <p key={`instruction-line-${i}`}>{line}</p>
                   ))}
-                </p>
+                </div>
               </div>
               <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
                 {showNextOption ? (

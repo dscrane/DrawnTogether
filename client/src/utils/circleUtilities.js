@@ -9,7 +9,6 @@ import { DefaultCircle, DotCircle, HollowCircle, RingCircle, StrokeCircle } from
  * @return {players[]} Array of player objects with newly created circleSVGs
  */
 function rerenderCircles(players, currentForm) {
-  console.log("rerender ran", currentForm);
   if (currentForm <= 7) {
     return Object.keys(players).map((playerKey) => {
       return players[playerKey].circleSVG;
@@ -30,8 +29,8 @@ function rerenderCircles(players, currentForm) {
  */
 function resizeAllCircles(playerCircles, resizeRatio) {
   // const toResize = ['radius', 'xCartesian', 'yCartesian']
-  console.log("resize all circles");
-  console.log(playerCircles, resizeRatio);
+  // console.log("resize all circles");
+  // console.log(playerCircles, resizeRatio);
   // playerCircles.forEach(playerCircle => {
   //   console.log(playerCircle)
   //   console.log(playerCircle.props.playerCircle)
@@ -49,7 +48,7 @@ function resizeAllCircles(playerCircles, resizeRatio) {
   //     playerCircleData[data] = playerCircleData[data] * resizeRatio;
   //   }
   // }
-  console.log(playerCircles);
+  // console.log(playerCircles);
   return playerCircles;
 }
 
@@ -163,8 +162,6 @@ function createEssPath(x, y, r, id, centerPoint) {
  * @returns {JSX.Element}
  */
 function createCircleDesign(playerId, playerCircleData, centerPoint) {
-  console.log("[playerCircleData]: ", playerCircleData);
-
   switch (playerCircleData.design) {
     case "initialCircle": {
       return (

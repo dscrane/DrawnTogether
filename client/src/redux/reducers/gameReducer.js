@@ -72,7 +72,7 @@ export default (state = INITIAL_STATE, action) => {
         ...action.payload,
       };
     case UPDATE_PLAYER:
-      console.info(action.type, action.payload);
+      // console.info(action.type, action.payload);
       return {
         ...state,
         circles: [
@@ -114,7 +114,7 @@ export default (state = INITIAL_STATE, action) => {
         finalCircles: [...state.finalCircles, action.payload.initialCircleSVG],
       };
     case FINAL_DISPLAY:
-      console.info(action.type, action.payload);
+      // console.info(action.type, action.payload);
       return {
         ...state,
         displayGrid: action.payload.displayGrid,
