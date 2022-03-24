@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -r ../server/src/public/* && react-scripts build && mv build/* ../server/src/public",
+    "build": "react-scripts build && rm -r ../server/src/public/* && mv build/* ../server/src/public",
+    "deploy": "react-scripts build && rm -r ../../herokuCircles/src/public/* && cp build/* ../../herokuCircles/src/public/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
