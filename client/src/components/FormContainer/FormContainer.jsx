@@ -49,8 +49,8 @@ const FormContainer = ({
       return;
     }
     if (currentForm === 7 && currentPlayer === numPlayers) {
-      await finalDisplay(players);
-      await nextForm(currentForm);
+      await finalDisplay(players, currentForm);
+      // await nextForm(currentForm);
       return;
     }
     if (currentForm >= 2 && currentForm <= 7) {

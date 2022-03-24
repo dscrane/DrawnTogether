@@ -13,6 +13,7 @@ import {
   UPDATE_VIEW,
   UPDATE_DISPLAY_GRID,
   UPDATE_FINAL_CIRCLES,
+  UPDATE_PLAYER_CIRCLE,
 } from "../types";
 import { createCircleDesign, handleGridUpdate } from "../../utils";
 import { api } from "../../utils";
@@ -81,7 +82,7 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
 
   const circleSVG = createCircleDesign(playerId, data.circleData, centerPoint);
   dispatch({
-    type: UPDATE_PLAYER,
+    type: UPDATE_PLAYER_CIRCLE,
     payload: {
       circleSVG,
       circles: {
@@ -91,13 +92,6 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
       playerIndex,
     },
   });
-  if (data.initialCircleData) {
-    const initialCircleSVG = createCircleDesign(playerId, data.initialCircleData, centerPoint);
-    dispatch({
-      type: UPDATE_FINAL_CIRCLES,
-      payload: { initialCircleSVG },
-    });
-  }
   return true;
 };
 /* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
@@ -114,11 +108,16 @@ export const updatePlayer = (playerIndex, playerId, formData, currentForm) => as
 };*/
 
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
-export const finalDisplay = () => (dispatch, getState) => {
-  const { circles } = getState().gameState;
+export const finalDisplay = (players, currentForm) => async (dispatch, getState) => {
+  const { circles, centerPoint } = getState().gameState;
+  const finalCircles = [...circles];
+  const finalForm = currentForm + 1;
+  for (let player in players) {
+    finalCircles.push(createCircleDesign(players[player]._id, players[player].initialCircleData, centerPoint));
+  }
   dispatch({
     type: FINAL_DISPLAY,
-    payload: { completeCircles: circles, displayGrid: false },
+    payload: { finalCircles: finalCircles, displayGrid: false, inProgress: false, currentForm: finalForm },
   });
 };
 /* ----   NEXT_FORM ACTION CREATOR    ---- */
@@ -126,13 +125,6 @@ export const nextForm = (currentForm) => async (dispatch, getState) => {
   const { players, currentPlayer } = getState().gameState;
   const newForm = currentForm + 1;
   const nextPlayer = players.length === 0 ? currentPlayer : 0;
-  if (currentForm === 7) {
-    await dispatch({
-      type: "SHOW_RESULTS",
-      payload: { inProgress: false, currentForm: newForm },
-    });
-    return;
-  }
   await dispatch({
     type: NEXT_FORM,
     payload: { currentPlayer: nextPlayer, currentForm: newForm },

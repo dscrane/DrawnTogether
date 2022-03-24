@@ -13,3 +13,7 @@
   height: 100%;
   width: 100%;
 }
+
+.svg__canvas-light {
+  background: #d5d0c8;
+}

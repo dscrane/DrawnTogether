@@ -28,8 +28,14 @@ export default (state = INITIAL_STATE, action) => {
     case END_GAME:
       // console.info(action.type, action.payload);
       return {
-        ...state,
         ...INITIAL_STATE,
+
+        centerPoint: {
+          ...state.centerPoint,
+        },
+        canvasDisplay: {
+          ...state.canvasDisplay,
+        },
       };
     case INITIALIZE_GAME:
       // console.info(action.type, action.payload);
@@ -99,14 +105,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         circles: [
           ...state.circles.map((circle, i) => {
-            return i !== action.payload.currentPlayer ? circle : action.payload.updatedPlayerCircle.circleSVG;
+            return i !== action.payload.playerIndex ? circle : action.payload.circleSVG;
           }),
         ],
         players: {
           ...state.players,
-          [action.payload.currentPlayer]: {
-            ...state.players[action.payload.currentPlayer],
-            ...action.payload.updatedPlayerCircle,
+          [action.payload.playerIndex]: {
+            ...state.players[action.payload.playerIndex],
+            ...action.payload.circles,
           },
         },
       };
@@ -122,8 +128,10 @@ export default (state = INITIAL_STATE, action) => {
       // console.info(action.type, action.payload);
       return {
         ...state,
+        inProgress: action.payload.inProgress,
+        currentForm: action.payload.currentForm,
         displayGrid: action.payload.displayGrid,
-        finalCircles: [...state.finalCircles, ...action.payload.completeCircles],
+        finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
       };
     case UPDATE_DISPLAY_GRID:
       // console.info(action.type, action.payload);
