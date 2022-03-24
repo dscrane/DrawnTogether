@@ -4,35 +4,19 @@ import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } 
 const FormSwitch = ({ form, values, formProps, currentPlayer }) => {
   switch (form) {
     case 1:
-      return (
-        <PlayerForm values={values} formProps={formProps}/>
-      )
+      return <PlayerForm values={values} formProps={formProps} />;
     case 2:
-      return (
-          <FormOne values={values} formProps={formProps} currentPlayer={currentPlayer} />
-      );
+      return <FormOne values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     case 3:
-      return (
-          <FormTwo values={values} formProps={formProps} currentPlayer={currentPlayer} />
-      );
+      return <FormTwo values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     case 4:
-      return (
-          <FormThree values={values} formProps={formProps} currentPlayer={currentPlayer} />
-      );
+      return <FormThree values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     case 5:
-      return (
-          <FormFour values={values} formProps={formProps} currentPlayer={currentPlayer} />
-      );
+      return <FormFour values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     case 6:
-      return (
-          <FormFive values={values} formProps={formProps} currentPlayer={currentPlayer} />
-      );
+      return <FormFive values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     case 7:
-      return (
-          <FormSix values={values} formProps={formProps} currentPlayer={currentPlayer} />
-      );
-    case 8:
-      return <>hi</>;
+      return <FormSix values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     default:
       console.log("FormDisplay switch has failed");
   }

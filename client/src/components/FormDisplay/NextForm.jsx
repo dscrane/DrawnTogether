@@ -2,12 +2,12 @@ import React from "react";
 
 export const NextForm = () => {
   return (
-    <div className="body__updateMessage">
-      Click "Next Form"
-      <br/> to continue
-      <br/> or
-      <br/> go back
-      <br/> to change responses
+    <div className="form">
+      <div className="instructions">
+        <p>"Next Form" to continue</p>
+        <p>or</p>
+        <p>"Back" to change responses</p>
+      </div>
     </div>
-  )
-}
+  );
+};

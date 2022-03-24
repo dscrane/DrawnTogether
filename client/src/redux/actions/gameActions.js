@@ -126,6 +126,13 @@ export const nextForm = (currentForm) => async (dispatch, getState) => {
   const { players, currentPlayer } = getState().gameState;
   const newForm = currentForm + 1;
   const nextPlayer = players.length === 0 ? currentPlayer : 0;
+  if (currentForm === 7) {
+    await dispatch({
+      type: "SHOW_RESULTS",
+      payload: { inProgress: false, currentForm: newForm },
+    });
+    return;
+  }
   await dispatch({
     type: NEXT_FORM,
     payload: { currentPlayer: nextPlayer, currentForm: newForm },

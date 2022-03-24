@@ -9,6 +9,15 @@ import "./formDisplay.css";
 
 const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, currentPlayer, numPlayers, players }) => {
   const showNextOption = currentPlayer !== numPlayers || currentForm < 2;
+  const showInstructions = showNextOption ? (
+    <div className="form__row form__row-instructions">
+      <div className="instructions">
+        {formInstructions[currentForm].split("\n").map((line, i) => (
+          <p key={`instruction-line-${i}`}>{line}</p>
+        ))}
+      </div>
+    </div>
+  ) : null;
   return (
     <>
       <Formik initialValues={initialValues} onSubmit={(values, actions) => onSubmit(values, actions)}>
@@ -16,13 +25,7 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
           <>
             <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
             <Form className={`form ${currentForm === 1 ? "form__full-border" : ""}`}>
-              <div className="form__row form__row-instructions">
-                <div className="instructions">
-                  {formInstructions[currentForm].split("\n").map((line, i) => (
-                    <p key={`instruction-line-${i}`}>{line}</p>
-                  ))}
-                </div>
-              </div>
+              {showInstructions}
               <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
                 {showNextOption ? (
                   <FormSwitch form={currentForm} currentPlayer={currentPlayer} values={values} formProps={props} />

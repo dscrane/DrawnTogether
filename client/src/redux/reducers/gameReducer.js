@@ -41,6 +41,11 @@ export default (state = INITIAL_STATE, action) => {
           ...action.payload.players /*to change to players*/,
         },
       };
+    case "SHOW_RESULTS":
+      return {
+        ...state,
+        ...action.payload,
+      };
     case NEXT_FORM:
       // console.info(action.type, action.payload);
       return {
