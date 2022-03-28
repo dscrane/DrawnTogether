@@ -5,28 +5,28 @@ import { spline } from "@georgedoescode/spline";
 
 const Blob = ({ players, canvasDisplay }) => {
   let blobPoints = "";
-  const { cx, cy } = canvasDisplay.grid;
+  const { xAxisCenter, yAxisCenter } = canvasDisplay.grid;
 
   const createBlobPoints = ({ radian, radius, degree, xCartesian, yCartesian }) => {
     let blobX, blobY;
     const theta = degree * (Math.PI / 180);
 
-    if (xCartesian < cx && yCartesian < cy) {
+    if (xCartesian < xAxisCenter && yCartesian < yAxisCenter) {
       // circle in upper left quadrant
-      blobX = cx + radian * 1.25 * -Math.cos(theta);
-      blobY = cy + radian * 1.25 * Math.sin(theta);
-    } else if (xCartesian > cx && yCartesian < cy) {
+      blobX = xAxisCenter + radian * 1.25 * -Math.cos(theta);
+      blobY = yAxisCenter + radian * 1.25 * Math.sin(theta);
+    } else if (xCartesian > xAxisCenter && yCartesian < yAxisCenter) {
       // circle in upper right quadrant
-      blobX = cx + radian * 1.25 * -Math.cos(theta);
-      blobY = cy + radian * 1.25 * Math.sin(theta);
-    } else if (xCartesian < cx && yCartesian > cy) {
+      blobX = xAxisCenter + radian * 1.25 * -Math.cos(theta);
+      blobY = yAxisCenter + radian * 1.25 * Math.sin(theta);
+    } else if (xCartesian < xAxisCenter && yCartesian > yAxisCenter) {
       // circle in lower left quadrant
-      blobX = cx + radian * 1.25 * -Math.cos(theta);
-      blobY = cy + radian * 1.25 * Math.sin(theta);
-    } else if (xCartesian > cx && yCartesian > cy) {
+      blobX = xAxisCenter + radian * 1.25 * -Math.cos(theta);
+      blobY = yAxisCenter + radian * 1.25 * Math.sin(theta);
+    } else if (xCartesian > xAxisCenter && yCartesian > yAxisCenter) {
       // circle in lower right quadrant
-      blobX = cx + radian * 1.25 * -Math.cos(theta);
-      blobY = cy + radian * 1.25 * Math.sin(theta);
+      blobX = xAxisCenter + radian * 1.25 * -Math.cos(theta);
+      blobY = yAxisCenter + radian * 1.25 * Math.sin(theta);
     }
 
     return `${Math.round(blobX)},${Math.round(blobY)} `;

@@ -100,13 +100,13 @@ function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
 
 /**
  * Creates the circle path based on player's playerCircleData
- * @param cx {number}
- * @param cy {number}
+ * @param xAxisCenter {number}
+ * @param yAxisCenter {number}
  * @param r {number}
  * @returns {string}
  */
-function circlePathTemplate(cx, cy, r) {
-  return `M ${cx} ${cy} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0 `;
+function circlePathTemplate(xAxisCenter, yAxisCenter, r) {
+  return `M ${xAxisCenter} ${yAxisCenter} m -${r}, 0 a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 -${r * 2},0 `;
 }
 
 /**

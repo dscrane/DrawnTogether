@@ -5,7 +5,7 @@ import { debounce } from "../../utils";
 import { DisplaySvg } from "./components";
 import "./canvas.css";
 
-const Canvas = ({ canvasDisplay, session, updateView }) => {
+const Canvas = ({ gridDisplay, session, updateView }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -29,19 +29,19 @@ const Canvas = ({ canvasDisplay, session, updateView }) => {
     }, 500);
     window.addEventListener("resize", debounceHandleResize);
     return (_) => window.removeEventListener("resize", debounceHandleResize);
-  }, [canvasDisplay.view, updateView]);
+  }, [gridDisplay.view, updateView]);
 
   return (
     <div className="svg__container" ref={displaySVG}>
-      <DisplaySvg session={session} canvasDisplay={canvasDisplay} />
+      <DisplaySvg session={session} gridDisplay={gridDisplay} />
     </div>
   );
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { canvasDisplay, ...rest } = gameState;
+  const { gridDisplay, ...rest } = gameState;
   return {
-    canvasDisplay,
+    gridDisplay,
     session: rest,
   };
 };

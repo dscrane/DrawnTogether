@@ -35,12 +35,13 @@ export const endGame = () => (dispatch) => {
   dispatch({ type: END_GAME });
 };
 /* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
-export const initializeGame = (gameId, formData) => async (dispatch) => {
+// TODO better implement passing the display config to the server for initial rendering
+export const initializeGame = (gameId, formData, display) => async (dispatch) => {
   const { interest, players } = formData;
-  const { data } = await api.post("/games/initializeGame", { interest, players });
+  const { data } = await api.post("/games/initializeGame", { interest, players, display });
   dispatch({
     type: INITIALIZE_GAME,
-    payload: { game: data.game, players: data.players },
+    payload: { game: data.game, players: data.players, polarGridPath: data.polarGridPath },
   });
 };
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
@@ -141,7 +142,7 @@ export const prevForm = (currentForm) => async (dispatch, getState) => {
 };
 /* ----   RESIZE_PLAYER_CIRCLES ACTION CREATOR    ---- */
 export const resizePlayerCircles =
-  ({ cx, cy }) =>
+  ({ xAxisCenter, yAxisCenter }) =>
   (dispatch) => {
     //TODO:
     // find new way to resize circles
@@ -150,28 +151,26 @@ export const resizePlayerCircles =
 
     dispatch({
       type: RESIZE_PLAYER_CIRCLES,
-      payload: { cx, cy },
+      payload: { xAxisCenter, yAxisCenter },
     });
   };
 /* ----   UPDATE_VIEW ACTION CREATOR    ---- */
-export const updateView = (dimensions) => (dispatch) => {
+export const updateView = ({ height, width }) => (dispatch) => {
   dispatch({
     type: UPDATE_VIEW,
     payload: {
-      view: {
-        height: Math.round(dimensions.height),
-        width: Math.round(dimensions.width),
-      },
+      height: Math.round(height),
+      width: Math.round(width),
     },
   });
 };
 /* ----   UPDATE_DISPLAY_GRID ACTION CREATOR    ---- */
 export const updateGridDisplay = (view) => async (dispatch, getState) => {
-  const resizeRatio = getState().gameState.canvasDisplay.resizeRatio;
-  const updatedGrid = await handleGridUpdate(view, resizeRatio);
+  const resizeRatio = getState().gameState.displayGrid.resizeRatio;
+  const updatedGrid = handleGridUpdate(view, resizeRatio);
 
   dispatch({
     type: UPDATE_DISPLAY_GRID,
-    payload: { ...updatedGrid, resizeCircles: true },
+    payload: { ...updatedGrid },
   });
 };

@@ -7,24 +7,12 @@ export const handleGridUpdate = (view, currentMultiplier) => {
     newMultiplier = currentMultiplier;
   }
 
-  const svgDim = height > width ? Math.round(height) : Math.round(width);
-  const radius = height < width ? Math.round(height / 2) : Math.round(width / 2);
-  const axis = parseFloat((radius * 1.1).toFixed(4));
-  const cross = parseFloat((radius * 0.75).toFixed(4));
-  const cy = parseFloat((height / 2).toFixed(4));
-  const cx = parseFloat((width / 2).toFixed(4));
-  const step = parseFloat((radius / 16).toFixed(4));
+  const yAxisCenter = parseFloat((height / 2).toFixed(4));
+  const xAxisCenter = parseFloat((width / 2).toFixed(4));
 
   return {
     resizeRatio: newMultiplier,
-    grid: {
-      svgDim,
-      radius,
-      axis,
-      cross,
-      cx,
-      cy,
-      step,
-    },
+    xAxisCenter,
+    yAxisCenter,
   };
 };

@@ -22,6 +22,7 @@ const FormContainer = ({
   session,
   gameId,
   players,
+  gridDisplay,
   updatePlayer,
   nextPlayer,
   initializeGame,
@@ -32,7 +33,6 @@ const FormContainer = ({
   finalDisplay,
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
-
   const handlePrevious = async () => {
     if (currentForm === 1) {
       await endGame();
@@ -43,8 +43,9 @@ const FormContainer = ({
     }
   };
   const handleSubmit = async (values) => {
+    const grid = { width: gridDisplay.width, xAxisCenter: gridDisplay.xAxisCenter, yAxisCenter: gridDisplay.yAxisCenter };
     if (currentForm === 1) {
-      await initializeGame(gameId, values);
+      await initializeGame(gameId, values, grid);
       await nextForm(currentForm);
       return;
     }
@@ -88,9 +89,9 @@ const FormContainer = ({
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { canvasDisplay, players, gameId, ...rest } = gameState;
+  const { gridDisplay, players, gameId, ...rest } = gameState;
   return {
-    canvasDisplay,
+    gridDisplay,
     players,
     gameId,
     session: rest,

@@ -33,8 +33,8 @@ export default (state = INITIAL_STATE, action) => {
         centerPoint: {
           ...state.centerPoint,
         },
-        canvasDisplay: {
-          ...state.canvasDisplay,
+        gridDisplay: {
+          ...state.gridDisplay,
         },
       };
     case INITIALIZE_GAME:
@@ -46,6 +46,10 @@ export default (state = INITIAL_STATE, action) => {
           ...state.players,
           ...action.payload.players /*to change to players*/,
         },
+        gridDisplay: {
+          ...state.gridDisplay,
+          polarGridPath: action.payload.polarGridPath,
+        }
       };
     case "SHOW_RESULTS":
       return {
@@ -133,6 +137,7 @@ export default (state = INITIAL_STATE, action) => {
         displayGrid: action.payload.displayGrid,
         finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
       };
+      // TODO have the grid updates handled on the server
     case UPDATE_DISPLAY_GRID:
       // console.info(action.type, action.payload);
       return {
@@ -140,28 +145,24 @@ export default (state = INITIAL_STATE, action) => {
         resizeCircles: action.payload.resizeCircles,
         centerPoint: {
           ...state.centerPoint,
-          x: Math.round(action.payload.grid.cx),
-          y: Math.round(action.payload.grid.cy),
+          x: Math.round(action.payload.xAxisCenter),
+          y: Math.round(action.payload.yAxisCenter),
         },
-        canvasDisplay: {
-          ...state.canvasDisplay,
-          resizeRatio: action.payload.resizeRatio,
-          grid: { ...action.payload.grid },
+        gridDisplay: {
+          ...state.gridDisplay,
+          ...action.payload
         },
       };
     case UPDATE_VIEW:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         resizeCircles: action.payload.resizeCircles,
-        canvasDisplay: {
-          ...state.canvasDisplay,
-          view: {
-            ...state.canvasDisplay.view,
-            oldHeight: state.canvasDisplay.view.height,
-            oldWidth: state.canvasDisplay.view.width,
-            ...action.payload.view,
-          },
+        gridDisplay: {
+          ...state.gridDisplay,
+          oldHeight: state.gridDisplay.height,
+          oldWidth: state.gridDisplay.width,
+          ...action.payload
         },
       };
     default:

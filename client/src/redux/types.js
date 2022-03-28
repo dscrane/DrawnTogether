@@ -40,21 +40,12 @@ export const INITIAL_STATE = {
   circles: [],
   finalCircles: [],
   centerPoint: { x: 0, y: 0 },
-  canvasDisplay: {
+  gridDisplay: {
     resizeRatio: 1,
-    view: {
-      height: 0,
-      width: 0,
-    },
-    grid: {
-      stage: 0,
-      svgDim: 0,
-      radius: 0,
-      axis: 0,
-      cross: 0,
-      cx: 0,
-      cy: 0,
-      step: 0,
-    },
+    xAxisCenter: 0,
+    yAxisCenter: 0,
+    height: 0,
+    width: 0,
+    polarGridPath: ''
   },
 };

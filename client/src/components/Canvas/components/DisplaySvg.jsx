@@ -7,23 +7,24 @@ import { CircleDisplay } from "../../CircleDisplay";
 
 /* ------ */
 
-const DisplaySvg = ({ canvasDisplay, session, updateGridDisplay, resizePlayerCircles }) => {
-  /* Update the canvasDisplay grid based on new view dimensions */
+const DisplaySvg = ({ gridDisplay, session, updateGridDisplay, resizePlayerCircles }) => {
+  /* Update the gridDisplay grid based on new view dimensions */
+
   useEffect(() => {
     const asyncGridUpdate = async () => {
-      await updateGridDisplay(canvasDisplay.view, true);
+      await updateGridDisplay({ height:gridDisplay.height, width: gridDisplay.width}, true);
     };
     asyncGridUpdate();
-  }, [canvasDisplay.view, updateGridDisplay]);
+  }, [gridDisplay.height, gridDisplay.width, updateGridDisplay]);
 
   return (
     <svg className={`svg__canvas ${session.currentForm === 8 ? "svg__canvas-light" : ""}`}>
-      {session.displayGrid ? <PolarGrid {...canvasDisplay} /> : null}
+      {session.displayGrid ? <PolarGrid path={gridDisplay.polarGridPath} /> : null}
       {session.currentForm > 2 ? (
         <CircleDisplay
           currentForm={session.currentForm}
           playerCircles={session.finalCircles.length ? session.finalCircles : session.circles}
-          resizeRatio={canvasDisplay.resizeRatio}
+          resizeRatio={gridDisplay.resizeRatio}
           resizeCircles={session.resizeCircles}
           resizePlayerCircles={resizePlayerCircles}
         />
