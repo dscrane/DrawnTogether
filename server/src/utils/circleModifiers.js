@@ -138,7 +138,7 @@ function circleAlterationThree(responses, circleData, centerPoint) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFour(responses, circleData, centerPoint) {
-  const lineDesign = createLineDesign(responses.religion, "hsl(9, 100%, 44%)");
+  const lineDesign = createLineDesign(responses.religion, "hsl(0, 0%, 50%)");
   circleData = {
     ...circleData,
     lineDesign,
