@@ -1,6 +1,7 @@
 import express from "express";
 import { Game } from "../models/game.js";
 import { initializePlayers } from "../utils/initializePlayers.js";
+import { PolarGrid } from "../utils/createPolarGridPath.js";
 
 const router = new express.Router();
 
@@ -10,7 +11,9 @@ router.get("/games/:id", async (req, res) => {
 });
 
 router.post("/games/initializeGame", async (req, res) => {
-  const { interest, players } = req.body;
+
+  const { interest, players, display } = req.body;
+
   try {
     let newGame = await new Game({
       inProgress: true,
@@ -29,7 +32,9 @@ router.post("/games/initializeGame", async (req, res) => {
     newGame.timestamp = Date.now();
 
     await newGame.save();
-    res.send({ game: newGame, players: playersObj });
+    const polarGrid = new PolarGrid(display);
+    const polarGridPath = polarGrid.polarGridPath;
+    res.send({ game: newGame, players: playersObj, polarGridPath });
   } catch (e) {
     console.log(e);
   }

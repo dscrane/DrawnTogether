@@ -37,6 +37,7 @@ router.patch("/users/update", validateAndUpdateResponses, async (req, res) => {
       user.initialCircleData = alterations.initialCircleData;
     }
     await user.save();
+    // TODO add circle to the games database document
     log.green("[APP]: Circle alterations complete");
     res.send({
       data: {
