@@ -10,6 +10,7 @@ import {
   prevPlayer,
   initializeGame,
   updatePlayer,
+  initializePlayersEmitter,
 } from "../../redux/actions";
 import { responseSchema } from "../../utils";
 
@@ -25,7 +26,7 @@ const FormContainer = ({
   gridDisplay,
   updatePlayer,
   nextPlayer,
-  initializeGame,
+  initializePlayersEmitter,
   prevPlayer,
   nextForm,
   prevForm,
@@ -43,9 +44,10 @@ const FormContainer = ({
     }
   };
   const handleSubmit = async (values) => {
-    const grid = { width: gridDisplay.width, xAxisCenter: gridDisplay.xAxisCenter, yAxisCenter: gridDisplay.yAxisCenter };
     if (currentForm === 1) {
-      await initializeGame(gameId, values, grid);
+      // await initializeGame(gameId, values, gridDisplay);
+      console.log(values);
+      await initializePlayersEmitter(values);
       await nextForm(currentForm);
       return;
     }
@@ -105,6 +107,6 @@ export default connect(mapStateToProps, {
   nextForm,
   prevForm,
   endGame,
-  initializeGame,
+  initializePlayersEmitter,
   finalDisplay,
 })(FormContainer);

@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { updateView } from "../../redux/actions";
+import { updateView, initializeGame } from "../../redux/actions";
 import { debounce } from "../../utils";
 import { DisplaySvg } from "./components";
 import "./canvas.css";
 
-const Canvas = ({ gridDisplay, session, updateView }) => {
+const Canvas = ({ gridDisplay, session, updateView, initializeGame }) => {
   const displaySVG = useRef(null);
-
+  // useEffect(() => {
+  //   initializeGame(gridDisplay)
+  // }, []);
   /* Sets initial bounds for background grid */
   useEffect(() => {
     const asyncUpdate = async () => {
@@ -29,7 +31,7 @@ const Canvas = ({ gridDisplay, session, updateView }) => {
     }, 500);
     window.addEventListener("resize", debounceHandleResize);
     return (_) => window.removeEventListener("resize", debounceHandleResize);
-  }, [gridDisplay.view, updateView]);
+  }, [gridDisplay.height, gridDisplay.width, updateView]);
 
   return (
     <div className="svg__container" ref={displaySVG}>
@@ -48,4 +50,5 @@ const mapStateToProps = ({ gameState }) => {
 
 export default connect(mapStateToProps, {
   updateView,
+  initializeGame
 })(Canvas);

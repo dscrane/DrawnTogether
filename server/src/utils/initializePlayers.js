@@ -13,12 +13,13 @@ export const initializePlayers = async (players, gameId) => {
       name: player.name,
       timestamp: Date.now(),
     });
-    newUser.history.push({ gameId: gameId, circles: [] });
+    newUser.circleData = { gameId, userId: newUser._id };
     await newUser.save();
 
     playersObj[index] = newUser;
     playerIds.push(newUser._id);
     index = index + 1;
   }
-  return { playersObj, playerIds, circles };
+  return { playerIds, playersObj };
+  // return { playersObj, playerIds, circles };
 };

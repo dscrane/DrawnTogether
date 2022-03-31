@@ -8,6 +8,7 @@ import {
   PREV_PLAYER,
   UPDATE_PLAYER,
   INITIALIZE_GAME,
+  INITIALIZE_PLAYERS,
   UPDATE_DISPLAY_GRID,
   UPDATE_PLAYER_CIRCLE,
   UPDATE_FINAL_CIRCLES,
@@ -16,6 +17,78 @@ import {
   RESIZE_PLAYER_CIRCLES,
   INITIAL_STATE,
 } from "../types";
+import { createReducer } from "@reduxjs/toolkit";
+
+export const reducer = createReducer(INITIAL_STATE, (builder) => {
+  builder
+    .addCase(START_GAME, (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(INITIALIZE_GAME, (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(UPDATE_VIEW, (state, action) => {
+      return {
+        ...state,
+        gridDisplay: {
+          ...state.gridDisplay,
+          previousHeight: state.gridDisplay.height,
+          previousWidth: state.gridDisplay.width,
+          yAxisCenter: parseFloat((action.payload.height / 2).toFixed(4)),
+          xAxisCenter: parseFloat((action.payload.width / 2).toFixed(4)),
+          ...action.payload,
+        },
+      };
+    })
+    .addCase(END_GAME, (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    })
+    .addCase(NEXT_PLAYER, (state, action) => {
+      state.currentPlayer++;
+    })
+    .addCase(PREV_PLAYER, (state, action) => {
+      state.currentPlayer--;
+    })
+    .addCase(NEXT_FORM, (state, action) => {
+      state.currentPlayer = 0;
+      state.currentForm++;
+    })
+    .addCase(PREV_FORM, (state, action) => {
+      state.currentPlayer = state.playerIds.length - 1;
+      state.currentForm--;
+    })
+    .addCase(UPDATE_DISPLAY_GRID, (state, action) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        gridDisplay: {
+          ...state.gridDisplay,
+          ...action.payload,
+        },
+      };
+    })
+    .addCase(INITIALIZE_PLAYERS, (state, action) => {
+      console.log(action.payload);
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          ...action.payload.playersObj,
+        },
+        playerIds: [...state.playerIds, ...action.payload.playerIds],
+      };
+    })
+    .addCase(UPDATE_PLAYER, (state, action) => {});
+});
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -29,7 +102,6 @@ export default (state = INITIAL_STATE, action) => {
       // console.info(action.type, action.payload);
       return {
         ...INITIAL_STATE,
-
         centerPoint: {
           ...state.centerPoint,
         },
@@ -42,14 +114,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...action.payload.game,
-        players: {
-          ...state.players,
-          ...action.payload.players /*to change to players*/,
-        },
-        gridDisplay: {
-          ...state.gridDisplay,
-          polarGridPath: action.payload.polarGridPath,
-        }
       };
     case "SHOW_RESULTS":
       return {
@@ -137,7 +201,7 @@ export default (state = INITIAL_STATE, action) => {
         displayGrid: action.payload.displayGrid,
         finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
       };
-      // TODO have the grid updates handled on the server
+    // TODO have the grid updates handled on the server
     case UPDATE_DISPLAY_GRID:
       // console.info(action.type, action.payload);
       return {
@@ -150,19 +214,18 @@ export default (state = INITIAL_STATE, action) => {
         },
         gridDisplay: {
           ...state.gridDisplay,
-          ...action.payload
+          ...action.payload,
         },
       };
     case UPDATE_VIEW:
       console.info(action.type, action.payload);
       return {
         ...state,
-        resizeCircles: action.payload.resizeCircles,
         gridDisplay: {
           ...state.gridDisplay,
           oldHeight: state.gridDisplay.height,
           oldWidth: state.gridDisplay.width,
-          ...action.payload
+          ...action.payload,
         },
       };
     default:

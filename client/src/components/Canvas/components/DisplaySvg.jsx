@@ -1,21 +1,21 @@
 /* IMPORTS */
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { updateGridDisplay, resizePlayerCircles } from "../../../redux/actions";
+import { updateDisplayGrid, resizePlayerCircles } from "../../../redux/actions";
 import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
 
 /* ------ */
 
-const DisplaySvg = ({ gridDisplay, session, updateGridDisplay, resizePlayerCircles }) => {
+const DisplaySvg = ({ gridDisplay, session, updateDisplayGrid, resizePlayerCircles }) => {
   /* Update the gridDisplay grid based on new view dimensions */
 
   useEffect(() => {
     const asyncGridUpdate = async () => {
-      await updateGridDisplay({ height:gridDisplay.height, width: gridDisplay.width}, true);
+      await updateDisplayGrid({ height:gridDisplay.height, width: gridDisplay.width}, true);
     };
     asyncGridUpdate();
-  }, [gridDisplay.height, gridDisplay.width, updateGridDisplay]);
+  }, [gridDisplay.height, gridDisplay.width, updateDisplayGrid]);
 
   return (
     <svg className={`svg__canvas ${session.currentForm === 8 ? "svg__canvas-light" : ""}`}>
@@ -33,4 +33,4 @@ const DisplaySvg = ({ gridDisplay, session, updateGridDisplay, resizePlayerCircl
   );
 };
 
-export default connect(null, { updateGridDisplay, resizePlayerCircles })(DisplaySvg);
+export default connect(null, { updateDisplayGrid, resizePlayerCircles })(DisplaySvg);

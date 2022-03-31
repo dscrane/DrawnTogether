@@ -5,7 +5,7 @@ import { circleAlterations } from "../utils/circleModifiers.js";
 import { log } from "../utils/logs.js";
 
 // create express router
-const router = new express.Router();
+const router = express.Router();
 
 // get user by id
 router.get("/users/:id", async (req, res) => {

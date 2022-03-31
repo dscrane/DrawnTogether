@@ -27,6 +27,7 @@ export const userSchema = new mongoose.Schema({
   },
   circleData: {
     gameId: String,
+    userId: String,
     degree: Int32,
     slice: Int32,
     radius: Int32,
@@ -45,6 +46,7 @@ export const userSchema = new mongoose.Schema({
   },
   initialCircleData: {
     gameId: String,
+    userId: String,
     degree: Int32,
     slice: Int32,
     radius: Int32,

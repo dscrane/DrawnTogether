@@ -8,6 +8,16 @@ const gameSchema = new mongoose.Schema({
   complete: Boolean,
   timestamp: Date,
   interest: String,
+  gridDisplay: {
+    resizeRatio: Number,
+    xAxisCenter: Number,
+    yAxisCenter: Number,
+    height: Number,
+    width: Number,
+    previousHeight: Number,
+    previousWidth: Number,
+    polarGridPath: String,
+  }
   // finalDisplay: Buffer
 });
 

@@ -1,6 +1,15 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import reduxThunk from "redux-thunk";
-import reducers from "./redux/reducers";
+import { configureStore } from '@reduxjs/toolkit';
+import { reducer } from "./redux/reducers/gameReducer";
+import { socketMiddleware } from "./redux/middleware/socketMiddleware";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-export const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)));
+export const store = configureStore({
+  reducer: {
+    gameState: reducer
+  },
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(socketMiddleware),
+  devTools: { actionSanitizer: action => ({
+      ...action,
+      type: action.type
+    }) },
+
+})

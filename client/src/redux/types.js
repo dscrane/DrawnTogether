@@ -1,5 +1,6 @@
 // Game Action Types
 export const START_GAME = "START_GAME";
+export const START_GAME_EMITTER = "START_GAME_EMITTER";
 export const END_GAME = "END_GAME";
 export const NEXT_FORM = "NEXT_FORM";
 export const PREV_FORM = "PREV_FORM";
@@ -8,7 +9,8 @@ export const UPDATE_PLAYER = "UPDATE_PLAYER";
 export const DISPLAY_CIRCLES = "DISPLAY_CIRCLES";
 export const UPDATE_CIRCLES = "UPDATE_CIRCLES";
 export const DISPLAY_GRID = "DISPLAY_GRID";
-export const INITIALIZE_GROUP = "INITIALIZE_GROUP";
+export const INITIALIZE_PLAYERS = "INITIALIZE_PLAYERS";
+export const INITIALIZE_PLAYERS_EMITTER = "INITIALIZE_PLAYERS_EMITTER";
 export const INITIALIZE_GAME = "INITIALIZE_GAME";
 
 // Display Action Types
@@ -25,7 +27,8 @@ export const UPDATE_FINAL_CIRCLES = "UPDATE_FINAL_CIRCLES";
 export const FINAL_DISPLAY = "FINAL_DISPLAY";
 
 export const INITIAL_STATE = {
-  _id: "",
+  gameId: "",
+  socket: null,
   inProgress: false,
   updateCircles: false,
   displayGrid: false,
@@ -46,6 +49,8 @@ export const INITIAL_STATE = {
     yAxisCenter: 0,
     height: 0,
     width: 0,
-    polarGridPath: ''
+    previousHeight: 0,
+    previousWidth: 0,
+    polarGridPath: "",
   },
 };
