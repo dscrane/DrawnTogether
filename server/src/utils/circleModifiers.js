@@ -34,8 +34,8 @@ export const circleAlterations = {
 function initialCircleVariables(responses, centerPoint) {
   console.log("initialCircle created");
   const { degree, slice } = setPlayerDegree(
-    responses.interest,
-    responses.gender,
+    parseInt(responses.interest),
+    parseInt(responses.gender),
     responses.diet
   );
   const { xCartesian, yCartesian } = convertToCartesian(
@@ -43,14 +43,14 @@ function initialCircleVariables(responses, centerPoint) {
     responses.age,
     degree
   );
-  const radius = setCircleRadius(responses.association);
+  const radius = setCircleRadius(parseInt(responses.association));
 
   const initialCircleData = {
     degree: degree,
     slice: slice,
     xCartesian: xCartesian,
     yCartesian: yCartesian,
-    radian: responses.age,
+    radian: parseInt(responses.age),
     radius: radius,
     design: "initialCircle",
     ...createFillColor(responses.height, degree),
@@ -73,8 +73,8 @@ function initialCircleVariables(responses, centerPoint) {
 function circleAlterationOne(responses, circleData, centerPoint) {
   const updatedRadius = altRadius(
     circleData.radius,
-    responses.time,
-    responses.personality
+    parseInt(responses.time),
+    parseInt(responses.personality)
   );
   circleData = {
     ...circleData,

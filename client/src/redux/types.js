@@ -25,22 +25,36 @@ export const UPDATE_FINAL_CIRCLES = "UPDATE_FINAL_CIRCLES";
 export const FINAL_DISPLAY = "FINAL_DISPLAY";
 
 export const INITIAL_STATE = {
+  // session data
   _id: "",
   inProgress: false,
-  updateCircles: false,
-  displayGrid: false,
   complete: false,
-  resizeCircles: false,
+  displayGrid: false,
   numPlayers: 0,
-  interest: "",
   currentForm: 0,
-  currentPlayer: 0,
-  players: {},
   playerIds: [],
+  interest: "",
+  currentPlayer: 0,
+
+  players: {},
   circles: [],
   finalCircles: [],
+
+  // display data
+  updateCircles: false,
+  resizeCircles: false,
   centerPoint: { x: 0, y: 0 },
-  canvasDisplay: {
+  display: {
+    resizeRatio: 1,
+    xAxisCenter: 0,
+    yAxisCenter: 0,
+    height: 0,
+    width: 0,
+    previousHeight: 0,
+    previousWidth: 0,
+    polarGridPath: "",
+  },
+  displayGrid: {
     resizeRatio: 1,
     view: {
       height: 0,

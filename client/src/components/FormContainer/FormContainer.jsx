@@ -8,9 +8,10 @@ import {
   nextPlayer,
   prevForm,
   prevPlayer,
-  initializeGame,
+  initializePlayers,
   updatePlayer,
 } from "../../redux/actions";
+import { fetchCirclesEmitter, initializePlayersEmitter, updatePlayerEmitter } from "../../socket.io/emitters";
 import { responseSchema } from "../../utils";
 
 const formResponseSchema = {
@@ -19,20 +20,21 @@ const formResponseSchema = {
 };
 
 const FormContainer = ({
+  socket,
   session,
   gameId,
   players,
   updatePlayer,
   nextPlayer,
-  initializeGame,
+  initializePlayers,
   prevPlayer,
   nextForm,
   prevForm,
   endGame,
   finalDisplay,
+  centerPoint,
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
-
   const handlePrevious = async () => {
     if (currentForm === 1) {
       await endGame();
@@ -43,8 +45,9 @@ const FormContainer = ({
     }
   };
   const handleSubmit = async (values) => {
+    console.log(values);
     if (currentForm === 1) {
-      await initializeGame(gameId, values);
+      await initializePlayersEmitter(socket, gameId, values);
       await nextForm(currentForm);
       return;
     }
@@ -55,18 +58,16 @@ const FormContainer = ({
     }
     if (currentForm >= 2 && currentForm <= 7) {
       if (currentPlayer < numPlayers) {
-        const success = await updatePlayer(
-          currentPlayer,
+        await updatePlayerEmitter(
+          socket,
           session.playerIds[currentPlayer],
           values.players[currentPlayer],
-          currentForm
+          currentForm,
+          centerPoint
         );
-        if (success) {
-          await nextPlayer(currentPlayer);
-        } else {
-          alert(success.error.message);
-        }
+        await nextPlayer(currentPlayer);
       } else {
+        await fetchCirclesEmitter(socket);
         await nextForm(currentForm);
       }
     }
@@ -88,11 +89,11 @@ const FormContainer = ({
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { canvasDisplay, players, gameId, ...rest } = gameState;
+  const { _id, centerPoint, players, ...rest } = gameState;
   return {
-    canvasDisplay,
+    centerPoint,
     players,
-    gameId,
+    gameId: _id,
     session: rest,
   };
 };
@@ -104,6 +105,6 @@ export default connect(mapStateToProps, {
   nextForm,
   prevForm,
   endGame,
-  initializeGame,
+  initializePlayers,
   finalDisplay,
 })(FormContainer);

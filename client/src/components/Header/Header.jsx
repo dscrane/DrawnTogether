@@ -8,8 +8,8 @@ const Header = ({ currentForm }) => {
   return (
     <div className="header" data-testid="component-Header">
       <h1 className="header__title">
-        Spherical <br />
-        Impressions
+        SPHERICAL <br />
+        IMPRESSIONS
       </h1>
       <h3 className="header__text">{displayHeaderText}</h3>
       <div className="header__icons">{displayHeaderIcons}</div>

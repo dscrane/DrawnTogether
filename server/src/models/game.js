@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
+import { Circle, circleSchema } from "./circle.js";
 
 const gameSchema = new mongoose.Schema({
   numPlayers: Number,
   playerIds: [mongoose.Schema.Types.ObjectId],
-  circles: Array,
+  circles: [mongoose.Schema.Types.ObjectId],
+  initialCircles: [mongoose.Schema.Types.ObjectId],
   inProgress: Boolean,
   complete: Boolean,
   timestamp: Date,
@@ -13,11 +15,11 @@ const gameSchema = new mongoose.Schema({
 
 gameSchema.methods.toJSON = function () {
   const game = this;
-  const userObject = game.toObject();
+  const gameObject = game.toObject();
 
-  delete userObject.__v;
+  delete gameObject.__v;
 
-  return userObject;
+  return gameObject;
 };
 
 export const Game = mongoose.model("Game", gameSchema);

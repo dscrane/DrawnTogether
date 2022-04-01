@@ -1,51 +1,51 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { updateView } from "../../redux/actions";
+import { updateDisplayDimensions } from "../../redux/actions";
 import { debounce } from "../../utils";
 import { DisplaySvg } from "./components";
 import "./canvas.css";
 
-const Canvas = ({ canvasDisplay, session, updateView }) => {
+const Canvas = ({ display, session, updateDisplayDimensions }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
   useEffect(() => {
     const asyncUpdate = async () => {
-      await updateView({
+      await updateDisplayDimensions({
         height: displaySVG.current.scrollHeight || null,
         width: displaySVG.current.scrollWidth || null,
       });
     };
     asyncUpdate();
-  }, [updateView]);
+  }, [updateDisplayDimensions]);
 
   /* Debounced handler for catching window resized and changing bounds for background grid */
   useEffect(() => {
     const debounceHandleResize = debounce(function () {
-      updateView({
+      updateDisplayDimensions({
         height: displaySVG.current.scrollHeight,
         width: displaySVG.current.scrollWidth,
       });
     }, 500);
     window.addEventListener("resize", debounceHandleResize);
     return (_) => window.removeEventListener("resize", debounceHandleResize);
-  }, [canvasDisplay.view, updateView]);
+  }, [display.height, display.width, updateDisplayDimensions]);
 
   return (
     <div className="svg__container" ref={displaySVG}>
-      <DisplaySvg session={session} canvasDisplay={canvasDisplay} />
+      <DisplaySvg session={session} display={display} />
     </div>
   );
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { canvasDisplay, ...rest } = gameState;
+  const { display, ...rest } = gameState;
   return {
-    canvasDisplay,
+    display,
     session: rest,
   };
 };
 
 export default connect(mapStateToProps, {
-  updateView,
+  updateDisplayDimensions,
 })(Canvas);

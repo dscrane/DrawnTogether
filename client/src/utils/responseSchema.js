@@ -1,4 +1,4 @@
-export const responseSchema =      {
+export const responseSchema = {
   name: "",
   association: "",
   age: "",

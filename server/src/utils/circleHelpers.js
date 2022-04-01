@@ -13,7 +13,7 @@ export function convertToCartesian(centerPoint, age, degree) {
   let xCartesian = centerPoint.x + Math.round(radian * -Math.cos(theta));
   let yCartesian = centerPoint.y + Math.round(radian * Math.sin(theta));
 
-  return { xCartesian, yCartesian };
+  return { xCartesian: xCartesian, yCartesian: yCartesian };
 }
 
 /**
@@ -27,6 +27,7 @@ export function convertToCartesian(centerPoint, age, degree) {
  * @returns {{yCartesian: {number}, xCartesian: {number}, degree: {number}}} Alternate cartesian coordinates for current player's circle on grid
  */
 export function altCartesian(centerPoint, degree, radian, food, hair) {
+  console.log(centerPoint, degree, radian, food, hair);
   const shiftDegree = food * hair;
   const newDegree = degree + shiftDegree;
   const theta = newDegree * (Math.PI / 180);
@@ -39,7 +40,7 @@ export function altCartesian(centerPoint, degree, radian, food, hair) {
 }
 
 /**
- * Creates the initial position for playerCircle
+ // * Creates the initial position for playerCircle
  * @function setPlayerDegree
  * @param {number} interest -- Current player's interest value
  * @param {number} gender -- Current player's gender value
@@ -47,11 +48,12 @@ export function altCartesian(centerPoint, degree, radian, food, hair) {
  * @returns {{slice: number, degree: number}} playerCircle's positional values
  */
 export function setPlayerDegree(interest, gender, diet) {
-  let degree;
+  let degree = 0;
   if (!interest || !gender || !diet) {
     return { degree: 0, slice: 0 };
   }
   const slice = Math.floor(Math.random() * 9) + interest;
+  console.log(typeof slice);
   switch (diet) {
     case "omnivore":
       if (gender === 0) {
@@ -92,6 +94,7 @@ export function setPlayerDegree(interest, gender, diet) {
     default:
       console.info("%c[ERROR]: Switch - setPlayerDegree", "color: red");
   }
+  console.log(typeof degree, typeof slice);
   return { degree, slice };
 }
 

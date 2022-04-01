@@ -3,9 +3,9 @@ import React from "react";
 import { spline } from "@georgedoescode/spline";
 /* ------ */
 
-const Blob = ({ players, canvasDisplay }) => {
+const Blob = ({ players, display }) => {
   let blobPoints = "";
-  const { cx, cy } = canvasDisplay.grid;
+  const { cx, cy } = display.grid;
 
   const createBlobPoints = ({ radian, radius, degree, xCartesian, yCartesian }) => {
     let blobX, blobY;

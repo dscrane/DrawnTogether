@@ -34,15 +34,24 @@ export const startGame = () => async (dispatch) => {
 export const endGame = () => (dispatch) => {
   dispatch({ type: END_GAME });
 };
-/* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
-export const initializeGame = (gameId, formData) => async (dispatch) => {
-  const { interest, players } = formData;
-  const { data } = await api.post("/games/initializeGame", { interest, players });
+export const generateSession = () => async (dispatch) => {
+  const { data } = await api.post("/games/generateSession", {});
+  console.log(data);
   dispatch({
-    type: INITIALIZE_GAME,
-    payload: { game: data.game, players: data.players },
+    type: "GENERATE_SESSION",
+    payload: { game: data.game },
   });
 };
+
+/* ----   CREATE_PLAYERS ACTION CREATOR    ---- */
+export const initializePlayers =
+  ({ numPlayers, playerIds, playersObj, interest }) =>
+  async (dispatch) => {
+    dispatch({
+      type: INITIALIZE_GAME,
+      payload: { numPlayers, playerIds, playersObj, interest },
+    });
+  };
 /* ----   NEXT_PLAYER ACTION CREATOR    ---- */
 export const nextPlayer = (currentPlayer) => (dispatch) => {
   const newPlayer = currentPlayer + 1;
@@ -60,52 +69,54 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
   });
 };
 /* ----    UPDATE_PLAYER ACTION CREATOR    ---- */
-export const updatePlayer = (playerIndex, playerId, formData, currentForm) => async (dispatch, getState) => {
-  const { centerPoint, players } = getState().gameState;
-  const {
-    data: { data, error },
-  } = await api.patch("/users/update", {
-    centerPoint,
-    _id: playerId,
-    responses: formData,
-    updateStep: currentForm,
-  });
+export const updatePlayer =
+  (playerIndex, { playerId, circleData, initialCircleData }) =>
+  async (dispatch, getState) => {
+    const { centerPoint, players } = getState().gameState;
+    // const {
+    //   data: { data, error },
+    // } = await api.patch("/users/update", {
+    //   centerPoint,
+    //   _id: playerId,
+    //   responses: formData,
+    //   updateStep: currentForm,
+    // });
 
-  if (error) {
-    await alert(error.message);
-    dispatch({
-      type: RESET_FORM,
-      payload: { currentPlayer: playerIndex },
-    });
-    return false;
-  }
+    // if (error) {
+    //   await alert(error.message);
+    //   dispatch({
+    //     type: RESET_FORM,
+    //     payload: { currentPlayer: playerIndex },
+    //   });
+    //   return false;
+    // }
 
-  const circleSVG = createCircleDesign(playerId, data.circleData, centerPoint);
-  dispatch({
-    type: UPDATE_PLAYER_CIRCLE,
-    payload: {
-      circleSVG,
-      circles: {
-        circleData: data.circleData,
-        initialCircleData: data.initialCircleData || players[playerIndex].initialCircleData,
+    const circleSVG = createCircleDesign(circleData);
+    await dispatch({
+      type: UPDATE_PLAYER_CIRCLE,
+      payload: {
+        circleSVG,
+        circles: {
+          circleData: circleData,
+          initialCircleData: initialCircleData || players[playerIndex].initialCircleData,
+        },
+        playerIndex,
       },
-      playerIndex,
+    });
+    return true;
+  };
+
+export const displayCircles = (circles) => (dispatch, getState) => {
+  const { centerPoint } = getState().gameState;
+  const circleSvgs = circles.map((circle) => createCircleDesign(circle, centerPoint));
+  console.log(circleSvgs);
+  dispatch({
+    type: "DISPLAY_CIRCLES",
+    payload: {
+      circleSvgs,
     },
   });
-  return true;
 };
-/* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
-/*export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
-  const { centerPoint } = getState().gameState;
-
-
-
-  return;
-  // dispatch({
-  //   type: UPDATE_PLAYER_CIRCLE,
-  //   payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
-  // });
-};*/
 
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
 export const finalDisplay = (players, currentForm) => async (dispatch, getState) => {
@@ -139,6 +150,30 @@ export const prevForm = (currentForm) => async (dispatch, getState) => {
     payload: { currentForm: newForm, currentPlayer: numPlayers },
   });
 };
+
+/* ----   UPDATE_VIEW ACTION CREATOR    ---- */
+// todo update to 'updateDisplayDimensions
+export const updateDisplayDimensions =
+  ({ height, width }) =>
+  (dispatch) => {
+    dispatch({
+      type: UPDATE_VIEW,
+      payload: {
+        height: Math.round(height),
+        width: Math.round(width),
+      },
+    });
+  };
+// /* ----   UPDATE_DISPLAY_GRID ACTION CREATOR    ---- */
+// export const updateGridDisplay = (view) => async (dispatch, getState) => {
+//   const resizeRatio = getState().gameState.display.resizeRatio;
+//   const updatedGrid = await handleGridUpdate(view, resizeRatio);
+//
+//   dispatch({
+//     type: UPDATE_DISPLAY_GRID,
+//     payload: { ...updatedGrid, resizeCircles: true },
+//   });
+// };
 /* ----   RESIZE_PLAYER_CIRCLES ACTION CREATOR    ---- */
 export const resizePlayerCircles =
   ({ cx, cy }) =>
@@ -153,25 +188,15 @@ export const resizePlayerCircles =
       payload: { cx, cy },
     });
   };
-/* ----   UPDATE_VIEW ACTION CREATOR    ---- */
-export const updateView = (dimensions) => (dispatch) => {
-  dispatch({
-    type: UPDATE_VIEW,
-    payload: {
-      view: {
-        height: Math.round(dimensions.height),
-        width: Math.round(dimensions.width),
-      },
-    },
-  });
-};
-/* ----   UPDATE_DISPLAY_GRID ACTION CREATOR    ---- */
-export const updateGridDisplay = (view) => async (dispatch, getState) => {
-  const resizeRatio = getState().gameState.canvasDisplay.resizeRatio;
-  const updatedGrid = await handleGridUpdate(view, resizeRatio);
+/* ----    UPDATE_PLAYER_CIRCLE ACTION CREATOR    ---- */
+/*export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
+  const { centerPoint } = getState().gameState;
 
-  dispatch({
-    type: UPDATE_DISPLAY_GRID,
-    payload: { ...updatedGrid, resizeCircles: true },
-  });
-};
+
+
+  return;
+  // dispatch({
+  //   type: UPDATE_PLAYER_CIRCLE,
+  //   payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
+  // });
+};*/

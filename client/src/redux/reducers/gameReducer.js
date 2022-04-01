@@ -20,32 +20,47 @@ import {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case START_GAME:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case END_GAME:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...INITIAL_STATE,
 
         centerPoint: {
           ...state.centerPoint,
         },
-        canvasDisplay: {
-          ...state.canvasDisplay,
+        display: {
+          ...state.display,
         },
       };
-    case INITIALIZE_GAME:
-      // console.info(action.type, action.payload);
+    case "GENERATE_SESSION": {
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload.game,
+      };
+    }
+    case "DISPLAY_CIRCLES":
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        circles: [...state.circles, ...action.payload.circleSvgs],
+      };
+    case INITIALIZE_GAME:
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        interest: action.payload.interest,
+        numPlayers: action.payload.numPlayers,
         players: {
           ...state.players,
-          ...action.payload.players /*to change to players*/,
+          ...action.payload.playersObj /*to change to players*/,
         },
+        playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
     case "SHOW_RESULTS":
       return {
@@ -53,37 +68,37 @@ export default (state = INITIAL_STATE, action) => {
         ...action.payload,
       };
     case NEXT_FORM:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_FORM:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case RESET_FORM:
-      // console.log(action.type, action.payload);
+      console.log(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_PLAYER:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_PLAYER:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case UPDATE_PLAYER:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         circles: [
@@ -100,7 +115,7 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case UPDATE_PLAYER_CIRCLE:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         circles: [
@@ -117,7 +132,7 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case RESIZE_PLAYER_CIRCLES:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return { ...state };
     case UPDATE_FINAL_CIRCLES:
       return {
@@ -125,7 +140,7 @@ export default (state = INITIAL_STATE, action) => {
         finalCircles: [...state.finalCircles, action.payload.initialCircleSVG],
       };
     case FINAL_DISPLAY:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         inProgress: action.payload.inProgress,
@@ -134,7 +149,7 @@ export default (state = INITIAL_STATE, action) => {
         finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
       };
     case UPDATE_DISPLAY_GRID:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
         resizeCircles: action.payload.resizeCircles,
@@ -143,25 +158,24 @@ export default (state = INITIAL_STATE, action) => {
           x: Math.round(action.payload.grid.cx),
           y: Math.round(action.payload.grid.cy),
         },
-        canvasDisplay: {
-          ...state.canvasDisplay,
+        display: {
+          ...state.display,
+          ...action.payload.grid,
           resizeRatio: action.payload.resizeRatio,
-          grid: { ...action.payload.grid },
         },
       };
+    // TODO change to 'updateDisplayDimensions'
     case UPDATE_VIEW:
-      // console.info(action.type, action.payload);
+      console.info(action.type, action.payload);
       return {
         ...state,
-        resizeCircles: action.payload.resizeCircles,
-        canvasDisplay: {
-          ...state.canvasDisplay,
-          view: {
-            ...state.canvasDisplay.view,
-            oldHeight: state.canvasDisplay.view.height,
-            oldWidth: state.canvasDisplay.view.width,
-            ...action.payload.view,
-          },
+        display: {
+          ...state.display,
+          ...action.payload,
+          yAxisCenter: parseFloat((action.payload.height / 2).toFixed(4)),
+          xAxisCenter: parseFloat((action.payload.width / 2).toFixed(4)),
+          oldHeight: state.display.height,
+          oldWidth: state.display.width,
         },
       };
     default:

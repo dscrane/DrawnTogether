@@ -157,18 +157,19 @@ function createEssPath(x, y, r, id, centerPoint) {
 /**
  * Creates the complex SVG design for each playerCircle
  * @param {string} playerId -- Player ID
- * @param {Object} playerCircleData -- Player circle object
+ * @param {Object} circleData -- Player circle object
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @returns {JSX.Element}
  */
-function createCircleDesign(playerId, playerCircleData, centerPoint) {
-  switch (playerCircleData.design) {
+function createCircleDesign(circleData, centerPoint) {
+  const { design, playerId } = circleData;
+  switch (design) {
     case "initialCircle": {
       return (
         <DefaultCircle
           key={`circle_${playerId}_init`}
           id={playerId}
-          playerCircle={playerCircleData}
+          playerCircle={circleData}
           centerPoint={centerPoint}
           isInit={true}
         />
@@ -179,42 +180,25 @@ function createCircleDesign(playerId, playerCircleData, centerPoint) {
         <DefaultCircle
           key={`circle_${playerId}`}
           id={playerId}
-          playerCircle={playerCircleData}
+          playerCircle={circleData}
           centerPoint={centerPoint}
           isInit={false}
         />
       );
     case "hollow":
       return (
-        <HollowCircle
-          key={`circle_${playerId}`}
-          id={playerId}
-          playerCircle={playerCircleData}
-          centerPoint={centerPoint}
-        />
+        <HollowCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
       );
     case "stroke":
       return (
-        <StrokeCircle
-          key={`circle_${playerId}`}
-          id={playerId}
-          playerCircle={playerCircleData}
-          centerPoint={centerPoint}
-        />
+        <StrokeCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
       );
     case "ring":
       return (
-        <RingCircle
-          key={`circle_${playerId}`}
-          id={playerId}
-          playerCircle={playerCircleData}
-          centerPoint={centerPoint}
-        />
+        <RingCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
       );
     case "dot":
-      return (
-        <DotCircle key={`circle_${playerId}`} id={playerId} playerCircle={playerCircleData} centerPoint={centerPoint} />
-      );
+      return <DotCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />;
     default:
       console.info("%c[ERROR]: Switch - createCircleDesign", "color: red");
   }

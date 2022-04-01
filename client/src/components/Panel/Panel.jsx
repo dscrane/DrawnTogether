@@ -7,10 +7,10 @@ import { startGame, endGame } from "../../redux/actions";
 import "./panel.css";
 import { DisplayResults } from "../DisplayResults";
 
-const Panel = ({ currentForm, inProgress, startGame, endGame }) => {
+const Panel = ({ socket, currentForm, inProgress, startGame, endGame }) => {
   const display = () => {
     if (inProgress) {
-      return <FormContainer />;
+      return <FormContainer socket={socket} />;
     } else {
       return currentForm === 8 ? <DisplayResults endGame={endGame} /> : <Landing startGame={startGame} />;
     }
