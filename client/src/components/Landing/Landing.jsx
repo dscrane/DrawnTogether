@@ -6,15 +6,16 @@ export const Landing = ({ startGame }) => {
   return (
     <div className="landing">
       <div className="landing__text">
-        <p>Circle Generator is the artistic brainchild of Carrie Crane.</p>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center"}}>
+        <p>Drawn Together is an artistic collaboration between Daegan and Carrie Crane.</p>
+        <p>For teams of 2-5 players.</p>
         <p>
-          Moving through the sections of the game will create and alter a collection of circles based on your groups
-          common interest and a variety of personality factors.
+          As team progress through the sections, the game will create and alter a collection of circles based on your teams common interest and varied personalities .
         </p>
         <p>
-          By the end you will have unique visual of how the members of your group are connected to the common interest
-          that brought you together.
+          In the end you will have unique visual interpretation of your teams’s connection to the common interest that brought you together.
         </p>
+        </div>
       </div>
       <StartButton startGame={startGame} />
     </div>

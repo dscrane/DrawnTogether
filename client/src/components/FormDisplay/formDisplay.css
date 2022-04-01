@@ -138,6 +138,8 @@
   color: var(--font-dark);
   background-color: var(--bg-input-background);
   background-clip: padding-box;
+  border-radius: 10px;
+
   transition: border-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
 }
 .form__control-input::placeholder {
@@ -145,6 +147,8 @@
 }
 select {
   background-color: var(--bg-input-background);
+  border-radius-bottomleft: 50px;
+  border-radius-topleft: 50px;
 
 }
 select > option {

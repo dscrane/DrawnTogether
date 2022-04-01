@@ -8,10 +8,10 @@ const Header = ({ currentForm }) => {
   return (
     <div className="header" data-testid="component-Header">
       <h1 className="header__title">
-        Spherical <br />
-        Impressions
+        Drawn <br />
+        Together
       </h1>
-      <h3 className="header__text">{displayHeaderText}</h3>
+      <h3 className="header__text">an interactive visual investigation</h3>
       <div className="header__icons">{displayHeaderIcons}</div>
     </div>
   );

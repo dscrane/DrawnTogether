@@ -6,15 +6,17 @@
 .header__title {
   color: var(--font-light);
   text-align: center;
-  font-size: 3.25rem;
+  font-size: 5rem;
   font-weight: 600;
   margin: 0;
 }
 .header__text {
   width: 90%;
   margin: 1vh 0;
-  font-size: 1.65vh;
+  font-size: 1.6rem;
   text-align: center;
+  color: var(--accent);
+  margin-bottom: 30px
 }
 .header__icons {
   display: flex;

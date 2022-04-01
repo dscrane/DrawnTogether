@@ -4,7 +4,9 @@
   align-items: center;
   height: 100%;
 }
-
+p {
+  margin-bottom: 25px;
+}
 .landing__text {
   padding-top: 1rem;
   color: var(--font-light);
@@ -12,5 +14,5 @@
   font-size: 1.7rem;
   text-align: center;
   line-height: 1.8rem;
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
 }
