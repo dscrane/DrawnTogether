@@ -15,7 +15,7 @@ import {
   UPDATE_FINAL_CIRCLES,
   UPDATE_PLAYER_CIRCLE,
 } from "../types";
-import { createCircleDesign, handleGridUpdate } from "../../utils";
+import { createCircleDesign } from "../../utils";
 import { api } from "../../utils";
 
 /* ----   START_GAME ACTION CREATOR    ---- */
@@ -117,7 +117,12 @@ export const displayCircles = (circles) => (dispatch, getState) => {
     },
   });
 };
-
+export const updatePolarGrid = (polarGridPath) => (dispatch) => {
+  dispatch({
+    type: "UPDATE_POLAR_GRID",
+    payload: polarGridPath,
+  });
+};
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
 export const finalDisplay = (players, currentForm) => async (dispatch, getState) => {
   const { circles, centerPoint } = getState().gameState;

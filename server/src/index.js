@@ -12,6 +12,7 @@ import { log } from "./utils/logs.js";
 import { validateAndUpdateResponses } from "./middleware/validateAndUpdateResponses.js";
 import { updatePlayer } from "./controllers/updatePlayer.js";
 import { fetchCircleData } from "./controllers/fetchCircleData.js";
+import { PolarGrid } from "./utils/polarGrid.js";
 
 console.log(process.env.NODE_ENV);
 // Set port
@@ -34,12 +35,11 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(gameRouter);
 app.use(userRouter);
 
-const getGameAndUser = (req, next) => {
-  console.log(request);
+const createPolarGrid = (gridData) => {
+  const polarGrid = new PolarGrid(gridData);
+  return polarGrid.polarGridPath;
 };
 
-const wrap = (validateAndUpdateResponses) => (socket, next) =>
-  validateAndUpdateResponses(socket.request, {}, next);
 io.on("connect", (socket) => {
   socket.on(
     "initialize-players",
@@ -47,12 +47,14 @@ io.on("connect", (socket) => {
       initializePlayers(socket, gameId, interest, players);
     }
   );
-  // socket.use((socket, next) => validateAndUpdateResponses(socket, {}, next));
   socket.on("update-player", (updateData, cb) => {
     updatePlayer(socket, updateData);
   });
   socket.on("fetch-circles", () => {
     fetchCircleData(socket);
+  });
+  socket.on("fetch-polar-grid", (gridData) => {
+    socket.emit("polar-grid", createPolarGrid(gridData));
   });
 });
 

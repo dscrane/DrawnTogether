@@ -17,7 +17,7 @@ const DisplaySvg = ({ display, session, updateGridDisplay, resizePlayerCircles }
   // }, [display.height, display.width, updateGridDisplay]);
   return (
     <svg className={`svg__canvas ${session.currentForm === 8 ? "svg__canvas-light" : ""}`}>
-      {/*{session.displayGrid ? <PolarGrid {...display} /> : null}*/}
+      {session.displayGrid ? <PolarGrid path={display.polarGridPath} /> : null}
       {session.currentForm > 2 ? (
         <CircleDisplay
           currentForm={session.currentForm}

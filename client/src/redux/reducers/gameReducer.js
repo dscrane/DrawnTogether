@@ -164,6 +164,15 @@ export default (state = INITIAL_STATE, action) => {
           resizeRatio: action.payload.resizeRatio,
         },
       };
+    case "UPDATE_POLAR_GRID":
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        display: {
+          ...state.display,
+          polarGridPath: action.payload,
+        },
+      };
     // TODO change to 'updateDisplayDimensions'
     case UPDATE_VIEW:
       console.info(action.type, action.payload);

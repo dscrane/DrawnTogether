@@ -1,23 +1,23 @@
 .svg__ring {
-  fill: transparent;
-  stroke-width: 1px;
+    fill: transparent;
+    stroke-width: 1px;
 }
 .svg__ring-thick {
-  stroke: var(--svg-ring-thick);
-  stroke-width: 1px;
+    stroke: var(--svg-ring-thick);
+    stroke-width: 1px;
 }
 .svg__ring-thin {
-  /*stroke: var(--svg-ring-thin);*/
-  stroke: red;
+    /*stroke: var(--svg-ring-thin);*/
+    stroke: red;
 }
 .svg__line {
-  stroke: var(--svg-line);
-  stroke-width: 1px;
+    stroke: var(--svg-line);
+    stroke-width: 1px;
 }
 .svg__line-full {
-  stroke-width: 1.5px;
+    stroke-width: 1.5px;
 }
 .polarGrid {
-  fill: transparent;
-  stroke: var(--svg-ring-thick);
+    fill: transparent;
+    stroke: var(--svg-ring-thick);
 }

@@ -2,33 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3fa038-a0c6-40b2-a7d3-56d5e80e0499" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Blob/Blob.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Blob/Blob.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Canvas/Canvas.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Canvas/Canvas.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/Canvas/components/DisplaySvg.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Canvas/components/DisplaySvg.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/FormContainer/FormContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/FormContainer/FormContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Panel/Panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Panel/Panel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/PolarGrid/PolarGrid.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/PolarGrid/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/PolarGrid/polarGrid.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/redux/actions/gameActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/redux/actions/gameActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/redux/reducers/gameReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/redux/reducers/gameReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/redux/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/redux/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/root.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/root.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/utils/circleUtilities.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/utils/circleUtilities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/utils/responseSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/utils/responseSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/gameControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/gameControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/userControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/userControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware/validateAndUpdateResponses.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/validateAndUpdateResponses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/circleHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/circleHelpers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/circleModifiers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/circleModifiers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/initializePlayers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/createPlayerObjects.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

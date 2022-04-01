@@ -3,7 +3,14 @@ import { io } from "socket.io-client";
 import { connect } from "react-redux";
 import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
-import { generateSession, initializePlayers, nextPlayer, updatePlayer, displayCircles } from "./redux/actions";
+import {
+  generateSession,
+  initializePlayers,
+  nextPlayer,
+  updatePlayer,
+  displayCircles,
+  updatePolarGrid,
+} from "./redux/actions";
 
 export const App = ({
   inProgress,
@@ -16,6 +23,7 @@ export const App = ({
   nextPlayer,
   displayCircles,
   display,
+  updatePolarGrid,
 }) => {
   const [socket, setSocket] = useState(null);
   useEffect(() => {
@@ -35,7 +43,7 @@ export const App = ({
     }
     socket.on("connect", async () => {
       const { width, xAxisCenter, yAxisCenter } = display;
-      await socket.emit({
+      await socket.emit("fetch-polar-grid", {
         width,
         xAxisCenter,
         yAxisCenter,
@@ -43,8 +51,10 @@ export const App = ({
     });
 
     socket.on("initialized-players", (data) => {
-      console.log(data);
       initializePlayers(data);
+    });
+    socket.on("polar-grid", (polarGridPath) => {
+      updatePolarGrid(polarGridPath);
     });
     socket.on("updated-player", async (data, cb) => {
       console.log(currentPlayer);
@@ -86,4 +96,5 @@ export default connect(mapStateToProps, {
   updatePlayer,
   nextPlayer,
   displayCircles,
+  updatePolarGrid,
 })(App);
