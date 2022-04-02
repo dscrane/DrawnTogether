@@ -13,10 +13,11 @@
 .form {
   display: flex;
   flex-direction: column;
-  /*flex-wrap: wrap;*/
   justify-content: center;
   align-items: stretch;
   width: 100%;
+}
+.form__stretch {
   height: 100%;
 }
 .form__group {
@@ -172,4 +173,11 @@ select > option {
   font-size: 1.7rem;
   text-align: center;
   line-height: 1.8rem;
+}
+
+.form__scroll {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

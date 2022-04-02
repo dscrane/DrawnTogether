@@ -23,8 +23,10 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
       <Formik initialValues={initialValues} onSubmit={(values, actions) => onSubmit(values, actions)}>
         {({ values, ...props }) => (
           <>
-            <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
-            <Form className={`form ${currentForm === 1 ? "form__full-border" : ""}`}>
+            {currentForm === 1 ? null : (
+              <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
+            )}
+            <Form className={`form ${currentForm > 1 ? "form__stretch" : ""}`}>
               {showInstructions}
               <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
                 {showNextOption ? (
