@@ -14,6 +14,7 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
 };
 
 export const PlayerForm = ({ values }) => {
+  console.log(values);
   return (
     <>
       <div className="form__row">
@@ -65,8 +66,8 @@ export const PlayerForm = ({ values }) => {
                 </div>
               </div>
             ))}
-            <div className={`form__row ${values.length === 5 ? "invisible" : ""}`}>
-              <div className="form__item form__item-addCTA">
+            <div className="form__row">
+              <div className={`form__item form__item-addCTA ${values.players.length === 5 ? "invisible" : ""}`}>
                 <button className="p-button p-button__add" type="button" onClick={() => push(responseSchema)}>
                   Add Player
                 </button>
