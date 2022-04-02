@@ -75,15 +75,17 @@ const FormContainer = ({
 
   return (
     <div className={`form__container ${currentForm === 1 ? "form__container-border" : ""}`}>
-      <FormDisplay
-        onSubmit={handleSubmit}
-        initialValues={formResponseSchema}
-        handlePrevious={handlePrevious}
-        currentForm={currentForm}
-        currentPlayer={currentPlayer}
-        numPlayers={numPlayers}
-        players={players}
-      />
+      <div className="form__scroll">
+        <FormDisplay
+          onSubmit={handleSubmit}
+          initialValues={formResponseSchema}
+          handlePrevious={handlePrevious}
+          currentForm={currentForm}
+          currentPlayer={currentPlayer}
+          numPlayers={numPlayers}
+          players={players}
+        />
+      </div>
     </div>
   );
 };
