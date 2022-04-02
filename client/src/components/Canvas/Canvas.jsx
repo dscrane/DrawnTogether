@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { updateDisplayDimensions } from "../../redux/actions";
+import { updateDisplayDimensions, startGame } from "../../redux/actions";
 import { debounce } from "../../utils";
 import { DisplaySvg } from "./components";
 import "./canvas.css";
+import { StartButton } from "../../lib/buttons";
 
-const Canvas = ({ display, session, updateDisplayDimensions }) => {
+const Canvas = ({ display, session, updateDisplayDimensions, startGame }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -33,7 +34,7 @@ const Canvas = ({ display, session, updateDisplayDimensions }) => {
 
   return (
     <div className="svg__container" ref={displaySVG}>
-      <DisplaySvg session={session} display={display} />
+      {session.inProgress ? <DisplaySvg session={session} display={display} /> : <StartButton startGame={startGame} />}
     </div>
   );
 };
@@ -48,4 +49,5 @@ const mapStateToProps = ({ gameState }) => {
 
 export default connect(mapStateToProps, {
   updateDisplayDimensions,
+  startGame,
 })(Canvas);
