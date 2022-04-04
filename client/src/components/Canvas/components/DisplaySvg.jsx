@@ -11,13 +11,12 @@ import { fetchPolarGrid } from "../../../socket.io/emitters";
 const DisplaySvg = ({ socket, display, session, updateGridDisplay, resizePlayerCircles }) => {
   /* Update the display grid based on new view dimensions */
   useEffect(() => {
-    const { width, xAxisCenter, yAxisCenter } = display;
+    const { width, centerPoint } = display;
     fetchPolarGrid(socket, {
       width,
-      xAxisCenter,
-      yAxisCenter,
+      centerPoint,
     });
-  });
+  }, [display.centerPoint, fetchPolarGrid]);
   return (
     <svg className={`svg__canvas ${session.currentForm === 8 ? "svg__canvas-light" : ""}`}>
       {session.displayGrid ? <PolarGrid path={display.polarGridPath} /> : null}

@@ -46,29 +46,11 @@ export const INITIAL_STATE = {
   centerPoint: { x: 0, y: 0 },
   display: {
     resizeRatio: 1,
-    xAxisCenter: 0,
-    yAxisCenter: 0,
+    centerPoint: { x: 0, y: 0 },
     height: 0,
     width: 0,
     previousHeight: 0,
     previousWidth: 0,
     polarGridPath: "",
-  },
-  displayGrid: {
-    resizeRatio: 1,
-    view: {
-      height: 0,
-      width: 0,
-    },
-    grid: {
-      stage: 0,
-      svgDim: 0,
-      radius: 0,
-      axis: 0,
-      cross: 0,
-      cx: 0,
-      cy: 0,
-      step: 0,
-    },
   },
 };

@@ -42,11 +42,10 @@ export const App = ({
       return;
     }
     socket.on("connect", async () => {
-      const { width, xAxisCenter, yAxisCenter } = display;
+      const { width, centerPoint } = display;
       await socket.emit("fetch-polar-grid", {
         width,
-        xAxisCenter,
-        yAxisCenter,
+        centerPoint,
       });
     });
 

@@ -107,8 +107,8 @@ export const updatePlayer =
   };
 
 export const displayCircles = (circles) => (dispatch, getState) => {
-  const { centerPoint } = getState().gameState;
-  const circleSvgs = circles.map((circle) => createCircleDesign(circle, centerPoint));
+  const { display } = getState().gameState;
+  const circleSvgs = circles.map((circle) => createCircleDesign(circle, display.centerPoint));
   console.log(circleSvgs);
   dispatch({
     type: "DISPLAY_CIRCLES",
@@ -125,11 +125,11 @@ export const updatePolarGrid = (polarGridPath) => (dispatch) => {
 };
 /* ----    FINAL_DISPLAY ACTION CREATOR    ---- */
 export const finalDisplay = (players, currentForm) => async (dispatch, getState) => {
-  const { circles, centerPoint } = getState().gameState;
+  const { circles, display } = getState().gameState;
   const finalCircles = [...circles];
   const finalForm = currentForm + 1;
   for (let player in players) {
-    finalCircles.push(createCircleDesign(players[player]._id, players[player].initialCircleData, centerPoint));
+    finalCircles.push(createCircleDesign(players[player].initialCircleData, display.centerPoint));
   }
   dispatch({
     type: FINAL_DISPLAY,

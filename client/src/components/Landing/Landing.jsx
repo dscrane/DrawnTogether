@@ -1,4 +1,3 @@
-import { StartButton } from "../../lib/buttons";
 import React from "react";
 import "./landing.css";
 

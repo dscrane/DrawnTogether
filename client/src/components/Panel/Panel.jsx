@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Header } from "../Header";
 import { Landing } from "../Landing";
+import { DisplayResults } from "../DisplayResults";
 import { FormContainer } from "../FormContainer";
 import { startGame, endGame } from "../../redux/actions";
 import "./panel.css";
-import { DisplayResults } from "../DisplayResults";
 
-const Panel = ({ socket, currentForm, inProgress, startGame, endGame, yAxisCenter, xAxisCenter }) => {
+const Panel = ({ socket, currentForm, inProgress, endGame }) => {
   const display = () => {
     if (inProgress) {
       return <FormContainer socket={socket} />;
@@ -26,8 +26,8 @@ const Panel = ({ socket, currentForm, inProgress, startGame, endGame, yAxisCente
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { currentForm, inProgress, display } = gameState;
-  return { currentForm, inProgress, yAxisCenter: display.yAxisCenter, xAxisCenter: display.xAxisCenter };
+  const { currentForm, inProgress } = gameState;
+  return { currentForm, inProgress };
 };
 
 export default connect(mapStateToProps, { startGame, endGame })(Panel);

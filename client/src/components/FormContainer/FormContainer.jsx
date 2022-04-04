@@ -91,9 +91,9 @@ const FormContainer = ({
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { _id, centerPoint, players, ...rest } = gameState;
+  const { _id, display, players, ...rest } = gameState;
   return {
-    centerPoint,
+    centerPoint: display.centerPoint,
     players,
     gameId: _id,
     session: rest,
