@@ -6,7 +6,7 @@ import { DisplaySvg } from "./components";
 import "./canvas.css";
 import { StartButton } from "../../lib/buttons";
 
-const Canvas = ({ display, session, updateDisplayDimensions, startGame }) => {
+const Canvas = ({ socket, display, session, updateDisplayDimensions, startGame }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -34,7 +34,11 @@ const Canvas = ({ display, session, updateDisplayDimensions, startGame }) => {
 
   return (
     <div className="svg__container" ref={displaySVG}>
-      {session.inProgress ? <DisplaySvg session={session} display={display} /> : <StartButton startGame={startGame} />}
+      {session.currentForm !== 0 ? (
+        <DisplaySvg socket={socket} session={session} display={display} />
+      ) : (
+        <StartButton startGame={startGame} />
+      )}
     </div>
   );
 };

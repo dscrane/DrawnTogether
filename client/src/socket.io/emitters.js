@@ -20,3 +20,7 @@ export const updatePlayerEmitter = (socket, playerId, formData, currentForm, cen
 export const fetchCirclesEmitter = (socket) => {
   socket.emit("fetch-circles");
 };
+
+export const fetchPolarGrid = (socket, data) => {
+  socket.emit("fetch-polar-grid", data);
+};

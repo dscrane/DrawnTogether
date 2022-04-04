@@ -73,7 +73,7 @@ export const App = ({
           <Panel socket={socket} />
         </div>
         <div className="app__canvas">
-          <Canvas />
+          <Canvas socket={socket} />
         </div>
       </div>
     </div>
