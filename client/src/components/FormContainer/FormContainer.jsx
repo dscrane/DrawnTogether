@@ -2,7 +2,12 @@ import React from "react";
 import { FormDisplay } from "../FormDisplay";
 import { connect } from "react-redux";
 import { endGame, finalDisplay, nextForm, nextPlayer, prevForm, prevPlayer } from "../../redux/actions";
-import { fetchCirclesEmitter, initializePlayersEmitter, updatePlayerEmitter } from "../../socket.io/emitters";
+import {
+  fetchCirclesEmitter,
+  finalDisplayEmitter,
+  initializePlayersEmitter,
+  updatePlayerEmitter,
+} from "../../socket.io/emitters";
 import { responseSchema } from "../../utils";
 
 const formResponseSchema = {
@@ -20,7 +25,6 @@ const FormContainer = ({
   nextForm,
   prevForm,
   endGame,
-  finalDisplay,
   centerPoint,
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
@@ -40,8 +44,7 @@ const FormContainer = ({
       return;
     }
     if (currentForm === 7 && currentPlayer === numPlayers) {
-      await finalDisplay(players, currentForm);
-      // await nextForm(currentForm);
+      await finalDisplayEmitter(socket);
       return;
     }
     if (currentForm >= 2 && currentForm <= 7) {
@@ -66,8 +69,8 @@ const FormContainer = ({
       <div className="form__scroll">
         <FormDisplay
           onSubmit={handleSubmit}
-          initialValues={formResponseSchema}
           handlePrevious={handlePrevious}
+          initialValues={formResponseSchema}
           currentForm={currentForm}
           currentPlayer={currentPlayer}
           numPlayers={numPlayers}

@@ -24,3 +24,7 @@ export const fetchCirclesEmitter = (socket) => {
 export const fetchPolarGrid = (socket, data) => {
   socket.emit("fetch-polar-grid", data);
 };
+
+export const finalDisplayEmitter = (socket) => {
+  socket.emit("final-display");
+};

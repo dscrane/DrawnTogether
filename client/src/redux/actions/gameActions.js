@@ -110,13 +110,11 @@ export const updatePolarGrid = (polarGridPath) => (dispatch) => {
   });
 };
 // FINAL_DISPLAY ACTION CREATOR
-export const finalDisplay = (players, currentForm) => async (dispatch, getState) => {
-  const { circles, display } = getState().gameState;
-  const finalCircles = [...circles];
+export const finalDisplay = (circles) => async (dispatch, getState) => {
+  const { display, currentForm } = getState().gameState;
   const finalForm = currentForm + 1;
-  for (let player in players) {
-    finalCircles.push(createCircleDesign(players[player].initialCircleData, display.centerPoint));
-  }
+  const finalCircles = circles.map((circle) => createCircleDesign(circle, display.centerPoint));
+
   dispatch({
     type: FINAL_DISPLAY,
     payload: { finalCircles: finalCircles, displayGrid: false, inProgress: false, currentForm: finalForm },

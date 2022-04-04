@@ -3,13 +3,21 @@ import { io } from "socket.io-client";
 import { connect } from "react-redux";
 import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
-import { generateSession, initializePlayers, nextPlayer, displayCircles, updatePolarGrid } from "./redux/actions";
+import {
+  generateSession,
+  initializePlayers,
+  nextPlayer,
+  displayCircles,
+  updatePolarGrid,
+  finalDisplay,
+} from "./redux/actions";
 
 export const App = ({
   _id,
   inProgress,
   display,
   displayCircles,
+  finalDisplay,
   generateSession,
   initializePlayers,
   nextPlayer,
@@ -48,6 +56,9 @@ export const App = ({
     socket.on("display-circles", (circles) => {
       displayCircles(circles);
     });
+    socket.on("final-display-circles", (circles) => {
+      finalDisplay(circles);
+    });
   }, [socket, _id, initializePlayers, nextPlayer]);
 
   return (
@@ -77,5 +88,6 @@ export default connect(mapStateToProps, {
   initializePlayers,
   nextPlayer,
   displayCircles,
+  finalDisplay,
   updatePolarGrid,
 })(App);
