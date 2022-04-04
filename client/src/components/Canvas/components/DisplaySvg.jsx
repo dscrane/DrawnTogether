@@ -1,22 +1,22 @@
 /* IMPORTS */
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { resizePlayerCircles } from "../../../redux/actions";
 import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
 import { fetchPolarGrid } from "../../../socket.io/emitters";
-
 /* ------ */
 
-const DisplaySvg = ({ socket, display, session, updateGridDisplay, resizePlayerCircles }) => {
+const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
   /* Update the display grid based on new view dimensions */
+  const { width, centerPoint } = display;
   useEffect(() => {
-    const { width, centerPoint } = display;
+    if (!display.polarGridPath) {
+      return;
+    }
     fetchPolarGrid(socket, {
       width,
       centerPoint,
     });
-  }, [display.centerPoint, fetchPolarGrid]);
+  }, [width, socket]);
   return (
     <svg className={`svg__canvas ${session.currentForm === 8 ? "svg__canvas-light" : ""}`}>
       {session.displayGrid ? <PolarGrid path={display.polarGridPath} /> : null}
@@ -33,4 +33,4 @@ const DisplaySvg = ({ socket, display, session, updateGridDisplay, resizePlayerC
   );
 };
 
-export default connect(null, { resizePlayerCircles })(DisplaySvg);
+export default DisplaySvg;

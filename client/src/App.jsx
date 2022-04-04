@@ -3,29 +3,21 @@ import { io } from "socket.io-client";
 import { connect } from "react-redux";
 import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
-import {
-  generateSession,
-  initializePlayers,
-  nextPlayer,
-  updatePlayer,
-  displayCircles,
-  updatePolarGrid,
-} from "./redux/actions";
+import { generateSession, initializePlayers, nextPlayer, displayCircles, updatePolarGrid } from "./redux/actions";
 
 export const App = ({
-  inProgress,
   _id,
-  players,
-  currentPlayer,
+  inProgress,
+  display,
+  displayCircles,
   generateSession,
   initializePlayers,
-  updatePlayer,
   nextPlayer,
-  displayCircles,
-  display,
   updatePolarGrid,
 }) => {
   const [socket, setSocket] = useState(null);
+  const { width, centerPoint } = display;
+
   useEffect(() => {
     generateSession();
   }, []);
@@ -42,28 +34,21 @@ export const App = ({
       return;
     }
     socket.on("connect", async () => {
-      const { width, centerPoint } = display;
       await socket.emit("fetch-polar-grid", {
         width,
         centerPoint,
       });
     });
-
     socket.on("initialized-players", (data) => {
       initializePlayers(data);
     });
     socket.on("polar-grid", (polarGridPath) => {
       updatePolarGrid(polarGridPath);
     });
-    socket.on("updated-player", async (data, cb) => {
-      console.log(currentPlayer);
-      // await updatePlayer(currentPlayer, data);
-      // cb("update processed");
-    });
     socket.on("display-circles", (circles) => {
       displayCircles(circles);
     });
-  }, [socket, _id, initializePlayers, updatePlayer, nextPlayer]);
+  }, [socket, _id, initializePlayers, nextPlayer]);
 
   return (
     <div className="app" data-testid="component-App">
@@ -79,12 +64,10 @@ export const App = ({
   );
 };
 
-const mapStateToProps = ({ gameState: { _id, inProgress, players, currentPlayer, display } }) => {
+const mapStateToProps = ({ gameState: { _id, inProgress, display } }) => {
   return {
     _id,
-    currentPlayer,
     inProgress,
-    players,
     display,
   };
 };
@@ -92,7 +75,6 @@ const mapStateToProps = ({ gameState: { _id, inProgress, players, currentPlayer,
 export default connect(mapStateToProps, {
   generateSession,
   initializePlayers,
-  updatePlayer,
   nextPlayer,
   displayCircles,
   updatePolarGrid,

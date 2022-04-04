@@ -1,16 +1,7 @@
 import React from "react";
 import { FormDisplay } from "../FormDisplay";
 import { connect } from "react-redux";
-import {
-  endGame,
-  finalDisplay,
-  nextForm,
-  nextPlayer,
-  prevForm,
-  prevPlayer,
-  initializePlayers,
-  updatePlayer,
-} from "../../redux/actions";
+import { endGame, finalDisplay, nextForm, nextPlayer, prevForm, prevPlayer } from "../../redux/actions";
 import { fetchCirclesEmitter, initializePlayersEmitter, updatePlayerEmitter } from "../../socket.io/emitters";
 import { responseSchema } from "../../utils";
 
@@ -24,9 +15,7 @@ const FormContainer = ({
   session,
   gameId,
   players,
-  updatePlayer,
   nextPlayer,
-  initializePlayers,
   prevPlayer,
   nextForm,
   prevForm,
@@ -45,7 +34,6 @@ const FormContainer = ({
     }
   };
   const handleSubmit = async (values) => {
-    console.log(values);
     if (currentForm === 1) {
       await initializePlayersEmitter(socket, gameId, values);
       await nextForm(currentForm);
@@ -101,12 +89,10 @@ const mapStateToProps = ({ gameState }) => {
 };
 
 export default connect(mapStateToProps, {
-  updatePlayer,
   nextPlayer,
   prevPlayer,
   nextForm,
   prevForm,
   endGame,
-  initializePlayers,
   finalDisplay,
 })(FormContainer);
