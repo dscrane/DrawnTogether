@@ -41,6 +41,7 @@
 .blue_gray_pink {
   --bg-canvas: var(--darkgray-500);
   --bg-panel: var(--darkgray-500);
+  --bg-panel-light: #66635c;
   --bg-sidebar: var(--bluegreen-900);
   --bg-tab: var(--darkgray-100);
   --bg-active: var(--darkgray-500);

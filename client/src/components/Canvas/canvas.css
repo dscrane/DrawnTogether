@@ -18,5 +18,5 @@
 }
 
 .svg__canvas-light {
-  background: #d5d0c8;
+  background: var(--bg-panel-light);
 }
