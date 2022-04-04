@@ -48,6 +48,7 @@ io.on("connect", (socket) => {
     }
   );
   socket.on("update-player", (updateData, cb) => {
+    console.log("[update-player]: ", updateData);
     updatePlayer(socket, updateData);
   });
   socket.on("fetch-circles", () => {

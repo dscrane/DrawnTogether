@@ -53,7 +53,6 @@ export function setPlayerDegree(interest, gender, diet) {
     return { degree: 0, slice: 0 };
   }
   const slice = Math.floor(Math.random() * 9) + interest;
-  console.log(typeof slice);
   switch (diet) {
     case "omnivore":
       if (gender === 0) {

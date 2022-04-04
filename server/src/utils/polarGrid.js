@@ -1,9 +1,9 @@
 export class PolarGrid {
-  constructor({ width, xAxisCenter, yAxisCenter }) {
+  constructor({ width, centerPoint }) {
     this._svgRadius = (width * 0.99) / 2;
     this._ringSpacing = (width * 0.99) / 2 / 50;
-    this._xAxisCenter = xAxisCenter;
-    this._yAxisCenter = yAxisCenter;
+    this._xAxisCenter = centerPoint.x;
+    this._yAxisCenter = centerPoint.y;
     this._polarGridPath = this.createPolarGridPath();
   }
 
