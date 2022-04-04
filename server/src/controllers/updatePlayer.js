@@ -24,7 +24,6 @@ const findAndUpdateCircle = async (
             centerPoint
           )
         : circleAlterations[updateStep](responses, centerPoint);
-    console.log(alterations);
     await userCircle.updateOne({ ...alterations.circleData });
 
     if (alterations.initialCircleData) {

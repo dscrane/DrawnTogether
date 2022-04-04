@@ -288,10 +288,12 @@ export function averageColors(color, hue, saturation, lightness) {
       console.info("%c[ERROR]: Switch - averageColors", "color: red");
   }
   return {
-    hue: averageHue,
-    saturation: averageSaturation,
-    lightness: averageLightness,
-    color: `hsl(${averageHue},${averageSaturation}%,${averageLightness}%)`,
+    hue: averageHue.toFixed(2),
+    saturation: averageSaturation.toFixed(2),
+    lightness: averageLightness.toFixed(2),
+    color: `hsl(${averageHue.toFixed(2)},${averageSaturation.toFixed(
+      2
+    )}%,${averageLightness.toFixed(2)}%)`,
   };
 }
 
