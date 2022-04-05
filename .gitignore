@@ -10,6 +10,7 @@ node_modules
 /client/build
 
 # misc
+docs
 /other
 NOTES.md
 .DS_Store
