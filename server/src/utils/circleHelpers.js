@@ -41,49 +41,49 @@ export function altCartesian(centerPoint, degree, radian, food, hair) {
 /**
  // * Creates the initial position for playerCircle
  * @function setPlayerDegree
- * @param {number} interest -- Current player's interest value
- * @param {number} gender -- Current player's gender value
+ * @param {number} curiosity -- Current player's curiosity value
+ * @param {number} productivity -- Current player's productivity value
  * @param {string} diet -- Current player's diet value
  * @returns {{slice: number, degree: number}} playerCircle's positional values
  */
-export function setPlayerDegree(interest, gender, diet) {
+export function setPlayerDegree(curiosity, productivity, diet) {
   let degree = 0;
-  if (!interest || !gender || !diet) {
+  if (!curiosity || !productivity || !diet) {
     return { degree: 0, slice: 0 };
   }
-  const slice = Math.floor(Math.random() * 9) + interest;
+  const slice = Math.floor(Math.random() * 9) + curiosity;
   switch (diet) {
     case "omnivore":
-      if (gender === 0) {
+      if (productivity === 0) {
         degree = slice;
-      } else if (gender % 2 === 0) {
+      } else if (productivity % 2 === 0) {
         degree = 136 + slice;
       } else {
         degree = slice;
       }
       break;
     case "vegetarian":
-      if (gender === 0) {
+      if (productivity === 0) {
         degree = 181 + slice;
-      } else if (gender % 2 === 0) {
+      } else if (productivity % 2 === 0) {
         degree = 316 + slice;
       } else {
         degree = 181 + slice;
       }
       break;
     case "pescatarian":
-      if (gender === 0) {
+      if (productivity === 0) {
         degree = 226 + slice;
-      } else if (gender % 2 === 0) {
+      } else if (productivity % 2 === 0) {
         degree = 226 + slice;
       } else {
         degree = 91 + slice;
       }
       break;
     case "vegan":
-      if (gender === 0) {
+      if (productivity === 0) {
         degree = 46 + slice;
-      } else if (gender % 2 === 0) {
+      } else if (productivity % 2 === 0) {
         degree = 46 + slice;
       } else {
         degree = 271 + slice;
@@ -116,13 +116,13 @@ export function setCircleRadius(association) {
  * Creates an alternate radius for playerCircle
  * @function altRadius
  * @param {Number} radius -- Current player's circle radius
- * @param {Number} time -- Current player's time value
+ * @param {Number} leaning -- Current player's leaning value
  * @param {Number} personality -- Current player's personality value
  * @returns {number} altRadius - Current player's circle alternate radius
  */
-export function altRadius(radius, time, personality) {
-  const timeShift = radius * (time / 100);
-  time % 2 === 0 ? (radius += timeShift) : (radius -= timeShift);
+export function altRadius(radius, leaning, personality) {
+  const leaningShift = radius * (leaning / 100);
+  leaning % 2 === 0 ? (radius += leaningShift) : (radius -= leaningShift);
   const personalityShift = radius * (personality / 100);
   personality % 2 === 0
     ? (radius += personalityShift)
@@ -142,7 +142,7 @@ export function createFillColor(height, degree) {
   if (!height) {
     return { hue: 0, lightness: 0, saturation: 0, color: "" };
   }
-  const hue = degree;
+  const hue = Math.floor(Math.random() * 360);
   const lightness = Math.floor(Math.random() * height) + 25;
   const saturation = 100 - (Math.floor(Math.random() * height) + 25);
 
@@ -181,7 +181,7 @@ export function createSecondaryColor(progress, hue, saturation, lightness) {
       }%)`;
       break;
     case "triadic":
-      const triadicRange = Math.floor(Math.random() * 3);
+      const triadicRange = Math.floor(Math.random() * 3) * 120;
       altHue = (
         !(hue % 2) ? triadicRange + variation : triadicRange - variation
       ).toFixed(0);

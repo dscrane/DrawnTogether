@@ -8,13 +8,12 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   return (
     <>
       <label className="item__label">{label}</label>
-      <input {...field} {...props} placeholder={placeholder || label + "..."} />
+      <input {...field} {...props} />
     </>
   );
 };
 
 export const PlayerForm = ({ values }) => {
-  console.log(values);
   return (
     <>
       <div className="form__row">
@@ -26,7 +25,7 @@ export const PlayerForm = ({ values }) => {
             name="interest"
             component="input"
             type="text"
-            placeholder="Common interest..."
+            // placeholder="Common interest..."
             validate={validateString}
           />
         </div>
@@ -39,9 +38,16 @@ export const PlayerForm = ({ values }) => {
               <div key={`player_${index}`} className="form__row">
                 <div className="form__item">
                   <div className="item__name">Player #{index + 1}</div>
-                  <button className="item__removeCTA" type="button" title="Remove Player" onClick={() => remove(index)}>
-                    Remove
-                  </button>
+                  {values.players.length < 3 ? null : (
+                    <button
+                      className="item__removeCTA"
+                      type="button"
+                      title="Remove Player"
+                      onClick={() => remove(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
                 </div>
                 <div className="form__item">
                   <Field
@@ -60,7 +66,7 @@ export const PlayerForm = ({ values }) => {
                     name={`players.${index}.association`}
                     type="text"
                     component={renderField}
-                    label={"Association"}
+                    label={"Time"}
                     validate={validateNumber}
                   />
                 </div>

@@ -33,8 +33,8 @@ export const circleAlterations = {
  * */
 function initialCircleVariables(responses, centerPoint) {
   const { degree, slice } = setPlayerDegree(
-    parseInt(responses.interest),
-    parseInt(responses.gender),
+    parseInt(responses.curiosity),
+    parseInt(responses.productivity),
     responses.diet
   );
   const { xCartesian, yCartesian } = convertToCartesian(
@@ -72,7 +72,7 @@ function initialCircleVariables(responses, centerPoint) {
 function circleAlterationOne(responses, circleData) {
   const updatedRadius = altRadius(
     circleData.radius,
-    parseInt(responses.time),
+    parseInt(responses.leaning),
     parseInt(responses.personality)
   );
   circleData = {

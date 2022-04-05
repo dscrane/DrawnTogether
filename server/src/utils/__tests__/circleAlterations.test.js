@@ -61,8 +61,8 @@ export const circleAlterationsSuite = () => {
     describe("Initial Circle Helpers", () => {
       it("Should create circle degree and slice", () => {
         const result = setPlayerDegree(
-          responses.interest,
-          responses.gender,
+          responses.curiosity,
+          responses.productivity,
           responses.diet
         );
         degree = result.degree;
@@ -121,7 +121,7 @@ export const circleAlterationsSuite = () => {
       it("Should update the the circle radius", () => {
         const result = altRadius(
           circleDataResult.radius,
-          responses.time,
+          responses.leaning,
           responses.personality
         );
         expect(result).toStrictEqual(expect.any(Number));

@@ -28,10 +28,10 @@ export const FormThree = ({ currentPlayer }) => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value={45}>I will try anything</option>
+          <option value={45}>Fear Factor</option>
           <option value={135}>A foodie</option>
           <option value={45}>See it, Eat it</option>
-          <option value={270}>A picky eater</option>
+          <option value={270}>Vanilla</option>
         </Field>
       </div>
     </>

@@ -13,10 +13,10 @@ export const FormFour = ({ currentPlayer }) => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value="hollow">Video Gamer</option>
+          <option value="hollow">What is the sun?</option>
           <option value="stroke">Happy on the porch</option>
-          <option value="ring">Nature Lover</option>
-          <option value="dot">Climate activist</option>
+          <option value="ring">National Park-er</option>
+          <option value="dot">Tree-hugger</option>
         </Field>
       </div>
       <div className="form__row">
@@ -28,9 +28,9 @@ export const FormFour = ({ currentPlayer }) => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value="thinner">What is social media</option>
+          <option value="thinner">What is social media?</option>
           <option value="thicker">Lurker</option>
-          <option value="thin">Regular poster</option>
+          <option value="thin">You didn't see my post?</option>
           <option value="thick">Influencer</option>
         </Field>
       </div>
@@ -46,7 +46,7 @@ export const FormFour = ({ currentPlayer }) => {
           <option value="complimentary">Curmudgeon</option>
           <option value="triadic">C'est Le Vie</option>
           <option value="monochromatic">Reluctant Participant</option>
-          <option value="analogous">Activist</option>
+          <option value="analogous">When is the next rally?</option>
         </Field>
       </div>
     </>

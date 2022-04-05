@@ -1,13 +1,13 @@
 import { Game } from "../models/game.js";
 import { createPlayerObjects } from "../utils/createPlayerObjects.js";
 
-export const initializePlayers = async (socket, gameId, interest, players) => {
+export const initializePlayers = async (socket, gameId, curiosity, players) => {
   console.log("initialize");
   const game = await Game.findById(gameId);
   const { playersObj, playerIds, circles, initialCircles } =
     await createPlayerObjects(players, game._id);
 
-  game.interest = interest;
+  game.curiosity = curiosity;
   game.numPlayers = playerIds.length;
   game.playerIds = playerIds;
   game.circles = circles;
@@ -19,7 +19,7 @@ export const initializePlayers = async (socket, gameId, interest, players) => {
     numPlayers: playerIds.length,
     playerIds,
     playersObj,
-    interest,
+    curiosity,
   });
 
   await game.save();

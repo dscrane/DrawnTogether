@@ -31,8 +31,8 @@ export const FormFive = ({ currentPlayer }) => {
           <option value="DEFAULT">Choose...</option>
           <option value={1}>People Magazine reader</option>
           <option value={2}>Netflix binger</option>
-          <option value={3}>Museum attendee</option>
-          <option value={4}>Cultural practitioner</option>
+          <option value={3}>Smithsonian denizen</option>
+          <option value={4}>Artiste</option>
         </Field>
       </div>
     </>
