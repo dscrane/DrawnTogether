@@ -13,7 +13,9 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
     <div className="form__row form__row-instructions">
       <div className="instructions">
         {formInstructions[currentForm].split("\n").map((line, i) => (
-          <p key={`instruction-line-${i}`}>{line}</p>
+          <p className="instruction__line" key={`instruction-line-${i}`}>
+            {line}
+          </p>
         ))}
       </div>
     </div>

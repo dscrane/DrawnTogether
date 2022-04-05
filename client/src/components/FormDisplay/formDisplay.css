@@ -175,6 +175,10 @@ select > option {
   line-height: 1.8rem;
 }
 
+.instruction__line {
+  line-height: 2rem;
+}
+
 .form__scroll {
   overflow: auto;
   display: flex;
