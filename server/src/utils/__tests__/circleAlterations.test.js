@@ -1,3 +1,147 @@
+import { mockResponses } from "../../testing/mockData/mockResponses.js";
+import {
+  altRadius,
+  convertToCartesian,
+  createFillColor,
+  setCircleRadius,
+  setPlayerDegree,
+} from "../circleHelpers.js";
+import { circleAlterations } from "../circleModifiers.js";
+
+const createDataModel = (changes = {}) => {
+  return {
+    degree: expect.toBeWithinRange(0, 360),
+    slice: expect.toBeWithinRange(0, 45),
+    xCartesian: expect.toBeWithinRange(0, 1920),
+    yCartesian: expect.toBeWithinRange(0, 1080),
+    radian: expect.any(Number),
+    radius: expect.toBeWithinRange(0, 400),
+    design: "initialCircle",
+    color: expect.stringMatching(/hsl\([0-9]{1,3},([0-9]{1,2}%,?){2}\)/g),
+    hue: expect.toBeWithinRange(0, 365),
+    saturation: expect.toBeWithinRange(27, 75),
+    lightness: expect.toBeWithinRange(25, 73),
+    ...changes,
+  };
+};
+expect.extend({
+  toBeWithinRange(received, floor, ceiling) {
+    const pass = received >= floor && received <= ceiling;
+    if (pass) {
+      return {
+        message: () =>
+          `expected ${received} not to be within range ${floor} - ${ceiling}`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () =>
+          `expected ${received} to be within range ${floor} - ${ceiling}`,
+        pass: false,
+      };
+    }
+  },
+});
+
+describe("Circle modifications", () => {
+  const allResponses = mockResponses();
+  let circleDataResult;
+
+  describe("Initial Circle Variables", () => {
+    const centerPoint = { x: 960, y: 540 };
+    const responses = allResponses[0];
+    let degree;
+    let initialCircleDataResult;
+    describe("Initial Circle Helpers", () => {
+      it("Should create circle degree and slice", () => {
+        const result = setPlayerDegree(
+          responses.interest,
+          responses.gender,
+          responses.diet
+        );
+        degree = result.degree;
+        expect(result).toMatchObject({
+          degree: expect.toBeWithinRange(0, 360),
+          slice: expect.toBeWithinRange(0, 45),
+        });
+      });
+
+      it("Should create circle cartesian position", () => {
+        const result = convertToCartesian(centerPoint, responses.age, degree);
+        expect(result).toMatchObject({
+          xCartesian: expect.toBeWithinRange(0, 1920),
+          yCartesian: expect.toBeWithinRange(0, 1080),
+        });
+      });
+
+      it("Should create circle radius", () => {
+        const result = setCircleRadius(responses.association);
+        expect(result).toStrictEqual(expect.any(Number));
+      });
+
+      it("Should create the HSL color string for fill", () => {
+        const result = createFillColor(responses.height, degree);
+        expect(result).toMatchObject({
+          color: expect.stringMatching(/hsl\([0-9]{1,3},([0-9]{1,2}%,?){2}\)/g),
+          hue: expect.toBeWithinRange(0, 365),
+          saturation: expect.toBeWithinRange(27, 75),
+          lightness: expect.toBeWithinRange(25, 73),
+        });
+      });
+    });
+    describe("initialCircleVariables", () => {
+      const { circleData, initialCircleData } = circleAlterations[2](
+        responses,
+        centerPoint
+      );
+      circleDataResult = circleData;
+      initialCircleDataResult = initialCircleData;
+      it("Should return the initialCircleData object", () => {
+        const initialCircleDataModel = createDataModel();
+        expect(initialCircleData).toMatchObject(initialCircleDataModel);
+      });
+
+      it("Should return the circleData object", () => {
+        const circleDataModel = createDataModel({
+          design: "defaultCircle",
+          isAnimated: true,
+        });
+        expect(circleData).toMatchObject(circleDataModel);
+      });
+    });
+  });
+  describe("Circle Alteration #1", () => {
+    const responses = allResponses[1];
+    describe("Alteration #1 Helpers", () => {
+      it("Should update the the circle radius", () => {
+        const result = altRadius(
+          circleDataResult.radius,
+          responses.time,
+          responses.personality
+        );
+        expect(result).toStrictEqual(expect.any(Number));
+      });
+    });
+    describe("circleAlterationOne", () => {
+      it("It should return an circleData object with updated radius", () => {
+        const { circleData } = circleAlterations[3](
+          responses,
+          circleDataResult
+        );
+
+        expect(circleData.radius === circleDataResult.radius).toBe(false);
+        expect(Object.keys(circleData)).toEqual(
+          expect.arrayContaining(Object.keys(createDataModel()))
+        );
+      });
+    });
+  });
+  describe("Circle Alteration #2", () => {});
+  describe("Circle Alteration #3", () => {});
+  describe("Circle Alteration #4", () => {});
+  describe("Circle Alteration #5", () => {});
+});
+
 // import {
 //   setCircleRadius,
 //   setPlayerDegree,

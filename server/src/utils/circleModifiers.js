@@ -32,7 +32,6 @@ export const circleAlterations = {
  * @return {Object} circle -- Updated player circle object
  * */
 function initialCircleVariables(responses, centerPoint) {
-  console.log("initialCircle created");
   const { degree, slice } = setPlayerDegree(
     parseInt(responses.interest),
     parseInt(responses.gender),
@@ -70,7 +69,7 @@ function initialCircleVariables(responses, centerPoint) {
  * @param {object} responses -- Current player responses
  * @param {object} circleData -- Current player circle
  * */
-function circleAlterationOne(responses, circleData, centerPoint) {
+function circleAlterationOne(responses, circleData) {
   const updatedRadius = altRadius(
     circleData.radius,
     parseInt(responses.time),
@@ -110,7 +109,7 @@ function circleAlterationTwo(responses, circleData, centerPoint) {
  * @param {object} responses -- Current player responses
  * @param {object} circleData -- Current player circle
  * */
-function circleAlterationThree(responses, circleData, centerPoint) {
+function circleAlterationThree(responses, circleData) {
   const secondaryColor = createSecondaryColor(
     responses.progress,
     circleData.hue,
@@ -137,8 +136,8 @@ function circleAlterationThree(responses, circleData, centerPoint) {
  * @param {object} responses -- Current player responses
  * @param {object} circleData -- Current player circle
  * */
-function circleAlterationFour(responses, circleData, centerPoint) {
-  const lineDesign = createLineDesign(responses.religion, "hsl(0, 0%, 50%)");
+function circleAlterationFour(responses, circleData) {
+  const lineDesign = createLineDesign(responses.religion, "hsl(0,0%,50%)");
   circleData = {
     ...circleData,
     lineDesign,

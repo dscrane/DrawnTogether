@@ -27,7 +27,6 @@ export function convertToCartesian(centerPoint, age, degree) {
  * @returns {{yCartesian: {number}, xCartesian: {number}, degree: {number}}} Alternate cartesian coordinates for current player's circle on grid
  */
 export function altCartesian(centerPoint, degree, radian, food, hair) {
-  console.log(centerPoint, degree, radian, food, hair);
   const shiftDegree = food * hair;
   const newDegree = degree + shiftDegree;
   const theta = newDegree * (Math.PI / 180);
@@ -93,7 +92,7 @@ export function setPlayerDegree(interest, gender, diet) {
     default:
       console.info("%c[ERROR]: Switch - setPlayerDegree", "color: red");
   }
-  console.log(typeof degree, typeof slice);
+
   return { degree, slice };
 }
 
@@ -162,8 +161,9 @@ export function createFillColor(height, degree) {
  */
 export function createSecondaryColor(progress, hue, saturation, lightness) {
   let altHue, secondaryColor;
-  const randomSaturation = Math.random() * (saturation / 4);
-  const randomLightness = Math.random() * (lightness / 4);
+  const randomSaturation = Math.floor(Math.random() * (saturation / 4));
+  const randomLightness = Math.floor(Math.random() * (lightness / 4));
+  const variation = Math.floor(Math.random() * 15);
   switch (progress) {
     case "complimentary":
       altHue = hue + 180;
@@ -172,19 +172,25 @@ export function createSecondaryColor(progress, hue, saturation, lightness) {
       }%)`;
       break;
     case "analogous":
-      altHue = Math.random() * (hue + 75 - (hue - 75)) + hue - 75;
+      const analogousRange = Math.floor(Math.random() * 3) * 20;
+      altHue = (
+        !(hue % 2) ? analogousRange + variation : analogousRange - variation
+      ).toFixed(0);
       secondaryColor = `hsl(${altHue},${saturation + randomSaturation}%,${
         lightness - randomLightness
       }%)`;
       break;
     case "triadic":
-      altHue = ((hue + 120) * (hue - 120) * hue) / 3;
+      const triadicRange = Math.floor(Math.random() * 3);
+      altHue = (
+        !(hue % 2) ? triadicRange + variation : triadicRange - variation
+      ).toFixed(0);
       secondaryColor = `hsl(${altHue},${saturation - randomSaturation}%,${
         lightness - randomLightness
       }%)`;
       break;
     case "monochromatic":
-      altHue = Math.random() * (hue + 15 - (hue - 15)) + hue - 15;
+      altHue = (!(hue % 2) ? hue + variation : hue - variation).toFixed(0);
       secondaryColor = `hsl(${altHue},${saturation + randomSaturation}%,${
         lightness + randomLightness
       }%)`;
@@ -288,12 +294,12 @@ export function averageColors(color, hue, saturation, lightness) {
       console.info("%c[ERROR]: Switch - averageColors", "color: red");
   }
   return {
-    hue: averageHue.toFixed(2),
-    saturation: averageSaturation.toFixed(2),
-    lightness: averageLightness.toFixed(2),
-    color: `hsl(${averageHue.toFixed(2)},${averageSaturation.toFixed(
-      2
-    )}%,${averageLightness.toFixed(2)}%)`,
+    hue: averageHue.toFixed(0),
+    saturation: averageSaturation.toFixed(0),
+    lightness: averageLightness.toFixed(0),
+    color: `hsl(${averageHue.toFixed(0)},${averageSaturation.toFixed(
+      0
+    )}%,${averageLightness.toFixed(0)}%)`,
   };
 }
 
