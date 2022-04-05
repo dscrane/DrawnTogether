@@ -31,7 +31,10 @@ export const App = ({
   }, []);
   useEffect(() => {
     if (inProgress) {
-      let newSocket = io("http://localhost:5500", { auth: { gameId: _id } });
+      let newSocket =
+        process.env.NODE_ENV === "production"
+          ? io({ auth: { gameId: _id } })
+          : io("http://localhost:5500", { auth: { gameId: _id } });
       setSocket(newSocket);
       return;
     }

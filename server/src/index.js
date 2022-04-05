@@ -43,21 +43,21 @@ const createPolarGrid = (gridData) => {
 io.on("connect", (socket) => {
   socket.on(
     "initialize-players",
-    ({ gameId, formValues: { interest, players } }) => {
-      initializePlayers(socket, gameId, interest, players);
+    async ({ gameId, formValues: { curiosity, players } }) => {
+      await initializePlayers(socket, gameId, curiosity, players);
     }
   );
-  socket.on("update-player", (updateData, cb) => {
-    updatePlayer(socket, updateData);
+  socket.on("update-player", async (updateData, cb) => {
+    await updatePlayer(socket, updateData);
   });
-  socket.on("fetch-circles", () => {
-    fetchCircleData(socket);
+  socket.on("fetch-circles", async () => {
+    await fetchCircleData(socket);
   });
   socket.on("fetch-polar-grid", (gridData) => {
     socket.emit("polar-grid", createPolarGrid(gridData));
   });
-  socket.on("final-display", () => {
-    fetchCircleData(socket, true);
+  socket.on("final-display", async () => {
+    await fetchCircleData(socket, true);
   });
 });
 

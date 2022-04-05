@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e3fa038-a0c6-40b2-a7d3-56d5e80e0499" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Canvas/components/DisplaySvg.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Canvas/components/DisplaySvg.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/PolarGrid/PolarGrid.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/PolarGrid/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/PolarGrid/polarGrid.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/redux/actions/gameActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/redux/actions/gameActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/redux/reducers/gameReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/redux/reducers/gameReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/root.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/root.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/utils/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +23,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -36,9 +47,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="/usr/local/lib/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/testing" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -49,6 +69,9 @@
       <option name="presentableId" value="Default" />
       <updated>1648813798509</updated>
       <workItem from="1648813799950" duration="19443000" />
+      <workItem from="1648900668225" duration="2846000" />
+      <workItem from="1649071288814" duration="4526000" />
+      <workItem from="1649078700445" duration="55038000" />
     </task>
     <servers />
   </component>

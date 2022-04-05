@@ -45,7 +45,7 @@
   --bg-sidebar: var(--bluegreen-900);
   --bg-tab: var(--darkgray-100);
   --bg-active: var(--darkgray-500);
-  --bg-input-background: var(--cream-900);
+  --bg-input-background: var(--gray-500);
   --bg-input-options: var(--cream-900);
   --bg-input-shadow: var(--darkgray-100);
   --bg-input-outline: rgb(144, 219, 219);

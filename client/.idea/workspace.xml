@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c4e37db-f8b6-41f9-bd18-070002037aa0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Canvas/components/DisplaySvg.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Canvas/components/DisplaySvg.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PolarGrid/PolarGrid.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PolarGrid/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PolarGrid/polarGrid.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/actions/gameActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/gameActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/gameReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/gameReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/handleGridUpdate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/root.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/root.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/prettier.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/models/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +41,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="/usr/local/lib/node_modules/prettier" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -54,6 +56,8 @@
       <option name="presentableId" value="Default" />
       <updated>1648814700229</updated>
       <workItem from="1648814701501" duration="13881000" />
+      <workItem from="1648900660026" duration="11260000" />
+      <workItem from="1649071275980" duration="29535000" />
     </task>
     <servers />
   </component>

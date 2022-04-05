@@ -9,7 +9,7 @@ const gameSchema = new mongoose.Schema({
   inProgress: Boolean,
   complete: Boolean,
   timestamp: Date,
-  interest: String,
+  curiosity: String,
   // finalDisplay: Buffer
 });
 

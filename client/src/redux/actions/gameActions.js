@@ -15,7 +15,7 @@ import {
 } from "../types";
 import { createCircleDesign } from "../../utils";
 import { api } from "../../utils";
-
+// TODO think about aspect ratio for resizing circles if that is possible
 /* ----   Game Actions    ---- */
 // GENERATE_SESSION ACTION CREATOR
 export const generateSession = () => async (dispatch) => {
@@ -33,6 +33,7 @@ export const initializePlayers = (initialData) => async (dispatch) => {
     payload: { ...initialData },
   });
 };
+
 // START_GAME ACTION CREATOR
 export const startGame = () => async (dispatch) => {
   dispatch({
