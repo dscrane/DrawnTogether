@@ -24,7 +24,7 @@ const getValue = (vals) => {
 };
 const heightVals = [16, 32, 48];
 const curiosityVals = [27, 36, 18, 9, 0];
-const productivityVals = [2, 1, 0];
+const productivityVals = [2, 1];
 const ageVals = [400, 40, 360, 80, 320, 120, 280, 160, 240, 200];
 const dietVals = ["omnivore", "vegetarian", "pescatarian", "vegan"];
 const leaningVals = [18, 45];

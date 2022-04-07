@@ -5,7 +5,7 @@ export const FormTwo = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Leaning</label>
+        <label className="item__label item__label-select">Cognitive Disposition?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.leaning`}
@@ -18,7 +18,7 @@ export const FormTwo = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Personality</label>
+        <label className="item__label item__label-select">Personality Profile #2</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.personality`}
@@ -27,11 +27,12 @@ export const FormTwo = ({ currentPlayer }) => {
         >
           <option value="DEFAULT">Choose...</option>
           <option value={60}>Introvert</option>
-          <option value={31}>Extrovert</option>
+          <option value={18}>Extrovert</option>
+          <option value={31}>It Depends</option>
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Hair</label>
+        <label className="item__label item__label-select">Best Hair Day?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.hair`}
@@ -42,6 +43,7 @@ export const FormTwo = ({ currentPlayer }) => {
           <option value={10}>Curly</option>
           <option value={18}>Straight</option>
           <option value={25}>Wavy</option>
+          <option value={-15}>Patrick Stewart</option>
         </Field>
       </div>
     </>

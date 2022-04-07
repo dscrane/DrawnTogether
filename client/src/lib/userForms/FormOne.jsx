@@ -5,7 +5,7 @@ export const FormOne = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Height</label>
+        <label className="item__label item__label-select">Tallness?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.height`}
@@ -13,13 +13,13 @@ export const FormOne = ({ currentPlayer }) => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value={16}>Tall</option>
-          <option value={32}>Average</option>
-          <option value={48}>Short</option>
+          <option value={16}>How's the weather up there?</option>
+          <option value={32}>Regular</option>
+          <option value={48}>Small but mighty</option>
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Curiosity</label>
+        <label className="item__label item__label-select">Most Distracted by?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.curiosity`}
@@ -28,14 +28,14 @@ export const FormOne = ({ currentPlayer }) => {
         >
           <option value="DEFAULT">Choose...</option>
           <option value={27}>Numbers</option>
-          <option value={36}>Words</option>
-          <option value={18}>Ideas</option>
-          <option value={9}>Images</option>
-          <option value={0}>People</option>
+          <option value={36}>Letters</option>
+          <option value={18}>Thoughts</option>
+          <option value={9}>Sights</option>
+          <option value={0}>Humans</option>
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Productivity</label>
+        <label className="item__label item__label-select">Personality Profile #1</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.productivity`}
@@ -43,12 +43,12 @@ export const FormOne = ({ currentPlayer }) => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value={2}>Morning</option>
-          <option value={1}>Evening</option>
+          <option value={2}>Up with the sun</option>
+          <option value={1}>Night owl</option>
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Age</label>
+        <label className="item__label item__label-select">Elderliness?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.age`}
@@ -69,7 +69,7 @@ export const FormOne = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Diet</label>
+        <label className="item__label item__label-select">Dietary Predilection?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.diet`}
@@ -77,10 +77,10 @@ export const FormOne = ({ currentPlayer }) => {
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value="omnivore">Omnivore</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="pescatarian">Pescatarian</option>
-          <option value="vegan">Vegan</option>
+          <option value="omnivore">Meat and salad</option>
+          <option value="vegetarian">Salad and salad</option>
+          <option value="pescatarian">Fish and salad</option>
+          <option value="vegan">No dairy, no eggs and salad</option>
         </Field>
       </div>
     </>

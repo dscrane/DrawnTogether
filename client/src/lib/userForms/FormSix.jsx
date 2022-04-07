@@ -5,7 +5,7 @@ export const FormSix = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Choose a Color</label>
+        <label className="item__label item__label-select">Which hue is you?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.color`}

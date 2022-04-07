@@ -5,7 +5,7 @@ export const FormFive = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Relationship to Religion</label>
+        <label className="item__label item__label-select">Faithful Foundation?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.religion`}
@@ -21,7 +21,7 @@ export const FormFive = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Relationship to Culture</label>
+        <label className="item__label item__label-select">Cultural Consumption?</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.culture`}
@@ -31,8 +31,8 @@ export const FormFive = ({ currentPlayer }) => {
           <option value="DEFAULT">Choose...</option>
           <option value={1}>People Magazine reader</option>
           <option value={2}>Netflix binger</option>
-          <option value={3}>Smithsonian denizen</option>
-          <option value={4}>Artiste</option>
+          <option value={3}>Museum Crawler</option>
+          <option value={4}>Cultural Practitioner</option>
         </Field>
       </div>
     </>
