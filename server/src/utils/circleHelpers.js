@@ -309,9 +309,9 @@ export function setAlternateDesignWeight(radius, media) {
     case "thick":
       return radius * 0.35;
     case "thin":
-      return radius * 0.2;
+      return radius * 0.22;
     case "thinner":
-      return radius * 0.05;
+      return radius * 0.18;
     default:
       console.info(
         "%c[ERROR]: Switch - setAlternateDesignWeight",
