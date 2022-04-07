@@ -10,8 +10,6 @@ export const ActionButton = ({ onClick, text, buttonType }) => {
     }
   };
   const formatText = () => {
-    console.log(buttonType);
-    console.log(buttonType === "add" || buttonType === "next");
     if (text.includes(" ")) {
       const textArray = text.split(" ");
       if (buttonType === "add" || buttonType === "next") {
