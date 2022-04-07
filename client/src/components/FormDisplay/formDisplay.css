@@ -17,6 +17,27 @@
   align-items: stretch;
   width: 100%;
 }
+.form__scroll {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  scrollbar-color: #7f7f7f transparent;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 8px !important;
+}
+::-webkit-scrollbar-track {
+  margin: 5px;
+  background-color: transparent;
+  border-radius: .75rem;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: .75rem;
+  background-color: #7f7f7f;
+}
 .form__screenshot {
   width: 75%;
   display: flex;
@@ -114,14 +135,10 @@
   box-shadow: .25rem .25rem 1rem var(--font-dark);
   transition: background-color 750ms;
 }
-.invisible {
-  display: none;
-}
 .item__addCTA:hover {
   color: var(--accent);
   background-color: var(--bg-button-hover);
 }
-
 .form__control {
   flex: 2.75;
   font-size: 1.15rem;
@@ -156,14 +173,6 @@
 .form__control-input::placeholder {
   color: var(--font-placeholder);
 }
-select {
-  background-color: var(--bg-input-background);
-
-}
-select > option {
-  background-color: var(--bg-input-options);
-  font-family: "Baloo Thambi 2", serif;
-}
 .form__control-select:hover {
   cursor:pointer;
 }
@@ -172,6 +181,17 @@ select > option {
 }
 .form__control-invalid:focus {
   border: none;
+}
+select {
+  background-color: var(--bg-input-background);
+
+}
+select > option {
+  background-color: var(--bg-input-options);
+  font-family: "Baloo Thambi 2", serif;
+}
+.invisible {
+  display: none;
 }
 .form__message-error {
   width: 15%;
@@ -191,9 +211,3 @@ select > option {
   line-height: 2rem;
 }
 
-.form__scroll {
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
