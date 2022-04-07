@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
-        ...action.payload.game,
+        ...action.payload,
       };
     }
     case INITIALIZE_PLAYERS:
@@ -84,7 +84,6 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
-        inProgress: action.payload.inProgress,
         currentForm: action.payload.currentForm,
         displayGrid: action.payload.displayGrid,
         finalCircles: [...state.finalCircles, ...action.payload.finalCircles],

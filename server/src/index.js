@@ -4,14 +4,15 @@ import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
+import { default as connectDatabase } from "./db/db.js";
 import { initializePlayers } from "./controllers/initializePlayers.js";
 import { userRouter } from "./routes/userControllers.js";
 import { gameRouter } from "./routes/gameControllers.js";
-import { default as connectDatabase } from "./db/db.js";
-import { log } from "./utils/logs.js";
 import { updatePlayer } from "./controllers/updatePlayer.js";
 import { fetchCircleData } from "./controllers/fetchCircleData.js";
+import { endGame } from "./controllers/endGame.js";
 import { PolarGrid } from "./utils/polarGrid.js";
+import { log } from "./utils/logs.js";
 
 console.log(process.env.NODE_ENV);
 // Set port
@@ -57,6 +58,9 @@ io.on("connect", (socket) => {
   });
   socket.on("final-display", async () => {
     await fetchCircleData(socket, true);
+  });
+  socket.on("end-game", async () => {
+    await endGame(socket);
   });
 });
 

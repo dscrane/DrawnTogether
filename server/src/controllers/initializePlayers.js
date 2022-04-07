@@ -13,8 +13,6 @@ export const initializePlayers = async (socket, gameId, curiosity, players) => {
   game.circles = circles;
   game.initialCircles = initialCircles;
 
-  console.log(game.circles);
-
   socket.emit("initialized-players", {
     numPlayers: playerIds.length,
     playerIds,

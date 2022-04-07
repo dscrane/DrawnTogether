@@ -7,7 +7,6 @@ const circleSkeleton = (gameId, playerId, initial) => {
 };
 
 export const createPlayerObjects = async (players, gameId) => {
-  console.log(players);
   let index = 0;
   let playersObj = {};
   const playerIds = [];

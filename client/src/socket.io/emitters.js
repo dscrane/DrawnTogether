@@ -28,3 +28,7 @@ export const fetchPolarGrid = (socket, data) => {
 export const finalDisplayEmitter = (socket) => {
   socket.emit("final-display");
 };
+
+export const endGameEmitter = (socket) => {
+  socket.emit("end-game");
+};

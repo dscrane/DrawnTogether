@@ -4,15 +4,14 @@ import { Header } from "../Header";
 import { Landing } from "../Landing";
 import { DisplayResults } from "../DisplayResults";
 import { FormContainer } from "../FormContainer";
-import { startGame, endGame } from "../../redux/actions";
 import "./panel.css";
 
-const Panel = ({ socket, _id, currentForm, inProgress, endGame }) => {
+const Panel = ({ socket, _id, currentForm }) => {
   const display = () => {
-    if (inProgress) {
-      return <FormContainer socket={socket} />;
+    if (currentForm === 0) {
+      return <Landing />;
     } else {
-      return currentForm === 8 ? <DisplayResults endGame={endGame} gameId={_id} /> : <Landing />;
+      return currentForm === 8 ? <DisplayResults socket={socket} gameId={_id} /> : <FormContainer socket={socket} />;
     }
   };
   return (
@@ -26,8 +25,8 @@ const Panel = ({ socket, _id, currentForm, inProgress, endGame }) => {
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { _id, currentForm, inProgress } = gameState;
-  return { _id, currentForm, inProgress };
+  const { _id, currentForm } = gameState;
+  return { _id, currentForm };
 };
 
-export default connect(mapStateToProps, { startGame, endGame })(Panel);
+export default connect(mapStateToProps, {})(Panel);

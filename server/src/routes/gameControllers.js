@@ -23,7 +23,7 @@ router.post("/games/generateSession", async (req, res) => {
   console.log("generate");
   try {
     let newGame = await new Game({
-      inProgress: false,
+      inProgress: true,
       complete: false,
       timestamp: Date.now(),
     });

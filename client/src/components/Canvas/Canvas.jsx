@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { ActionButton } from "../ActionButton";
 import { DisplaySvg } from "./components";
-import { updateDisplayDimensions, startGame } from "../../redux/actions";
+import { updateDisplayDimensions, startGame, generateSession } from "../../redux/actions";
 import { debounce } from "../../utils";
 import "./canvas.css";
 
-const Canvas = ({ socket, display, session, updateDisplayDimensions, startGame }) => {
+const Canvas = ({ socket, display, session, updateDisplayDimensions, generateSession, startGame }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -32,12 +32,17 @@ const Canvas = ({ socket, display, session, updateDisplayDimensions, startGame }
     return (_) => window.removeEventListener("resize", debounceHandleResize);
   }, [display.height, display.width, updateDisplayDimensions]);
 
+  const buttonOnClick = async () => {
+    await generateSession();
+    // await startGame();
+  };
+
   return (
     <div id="canvas" className="svg__container" ref={displaySVG}>
       {session.currentForm !== 0 ? (
         <DisplaySvg socket={socket} session={session} display={display} />
       ) : (
-        <ActionButton onClick={startGame} text={"Begin Game"} buttonType={"start"} />
+        <ActionButton onClick={buttonOnClick} text={"Begin Game"} buttonType={"start"} />
       )}
     </div>
   );
@@ -53,5 +58,6 @@ const mapStateToProps = ({ gameState }) => {
 
 export default connect(mapStateToProps, {
   updateDisplayDimensions,
+  generateSession,
   startGame,
 })(Canvas);

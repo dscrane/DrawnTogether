@@ -23,7 +23,7 @@ export const generateSession = () => async (dispatch) => {
   console.log(data);
   dispatch({
     type: GENERATE_SESSION,
-    payload: { game: data.game },
+    payload: { ...data.game, currentForm: 1, displayGrid: true, currentPlayer: 0 },
   });
 };
 // CREATE_PLAYERS ACTION CREATOR
@@ -117,7 +117,7 @@ export const finalDisplay = (circles) => async (dispatch, getState) => {
 
   dispatch({
     type: FINAL_DISPLAY,
-    payload: { finalCircles: finalCircles, displayGrid: false, inProgress: false, currentForm: finalForm },
+    payload: { finalCircles: finalCircles, displayGrid: false, currentForm: finalForm },
   });
 };
 // UPDATE_DISPLAY_DIMENSIONS ACTION CREATOR

@@ -3,14 +3,7 @@ import { io } from "socket.io-client";
 import { connect } from "react-redux";
 import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
-import {
-  generateSession,
-  initializePlayers,
-  nextPlayer,
-  displayCircles,
-  updatePolarGrid,
-  finalDisplay,
-} from "./redux/actions";
+import { initializePlayers, nextPlayer, displayCircles, updatePolarGrid, finalDisplay, endGame } from "./redux/actions";
 
 export const App = ({
   _id,
@@ -18,17 +11,14 @@ export const App = ({
   display,
   displayCircles,
   finalDisplay,
-  generateSession,
   initializePlayers,
   nextPlayer,
   updatePolarGrid,
+  endGame,
 }) => {
   const [socket, setSocket] = useState(null);
   const { width, centerPoint } = display;
 
-  useEffect(() => {
-    generateSession();
-  }, []);
   useEffect(() => {
     if (inProgress) {
       let newSocket =
@@ -41,7 +31,7 @@ export const App = ({
   }, [inProgress]);
 
   useEffect(() => {
-    if (!inProgress) {
+    if (!inProgress || !socket) {
       return;
     }
     socket.on("connect", async () => {
@@ -62,7 +52,10 @@ export const App = ({
     socket.on("final-display-circles", (circles) => {
       finalDisplay(circles);
     });
-  }, [socket, _id, initializePlayers, nextPlayer]);
+    socket.on("restart-game", (status) => {
+      status.endGame ? endGame() : console.log("end game failed");
+    });
+  }, [socket, _id, initializePlayers, nextPlayer, endGame]);
 
   return (
     <div className="app" data-testid="component-App">
@@ -87,10 +80,10 @@ const mapStateToProps = ({ gameState: { _id, inProgress, display } }) => {
 };
 
 export default connect(mapStateToProps, {
-  generateSession,
   initializePlayers,
   nextPlayer,
   displayCircles,
   finalDisplay,
   updatePolarGrid,
+  endGame,
 })(App);
