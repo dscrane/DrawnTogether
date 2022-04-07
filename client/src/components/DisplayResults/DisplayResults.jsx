@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormData from "form-data";
 import * as htmlToImage from "html-to-image";
-import { ResetButton } from "../../lib/buttons";
+import { ActionButton } from "../ActionButton";
 import { api, dataToFile } from "../../utils";
 
 const DisplayResults = ({ endGame, gameId }) => {
@@ -55,14 +55,14 @@ const DisplayResults = ({ endGame, gameId }) => {
         />
       )}
       <p className="landing__text">If you would like to play again please hit the "Reset" button!</p>
-      <ResetButton onClick={endGame} buttonType={"restart"} text={"Restart Game"} />
+      <ActionButton onClick={endGame} buttonType={"restart"} text={"Restart\nGame"} />
     </div>
   );
 };
 
 const ResultForm = ({ screenshot, handleScreenshot, handleSubmit, handleEmailChange }) => {
   return !screenshot ? (
-    <ResetButton onClick={handleScreenshot} buttonType={"screenshot"} text={"Take Screenshot"} />
+    <ActionButton onClick={handleScreenshot} buttonType={"screenshot"} text={"Take Screenshot"} />
   ) : (
     <div className="form__screenshot">
       <input
@@ -71,7 +71,7 @@ const ResultForm = ({ screenshot, handleScreenshot, handleSubmit, handleEmailCha
         type="email"
         onChange={handleEmailChange}
       />
-      <ResetButton onClick={handleSubmit} buttonType={"send"} text={"Send"} />
+      <ActionButton onClick={handleSubmit} buttonType={"send"} text={"Send"} />
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import { ActionButton } from "../ActionButton";
+import { DisplaySvg } from "./components";
 import { updateDisplayDimensions, startGame } from "../../redux/actions";
 import { debounce } from "../../utils";
-import { DisplaySvg } from "./components";
 import "./canvas.css";
-import { StartButton } from "../../lib/buttons";
 
 const Canvas = ({ socket, display, session, updateDisplayDimensions, startGame }) => {
   const displaySVG = useRef(null);
@@ -37,7 +37,7 @@ const Canvas = ({ socket, display, session, updateDisplayDimensions, startGame }
       {session.currentForm !== 0 ? (
         <DisplaySvg socket={socket} session={session} display={display} />
       ) : (
-        <StartButton startGame={startGame} />
+        <ActionButton onClick={startGame} text={"Begin Game"} buttonType={"start"} />
       )}
     </div>
   );

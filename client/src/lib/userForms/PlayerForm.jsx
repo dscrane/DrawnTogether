@@ -2,6 +2,7 @@ import React from "react";
 import { Field, FieldArray } from "formik";
 import { validateString, validateNumber } from "../../utils/validators";
 import { responseSchema } from "../../utils";
+import { ActionButton } from "../../components/ActionButton";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
@@ -74,9 +75,7 @@ export const PlayerForm = ({ values }) => {
             ))}
             <div className="form__row">
               <div className={`form__item form__item-addCTA ${values.players.length === 5 ? "invisible" : ""}`}>
-                <button className="p-button p-button__add" type="button" onClick={() => push(responseSchema)}>
-                  Add Player
-                </button>
+                <ActionButton onClick={() => push(responseSchema)} text={"Add Player"} buttonType={"add"} />
               </div>
             </div>
           </>
