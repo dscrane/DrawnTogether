@@ -1,5 +1,5 @@
 import React from "react";
-import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } from "../../lib/userForms";
+import { FormOne, FormTwo, FormThree, FormFour, FormFive, FormSix, PlayerForm } from "./components";
 
 const FormSwitch = ({ form, values, formProps, currentPlayer }) => {
   switch (form) {
@@ -18,6 +18,7 @@ const FormSwitch = ({ form, values, formProps, currentPlayer }) => {
     case 7:
       return <FormSix values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     default:
+      // TODO handle error
       console.log("FormDisplay switch has failed");
   }
 };

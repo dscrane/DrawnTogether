@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";
-import { NextForm } from "./NextForm";
+import { NextForm } from "./components/";
 import { FormHeading } from "../FormHeading";
 import { formInstructions } from "../../lib/instructions";
 import "./formDisplay.css";

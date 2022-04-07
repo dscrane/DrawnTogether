@@ -1,8 +1,8 @@
 import React from "react";
 import { Field, FieldArray } from "formik";
-import { validateString, validateNumber } from "../../utils/validators";
-import { responseSchema } from "../../utils";
-import { ActionButton } from "../../components/ActionButton";
+import { validateString, validateNumber } from "../../../utils/validators";
+import { responseSchema } from "../../../utils";
+import { ActionButton } from "../../ActionButton";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
