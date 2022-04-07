@@ -8,11 +8,17 @@ import {
   initializePlayersEmitter,
   updatePlayerEmitter,
 } from "../../socket.io/emitters";
-import { responseSchema } from "../../utils";
+import { createResponseSchema } from "../../utils";
 
 const formResponseSchema = {
   interest: "",
-  players: [responseSchema, responseSchema],
+  players: [
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+  ],
 };
 
 const FormContainer = ({
