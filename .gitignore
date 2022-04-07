@@ -8,6 +8,7 @@ node_modules
 
 # production
 /client/build
+uploads
 
 # misc
 docs
@@ -25,7 +26,7 @@ yarn-error.log*
 
 .env
 
-/.idea
+.idea
 # Default ignored files
 /shelf/
 /workspace.xml

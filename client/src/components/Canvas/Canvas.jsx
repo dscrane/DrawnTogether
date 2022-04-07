@@ -33,7 +33,7 @@ const Canvas = ({ socket, display, session, updateDisplayDimensions, startGame }
   }, [display.height, display.width, updateDisplayDimensions]);
 
   return (
-    <div className="svg__container" ref={displaySVG}>
+    <div id="canvas" className="svg__container" ref={displaySVG}>
       {session.currentForm !== 0 ? (
         <DisplaySvg socket={socket} session={session} display={display} />
       ) : (

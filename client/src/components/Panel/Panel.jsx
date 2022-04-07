@@ -7,12 +7,12 @@ import { FormContainer } from "../FormContainer";
 import { startGame, endGame } from "../../redux/actions";
 import "./panel.css";
 
-const Panel = ({ socket, currentForm, inProgress, endGame }) => {
+const Panel = ({ socket, _id, currentForm, inProgress, endGame }) => {
   const display = () => {
     if (inProgress) {
       return <FormContainer socket={socket} />;
     } else {
-      return currentForm === 8 ? <DisplayResults endGame={endGame} /> : <Landing />;
+      return currentForm === 8 ? <DisplayResults endGame={endGame} gameId={_id} /> : <Landing />;
     }
   };
   return (
@@ -26,8 +26,8 @@ const Panel = ({ socket, currentForm, inProgress, endGame }) => {
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { currentForm, inProgress } = gameState;
-  return { currentForm, inProgress };
+  const { _id, currentForm, inProgress } = gameState;
+  return { _id, currentForm, inProgress };
 };
 
 export default connect(mapStateToProps, { startGame, endGame })(Panel);

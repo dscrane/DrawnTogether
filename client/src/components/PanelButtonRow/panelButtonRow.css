@@ -45,6 +45,29 @@
   width: 200px;
 
 }
+.p-button__restart {
+  border-radius: 50%;
+  font-size: 2rem;
+  height: 100px;
+  width: 100px;
+}
+
+.p-button__screenshot {
+  border-radius: 50%;
+  font-size: 1.5rem;
+  height: 100px;
+  width: 100px;
+  margin-bottom: 25px;
+}
+
+.p-button__send {
+  border-radius: 50%;
+  font-size: 1.5rem;
+  height: 50px;
+  width: 50px;
+  margin-bottom: 25px;
+}
+
 .p-button__add {
   font-size: 1.5rem;
   border-radius: 5px;

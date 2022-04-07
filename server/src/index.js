@@ -9,7 +9,6 @@ import { userRouter } from "./routes/userControllers.js";
 import { gameRouter } from "./routes/gameControllers.js";
 import { default as connectDatabase } from "./db/db.js";
 import { log } from "./utils/logs.js";
-import { validateAndUpdateResponses } from "./middleware/validateAndUpdateResponses.js";
 import { updatePlayer } from "./controllers/updatePlayer.js";
 import { fetchCircleData } from "./controllers/fetchCircleData.js";
 import { PolarGrid } from "./utils/polarGrid.js";
@@ -28,7 +27,7 @@ const io = new Server(httpServer, {
 // Connect middlewares
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/src/public")));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cors({ origin: "http://localhost:3000" }));
 
 // Connect routers

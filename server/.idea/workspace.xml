@@ -4,17 +4,24 @@
     <list default="true" id="2e3fa038-a0c6-40b2-a7d3-56d5e80e0499" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/redux/actions/gameActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/redux/actions/gameActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/root.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/root.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/utils/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Canvas/Canvas.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Canvas/Canvas.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/DisplayResults/DisplayResults.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/DisplayResults/DisplayResults.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/FormContainer/FormContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/FormContainer/FormContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/FormDisplay/formDisplay.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/FormDisplay/formDisplay.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Landing/landing.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Landing/landing.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Panel/Panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Panel/Panel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/PanelButtonRow/panelButtonRow.css" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/PanelButtonRow/panelButtonRow.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/lib/buttons/ResetButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/buttons/ResetButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/utils/responseSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/utils/responseSchema.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/gameControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/gameControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +78,7 @@
       <workItem from="1648813799950" duration="19443000" />
       <workItem from="1648900668225" duration="2846000" />
       <workItem from="1649071288814" duration="4526000" />
-      <workItem from="1649078700445" duration="55038000" />
+      <workItem from="1649078700445" duration="72621000" />
     </task>
     <servers />
   </component>
