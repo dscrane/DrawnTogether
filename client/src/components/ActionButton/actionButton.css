@@ -22,7 +22,7 @@
     padding: 1rem;
     border-radius: 5px;
     line-height: 1.5rem;
-
+    box-shadow: var(--button-shadow);
 }
 .p-button__start {
     justify-self: center;
@@ -30,13 +30,15 @@
     border-radius: 50%;
     height: 200px;
     width: 200px;
-
+    box-shadow: var(--button-shadow-circle);
 }
 .p-button__restart {
     border-radius: 50%;
     font-size: 2rem;
     height: 100px;
     width: 100px;
+    box-shadow: var(--button-shadow-circle);
+
 }
 
 .p-button__screenshot {
@@ -45,6 +47,8 @@
     height: 100px;
     width: 100px;
     margin-bottom: 25px;
+    box-shadow: var(--button-shadow-circle);
+
 }
 
 .p-button__send {
@@ -59,4 +63,5 @@
     font-size: 1.5rem;
     border-radius: 5px;
     padding: .5rem .75rem;
+    box-shadow: var(--button-shadow-thin);
 }

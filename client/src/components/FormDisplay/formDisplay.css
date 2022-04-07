@@ -6,6 +6,7 @@
   border-style: none solid solid solid;
   border-radius: .75rem .75rem;
   border-color: var(--accent);
+  box-shadow: var(--panel-shadow);
 }
 .form__container-border {
   border-style: solid solid solid solid;
