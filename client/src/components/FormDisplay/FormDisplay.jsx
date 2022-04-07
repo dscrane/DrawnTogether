@@ -11,7 +11,7 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
   const showNextOption = currentPlayer !== numPlayers || currentForm < 2;
   const showInstructions = showNextOption ? (
     <div className="form__row form__row-instructions">
-      <div className="instructions">
+      <div className="form__instructions">
         {formInstructions[currentForm].split("\n").map((line, i) => (
           <p className="instruction__line" key={`instruction-line-${i}`}>
             {line}

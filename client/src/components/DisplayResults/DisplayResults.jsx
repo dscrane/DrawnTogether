@@ -65,7 +65,7 @@ const ResultForm = ({ screenshot, handleScreenshot, handleSubmit, handleEmailCha
   return !screenshot ? (
     <ActionButton onClick={handleScreenshot} buttonType={"screenshot"} text={"Take Screenshot"} />
   ) : (
-    <div className="form__screenshot">
+    <div className="form form__screenshot">
       <input
         className="form__control form__control-input form__control-input_screenshot"
         placeholder="Email..."

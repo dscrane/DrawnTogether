@@ -9,6 +9,7 @@ import {
   updatePlayerEmitter,
 } from "../../socket.io/emitters";
 import { createResponseSchema } from "../../utils";
+import "./formContainer.css";
 
 const formResponseSchema = {
   interest: "",

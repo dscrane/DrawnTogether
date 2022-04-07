@@ -1,0 +1,33 @@
+.form__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-width: 1px;
+    border-style: none solid solid solid;
+    border-radius: .75rem .75rem;
+    border-color: var(--accent);
+    box-shadow: var(--panel-shadow);
+}
+.form__container-border {
+    border-style: solid solid solid solid;
+}
+.form__scroll {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    scrollbar-color: #7f7f7f transparent;
+    scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    margin: 5px;
+    background-color: transparent;
+    border-radius: .75rem;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: .75rem;
+    background-color: #7f7f7f;
+}
