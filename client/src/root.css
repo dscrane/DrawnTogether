@@ -26,8 +26,9 @@
   --bluegreen-fade-20: hsla(180, 51%, 71%, .20);
   --bluegreen-fade-15: hsla(180, 51%, 71%, .15);
 
-  --cream-500: hsl(37, 13%, 61%);
-  --cream-900: hsl(37, 13%, 81%);
+  --cream-100: hsl(37, 13%, 61%);
+  --cream-500: hsl(37, 13%, 81%);
+  --cream-900: hsl(30, 41%, 93%);
   --cream-fade-75: hsla(37, 13%, 81%, .75);
   --cream-fade-50: hsla(37, 13%, 81%, .50);
 
@@ -46,22 +47,21 @@
   --bg-tab: var(--darkgray-100);
   --bg-active: var(--darkgray-500);
   --bg-input-background: var(--gray-500);
-  --bg-input-options: var(--cream-900);
+  --bg-input-options: var(--gray-500);
   --bg-input-shadow: var(--darkgray-100);
   --bg-input-outline: rgb(144, 219, 219);
   --bg-button: var(--darkgray-500);
   --bg-button-hover: var(--darkgray-100);
   --bg-button-border: rgb(144, 219, 219);
-  --font-light: var(--cream-900);
+  --font-light: var(--cream-500);
   --font-dark: var(--darkgray-100);
-  --font-placeholder: var(--darkgray-fade-75);
+  --font-placeholder: var(--cream-900);
   --accent: var(--bluegreen-500);
   --warning-red: var(--red-fade-50);
   --notice-red: var(--red-900);
   --svg-ring-thick: hsla(180, 25%, 50%, .20);
   --svg-ring-thin: hsla(180, 25%, 50%, .15);
   --svg-line: hsla(180, 25%, 50%, .20);
-
 }
 
 /* ----   html & body styles    ---- */
