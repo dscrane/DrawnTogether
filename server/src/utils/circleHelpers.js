@@ -56,37 +56,29 @@ export function setPlayerDegree(curiosity, productivity, diet) {
     case "omnivore":
       if (productivity === 0) {
         degree = slice;
-      } else if (productivity % 2 === 0) {
-        degree = 136 + slice;
       } else {
-        degree = slice;
+        degree = 136 + slice;
       }
       break;
     case "vegetarian":
       if (productivity === 0) {
         degree = 181 + slice;
-      } else if (productivity % 2 === 0) {
-        degree = 316 + slice;
       } else {
-        degree = 181 + slice;
+        degree = 316 + slice;
       }
       break;
     case "pescatarian":
       if (productivity === 0) {
         degree = 226 + slice;
-      } else if (productivity % 2 === 0) {
-        degree = 226 + slice;
       } else {
-        degree = 91 + slice;
+        degree = 226 + slice;
       }
       break;
     case "vegan":
       if (productivity === 0) {
         degree = 46 + slice;
-      } else if (productivity % 2 === 0) {
-        degree = 46 + slice;
       } else {
-        degree = 271 + slice;
+        degree = 46 + slice;
       }
       break;
     default:
