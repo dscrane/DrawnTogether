@@ -33,7 +33,6 @@ export const initializePlayers = (initialData) => async (dispatch) => {
     payload: { ...initialData },
   });
 };
-
 // START_GAME ACTION CREATOR
 export const startGame = () => async (dispatch) => {
   dispatch({
@@ -134,78 +133,3 @@ export const updateDisplayDimensions =
     });
   };
 /* ----  ***  ---- */
-
-// export const resizePlayerCircles =
-//   ({ cx, cy }) =>
-//   (dispatch) => {
-//     //TODO:
-//     // find new way to resize circles
-//     // return the new circles and correctly resize the display
-//     // have alteration be constant after a resize until the next resize
-//
-//     dispatch({
-//       type: RESIZE_PLAYER_CIRCLES,
-//       payload: { cx, cy },
-//     });
-//   };
-
-// UPDATE_PLAYER_CIRCLE ACTION CREATOR
-/*export const updatePlayerCircle = (player, currentPlayer, currentForm) => async (dispatch, getState) => {
-  const { centerPoint } = getState().gameState;
-
-
-
-  return;
-  // dispatch({
-  //   type: UPDATE_PLAYER_CIRCLE,
-  //   payload: { currentPlayer, updatedPlayerCircle, updateCircles: true },
-  // });
-};*/
-// UPDATE_PLAYER ACTION CREATOR
-// export const updatePlayer =
-//   (playerIndex, { playerId, circleData, initialCircleData }) =>
-//   async (dispatch, getState) => {
-//     const { centerPoint, players } = getState().gameState;
-//     // const {
-//     //   data: { data, error },
-//     // } = await api.patch("/users/update", {
-//     //   centerPoint,
-//     //   _id: playerId,
-//     //   responses: formData,
-//     //   updateStep: currentForm,
-//     // });
-//
-//     // if (error) {
-//     //   await alert(error.message);
-//     //   dispatch({
-//     //     type: RESET_FORM,
-//     //     payload: { currentPlayer: playerIndex },
-//     //   });
-//     //   return false;
-//     // }
-//
-//     const circleSVG = createCircleDesign(circleData);
-//     await dispatch({
-//       type: UPDATE_PLAYER_CIRCLE,
-//       payload: {
-//         circleSVG,
-//         circles: {
-//           circleData: circleData,
-//           initialCircleData: initialCircleData || players[playerIndex].initialCircleData,
-//         },
-//         playerIndex,
-//       },
-//     });
-//     return true;
-//   };
-// // UPDATE_DISPLAY_GRID ACTION CREATOR
-// export const updateGridDisplay = (view) => async (dispatch, getState) => {
-//   const resizeRatio = getState().gameState.display.resizeRatio;
-//   const updatedGrid = await handleGridUpdate(view, resizeRatio);
-//
-//   dispatch({
-//     type: UPDATE_DISPLAY_GRID,
-//     payload: { ...updatedGrid, resizeCircles: true },
-//   });
-// };
-// RESIZE_PLAYER_CIRCLES ACTION CREATOR

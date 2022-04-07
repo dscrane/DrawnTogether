@@ -25,7 +25,8 @@ yarn-debug.log*
 yarn-error.log*
 
 .env
-
+server/.idea/workspace.xml
+client/.idea/workspace.xml
 .idea
 # Default ignored files
 /shelf/

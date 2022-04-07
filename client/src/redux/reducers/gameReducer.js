@@ -12,7 +12,6 @@ import {
   UPDATE_DISPLAY_DIMENSIONS,
   NEXT_PLAYER,
   PREV_PLAYER,
-  // RESIZE_PLAYER_CIRCLES,
 } from "../types";
 
 export default (state = INITIAL_STATE, action) => {
@@ -32,7 +31,7 @@ export default (state = INITIAL_STATE, action) => {
         numPlayers: action.payload.numPlayers,
         players: {
           ...state.players,
-          ...action.payload.playersObj /*to change to players*/,
+          ...action.payload.playersObj,
         },
         playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
@@ -62,20 +61,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload,
       };
-
     case DISPLAY_CIRCLES:
       console.info(action.type, action.payload);
       return {
         ...state,
         circles: [...action.payload.circleSvgs],
       };
-
-    // case RESET_FORM:
-    //   console.log(action.type, action.payload);
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
     case NEXT_PLAYER:
       console.info(action.type, action.payload);
       return {
