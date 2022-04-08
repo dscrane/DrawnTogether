@@ -59,7 +59,7 @@
   --accent: var(--bluegreen-500);
   --warning-red: var(--red-fade-50);
   --notice-red: var(--red-900);
-  --svg-ring-thick: hsla(180, 25%, 50%, .20);
+  --svg-ring-thick: hsla(180, 35%, 58%, 0.26);
   --svg-ring-thin: hsla(180, 25%, 50%, .15);
   --svg-line: hsla(180, 25%, 50%, .20);
   --button-shadow-thin: var(--darkgray-fade-50) 0px 4px 6px -2px, rgba(0, 0, 0, 0.3) 0px 1px 5px -3px;
