@@ -20,8 +20,8 @@ export const DotCircle = ({ id, playerCircle, centerPoint }) => {
           fill: playerCircle.secondaryColor,
           opacity: 1,
           fillRule: "evenodd",
-          stroke: `url(#radialGradient${id})`,
-          strokeWidth: playerCircle.designThickness,
+          stroke:  `url(#radialGradient${id})`,
+          strokeWidth: playerCircle.radius - playerCircle.designThickness,
         }}
       >
         {animation}

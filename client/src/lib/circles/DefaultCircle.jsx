@@ -9,7 +9,7 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
   return (
     <>
       <defs>
-        {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
+        {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness, isInit)}
         {createLinearPath(id, playerCircle.linearDPath, null)}
       </defs>
       <path
@@ -17,7 +17,7 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
         key={`circle_${id}${isInit ? "_init" : ""}`}
         d={path}
         style={{
-          fill: `url(#radialGradient${id})`,
+          fill: `url(#radialGradient${id}${isInit ? "_init" : ""})`,
           opacity: `${isInit ? 0.2 : 1}`,
           fillRule: "evenodd",
           stroke: "none",

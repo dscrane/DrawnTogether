@@ -25,7 +25,9 @@ const DisplayResults = ({ gameId, socket }) => {
       const urlData = await QRCode.toDataURL(`${process.env.REACT_APP_SERVER}/games/screenshot/${gameId}`, opts);
       setQrcode(urlData);
     }
-    generateQRCode();
+    if (screenshotStatus) {
+      generateQRCode();
+    }
   }, [screenshotStatus])
 
   const handleSubmit = async () => {
@@ -36,7 +38,6 @@ const DisplayResults = ({ gameId, socket }) => {
     form.append("screenshot", screenshot);
 
     const { data } = await api.post("/games/sendScreenshot", form);
-
     setScreenshotStatus(data.screenshotStatus);
   };
   const resultsDisplay = !qrcode ? (

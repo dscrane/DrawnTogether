@@ -62,9 +62,9 @@ function resizeAllCircles(playerCircles, resizeRatio) {
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @returns {JSX.Element} <radialGradient />
  * */
-function createRadialGradient(id, centerPoint, hue, saturation, lightness) {
+function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit=false) {
   return (
-    <radialGradient id={`radialGradient${id}`}>
+    <radialGradient id={`radialGradient${id}${isInit ? "_init" : ""}`}>
       <stop offset="0%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`} stopOpacity={1} />
       <stop offset="25%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`} stopOpacity={1} />
       <stop offset="50%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.3}%`} stopOpacity={1} />
