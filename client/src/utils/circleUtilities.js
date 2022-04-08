@@ -77,25 +77,15 @@ function createRadialGradient(id, centerPoint, hue, saturation, lightness) {
 /**
  * Creates the animation path for the player's circle
  * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @param {number} x -- playerCircle's x location
- * @param {number} y - playerCircle's y location
- * @param {number} r -- playerCircle's radius
+ * @param {string} linearDPath -- string containing the 'd' path for animation line
  * @param {Object} lineDesign -- playerCircle's stroke properties
  * @returns {JSX.Element} <path />
  */
-function createLinearPath(id, centerPoint, x, y, r, lineDesign) {
+function createLinearPath(id, linearDPath, lineDesign) {
   if (lineDesign !== null) {
-    return (
-      <path
-        id={`linearPath${id}`}
-        d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`}
-        style={{ ...lineDesign }}
-      />
-    );
+    return <path id={`linearPath${id}`} d={linearDPath} style={{ ...lineDesign }} />;
   }
-
-  return <path id={`linearPath${id}`} d={`m${x},${y} L${centerPoint.x},${centerPoint.y} ${x},${y}`} />;
+  return <path id={`linearPath${id}`} d={linearDPath} />;
 }
 
 /**

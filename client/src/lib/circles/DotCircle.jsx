@@ -9,14 +9,7 @@ export const DotCircle = ({ id, playerCircle, centerPoint }) => {
     <>
       <defs>
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
-        {createLinearPath(
-          id,
-          centerPoint,
-          playerCircle.xCartesian,
-          playerCircle.yCartesian,
-          playerCircle.radius,
-          playerCircle.lineDesign
-        )}
+        {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <path

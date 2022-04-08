@@ -10,7 +10,7 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
     <>
       <defs>
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
-        {createLinearPath(id, centerPoint, playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius, null)}
+        {createLinearPath(id, playerCircle.linearDPath, null)}
       </defs>
       <path
         id={`circle_${id}${isInit ? "_init" : ""}`}
