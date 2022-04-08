@@ -2,6 +2,7 @@ import express from "express";
 import nodemailer from "nodemailer";
 import multer from "multer";
 import { Game } from "../models/game.js";
+import cors from "cors";
 
 // Multer config
 const storage = multer.diskStorage({
@@ -19,7 +20,11 @@ router.get("/games/:id", async (req, res) => {
   const game = await Game.findById(req.body._id);
   res.send(game);
 });
-router.post("/games/generateSession", async (req, res) => {
+router.get("/games/screenshot/:id", (req, res) => {
+  console.log(req.params);
+  res.sendFile(`/Users/daegancrane/Projects/react/circle-art-react/server/uploads/screenshot_${req.params.id}.png`)
+})
+router.post("/games/generateSession", cors({ origin: "http://localhost:3000" }), async (req, res) => {
   console.log("generate");
   try {
     let newGame = await new Game({
@@ -37,6 +42,7 @@ router.post("/games/generateSession", async (req, res) => {
 });
 router.post(
   "/games/sendScreenshot",
+  cors({ origin: "http://localhost:3000" }),
   screenshot.single("screenshot"),
   async (req, res) => {
     const { email, screenshotName } = req.body;
@@ -71,7 +77,7 @@ router.post(
     //   }
     // });
 
-    res.send({ emailStatus: true });
+    res.send({ screenshotStatus: true });
   }
 );
 router.post("/games/createPlayerObjects", async (req, res) => {
