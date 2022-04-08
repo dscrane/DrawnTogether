@@ -24,7 +24,7 @@ export const App = ({
       let newSocket =
         process.env.NODE_ENV === "production"
           ? io({ auth: { gameId: _id } })
-          : io("http://localhost:5500", { auth: { gameId: _id } });
+          : io(process.env.REACT_APP_SERVER, { auth: { gameId: _id } });
       setSocket(newSocket);
       return;
     }
