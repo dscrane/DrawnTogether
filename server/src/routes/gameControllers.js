@@ -1,8 +1,6 @@
 import express from "express";
-import nodemailer from "nodemailer";
 import multer from "multer";
 import { Game } from "../models/game.js";
-import cors from "cors";
 
 // Multer config
 const storage = multer.diskStorage({
@@ -21,10 +19,9 @@ router.get("/games/:id", async (req, res) => {
   res.send(game);
 });
 router.get("/games/screenshot/:id", (req, res) => {
-  console.log(req.params);
   res.sendFile(`/Users/daegancrane/Projects/react/circle-art-react/server/uploads/screenshot_${req.params.id}.png`)
 })
-router.post("/games/generateSession", cors({ origin: "http://localhost:3000" }), async (req, res) => {
+router.post("/games/generateSession", async (req, res) => {
   console.log("generate");
   try {
     let newGame = await new Game({
@@ -42,41 +39,8 @@ router.post("/games/generateSession", cors({ origin: "http://localhost:3000" }),
 });
 router.post(
   "/games/sendScreenshot",
-  cors({ origin: "http://localhost:3000" }),
   screenshot.single("screenshot"),
   async (req, res) => {
-    const { email, screenshotName } = req.body;
-    // TODO implement emailing of screenshot to provided email
-    // const transporter = nodemailer.createTransport({
-    //   service: "smtp.gmail.com",
-    //   auth: {
-    //     user: "daegancrane@gmail.com",
-    //     pass: process.env.GMAIL,
-    //   },
-    // });
-    //
-    // const mailOptions = {
-    //   from: "daegancrane@gmail.com",
-    //   to: "daegancrane@gmail.com",
-    //   subject: "Drawn Together Display",
-    //   html: `<image src="${screenshotName.slice(0, 35)}" />`,
-    //   attachments: [
-    //     {
-    //       filename: screenshotName,
-    //       path: `/uploads/${screenshotName}`,
-    //       cid: screenshotName.slice(0, 35),
-    //     },
-    //   ],
-    // };
-    //
-    // transporter.sendMail(mailOptions, (err, info) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log("Email sent: " + info.response);
-    //   }
-    // });
-
     res.send({ screenshotStatus: true });
   }
 );
