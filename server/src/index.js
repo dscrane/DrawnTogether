@@ -13,6 +13,7 @@ import { fetchCircleData } from "./controllers/fetchCircleData.js";
 import { endGame } from "./controllers/endGame.js";
 import { PolarGrid } from "./utils/polarGrid.js";
 import { log } from "./utils/logs.js";
+import {updateScreenshot} from "./controllers/updateScreenshot.js";
 
 // Set port
 const PORT = process.env.PORT || 5500;
@@ -26,7 +27,9 @@ const io = new Server(httpServer, {
 });
 // Connect middlewares
 const __dirname = path.resolve();
+
 app.use(express.static(path.join(__dirname, "/src/public")));
+app.use(express.static(path.join(__dirname, "/uploads")));
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cors({ origin: "http://localhost:3000" }));
 
@@ -61,6 +64,9 @@ io.on("connect", (socket) => {
   socket.on("end-game", async () => {
     await endGame(socket);
   });
+  socket.on("screenshot", async (screenshotBuffer) => {
+    await updateScreenshot(socket, screenshotBuffer)
+  })
 });
 
 app.get("/*", (req, res) => {

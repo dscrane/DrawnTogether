@@ -1,6 +1,8 @@
 import express from "express";
 import multer from "multer";
 import { Game } from "../models/game.js";
+import path from "path";
+import fs from 'fs';
 
 // Multer config
 const storage = multer.diskStorage({
@@ -18,8 +20,9 @@ router.get("/games/:id", async (req, res) => {
   const game = await Game.findById(req.body._id);
   res.send(game);
 });
-router.get("/games/screenshot/:id", (req, res) => {
-  res.sendFile(`/Users/daegancrane/Projects/react/circle-art-react/server/uploads/screenshot_${req.params.id}.png`)
+router.get("/games/screenshot/:id", async (req, res) => {
+  const __dirname = path.resolve();
+  res.sendFile(path.join(__dirname, `/uploads/temp/screenshot_${req.params.id}.png`))
 })
 router.post("/games/generateSession", async (req, res) => {
   console.log("generate");

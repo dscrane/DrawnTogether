@@ -21,6 +21,7 @@ export const INITIAL_STATE = {
   _id: "",
   inProgress: false,
   complete: false,
+  screenshot: false,
   displayGrid: false,
   numPlayers: 0,
   currentForm: 0,

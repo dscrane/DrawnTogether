@@ -32,3 +32,8 @@ export const finalDisplayEmitter = (socket) => {
 export const endGameEmitter = (socket) => {
   socket.emit("end-game");
 };
+
+export const screenshotEmitter = (socket, screenshotBuffer) => {
+  console.log('screenshot emitter')
+  socket.emit("screenshot", screenshotBuffer);
+}

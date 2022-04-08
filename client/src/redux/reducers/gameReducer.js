@@ -113,7 +113,14 @@ export default (state = INITIAL_STATE, action) => {
           oldWidth: state.display.width,
         },
       };
+  case "UPDATE_SCREENSHOT":
+    console.info(action.type, action.payload);
+    return {
+      ...state,
+      screenshot: action.payload,
+    }
     default:
       return state;
   }
+
 };

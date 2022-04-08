@@ -120,6 +120,12 @@ export const finalDisplay = (circles) => async (dispatch, getState) => {
     payload: { finalCircles: finalCircles, displayGrid: false, currentForm: finalForm },
   });
 };
+export const updateScreenshot = ({ screenshot }) => (dispatch, getState) => {
+  dispatch({
+    type: "UPDATE_SCREENSHOT",
+    payload: screenshot,
+  })
+}
 // UPDATE_DISPLAY_DIMENSIONS ACTION CREATOR
 export const updateDisplayDimensions =
   ({ height, width }) =>

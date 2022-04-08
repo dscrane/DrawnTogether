@@ -3,7 +3,15 @@ import { io } from "socket.io-client";
 import { connect } from "react-redux";
 import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
-import { initializePlayers, nextPlayer, displayCircles, updatePolarGrid, finalDisplay, endGame } from "./redux/actions";
+import {
+  initializePlayers,
+  nextPlayer,
+  displayCircles,
+  updatePolarGrid,
+  finalDisplay,
+  endGame,
+  updateScreenshot
+} from "./redux/actions";
 
 export const App = ({
   _id,
@@ -15,6 +23,7 @@ export const App = ({
   nextPlayer,
   updatePolarGrid,
   endGame,
+                      updateScreenshot
 }) => {
   const [socket, setSocket] = useState(null);
   const { width, centerPoint } = display;
@@ -55,6 +64,9 @@ export const App = ({
     socket.on("restart-game", (status) => {
       status.endGame ? endGame() : console.log("end game failed");
     });
+    socket.on("screenshot-taken", (status) => {
+      updateScreenshot(status);
+    })
   }, [socket, _id, initializePlayers, nextPlayer, endGame]);
 
   return (
@@ -86,4 +98,5 @@ export default connect(mapStateToProps, {
   finalDisplay,
   updatePolarGrid,
   endGame,
+  updateScreenshot
 })(App);

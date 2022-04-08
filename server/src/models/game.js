@@ -10,7 +10,7 @@ const gameSchema = new mongoose.Schema({
   complete: Boolean,
   timestamp: Date,
   curiosity: String,
-  // finalDisplay: Buffer
+  screenshot: Buffer,
 });
 
 gameSchema.methods.toJSON = function () {

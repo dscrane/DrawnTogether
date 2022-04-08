@@ -3,14 +3,14 @@ import FormData from "form-data";
 import * as htmlToImage from "html-to-image";
 import QRCode from 'qrcode';
 import { ActionButton } from "../ActionButton";
-import { endGameEmitter } from "../../socket.io/emitters";
+import {endGameEmitter, screenshotEmitter} from "../../socket.io/emitters";
 import { api, dataToFile } from "../../utils";
 import "./displayResults.css";
 
-const DisplayResults = ({ gameId, socket }) => {
-  const [screenshotStatus, setScreenshotStatus] = useState(false);
-  const [ qrcode, setQrcode ] = useState(null);
+const DisplayResults = ({ gameId, socket, screenshot }) => {
 
+  const [ qrcode, setQrcode ] = useState(null);
+  console.log(qrcode)
   useEffect(() => {
     const generateQRCode = async () => {
       const opts = {
@@ -25,20 +25,14 @@ const DisplayResults = ({ gameId, socket }) => {
       const urlData = await QRCode.toDataURL(`${process.env.REACT_APP_SERVER}/games/screenshot/${gameId}`, opts);
       setQrcode(urlData);
     }
-    if (screenshotStatus) {
+    if (screenshot) {
       generateQRCode();
     }
-  }, [screenshotStatus])
+  }, [screenshot])
 
   const handleSubmit = async () => {
-    const form = new FormData();
     const dataUrl = await htmlToImage.toPng(document.getElementById("canvas"));
-    const screenshot = await dataToFile(dataUrl, `screenshot_${gameId}.png`);
-    // add data to form object
-    form.append("screenshot", screenshot);
-
-    const { data } = await api.post("/games/sendScreenshot", form);
-    setScreenshotStatus(data.screenshotStatus);
+    screenshotEmitter(socket, dataUrl);
   };
   const resultsDisplay = !qrcode ? (
     <>
@@ -64,10 +58,6 @@ const DisplayResults = ({ gameId, socket }) => {
       <ActionButton onClick={() => endGameEmitter(socket)} buttonType={"restart"} text={"Restart\nGame"} />
     </div>
   );
-};
-
-const ResultForm = ({ handleSubmit, qrcode }) => {
-return
 };
 
 export default DisplayResults;
