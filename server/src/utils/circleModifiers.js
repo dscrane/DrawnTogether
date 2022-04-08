@@ -35,7 +35,8 @@ export const circleAlterations = {
 function initialCircleVariables(responses, centerPoint) {
   const { degree, slice } = setPlayerDegree(
     parseInt(responses.curiosity),
-    parseInt(responses.productivity),
+    // parseInt(responses.productivity),
+    parseInt(responses.hair),
     responses.diet
   );
   const { xCartesian, yCartesian } = convertToCartesian(
@@ -43,7 +44,7 @@ function initialCircleVariables(responses, centerPoint) {
     responses.age,
     degree
   );
-  const radius = setCircleRadius(parseInt(responses.association));
+  const radius = setCircleRadius(parseInt(responses.association), responses.name);
 
   const linearDPath = createLinearDPath(
     centerPoint,
@@ -116,7 +117,7 @@ function circleAlterationTwo(responses, circleData, centerPoint) {
     circleData.degree,
     circleData.radian,
     responses.food,
-    responses.hair
+    responses.productivity
   );
 
   const linearDPath = createLinearDPath(centerPoint, xCartesian, yCartesian, circleData.radian, degree);

@@ -62,22 +62,45 @@ function resizeAllCircles(playerCircles, resizeRatio) {
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @returns {JSX.Element} <radialGradient />
  * */
-function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit=false) {
+function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit=false, animationDPath) {
+  const stops = [
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.3}%`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.15}%`,
+    `hsl(${hue}, ${saturation}%, ${lightness}%`,
+  ]
+  const offsets = ["0%", "25%", "50%", "75%", "100%"]
+
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+
   return (
     <radialGradient id={`radialGradient${id}${isInit ? "_init" : ""}`}>
-      <stop offset="0%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`} stopOpacity={1} />
-      <stop offset="25%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`} stopOpacity={1} />
-      <stop offset="50%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.3}%`} stopOpacity={1} />
-      <stop offset="75%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness * 1.15}%`} stopOpacity={1} />
-      <stop offset="100%" stopColor={`hsl(${hue}, ${saturation}%, ${lightness}%`} stopOpacity={1} />
+      {animationDPath ? shuffle(stops).map((el, i) => <stop offset={offsets[i]} stopColor={el} stopOpacity={1} />) : stops.map((el, i) => <stop offset={offsets[i]} stopColor={el} stopOpacity={1} />)}
     </radialGradient>
   );
 }
 
 /**
- * Creates the animation path for the player's circle
+ * Creates the linear path for the player's circle
  * @param {number} id -- playerCircle's player id
- * @param {string} linearDPath -- string containing the 'd' path for animation line
+ * @param {string} linearDPath -- string containing the 'd' path for drawn line
  * @param {Object} lineDesign -- playerCircle's stroke properties
  * @returns {JSX.Element} <path />
  */
@@ -88,6 +111,12 @@ function createLinearPath(id, linearDPath, lineDesign) {
   return <path id={`linearPath${id}`} d={linearDPath} />;
 }
 
+/**
+ * Creates the animation path for the player's circle
+ * @param {number} id -- playerCircle's player id
+ * @param {string} animationDPath -- string containing the 'd' path for animation line
+ * @returns {JSX.Element} <path />
+ */
 function createAnimationPath(id, animationDPath) {
   return <path id={`animationPath${id}`} d={animationDPath} />;
 }

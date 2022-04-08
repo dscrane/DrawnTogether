@@ -23,11 +23,11 @@ export function convertToCartesian(centerPoint, age, degree) {
  * @param {number} degree -- Current player's circle position in degrees
  * @param {number} radian -- Current player's circle radian
  * @param {number} food -- Current player's food value
- * @param {number} hair -- Current player's hair value
+ * @param {number} productivity -- Current player's hair value
  * @returns {{yCartesian: {number}, xCartesian: {number}, degree: {number}}} Alternate cartesian coordinates for current player's circle on grid
  */
-export function altCartesian(centerPoint, degree, radian, food, hair) {
-  const shiftDegree = food * hair;
+export function altCartesian(centerPoint, degree, radian, food, productivity) {
+  const shiftDegree = food * productivity;
   const newDegree = degree + shiftDegree;
   const theta = newDegree * (Math.PI / 180);
 
@@ -42,43 +42,51 @@ export function altCartesian(centerPoint, degree, radian, food, hair) {
  // * Creates the initial position for playerCircle
  * @function setPlayerDegree
  * @param {number} curiosity -- Current player's curiosity value
- * @param {number} productivity -- Current player's productivity value
+ * @param {number} hair -- Current player's productivity value
  * @param {string} diet -- Current player's diet value
  * @returns {{slice: number, degree: number}} playerCircle's positional values
  */
-export function setPlayerDegree(curiosity, productivity, diet) {
+export function setPlayerDegree(curiosity, hair, diet) {
   let degree = 0;
-  if (!curiosity || !productivity || !diet) {
+  if (!curiosity || !hair || !diet) {
     return { degree: 0, slice: 0 };
   }
   const slice = Math.floor(Math.random() * 9) + curiosity;
   switch (diet) {
     case "omnivore":
-      if (productivity === 0) {
+      if (hair === 0) {
         degree = slice;
-      } else {
+      } else if (hair % 2 === 0) {
         degree = 136 + slice;
+      } else {
+        degree = slice;
       }
       break;
     case "vegetarian":
-      if (productivity === 0) {
+      if (hair === 0) {
         degree = 181 + slice;
-      } else {
+      } else if (hair % 2 === 0) {
         degree = 316 + slice;
+      } else {
+        degree = 181 + slice;
       }
       break;
     case "pescatarian":
-      if (productivity === 0) {
+      if (hair === 0) {
+        degree = 226 + slice;
+      } else if (hair % 2 === 0) {
         degree = 226 + slice;
       } else {
-        degree = 226 + slice;
+        degree = 91 + slice;
       }
       break;
     case "vegan":
-      if (productivity === 0) {
+      if (hair === 0) {
+        degree = 46 + slice;
+      } else if (hair % 2 === 0) {
         degree = 46 + slice;
       } else {
-        degree = 46 + slice;
+        degree = 271 + slice;
       }
       break;
     default:
@@ -94,14 +102,51 @@ export function setPlayerDegree(curiosity, productivity, diet) {
  * @param {number} association -- Current player's association value
  * @return {number} Initial value for playerCircle's radius
  */
-export function setCircleRadius(association) {
-  if (association * 10 < 75) {
-    return association * 8;
-  } else if (association * 2 < 75) {
-    return association * 4;
-  } else {
-    return association * 2;
+export function setCircleRadius(association, name) {
+
+  switch (association) {
+    case association < 10:
+      console.log(association * (name.length));
+      return association * (name.length );
+    case association < 25:
+      console.log(association * (name.length  / 2));
+      return association * (name.length / 2);
+    case association < 45:
+      console.log(association);
+      return association;
+    case association < 60:
+      console.log(association - name.length * 3);
+      return association - name.length * 3;
+    case association < 85:
+      console.log(association / 2.25)
+      return association / 2.25;
+    case association > 84:
+      console.log(association / name.length  / 2)
+      return association / (name.length / 2)
+    default:
+      return Math.floor(Math.random() * (35 - 45 + 1) + 35)
   }
+
+  // if (association === 1) {
+  //   const a = Math.floor(Math.random() * name.length) + name.length;
+  //   console.log(a)
+  //   return a;
+  // } else if (association < 7) {
+  //   console.log(((name.length / 10) + 5))
+  //   return association * ((name.length / 10) + 5);
+  // } else if (association > 75) {
+  //   console.log(association * (name.length / 100))
+  //   return association * (name.length / 100)
+  // } else if (association * 10 < 75) {
+  //   console.log(association * 8)
+  //   return association * 8;
+  // } else if (association * 2 < 75) {
+  //   console.log(association * 4)
+  //   return association * 4;
+  // } else {
+  //   console.log('default', association)
+  //   return association
+  // }
 }
 
 /**

@@ -20,23 +20,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito&family=Quicksand:wght@400;600&family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Circles</title>
-    <script>
-      function changeTheme(val) {
-        const classList = document.getElementById("root").classList;
-        classList.remove(...classList);
-        classList.add(val);
-      }
-    </script>
   </head>
   <body>
-<!--    <div style="position: absolute; display: flex">-->
-<!--      <span style="font-size: medium">Change theme:</span>-->
-<!--      <button onclick="changeTheme(this.value)" value="blue_gray_pink">Blue Gray Pink</button>-->
-<!--      <button onclick="changeTheme(this.value)" value="purple_gray_blue">Purple Gray Blue</button>-->
-<!--      <button onclick="changeTheme(this.value)" value="premade_blue">Premade Blue</button>-->
-<!--      <button onclick="changeTheme(this.value)" value="triadic">Triadic</button>-->
-<!--    </div>-->
-
     <div id="root"></div>
   <script>
     document.getElementById("root").classList.add("blue_gray_pink");

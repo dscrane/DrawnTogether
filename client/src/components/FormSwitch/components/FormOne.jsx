@@ -35,16 +35,18 @@ export const FormOne = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Personality Profile #1</label>
+        <label className="item__label item__label-select">Best Hair Day?</label>
         <Field
           className="form__control form__control-select"
-          name={`players.${currentPlayer}.productivity`}
-          id="formGender"
+          name={`players.${currentPlayer}.hair`}
+          id="formHair"
           as="select"
         >
           <option value="DEFAULT">Choose...</option>
-          <option value={2}>Up with the sun</option>
-          <option value={1}>Night owl</option>
+          <option value={2}>Curly</option>
+          <option value={1}>Straight</option>
+          <option value={0}>Wavy</option>
+          {/*<option value={-15}>Patrick Stewart</option>*/}
         </Field>
       </div>
       <div className="form__row">

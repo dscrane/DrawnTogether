@@ -34,7 +34,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start-dev": "REACT_APP_SERVER=http://192.168.1.62:5500 react-sripts start",
-    "start-auto": "REACT_APP_AUTOFILL=true REACT_APP_SERVER=http://localhost:5500 react-scripts start",
+    "start-auto": "REACT_APP_AUTOFILL=true REACT_APP_SERVER=http://192.168.1.62:5500 react-scripts start",
     "build": "react-scripts build",
     "build-server": "react-scripts build && rm -r ../server/src/public/* && mv build/* ../server/src/public",
     "": "react-scripts build && rm -r ../../herokuCircles/src/public/* && cp -R build/* ../../herokuCircles/src/public/",
