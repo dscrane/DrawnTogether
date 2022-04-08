@@ -9,6 +9,7 @@ import {
   createSecondaryColor,
   setAlternateDesignWeight,
   createLineDesign,
+  createLinearDPath,
 } from "./circleHelpers.js";
 
 /**
@@ -44,7 +45,15 @@ function initialCircleVariables(responses, centerPoint) {
   );
   const radius = setCircleRadius(parseInt(responses.association));
 
+  const linearDPath = createLinearDPath(
+    centerPoint,
+    xCartesian,
+    yCartesian,
+    responses.age,
+    degree
+  );
   const initialCircleData = {
+    linearDPath,
     degree: degree,
     slice: slice,
     xCartesian: xCartesian,
@@ -68,8 +77,18 @@ function initialCircleVariables(responses, centerPoint) {
  * @function circleAlterationOne
  * @param {object} responses -- Current player responses
  * @param {object} circleData -- Current player circle
+ * @param {object} centerPoint -- Current diplay center point
  * */
-function circleAlterationOne(responses, circleData) {
+function circleAlterationOne(responses, circleData, centerPoint) {
+  const linearDPath = createLinearDPath(
+    centerPoint,
+    circleData.xCartesian,
+    circleData.yCartesian,
+    circleData.radian,
+    circleData.degree,
+    true
+  );
+
   const updatedRadius = altRadius(
     circleData.radius,
     parseInt(responses.leaning),
@@ -77,6 +96,7 @@ function circleAlterationOne(responses, circleData) {
   );
   circleData = {
     ...circleData,
+    linearDPath,
     radius: updatedRadius,
   };
 
@@ -88,6 +108,7 @@ function circleAlterationOne(responses, circleData) {
  * @function circleAlterationTwo
  * @param {object} responses -- Current player responses
  * @param {object} circleData -- Current player circle
+ * @param {object} centerPoint -- Current diplay center point
  * */
 function circleAlterationTwo(responses, circleData, centerPoint) {
   circleData = {
@@ -152,7 +173,7 @@ function circleAlterationFour(responses, circleData) {
  * @param {object} responses -- Current player responses
  * @param {object} circleData -- Current player circle
  * */
-function circleAlterationFive(responses, circleData, centerPoint) {
+function circleAlterationFive(responses, circleData) {
   const averageColor = averageColors(
     responses.color,
     circleData.hue,

@@ -5,6 +5,7 @@ import {
   averageColors,
   convertToCartesian,
   createFillColor,
+  createLinearDPath,
   createLineDesign,
   createSecondaryColor,
   setAlternateDesignWeight,
@@ -28,6 +29,9 @@ const createDataModel = (changes = {}) => {
     hue: expect.toBeWithinRange(0, 365),
     saturation: expect.toBeWithinRange(27, 75),
     lightness: expect.toBeWithinRange(25, 73),
+    linearDPath: expect.stringMatching(
+      /m[0-9]{1,4},[0-9]{1,4} L([0-9]{1,4}(.[0-9])?,[0-9]{1,4}(.[0-9])? ?){2}/g
+    ),
     ...changes,
   };
 };
@@ -71,7 +75,6 @@ export const circleAlterationsSuite = () => {
           slice: expect.toBeWithinRange(0, 45),
         });
       });
-
       it("Should create circle cartesian position", () => {
         const result = convertToCartesian(centerPoint, responses.age, degree);
         expect(result).toMatchObject({
@@ -79,12 +82,10 @@ export const circleAlterationsSuite = () => {
           yCartesian: expect.toBeWithinRange(0, 1080),
         });
       });
-
       it("Should create circle radius", () => {
         const result = setCircleRadius(responses.association);
         expect(result).toStrictEqual(expect.any(Number));
       });
-
       it("Should create the HSL color string for fill", () => {
         const result = createFillColor(responses.height, degree);
         expect(result).toMatchObject({
@@ -93,6 +94,18 @@ export const circleAlterationsSuite = () => {
           saturation: expect.toBeWithinRange(27, 75),
           lightness: expect.toBeWithinRange(25, 73),
         });
+      });
+      it("Should create a 'd' path sting", () => {
+        const result = createLinearDPath(
+          centerPoint,
+          circleDataResult.xCartesian,
+          circleDataResult.yCartesian,
+          circleDataResult.radian,
+          circleDataResult.degree
+        );
+        expect(result).toMatch(
+          /m[0-9]{1,4},[0-9]{1,4} L([0-9]{1,4}(.[0-9])?,[0-9]{1,4}(.[0-9])? ?){2}/g
+        );
       });
     });
     describe("initialCircleVariables()", () => {
@@ -126,15 +139,32 @@ export const circleAlterationsSuite = () => {
         );
         expect(result).toStrictEqual(expect.any(Number));
       });
+      it("Should create a 'd' path sting", () => {
+        const result = createLinearDPath(
+          centerPoint,
+          circleDataResult.xCartesian,
+          circleDataResult.yCartesian,
+          circleDataResult.radian,
+          circleDataResult.degree,
+          true
+        );
+        expect(result).toMatch(
+          /m[0-9]{1,4},[0-9]{1,4} L([0-9]{1,4}(.[0-9])?,[0-9]{1,4}(.[0-9])? ?){2}/g
+        );
+      });
     });
     describe("circleAlterationOne()", () => {
       it("Should update radius", () => {
         const { circleData } = circleAlterations[3](
           responses,
-          circleDataResult
+          circleDataResult,
+          centerPoint
         );
 
         expect(circleData.radius === circleDataResult.radius).toBe(false);
+        expect(circleData.linearDPath === circleDataResult.linearDPath).toBe(
+          false
+        );
         expect(Object.keys(circleData)).toEqual(
           expect.arrayContaining(Object.keys(createDataModel()))
         );

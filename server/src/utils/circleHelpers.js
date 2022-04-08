@@ -319,3 +319,32 @@ export function setAlternateDesignWeight(radius, media) {
       );
   }
 }
+
+/**
+ * Sets the linear 'd' path for the SVG element
+ * @param {object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} xCartesian -- Current player's circle cartesian x coordinate
+ * @param {number} yCartesian -- Current player's circle cartesian y coordinate
+ * @param {number} degree -- Current player's circle position in degrees
+ * @param {number} radian -- Current player's circle radian
+ * @param {boolean} alteration -- Whether to randomly set the radian start point
+ * @returns {string}
+ */
+export function createLinearDPath(
+  centerPoint,
+  xCartesian,
+  yCartesian,
+  radian,
+  degree,
+  alteration = false
+) {
+  const r = alteration ? Math.floor(Math.random() * (radian / 2)) : 0;
+  const theta = degree * (Math.PI / 180);
+  // Get the line starting y point
+  const xStartPoint = () =>
+    parseFloat((centerPoint.x + r * -Math.cos(theta)).toFixed(1));
+  // Get the line starting y point
+  const yStartPoint = () =>
+    parseFloat((centerPoint.y + r * Math.sin(theta)).toFixed(1));
+  return `m${xCartesian},${yCartesian} L${xStartPoint()},${yStartPoint()} ${xCartesian},${yCartesian}`;
+}
