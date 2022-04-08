@@ -17,6 +17,17 @@ const FormSwitch = ({ form, values, formProps, currentPlayer }) => {
       return <FormFive values={values} formProps={formProps} currentPlayer={currentPlayer} />;
     case 7:
       return <FormSix values={values} formProps={formProps} currentPlayer={currentPlayer} />;
+    case 8:
+      return (
+        <>
+          <div className="form__row">
+            <div className="form__instructions">
+              <p className="instruction__line">"Finish" to see the final display</p>
+              <p className="instruction__line">or</p>
+              <p className="instruction__line">"Back" to make any final changes</p>
+            </div>
+          </div></>
+      )
     default:
       // TODO handle error
       console.log("FormDisplay switch has failed");

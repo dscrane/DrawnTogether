@@ -7,7 +7,7 @@ export const formInstructions = {
   5: "Choose the option that fits best.\n(Options are meant to be humorous and should not be taken seriously)",
   6: "Choose the option that fits best.\n(Options are meant to be humorous and should not be taken seriously)",
   7: "Choose the option that fits best.\n(Options are meant to be humorous and should not be taken seriously)",
-  8: "Choose the option that fits best.\n(Options are meant to be humorous and should not be taken seriously)",
+  8: "",
   9: "Choose the option that fits best.\n(Options are meant to be humorous and should not be taken seriously)",
   10: "",
 };

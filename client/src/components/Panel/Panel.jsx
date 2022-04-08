@@ -11,7 +11,7 @@ const Panel = ({ socket, _id, currentForm }) => {
     if (currentForm === 0) {
       return <Landing />;
     } else {
-      return currentForm === 8 ? <DisplayResults socket={socket} gameId={_id} /> : <FormContainer socket={socket} />;
+      return currentForm > 8 ? <DisplayResults socket={socket} gameId={_id} /> : <FormContainer socket={socket} />;
     }
   };
   return (

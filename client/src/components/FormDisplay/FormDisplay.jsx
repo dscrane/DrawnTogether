@@ -40,7 +40,7 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
               <div className="form__row form__row-buttons">
                 <PanelButtonRow
                   prevText={"Back"}
-                  nextText={showNextOption ? "Submit" : "Next Form"}
+                  nextText={showNextOption ? currentForm === 8 ? "Finish" : "Submit" : "Next Form"}
                   handlePrevious={handlePrevious}
                 />
               </div>

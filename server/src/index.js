@@ -14,7 +14,6 @@ import { endGame } from "./controllers/endGame.js";
 import { PolarGrid } from "./utils/polarGrid.js";
 import { log } from "./utils/logs.js";
 
-console.log(process.env.NODE_ENV);
 // Set port
 const PORT = process.env.PORT || 5500;
 // Initialize Database connection

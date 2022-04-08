@@ -183,9 +183,7 @@ function circleAlterationFive(responses, circleData) {
   circleData = {
     ...circleData,
     ...averageColor,
-    isAnimated: false,
   };
-
   return { circleData };
 }
 

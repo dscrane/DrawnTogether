@@ -7,6 +7,9 @@ export const fetchCircleData = async (socket, finalDisplay) => {
   const circles = await Circle.find({ _id: { $in: gameCircles } });
 
   if (finalDisplay) {
+    // Turn animations off for final display
+    const finalCircles = circles.map(circle => circle.isAnimated = false);
+    // Recreate initial circles for final display
     const initialGameCircles = game.initialCircles.map(
       (initialCircle) => initialCircle._id
     );
@@ -14,7 +17,7 @@ export const fetchCircleData = async (socket, finalDisplay) => {
       _id: { $in: initialGameCircles },
     });
 
-    socket.emit("final-display-circles", [...circles, ...initialCircles]);
+    socket.emit("final-display-circles", [...finalCircles, ...initialCircles]);
     return;
   }
 

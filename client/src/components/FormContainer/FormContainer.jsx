@@ -50,7 +50,7 @@ const FormContainer = ({
       await nextForm(currentForm);
       return;
     }
-    if (currentForm === 7 && currentPlayer === numPlayers) {
+    if (currentForm === 8 && currentPlayer === numPlayers) {
       await finalDisplayEmitter(socket);
       return;
     }
