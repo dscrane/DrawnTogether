@@ -1,6 +1,6 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient, createPathAndAnimation } from "../../utils";
+import {createLinearPath, createRadialGradient, createPathAndAnimation, createAnimationPath} from "../../utils";
 /* ------ */
 
 export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
@@ -11,6 +11,7 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
       <defs>
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness, isInit)}
         {createLinearPath(id, playerCircle.linearDPath, null)}
+        {createAnimationPath(id, playerCircle.animationDPath)}
       </defs>
       <path
         id={`circle_${id}${isInit ? "_init" : ""}`}

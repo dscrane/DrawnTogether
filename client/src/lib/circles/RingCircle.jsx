@@ -1,6 +1,6 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient, circlePathTemplate } from "../../utils";
+import {createLinearPath, createRadialGradient, circlePathTemplate, createAnimationPath} from "../../utils";
 /* ------ */
 
 export const RingCircle = ({ id, playerCircle, centerPoint }) => {
@@ -26,6 +26,8 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
       <defs>
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
+        {createAnimationPath(id, playerCircle.animationDPath)}
+
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <g id={`circle_${id}`}>

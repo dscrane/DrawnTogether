@@ -1,14 +1,13 @@
 import { log } from "../utils/logs.js";
 import { circleAlterations } from "../utils/circleModifiers.js";
 import { User } from "../models/user.js";
-import { Game } from "../models/game.js";
 import { Circle } from "../models/circle.js";
 
 const findAndUpdateCircle = async (
   gameId,
   { _id, updateStep, centerPoint, responses }
 ) => {
-  log.yellow("[APP]: Beginning circle alterations...");
+  log.yellow(`[APP]: Beginning circle alterations ${updateStep}...`);
   try {
     const userCircle = await Circle.findOne({
       playerId: _id,

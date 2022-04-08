@@ -80,7 +80,7 @@ function initialCircleVariables(responses, centerPoint) {
  * @param {object} centerPoint -- Current diplay center point
  * */
 function circleAlterationOne(responses, circleData, centerPoint) {
-  const linearDPath = createLinearDPath(
+  const animationDPath = createLinearDPath(
     centerPoint,
     circleData.xCartesian,
     circleData.yCartesian,
@@ -96,7 +96,7 @@ function circleAlterationOne(responses, circleData, centerPoint) {
   );
   circleData = {
     ...circleData,
-    linearDPath,
+    animationDPath,
     radius: updatedRadius,
   };
 
@@ -111,15 +111,23 @@ function circleAlterationOne(responses, circleData, centerPoint) {
  * @param {object} centerPoint -- Current diplay center point
  * */
 function circleAlterationTwo(responses, circleData, centerPoint) {
+  const { degree, xCartesian, yCartesian } = altCartesian(
+    centerPoint,
+    circleData.degree,
+    circleData.radian,
+    responses.food,
+    responses.hair
+  );
+
+  const linearDPath = createLinearDPath(centerPoint, xCartesian, yCartesian, circleData.radian, degree);
+  const animationDPath = createLinearDPath(centerPoint, xCartesian, yCartesian, circleData.radian, degree, true);
   circleData = {
     ...circleData,
-    ...altCartesian(
-      centerPoint,
-      circleData.degree,
-      circleData.radian,
-      responses.food,
-      responses.hair
-    ),
+    degree,
+    xCartesian,
+    yCartesian,
+    linearDPath,
+    animationDPath
   };
   return { circleData };
 }

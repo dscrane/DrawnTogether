@@ -88,6 +88,10 @@ function createLinearPath(id, linearDPath, lineDesign) {
   return <path id={`linearPath${id}`} d={linearDPath} />;
 }
 
+function createAnimationPath(id, animationDPath) {
+  return <path id={`animationPath${id}`} d={animationDPath} />;
+}
+
 /**
  * Creates the circle path based on player's playerCircleData
  * @param cx {number}
@@ -112,7 +116,7 @@ function createPathAndAnimation(playerCircle, id) {
   if (playerCircle.isAnimated) {
     animation = (
       <animateMotion dur="10s" repeatCount="indefinite">
-        <mpath href={`#linearPath${id}`} />
+        <mpath href={playerCircle.animationDPath ? `#animationPath${id}` :`#linearPath${id}`} />
       </animateMotion>
     );
     path = circlePathTemplate(0, 0, playerCircle.radius);
@@ -204,4 +208,5 @@ export {
   createLinearPath,
   createEssPath,
   createCircleDesign,
+  createAnimationPath
 };

@@ -19,6 +19,7 @@ export const circleSchema = new mongoose.Schema({
   secondaryColor: String,
   isAnimated: Boolean,
   linearDPath: String,
+  animationDPath: String,
   lineDesign: {
     strokeDasharray: String,
     strokeLinecap: String,
