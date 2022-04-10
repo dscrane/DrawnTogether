@@ -62,7 +62,8 @@ function resizeAllCircles(playerCircles, resizeRatio) {
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @returns {JSX.Element} <radialGradient />
  * */
-function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit=false, animationDPath) {
+function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit=false, currentForm) {
+
   const stops = [
     `hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`,
     `hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`,
@@ -72,27 +73,14 @@ function createRadialGradient(id, centerPoint, hue, saturation, lightness, isIni
   ]
   const offsets = ["0%", "25%", "50%", "75%", "100%"]
 
-  function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
-
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
+  function shuffle() {
+    const toMove = stops.splice(0, currentForm-3)
+    return [...stops, ...toMove];
   }
-
+console.log(shuffle())
   return (
     <radialGradient id={`radialGradient${id}${isInit ? "_init" : ""}`}>
-      {animationDPath ? shuffle(stops).map((el, i) => <stop offset={offsets[i]} stopColor={el} stopOpacity={1} />) : stops.map((el, i) => <stop offset={offsets[i]} stopColor={el} stopOpacity={1} />)}
+      { shuffle().map((el, i) => <stop offset={offsets[i]} stopColor={el} stopOpacity={1} />)}
     </radialGradient>
   );
 }
@@ -184,7 +172,7 @@ function createEssPath(x, y, r, id, centerPoint) {
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @returns {JSX.Element}
  */
-function createCircleDesign(circleData, centerPoint) {
+function createCircleDesign(circleData, centerPoint, currentForm) {
   const { design, playerId } = circleData;
   switch (design) {
     case "initialCircle": {
@@ -206,6 +194,7 @@ function createCircleDesign(circleData, centerPoint) {
           playerCircle={circleData}
           centerPoint={centerPoint}
           isInit={false}
+          currentForm={currentForm}
         />
       );
     case "hollow":
