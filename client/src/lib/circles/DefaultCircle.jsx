@@ -3,13 +3,13 @@ import React from "react";
 import {createLinearPath, createRadialGradient, createPathAndAnimation, createAnimationPath} from "../../utils";
 /* ------ */
 
-export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit }) => {
+export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit, currentForm }) => {
   const { path, animation } = createPathAndAnimation(playerCircle, id);
 
   return (
     <>
       <defs>
-        {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness, isInit, playerCircle.animationDPath)}
+        {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness, isInit, currentForm)}
         {createLinearPath(id, playerCircle.linearDPath, null)}
         {createAnimationPath(id, playerCircle.animationDPath)}
       </defs>

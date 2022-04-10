@@ -92,8 +92,8 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 /* ----   Display Actions    ---- */
 // DISPLAY_CIRCLES ACTION CREATOR
 export const displayCircles = (circles) => (dispatch, getState) => {
-  const { display } = getState().gameState;
-  const circleSvgs = circles.map((circle) => createCircleDesign(circle, display.centerPoint));
+  const { display, currentForm } = getState().gameState;
+  const circleSvgs = circles.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
   console.log(circleSvgs);
   dispatch({
     type: DISPLAY_CIRCLES,

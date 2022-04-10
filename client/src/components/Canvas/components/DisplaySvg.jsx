@@ -19,7 +19,7 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
   }, [width, socket]);
   return (
     <svg className={`svg__canvas ${session.currentForm === 9 ? "svg__canvas-light" : ""}`}>
-      {session.displayGrid ? <PolarGrid path={display.polarGridPath} /> : null}
+      <PolarGrid path={display.polarGridPath} inProgress={session.displayGrid} />
       {session.currentForm > 2 ? (
         <CircleDisplay
           currentForm={session.currentForm}

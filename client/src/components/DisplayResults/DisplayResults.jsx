@@ -22,7 +22,7 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
           light:"#2b2b2b"
         }
       }
-      const urlData = await QRCode.toDataURL(`${process.env.REACT_APP_SERVER}/games/screenshot/${gameId}`, opts);
+      const urlData = await QRCode.toDataURL(`https://dsc-circle-server.herokuapp.com/games/screenshot/${gameId}`, opts);
       setQrcode(urlData);
     }
     if (screenshot) {
