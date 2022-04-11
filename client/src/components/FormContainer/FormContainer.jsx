@@ -13,13 +13,7 @@ import "./formContainer.css";
 
 const formResponseSchema = {
   interest: "",
-  players: [
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-  ],
+  players: [createResponseSchema(), createResponseSchema()],
 };
 
 const FormContainer = ({
@@ -50,7 +44,7 @@ const FormContainer = ({
       await nextForm(currentForm);
       return;
     }
-    if (currentForm === 8 ) {
+    if (currentForm === 8) {
       await finalDisplayEmitter(socket);
       return;
     }

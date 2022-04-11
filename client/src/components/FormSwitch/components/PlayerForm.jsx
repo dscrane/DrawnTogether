@@ -1,15 +1,29 @@
 import React from "react";
-import { Field, FieldArray } from "formik";
+import { ErrorMessage, Field, FieldArray } from "formik";
 import { validateString, validateNumber } from "../../../utils/validators";
 import { responseSchema } from "../../../utils";
 import { ActionButton } from "../../ActionButton";
+import { Tooltip } from "../../../lib/Tooltip/Tooltip";
+import { HelpTwoTone, ErrorOutlineRounded } from "@material-ui/icons";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   return (
     <>
-      <label className="item__label">{label}</label>
-      <input {...field} {...props} />
+      {label !== "Time" ? (
+        <label className="item__label">{label}</label>
+      ) : (
+        <div className="tooltip__wrapper">
+          <label className="item__label item__label-tooltip">{label}</label>
+          <Tooltip content="Hours, Months, Years, etc">
+            <HelpTwoTone className="tooltip__icon" />
+          </Tooltip>
+        </div>
+      )}
+      <div className="item__control">
+        <input {...field} {...props} />
+        <ErrorMessage className="control__error" name={field.name} component={ErrorOutlineRounded} />
+      </div>
     </>
   );
 };
@@ -21,14 +35,14 @@ export const PlayerForm = ({ values }) => {
         <div className="form__item form__item-interest">
           <label className="item__label item__label-interest">Common Interest</label>
           <Field
-            className={`form__control form__control-input ${1 === 2 ? "form__control-invalid" : ""}`}
+            className={`form__control form__control-input `}
             id="commonInterest"
             name="interest"
             component="input"
             type="text"
-            // placeholder="Common interest..."
             validate={validateString}
           />
+          <ErrorMessage name="interest" />
         </div>
       </div>
       <FieldArray
@@ -52,7 +66,7 @@ export const PlayerForm = ({ values }) => {
                 </div>
                 <div className="form__item">
                   <Field
-                    className={`form__control form__control-input ${1 === 2 ? "form__control-invalid" : ""}`}
+                    className={`form__control form__control-input `}
                     name={`players.${index}.name`}
                     type="text"
                     component={renderField}
@@ -63,7 +77,7 @@ export const PlayerForm = ({ values }) => {
                 </div>
                 <div className="form__item">
                   <Field
-                    className={`form__control form__control-input ${1 === 2 ? "form__control-invalid" : ""}`}
+                    className={`form__control form__control-input `}
                     name={`players.${index}.association`}
                     type="text"
                     component={renderField}

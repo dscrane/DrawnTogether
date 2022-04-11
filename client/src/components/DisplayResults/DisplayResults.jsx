@@ -29,8 +29,10 @@ const DisplayResults = ({ gameId, socket }) => {
           light:"#2b2b2b"
         }
       }
-      const urlData = await QRCode.toDataURL(`https://dsc-circle-server.herokuapp.com/games/screenshot/${gameId}`, opts);
-      setQrcode(urlData);
+      // const urlData = await QRCode.toDataURL(`https://dsc-circle-server.herokuapp.com/games/screenshot/${gameId}`, opts);
+    const urlData = await QRCode.toDataURL(`http://192.168.1.62:5500/games/screenshot/${gameId}`, opts);
+
+    setQrcode(urlData);
   };
   const resultsDisplay = !qrcode ? (
     <>

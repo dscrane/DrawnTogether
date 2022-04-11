@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form } from "formik";
 import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";
@@ -8,6 +8,8 @@ import { formInstructions } from "../../lib/instructions";
 import "./formDisplay.css";
 
 const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, currentPlayer, numPlayers, players }) => {
+  const buttonRowRef = useRef(null);
+  const [nPlayers, setNPlayers] = useState(2);
   const showNextOption = currentPlayer !== numPlayers || currentForm < 2;
   const showInstructions = showNextOption ? (
     <div className="form__row form__row-instructions">
@@ -20,11 +22,15 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
       </div>
     </div>
   ) : null;
+  useEffect(() => {
+    buttonRowRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [nPlayers]);
   return (
     <>
       <Formik initialValues={initialValues} onSubmit={(values, actions) => onSubmit(values, actions)}>
         {({ values, ...props }) => (
           <>
+            {values.players.length !== nPlayers ? setNPlayers(values.players.length) : null}
             {currentForm === 1 ? null : (
               <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
             )}
@@ -37,10 +43,10 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
                   <NextForm />
                 )}
               </div>
-              <div className="form__row form__row-buttons">
+              <div ref={buttonRowRef} className="form__row form__row-buttons">
                 <PanelButtonRow
                   prevText={"Back"}
-                  nextText={showNextOption ? currentForm === 8 ? "Finish" : "Submit" : "Next Form"}
+                  nextText={showNextOption ? (currentForm === 8 ? "Finish" : "Submit") : "Next Form"}
                   handlePrevious={handlePrevious}
                 />
               </div>
