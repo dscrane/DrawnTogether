@@ -49,7 +49,7 @@ io.on("connect", (socket) => {
       await initializePlayers(socket, gameId, curiosity, players);
     }
   );
-  socket.on("update-player", async (updateData, cb) => {
+  socket.on("update-player", async (updateData) => {
     await updatePlayer(socket, updateData);
   });
   socket.on("fetch-circles", async () => {
@@ -64,8 +64,8 @@ io.on("connect", (socket) => {
   socket.on("end-game", async () => {
     await endGame(socket);
   });
-  socket.on("screenshot", async (screenshotBuffer) => {
-    await updateScreenshot(socket, screenshotBuffer)
+  socket.on("save-screenshot", async (screenshotData) => {
+    await updateScreenshot(socket, screenshotData)
   })
 });
 

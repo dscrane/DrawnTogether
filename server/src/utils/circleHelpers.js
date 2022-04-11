@@ -383,7 +383,7 @@ export function createLinearDPath(
   degree,
   alteration = false
 ) {
-  const r = alteration ? Math.floor(Math.random() * (radian / 2)) : 0;
+  const r = alteration ? Math.floor(Math.random() * (radian / 1.75)) : 0;
   const theta = degree * (Math.PI / 180);
   // Get the line starting y point
   const xStartPoint = () =>

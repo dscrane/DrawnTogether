@@ -11,9 +11,6 @@ export const updatePlayerEmitter = (socket, playerId, formData, currentForm, cen
       responses: formData,
       updateStep: currentForm,
     },
-    (res) => {
-      console.log(res);
-    }
   );
 };
 
@@ -33,7 +30,6 @@ export const endGameEmitter = (socket) => {
   socket.emit("end-game");
 };
 
-export const screenshotEmitter = (socket, screenshotBuffer) => {
-  console.log('screenshot emitter')
-  socket.emit("screenshot", screenshotBuffer);
+export const saveScreenshotEmitter = (socket, screenshotBuffer) => {
+  socket.emit("save-screenshot", screenshotBuffer);
 }

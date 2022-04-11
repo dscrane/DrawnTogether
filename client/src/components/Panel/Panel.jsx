@@ -6,13 +6,12 @@ import { DisplayResults } from "../DisplayResults";
 import { FormContainer } from "../FormContainer";
 import "./panel.css";
 
-const Panel = ({ socket, _id, currentForm, screenshot }) => {
-  console.log(screenshot)
+const Panel = ({ socket, _id, currentForm }) => {
   const display = () => {
     if (currentForm === 0) {
       return <Landing />;
     } else {
-      return currentForm > 8 ? <DisplayResults socket={socket} gameId={_id} screenshot={screenshot} /> : <FormContainer socket={socket} />;
+      return currentForm > 8 ? <DisplayResults socket={socket} gameId={_id} /> : <FormContainer socket={socket} />;
     }
   };
   return (
@@ -26,8 +25,8 @@ const Panel = ({ socket, _id, currentForm, screenshot }) => {
 };
 
 const mapStateToProps = ({ gameState }) => {
-  const { _id, currentForm, screenshot } = gameState;
-  return { _id, currentForm, screenshot };
+  const { _id, currentForm } = gameState;
+  return { _id, currentForm };
 };
 
 export default connect(mapStateToProps, {})(Panel);

@@ -1,18 +1,25 @@
 import React, {useEffect, useState} from "react";
-import FormData from "form-data";
 import * as htmlToImage from "html-to-image";
 import QRCode from 'qrcode';
 import { ActionButton } from "../ActionButton";
-import {endGameEmitter, screenshotEmitter} from "../../socket.io/emitters";
-import { api, dataToFile } from "../../utils";
+import { endGameEmitter, saveScreenshotEmitter } from "../../socket.io/emitters";
 import "./displayResults.css";
 
-const DisplayResults = ({ gameId, socket, screenshot }) => {
-
+const DisplayResults = ({ gameId, socket }) => {
   const [ qrcode, setQrcode ] = useState(null);
-  console.log(qrcode)
+
+  const sendScreenshot = async () => {
+    const dataUrl = await htmlToImage.toPng(document.getElementById("canvas"));
+    saveScreenshotEmitter(socket, dataUrl);
+  }
   useEffect(() => {
-    const generateQRCode = async () => {
+    const screenshotTimer = setTimeout(async () => {
+      sendScreenshot();
+    }, 4000);
+    return () => clearTimeout(screenshotTimer);
+  },[])
+
+  const handleSubmit = async () => {
       const opts = {
         errorCorrectionLevel: 'H',
         type: 'image/png',
@@ -24,15 +31,6 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
       }
       const urlData = await QRCode.toDataURL(`https://dsc-circle-server.herokuapp.com/games/screenshot/${gameId}`, opts);
       setQrcode(urlData);
-    }
-    if (screenshot) {
-      generateQRCode();
-    }
-  }, [screenshot])
-
-  const handleSubmit = async () => {
-    const dataUrl = await htmlToImage.toPng(document.getElementById("canvas"));
-    screenshotEmitter(socket, dataUrl);
   };
   const resultsDisplay = !qrcode ? (
     <>

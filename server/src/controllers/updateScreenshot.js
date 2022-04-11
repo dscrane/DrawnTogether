@@ -2,10 +2,10 @@ import {Game} from "../models/game.js";
 import fs from "fs";
 import path from "path";
 
-export const updateScreenshot = async (socket, screenshotBuffer) => {
+export const updateScreenshot = async (socket, screenshotData) => {
   const __dirname = path.resolve();
   let game = await Game.findById(socket.handshake.auth.gameId);
-  const screenshotBase64String = screenshotBuffer.split(';base64,').pop()
+  const screenshotBase64String = screenshotData.split(';base64,').pop()
   game.screenshot = screenshotBase64String;
   await game.save();
 
@@ -16,10 +16,7 @@ export const updateScreenshot = async (socket, screenshotBuffer) => {
     (err) => {
       if (err) {
         console.log(err)
-        return;
       }
-      console.log('File created');
     }
   )
-  socket.emit('screenshot-taken', {screenshot: true})
 }
