@@ -18,12 +18,12 @@
     stroke-width: 1.5px;
 }
 .polar-grid {
-    opacity: 100%;
+    opacity: 1;
     fill: transparent;
     stroke: var(--svg-ring-thick);
 }
 .polar-grid__transparent {
-    opacity: 0%;
+    opacity: 0;
     stroke: transparent;
     transition: all 4s linear;
 }
