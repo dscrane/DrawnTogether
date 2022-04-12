@@ -170,6 +170,7 @@
   color: var(--font-placeholder);
 }
 .form__control-select {
+  width: 75%;
   flex: 0;
   font-size: 1.45rem;
   margin: 2px;
@@ -184,8 +185,6 @@
 }
 .form__control-invalid {
   box-shadow: 0 0 2px 2px var(--warning-red);
-
-  /*border: 2px solid var(--warning-red);*/
 }
 .form__control-invalid:focus {
   border: none;
