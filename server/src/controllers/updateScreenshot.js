@@ -19,4 +19,6 @@ export const updateScreenshot = async (socket, screenshotData) => {
       }
     }
   )
+
+  socket.emit('screenshot-taken', { screenshot: true })
 }
