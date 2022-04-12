@@ -62,25 +62,26 @@ function resizeAllCircles(playerCircles, resizeRatio) {
  * @param {Object} centerPoint -- display grid's center position along x and y axis
  * @returns {JSX.Element} <radialGradient />
  * */
-function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit=false, currentForm) {
-
+function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit = false, currentForm) {
   const stops = [
     `hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`,
     `hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`,
     `hsl(${hue}, ${saturation}%, ${lightness * 1.3}%`,
     `hsl(${hue}, ${saturation}%, ${lightness * 1.15}%`,
     `hsl(${hue}, ${saturation}%, ${lightness}%`,
-  ]
-  const offsets = ["0%", "25%", "50%", "75%", "100%"]
+  ];
+  const offsets = ["0%", "25%", "50%", "75%", "100%"];
 
   function shuffle() {
-    const toMove = stops.splice(0, currentForm-3)
+    const toMove = stops.splice(0, currentForm - 3);
     return [...stops, ...toMove];
   }
-console.log(shuffle())
+  console.log(shuffle());
   return (
     <radialGradient id={`radialGradient${id}${isInit ? "_init" : ""}`}>
-      { shuffle().map((el, i) => <stop offset={offsets[i]} stopColor={el} stopOpacity={1} />)}
+      {shuffle().map((el, i) => (
+        <stop key={`gradient_stop_${i}`} offset={offsets[i]} stopColor={el} stopOpacity={1} />
+      ))}
     </radialGradient>
   );
 }
@@ -133,7 +134,7 @@ function createPathAndAnimation(playerCircle, id) {
   if (playerCircle.isAnimated) {
     animation = (
       <animateMotion dur="10s" repeatCount="indefinite">
-        <mpath href={playerCircle.animationDPath ? `#animationPath${id}` :`#linearPath${id}`} />
+        <mpath href={playerCircle.animationDPath ? `#animationPath${id}` : `#linearPath${id}`} />
       </animateMotion>
     );
     path = circlePathTemplate(0, 0, playerCircle.radius);
@@ -178,7 +179,7 @@ function createCircleDesign(circleData, centerPoint, currentForm) {
     case "initialCircle": {
       return (
         <DefaultCircle
-          key={`circle_${playerId}_init`}
+          key={`init_circle_${playerId}`}
           id={playerId}
           playerCircle={circleData}
           centerPoint={centerPoint}
@@ -189,7 +190,7 @@ function createCircleDesign(circleData, centerPoint, currentForm) {
     case "defaultCircle":
       return (
         <DefaultCircle
-          key={`circle_${playerId}`}
+          key={`default_circle_${playerId}`}
           id={playerId}
           playerCircle={circleData}
           centerPoint={centerPoint}
@@ -199,18 +200,30 @@ function createCircleDesign(circleData, centerPoint, currentForm) {
       );
     case "hollow":
       return (
-        <HollowCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
+        <HollowCircle
+          key={`hollow_circle_${playerId}`}
+          id={playerId}
+          playerCircle={circleData}
+          centerPoint={centerPoint}
+        />
       );
     case "stroke":
       return (
-        <StrokeCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
+        <StrokeCircle
+          key={`stroke_circle_${playerId}`}
+          id={playerId}
+          playerCircle={circleData}
+          centerPoint={centerPoint}
+        />
       );
     case "ring":
       return (
-        <RingCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
+        <RingCircle key={`ring_circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
       );
     case "dot":
-      return <DotCircle key={`circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />;
+      return (
+        <DotCircle key={`dot_circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
+      );
     default:
       console.info("%c[ERROR]: Switch - createCircleDesign", "color: red");
   }
@@ -226,5 +239,5 @@ export {
   createLinearPath,
   createEssPath,
   createCircleDesign,
-  createAnimationPath
+  createAnimationPath,
 };
