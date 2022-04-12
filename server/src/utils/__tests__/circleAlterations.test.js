@@ -83,7 +83,7 @@ export const circleAlterationsSuite = () => {
         });
       });
       it("Should create circle radius", () => {
-        const result = setCircleRadius(responses.association);
+        const result = setCircleRadius(responses.association, responses.name);
         expect(result).toStrictEqual(expect.any(Number));
       });
       it("Should create the HSL color string for fill", () => {
@@ -258,12 +258,12 @@ export const circleAlterationsSuite = () => {
     const lineDesignModel = () => ({
       strokeDasharray: expect.stringMatching(/(([0-9])?\.?[0-9]*)%\s?/g),
       strokeLinecap: expect.stringMatching(/square||round/),
-      stroke: expect.stringMatching(/hsl\([0-9]{1,3},([0-9]{1,2}%,?){2}\)/g),
+      stroke: expect.stringMatching(/hsla\([0-9]{1,3},([0-9]{1,2}%,?){2},\.[0-9]{2}\)/g),
       strokeWidth: expect.stringMatching(/[0-5]px/),
     });
     describe("Alteration #4 Helpers", () => {
       it("Should create a lineDesign object", () => {
-        const result = createLineDesign(responses.religion, "hsl(0,0%,50%)");
+        const result = createLineDesign(responses.religion, responses.culture,{hue: circleDataResult.hue, saturation: circleDataResult.saturation, lightness: circleDataResult.lightness });
         expect(lineDesignModel()).toMatchObject(result);
       });
     });

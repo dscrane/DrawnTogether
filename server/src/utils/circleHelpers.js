@@ -236,10 +236,14 @@ export function createSecondaryColor(progress, hue, saturation, lightness) {
 /**
  * Creates stroke design for playerCircle linear path
  * @param religion -- Current player's religion value
- * @param strokeColor -- Stroke color for current player
+ * @param culture -- Current player's culture value
+ * @param color -- Current player's circle color
  * @returns {{strokeWidth: string, strokeLinecap: string, stroke, strokeDasharray: string}|{strokeWidth: string, strokeLinecap: string, stroke}}
  */
-export function createLineDesign(religion, strokeColor) {
+export function createLineDesign(religion, culture, color) {
+  const { hue, saturation, lightness } = color;
+  const strokeColor = `hsla(${hue + 90 * culture}, ${saturation}%, ${lightness}%, ${1 - culture * .15}`;
+
   switch (religion) {
     case "dotted":
       return {

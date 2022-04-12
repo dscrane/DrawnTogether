@@ -1,6 +1,38 @@
 const getValue = (vals) => {
   return vals[Math.floor(Math.random() * vals.length)];
 };
+const names = [
+  "Gonzales",
+  "Harrell",
+  "Parker",
+  "Owens",
+  "Welch",
+  "Russo",
+  "May",
+  "Walls",
+  "Buchanan",
+  "Donaldson",
+  "Shah",
+  "Martin",
+  "Montgomery",
+  "Simon",
+  "Nichols",
+  "Wood",
+  "Novak",
+  "Herrera",
+  "Golden",
+  "Bryant",
+  "Small",
+  "Huffman",
+  "Dodson",
+  "Acosta",
+  "Peterson",
+  "Joyce",
+  "Moore",
+  "Davenport",
+  "Michael",
+  "Mack",
+];
 const heightVals = [16, 32, 48];
 const curiosityVals = [27, 36, 18, 9, 0];
 const productivityVals = [2, 1, 0];
@@ -27,6 +59,7 @@ const colorVals = [
 
 export const mockResponses = () => [
   {
+    name: getValue(names),
     association: Math.floor(Math.random() * 50 + 1),
     height: getValue(heightVals),
     curiosity: getValue(curiosityVals),

@@ -35,7 +35,6 @@ export const circleAlterations = {
 function initialCircleVariables(responses, centerPoint) {
   const { degree, slice } = setPlayerDegree(
     parseInt(responses.curiosity),
-    // parseInt(responses.productivity),
     parseInt(responses.hair),
     responses.diet
   );
@@ -167,7 +166,7 @@ function circleAlterationThree(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFour(responses, circleData) {
-  const lineDesign = createLineDesign(responses.religion, "hsl(0,0%,50%)");
+  const lineDesign = createLineDesign(responses.religion, responses.culture, { hue: circleData.hue, saturation: circleData.saturation, lightness: circleData.lightness, });
   circleData = {
     ...circleData,
     lineDesign,
