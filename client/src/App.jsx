@@ -10,7 +10,8 @@ import {
   updatePolarGrid,
   finalDisplay,
   endGame,
-  updateScreenshot
+  updateScreenshot,
+  updatePlayerCircle,
 } from "./redux/actions";
 
 export const App = ({
@@ -23,7 +24,8 @@ export const App = ({
   nextPlayer,
   updatePolarGrid,
   endGame,
-                      updateScreenshot
+  updateScreenshot,
+  updatePlayerCircle,
 }) => {
   const [socket, setSocket] = useState(null);
   const { width, centerPoint } = display;
@@ -55,6 +57,9 @@ export const App = ({
     socket.on("polar-grid", (polarGridPath) => {
       updatePolarGrid(polarGridPath);
     });
+    socket.on("updated-circle", (circle) => {
+      updatePlayerCircle(circle);
+    });
     socket.on("display-circles", (circles) => {
       displayCircles(circles);
     });
@@ -66,7 +71,7 @@ export const App = ({
     });
     socket.on("screenshot-taken", (status) => {
       updateScreenshot(status);
-    })
+    });
   }, [socket, _id, initializePlayers, nextPlayer, endGame]);
 
   return (
@@ -98,5 +103,6 @@ export default connect(mapStateToProps, {
   finalDisplay,
   updatePolarGrid,
   endGame,
-  updateScreenshot
+  updateScreenshot,
+  updatePlayerCircle,
 })(App);

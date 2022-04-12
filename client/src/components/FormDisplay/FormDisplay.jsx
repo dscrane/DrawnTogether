@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Formik, Form } from "formik";
 import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";
@@ -9,7 +9,6 @@ import "./formDisplay.css";
 
 const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, currentPlayer, numPlayers, players }) => {
   const buttonRowRef = useRef(null);
-  const [nPlayers, setNPlayers] = useState(2);
   const showNextOption = currentPlayer !== numPlayers || currentForm < 2;
   const showInstructions = showNextOption ? (
     <div className="form__row form__row-instructions">
@@ -22,37 +21,37 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
       </div>
     </div>
   ) : null;
-  useEffect(() => {
-    buttonRowRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [nPlayers]);
+
   return (
     <>
       <Formik initialValues={initialValues} onSubmit={(values, actions) => onSubmit(values, actions)}>
-        {({ values, ...props }) => (
-          <>
-            {values.players.length !== nPlayers ? setNPlayers(values.players.length) : null}
-            {currentForm === 1 ? null : (
-              <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
-            )}
-            <Form className={`form ${currentForm > 1 ? "form__stretch" : ""}`}>
-              {showInstructions}
-              <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
-                {showNextOption ? (
-                  <FormSwitch form={currentForm} currentPlayer={currentPlayer} values={values} formProps={props} />
-                ) : (
-                  <NextForm />
-                )}
-              </div>
-              <div ref={buttonRowRef} className="form__row form__row-buttons">
-                <PanelButtonRow
-                  prevText={"Back"}
-                  nextText={showNextOption ? (currentForm === 8 ? "Finish" : "Submit") : "Next Form"}
-                  handlePrevious={handlePrevious}
-                />
-              </div>
-            </Form>
-          </>
-        )}
+        {({ values, ...props }) => {
+          return (
+            <>
+              {buttonRowRef.current !== null ? buttonRowRef.current.scrollIntoView({ behavior: "smooth" }) : null}
+              {currentForm === 1 ? null : (
+                <FormHeading currentPlayer={currentPlayer} numPlayers={numPlayers} players={players} />
+              )}
+              <Form className={`form ${currentForm > 1 ? "form__stretch" : ""}`}>
+                {showInstructions}
+                <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
+                  {showNextOption ? (
+                    <FormSwitch form={currentForm} currentPlayer={currentPlayer} values={values} formProps={props} />
+                  ) : (
+                    <NextForm />
+                  )}
+                </div>
+                <div ref={buttonRowRef} className="form__row form__row-buttons">
+                  <PanelButtonRow
+                    prevText={"Back"}
+                    nextText={showNextOption ? (currentForm === 8 ? "Finish" : "Submit") : "Next Form"}
+                    handlePrevious={handlePrevious}
+                  />
+                </div>
+              </Form>
+            </>
+          );
+        }}
       </Formik>
     </>
   );

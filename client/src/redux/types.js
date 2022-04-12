@@ -8,9 +8,11 @@ export const PREV_FORM = "PREV_FORM";
 
 // Display Action Types
 export const DISPLAY_CIRCLES = "DISPLAY_CIRCLES";
+export const UPDATE_PLAYER_CIRCLE = "UPDATE_PLAYER_CIRCLE";
 export const UPDATE_POLAR_GRID = "UPDATE_POLAR_GRID";
 export const FINAL_DISPLAY = "FINAL_DISPLAY";
 export const UPDATE_DISPLAY_DIMENSIONS = "UPDATE_DISPLAY_DIMENSIONS";
+export const UPDATE_SCREENSHOT = "UPDATE_SCREENSHOT";
 
 // Player Action Types
 export const NEXT_PLAYER = "NEXT_PLAYER";

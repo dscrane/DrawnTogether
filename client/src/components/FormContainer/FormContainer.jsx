@@ -13,7 +13,13 @@ import "./formContainer.css";
 
 const formResponseSchema = {
   interest: "",
-  players: [createResponseSchema(), createResponseSchema()],
+  players: [
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+  ],
 };
 
 const FormContainer = ({

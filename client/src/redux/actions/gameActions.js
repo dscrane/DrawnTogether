@@ -5,12 +5,14 @@ import {
   END_GAME,
   NEXT_FORM,
   PREV_FORM,
+  NEXT_PLAYER,
+  PREV_PLAYER,
   DISPLAY_CIRCLES,
+  UPDATE_PLAYER_CIRCLE,
   UPDATE_POLAR_GRID,
   FINAL_DISPLAY,
   UPDATE_DISPLAY_DIMENSIONS,
-  NEXT_PLAYER,
-  PREV_PLAYER,
+  UPDATE_SCREENSHOT,
   // RESIZE_PLAYER_CIRCLES,
 } from "../types";
 import { createCircleDesign } from "../../utils";
@@ -102,6 +104,19 @@ export const displayCircles = (circles) => (dispatch, getState) => {
     },
   });
 };
+// UPDATE_PLAYER_CIRCLE
+export const updatePlayerCircle =
+  ({ circle }) =>
+  (dispatch, getState) => {
+    const { display, currentForm } = getState().gameState;
+    console.log(circle);
+    const circleSvg = createCircleDesign(circle, display.centerPoint, currentForm);
+
+    dispatch({
+      type: UPDATE_PLAYER_CIRCLE,
+      payload: { circleSvg },
+    });
+  };
 // UPDATE_POLAR_GRID ACTION CREATOR
 export const updatePolarGrid = (polarGridPath) => (dispatch) => {
   dispatch({
@@ -120,14 +135,6 @@ export const finalDisplay = (circles) => async (dispatch, getState) => {
     payload: { finalCircles: finalCircles, displayGrid: false, currentForm: finalForm },
   });
 };
-export const updateScreenshot =
-  ({ screenshot }) =>
-  (dispatch) => {
-    dispatch({
-      type: "UPDATE_SCREENSHOT",
-      payload: screenshot,
-    });
-  };
 // UPDATE_DISPLAY_DIMENSIONS ACTION CREATOR
 export const updateDisplayDimensions =
   ({ height, width }) =>
@@ -138,6 +145,15 @@ export const updateDisplayDimensions =
         height: Math.round(height),
         width: Math.round(width),
       },
+    });
+  };
+// UPDATE_SCREENSHOT ACTION CREATOR
+export const updateScreenshot =
+  ({ screenshot }) =>
+  (dispatch) => {
+    dispatch({
+      type: UPDATE_SCREENSHOT,
+      payload: screenshot,
     });
   };
 /* ----  ***  ---- */
