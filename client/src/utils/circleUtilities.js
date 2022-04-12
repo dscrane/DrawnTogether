@@ -76,7 +76,7 @@ function createRadialGradient(id, centerPoint, hue, saturation, lightness, isIni
     const toMove = stops.splice(0, currentForm - 3);
     return [...stops, ...toMove];
   }
-  console.log(shuffle());
+
   return (
     <radialGradient id={`radialGradient${id}${isInit ? "_init" : ""}`}>
       {shuffle().map((el, i) => (

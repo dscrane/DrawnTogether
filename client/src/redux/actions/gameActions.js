@@ -94,7 +94,7 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 export const displayCircles = (circles) => (dispatch, getState) => {
   const { display, currentForm } = getState().gameState;
   const circleSvgs = circles.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
-  console.log(circleSvgs);
+
   dispatch({
     type: DISPLAY_CIRCLES,
     payload: {
