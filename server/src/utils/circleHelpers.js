@@ -48,7 +48,7 @@ export function altCartesian(centerPoint, degree, radian, food, productivity) {
  */
 export function setPlayerDegree(curiosity, hair, diet) {
   let degree = 0;
-  if (!curiosity || !hair || !diet) {
+  if (curiosity === undefined || hair === undefined || diet === undefined) {
     return { degree: 0, slice: 0 };
   }
   const slice = Math.floor(Math.random() * 9) + curiosity;
@@ -100,32 +100,27 @@ export function setPlayerDegree(curiosity, hair, diet) {
  * Creates initial radius for playerCircle
  * @function setCircleRadius
  * @param {number} association -- Current player's association value
+ * @param {string} name -- Current player's name value
  * @return {number} Initial value for playerCircle's radius
  */
 export function setCircleRadius(association, name) {
-
-  switch (association) {
-    case association < 10:
-      console.log(association * (name.length));
-      return association * (name.length );
-    case association < 25:
-      console.log(association * (name.length  / 2));
+    if (association < 10) {
+      return association * (name.length);
+    } else if (association < 25) {
       return association * (name.length / 2);
-    case association < 45:
-      console.log(association);
+    } else if (association < 45) {
       return association;
-    case association < 60:
-      console.log(association - name.length * 3);
+    } else if (association < 60) {
       return association - name.length * 3;
-    case association < 85:
-      console.log(association / 2.25)
+    } else if (association < 85) {
       return association / 2.25;
-    case association > 84:
-      console.log(association / name.length  / 2)
+    } else if (association > 84) {
       return association / (name.length / 2)
-    default:
+    } else {
       return Math.floor(Math.random() * (35 - 45 + 1) + 35)
-  }
+    }
+
+
 
   // if (association === 1) {
   //   const a = Math.floor(Math.random() * name.length) + name.length;

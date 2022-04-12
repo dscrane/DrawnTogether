@@ -5,15 +5,15 @@ import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
 import { default as connectDatabase } from "./db/db.js";
-import { initializePlayers } from "./controllers/initializePlayers.js";
 import { userRouter } from "./routes/userControllers.js";
 import { gameRouter } from "./routes/gameControllers.js";
+import { initializePlayers } from "./controllers/initializePlayers.js";
+import { fetchPolarGrid } from "./controllers/fetchPolarGrid.js";
 import { updatePlayer } from "./controllers/updatePlayer.js";
 import { fetchCircleData } from "./controllers/fetchCircleData.js";
+import { updateScreenshot } from "./controllers/updateScreenshot.js";
 import { endGame } from "./controllers/endGame.js";
-import { PolarGrid } from "./utils/polarGrid.js";
 import { log } from "./utils/logs.js";
-import {updateScreenshot} from "./controllers/updateScreenshot.js";
 
 // Set port
 const PORT = process.env.PORT || 5500;
@@ -37,11 +37,6 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(gameRouter);
 app.use(userRouter);
 
-const createPolarGrid = (gridData) => {
-  const polarGrid = new PolarGrid(gridData);
-  return polarGrid.polarGridPath;
-};
-
 io.on("connect", (socket) => {
   socket.on(
     "initialize-players",
@@ -55,8 +50,8 @@ io.on("connect", (socket) => {
   socket.on("fetch-circles", async () => {
     await fetchCircleData(socket);
   });
-  socket.on("fetch-polar-grid", (gridData) => {
-    socket.emit("polar-grid", createPolarGrid(gridData));
+  socket.on("fetch-polar-grid", async (gridData) => {
+    await fetchPolarGrid(socket, gridData)
   });
   socket.on("final-display", async () => {
     await fetchCircleData(socket, true);
