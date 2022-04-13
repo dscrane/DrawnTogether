@@ -2,6 +2,7 @@ import {
   INITIAL_STATE,
   GENERATE_SESSION,
   INITIALIZE_PLAYERS,
+  REINITIALIZE_PLAYERS,
   START_GAME,
   END_GAME,
   NEXT_FORM,
@@ -37,7 +38,7 @@ export default (state = INITIAL_STATE, action) => {
         },
         playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
-    case "REINITIALIZE_PLAYERS":
+    case REINITIALIZE_PLAYERS:
       console.info(action.type, action.payload);
       return {
         ...state,

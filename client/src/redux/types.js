@@ -1,6 +1,7 @@
 // Game Action Types
 export const GENERATE_SESSION = "GENERATE_SESSION";
 export const INITIALIZE_PLAYERS = "INITIALIZE_PLAYERS";
+export const REINITIALIZE_PLAYERS = "REINITIALIZE_PLAYERS";
 export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
 export const NEXT_FORM = "NEXT_FORM";

@@ -1,6 +1,7 @@
 import {
   GENERATE_SESSION,
   INITIALIZE_PLAYERS,
+  REINITIALIZE_PLAYERS,
   START_GAME,
   END_GAME,
   NEXT_FORM,
@@ -37,7 +38,7 @@ export const initializePlayers = (initialData) => async (dispatch) => {
 };
 // REINITIALIZE_PLAYERS ACTION CREATOR
 export const reinitializePlayers = (reinitializedPlayers) => (dispatch) => {
-  dispatch({ type: "REINITIALIZE_PLAYERS", payload: reinitializedPlayers });
+  dispatch({ type: REINITIALIZE_PLAYERS, payload: reinitializedPlayers });
 };
 // START_GAME ACTION CREATOR
 export const startGame = () => async (dispatch) => {
@@ -113,7 +114,6 @@ export const updatePlayerCircle =
   ({ circle }) =>
   (dispatch, getState) => {
     const { display, currentForm } = getState().gameState;
-    console.log(circle);
     const circleSvg = createCircleDesign(circle, display.centerPoint, currentForm);
 
     dispatch({
