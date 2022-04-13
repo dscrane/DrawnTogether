@@ -6,6 +6,7 @@ import {
   fetchCirclesEmitter,
   finalDisplayEmitter,
   initializePlayersEmitter,
+  reinitializePlayersEmitter,
   updatePlayerEmitter,
 } from "../../socket.io/emitters";
 import { createResponseSchema } from "../../utils";
@@ -46,7 +47,12 @@ const FormContainer = ({
   };
   const handleSubmit = async (values) => {
     if (currentForm === 1) {
-      await initializePlayersEmitter(socket, gameId, values);
+      console.log(Object.keys(players).length);
+      if (!Object.keys(players).length) {
+        await initializePlayersEmitter(socket, gameId, values);
+      } else {
+        await reinitializePlayersEmitter(socket, session.playerIds, values);
+      }
       await nextForm(currentForm);
       return;
     }

@@ -37,6 +37,15 @@ export default (state = INITIAL_STATE, action) => {
         },
         playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
+    case "REINITIALIZE_PLAYERS":
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          ...action.payload,
+        },
+      };
     case START_GAME:
       console.info(action.type, action.payload);
       return {

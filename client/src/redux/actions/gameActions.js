@@ -28,12 +28,16 @@ export const generateSession = () => async (dispatch) => {
     payload: { ...data.game, currentForm: 1, displayGrid: true, currentPlayer: 0 },
   });
 };
-// CREATE_PLAYERS ACTION CREATOR
+// INITIALIZE_PLAYERS ACTION CREATOR
 export const initializePlayers = (initialData) => async (dispatch) => {
   dispatch({
     type: INITIALIZE_PLAYERS,
     payload: { ...initialData },
   });
+};
+// REINITIALIZE_PLAYERS ACTION CREATOR
+export const reinitializePlayers = (reinitializedPlayers) => (dispatch) => {
+  dispatch({ type: "REINITIALIZE_PLAYERS", payload: reinitializedPlayers });
 };
 // START_GAME ACTION CREATOR
 export const startGame = () => async (dispatch) => {

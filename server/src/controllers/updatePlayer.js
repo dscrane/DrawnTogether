@@ -39,7 +39,10 @@ const findAndUpdateCircle = async (
     }
 
     await userCircle.save();
-    return true;
+    if (!alterations.initialCircleData) {
+      return alterations.circleData
+    }
+    return null;
   } catch (e) {
     log.red("[APP]: Circle alterations have failed");
     console.log(e);
@@ -55,12 +58,15 @@ export const updatePlayer = async (socket, updateData) => {
 
     await user.save();
 
-    const updateStatus = await findAndUpdateCircle(gameId, updateData);
+    const updatedCircle = await findAndUpdateCircle(gameId, updateData);
 
     log.green("[APP]: Circle alterations complete");
-    socket.emit("updated-player", { success: updateStatus }, (ack) =>
-      console.log(ack)
-    );
+    if (updatedCircle) {
+      socket.emit("updated-circle", { circle: updatedCircle }, (ack) =>
+        console.log(ack)
+      );
+    }
+
   } catch (e) {
     log.red(e);
     socket.emit("updated-player", { success: false });

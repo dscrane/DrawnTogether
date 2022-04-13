@@ -8,6 +8,7 @@ import { default as connectDatabase } from "./db/db.js";
 import { userRouter } from "./routes/userControllers.js";
 import { gameRouter } from "./routes/gameControllers.js";
 import { initializePlayers } from "./controllers/initializePlayers.js";
+import { reinitializePlayers } from "./controllers/reinitializePlayers.js";
 import { fetchPolarGrid } from "./controllers/fetchPolarGrid.js";
 import { updatePlayer } from "./controllers/updatePlayer.js";
 import { fetchCircleData } from "./controllers/fetchCircleData.js";
@@ -44,6 +45,9 @@ io.on("connect", (socket) => {
       await initializePlayers(socket, gameId, curiosity, players);
     }
   );
+  socket.on("reinitialize-players", async ({ playerIds, formValues: { players } }) => {
+    await reinitializePlayers(socket, playerIds, players)
+  })
   socket.on("update-player", async (updateData) => {
     await updatePlayer(socket, updateData);
   });
