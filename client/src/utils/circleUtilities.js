@@ -95,7 +95,7 @@ function createRadialGradient(id, centerPoint, hue, saturation, lightness, isIni
  */
 function createLinearPath(id, linearDPath, lineDesign) {
   if (lineDesign !== null) {
-    return <path id={`linearPath${id}`} d={linearDPath} style={{ ...lineDesign }} />;
+    return <path id={`linearPath${id}`} className="circle__line" d={linearDPath} style={{ ...lineDesign }} />;
   }
   return <path id={`linearPath${id}`} d={linearDPath} />;
 }
@@ -125,25 +125,41 @@ function circlePathTemplate(cx, cy, r) {
  * Creates the path and adds animation if .isAnimated === true
  * @param {object} playerCircle
  * @param {string} id
+ * @param {number?} innerRadius
+ * @param {number?} outerRadius
  * @returns {{path: string, animation: JSX.Element}}
  */
-function createPathAndAnimation(playerCircle, id) {
-  let path;
-  let animation;
+function createPathAndAnimation(playerCircle, id, innerRadius, outerRadius) {
+  let path, innerPath, outerPath, animation;
 
-  if (playerCircle.isAnimated) {
-    animation = (
-      <animateMotion dur="10s" repeatCount="indefinite">
-        <mpath href={playerCircle.animationDPath ? `#animationPath${id}` : `#linearPath${id}`} />
-      </animateMotion>
-    );
-    path = circlePathTemplate(0, 0, playerCircle.radius);
+  if (innerRadius && outerRadius) {
+    if (playerCircle.isAnimated) {
+      animation = (
+        <animateMotion dur="10s" repeatCount="indefinite">
+          <mpath href={`#linearPath${id}`} />
+        </animateMotion>
+      );
+      innerPath = circlePathTemplate(0, 0, innerRadius);
+      outerPath = circlePathTemplate(0, 0, outerRadius);
+    } else if (!playerCircle.isAnimated) {
+      animation = null;
+      innerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, innerRadius);
+      outerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, outerRadius);
+    }
   } else {
-    animation = null;
-    path = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius);
+    if (playerCircle.isAnimated) {
+      animation = (
+        <animateMotion dur="10s" repeatCount="indefinite">
+          <mpath href={playerCircle.animationDPath ? `#animationPath${id}` : `#linearPath${id}`} />
+        </animateMotion>
+      );
+      path = circlePathTemplate(0, 0, playerCircle.radius);
+    } else {
+      animation = null;
+      path = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius);
+    }
   }
-
-  return { path, animation };
+  return { path, innerPath, outerPath, animation };
 }
 
 /**

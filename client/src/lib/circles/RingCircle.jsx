@@ -1,25 +1,18 @@
 /* IMPORTS */
 import React from "react";
-import {createLinearPath, createRadialGradient, circlePathTemplate, createAnimationPath} from "../../utils";
+import {
+  createLinearPath,
+  createRadialGradient,
+  circlePathTemplate,
+  createAnimationPath,
+  createPathAndAnimation,
+} from "../../utils";
 /* ------ */
 
 export const RingCircle = ({ id, playerCircle, centerPoint }) => {
-  let animation, innerPath, outerPath;
   const innerRadius = playerCircle.radius - 2 * playerCircle.designThickness;
   const outerRadius = playerCircle.radius - 0.5 * playerCircle.designThickness;
-  if (playerCircle.isAnimated) {
-    animation = (
-      <animateMotion dur="10s" repeatCount="indefinite">
-        <mpath href={`#linearPath${id}`} />
-      </animateMotion>
-    );
-    innerPath = circlePathTemplate(0, 0, innerRadius);
-    outerPath = circlePathTemplate(0, 0, outerRadius);
-  } else {
-    animation = null;
-    innerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, innerRadius);
-    outerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, outerRadius);
-  }
+  const { innerPath, outerPath, animation } = createPathAndAnimation(playerCircle, id, innerRadius, outerRadius);
 
   return (
     <>
@@ -27,26 +20,22 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
         {createAnimationPath(id, playerCircle.animationDPath)}
-
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <g id={`circle_${id}`}>
         <path
           key={`circle_${id}_inner`}
+          className="circle circle__inner"
           d={innerPath}
-          style={{
-            fill: `url(#radialGradient${id})`,
-            opacity: 1,
-            fillRule: "evenodd",
-            strokeLinecap: "round",
-          }}
+          fill={`url(#radialGradient${id})`}
         />
         <path
           key={`circle_${id}_outer`}
+          className="circle circle__outer"
           d={outerPath}
-          strokeWidth={playerCircle.designThickness}
-          stroke={playerCircle.secondaryColor}
           fill="none"
+          stroke={playerCircle.secondaryColor}
+          strokeWidth={playerCircle.designThickness}
         />
         {animation}
       </g>
