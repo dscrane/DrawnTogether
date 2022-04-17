@@ -11,7 +11,7 @@ const Header = ({ currentForm }) => {
         Drawn <br />
         Together
       </h1>
-      <h3 className="header__text">an interactive visual investigation</h3>
+      <h3 className="header__text">an interactive image generator</h3>
       <div className="header__icons">{displayHeaderIcons}</div>
     </div>
   );
