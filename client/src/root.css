@@ -42,7 +42,8 @@
 .blue_gray_pink {
   --bg-canvas: var(--darkgray-500);
   --bg-panel: var(--darkgray-500);
-  --bg-panel-light: #66635c;
+  /*--bg-panel-light: #66635c;*/
+  --bg-panel-light: hsl(45, 4%, 38%);
   --bg-sidebar: var(--bluegreen-900);
   --bg-tab: var(--darkgray-100);
   --bg-active: var(--darkgray-500);
@@ -70,6 +71,7 @@
   --tooltip-background-color: var(--darkgray-100);
   --tooltip-margin: 30px;
   --tooltip-arrow-size: 6px;
+  --svg-text: hsl(245, 10%, 26%)
   /*--panel-shadow: var(--darkgray-100) 0px 3px 8px;*/
 }
 
