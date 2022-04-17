@@ -1,6 +1,6 @@
 import React from "react";
 import { ErrorMessage, Field, FieldArray } from "formik";
-import { validateString, validateNumber } from "../../../utils/validators";
+import { validateString, validateNumber, validateInterest } from "../../../utils/validators";
 import { responseSchema } from "../../../utils";
 import { ActionButton } from "../../ActionButton";
 import { Tooltip } from "../../../lib/Tooltip/Tooltip";
@@ -40,7 +40,7 @@ export const PlayerForm = ({ values }) => {
             name="interest"
             component="input"
             type="text"
-            validate={validateString}
+            validate={validateInterest}
           />
           <ErrorMessage name="interest" />
         </div>
