@@ -31,11 +31,47 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
       </g>
     );
   };
+  const createFinalText = () => {
+    if (!Object.keys(session.players)) {
+      return;
+    }
+    const finalTexts = [];
+    const playerNames = Object.values(session.players).map((el) => el.name);
+    const longestName = playerNames.sort((a, b) => a.length - b.length).pop();
+    const positionSetterText = longestName.length > session.interest.length ? longestName : session.interest;
+    const textPosition = (positionSetterText.length * 8) / 2 + 50;
+
+    for (let player in session.players) {
+      finalTexts.push(
+        <text key={`final_${session.players[player].id}`} x={textPosition} y={50 + 25 * (parseInt(player) + 1)}>
+          {session.players[player].name}
+        </text>
+      );
+    }
+    finalTexts.unshift(
+      <text className="svg__test-header" x={textPosition} y={50}>
+        {session.interest.toUpperCase()}
+      </text>
+    );
+    return (
+      <g className="svg__text" textAnchor="middle">
+        {finalTexts}
+      </g>
+    );
+  };
+
+  const finalDisplays =
+    session.currentForm === 9 ? (
+      <>
+        {createFinalText()}
+        {createFinalBackground()}
+      </>
+    ) : null;
 
   return (
-    <svg className={`svg__canvas ${session.currentForm === 9 ? "svg__canvas-light" : ""}`}>
+    <svg className={`svg__canvas svg__canvas-light ${session.currentForm === 9 ? "svg__canvas-light" : ""}`}>
       <PolarGrid path={display.polarGridPath} inProgress={session.displayGrid} />
-      {session.currentForm === 9 ? createFinalBackground() : null}
+      {finalDisplays}
       {session.currentForm > 2 ? (
         <CircleDisplay
           currentForm={session.currentForm}
