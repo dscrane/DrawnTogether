@@ -5,7 +5,8 @@ import { Circle } from "../models/circle.js";
 
 const findAndUpdateCircle = async (
   gameId,
-  { _id, updateStep, centerPoint, responses }
+  { _id, updateStep, centerPoint },
+  responses
 ) => {
   log.yellow(`[APP]: Beginning circle alterations ${updateStep}...`);
   try {
@@ -56,9 +57,10 @@ export const updatePlayer = async (socket, updateData) => {
     const user = await User.findById(updateData._id);
     user.responses = updateData.responses;
 
-    await user.save();
+    const updatedUser = await user.save();
+    const responses = { ...updatedUser.responses }
 
-    const updatedCircle = await findAndUpdateCircle(gameId, updateData);
+    const updatedCircle = await findAndUpdateCircle(gameId, updateData, responses);
 
     log.green("[APP]: Circle alterations complete");
     if (updatedCircle) {
