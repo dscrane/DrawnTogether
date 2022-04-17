@@ -10,6 +10,7 @@ import {
   setAlternateDesignWeight,
   createLineDesign,
   createLinearDPath,
+  createRadian,
 } from "./circleHelpers.js";
 
 /**
@@ -33,32 +34,35 @@ export const circleAlterations = {
  * @return {Object} circle -- Updated player circle object
  * */
 function initialCircleVariables(responses, centerPoint) {
+  const radius = setCircleRadius(responses.association);
+  const radian = createRadian(responses.age, radius);
+
   const { degree, slice } = setPlayerDegree(
-    parseInt(responses.curiosity),
-    parseInt(responses.hair),
+    responses.curiosity,
+    responses.hair,
     responses.diet
   );
   const { xCartesian, yCartesian } = convertToCartesian(
     centerPoint,
-    responses.age,
+    radian,
     degree
   );
-  const radius = setCircleRadius(parseInt(responses.association), responses.name);
 
   const linearDPath = createLinearDPath(
     centerPoint,
     xCartesian,
     yCartesian,
-    responses.age,
+    radian,
     degree
   );
+
   const initialCircleData = {
     linearDPath,
     degree: degree,
     slice: slice,
     xCartesian: xCartesian,
     yCartesian: yCartesian,
-    radian: parseInt(responses.age),
+    radian,
     radius: radius,
     design: "initialCircle",
     ...createFillColor(responses.height, degree),
@@ -91,8 +95,8 @@ function circleAlterationOne(responses, circleData, centerPoint) {
 
   const updatedRadius = altRadius(
     circleData.radius,
-    parseInt(responses.leaning),
-    parseInt(responses.personality)
+    responses.leaning,
+    responses.personality
   );
   circleData = {
     ...circleData,

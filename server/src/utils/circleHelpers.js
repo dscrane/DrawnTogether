@@ -1,4 +1,19 @@
 /**
+ * Creates the radian the circle is set on based off of players age
+ * @function convertToCartesian
+ * @param {number} age -- Current player's age value
+ * @param {number} radius -- Current player circle's radius
+ * @returns {number} Radian set for player circle
+ */
+export function createRadian(age, radius) {
+  const min = age < radius ? (age + (radius * 1.25)) : age - 20;
+  const max = min > age + 20 ? min + 20 : age + 20;
+  console.log(age, radius)
+
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+/**
  * Converts initial player position to cartesian points for plotting
  * @function convertToCartesian
  * @param {Object} centerPoint -- display grid's center position along x and y axis
@@ -100,48 +115,15 @@ export function setPlayerDegree(curiosity, hair, diet) {
  * Creates initial radius for playerCircle
  * @function setCircleRadius
  * @param {number} association -- Current player's association value
- * @param {string} name -- Current player's name value
  * @return {number} Initial value for playerCircle's radius
  */
-export function setCircleRadius(association, name) {
-    if (association < 10) {
-      return association * (name.length);
-    } else if (association < 25) {
-      return association * (name.length / 2);
-    } else if (association < 45) {
-      return association;
-    } else if (association < 60) {
-      return association - name.length * 3;
-    } else if (association < 85) {
-      return association / 2.25;
-    } else if (association > 84) {
-      return association / (name.length / 2)
-    } else {
-      return Math.floor(Math.random() * (35 - 45 + 1) + 35)
-    }
+export function setCircleRadius(association) {
+  const initRadius = 40;
+  const randomness = 10 * (association / 100)
+  const min = initRadius - randomness;
+  const max = initRadius + randomness;
+  return Math.floor(Math.random() * (max - min + 1) + min)
 
-
-
-  // if (association === 1) {
-  //   const a = Math.floor(Math.random() * name.length) + name.length;
-  //   console.log(a)
-  //   return a;
-  // } else if (association < 7) {
-  //   console.log(((name.length / 10) + 5))
-  //   return association * ((name.length / 10) + 5);
-  // } else if (association > 75) {
-  //   console.log(association * (name.length / 100))
-  //   return association * (name.length / 100)
-  // } else if (association * 10 < 75) {
-  //   console.log(association * 8)
-  //   return association * 8;
-  // } else if (association * 2 < 75) {
-  //   console.log(association * 4)
-  //   return association * 4;
-  // } else {
-  //   console.log('default', association)
-  //   return association
-  // }
 }
 
 /**
@@ -153,6 +135,7 @@ export function setCircleRadius(association, name) {
  * @returns {number} altRadius - Current player's circle alternate radius
  */
 export function altRadius(radius, leaning, personality) {
+  //TODO take into account the radian so circle radius is never larger than distance from center
   const leaningShift = radius * (leaning / 100);
   leaning % 2 === 0 ? (radius += leaningShift) : (radius -= leaningShift);
   const personalityShift = radius * (personality / 100);
