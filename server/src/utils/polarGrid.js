@@ -4,9 +4,17 @@ export class PolarGrid {
     this._ringSpacing = (width * 0.99) / 2 / 50;
     this._xAxisCenter = centerPoint.x;
     this._yAxisCenter = centerPoint.y;
+    this._topMin = 220;
+    this._topMax = 270;
+    this._bottomMax = 60;
+    this._bottomMin = 30;
     this._polarGridPath = this.createPolarGridPath();
+    this._partialGridPath = this.createPartialPath();
   }
 
+  get partialPath() {
+    return this._partialGridPath;
+  }
   get polarGridPath() {
     return this._polarGridPath;
   }
@@ -59,9 +67,12 @@ export class PolarGrid {
     return ringsPath;
   };
   // Create full lines at 30 degree increments
-  createFullLines = () => {
+  createFullLines = (partial) => {
     let fullRingsPath = "";
     for (let i = 0; i < 360; i += 30) {
+      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+        continue;
+      }
       const theta = i * (Math.PI / 180);
       fullRingsPath =
         fullRingsPath +
@@ -73,9 +84,13 @@ export class PolarGrid {
     }
     return fullRingsPath;
   };
-  createLongLines = () => {
+  // Create full lines at 10 degree increments
+  createLongLines = (partial) => {
     let longLinesPath = "";
     for (let i = 0; i < 360; i += 10) {
+      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+        continue;
+      }
       if (i % 30 === 0) {
         continue;
       }
@@ -90,10 +105,14 @@ export class PolarGrid {
     }
     return longLinesPath;
   };
-  createMediumLines = () => {
+  // Create full lines at 2 degree increments
+  createMediumLines = (partial) => {
     let mediumLinesPath = "";
     for (let i = 0; i < 360; i += 2) {
       if (i % 30 === 0 || i % 10 === 0) {
+        continue;
+      }
+      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
         continue;
       }
       const theta = i * (Math.PI / 180);
@@ -107,9 +126,13 @@ export class PolarGrid {
     }
     return mediumLinesPath;
   };
-  createShortLines = () => {
+  // Create full lines at 1 degree increments
+  createShortLines = (partial) => {
     let shortLinesPath = "";
     for (let i = 0; i < 360; i += 1) {
+      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+        continue;
+      }
       if (i % 30 === 0 || i % 10 === 0 || i % 2 === 0) {
         continue;
       }
@@ -124,6 +147,18 @@ export class PolarGrid {
     }
     return shortLinesPath;
   };
+
+  createPartialPath = () =>
+    this.circlePathTemplate(
+      this._xAxisCenter,
+      this._yAxisCenter,
+      0.5 * this._ringSpacing
+    ) +
+    this.createFullLines(true) +
+    this.createLongLines(true) +
+    this.createMediumLines(true) +
+    this.createShortLines(true);
+
 
   createPolarGridPath = () =>
     this.circlePathTemplate(

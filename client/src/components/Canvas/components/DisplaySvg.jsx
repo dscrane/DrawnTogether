@@ -17,20 +17,7 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
       width,
       centerPoint,
     });
-  }, [width, socket]);
-
-  const createFinalBackground = () => {
-    const { blobPath, blobSize } = createBlob(session._id);
-    return (
-      <g
-        style={{
-          transform: `translate(${centerPoint.x - blobSize}px, ${centerPoint.y - blobSize}px)`,
-        }}
-      >
-        <path style={{ fill: "#5A636A" }} d={blobPath} />
-      </g>
-    );
-  };
+  }, [width]);
   const createFinalText = () => {
     if (!Object.keys(session.players)) {
       return;
@@ -43,7 +30,7 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
 
     for (let player in session.players) {
       finalTexts.push(
-        <text key={`final_${session.players[player].id}`} x={textPosition} y={50 + 25 * (parseInt(player) + 1)}>
+        <text key={`final_${session.players[player]._id}`} x={textPosition} y={50 + 25 * (parseInt(player) + 1)}>
           {session.players[player].name}
         </text>
       );
@@ -60,17 +47,15 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
     );
   };
 
-  const finalDisplays =
-    session.currentForm === 9 ? (
-      <>
-        {createFinalText()}
-        {createFinalBackground()}
-      </>
-    ) : null;
+  const finalDisplays = session.currentForm === 9 ? <>{createFinalText()}</> : null;
 
   return (
-    <svg className={`svg__canvas svg__canvas-light ${session.currentForm === 9 ? "svg__canvas-light" : ""}`}>
-      <PolarGrid path={display.polarGridPath} inProgress={session.displayGrid} />
+    <svg className={`svg__canvas svg__canvas-light`}>
+      <PolarGrid
+        path={display.polarGridPath}
+        partialPath={!session.displayGrid ? display.partialPath : null}
+        displayGrid={session.displayGrid}
+      />
       {finalDisplays}
       {session.currentForm > 2 ? (
         <CircleDisplay

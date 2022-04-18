@@ -48,5 +48,6 @@ export const INITIAL_STATE = {
     previousHeight: 0,
     previousWidth: 0,
     polarGridPath: "",
+    partialPath: "",
   },
 };

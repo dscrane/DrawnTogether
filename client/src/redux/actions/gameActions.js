@@ -30,15 +30,15 @@ export const generateSession = () => async (dispatch) => {
   });
 };
 // INITIALIZE_PLAYERS ACTION CREATOR
-export const initializePlayers = (initialData) => async (dispatch) => {
-  dispatch({
+export const initializePlayers = (initialPlayers) => async (dispatch) => {
+  await dispatch({
     type: INITIALIZE_PLAYERS,
-    payload: { ...initialData },
+    payload: { ...initialPlayers },
   });
 };
 // REINITIALIZE_PLAYERS ACTION CREATOR
 export const reinitializePlayers = (reinitializedPlayers) => (dispatch) => {
-  dispatch({ type: REINITIALIZE_PLAYERS, payload: reinitializedPlayers });
+  dispatch({ type: REINITIALIZE_PLAYERS, payload: { ...reinitializedPlayers } });
 };
 // START_GAME ACTION CREATOR
 export const startGame = () => async (dispatch) => {
@@ -122,17 +122,18 @@ export const updatePlayerCircle =
     });
   };
 // UPDATE_POLAR_GRID ACTION CREATOR
-export const updatePolarGrid = (polarGridPath) => (dispatch) => {
+export const updatePolarGrid = (paths) => (dispatch) => {
   dispatch({
     type: UPDATE_POLAR_GRID,
-    payload: polarGridPath,
+    payload: paths,
   });
 };
 // FINAL_DISPLAY ACTION CREATOR
 export const finalDisplay = (circles) => async (dispatch, getState) => {
   const { display, currentForm } = getState().gameState;
   const finalForm = currentForm + 1;
-  const finalCircles = circles.map((circle) => createCircleDesign(circle, display.centerPoint));
+  console.log(circles);
+  const finalCircles = circles.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
 
   dispatch({
     type: FINAL_DISPLAY,

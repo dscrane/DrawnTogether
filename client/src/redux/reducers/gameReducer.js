@@ -105,7 +105,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         display: {
           ...state.display,
-          polarGridPath: action.payload,
+          polarGridPath: action.payload.polarGridPath,
+          partialPath: action.payload.partialPath,
         },
       };
     case FINAL_DISPLAY:
