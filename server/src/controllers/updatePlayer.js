@@ -8,7 +8,7 @@ const findAndUpdateCircle = async (
   { _id, updateStep, centerPoint },
   responses
 ) => {
-  log.yellow(`[APP]: Beginning circle alterations ${updateStep}...`);
+  log.controller(`Alteration ${updateStep} for`, _id, 'begun');
   try {
     const userCircle = await Circle.findOne({
       playerId: _id,
@@ -62,11 +62,13 @@ export const updatePlayer = async (socket, updateData) => {
 
     const updatedCircle = await findAndUpdateCircle(gameId, updateData, responses);
 
-    log.green("[APP]: Circle alterations complete");
+    log.controllerSuccess(`Alteration ${updateData.updateStep} for`, updateData._id,  'complete');
     if (updatedCircle) {
-      socket.emit("updated-circle", { circle: updatedCircle }, (ack) =>
-        console.log(ack)
-      );
+      socket.emit("updated-circle", { circle: updatedCircle }, (status) => {
+        status ?
+          log.socket(socket.handshake.auth.gameId,  'player update successful') :
+          log.socketError(socket.id, 'player update failed')
+      })
     }
 
   } catch (e) {

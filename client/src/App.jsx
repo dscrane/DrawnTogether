@@ -53,29 +53,37 @@ export const App = ({
         centerPoint,
       });
     });
-    socket.on("initialized-players", (data) => {
-      initializePlayers(data);
+    socket.on("initialized-players", async (players, ack) => {
+      const status = await initializePlayers(players);
+      ack(status);
     });
-    socket.on("reinitialized-players", ({ resetPlayers }) => {
+    socket.on("reinitialized-players", (resetPlayers, ack) => {
       reinitializePlayers(resetPlayers);
+      ack(true);
     });
-    socket.on("polar-grid", (polarGridPath) => {
+    socket.on("polar-grid", (polarGridPath, ack) => {
       updatePolarGrid(polarGridPath);
+      ack(true);
     });
-    socket.on("updated-circle", (circle) => {
+    socket.on("updated-circle", (circle, ack) => {
       updatePlayerCircle(circle);
+      ack(true);
     });
-    socket.on("display-circles", (circles) => {
+    socket.on("display-circles", (circles, ack) => {
       displayCircles(circles);
+      ack(true);
     });
-    socket.on("final-display-circles", (circles) => {
+    socket.on("final-display-circles", (circles, ack) => {
       finalDisplay(circles);
+      ack(true);
     });
-    socket.on("restart-game", (status) => {
+    socket.on("restart-game", (status, ack) => {
       status.endGame ? endGame() : console.log("end game failed");
+      ack(true);
     });
-    socket.on("screenshot-taken", (status) => {
+    socket.on("screenshot-taken", (status, ack) => {
       updateScreenshot(status);
+      ack(true);
     });
   }, [socket, _id, initializePlayers, nextPlayer, endGame]);
 

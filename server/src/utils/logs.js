@@ -18,10 +18,35 @@ const cyan = (log) => {
   console.log(`\x1b[36m${log}\x1b[0m`);
 };
 
+const white = (log) => {
+  console.log(`\x1b[37m${log}\x1b[0m`)
+}
+
+const controller = (log, id, status) => {
+  console.log(`\x1b[37m${log} \x1b[36m${id} \x1b[37m${status}`)
+}
+
+const controllerSuccess = (log, id, status) => {
+  console.log(`\x1b[37m${log} \x1b[36m${id} \x1b[32m${status}`)
+}
+
+const socket = (socketId, log) => {
+  console.log(`\x1b[33m${socketId}\x1b[37m ${log}\x1b[0m`)
+}
+
+const socketError = (socketId, log) => {
+  console.log(`\x1b[33m${socketId}\x1b[31m ${log}\x1b[0m`)
+}
+
 export const log = {
   red,
   green,
   yellow,
   blue,
   cyan,
+  white,
+  socket,
+  socketError,
+  controller,
+  controllerSuccess,
 };

@@ -1,6 +1,7 @@
 import {Game} from "../models/game.js";
 import fs from "fs";
 import path from "path";
+import {log} from "../utils/logs.js";
 
 export const updateScreenshot = async (socket, screenshotData) => {
   const __dirname = path.resolve();
@@ -20,5 +21,9 @@ export const updateScreenshot = async (socket, screenshotData) => {
     }
   )
 
-  socket.emit('screenshot-taken', { screenshot: true })
+  socket.emit('screenshot-taken', { screenshot: true }, (status) => {
+    status ?
+      log.socket(socket.handshake.auth.gameId, 'final screenshot successful') :
+      log.socketError(socket.id, 'final screenshot failed')
+  })
 }

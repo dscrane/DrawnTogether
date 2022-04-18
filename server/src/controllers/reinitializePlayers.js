@@ -1,4 +1,5 @@
 import { User } from "../models/user.js";
+import {log} from "../utils/logs.js";
 
 export const reinitializePlayers = async (socket, playerIds, formPlayers) => {
   console.log('reinitialized-players');
@@ -19,5 +20,9 @@ export const reinitializePlayers = async (socket, playerIds, formPlayers) => {
       resetPlayers[i] = await player.save();
     }
   }
-  socket.emit("reinitialized-players", {resetPlayers})
+  socket.emit("reinitialized-players", {resetPlayers}, (status) => {
+    status ?
+      log.socket(socket.handshake.auth.gameId, 'reinitializing player successful') :
+      log.socketError(socket.id, 'reinitializing players failed')
+  })
 }
