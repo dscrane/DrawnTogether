@@ -1,26 +1,7 @@
-.svg__ring {
-    fill: transparent;
-    stroke-width: 1px;
-}
-.svg__ring-thick {
-    stroke: var(--svg-ring-thick);
-    stroke-width: 1px;
-}
-.svg__ring-thin {
-    /*stroke: var(--svg-ring-thin);*/
-    stroke: red;
-}
-.svg__line {
-    stroke: var(--svg-line);
-    stroke-width: 1px;
-}
-.svg__line-full {
-    stroke-width: 1.5px;
-}
 .polar-grid {
     opacity: 1;
     fill: transparent;
-    stroke: var(--svg-ring-thick);
+    stroke: var(--polar-grid-stroke);
 }
 .polar-grid__transparent {
     opacity: 0;

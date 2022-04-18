@@ -28,10 +28,6 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit, currentFo
         d={path}
         style={{
           fill: `url(#radialGradient${id}${isInit ? "_init" : ""})`,
-          opacity: `${isInit ? 0.2 : 1}`,
-          fillRule: "evenodd",
-          stroke: "none",
-          strokeLinecap: "round",
         }}
       >
         {animation}

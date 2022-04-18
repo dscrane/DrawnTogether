@@ -4,6 +4,7 @@ import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
 import { fetchPolarGrid } from "../../../socket.io/emitters";
 import { createBlob } from "../../../utils";
+import { FinalCircle } from "../../../lib/circles";
 /* ------ */
 
 const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
@@ -47,7 +48,18 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
     );
   };
 
-  const finalDisplays = session.currentForm === 9 ? <>{createFinalText()}</> : null;
+  const finalDisplays =
+    session.currentForm === 9 ? (
+      <>
+        {createFinalText()}
+        <FinalCircle
+          key={`final_circle`}
+          gameId={session._id}
+          width={display.width}
+          centerPoint={display.centerPoint}
+        />
+      </>
+    ) : null;
 
   return (
     <svg className={`svg__canvas svg__canvas-light`}>

@@ -16,42 +16,38 @@
   height: 100%;
   width: 100%;
 }
-
 .svg__canvas-light {
   background: var(--bg-panel-light);
 }
-
 .circle {
   opacity: 1;
   fill-rule: evenodd;
   stroke-linecap: round;
-  filter: drop-shadow( 4px 4px 2px rgba(0, 0, 0, .25));
-
+  filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, .25));
 }
 .circle__init {
-  opacity: 0.2;
+  opacity: .6;
 }
-
 .circle__line {
-  filter: drop-shadow( 2px 2px 1px rgba(0, 0, 0, .5));
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .5));
 }
 .circle__inner {
-  filter: drop-shadow( 4px 4px 2px rgba(0, 0, 0, .25));
+  filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, .25));
 }
 .circle__outer {
-  filter: drop-shadow( 2px 2px 1px rgba(0, 0, 0, .5));
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .5));
 }
 .circle__stroke {
-  filter: drop-shadow( 4px 4px 1px rgba(0, 0, 0, .45));
+  filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, .55));
 }
 .circle__over {
-  filter: drop-shadow(1px 1px 2px rgba(0,0,0,.5));
+  filter: drop-shadow(3px 3px 3px rgba(0,0,0,.65));
 }
-
 .svg__test-header {
   font: bold 2rem "Quicksand";
 }
 .svg__text {
   font: bold 1.75rem "Quicksand";
-  fill: var(--svg-text);
+  fill: var(--bluegreen-fade-30);
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,1));
 }

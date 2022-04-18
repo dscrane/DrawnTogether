@@ -4,7 +4,7 @@ import { createLinearPath, createRadialGradient, createPathAndAnimation, createA
 /* ------ */
 
 export const DotCircle = ({ id, playerCircle, centerPoint }) => {
-  const innerRadius = playerCircle.radius - playerCircle.designThickness;
+  const innerRadius = playerCircle.designThickness;
   const outerRadius = playerCircle.radius;
   const { innerPath, outerPath, animation } = createPathAndAnimation(playerCircle, id, innerRadius, outerRadius);
   return (
