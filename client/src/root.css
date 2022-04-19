@@ -23,6 +23,7 @@
   --bluegreen-900: hsl(180, 51%, 91%);
   --bluegreen-fade-75: hsla(180, 51%, 71%, .95);
   --bluegreen-fade-50: hsla(180, 51%, 71%, .50);
+  --bluegreen-fade-30: hsla(180, 51%, 71%, .30);
   --bluegreen-fade-20: hsla(180, 51%, 71%, .20);
   --bluegreen-fade-15: hsla(180, 51%, 71%, .15);
 
@@ -42,7 +43,6 @@
 .blue_gray_pink {
   --bg-canvas: var(--darkgray-500);
   --bg-panel: var(--darkgray-500);
-  /*--bg-panel-light: #66635c;*/
   --bg-panel-light: hsl(45, 4%, 38%);
   --bg-sidebar: var(--bluegreen-900);
   --bg-tab: var(--darkgray-100);
@@ -60,9 +60,7 @@
   --accent: var(--bluegreen-500);
   --warning-red: var(--red-fade-50);
   --notice-red: var(--red-900);
-  --svg-ring-thick: hsla(180, 35%, 58%, 0.26);
-  --svg-ring-thin: hsla(180, 25%, 50%, .15);
-  --svg-line: hsla(180, 25%, 50%, .20);
+  --polar-grid-stroke: var(--bluegreen-fade-15);
   --button-shadow-thin: var(--darkgray-fade-50) 0px 4px 6px -2px, rgba(0, 0, 0, 0.3) 0px 1px 5px -3px;
   --button-shadow: var(--darkgray-fade-50) 0px 6px 8px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   --button-shadow-circle: var(--darkgray-fade-20) 0px 5px 18px 0px, var(--darkgray-fade-15) 0px 5px 29px 0px;

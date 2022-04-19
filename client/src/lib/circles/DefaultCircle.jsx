@@ -18,7 +18,7 @@ export const DefaultCircle = ({ id, playerCircle, centerPoint, isInit, currentFo
           isInit,
           currentForm
         )}
-        {createLinearPath(id, playerCircle.linearDPath, null)}
+        {!isInit ? createLinearPath(id, playerCircle.linearDPath, null) : null}
         {createAnimationPath(id, playerCircle.animationDPath)}
       </defs>
       <path

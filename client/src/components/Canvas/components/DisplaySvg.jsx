@@ -3,22 +3,18 @@ import React, { useEffect } from "react";
 import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
 import { fetchPolarGrid } from "../../../socket.io/emitters";
-import { createBlob } from "../../../utils";
 import { FinalCircle } from "../../../lib/circles";
 /* ------ */
 
 const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
   /* Update the display grid based on new view dimensions */
-  const { width, centerPoint } = display;
+  const { width, centerPoint, polarGridPath, partialPath } = display;
   useEffect(() => {
-    if (!display.polarGridPath) {
-      return;
-    }
     fetchPolarGrid(socket, {
       width,
       centerPoint,
     });
-  }, [width]);
+  }, [socket, centerPoint, width]);
   const createFinalText = () => {
     if (!Object.keys(session.players)) {
       return;
@@ -37,7 +33,7 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
       );
     }
     finalTexts.unshift(
-      <text className="svg__test-header" x={textPosition} y={50}>
+      <text key={"final_header"} className="svg__test-header" x={textPosition} y={50}>
         {session.interest.toUpperCase()}
       </text>
     );
@@ -64,8 +60,8 @@ const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
   return (
     <svg className={`svg__canvas svg__canvas-light`}>
       <PolarGrid
-        path={display.polarGridPath}
-        partialPath={!session.displayGrid ? display.partialPath : null}
+        path={polarGridPath}
+        partialPath={!session.displayGrid ? partialPath : null}
         displayGrid={session.displayGrid}
       />
       {finalDisplays}

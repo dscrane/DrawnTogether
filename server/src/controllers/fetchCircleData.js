@@ -21,9 +21,7 @@ export const fetchCircleData = async (socket, finalDisplay) => {
     const initialCircles = await Circle.find({
       _id: { $in: initialGameCircles },
     });
-
-    socket.emit("final-display-circles", [...circles,...initialCircles], (status) => {
-    // socket.emit("final-display-circles", [...initialCircles, ...circles], (status) => {
+    socket.emit("final-display-circles", [...initialCircles, ...circles], (status) => {
       status ?
         log.socket(socket.handshake.auth.gameId, 'final display successful') :
         log.socketError(socket.id, 'final display failed')

@@ -9,7 +9,7 @@ const CircleDisplay = ({ currentForm, playerCircles, resizeRatio, resizeCircles 
     circles = playerCircles;
   }
 
-  return currentForm > 2 ? circles.map((circle) => <>{circle}</>) : <></>;
+  return currentForm > 2 ? circles.map((circle) => circle) : <></>;
 };
 
 export default CircleDisplay;

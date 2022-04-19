@@ -100,7 +100,7 @@ export default (state = INITIAL_STATE, action) => {
         ),
       };
     case UPDATE_POLAR_GRID:
-      console.info(action.type, action.payload);
+      console.info(action.type, Object.keys(action.payload));
       return {
         ...state,
         display: {

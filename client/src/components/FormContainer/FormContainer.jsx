@@ -33,7 +33,7 @@ const FormContainer = ({
   nextForm,
   prevForm,
   endGame,
-  centerPoint,
+  display,
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
   const handlePrevious = async () => {
@@ -47,7 +47,6 @@ const FormContainer = ({
   };
   const handleSubmit = async (values) => {
     if (currentForm === 1) {
-      console.log(Object.keys(players).length);
       if (!Object.keys(players).length) {
         await initializePlayersEmitter(socket, gameId, values);
       } else {
@@ -67,7 +66,7 @@ const FormContainer = ({
           session.playerIds[currentPlayer],
           values.players[currentPlayer],
           currentForm,
-          centerPoint
+          display.centerPoint
         );
         await nextPlayer(currentPlayer);
       } else {
@@ -97,7 +96,7 @@ const FormContainer = ({
 const mapStateToProps = ({ gameState }) => {
   const { _id, display, players, ...rest } = gameState;
   return {
-    centerPoint: display.centerPoint,
+    display,
     players,
     gameId: _id,
     session: rest,

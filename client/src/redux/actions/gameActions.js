@@ -53,8 +53,8 @@ export const startGame = () => async (dispatch) => {
   });
 };
 // END_GAME ACTION CREATOR
-export const endGame = () => (dispatch) => {
-  dispatch({ type: END_GAME });
+export const endGame = () => async (dispatch) => {
+  await dispatch({ type: END_GAME });
 };
 // NEXT_FORM ACTION CREATOR
 export const nextForm = (currentForm) => async (dispatch, getState) => {
@@ -132,7 +132,6 @@ export const updatePolarGrid = (paths) => (dispatch) => {
 export const finalDisplay = (circles) => async (dispatch, getState) => {
   const { display, currentForm } = getState().gameState;
   const finalForm = currentForm + 1;
-  console.log(circles);
   const finalCircles = circles.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
 
   dispatch({

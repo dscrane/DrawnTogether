@@ -8,8 +8,6 @@
 export function createRadian(age, radius) {
   const min = age < radius ? (age + (radius * 1.25)) : age - 20;
   const max = min > age + 20 ? min + 20 : age + 20;
-  console.log(age, radius)
-
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -139,10 +137,14 @@ export function altRadius(radius, leaning, personality) {
   const leaningShift = radius * (leaning / 100);
   leaning % 2 === 0 ? (radius += leaningShift) : (radius -= leaningShift);
   const personalityShift = radius * (personality / 100);
+  if (personality === 18) {
+    Math.floor(Math.random() * 100 + 1) % 2 === 0 ? (radius += personalityShift)
+      : (radius -= personalityShift);
+  } else {
   personality % 2 === 0
     ? (radius += personalityShift)
     : (radius -= personalityShift);
-
+  }
   return radius;
 }
 

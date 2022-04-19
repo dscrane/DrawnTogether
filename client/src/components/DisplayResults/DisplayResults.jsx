@@ -14,7 +14,7 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
   };
   useEffect(() => {
     const screenshotTimer = setTimeout(async () => {
-      sendScreenshot();
+      await sendScreenshot();
     }, 4000);
     return () => clearTimeout(screenshotTimer);
   }, []);
@@ -30,8 +30,11 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
           light: "#2b2b2b",
         },
       };
-      // const urlData = await QRCode.toDataURL(`https://dsc-circle-server.herokuapp.com/games/screenshot/${gameId}`, opts);
-      const urlData = await QRCode.toDataURL(`http://192.168.1.62:5500/games/screenshot/${gameId}`, opts);
+      const apiUrl =
+        process.env.NODE_ENV === "production"
+          ? "https://dsc-circle-server.herokuapp.com"
+          : process.env.REACT_APP_SERVER;
+      const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${gameId}`, opts);
 
       setQrcode(urlData);
     };
@@ -39,20 +42,6 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
       createQRCode();
     }
   }, [screenshot]);
-
-  /*  const resultsDisplay = !qrcode ? (
-    <>
-      <p className="landing__text landing__text-smaller">
-        If you would like an emailed version of your display click the button below
-      </p>
-      <ActionButton onClick={handleSubmit} buttonType={"screenshot"} text={"Take Screenshot"} />
-    </>
-  ) : (
-    <div className="landing ">
-      <p className="landing__text landing__text-smaller">Scan the code below to download the final display</p>
-      <img className="results__qrcode" src={`${qrcode}`} alt="screenshot-qrcode" />
-    </div>
-  );*/
 
   return (
     <div className="landing">

@@ -19,8 +19,8 @@ export const responseSchema = {
   color: "",
 };
 
-const getValue = (vals) => {
-  return vals[Math.floor(Math.random() * vals.length)];
+const getValue = (vals, i) => {
+  return i ? vals[i] : vals[Math.floor(Math.random() * vals.length)];
 };
 const names = [
   "Gonzales",
@@ -71,26 +71,26 @@ const religionVals = ["solid", "round", "dotted", "uneven", "dashed"];
 const cultureVals = [1, 2, 3, 4];
 const colorVals = ["chartreuse", "vermilion", "cobalt", "teal", "kellyGreen", "aubergine"];
 
-export const createResponseSchema = () =>
+export const createResponseSchema = (i) =>
   !process.env.REACT_APP_AUTOFILL
     ? responseSchema
     : {
-        name: getValue(names),
+        name: getValue(names, i),
         association: Math.floor(Math.random() * 100),
-        height: getValue(heightVals),
-        curiosity: getValue(curiosityVals),
-        hair: getValue(hairVals),
-        age: getValue(ageVals),
-        diet: getValue(dietVals),
-        personality: getValue(personalityVals),
-        leaning: getValue(leaningVals),
-        productivity: getValue(productivityVals),
-        money: getValue(moneyVals),
-        food: getValue(foodVals),
-        nature: getValue(natureVals),
-        media: getValue(mediaVals),
-        progress: getValue(progressVals),
-        religion: getValue(religionVals),
-        culture: getValue(cultureVals),
-        color: getValue(colorVals),
+        height: getValue(heightVals, i),
+        curiosity: getValue(curiosityVals, i),
+        hair: getValue(hairVals, i),
+        age: getValue(ageVals, i),
+        diet: getValue(dietVals, i),
+        personality: getValue(personalityVals, i),
+        leaning: getValue(leaningVals, i),
+        productivity: getValue(productivityVals, i),
+        money: getValue(moneyVals, i),
+        food: getValue(foodVals, i),
+        nature: getValue(natureVals, i),
+        media: getValue(mediaVals, i),
+        progress: getValue(progressVals, i),
+        religion: getValue(religionVals, i),
+        culture: getValue(cultureVals, i),
+        color: getValue(colorVals, i),
       };

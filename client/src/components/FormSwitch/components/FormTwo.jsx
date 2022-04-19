@@ -40,8 +40,8 @@ export const FormTwo = ({ currentPlayer }) => {
         >
           <option value="DEFAULT">Choose...</option>
           <option value={60}>Introvert</option>
-          <option value={18}>Extrovert</option>
-          <option value={31}>It Depends</option>
+          <option value={31}>Extrovert</option>
+          <option value={18}>It Depends</option>
         </Field>
       </div>
     </>

@@ -35,12 +35,12 @@
     z-index: 100;
     white-space: nowrap;
     bottom: calc(var(--tooltip-margin) * -1);
-    margin-left: 2rem;
+    margin-left: 3.75rem;
 }
 
 .tooltip__content::before {
     content: " ";
-    left: calc(50% - 2rem);
+    left: calc(50% - 3.75rem);
     border: solid transparent;
     height: 0;
     width: 0;
