@@ -15,6 +15,7 @@ import { fetchCircleData } from "./controllers/fetchCircleData.js";
 import { updateScreenshot } from "./controllers/updateScreenshot.js";
 import { endGame } from "./controllers/endGame.js";
 import { log } from "./utils/logs.js";
+import {PolarGrid} from "./utils/polarGrid.js";
 
 // Set port
 const PORT = process.env.PORT || 5500;
@@ -30,7 +31,6 @@ const io = new Server(httpServer, {
 const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "/src/public")));
-app.use(express.static(path.join(__dirname, "/uploads")));
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cors({ origin: "http://localhost:3000" }));
 
@@ -39,33 +39,56 @@ app.use(gameRouter);
 app.use(userRouter);
 
 io.on("connect", (socket) => {
+  log.socket(socket.id, `${socket.handshake.auth.gameId} has connected`)
+  socket.on("connect_error", (err) => {
+    console.log(err.req);      // the request object
+    console.log(err.code);     // the error code, for example 1
+    console.log(err.message);  // the error message, for example "Session ID unknown"
+    console.log(err.context);  // some additional error context
+  });
   socket.on(
     "initialize-players",
-    async ({ gameId, formValues: { curiosity, players } }) => {
-      await initializePlayers(socket, gameId, curiosity, players);
+    async ({ gameId, formValues: { interest, players } }) => {
+      log.socket(socket.handshake.auth.gameId, 'is initializing players');
+      await initializePlayers(socket, gameId, interest, players);
     }
   );
   socket.on("reinitialize-players", async ({ playerIds, formValues: { players } }) => {
+    log.socket(socket.handshake.auth.gameId, 'is reinitializing players');
     await reinitializePlayers(socket, playerIds, players)
   })
   socket.on("update-player", async (updateData) => {
+    log.socket(socket.handshake.auth.gameId, 'is updating a player');
     await updatePlayer(socket, updateData);
   });
   socket.on("fetch-circles", async () => {
+    log.socket(socket.handshake.auth.gameId, 'is fetching player circles');
     await fetchCircleData(socket);
   });
   socket.on("fetch-polar-grid", async (gridData) => {
+    log.socket(socket.handshake.auth.gameId, 'is fetching polar grid');
     await fetchPolarGrid(socket, gridData)
   });
   socket.on("final-display", async () => {
+    log.socket(socket.handshake.auth.gameId, 'is creating the final display');
     await fetchCircleData(socket, true);
   });
   socket.on("end-game", async () => {
+    log.socket(socket.handshake.auth.gameId, 'is ending the game');
     await endGame(socket);
+    // io.disconnectSockets();
   });
   socket.on("save-screenshot", async (screenshotData) => {
+    log.socket(socket.handshake.auth.gameId, 'is saving a screenshot');
     await updateScreenshot(socket, screenshotData)
   })
+  socket.on("connection_error", (err) => {
+    console.log(err)
+  })
+  socket.on("disconnect", (reason) => {
+    log.socket(socket.handshake.auth.gameId, reason)
+  })
+
 });
 
 app.get("/*", (req, res) => {

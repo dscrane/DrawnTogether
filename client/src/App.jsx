@@ -18,7 +18,6 @@ import {
 export const App = ({
   _id,
   inProgress,
-  display,
   displayCircles,
   finalDisplay,
   initializePlayers,
@@ -30,62 +29,69 @@ export const App = ({
   reinitializePlayers,
 }) => {
   const [socket, setSocket] = useState(null);
-  const { width, centerPoint } = display;
 
   useEffect(() => {
-    if (inProgress) {
+    if (inProgress && _id !== "") {
       let newSocket =
         process.env.NODE_ENV === "production"
-          ? io({ auth: { gameId: _id } })
-          : io(process.env.REACT_APP_SERVER, { auth: { gameId: _id } });
+          ? io({ auth: { gameId: _id }, transports: ["websocket", "polling"] })
+          : io(process.env.REACT_APP_SERVER, { auth: { gameId: _id }, transports: ["websocket", "polling"] });
       setSocket(newSocket);
       return;
     }
-  }, [inProgress]);
+  }, [inProgress, _id]);
 
   useEffect(() => {
     if (!inProgress || !socket) {
       return;
     }
-    socket.on("connect", async () => {
-      await socket.emit("fetch-polar-grid", {
-        width,
-        centerPoint,
-      });
-    });
     socket.on("initialized-players", async (players, ack) => {
-      const status = await initializePlayers(players);
-      ack(status);
-    });
-    socket.on("reinitialized-players", (resetPlayers, ack) => {
-      reinitializePlayers(resetPlayers);
+      await initializePlayers(players);
       ack(true);
     });
-    socket.on("polar-grid", (polarGridPath, ack) => {
-      updatePolarGrid(polarGridPath);
+    socket.on("reinitialized-players", async (resetPlayers, ack) => {
+      await reinitializePlayers(resetPlayers);
       ack(true);
     });
-    socket.on("updated-circle", (circle, ack) => {
-      updatePlayerCircle(circle);
+    socket.on("polar-grid", async (paths, ack) => {
+      await updatePolarGrid(paths);
       ack(true);
     });
-    socket.on("display-circles", (circles, ack) => {
-      displayCircles(circles);
+    socket.on("updated-circle", async (circle, ack) => {
+      await updatePlayerCircle(circle);
       ack(true);
     });
-    socket.on("final-display-circles", (circles, ack) => {
-      finalDisplay(circles);
+    socket.on("display-circles", async (circles, ack) => {
+      await displayCircles(circles);
       ack(true);
     });
-    socket.on("restart-game", (status, ack) => {
-      status.endGame ? endGame() : console.log("end game failed");
+    socket.on("final-display-circles", async (circles, ack) => {
+      await finalDisplay(circles);
       ack(true);
     });
-    socket.on("screenshot-taken", (status, ack) => {
-      updateScreenshot(status);
+    socket.on("restart-game", async (status, ack) => {
+      await endGame();
+      await socket.disconnect();
       ack(true);
     });
-  }, [socket, _id, initializePlayers, nextPlayer, endGame]);
+    socket.on("screenshot-taken", async (status, ack) => {
+      await updateScreenshot(status);
+      ack(true);
+    });
+  }, [
+    socket,
+    _id,
+    inProgress,
+    initializePlayers,
+    reinitializePlayers,
+    displayCircles,
+    finalDisplay,
+    updatePlayerCircle,
+    updateScreenshot,
+    updatePolarGrid,
+    nextPlayer,
+    endGame,
+  ]);
 
   return (
     <div className="app" data-testid="component-App">
@@ -101,11 +107,10 @@ export const App = ({
   );
 };
 
-const mapStateToProps = ({ gameState: { _id, inProgress, display } }) => {
+const mapStateToProps = ({ gameState: { _id, inProgress } }) => {
   return {
     _id,
     inProgress,
-    display,
   };
 };
 
