@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import * as htmlToImage from "html-to-image";
 import QRCode from "qrcode";
+import { ClipLoader } from "react-spinners";
 import { ActionButton } from "../ActionButton";
 import { endGameEmitter, saveScreenshotEmitter } from "../../socket.io/emitters";
 import "./displayResults.css";
 
 const DisplayResults = ({ gameId, socket, screenshot }) => {
   const [qrcode, setQrcode] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const sendScreenshot = async () => {
     const dataUrl = await htmlToImage.toPng(document.getElementById("canvas"));
@@ -37,6 +39,7 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
       const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${gameId}`, opts);
 
       setQrcode(urlData);
+      setLoading(false);
     };
     if (screenshot) {
       createQRCode();
@@ -46,9 +49,13 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
   return (
     <div className="landing">
       <p className="landing__text">The final results of your group are displayed to the right.</p>
-      <div className={!qrcode ? "invisible" : "qrcode__container"}>
+      <div className="qrcode__container">
         <p className="landing__text landing__text-smaller">Scan the code below to download the final display</p>
-        <img className="results__qrcode" src={`${qrcode}`} alt="screenshot-qrcode" />
+        {loading ? (
+          <ClipLoader color="hsl(180, 51%, 71%)" loading={loading} size={50} speedMultiplier={0.65} />
+        ) : (
+          <img className="results__qrcode" src={`${qrcode}`} alt="screenshot-qrcode" />
+        )}
       </div>
       <p className="landing__text">If you would like to play again please hit the "Reset" button!</p>
       <ActionButton onClick={() => endGameEmitter(socket)} buttonType={"restart"} text={"Restart\nGame"} />

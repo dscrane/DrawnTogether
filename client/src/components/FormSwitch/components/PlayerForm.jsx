@@ -42,7 +42,7 @@ export const PlayerForm = ({ values }) => {
             type="text"
             validate={validateInterest}
           />
-          <ErrorMessage name="interest" />
+          <ErrorMessage name="interest">{(msg) => <span className="control__error">{msg}</span>}</ErrorMessage>
         </div>
       </div>
       <FieldArray
@@ -82,7 +82,7 @@ export const PlayerForm = ({ values }) => {
                     type="text"
                     component={renderField}
                     label={"Time"}
-                    validate={validateNumber}
+                    // validate={validateNumber}
                   />
                 </div>
               </div>
