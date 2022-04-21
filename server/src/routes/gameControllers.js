@@ -1,19 +1,8 @@
-import express from "express";
-import multer from "multer";
-import { Game } from "../models/game.js";
 import path from "path";
+import express from "express";
+import { Game } from "../models/game.js";
 import { log } from "../utils/logs.js";
-import fs from 'fs';
 
-// Multer config
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => {
-    console.log(file);
-    cb(null, file.originalname);
-  },
-});
-const screenshot = multer({ storage: storage });
 // Router initialization
 const router = new express.Router();
 
@@ -38,13 +27,7 @@ router.post("/games/generateSession", async (req, res) => {
     console.log(e);
   }
 });
-router.post(
-  "/games/sendScreenshot",
-  screenshot.single("screenshot"),
-  async (req, res) => {
-    res.send({ screenshotStatus: true });
-  }
-);
+
 
 
 export { router as gameRouter };

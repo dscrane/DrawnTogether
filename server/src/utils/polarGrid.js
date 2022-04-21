@@ -5,16 +5,12 @@ export class PolarGrid {
     this._xAxisCenter = centerPoint.x;
     this._yAxisCenter = centerPoint.y;
     this._topMax = Math.floor(Math.random() * (30 - 27 + 1) + 27) * 10;
-    // this._topMax = 270;
     this._topMin = this._topMax - 60;
     this._bottomMin = Math.floor(Math.random() * (12 - 0 + 1)) * 10;
     this._bottomMax = this._bottomMin + 30;
     this._polarGridPath = this.createPolarGridPath();
     this._partialGridPath = this.createPartialPath();
   }
-
-
-
   get partialPath() {
     return this._partialGridPath;
   }

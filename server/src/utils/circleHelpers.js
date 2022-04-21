@@ -6,8 +6,8 @@
  * @returns {number} Radian set for player circle
  */
 export function createRadian(age, radius) {
-  const min = age < radius ? (age + (radius * 1.25)) : age - 20;
-  const max = min > age + 20 ? min + 20 : age + 20;
+  const min = radius > age - 20 ? (age + (radius * 1.25)) : age - 20;
+  const max = min + 40;
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 

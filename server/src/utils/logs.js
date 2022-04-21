@@ -30,6 +30,11 @@ const controllerSuccess = (log, id, status) => {
   console.log(`\x1b[37m${log} \x1b[36m${id} \x1b[32m${status}`)
 }
 
+const controllerFailure = (log, id, status) => {
+  console.log(`\x1b[37m${log} \x1b[36m${id} \x1b[31m${status}`)
+
+}
+
 const socket = (socketId, log) => {
   console.log(`\x1b[33m${socketId}\x1b[37m ${log}\x1b[0m`)
 }
@@ -49,4 +54,5 @@ export const log = {
   socketError,
   controller,
   controllerSuccess,
+  controllerFailure
 };
