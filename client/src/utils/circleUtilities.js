@@ -136,7 +136,7 @@ function createPathAndAnimation(playerCircle, id, innerRadius, outerRadius) {
     if (playerCircle.isAnimated) {
       animation = (
         <animateMotion dur="10s" repeatCount="indefinite">
-          <mpath href={`#linearPath${id}`} />
+          <mpath href={`#animationPath${id}`} />
         </animateMotion>
       );
       innerPath = circlePathTemplate(0, 0, innerRadius);

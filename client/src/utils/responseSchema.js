@@ -76,7 +76,7 @@ export const createResponseSchema = (i) =>
     ? responseSchema
     : {
         name: getValue(names, i),
-        association: Math.floor(Math.random() * 100),
+        association: Math.floor(Math.random() * 100).toString(),
         height: getValue(heightVals, i),
         curiosity: getValue(curiosityVals, i),
         hair: getValue(hairVals, i),

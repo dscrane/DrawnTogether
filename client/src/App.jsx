@@ -78,6 +78,9 @@ export const App = ({
       await updateScreenshot(status);
       ack(true);
     });
+    socket.on("error", async (err) => {
+      console.log(err);
+    });
   }, [
     socket,
     _id,
