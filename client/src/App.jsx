@@ -35,7 +35,7 @@ export const App = ({
       let newSocket =
         process.env.NODE_ENV === "production"
           ? io({ auth: { gameId: _id }, transports: ["websocket", "polling"] })
-          : io(process.env.REACT_APP_SERVER, { auth: { gameId: _id }, transports: ["websocket", "polling"] });
+          : io(process.env.REACT_APP_SERVER, { auth: { gameId: _id } });
       setSocket(newSocket);
       return;
     }
@@ -106,6 +106,7 @@ export const App = ({
           <Canvas socket={socket} />
         </div>
       </div>
+      <div className="cr">C 2020-2022 - Drawn Together - Created by Carrie and Daegan Crane</div>
     </div>
   );
 };
