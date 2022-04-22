@@ -4,14 +4,12 @@
     url("./fonts/Quicksand-Regular.ttf") format('truetype');
   font-weight: 400;
 }
-
 @font-face {
   font-family: 'Quicksand';
   src: local('Quicksand'),
     url("./fonts/Quicksand-SemiBold.ttf") format('truetype');
   font-weight: 600;
 }
-
 :root {
   --black: #000000;
   --white: ivory;
@@ -52,9 +50,23 @@
   --red-900: hsl(9, 100%, 84%);
   --red-fade-75: hsla(9, 100%, 64%, .75);
   --red-fade-50: hsla(13, 100%, 50%, 0.5);
-
 }
-.blue_gray_pink {
+/* ----   html & body styles    ---- */
+::before, ::after {
+  box-sizing: border-box;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  font-size: x-small;
+  margin: 0 0;
+}
+body {
+  font-family: Quicksand, sans-serif;
   --bg-canvas: var(--darkgray-500);
   --bg-panel: var(--darkgray-500);
   --bg-panel-light: hsl(45, 4%, 38%);
@@ -85,28 +97,6 @@
   --tooltip-arrow-size: 6px;
   --svg-text: hsl(245, 10%, 26%)
   /*--panel-shadow: var(--darkgray-100) 0px 3px 8px;*/
-}
-
-::before, ::after {
-  box-sizing: border-box;
-}
-
-* {
-  box-sizing: border-box;
-
-}
-
-/* ----   html & body styles    ---- */
-html,
-body {
-  height: 100vh;
-  width: 100vw;
-  font-size: x-small;
-  margin: 0 0;
-}
-body {
-  color: var(--font-dark) !important;
-  font-family: Quicksand, sans-serif;
 }
 #root {
   align-items: start;
@@ -144,7 +134,6 @@ body {
   flex-direction: row;
   justify-content: center;
 }
-
 .cr {
   position: fixed;
   left: 15px;
