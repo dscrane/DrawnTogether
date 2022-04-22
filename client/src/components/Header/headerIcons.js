@@ -7,7 +7,7 @@ import {
   PublicOutlined,
   WatchOutlined,
   ShoppingCartOutlined,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 export const headerIcons = [
   PeopleAltOutlined,
