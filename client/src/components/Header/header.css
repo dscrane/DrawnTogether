@@ -9,6 +9,7 @@
   font-size: 5rem;
   font-weight: 600;
   margin: 0;
+  filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.85));
 }
 .header__text {
   width: 90%;
@@ -16,6 +17,7 @@
   font-size: 1.6rem;
   text-align: center;
   color: var(--accent);
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.85));
 }
 .header__icons {
   display: flex;
@@ -30,6 +32,7 @@
   color: var(--font-light);
   overflow: hidden;
   line-height: 1;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.85));
 }
 .header__icon-active {
   color: var(--accent);
