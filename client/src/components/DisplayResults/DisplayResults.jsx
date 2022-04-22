@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as htmlToImage from "html-to-image";
+import { toPng } from "html-to-image";
 import QRCode from "qrcode";
 import { ClipLoader } from "react-spinners";
 import { ActionButton } from "../ActionButton";
@@ -11,9 +11,10 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
   const [loading, setLoading] = useState(true);
 
   const sendScreenshot = async () => {
-    const dataUrl = await htmlToImage.toPng(document.getElementById("canvas"));
+    const dataUrl = await toPng(document.getElementById("canvas"));
     saveScreenshotEmitter(socket, dataUrl);
   };
+
   useEffect(() => {
     const screenshotTimer = setTimeout(async () => {
       await sendScreenshot();

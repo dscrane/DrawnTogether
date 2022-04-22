@@ -4,7 +4,7 @@ import { validateString, validateNumber, validateInterest } from "../../../utils
 import { responseSchema } from "../../../utils";
 import { ActionButton } from "../../ActionButton";
 import { Tooltip } from "../../../lib/Tooltip/Tooltip";
-import { HelpTwoTone, ErrorOutlineRounded } from "@material-ui/icons";
+import { HelpTwoTone, ErrorOutlineRounded } from "@mui/icons-material";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
