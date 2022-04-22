@@ -1,0 +1,11 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.info__text {
+    font-size: 2rem;
+}

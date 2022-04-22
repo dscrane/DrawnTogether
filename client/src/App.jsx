@@ -14,6 +14,8 @@ import {
   updatePlayerCircle,
   reinitializePlayers,
 } from "./redux/actions";
+import { Modal } from "./lib/Modal";
+import { MoreInformation } from "./components/MoreInformation";
 
 export const App = ({
   _id,
@@ -28,6 +30,7 @@ export const App = ({
   updatePlayerCircle,
   reinitializePlayers,
 }) => {
+  const [showModal, setShowModal] = useState(false);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -98,6 +101,10 @@ export const App = ({
 
   return (
     <div className="app" data-testid="component-App">
+      <Modal show={showModal} onClose={() => setShowModal(!showModal)}>
+        <span>Drawn Together</span>
+        <MoreInformation />
+      </Modal>
       <div className="app__display">
         <div className="app__sidebar">
           <Panel socket={socket} />
