@@ -245,6 +245,65 @@ function createCircleDesign(circleData, centerPoint, currentForm) {
   }
 }
 
+/**
+ * Creates the playerCircle's secondary radial gradient
+ * @function createRadialGradient
+ * @param {string} secondaryColor -- playerCircle's secondary color
+ * @param {number} design -- playerCircle's design
+ * @param {number} designThickness -- playerCircle's designThickness
+ * @param {number} id -- playerCircle's player id
+ * @param {number} radius -- playerCircle's radius
+ * @returns {JSX.Element} <radialGradient />
+ * */
+function createSecondaryGradient(id, secondaryColor, design, designThickness, radius) {
+  const offsets = ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"];
+  const offsetsThick = ["0%", "25%", "50%", "75%", "100%"];
+  const secondaryLightColor = secondaryColor.replace(/([0-9]*)%\)/g, (match, p0) => {
+    return `${parseInt(p0) * 1.3}%)`;
+  });
+
+  if (design === "dot") {
+    const secondaryLightestColor = secondaryColor.replace(/([0-9]*)%\)/g, (match, p0) => {
+      return `${parseInt(p0) * 1.4}%)`;
+    });
+    return (
+      <radialGradient id={`secondaryRadialGradient${id}`}>
+        <stop key={`gradient_stop_${0}`} offset="25%" stopColor={secondaryColor} stopOpacity={1} />
+        <stop key={`gradient_stop_${50}`} offset="75%" stopColor={secondaryLightColor} stopOpacity={1} />
+        <stop key={`gradient_stop_${100}`} offset="100%" stopColor={secondaryLightestColor} stopOpacity={1} />
+      </radialGradient>
+    );
+  }
+  console.log(designThickness / radius);
+  if (designThickness / radius > 0.22) {
+    return (
+      <radialGradient id={`secondaryRadialGradient${id}`} spreadMethod="repeat">
+        {offsetsThick.map((el, i) => (
+          <stop
+            key={`gradient_stop_${i}`}
+            offset={el}
+            stopColor={i % 2 === 0 ? secondaryColor : secondaryLightColor}
+            stopOpacity={1}
+          />
+        ))}
+      </radialGradient>
+    );
+  }
+
+  return (
+    <radialGradient id={`secondaryRadialGradient${id}`} spreadMethod="repeat">
+      {offsets.map((el, i) => (
+        <stop
+          key={`gradient_stop_${i}`}
+          offset={el}
+          stopColor={i % 2 === 0 ? secondaryColor : secondaryLightColor}
+          stopOpacity={1}
+        />
+      ))}
+    </radialGradient>
+  );
+}
+
 /* Export necessary pieces */
 export {
   rerenderCircles,
@@ -256,4 +315,5 @@ export {
   createEssPath,
   createCircleDesign,
   createAnimationPath,
+  createSecondaryGradient,
 };

@@ -1,6 +1,12 @@
 /* IMPORTS */
 import React from "react";
-import { createLinearPath, createRadialGradient, createPathAndAnimation, createAnimationPath } from "../../utils";
+import {
+  createLinearPath,
+  createRadialGradient,
+  createPathAndAnimation,
+  createAnimationPath,
+  createSecondaryGradient,
+} from "../../utils";
 /* ------ */
 
 export const DotCircle = ({ id, playerCircle, centerPoint }) => {
@@ -13,6 +19,13 @@ export const DotCircle = ({ id, playerCircle, centerPoint }) => {
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
         {createAnimationPath(id, playerCircle.animationDPath)}
+        {createSecondaryGradient(
+          id,
+          playerCircle.secondaryColor,
+          playerCircle.design,
+          playerCircle.designThickness,
+          playerCircle.radius
+        )}
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <g id={`circle_${id}`}>
@@ -26,7 +39,7 @@ export const DotCircle = ({ id, playerCircle, centerPoint }) => {
           key={`circle_${id}_inner`}
           className=" circle circle__over"
           d={innerPath}
-          fill={playerCircle.secondaryColor}
+          fill={`url(#secondaryRadialGradient${id})`}
         />
         {animation}
       </g>

@@ -6,6 +6,7 @@ import {
   circlePathTemplate,
   createAnimationPath,
   createPathAndAnimation,
+  createSecondaryGradient,
 } from "../../utils";
 /* ------ */
 
@@ -20,6 +21,13 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
         {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
         {createAnimationPath(id, playerCircle.animationDPath)}
+        {createSecondaryGradient(
+          id,
+          playerCircle.secondaryColor,
+          playerCircle.design,
+          playerCircle.designThickness,
+          playerCircle.radius
+        )}
       </defs>
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
       <g id={`circle_${id}`}>
@@ -34,7 +42,7 @@ export const RingCircle = ({ id, playerCircle, centerPoint }) => {
           className="circle circle__outer"
           d={outerPath}
           fill="none"
-          stroke={playerCircle.secondaryColor}
+          stroke={`url(#secondaryRadialGradient${id})`}
           strokeWidth={playerCircle.designThickness}
         />
         {animation}
