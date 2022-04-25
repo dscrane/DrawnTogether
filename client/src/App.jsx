@@ -107,7 +107,7 @@ export const App = ({
       </Modal>
       <div className="app__display">
         <div className="app__sidebar">
-          <Panel socket={socket} />
+          <Panel socket={socket} showModal={() => setShowModal(true)} />
         </div>
         <div className="app__canvas">
           <Canvas socket={socket} />

@@ -4,17 +4,25 @@ import { Header } from "../Header";
 import { Landing } from "../Landing";
 import { DisplayResults } from "../DisplayResults";
 import { FormContainer } from "../FormContainer";
+import { HelpOutlineRounded } from "@mui/icons-material";
 import "./panel.css";
 
-const Panel = ({ socket, _id, currentForm, screenshot }) => {
+const Panel = ({ socket, _id, currentForm, screenshot, showModal }) => {
   const display = () => {
     if (currentForm === 0) {
-      return <Landing />;
+      return <Landing showModal={showModal} />;
     } else {
-      return currentForm > 8 ? (
-        <DisplayResults socket={socket} gameId={_id} screenshot={screenshot} />
-      ) : (
-        <FormContainer socket={socket} />
+      return (
+        <>
+          <button className="help" onClick={showModal}>
+            <HelpOutlineRounded className="help__icon" />
+          </button>
+          {currentForm > 8 ? (
+            <DisplayResults socket={socket} gameId={_id} screenshot={screenshot} />
+          ) : (
+            <FormContainer socket={socket} />
+          )}
+        </>
       );
     }
   };

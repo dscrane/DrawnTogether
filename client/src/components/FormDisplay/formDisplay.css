@@ -91,7 +91,7 @@
 }
 .item__name {
   color: var(--font-light);
-  font-size: 1.7rem;
+  font-size: 1.85rem;
   font-weight: bold;
   flex: 1;
   text-align: left;
@@ -100,11 +100,11 @@
   margin: 0 0;
   padding: 0 0;
   background: none;
-  border-width: 0 0 1px 0;
-  border-color: var(--notice-red);
-  border-style: solid;
+  border: none;
   color: var(--notice-red);
-  font-size: 1.25rem;
+}
+.removeCTA__icon {
+  font-size: 2rem !important;
 }
 .item__addCTA {
   font-size: 1.5rem;
@@ -127,7 +127,7 @@
 }
 .form__control {
   flex: 10;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   display: block;
   width: 100%;
   border-radius: 0.33rem;

@@ -5,7 +5,7 @@ export const FormFour = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Nature Nature?</label>
+        <label className="item__label item__label-select">Nature Nature</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.nature`}
@@ -20,7 +20,7 @@ export const FormFour = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Social Media Appetite?</label>
+        <label className="item__label item__label-select">Social Media Appetite</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.media`}
@@ -35,7 +35,7 @@ export const FormFour = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Cause for Concern?</label>
+        <label className="item__label item__label-select">Cause for Concern</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.progress`}

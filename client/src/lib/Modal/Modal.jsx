@@ -7,8 +7,8 @@ export const Modal = ({ show, onClose, children }) => {
   return (
     <>
       {show ? (
-        <div className="modal visible">
-          <main className="modal__content visible">
+        <div className="modal visible" onClick={onClose}>
+          <main className="modal__content visible" onClick={(e) => e.stopPropagation()}>
             <header className="modal__header">
               <div className="modal__header-title">{children[0]}</div>
               <button className="modal__close" onClick={onClose}>

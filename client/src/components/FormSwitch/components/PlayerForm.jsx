@@ -4,7 +4,7 @@ import { validateString, validateNumber, validateInterest } from "../../../utils
 import { responseSchema } from "../../../utils";
 import { ActionButton } from "../../ActionButton";
 import { Tooltip } from "../../../lib/Tooltip/Tooltip";
-import { HelpTwoTone, ErrorOutlineRounded } from "@mui/icons-material";
+import { HelpTwoTone, ErrorOutlineRounded, CloseRounded } from "@mui/icons-material";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
@@ -15,7 +15,7 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
       ) : (
         <div className="tooltip__wrapper">
           <label className="item__label item__label-tooltip">{label}</label>
-          <Tooltip content="Number of hours, months, years, etc">
+          <Tooltip content="In hours, months, or years">
             <HelpTwoTone className="tooltip__icon" />
           </Tooltip>
         </div>
@@ -52,7 +52,7 @@ export const PlayerForm = ({ values }) => {
             {values.players.map((player, index) => (
               <div key={`player_${index}`} className="form__row">
                 <div className="form__item">
-                  <div className="item__name">Player #{index + 1}</div>
+                  <div className="item__name">Player {index + 1}</div>
                   {values.players.length < 3 ? null : (
                     <button
                       className="item__removeCTA"
@@ -60,7 +60,7 @@ export const PlayerForm = ({ values }) => {
                       title="Remove Player"
                       onClick={() => remove(index)}
                     >
-                      Remove
+                      <CloseRounded className="removeCTA__icon" />
                     </button>
                   )}
                 </div>

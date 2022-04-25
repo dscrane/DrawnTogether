@@ -5,7 +5,7 @@ export const FormThree = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">You and Your Wallet?</label>
+        <label className="item__label item__label-select">You and Your Wallet</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.money`}
@@ -20,7 +20,7 @@ export const FormThree = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Food Attitude?</label>
+        <label className="item__label item__label-select">Food Attitude</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.food`}

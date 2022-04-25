@@ -5,7 +5,7 @@ export const FormTwo = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Cognitive Disposition?</label>
+        <label className="item__label item__label-select">Cognitive Disposition</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.leaning`}

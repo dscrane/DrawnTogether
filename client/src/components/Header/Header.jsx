@@ -7,10 +7,10 @@ const Header = ({ currentForm }) => {
   const displayHeaderIcons = currentForm > 0 && currentForm < 8 ? createHeaderIcons(currentForm) : null;
   return (
     <div className="header" data-testid="component-Header">
-      <h1 className="header__title">
+      <div className="header__title">
         Drawn <br />
         Together
-      </h1>
+      </div>
       <h3 className="header__text">an interactive image generator</h3>
       <div className="header__icons">{displayHeaderIcons}</div>
     </div>

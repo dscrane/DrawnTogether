@@ -5,7 +5,7 @@ export const FormOne = ({ currentPlayer }) => {
   return (
     <>
       <div className="form__row">
-        <label className="item__label item__label-select">Tallness?</label>
+        <label className="item__label item__label-select">Tallness</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.height`}
@@ -19,7 +19,7 @@ export const FormOne = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Most Distracted by?</label>
+        <label className="item__label item__label-select">Most Distracted by</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.curiosity`}
@@ -35,7 +35,7 @@ export const FormOne = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Best Hair Day?</label>
+        <label className="item__label item__label-select">Best Hair Day</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.hair`}
@@ -50,7 +50,7 @@ export const FormOne = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Elderliness?</label>
+        <label className="item__label item__label-select">Elderliness</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.age`}
@@ -71,7 +71,7 @@ export const FormOne = ({ currentPlayer }) => {
         </Field>
       </div>
       <div className="form__row">
-        <label className="item__label item__label-select">Dietary Predilection?</label>
+        <label className="item__label item__label-select">Dietary Predilection</label>
         <Field
           className="form__control form__control-select"
           name={`players.${currentPlayer}.diet`}

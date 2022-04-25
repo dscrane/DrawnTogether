@@ -7,6 +7,7 @@
   color: var(--font-light);
   text-align: center;
   font-size: 5rem;
+  line-height: 5rem;
   font-weight: 600;
   margin: 0;
   filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.85));
@@ -15,6 +16,7 @@
   width: 90%;
   margin: 1vh 0;
   font-size: 1.6rem;
+  font-weight: 600;
   text-align: center;
   color: var(--accent);
   filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.85));
