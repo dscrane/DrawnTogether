@@ -69,7 +69,11 @@ export class PolarGrid {
   createFullLines = (partial) => {
     let fullRingsPath = "";
     for (let i = 0; i < 360; i += 30) {
-      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+      if (
+        partial &&
+        (i < this._topMin || i > this._topMax) &&
+        (i < this._bottomMin || i > this._bottomMax)
+      ) {
         continue;
       }
       const theta = i * (Math.PI / 180);
@@ -87,7 +91,11 @@ export class PolarGrid {
   createLongLines = (partial) => {
     let longLinesPath = "";
     for (let i = 0; i < 360; i += 10) {
-      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+      if (
+        partial &&
+        (i < this._topMin || i > this._topMax) &&
+        (i < this._bottomMin || i > this._bottomMax)
+      ) {
         continue;
       }
       if (i % 30 === 0) {
@@ -100,7 +108,6 @@ export class PolarGrid {
           5,
           theta
         )} L ${this.xEndPoint(theta)}, ${this.yEndPoint(theta)} `;
-      // path = path + `M ${xStartPoint(5, theta)}, ${yStartPoint(5, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
     return longLinesPath;
   };
@@ -111,7 +118,11 @@ export class PolarGrid {
       if (i % 30 === 0 || i % 10 === 0) {
         continue;
       }
-      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+      if (
+        partial &&
+        (i < this._topMin || i > this._topMax) &&
+        (i < this._bottomMin || i > this._bottomMax)
+      ) {
         continue;
       }
       const theta = i * (Math.PI / 180);
@@ -121,7 +132,6 @@ export class PolarGrid {
           15,
           theta
         )} L ${this.xEndPoint(theta)}, ${this.yEndPoint(theta)} `;
-      // path = path + `M ${xStartPoint(15, theta)}, ${yStartPoint(15, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
     return mediumLinesPath;
   };
@@ -129,7 +139,11 @@ export class PolarGrid {
   createShortLines = (partial) => {
     let shortLinesPath = "";
     for (let i = 0; i < 360; i += 1) {
-      if (partial && (i < this._topMin || i > this._topMax) && (i < this._bottomMin || i > this._bottomMax)) {
+      if (
+        partial &&
+        (i < this._topMin || i > this._topMax) &&
+        (i < this._bottomMin || i > this._bottomMax)
+      ) {
         continue;
       }
       if (i % 30 === 0 || i % 10 === 0 || i % 2 === 0) {
@@ -142,22 +156,15 @@ export class PolarGrid {
           35,
           theta
         )} L ${this.xEndPoint(theta)}, ${this.yEndPoint(theta)} `;
-      // path = path + `M ${xStartPoint(35, theta)}, ${yStartPoint(35, theta)} L ${xEndPoint(theta)}, ${yEndPoint(theta)} `;
     }
     return shortLinesPath;
   };
 
   createPartialPath = () =>
-    this.circlePathTemplate(
-      this._xAxisCenter,
-      this._yAxisCenter,
-      0.5 * this._ringSpacing
-    ) +
     this.createFullLines(true) +
     this.createLongLines(true) +
     this.createMediumLines(true) +
     this.createShortLines(true);
-
 
   createPolarGridPath = () =>
     this.circlePathTemplate(
