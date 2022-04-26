@@ -35,8 +35,8 @@
 .p-button__restart {
     border-radius: 50%;
     font-size: 2rem;
-    height: 100px;
-    width: 100px;
+    height: 125px;
+    width: 125px;
     box-shadow: var(--button-shadow-circle);
 
 }

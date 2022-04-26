@@ -1,8 +1,32 @@
-.qrcode__container {
+.results {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 25px;
+    justify-content: flex-start;
+    height: 100%;
+    padding-top: 2rem;
+}
+.results__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.results__restart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.qrcode__container {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*padding-bottom: 25px;*/
 }
 
 .results__qrcode {

@@ -48,18 +48,22 @@ const DisplayResults = ({ gameId, socket, screenshot }) => {
   }, [screenshot]);
 
   return (
-    <div className="landing">
-      <p className="landing__text">The final results of your group are displayed to the right.</p>
-      <div className="qrcode__container">
-        <p className="landing__text landing__text-smaller">Scan the code below to download the final display</p>
-        {loading ? (
-          <ClipLoader color="hsl(180, 51%, 71%)" loading={loading} size={50} speedMultiplier={0.65} />
-        ) : (
-          <img className="results__qrcode" src={`${qrcode}`} alt="screenshot-qrcode" />
-        )}
+    <div className="results">
+      <div className="results__content">
+        <p className="landing__text">...the final results for your group...</p>
+        <div className="qrcode__container">
+          <p className="landing__text landing__text-smaller">Scan the code below to download the final display</p>
+          {loading ? (
+            <ClipLoader color="hsl(180, 51%, 71%)" loading={loading} size={50} speedMultiplier={0.65} />
+          ) : (
+            <img className="results__qrcode" src={`${qrcode}`} alt="screenshot-qrcode" />
+          )}
+        </div>
       </div>
-      <p className="landing__text">If you would like to play again please hit the "Reset" button!</p>
-      <ActionButton onClick={() => endGameEmitter(socket)} buttonType={"restart"} text={"Restart\nGame"} />
+      <div className="results__restart">
+        <p className="landing__text">If you would like to play again please hit the "Reset" button!</p>
+        <ActionButton onClick={() => endGameEmitter(socket)} buttonType={"restart"} text={"Restart\nGame"} />
+      </div>
     </div>
   );
 };
