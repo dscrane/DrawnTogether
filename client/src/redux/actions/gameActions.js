@@ -21,12 +21,17 @@ import { api } from "../../utils";
 // TODO think about aspect ratio for resizing circles if that is possible
 /* ----   Game Actions    ---- */
 // GENERATE_SESSION ACTION CREATOR
-export const generateSession = () => async (dispatch) => {
-  const { data } = await api.post("/games/generateSession", {});
-  console.log(data);
+export const generateSession = () => async (dispatch, getState) => {
+  const { width, centerPoint } = getState().gameState.display;
+  const { data } = await api.post("/games/generateSession", { centerPoint, width });
   dispatch({
     type: GENERATE_SESSION,
-    payload: { ...data.game, currentForm: 1, displayGrid: true, currentPlayer: 0 },
+    payload: {
+      session: { ...data.game, currentForm: 1, displayGrid: true, currentPlayer: 0 },
+      display: {
+        ...data.gridPaths,
+      },
+    },
   });
 };
 // INITIALIZE_PLAYERS ACTION CREATOR
@@ -122,10 +127,11 @@ export const updatePlayerCircle =
     });
   };
 // UPDATE_POLAR_GRID ACTION CREATOR
-export const updatePolarGrid = (paths) => (dispatch) => {
+export const updatePolarGrid = (width, centerPoint) => async (dispatch) => {
+  const { data } = await api.post("/games/fetchPolarGrid", { width, centerPoint });
   dispatch({
     type: UPDATE_POLAR_GRID,
-    payload: paths,
+    payload: { ...data },
   });
 };
 // FINAL_DISPLAY ACTION CREATOR

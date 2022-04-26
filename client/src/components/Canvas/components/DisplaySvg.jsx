@@ -2,19 +2,15 @@
 import React, { useEffect } from "react";
 import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
-import { fetchPolarGrid } from "../../../socket.io/emitters";
 import { FinalCircle } from "../../../lib/circles";
 /* ------ */
 
-const DisplaySvg = ({ socket, display, session, resizePlayerCircles }) => {
+const DisplaySvg = ({ display, session, resizePlayerCircles, updatePolarGrid }) => {
   /* Update the display grid based on new view dimensions */
   const { width, centerPoint, polarGridPath, partialPath } = display;
   useEffect(() => {
-    fetchPolarGrid(socket, {
-      width,
-      centerPoint,
-    });
-  }, [socket, centerPoint, width]);
+    updatePolarGrid(width, centerPoint);
+  }, [centerPoint, width]);
   const createFinalText = () => {
     if (!Object.keys(session.players)) {
       return;

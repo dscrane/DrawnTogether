@@ -23,7 +23,11 @@ export default (state = INITIAL_STATE, action) => {
       console.info(action.type, action.payload);
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.session,
+        display: {
+          ...state.display,
+          ...action.payload.display,
+        },
       };
     }
     case INITIALIZE_PLAYERS:
@@ -105,8 +109,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         display: {
           ...state.display,
-          polarGridPath: action.payload.polarGridPath,
-          partialPath: action.payload.partialPath,
+          ...action.payload,
         },
       };
     case FINAL_DISPLAY:

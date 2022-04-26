@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { ActionButton } from "../ActionButton";
 import { DisplaySvg } from "./components";
-import { updateDisplayDimensions, startGame, generateSession } from "../../redux/actions";
+import { updateDisplayDimensions, startGame, updatePolarGrid, generateSession } from "../../redux/actions";
 import { debounce } from "../../utils";
 import "./canvas.css";
 
-const Canvas = ({ socket, display, session, updateDisplayDimensions, generateSession, startGame }) => {
+const Canvas = ({ socket, display, session, updateDisplayDimensions, generateSession, updatePolarGrid }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -34,13 +34,12 @@ const Canvas = ({ socket, display, session, updateDisplayDimensions, generateSes
 
   const buttonOnClick = async () => {
     await generateSession();
-    // await startGame();
   };
 
   return (
     <div id="canvas" className="svg__container" ref={displaySVG}>
       {session.currentForm !== 0 ? (
-        <DisplaySvg socket={socket} session={session} display={display} />
+        <DisplaySvg socket={socket} session={session} display={display} updatePolarGrid={updatePolarGrid} />
       ) : (
         <ActionButton onClick={buttonOnClick} text={"Begin Game"} buttonType={"start"} />
       )}
@@ -58,6 +57,7 @@ const mapStateToProps = ({ gameState }) => {
 
 export default connect(mapStateToProps, {
   updateDisplayDimensions,
+  updatePolarGrid,
   generateSession,
   startGame,
 })(Canvas);

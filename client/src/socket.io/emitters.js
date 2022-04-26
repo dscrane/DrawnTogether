@@ -23,10 +23,11 @@ export const fetchCirclesEmitter = (socket) => {
   socket.emit("fetch-circles");
 };
 
-export const fetchPolarGrid = (socket, data) => {
-  console.log(socket.id, "fetchPolarGrid");
-  socket.emit("fetch-polar-grid", data);
-};
+// export const fetchPolarGrid = (socket, data) => {
+//   console.log(socket.id, "fetchPolarGrid");
+//   console.log(data);
+//   socket.emit("fetch-polar-grid", data);
+// };
 
 export const finalDisplayEmitter = (socket) => {
   console.log(socket.id, "finalDisplayEmitter");
