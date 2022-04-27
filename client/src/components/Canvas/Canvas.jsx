@@ -6,7 +6,7 @@ import { updateDisplayDimensions, startGame, updatePolarGrid, generateSession } 
 import { debounce } from "../../utils";
 import "./canvas.css";
 
-const Canvas = ({ socket, display, session, updateDisplayDimensions, generateSession, updatePolarGrid }) => {
+const Canvas = ({ display, session, updateDisplayDimensions, generateSession, updatePolarGrid }) => {
   const displaySVG = useRef(null);
 
   /* Sets initial bounds for background grid */
@@ -39,7 +39,7 @@ const Canvas = ({ socket, display, session, updateDisplayDimensions, generateSes
   return (
     <div id="canvas" className="svg__container" ref={displaySVG}>
       {session.currentForm !== 0 ? (
-        <DisplaySvg socket={socket} session={session} display={display} updatePolarGrid={updatePolarGrid} />
+        <DisplaySvg session={session} display={display} updatePolarGrid={updatePolarGrid} />
       ) : (
         <ActionButton onClick={buttonOnClick} text={"Begin Game"} buttonType={"start"} />
       )}

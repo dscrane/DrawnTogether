@@ -9,6 +9,7 @@ import {
   NEXT_PLAYER,
   PREV_PLAYER,
   DISPLAY_CIRCLES,
+  ADD_PLAYER_CIRCLE,
   UPDATE_PLAYER_CIRCLE,
   UPDATE_POLAR_GRID,
   FINAL_DISPLAY,
@@ -35,15 +36,24 @@ export const generateSession = () => async (dispatch, getState) => {
   });
 };
 // INITIALIZE_PLAYERS ACTION CREATOR
-export const initializePlayers = (initialPlayers) => async (dispatch) => {
+export const initializePlayers = (gameId, values) => async (dispatch) => {
+  const { data } = await api.post("/games/initializePlayers", {
+    gameId,
+    interest: values.interest,
+    players: values.players,
+  });
   await dispatch({
     type: INITIALIZE_PLAYERS,
-    payload: { ...initialPlayers },
+    payload: { ...data },
   });
 };
 // REINITIALIZE_PLAYERS ACTION CREATOR
-export const reinitializePlayers = (reinitializedPlayers) => (dispatch) => {
-  dispatch({ type: REINITIALIZE_PLAYERS, payload: { ...reinitializedPlayers } });
+export const reinitializePlayers = (playerIds, values) => async (dispatch) => {
+  const { data } = await api.post("/games/reinitializePlayers", {
+    playerIds,
+    values,
+  });
+  dispatch({ type: REINITIALIZE_PLAYERS, payload: { ...data } });
 };
 // START_GAME ACTION CREATOR
 export const startGame = () => async (dispatch) => {
@@ -58,7 +68,8 @@ export const startGame = () => async (dispatch) => {
   });
 };
 // END_GAME ACTION CREATOR
-export const endGame = () => async (dispatch) => {
+export const endGame = (gameId) => async (dispatch) => {
+  await api.post("/games/endGame", { gameId });
   await dispatch({ type: END_GAME });
 };
 // NEXT_FORM ACTION CREATOR
@@ -114,18 +125,40 @@ export const displayCircles = (circles) => (dispatch, getState) => {
     },
   });
 };
+// ADD_PLAYER_CIRCLE
+export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
+  const { display, _id } = getState().gameState;
+  const { data } = await api.post("/games/addPlayerCircle", {
+    centerPoint,
+    playerId,
+    gameId: _id,
+    responses: formData,
+    updateStep: currentForm,
+  });
+  dispatch({
+    type: ADD_PLAYER_CIRCLE,
+    payload: createCircleDesign(data, display.centerPoint, currentForm),
+  });
+};
 // UPDATE_PLAYER_CIRCLE
-export const updatePlayerCircle =
-  ({ circle }) =>
-  (dispatch, getState) => {
-    const { display, currentForm } = getState().gameState;
-    const circleSvg = createCircleDesign(circle, display.centerPoint, currentForm);
+export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
+  const { display, currentForm, _id } = getState().gameState;
+  const { data } = await api.post("/games/updatePlayer", {
+    centerPoint,
+    playerId,
+    gameId: _id,
+    responses: formData,
+    updateStep: currentForm,
+  });
+  console.log(data);
 
-    dispatch({
-      type: UPDATE_PLAYER_CIRCLE,
-      payload: { circleSvg },
-    });
-  };
+  const circleSvg = createCircleDesign(data, display.centerPoint, currentForm);
+
+  dispatch({
+    type: UPDATE_PLAYER_CIRCLE,
+    payload: { circleSvg },
+  });
+};
 // UPDATE_POLAR_GRID ACTION CREATOR
 export const updatePolarGrid = (width, centerPoint) => async (dispatch) => {
   const { data } = await api.post("/games/fetchPolarGrid", { width, centerPoint });
@@ -135,10 +168,12 @@ export const updatePolarGrid = (width, centerPoint) => async (dispatch) => {
   });
 };
 // FINAL_DISPLAY ACTION CREATOR
-export const finalDisplay = (circles) => async (dispatch, getState) => {
+export const finalDisplay = (gameId) => async (dispatch, getState) => {
   const { display, currentForm } = getState().gameState;
+  const { data } = await api.post("/games/fetchCircleData", { gameId });
+  console.log(data);
   const finalForm = currentForm + 1;
-  const finalCircles = circles.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
+  const finalCircles = data.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
 
   dispatch({
     type: FINAL_DISPLAY,
@@ -158,12 +193,11 @@ export const updateDisplayDimensions =
     });
   };
 // UPDATE_SCREENSHOT ACTION CREATOR
-export const updateScreenshot =
-  ({ screenshot }) =>
-  (dispatch) => {
-    dispatch({
-      type: UPDATE_SCREENSHOT,
-      payload: screenshot,
-    });
-  };
+export const updateScreenshot = (gameId, screenshotData) => async (dispatch) => {
+  const { data } = await api.post("/games/updateScreenshot", { gameId, screenshotData });
+  dispatch({
+    type: UPDATE_SCREENSHOT,
+    payload: data,
+  });
+};
 /* ----  ***  ---- */

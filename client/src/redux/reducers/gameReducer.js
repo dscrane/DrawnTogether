@@ -15,6 +15,7 @@ import {
   FINAL_DISPLAY,
   UPDATE_DISPLAY_DIMENSIONS,
   UPDATE_SCREENSHOT,
+  ADD_PLAYER_CIRCLE,
 } from "../types";
 
 export default (state = INITIAL_STATE, action) => {
@@ -94,6 +95,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         circles: [...action.payload.circleSvgs],
+      };
+    case ADD_PLAYER_CIRCLE:
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        circles: [...state.circles, action.payload],
       };
     case UPDATE_PLAYER_CIRCLE:
       console.info(action.type, action.payload);

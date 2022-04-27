@@ -1,14 +1,18 @@
 import React from "react";
 import { FormDisplay } from "../FormDisplay";
 import { connect } from "react-redux";
-import { endGame, finalDisplay, nextForm, nextPlayer, prevForm, prevPlayer } from "../../redux/actions";
 import {
-  fetchCirclesEmitter,
-  finalDisplayEmitter,
-  initializePlayersEmitter,
-  reinitializePlayersEmitter,
-  updatePlayerEmitter,
-} from "../../socket.io/emitters";
+  endGame,
+  finalDisplay,
+  initializePlayers,
+  nextForm,
+  nextPlayer,
+  prevForm,
+  prevPlayer,
+  reinitializePlayers,
+  addPlayerCircle,
+  updatePlayerCircle,
+} from "../../redux/actions";
 import { createResponseSchema } from "../../utils";
 import "./formContainer.css";
 
@@ -24,7 +28,6 @@ const formResponseSchema = {
 };
 
 const FormContainer = ({
-  socket,
   session,
   gameId,
   players,
@@ -34,6 +37,11 @@ const FormContainer = ({
   prevForm,
   endGame,
   display,
+  initializePlayers,
+  reinitializePlayers,
+  addPlayerCircle,
+  updatePlayerCircle,
+  finalDisplay,
 }) => {
   const { currentForm, currentPlayer, numPlayers } = session;
   const handlePrevious = async () => {
@@ -48,31 +56,37 @@ const FormContainer = ({
   const handleSubmit = async (values) => {
     if (currentForm === 1) {
       if (!Object.keys(players).length) {
-        await initializePlayersEmitter(socket, gameId, values);
+        await initializePlayers(gameId, values);
       } else {
-        await reinitializePlayersEmitter(socket, session.playerIds, values);
+        await reinitializePlayers(session.playerIds, values);
       }
       await nextForm(currentForm);
       return;
     }
     if (currentForm === 8) {
-      await finalDisplayEmitter(socket);
+      await finalDisplay(gameId);
       return;
     }
-    if (currentForm >= 2 && currentForm <= 7) {
-      if (currentPlayer < numPlayers) {
-        await updatePlayerEmitter(
-          socket,
-          session.playerIds[currentPlayer],
-          values.players[currentPlayer],
-          currentForm,
-          display.centerPoint
-        );
-        await nextPlayer(currentPlayer);
-      } else {
-        await fetchCirclesEmitter(socket);
-        await nextForm(currentForm);
-      }
+    if (currentForm === 2) {
+      await addPlayerCircle(
+        session.playerIds[currentPlayer],
+        values.players[currentPlayer],
+        currentForm,
+        display.centerPoint
+      );
+    } else if (currentForm > 2 && currentForm <= 7) {
+      await updatePlayerCircle(
+        session.playerIds[currentPlayer],
+        values.players[currentPlayer],
+        currentForm,
+        display.centerPoint
+      );
+    }
+
+    if (currentPlayer < numPlayers - 1) {
+      await nextPlayer(currentPlayer);
+    } else {
+      await nextForm(currentForm);
     }
   };
 
@@ -110,4 +124,8 @@ export default connect(mapStateToProps, {
   prevForm,
   endGame,
   finalDisplay,
+  initializePlayers,
+  reinitializePlayers,
+  addPlayerCircle,
+  updatePlayerCircle,
 })(FormContainer);

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { PolarGrid } from "../../PolarGrid";
 import { CircleDisplay } from "../../CircleDisplay";
 import { FinalCircle } from "../../../lib/circles";
+import { createFinalText } from "../../../utils";
 /* ------ */
 
 const DisplaySvg = ({ display, session, resizePlayerCircles, updatePolarGrid }) => {
@@ -11,39 +12,11 @@ const DisplaySvg = ({ display, session, resizePlayerCircles, updatePolarGrid }) 
   useEffect(() => {
     updatePolarGrid(width, centerPoint);
   }, [centerPoint, width]);
-  const createFinalText = () => {
-    if (!Object.keys(session.players)) {
-      return;
-    }
-    const finalTexts = [];
-    const playerNames = Object.values(session.players).map((el) => el.name);
-    const longestName = playerNames.sort((a, b) => a.length - b.length).pop();
-    const positionSetterText = longestName.length > session.interest.length ? longestName : session.interest;
-    const textPosition = (positionSetterText.length * 8) / 2 + 50;
-
-    for (let player in session.players) {
-      finalTexts.push(
-        <text key={`final_${session.players[player]._id}`} x={textPosition} y={50 + 25 * (parseInt(player) + 1)}>
-          {session.players[player].name}
-        </text>
-      );
-    }
-    finalTexts.unshift(
-      <text key={"final_header"} className="svg__test-header" x={textPosition} y={50}>
-        {session.interest.toUpperCase()}
-      </text>
-    );
-    return (
-      <g className="svg__text" textAnchor="middle">
-        {finalTexts}
-      </g>
-    );
-  };
 
   const finalDisplays =
     session.currentForm === 9 ? (
       <>
-        {createFinalText()}
+        {createFinalText(session)}
         <FinalCircle
           key={`final_circle`}
           gameId={session._id}
@@ -65,6 +38,7 @@ const DisplaySvg = ({ display, session, resizePlayerCircles, updatePolarGrid }) 
         <CircleDisplay
           currentForm={session.currentForm}
           playerCircles={session.finalCircles.length ? session.finalCircles : session.circles}
+          centerPoint={centerPoint}
           resizeRatio={display.resizeRatio}
           resizeCircles={session.resizeCircles}
           resizePlayerCircles={resizePlayerCircles}
