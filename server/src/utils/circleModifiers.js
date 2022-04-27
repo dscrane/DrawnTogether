@@ -64,6 +64,7 @@ function initialCircleVariables(responses, centerPoint) {
     yCartesian: yCartesian,
     radian,
     radius: radius,
+    isAnimated: false,
     design: "initialCircle",
     ...createFillColor(responses.height, degree),
   };
@@ -123,15 +124,28 @@ function circleAlterationTwo(responses, circleData, centerPoint) {
     responses.productivity
   );
 
-  const linearDPath = createLinearDPath(centerPoint, xCartesian, yCartesian, circleData.radian, degree);
-  const animationDPath = createLinearDPath(centerPoint, xCartesian, yCartesian, circleData.radian, degree, true);
+  const linearDPath = createLinearDPath(
+    centerPoint,
+    xCartesian,
+    yCartesian,
+    circleData.radian,
+    degree
+  );
+  const animationDPath = createLinearDPath(
+    centerPoint,
+    xCartesian,
+    yCartesian,
+    circleData.radian,
+    degree,
+    true
+  );
   circleData = {
     ...circleData,
     degree,
     xCartesian,
     yCartesian,
     linearDPath,
-    animationDPath
+    animationDPath,
   };
   return { circleData };
 }
@@ -170,7 +184,11 @@ function circleAlterationThree(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFour(responses, circleData) {
-  const lineDesign = createLineDesign(responses.religion, responses.culture, { hue: circleData.hue, saturation: circleData.saturation, lightness: circleData.lightness, });
+  const lineDesign = createLineDesign(responses.religion, responses.culture, {
+    hue: circleData.hue,
+    saturation: circleData.saturation,
+    lightness: circleData.lightness,
+  });
   circleData = {
     ...circleData,
     lineDesign,
