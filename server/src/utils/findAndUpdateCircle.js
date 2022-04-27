@@ -6,7 +6,7 @@ export const findAndUpdateCircle = async (
   { gameId, playerId, updateStep, centerPoint },
   responses
 ) => {
-  log.controller(`Alteration ${updateStep} for`, playerId, "begun");
+  log.update(`Alteration for`, playerId, "begun");
   try {
     // Find user's circle ensuring it is not an initial circle
     const userCircle = await Circle.findOne({

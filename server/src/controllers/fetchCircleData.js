@@ -29,7 +29,7 @@ export const fetchCircleData = async (res, { gameId }) => {
 
     // Send circle data to client
     res.send([...initialCircles, ...circles]);
-    log.controller("Fetching final circle data for", gameId, "complete");
+    log.controllerSuccess("Fetching final circle data for", gameId, "complete");
     return;
   } catch (err) {
     log.controllerFailure("Fetching circle data for", gameId, "failed");

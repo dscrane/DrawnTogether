@@ -42,7 +42,13 @@ router.post("/games/addPlayerCircle", async (req, res) => {
 });
 
 router.post("/games/updatePlayer", async (req, res) => {
-  log.controller("Updating player for", req.body.updateData.gameId, "begun");
+  if (req.body.currentPlayer === 0) {
+    log.controller(
+      `Alteration #${req.body.updateStep} for`,
+      req.body.gameId,
+      "begun"
+    );
+  }
   await updatePlayer(res, req.body);
 });
 

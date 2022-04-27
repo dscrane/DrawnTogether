@@ -42,6 +42,14 @@ const socketError = (socketId, log) => {
   console.log(`\x1b[33m${socketId}\x1b[31m ${log}\x1b[0m`);
 };
 
+const update = (log, id, status) => {
+  console.log(`\x1b[37m${log} \x1b[33m${id}: \x1b[37m${status}`);
+};
+
+const updateSuccess = (log, id, status) => {
+  console.log(`\x1b[37m${log} \x1b[33m${id}: \x1b[32m${status}`);
+};
+
 export const log = {
   red,
   green,
@@ -54,4 +62,6 @@ export const log = {
   controller,
   controllerSuccess,
   controllerFailure,
+  update,
+  updateSuccess,
 };

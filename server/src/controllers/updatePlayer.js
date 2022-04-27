@@ -21,11 +21,14 @@ export const updatePlayer = async (res, updateData) => {
 
     // Handle sending the updated circle to the client to display
     res.send({ ...updatedCircle });
-    log.controllerSuccess(
-      `Alteration ${updateData.updateStep} for`,
-      updateData.playerId,
-      "complete"
-    );
+    log.updateSuccess(`Alteration for`, updateData.playerId, "complete");
+    if (updateData.currentPlayer === updateData.numPlayers - 1) {
+      log.controllerSuccess(
+        `Alteration #${updateData.updateStep} for`,
+        updateData.gameId,
+        "success"
+      );
+    }
     return;
   } catch (err) {
     log.controllerFailure(

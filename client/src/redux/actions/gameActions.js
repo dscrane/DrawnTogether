@@ -143,10 +143,12 @@ export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) =>
 };
 // UPDATE_PLAYER_CIRCLE
 export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
-  const { display, currentForm, _id } = getState().gameState;
+  const { display, currentForm, _id, currentPlayer, numPlayers } = getState().gameState;
   const { data } = await api.post("/games/updatePlayer", {
     centerPoint,
     playerId,
+    currentPlayer,
+    numPlayers,
     gameId: _id,
     responses: formData,
     updateStep: currentForm,

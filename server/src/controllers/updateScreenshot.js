@@ -32,6 +32,7 @@ export const updateScreenshot = async (res, { gameId, screenshotData }) => {
     );
     // Return status to client
     res.send({ screenshot: true });
+    log.controllerSuccess("Updating screenshot for", gameId, "success");
   } catch (err) {
     log.red(err);
   }
