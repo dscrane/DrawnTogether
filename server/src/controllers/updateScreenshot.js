@@ -3,19 +3,22 @@ import path from "path";
 import { Game } from "../models/game.js";
 import { log } from "../utils/logs.js";
 
-export const updateScreenshot = async (socket, screenshotData) => {
+export const updateScreenshot = async (res, { gameId, screenshotData }) => {
   try {
-    const __dirname = path.resolve();
-    let game = await Game.findById(socket.handshake.auth.gameId);
+    // Find game by _id
+    const game = await Game.findById(gameId);
+    // Split the screenshot data into pure base64 string
     const screenshotBase64String = screenshotData.split(";base64,").pop();
+    // Update game document screenshot string
     game.screenshot = screenshotBase64String;
+    // Save updated game document
     await game.save();
 
+    // Create the directory path
+    const __dirname = path.resolve();
+    // Write screenshot base64 into a png file and save
     await fs.writeFile(
-      path.join(
-        __dirname,
-        `/uploads/temp/screenshot_${socket.handshake.auth.gameId}.png`
-      ),
+      path.join(__dirname, `/uploads/temp/screenshot_${gameId}.png`),
       screenshotBase64String,
       { encoding: "base64" },
       (err) => {
@@ -27,17 +30,9 @@ export const updateScreenshot = async (socket, screenshotData) => {
         }
       }
     );
-
-    socket.emit("screenshot-taken", { screenshot: true }, (status) => {
-      status
-        ? log.socket(
-            socket.handshake.auth.gameId,
-            "final screenshot successful"
-          )
-        : log.socketError(socket.id, "final screenshot failed");
-    });
+    // Return status to client
+    res.send({ screenshot: true });
   } catch (err) {
     log.red(err);
-    socket.emit("error", err);
   }
 };

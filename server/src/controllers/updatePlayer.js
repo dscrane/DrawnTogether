@@ -4,7 +4,6 @@ import { log } from "../utils/logs.js";
 
 export const updatePlayer = async (res, updateData) => {
   try {
-    log.controller("Updating player for", updateData.gameId, "begun");
     // Find user by current id
     const user = await User.findById(updateData.playerId);
     // Update user responses with from updateData from form

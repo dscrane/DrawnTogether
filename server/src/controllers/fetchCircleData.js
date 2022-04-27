@@ -3,7 +3,6 @@ import { Game } from "../models/game.js";
 import { log } from "../utils/logs.js";
 
 export const fetchCircleData = async (res, { gameId }) => {
-  log.controller("Fetching circle data for", gameId, "begun");
   try {
     // Find the current game
     const game = await Game.findById(gameId);
@@ -28,11 +27,11 @@ export const fetchCircleData = async (res, { gameId }) => {
       _id: { $in: initialGameCircles },
     });
 
+    // Send circle data to client
     res.send([...initialCircles, ...circles]);
     log.controller("Fetching final circle data for", gameId, "complete");
     return;
   } catch (err) {
     log.controllerFailure("Fetching circle data for", gameId, "failed");
-    // socket.emit("error", err);
   }
 };
