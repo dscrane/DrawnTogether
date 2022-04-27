@@ -2,16 +2,11 @@ import { User } from "../models/user.js";
 import { findAndUpdateCircle } from "../utils/findAndUpdateCircle.js";
 import { log } from "../utils/logs.js";
 
-export const updatePlayer = async (socket, updateData) => {
+export const updatePlayer = async (res, updateData) => {
   try {
-    log.controller(
-      "Updating player for",
-      socket.handshake.auth.gameId,
-      "begun"
-    );
-    const gameId = socket.handshake.auth.gameId;
+    log.controller("Updating player for", updateData.gameId, "begun");
     // Find user by current id
-    const user = await User.findById(updateData._id);
+    const user = await User.findById(updateData.playerId);
     // Update user responses with from updateData from form
     user.responses = {
       ...updateData.responses,
@@ -23,37 +18,21 @@ export const updatePlayer = async (socket, updateData) => {
     const responses = { ...updatedUser.responses };
 
     // Find and update the user's circle and return if it is not an initial circle
-    const updatedCircle = await findAndUpdateCircle(
-      gameId,
-      updateData,
-      responses
-    );
+    const updatedCircle = await findAndUpdateCircle(updateData, responses);
 
     // Handle sending the updated circle to the client to display
-    if (updatedCircle) {
-      log.controllerSuccess(
-        `Alteration ${updateData.updateStep} for`,
-        updateData._id,
-        "complete"
-      );
-      socket.emit("updated-circle", { circle: updatedCircle }, (status) => {
-        status
-          ? log.socket(socket.handshake.auth.gameId, "player update successful")
-          : log.socketError(socket.id, "player update failed");
-      });
-      return;
-    }
-
-    log.controllerSuccess(`Initial data for`, updateData._id, "complete");
+    res.send({ ...updatedCircle });
+    log.controllerSuccess(
+      `Alteration ${updateData.updateStep} for`,
+      updateData.playerId,
+      "complete"
+    );
+    return;
   } catch (err) {
-    updateData.updateStep > 2
-      ? log.controllerFailure(
-          `Alteration ${updateData.updateStep} for`,
-          updateData._id,
-          "failed"
-        )
-      : log.controllerFailure(`Initial data for`, updateData._id, "failed");
-
-    socket.emit("error", err);
+    log.controllerFailure(
+      `Alteration ${updateData.updateStep} for`,
+      updateData._id,
+      "failed"
+    );
   }
 };
