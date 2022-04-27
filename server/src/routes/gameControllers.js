@@ -1,8 +1,15 @@
 import path from "path";
 import express from "express";
-import { Game } from "../models/game.js";
+import { generateSession } from "../controllers/generateSession.js";
+import { initializePlayers } from "../controllers/initializePlayers.js";
+import { reinitializePlayers } from "../controllers/reinitializePlayers.js";
+import { addPlayerCircle } from "../controllers/addPlayerCircle.js";
+import { updatePlayer } from "../controllers/updatePlayer.js";
+import { fetchCircleData } from "../controllers/fetchCircleData.js";
+import { updateScreenshot } from "../controllers/updateScreenshot.js";
+import { endGame } from "../controllers/endGame.js";
+import { fetchPolarGrid } from "../controllers/fetchPolarGrid.js";
 import { log } from "../utils/logs.js";
-import { PolarGrid } from "../utils/polarGrid.js";
 
 // Router initialization
 const router = new express.Router();
@@ -14,52 +21,49 @@ router.get("/games/screenshot/:id", async (req, res) => {
   );
 });
 
-router.post("/games/fetchPolarGrid", async (req, res) => {
-  console.log(req.body);
-  const polarGrid = new PolarGrid(req.body);
-  res.send({
-    partialPath: polarGrid.partialPath,
-    polarGridPath: polarGrid.polarGridPath,
-  });
-});
-
-router.get("/games/fetchCircleData", async (req, res) => {});
-
 router.post("/games/generateSession", async (req, res) => {
-  log.cyan("Generating game session");
-  console.log(req.body);
-  try {
-    const polarGrid = new PolarGrid(req.body);
-
-    let newGame = await new Game({
-      inProgress: true,
-      complete: false,
-      timestamp: Date.now(),
-    });
-
-    await newGame.save();
-
-    res.send({
-      game: newGame,
-      gridPaths: {
-        partialPath: polarGrid.partialPath,
-        polarGridPath: polarGrid.polarGridPath,
-      },
-    });
-    log.green("Game session generated");
-  } catch (e) {
-    console.log(e);
-  }
+  log.controller("", "Generating game session", "begun");
+  await generateSession(res, req.body);
 });
 
-router.post("/games/initializePlayers", async (req, res) => {});
+router.post("/games/initializePlayers", async (req, res) => {
+  log.controller("Initializing players for", req.body.gameId, "begun");
+  await initializePlayers(res, req.body);
+});
 
-router.post("/games/reinitializePlayers", async (req, res) => {});
+router.post("/games/reinitializePlayers", async (req, res) => {
+  log.controller("Reinitializing players for", req.body.gameId, "begun");
+  await reinitializePlayers(res, req.body);
+});
 
-router.post("/games/updatePlayer", async (req, res) => {});
+router.post("/games/addPlayerCircle", async (req, res) => {
+  log.controller(`Circle creation for`, req.body.playerId, "begun");
+  await addPlayerCircle(res, req.body);
+});
 
-router.post("/games/updateScreenshot", async (req, res) => {});
+router.post("/games/updatePlayer", async (req, res) => {
+  log.controller("Updating player for", req.body.updateData.gameId, "begun");
+  await updatePlayer(res, req.body);
+});
 
-router.post("/games/endGame", async (req, res) => {});
+router.post("/games/updateScreenshot", async (req, res) => {
+  log.controller("Updating screenshot for", req.body.gameId, "begun");
+  await updateScreenshot(res, req.body);
+});
+
+router.post("/games/endGame", async (req, res) => {
+  log.controller("Ending game for", req.body.gameId, "begun");
+  await endGame(res, req.body);
+});
+
+router.post("/games/fetchCircleData", async (req, res) => {
+  log.controller("Fetching circle data for", req.body.gameId, "begun");
+  await fetchCircleData(res, req.body);
+});
+
+router.post("/games/fetchPolarGrid", async (req, res) => {
+  log.controller("Fetching polar grid data for", null, "begun");
+  await fetchPolarGrid(res, req.body);
+});
 
 export { router as gameRouter };
