@@ -48,8 +48,9 @@ export const initializePlayers = (gameId, values) => async (dispatch) => {
   });
 };
 // REINITIALIZE_PLAYERS ACTION CREATOR
-export const reinitializePlayers = (playerIds, values) => async (dispatch) => {
+export const reinitializePlayers = (gameId, playerIds, values) => async (dispatch) => {
   const { data } = await api.post("/games/reinitializePlayers", {
+    gameId,
     playerIds,
     values,
   });

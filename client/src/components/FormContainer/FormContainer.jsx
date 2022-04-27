@@ -58,7 +58,7 @@ const FormContainer = ({
       if (!Object.keys(players).length) {
         await initializePlayers(gameId, values);
       } else {
-        await reinitializePlayers(session.playerIds, values);
+        await reinitializePlayers(gameId, session.playerIds, values);
       }
       await nextForm(currentForm);
       return;
