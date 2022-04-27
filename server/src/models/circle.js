@@ -26,6 +26,7 @@ export const circleSchema = new mongoose.Schema({
     stroke: String,
     strokeWidth: String,
   },
+  timestamp: Date,
 });
 
 circleSchema.methods.toJson = function () {
