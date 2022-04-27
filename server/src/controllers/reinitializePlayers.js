@@ -1,18 +1,14 @@
 import { User } from "../models/user.js";
 import { log } from "../utils/logs.js";
 
-export const reinitializePlayers = async (socket, playerIds, formPlayers) => {
+export const reinitializePlayers = async (res, { playerIds, values }) => {
   try {
-    log.controller(
-      "Reinitializing players for",
-      socket.handshake.auth.gameId,
-      "begun"
-    );
+    log.controller("Reinitializing players for", "", "begun");
     const resetPlayers = {};
     for (const [i, playerId] of playerIds.entries()) {
       const player = await User.findById(playerId);
 
-      const playerFormValues = formPlayers[i];
+      const playerFormValues = values.players[i];
 
       if (
         player.name === playerFormValues.name &&
@@ -30,25 +26,9 @@ export const reinitializePlayers = async (socket, playerIds, formPlayers) => {
         resetPlayers[i] = await player.save();
       }
     }
-    log.controllerSuccess(
-      "Reinitializing players for",
-      socket.handshake.auth.gameId,
-      "complete"
-    );
-    socket.emit("reinitialized-players", { resetPlayers }, (status) => {
-      status
-        ? log.socket(
-            socket.handshake.auth.gameId,
-            "reinitializing player successful"
-          )
-        : log.socketError(socket.id, "reinitializing players failed");
-    });
+    log.controllerSuccess("Reinitializing players for", "", "complete");
+    res.send({ ...resetPlayers });
   } catch (err) {
-    log.controllerFailure(
-      "Reinitializing players for",
-      socket.handshake.auth.gameId,
-      "failed"
-    );
-    socket.emit("error", err);
+    log.controllerFailure("Reinitializing players for", "", "failed");
   }
 };

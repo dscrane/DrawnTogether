@@ -2,13 +2,9 @@ import { Game } from "../models/game.js";
 import { createPlayerObjects } from "../utils/createPlayerObjects.js";
 import { log } from "../utils/logs.js";
 
-export const initializePlayers = async (socket, gameId, interest, players) => {
+export const initializePlayers = async (res, { gameId, interest, players }) => {
   try {
-    log.controller(
-      "Initializing players for",
-      socket.handshake.auth.gameId,
-      "begun"
-    );
+    log.controller("Initializing players for", gameId, "begun");
     const game = await Game.findById(gameId);
     const { playersObj, playerIds, circles, initialCircles } =
       await createPlayerObjects(players, game._id);
@@ -16,34 +12,13 @@ export const initializePlayers = async (socket, gameId, interest, players) => {
     game.curiosity = interest;
     game.numPlayers = playerIds.length;
     game.playerIds = playerIds;
-    game.circles = circles;
-    game.initialCircles = initialCircles;
+    // game.circles = circles;
+    // game.initialCircles = initialCircles;
 
-    socket.emit(
-      "initialized-players",
-      {
-        numPlayers: playerIds.length,
-        playerIds,
-        playersObj,
-        interest,
-      },
-      (status) => {
-        status
-          ? log.socket(
-              socket.handshake.auth.gameId,
-              "Initializing player successful"
-            )
-          : log.socketError(socket.id, "Initializing players failed");
-      }
-    );
-
+    res.send({ numPlayers: playerIds.length, playerIds, playersObj, interest });
     await game.save();
   } catch (err) {
-    log.controllerFailure(
-      "Initializing players for",
-      socket.handshake.auth.gameId,
-      "failed"
-    );
-    socket.emit("error", err);
+    log.controllerFailure("Initializing players for", gameId, "failed");
+    // socket.emit("error", err);
   }
 };
