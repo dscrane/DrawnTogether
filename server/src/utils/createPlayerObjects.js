@@ -9,7 +9,10 @@ export const createPlayerObjects = async (players, gameId) => {
 
     for (const player of players) {
       const newUser = await new User({
-        name: player.name,
+        responses: {
+          name: player.name,
+          association: player.association.match(/(\d+)/)[0],
+        },
         timestamp: Date.now(),
       });
       newUser.history.push({ gameId: gameId, circles: [] });

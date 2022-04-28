@@ -21,9 +21,9 @@ const formResponseSchema = {
   players: [
     createResponseSchema(),
     createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
+    // createResponseSchema(),
+    // createResponseSchema(),
+    // createResponseSchema(),
   ],
 };
 
@@ -53,7 +53,7 @@ const FormContainer = ({
       await prevPlayer(currentPlayer);
     }
   };
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, actions) => {
     if (currentForm === 1) {
       if (!Object.keys(players).length) {
         await initializePlayers(gameId, values);
@@ -82,7 +82,6 @@ const FormContainer = ({
         display.centerPoint
       );
     }
-
     if (currentPlayer < numPlayers - 1) {
       await nextPlayer(currentPlayer);
     } else {

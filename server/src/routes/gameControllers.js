@@ -9,6 +9,7 @@ import { fetchCircleData } from "../controllers/fetchCircleData.js";
 import { updateScreenshot } from "../controllers/updateScreenshot.js";
 import { endGame } from "../controllers/endGame.js";
 import { fetchPolarGrid } from "../controllers/fetchPolarGrid.js";
+import { validateAndUpdateResponses } from "../middleware/validateAndUpdateResponses.js";
 import { log } from "../utils/logs.js";
 
 // Router initialization
@@ -36,21 +37,29 @@ router.post("/games/reinitializePlayers", async (req, res) => {
   await reinitializePlayers(res, req.body);
 });
 
-router.post("/games/addPlayerCircle", async (req, res) => {
-  log.controller(`Circle creation for`, req.body.playerId, "begun");
-  await addPlayerCircle(res, req.body);
-});
-
-router.post("/games/updatePlayer", async (req, res) => {
-  if (req.body.currentPlayer === 0) {
-    log.controller(
-      `Alteration #${req.body.updateStep} for`,
-      req.body.gameId,
-      "begun"
-    );
+router.post(
+  "/games/addPlayerCircle",
+  validateAndUpdateResponses,
+  async (req, res) => {
+    log.controller(`Circle creation for`, req.body.playerId, "begun");
+    await addPlayerCircle(res, req.body, req.user);
   }
-  await updatePlayer(res, req.body);
-});
+);
+
+router.post(
+  "/games/updatePlayer",
+  validateAndUpdateResponses,
+  async (req, res) => {
+    if (req.body.currentPlayer === 0) {
+      log.controller(
+        `Alteration #${req.body.updateStep} for`,
+        req.body.gameId,
+        "begun"
+      );
+    }
+    await updatePlayer(res, req.body, req.user);
+  }
+);
 
 router.post("/games/updateScreenshot", async (req, res) => {
   log.controller("Updating screenshot for", req.body.gameId, "begun");

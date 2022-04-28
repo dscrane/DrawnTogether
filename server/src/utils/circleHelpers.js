@@ -6,7 +6,7 @@
  * @returns {number} Radian set for player circle
  */
 export function createRadian(age, radius) {
-  const min = radius > age - 20 ? (age + (radius * 1.25)) : age - 20;
+  const min = radius > age - 20 ? age + radius * 1.25 : age - 20;
   const max = min + 40;
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -117,11 +117,10 @@ export function setPlayerDegree(curiosity, hair, diet) {
  */
 export function setCircleRadius(association) {
   const initRadius = 40;
-  const randomness = 10 * (association / 100)
+  const randomness = 10 * (association / 100);
   const min = initRadius - randomness;
   const max = initRadius + randomness;
-  return Math.floor(Math.random() * (max - min + 1) + min)
-
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**
@@ -133,17 +132,17 @@ export function setCircleRadius(association) {
  * @returns {number} altRadius - Current player's circle alternate radius
  */
 export function altRadius(radius, leaning, personality) {
-  //TODO take into account the radian so circle radius is never larger than distance from center
   const leaningShift = radius * (leaning / 100);
   leaning % 2 === 0 ? (radius += leaningShift) : (radius -= leaningShift);
   const personalityShift = radius * (personality / 100);
   if (personality === 18) {
-    Math.floor(Math.random() * 100 + 1) % 2 === 0 ? (radius += personalityShift)
+    Math.floor(Math.random() * 100 + 1) % 2 === 0
+      ? (radius += personalityShift)
       : (radius -= personalityShift);
   } else {
-  personality % 2 === 0
-    ? (radius += personalityShift)
-    : (radius -= personalityShift);
+    personality % 2 === 0
+      ? (radius += personalityShift)
+      : (radius -= personalityShift);
   }
   return radius;
 }
@@ -227,7 +226,9 @@ export function createSecondaryColor(progress, hue, saturation, lightness) {
  */
 export function createLineDesign(religion, culture, color) {
   const { hue, saturation, lightness } = color;
-  const strokeColor = `hsla(${hue + 90 * culture}, ${saturation}%, ${lightness}%, ${1 - culture * .15}`;
+  const strokeColor = `hsla(${
+    hue + 90 * culture
+  }, ${saturation}%, ${lightness}%, ${1 - culture * 0.15}`;
 
   switch (religion) {
     case "dotted":

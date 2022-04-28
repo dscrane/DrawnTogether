@@ -16,6 +16,7 @@ import {
   UPDATE_DISPLAY_DIMENSIONS,
   UPDATE_SCREENSHOT,
   ADD_PLAYER_CIRCLE,
+  UPDATE_PLAYER_RESPONSES,
 } from "../types";
 
 export default (state = INITIAL_STATE, action) => {
@@ -96,19 +97,36 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         circles: [...action.payload.circleSvgs],
       };
-    case ADD_PLAYER_CIRCLE:
+    case UPDATE_PLAYER_RESPONSES:
       console.info(action.type, action.payload);
       return {
         ...state,
-        circles: [...state.circles, action.payload],
+        players: {
+          ...state.players,
+          [action.payload.currentPlayer]: {
+            ...state.players[action.payload.currentPlayer],
+            responses: {
+              ...state.players[action.payload.currentPlayer].responses,
+              ...action.payload.responses,
+            },
+          },
+        },
+      };
+    case ADD_PLAYER_CIRCLE:
+      console.info(action.type, action.payload, state.circles);
+      return {
+        ...state,
+        circles: [
+          ...state.circles.slice(0, action.payload.currentPlayer),
+          action.payload.circleSvg,
+          ...state.circles.slice(action.payload.currentPlayer + 1),
+        ],
       };
     case UPDATE_PLAYER_CIRCLE:
       console.info(action.type, action.payload);
       return {
         ...state,
-        circles: state.circles.map((el, i) =>
-          el.props.id === action.payload.circleSvg.props.id ? action.payload.circleSvg : el
-        ),
+        circles: state.circles.map((el, i) => (el.props.id === action.payload.props.id ? action.payload : el)),
       };
     case UPDATE_POLAR_GRID:
       console.info(action.type, Object.keys(action.payload));

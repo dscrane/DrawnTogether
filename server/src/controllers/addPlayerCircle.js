@@ -5,14 +5,18 @@ import { log } from "../utils/logs.js";
 
 export const addPlayerCircle = async (
   res,
-  { gameId, playerId, responses, centerPoint, updateStep }
+  { gameId, playerId, centerPoint, updateStep },
+  user
 ) => {
   try {
     // Find game by _id
     const game = await Game.findById(gameId);
 
     // Create circle data objects
-    const circleData = circleAlterations[updateStep](responses, centerPoint);
+    const circleData = circleAlterations[updateStep](
+      user.responses,
+      centerPoint
+    );
 
     // Create new circle document
     const newCircle = await new Circle({
@@ -36,7 +40,10 @@ export const addPlayerCircle = async (
     game.initialCircles = [...game.initialCircles, newCircleInitial._id];
 
     // Send the circle data to client
-    res.send({ ...circleData.circleData, playerId });
+    res.send({
+      circle: { ...newCircle.toJson() },
+      responses: user.currentFormData(updateStep),
+    });
 
     // Save new circle documents and updated game document
     await newCircle.save();
@@ -44,5 +51,6 @@ export const addPlayerCircle = async (
     await game.save();
   } catch (err) {
     log.controllerFailure(`Circle creation for`, playerId, "failed");
+    console.log(err);
   }
 };

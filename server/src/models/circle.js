@@ -34,6 +34,7 @@ circleSchema.methods.toJson = function () {
   const circleObject = circle.toObject();
 
   delete circleObject.__v;
+  delete circleObject.timestamp;
 
   return circleObject;
 };

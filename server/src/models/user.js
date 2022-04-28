@@ -4,9 +4,9 @@ import Int32 from "mongoose-int32";
 Int32.loadType(mongoose);
 
 export const userSchema = new mongoose.Schema({
-  name: String,
   hasProfile: Boolean,
   responses: {
+    name: String,
     age: Int32,
     association: Int32,
     color: String,
@@ -79,6 +79,28 @@ userSchema.methods.toJSON = function () {
   delete userObject.__v;
 
   return userObject;
+};
+
+userSchema.methods.currentFormData = function (currentForm) {
+  const formResponses = [
+    null,
+    ["name", "association"],
+    ["height", "curiosity", "hair", "age", "diet"],
+    ["personality", "leaning", "productivity"],
+    ["money", "food"],
+    ["nature", "media", "progress"],
+    ["religion", "culture"],
+    ["color"],
+  ];
+  const user = this;
+  const userObject = user.toObject();
+
+  let currentFormData = {};
+  formResponses[currentForm].forEach(
+    (responseKey) =>
+      (currentFormData[responseKey] = userObject.responses[responseKey])
+  );
+  return currentFormData;
 };
 
 export const User = mongoose.model("User", userSchema);

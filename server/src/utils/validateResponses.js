@@ -1,39 +1,53 @@
 const formResponses = [
-  "name",
-  "association",
-  "age",
-  "diet",
-  "productivity",
-  "height",
-  "curiosity",
-  "leaning",
-  "personality",
-  "hair",
-  "food",
-  "money",
-  "nature",
-  "media",
-  "progress",
-  "religion",
-  "culture",
-  "color",
+  null,
+  ["name", "association"],
+  ["height", "curiosity", "hair", "age", "diet"],
+  ["personality", "leaning", "productivity"],
+  ["money", "food"],
+  ["nature", "media", "progress"],
+  ["religion", "culture"],
+  ["color"],
 ];
 
-export const validateResponses = (responses) => {
-  const isValid = responses.every((response) =>
-    formResponses.includes(response)
+export const validateResponses = (
+  savedResponses,
+  updatedResponses,
+  updateStep
+) => {
+  const valid = formResponses[updateStep].every(
+    (response) => updatedResponses[response] !== ""
   );
 
-  if (!isValid) {
-    throw new ValidationException(
-      "An error has occurred, please try entering your responses again."
+  const updated = formResponses[updateStep].some((response) => {
+    console.log(
+      updatedResponses[response].toString(),
+      `${savedResponses[response]}`
     );
-  } else {
-    return true;
-  }
+    return (
+      !savedResponses[response] ||
+      updatedResponses[response].toString() !==
+        savedResponses[response].toString()
+    );
+  });
+
+  return { valid, updated };
 };
 
-function ValidationException(message) {
-  this.message = message;
-  this.name = "Response Validation Error";
-}
+// export const validateResponses = (responses) => {
+//   const isValid = responses.every((response) =>
+//     formResponses.includes(response)
+//   );
+//
+//   if (!isValid) {
+//     throw new ValidationException(
+//       "An error has occurred, please try entering your responses again."
+//     );
+//   } else {
+//     return true;
+//   }
+// };
+//
+// function ValidationException(message) {
+//   this.message = message;
+//   this.name = "Response Validation Error";
+// }

@@ -28,7 +28,8 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   );
 };
 
-export const PlayerForm = ({ values }) => {
+export const PlayerForm = ({ values, currentForm }) => {
+  console.log(currentForm);
   return (
     <>
       <div className="form__row">

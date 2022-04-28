@@ -14,22 +14,31 @@ export const findAndUpdateCircle = async (
       gameId,
       initial: false,
     }).exec();
+
     // Run the alterations for the current step
-    const { circleData } = circleAlterations[updateStep](
-      responses,
-      userCircle.toObject(),
-      centerPoint
-    );
+    const { circleData } =
+      updateStep === 2
+        ? circleAlterations[updateStep](responses, centerPoint)
+        : circleAlterations[updateStep](
+            responses,
+            userCircle.toObject(),
+            centerPoint
+          );
 
-    // Save the updated circle
-    await userCircle.updateOne({ ...circleData });
-
+    // Update the circle document
+    for (let value in circleData) {
+      if (circleData[value] === userCircle[value]) {
+        continue;
+      }
+      userCircle[value] = circleData[value];
+    }
     // Save the user's updated circle data
-    await userCircle.save();
+    const newCircle = await userCircle.save();
 
     // Return the user's updated circle data
-    return circleData;
+    return newCircle;
   } catch (err) {
+    console.log(err);
     throw {
       name: "Circle Update Error",
       cause: err.kind || "Alteration error",

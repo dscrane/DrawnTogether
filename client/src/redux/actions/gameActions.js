@@ -15,9 +15,10 @@ import {
   FINAL_DISPLAY,
   UPDATE_DISPLAY_DIMENSIONS,
   UPDATE_SCREENSHOT,
+  UPDATE_PLAYER_RESPONSES,
   // RESIZE_PLAYER_CIRCLES,
 } from "../types";
-import { createCircleDesign } from "../../utils";
+import { createCircleDesign, checkResponse } from "../../utils";
 import { api } from "../../utils";
 // TODO think about aspect ratio for resizing circles if that is possible
 /* ----   Game Actions    ---- */
@@ -89,7 +90,7 @@ export const prevForm = (currentForm) => async (dispatch, getState) => {
   const newForm = currentForm - 1;
   await dispatch({
     type: PREV_FORM,
-    payload: { currentForm: newForm, currentPlayer: numPlayers, circles: [] },
+    payload: { currentForm: newForm, currentPlayer: numPlayers - 1 },
   });
 };
 /* ----  ***  ---- */
@@ -128,22 +129,48 @@ export const displayCircles = (circles) => (dispatch, getState) => {
 };
 // ADD_PLAYER_CIRCLE
 export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
-  const { display, _id } = getState().gameState;
-  const { data } = await api.post("/games/addPlayerCircle", {
-    centerPoint,
-    playerId,
-    gameId: _id,
-    responses: formData,
-    updateStep: currentForm,
+  const { display, _id, currentPlayer, players } = getState().gameState;
+  const { isNewResponse, isUpdatedResponse, noUpdate } = checkResponse(formData, players[currentPlayer], currentForm);
+  if (noUpdate) {
+    return;
+  }
+
+  let data;
+  if (isNewResponse) {
+    const res = await api.post("/games/addPlayerCircle", {
+      centerPoint,
+      playerId,
+      gameId: _id,
+      responses: formData,
+      updateStep: currentForm,
+    });
+    data = res.data;
+  } else if (isUpdatedResponse) {
+    console.log("should update player");
+    dispatch(updatePlayerCircle(playerId, formData, currentForm, centerPoint));
+    return;
+  }
+  await dispatch({
+    type: UPDATE_PLAYER_RESPONSES,
+    payload: { currentPlayer, responses: data.responses },
   });
-  dispatch({
+
+  const circleSvg = createCircleDesign(data.circle, display.centerPoint, currentForm);
+  await dispatch({
     type: ADD_PLAYER_CIRCLE,
-    payload: createCircleDesign(data, display.centerPoint, currentForm),
+    payload: { circleSvg, currentPlayer },
   });
+  {
+  }
 };
 // UPDATE_PLAYER_CIRCLE
 export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
-  const { display, currentForm, _id, currentPlayer, numPlayers } = getState().gameState;
+  console.log("update should have hit");
+  const { display, currentForm, _id, currentPlayer, numPlayers, players } = getState().gameState;
+  const { noUpdate } = checkResponse(formData, players[currentPlayer], currentForm);
+  if (noUpdate) {
+    return;
+  }
   const { data } = await api.post("/games/updatePlayer", {
     centerPoint,
     playerId,
@@ -153,13 +180,16 @@ export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint)
     responses: formData,
     updateStep: currentForm,
   });
-  console.log(data);
 
-  const circleSvg = createCircleDesign(data, display.centerPoint, currentForm);
-
-  dispatch({
+  await dispatch({
+    type: UPDATE_PLAYER_RESPONSES,
+    payload: { currentPlayer, responses: data.responses },
+  });
+  console.log(data.circle);
+  const circleSvg = createCircleDesign(data.circle, display.centerPoint, currentForm);
+  await dispatch({
     type: UPDATE_PLAYER_CIRCLE,
-    payload: { circleSvg },
+    payload: circleSvg,
   });
 };
 // UPDATE_POLAR_GRID ACTION CREATOR
