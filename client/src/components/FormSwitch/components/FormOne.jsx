@@ -82,7 +82,7 @@ export const FormOne = ({ currentPlayer }) => {
           <option value="omnivore">Meat and salad</option>
           <option value="vegetarian">Salad and salad</option>
           <option value="pescatarian">Fish and salad</option>
-          <option value="vegan">No dairy, no eggs and salad</option>
+          <option value="vegan">No dairy, no eggs but salad</option>
         </Field>
       </div>
     </>
