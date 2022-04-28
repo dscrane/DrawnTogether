@@ -39,18 +39,18 @@ export const addPlayerCircle = async (
     game.circles = [...game.circles, newCircle._id];
     game.initialCircles = [...game.initialCircles, newCircleInitial._id];
 
+    // Save new circle documents and updated game document
+    await newCircle.save();
+    await newCircleInitial.save();
+    await game.save();
+
     // Send the circle data to client
     res.send({
       circle: { ...newCircle.toJson() },
       responses: user.currentFormData(updateStep),
     });
-
-    // Save new circle documents and updated game document
-    await newCircle.save();
-    await newCircleInitial.save();
-    await game.save();
   } catch (err) {
     log.controllerFailure(`Circle creation for`, playerId, "failed");
-    console.log(err);
+    console.log(Object.keys(err));
   }
 };
