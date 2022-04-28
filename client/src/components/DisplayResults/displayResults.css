@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 4rem;
+    /*margin-bottom: 4rem;*/
 }
 
 .results__restart {
@@ -19,6 +19,17 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.restart__text {
+    color: var(--font-light);
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.restart__text-smaller {
+    font-size: 1.75rem;
 }
 
 .qrcode__container {
@@ -30,7 +41,7 @@
 }
 
 .results__qrcode {
-    height: 150px;
-    width: 150px;
+    height: 175px;
+    width: 175px;
     border-radius: 6px;
 }

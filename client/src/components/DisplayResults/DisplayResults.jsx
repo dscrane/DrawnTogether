@@ -49,7 +49,7 @@ const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
   return (
     <div className="results">
       <div className="results__content">
-        <p className="landing__text">...the final results for your group...</p>
+        <p className="landing__text">The final results for your group...</p>
         <div className="qrcode__container">
           <p className="landing__text landing__text-smaller">Scan the code below to download the final display</p>
           {loading ? (
@@ -60,8 +60,9 @@ const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
         </div>
       </div>
       <div className="results__restart">
-        <p className="landing__text">If you would like to play again please hit the "Reset" button!</p>
-        <ActionButton onClick={() => endGame(gameId)} buttonType={"restart"} text={"Restart\nGame"} />
+        <p className="restart__text">Play again. Results may vary!</p>
+        {/*<p className="restart__text restart__text-smaller"></p>*/}
+        <ActionButton onClick={() => endGame(gameId)} buttonType={"restart"} text={"Play\nAgain"} />
       </div>
     </div>
   );
