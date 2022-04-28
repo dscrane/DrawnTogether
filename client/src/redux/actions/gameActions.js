@@ -146,7 +146,6 @@ export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) =>
     });
     data = res.data;
   } else if (isUpdatedResponse) {
-    console.log("should update player");
     dispatch(updatePlayerCircle(playerId, formData, currentForm, centerPoint));
     return;
   }
@@ -165,7 +164,6 @@ export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) =>
 };
 // UPDATE_PLAYER_CIRCLE
 export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
-  console.log("update should have hit");
   const { display, currentForm, _id, currentPlayer, numPlayers, players } = getState().gameState;
   const { noUpdate } = checkResponse(formData, players[currentPlayer], currentForm);
   if (noUpdate) {
@@ -185,7 +183,7 @@ export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint)
     type: UPDATE_PLAYER_RESPONSES,
     payload: { currentPlayer, responses: data.responses },
   });
-  console.log(data.circle);
+
   const circleSvg = createCircleDesign(data.circle, display.centerPoint, currentForm);
   await dispatch({
     type: UPDATE_PLAYER_CIRCLE,

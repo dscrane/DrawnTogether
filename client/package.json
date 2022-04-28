@@ -8,7 +8,6 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@georgedoescode/spline": "^1.0.1",
     "@mui/core": "^5.0.0-alpha.54",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.2",
@@ -16,8 +15,6 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.1",
-    "blobs": "^2.2.1-beta.1",
-    "form-data": "^4.0.0",
     "formik": "^2.2.6",
     "html-to-image": "^1.9.0",
     "qrcode": "^1.5.0",
@@ -30,8 +27,7 @@
     "react-svg-blob": "^0.3.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.3.0",
-    "simplex-noise": "^2.4.0",
-    "socket.io-client": "^4.4.1"
+    "simplex-noise": "^2.4.0"
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"
