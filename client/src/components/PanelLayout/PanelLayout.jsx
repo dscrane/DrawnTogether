@@ -5,24 +5,14 @@ import { MoreInformation } from "../MoreInformation";
 import { Modal } from "../../lib/Modal";
 import "./panel.css";
 
-const PanelLayout = ({ _id, currentForm, showModal, screenshot, updateScreenshot, endGame, toggleModal }) => {
+const PanelLayout = () => {
   return (
     <div className="app__panel" data-testid="component-PanelLayout">
-      <Modal show={showModal} onClose={toggleModal}>
-        <span>Drawn Together</span>
-        <MoreInformation />
-      </Modal>
       <div className="panel__row panel__row-header">
-        <PanelHeader currentForm={currentForm} />
+        <PanelHeader />
       </div>
       <div className="panel__row panel__row-content">
-        <PanelContent
-          currentForm={currentForm}
-          screenshot={screenshot}
-          updateScreenshot={updateScreenshot}
-          endGame={endGame}
-          toggleModal={toggleModal}
-        />
+        <PanelContent />
       </div>
     </div>
   );

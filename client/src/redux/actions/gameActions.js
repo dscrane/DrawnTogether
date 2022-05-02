@@ -226,6 +226,7 @@ export const updateDisplayDimensions =
   };
 // UPDATE_SCREENSHOT ACTION CREATOR
 export const updateScreenshot = (gameId, screenshotData) => async (dispatch) => {
+  console.log(gameId, screenshotData);
   const { data } = await api.post("/games/updateScreenshot", { gameId, screenshotData });
   dispatch({
     type: UPDATE_SCREENSHOT,

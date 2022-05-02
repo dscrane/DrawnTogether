@@ -1,34 +1,51 @@
 /* IMPORTS */
 import React from "react";
-import { HelpOutlineRounded } from "@mui/icons-material";
+import { connect } from "react-redux";
 import { Landing } from "../Landing";
 import { DisplayResults } from "../DisplayResults";
+import { MoreInformation } from "../MoreInformation";
 import { FormContainer } from "../FormContainer";
+import { Modal } from "../../lib/Modal";
+import { InfoButton } from "../../lib/InfoButton";
+import { endGame, toggleModal, updateScreenshot } from "../../redux/actions";
 /* ------ */
 
-export const PanelContent = ({ _id, currentForm, toggleModal, screenshot, updateScreenshot, endGame }) => {
-  const display = () => {
+const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreenshot, toggleModal, endGame }) => {
+  const defineView = () => {
     if (currentForm === 0) {
       return <Landing toggleModal={toggleModal} />;
-    } else {
+    }
+    if (currentForm > 8) {
       return (
         <>
-          <button className="help" onClick={toggleModal}>
-            <HelpOutlineRounded className="help__icon" />
-          </button>
-          {currentForm > 8 ? (
-            <DisplayResults
-              gameId={_id}
-              screenshot={screenshot}
-              updateScreenshot={updateScreenshot}
-              endGame={endGame}
-            />
-          ) : (
-            <FormContainer />
-          )}
+          <InfoButton toggleModal={toggleModal} />
+          <DisplayResults gameId={_id} screenshot={screenshot} updateScreenshot={updateScreenshot} endGame={endGame} />
+        </>
+      );
+    }
+    if (currentForm > 0 <= 8) {
+      return (
+        <>
+          <InfoButton toggleModal={toggleModal} />
+          <FormContainer />
         </>
       );
     }
   };
-  return <>{display()}</>;
+  return (
+    <>
+      <Modal show={showModal} onClose={toggleModal}>
+        <span>Drawn Together</span>
+        <MoreInformation />
+      </Modal>
+      {defineView()}
+    </>
+  );
 };
+
+const mapStateToProps = ({ gameState }) => {
+  const { _id, currentForm, screenshot, showModal } = gameState;
+  return { _id, currentForm, screenshot, showModal };
+};
+
+export default connect(mapStateToProps, { updateScreenshot, endGame, toggleModal })(PanelContent);

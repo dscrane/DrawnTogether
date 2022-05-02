@@ -21,9 +21,9 @@ const formResponseSchema = {
   players: [
     createResponseSchema(),
     createResponseSchema(),
-    // createResponseSchema(),
-    // createResponseSchema(),
-    // createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
+    createResponseSchema(),
   ],
 };
 
@@ -46,14 +46,14 @@ const FormContainer = ({
   const { currentForm, currentPlayer, numPlayers } = session;
   const handlePrevious = async () => {
     if (currentForm === 1) {
-      await endGame();
+      await endGame(gameId);
     } else if (currentPlayer === 0) {
       await prevForm(currentForm);
     } else {
       await prevPlayer(currentPlayer);
     }
   };
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (values) => {
     if (currentForm === 1) {
       if (!Object.keys(players).length) {
         await initializePlayers(gameId, values);

@@ -1,1 +1,1 @@
-export * from "./PanelContent";
+export { default as PanelContent } from "./PanelContent";

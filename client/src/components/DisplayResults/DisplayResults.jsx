@@ -11,7 +11,7 @@ const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
 
   const sendScreenshot = async () => {
     const dataUrl = await toPng(document.getElementById("canvas"));
-    updateScreenshot(gameId, dataUrl);
+    await updateScreenshot(gameId, dataUrl);
   };
 
   useEffect(() => {

@@ -32,9 +32,11 @@ export const MoreInformation = () => {
         personal data into an image.
       </p>
       <p className="info__text">
-        It just so happened that my son, Daegan Crane, was training to be a programmer and was open to the challenge to
-        make this happen. We (actually mostly him) have been working on this on and off for a year and a half. This
-        exhibition served as a catalyst to really get it up and running. Drawn Together is the result.
+        As a programmer, my son, Daegan Crane, was open to the challenge to make this happen. We have been working on
+        this on and off for a year and a half. Through several iterations Drawn Together has become a more polished,
+        user-friendly application. An exhibition at ArtsWorcester, an art galley in Worcester, Massachusetts served as a
+        catalyst to put the finishing touches on the project to present it to the public. This is the result of that
+        time and revision, we hope you enjoy.
       </p>
 
       <p className="info__text">See more about Carrie’s work...</p>
