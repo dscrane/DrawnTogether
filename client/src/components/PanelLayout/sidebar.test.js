@@ -6,5 +6,5 @@ import { Sidebar } from "./";
 
 test("component renders correctly", () => {
   const container = render(<Sidebar />);
-  const element = screen.getByTestId("component-Panel");
+  const element = screen.getByTestId("component-PanelLayout");
 });

@@ -1,4 +1,4 @@
-.p-button {
+.button {
     width: 100%;
     color: var(--bg-button-border);
     background-color: var(--bg-button);
@@ -12,19 +12,19 @@
     box-shadow: .20rem .25rem .5rem var(--darkgray-fade-75);
     transition: background-color 750ms;
 }
-.p-button:hover {
+.button:hover {
     cursor: pointer;
     background-color: var(--bg-button-hover);
     color: var(--accent)
 }
-.p-button__game {
+.button__game {
     font-size: 1.75rem;
     padding: 1rem;
     border-radius: 5px;
     line-height: 1.5rem;
     box-shadow: var(--button-shadow);
 }
-.p-button__start {
+.button__start {
     justify-self: center;
     font-size: 2.5rem;
     border-radius: 50%;
@@ -32,7 +32,7 @@
     width: 200px;
     box-shadow: var(--button-shadow-circle);
 }
-.p-button__restart {
+.button__restart {
     border-radius: 50%;
     font-size: 2rem;
     height: 120px;
@@ -41,7 +41,7 @@
 
 }
 
-.p-button__screenshot {
+.button__screenshot {
     border-radius: 50%;
     font-size: 1.5rem;
     height: 100px;
@@ -51,7 +51,7 @@
 
 }
 
-.p-button__send {
+.button__send {
     border-radius: 50%;
     font-size: 1.5rem;
     height: 50px;
@@ -59,7 +59,7 @@
     margin-bottom: 25px;
 }
 
-.p-button__add {
+.button__add {
     font-size: 1.5rem;
     border-radius: 5px;
     padding: .5rem .75rem;

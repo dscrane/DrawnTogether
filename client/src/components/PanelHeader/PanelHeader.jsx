@@ -2,11 +2,11 @@ import React from "react";
 import { createHeaderIcons } from "../../utils";
 import "./header.css";
 
-const Header = ({ currentForm }) => {
+const PanelHeader = ({ currentForm }) => {
   const displayHeaderText = currentForm > 0 ? null : <></>;
   const displayHeaderIcons = currentForm > 0 && currentForm < 8 ? createHeaderIcons(currentForm) : null;
   return (
-    <div className="header" data-testid="component-Header">
+    <div className="header" data-testid="component-PanelHeader">
       <div className="header__title">
         Drawn <br />
         Together
@@ -17,4 +17,4 @@ const Header = ({ currentForm }) => {
   );
 };
 
-export default Header;
+export default PanelHeader;

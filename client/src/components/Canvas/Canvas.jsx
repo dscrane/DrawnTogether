@@ -37,12 +37,14 @@ const Canvas = ({ display, session, updateDisplayDimensions, generateSession, up
   };
 
   return (
-    <div id="canvas" className="svg__container" ref={displaySVG}>
-      {session.currentForm !== 0 ? (
-        <DisplaySvg session={session} display={display} updatePolarGrid={updatePolarGrid} />
-      ) : (
-        <ActionButton onClick={buttonOnClick} text={"Begin Game"} buttonType={"start"} />
-      )}
+    <div className="app__canvas">
+      <div id="canvas" className="canvas__container" ref={displaySVG}>
+        {session.currentForm !== 0 ? (
+          <DisplaySvg session={session} display={display} updatePolarGrid={updatePolarGrid} />
+        ) : (
+          <ActionButton onClick={buttonOnClick} text={"Begin Game"} buttonType={"start"} />
+        )}
+      </div>
     </div>
   );
 };

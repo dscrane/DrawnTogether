@@ -1,4 +1,4 @@
-import {HeaderIcon} from "../components/Header";
+import { HeaderIcon } from "../components/PanelHeader";
 import React from "react";
 
 export const createHeaderIcons = (currentForm) => {

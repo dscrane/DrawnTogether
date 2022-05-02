@@ -2,7 +2,7 @@ import React from "react";
 import { HelpOutlineRounded } from "@mui/icons-material";
 import "./landing.css";
 
-export const Landing = ({ showModal }) => {
+export const Landing = ({ toggleModal }) => {
   return (
     <div className="landing">
       <div className="landing__content">
@@ -15,7 +15,7 @@ export const Landing = ({ showModal }) => {
       <div className="landing__info">
         <p className="landing__text">Drawn Together is an artistic collaboration between Carrie and Daegan Crane.</p>
         <p className="landing__text">Learn More:</p>
-        <button className="help help-landing" onClick={showModal}>
+        <button className="help help-landing" onClick={toggleModal}>
           <HelpOutlineRounded className="help__icon help__icon-landing" />
         </button>
       </div>

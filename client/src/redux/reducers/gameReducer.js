@@ -17,6 +17,7 @@ import {
   UPDATE_SCREENSHOT,
   ADD_PLAYER_CIRCLE,
   UPDATE_PLAYER_RESPONSES,
+  TOGGLE_MODAL,
 } from "../types";
 
 export default (state = INITIAL_STATE, action) => {
@@ -165,6 +166,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         screenshot: action.payload,
+      };
+    case TOGGLE_MODAL:
+      console.info(action.type, action.payload);
+      return {
+        ...state,
+        showModal: action.payload,
       };
     default:
       return state;

@@ -4,9 +4,9 @@ import "./actionButton.css";
 export const ActionButton = ({ onClick, text, buttonType }) => {
   const classNames = () => {
     if (buttonType === "prev" || buttonType === "next") {
-      return `p-button p-button__game p-button__game_${buttonType}`;
+      return `button button__game button__game_${buttonType}`;
     } else {
-      return `p-button p-button__${buttonType}`;
+      return `button button__${buttonType}`;
     }
   };
   const formatText = () => {
