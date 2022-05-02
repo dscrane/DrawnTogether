@@ -1,18 +1,20 @@
 import React from "react";
-import { render as rtlRender } from "@testing-library/react";
-import { createStore } from "redux";
+import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import rootReducer from "../src/redux/reducers";
+import { store } from "../src/store";
+import { applyMiddleware, createStore } from "redux";
+import reducers from "../src/redux/reducers";
+import reduxThunk from "redux-thunk";
 
-// Creating a custom render function including the state passed by Provider
-function render(ui, { initialState, store = createStore(rootReducer, initialState), ...renderOptions } = {}) {
-  function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>;
-  }
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
-}
+const AllProviders = ({ children }) => {
+  return <Provider store={createStore(reducers, applyMiddleware(reduxThunk))}>{children}</Provider>;
+};
+
+const customRender = (ui, options) => {
+  render(ui, { wrapper: AllProviders, ...options });
+};
 
 // Re export everything from react testing library
 export * from "@testing-library/react";
 
-export { render };
+export { customRender as render };

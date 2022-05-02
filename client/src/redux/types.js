@@ -6,6 +6,7 @@ export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
 export const NEXT_FORM = "NEXT_FORM";
 export const PREV_FORM = "PREV_FORM";
+export const TOGGLE_MODAL = "TOGGLE_MODAL";
 
 // Display Action Types
 export const DISPLAY_CIRCLES = "DISPLAY_CIRCLES";
@@ -28,6 +29,7 @@ export const INITIAL_STATE = {
   complete: false,
   screenshot: false,
   displayGrid: false,
+  showModal: false,
   numPlayers: 0,
   currentForm: 0,
   playerIds: [],

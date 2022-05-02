@@ -3,18 +3,19 @@ import { Panel } from "./components/Panel";
 import { Canvas } from "./components/Canvas";
 import { Modal } from "./lib/Modal";
 import { MoreInformation } from "./components/MoreInformation";
+import { connect } from "react-redux";
+import { toggleModal } from "./redux/actions";
 
-export const App = () => {
-  const [showModal, setShowModal] = useState(false);
+const App = ({ showModal, currentForm, toggleModal }) => {
   return (
     <div className="app" data-testid="component-App">
-      <Modal show={showModal} onClose={() => setShowModal(!showModal)}>
+      <Modal show={showModal} onClose={toggleModal}>
         <span>Drawn Together</span>
         <MoreInformation />
       </Modal>
       <div className="app__display">
         <div className="app__sidebar">
-          <Panel showModal={() => setShowModal(true)} />
+          <Panel currentForm={currentForm} />
         </div>
         <div className="app__canvas">
           <Canvas />
@@ -25,4 +26,9 @@ export const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = ({ gameState }) => {
+  const { showModal, currentForm } = gameState;
+  return { showModal, currentForm };
+};
+
+export default connect(mapStateToProps, { toggleModal })(App);

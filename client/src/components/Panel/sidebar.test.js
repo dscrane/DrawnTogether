@@ -2,9 +2,9 @@ import React from "react";
 import { render, screen, within } from "../../../tests/testingUtils";
 import "@testing-library/jest-dom/extend-expect";
 
-import { Sidebar } from "./";
+import { Panel } from "./";
 
 test("component renders correctly", () => {
-  const container = render(<Sidebar />);
-  const element = screen.getByTestId("component-Panel");
+  render(<Panel />);
+  expect(screen.getByTestId("component-Panel")).toBeDefined();
 });

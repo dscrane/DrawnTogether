@@ -16,6 +16,7 @@ import {
   UPDATE_DISPLAY_DIMENSIONS,
   UPDATE_SCREENSHOT,
   UPDATE_PLAYER_RESPONSES,
+  TOGGLE_MODAL,
   // RESIZE_PLAYER_CIRCLES,
 } from "../types";
 import { createCircleDesign, checkResponse } from "../../utils";
@@ -232,3 +233,11 @@ export const updateScreenshot = (gameId, screenshotData) => async (dispatch) => 
   });
 };
 /* ----  ***  ---- */
+// SHOW_MODAL ACTION CREATOR
+export const toggleModal = () => (dispatch, getState) => {
+  const { showModal } = getState().gameState;
+  dispatch({
+    type: TOGGLE_MODAL,
+    payload: !showModal,
+  });
+};
