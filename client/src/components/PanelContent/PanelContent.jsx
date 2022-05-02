@@ -23,7 +23,7 @@ const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreensho
         </>
       );
     }
-    if (currentForm > 0 <= 8) {
+    if (currentForm > 0 && currentForm <= 8) {
       return (
         <>
           <InfoButton toggleModal={toggleModal} />
@@ -43,8 +43,8 @@ const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreensho
   );
 };
 
-const mapStateToProps = ({ gameState }) => {
-  const { _id, currentForm, screenshot, showModal } = gameState;
+const mapStateToProps = ({ session }) => {
+  const { _id, currentForm, screenshot, showModal } = session;
   return { _id, currentForm, screenshot, showModal };
 };
 

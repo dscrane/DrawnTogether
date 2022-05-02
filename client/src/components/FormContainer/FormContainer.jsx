@@ -106,8 +106,8 @@ const FormContainer = ({
   );
 };
 
-const mapStateToProps = ({ gameState }) => {
-  const { _id, display, players, ...rest } = gameState;
+const mapStateToProps = ({ session }) => {
+  const { _id, display, players, ...rest } = session;
   return {
     display,
     players,

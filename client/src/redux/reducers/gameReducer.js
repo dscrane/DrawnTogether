@@ -11,19 +11,18 @@ import {
   PREV_PLAYER,
   DISPLAY_CIRCLES,
   UPDATE_PLAYER_CIRCLE,
+  TOGGLE_MODAL,
   UPDATE_POLAR_GRID,
   FINAL_DISPLAY,
   UPDATE_DISPLAY_DIMENSIONS,
   UPDATE_SCREENSHOT,
   ADD_PLAYER_CIRCLE,
   UPDATE_PLAYER_RESPONSES,
-  TOGGLE_MODAL,
 } from "../types";
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GENERATE_SESSION: {
-      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload.session,
@@ -34,7 +33,6 @@ export default (state = INITIAL_STATE, action) => {
       };
     }
     case INITIALIZE_PLAYERS:
-      console.info(action.type, action.payload);
       return {
         ...state,
         interest: action.payload.interest,
@@ -46,7 +44,6 @@ export default (state = INITIAL_STATE, action) => {
         playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
     case REINITIALIZE_PLAYERS:
-      console.info(action.type, action.payload);
       return {
         ...state,
         players: {
@@ -55,13 +52,11 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case START_GAME:
-      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case END_GAME:
-      console.info(action.type, action.payload);
       return {
         ...INITIAL_STATE,
         display: {
@@ -69,37 +64,31 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case NEXT_FORM:
-      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_FORM:
-      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case NEXT_PLAYER:
-      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case PREV_PLAYER:
-      console.info(action.type, action.payload);
       return {
         ...state,
         ...action.payload,
       };
     case DISPLAY_CIRCLES:
-      console.info(action.type, action.payload);
       return {
         ...state,
         circles: [...action.payload.circleSvgs],
       };
     case UPDATE_PLAYER_RESPONSES:
-      console.info(action.type, action.payload);
       return {
         ...state,
         players: {
@@ -114,7 +103,6 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case ADD_PLAYER_CIRCLE:
-      console.info(action.type, action.payload, state.circles);
       return {
         ...state,
         circles: [
@@ -124,13 +112,11 @@ export default (state = INITIAL_STATE, action) => {
         ],
       };
     case UPDATE_PLAYER_CIRCLE:
-      console.info(action.type, action.payload);
       return {
         ...state,
         circles: state.circles.map((el, i) => (el.props.id === action.payload.props.id ? action.payload : el)),
       };
     case UPDATE_POLAR_GRID:
-      console.info(action.type, Object.keys(action.payload));
       return {
         ...state,
         display: {
@@ -139,7 +125,6 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case FINAL_DISPLAY:
-      console.info(action.type, action.payload);
       return {
         ...state,
         currentForm: action.payload.currentForm,
@@ -147,7 +132,6 @@ export default (state = INITIAL_STATE, action) => {
         finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
       };
     case UPDATE_DISPLAY_DIMENSIONS:
-      console.info(action.type, action.payload);
       return {
         ...state,
         display: {
@@ -162,13 +146,11 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case UPDATE_SCREENSHOT:
-      console.info(action.type, action.payload);
       return {
         ...state,
         screenshot: action.payload,
       };
     case TOGGLE_MODAL:
-      console.info(action.type, action.payload);
       return {
         ...state,
         showModal: action.payload,

@@ -49,8 +49,8 @@ const Canvas = ({ display, session, updateDisplayDimensions, generateSession, up
   );
 };
 
-const mapStateToProps = ({ gameState }) => {
-  const { display, ...rest } = gameState;
+const mapStateToProps = ({ session }) => {
+  const { display, ...rest } = session;
   return {
     display,
     session: rest,

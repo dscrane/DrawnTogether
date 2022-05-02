@@ -25,7 +25,7 @@ import { api } from "../../utils";
 /* ----   Game Actions    ---- */
 // GENERATE_SESSION ACTION CREATOR
 export const generateSession = () => async (dispatch, getState) => {
-  const { width, centerPoint } = getState().gameState.display;
+  const { width, centerPoint } = getState().session.display;
   const { data } = await api.post("/games/generateSession", { centerPoint, width });
   dispatch({
     type: GENERATE_SESSION,
@@ -77,7 +77,7 @@ export const endGame = (gameId) => async (dispatch) => {
 };
 // NEXT_FORM ACTION CREATOR
 export const nextForm = (currentForm) => async (dispatch, getState) => {
-  const { players, currentPlayer } = getState().gameState;
+  const { players, currentPlayer } = getState().session;
   const newForm = currentForm + 1;
   const nextPlayer = players.length === 0 ? currentPlayer : 0;
   await dispatch({
@@ -87,7 +87,7 @@ export const nextForm = (currentForm) => async (dispatch, getState) => {
 };
 // PREV_FORM ACTION CREATOR
 export const prevForm = (currentForm) => async (dispatch, getState) => {
-  const { numPlayers } = getState().gameState;
+  const { numPlayers } = getState().session;
   const newForm = currentForm - 1;
   await dispatch({
     type: PREV_FORM,
@@ -118,7 +118,7 @@ export const prevPlayer = (currentPlayer) => (dispatch) => {
 /* ----   Display Actions    ---- */
 // DISPLAY_CIRCLES ACTION CREATOR
 export const displayCircles = (circles) => (dispatch, getState) => {
-  const { display, currentForm } = getState().gameState;
+  const { display, currentForm } = getState().session;
   const circleSvgs = circles.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
 
   dispatch({
@@ -130,7 +130,7 @@ export const displayCircles = (circles) => (dispatch, getState) => {
 };
 // ADD_PLAYER_CIRCLE
 export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
-  const { display, _id, currentPlayer, players } = getState().gameState;
+  const { display, _id, currentPlayer, players } = getState().session;
   const { isNewResponse, isUpdatedResponse, noUpdate } = checkResponse(formData, players[currentPlayer], currentForm);
   if (noUpdate) {
     return;
@@ -165,7 +165,7 @@ export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) =>
 };
 // UPDATE_PLAYER_CIRCLE
 export const updatePlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
-  const { display, currentForm, _id, currentPlayer, numPlayers, players } = getState().gameState;
+  const { display, currentForm, _id, currentPlayer, numPlayers, players } = getState().session;
   const { noUpdate } = checkResponse(formData, players[currentPlayer], currentForm);
   if (noUpdate) {
     return;
@@ -201,7 +201,7 @@ export const updatePolarGrid = (width, centerPoint) => async (dispatch) => {
 };
 // FINAL_DISPLAY ACTION CREATOR
 export const finalDisplay = (gameId) => async (dispatch, getState) => {
-  const { display, currentForm } = getState().gameState;
+  const { display, currentForm } = getState().session;
   const { data } = await api.post("/games/fetchCircleData", { gameId });
   console.log(data);
   const finalForm = currentForm + 1;
@@ -236,7 +236,7 @@ export const updateScreenshot = (gameId, screenshotData) => async (dispatch) => 
 /* ----  ***  ---- */
 // TOGGLE_MODAL ACTION CREATOR
 export const toggleModal = () => (dispatch, getState) => {
-  const { showModal } = getState().gameState;
+  const { showModal } = getState().session;
   dispatch({
     type: TOGGLE_MODAL,
     payload: !showModal,

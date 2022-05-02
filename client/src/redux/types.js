@@ -43,7 +43,6 @@ export const INITIAL_STATE = {
   // display data
   updateCircles: false,
   resizeCircles: false,
-  centerPoint: { x: 0, y: 0 },
   display: {
     resizeRatio: 1,
     centerPoint: { x: 0, y: 0 },

@@ -16,8 +16,8 @@ const PanelHeader = ({ currentForm }) => {
   );
 };
 
-const mapStateToProps = ({ gameState }) => {
-  const { currentForm } = gameState;
+const mapStateToProps = ({ session }) => {
+  const { currentForm } = session;
   return { currentForm };
 };
 
