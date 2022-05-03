@@ -3,13 +3,13 @@
 ### an interactive image generator
 
 
-Drawn Together is a collaboration betweeen Carrie and Daegan Crane. The project is an interactive game designed to generate a geometric design based on human connections. 
+Drawn Together is a collaboration between Carrie and Daegan Crane. The project is an interactive game designed to generate a geometric design based on human connections.
 <br/>
 <br/>
 
-**Try it for yourself:**
-<br/>  
-[<table><tr><td valign="center"><img src="images/favicon-32x32.png" /></td><td valign="center"><b>DRAWN TOGETHER</b></td></tr></table>](https://dsc-circle-server.herokuapp.com/)
+## **Try it for yourself:**
+
+[<img src="images/drawn_together_button.svg" width="300px" />](https://dsc-circle-server.herokuapp.com/)
 
 <br/>  
 
@@ -27,11 +27,11 @@ As I was working on this project I started to imagine a machine that would rando
 systems when given information about the individuals that were part of them. It occurred to me then that what I
 needed was not a machine or instrument, but a series of algorithms that could translate the individuals’
 personal data into an image.  
-&nbsp;&nbsp;&nbsp;&nbsp;\- Carrie Crane
+&nbsp;&nbsp;&nbsp;&nbsp;- Carrie Crane
 <br/>  
-<br/>  
+<br/>
 
-# Artistic Implimentation
+# Artistic Implementation
 
 Below is an installation piece which Drawn Together was created to inspire.
 <figure align="center">
@@ -47,12 +47,12 @@ Below is the final result when 5 player complete the game.
 <br/>
 
 # Development
-Drawn Together was created using React, relying heavily on SVG and animations using SMIL to create an interactive experience. 
+Drawn Together was created using React, relying heavily on SVG and animations using SMIL to create an interactive experience.
 
 
 
 ### Technologies Used
- ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)  
- ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=flat&logo=redux&logoColor=white)  
- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white)  
- ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB)  
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=flat&logo=redux&logoColor=white)  
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white)  
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB)
