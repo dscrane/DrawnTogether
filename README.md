@@ -9,14 +9,8 @@ Drawn Together is a collaboration betweeen Carrie and Daegan Crane. The project 
 
 **Try it for yourself:**
 <br/>  
+[<table><tr><td valign="center"><img src="images/favicon-32x32.png" /></td><td valign="center"><b>DRAWN TOGETHER</b></td></tr></table>](https://dsc-circle-server.herokuapp.com/)
 
-<figure>
-<div style="border-radius: 5px; background: lightgrey; width: 250px;">
-<a href="https://dsc-circle-server.herokuapp.com/" target="_blank" style="text-decoration: none; color: #242526; border-radius: 5px; background: lightgrey;" ><table><tr>
-<td valign="center"><img src="images/favicon-32x32.png" /></td><td valign="center"><b>DRAWN TOGETHER</b></td>
-</tr></table></a>
-</div>
-</figure>
 <br/>  
 
 
