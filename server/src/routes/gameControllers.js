@@ -16,6 +16,7 @@ import { log } from "../utils/logs.js";
 const router = new express.Router();
 
 router.get("/games/screenshot/:id", async (req, res) => {
+  log.controller("Fetching screenshot for", req.params.id, "begun");
   await getScreenshot(res, req.params.id);
 });
 

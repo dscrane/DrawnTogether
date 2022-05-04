@@ -1,11 +1,13 @@
+@import "/index.css";
 
 body {
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
-    background: hsl(0, 0%, 27%);
-    color: hsl(37, 13%, 81%);
+    background: var(--darkgray-500);
+    color: var(--cream-500);
     font-family: Quicksand, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 #root {
     display: flex;
@@ -15,6 +17,9 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
+}
+#text {
+    width: 90%;
 }
 @media (max-width: 1000px) {
     h2:after {

@@ -20,8 +20,10 @@ export const getScreenshot = async (res, gameId) => {
         
         <body>
           <div id="root">
-          <h2></h2>
-              <img src="data:image/png;base64,${game.screenshot}" id="screenshot" alt="screenshot_62729696d1cfc31908cce059" />
+            <div id="text">
+              <h2></h2>
+            </div>
+            <img src="data:image/png;base64,${game.screenshot}" id="screenshot" alt="screenshot_62729696d1cfc31908cce059" />
           </div>
         </body>
       </html>
