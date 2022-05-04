@@ -1,5 +1,5 @@
-import path from "path";
 import express from "express";
+import { getScreenshot } from "../controllers/getScreenshot.js";
 import { generateSession } from "../controllers/generateSession.js";
 import { initializePlayers } from "../controllers/initializePlayers.js";
 import { reinitializePlayers } from "../controllers/reinitializePlayers.js";
@@ -16,10 +16,7 @@ import { log } from "../utils/logs.js";
 const router = new express.Router();
 
 router.get("/games/screenshot/:id", async (req, res) => {
-  const __dirname = path.resolve();
-  res.sendFile(
-    path.join(__dirname, `/uploads/temp/screenshot_${req.params.id}.png`)
-  );
+  await getScreenshot(res, req.params.id);
 });
 
 router.post("/games/generateSession", async (req, res) => {

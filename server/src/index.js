@@ -21,10 +21,10 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 // Connect routers
 app.use(gameRouter);
-app.use(userRouter);
+// app.use(userRouter);
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/src/public/index.html"));
+  res.sendFile(path.join(path.resolve(), "/src/public/index.html"));
 });
 
 app.listen(PORT, "192.168.1.62", () =>

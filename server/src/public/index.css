@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Quicksand';
+    src: local('Quicksand'),
+    url("./fonts/Quicksand-Light.ttf") format('truetype');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Quicksand';
+    src: local('Quicksand'),
+    url("./fonts/Quicksand-Regular.ttf") format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Quicksand';
+    src: local('Quicksand'),
+    url("./fonts/Quicksand-SemiBold.ttf") format('truetype');
+    font-weight: 600;
+}
+:root {
+    --black: #000000;
+    --white: ivory;
+
+    --gray-100: hsl(37, 13%, 81%);
+    --gray-500: hsl(0, 0%, 50%);
+    --gray-900: hsl(0, 0%, 70%);
+    --gray-fade-75: hsla(0, 0%, 50%, .75);
+    --gray-fade-50: hsla(0, 0%, 50%, .50);
+    --gray-fade-20: hsla(0, 0%, 50%, .20);
+    --gray-fade-15: hsla(0, 0%, 50%, .15);
+
+    --darkgray-100: hsl(0, 0%, 17%);
+    --darkgray-500: hsl(0, 0%, 27%);
+    --darkgray-900: hsl(0, 0%, 47%);
+    --darkgray-fade-75: hsla(0, 0%, 7%, .75);
+    --darkgray-fade-50: hsla(0, 0%, 7%, .50);
+    --darkgray-fade-20: hsla(0, 0%, 7%, .20);
+    --darkgray-fade-15: hsla(0, 0%, 7%, .15);
+
+    --bluegreen-100: hsl(180, 51%, 51%);
+    --bluegreen-500: hsl(180, 51%, 71%);
+    --bluegreen-900: hsl(180, 51%, 91%);
+    --bluegreen-fade-75: hsla(180, 51%, 71%, .95);
+    --bluegreen-fade-50: hsla(180, 51%, 71%, .50);
+    --bluegreen-fade-30: hsla(180, 51%, 71%, .30);
+    --bluegreen-fade-20: hsla(180, 51%, 71%, .20);
+    --bluegreen-fade-15: hsla(180, 51%, 71%, .15);
+
+    --cream-100: hsl(37, 13%, 61%);
+    --cream-500: hsl(37, 13%, 81%);
+    --cream-900: hsl(30, 41%, 93%);
+    --cream-fade-75: hsla(37, 13%, 81%, .75);
+    --cream-fade-50: hsla(37, 13%, 81%, .50);
+
+    --red-100: hsl(9, 100%, 44%);
+    --red-500: hsl(9, 100%, 64%);
+    --red-900: hsl(9, 100%, 80%);
+    --red-fade-75: hsla(9, 100%, 64%, .75);
+    --red-fade-50: hsla(13, 100%, 50%, 0.5);
+}

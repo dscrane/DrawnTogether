@@ -18,13 +18,7 @@ import "./formContainer.css";
 
 const formResponseSchema = {
   interest: "",
-  players: [
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-    createResponseSchema(),
-  ],
+  players: [createResponseSchema(), createResponseSchema()],
 };
 
 const FormContainer = ({

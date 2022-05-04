@@ -1,170 +1,170 @@
-@font-face {
-  font-family: 'Quicksand';
-  src: local('Quicksand'),
-  url("./fonts/Quicksand-Light.ttf") format('truetype');
-  font-weight: 300;
-}
-@font-face {
-  font-family: 'Quicksand';
-  src: local('Quicksand'),
-    url("./fonts/Quicksand-Regular.ttf") format('truetype');
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'Quicksand';
-  src: local('Quicksand'),
-    url("./fonts/Quicksand-SemiBold.ttf") format('truetype');
-  font-weight: 600;
-}
-:root {
-  --black: #000000;
-  --white: ivory;
+/*@font-face {*/
+/*  font-family: 'Quicksand';*/
+/*  src: local('Quicksand'),*/
+/*  url("./fonts/Quicksand-Light.ttf") format('truetype');*/
+/*  font-weight: 300;*/
+/*}*/
+/*@font-face {*/
+/*  font-family: 'Quicksand';*/
+/*  src: local('Quicksand'),*/
+/*    url("./fonts/Quicksand-Regular.ttf") format('truetype');*/
+/*  font-weight: 400;*/
+/*}*/
+/*@font-face {*/
+/*  font-family: 'Quicksand';*/
+/*  src: local('Quicksand'),*/
+/*    url("./fonts/Quicksand-SemiBold.ttf") format('truetype');*/
+/*  font-weight: 600;*/
+/*}*/
+/*:root {*/
+/*  --black: #000000;*/
+/*  --white: ivory;*/
 
-  --gray-100: hsl(37, 13%, 81%);
-  --gray-500: hsl(0, 0%, 50%);
-  --gray-900: hsl(0, 0%, 70%);
-  --gray-fade-75: hsla(0, 0%, 50%, .75);
-  --gray-fade-50: hsla(0, 0%, 50%, .50);
-  --gray-fade-20: hsla(0, 0%, 50%, .20);
-  --gray-fade-15: hsla(0, 0%, 50%, .15);
+/*  --gray-100: hsl(37, 13%, 81%);*/
+/*  --gray-500: hsl(0, 0%, 50%);*/
+/*  --gray-900: hsl(0, 0%, 70%);*/
+/*  --gray-fade-75: hsla(0, 0%, 50%, .75);*/
+/*  --gray-fade-50: hsla(0, 0%, 50%, .50);*/
+/*  --gray-fade-20: hsla(0, 0%, 50%, .20);*/
+/*  --gray-fade-15: hsla(0, 0%, 50%, .15);*/
 
-  --darkgray-100: hsl(0, 0%, 17%);
-  --darkgray-500: hsl(0, 0%, 27%);
-  --darkgray-900: hsl(0, 0%, 47%);
-  --darkgray-fade-75: hsla(0, 0%, 7%, .75);
-  --darkgray-fade-50: hsla(0, 0%, 7%, .50);
-  --darkgray-fade-20: hsla(0, 0%, 7%, .20);
-  --darkgray-fade-15: hsla(0, 0%, 7%, .15);
+/*  --darkgray-100: hsl(0, 0%, 17%);*/
+/*  --darkgray-500: hsl(0, 0%, 27%);*/
+/*  --darkgray-900: hsl(0, 0%, 47%);*/
+/*  --darkgray-fade-75: hsla(0, 0%, 7%, .75);*/
+/*  --darkgray-fade-50: hsla(0, 0%, 7%, .50);*/
+/*  --darkgray-fade-20: hsla(0, 0%, 7%, .20);*/
+/*  --darkgray-fade-15: hsla(0, 0%, 7%, .15);*/
 
-  --bluegreen-100: hsl(180, 51%, 51%);
-  --bluegreen-500: hsl(180, 51%, 71%);
-  --bluegreen-900: hsl(180, 51%, 91%);
-  --bluegreen-fade-75: hsla(180, 51%, 71%, .95);
-  --bluegreen-fade-50: hsla(180, 51%, 71%, .50);
-  --bluegreen-fade-30: hsla(180, 51%, 71%, .30);
-  --bluegreen-fade-20: hsla(180, 51%, 71%, .20);
-  --bluegreen-fade-15: hsla(180, 51%, 71%, .15);
+/*  --bluegreen-100: hsl(180, 51%, 51%);*/
+/*  --bluegreen-500: hsl(180, 51%, 71%);*/
+/*  --bluegreen-900: hsl(180, 51%, 91%);*/
+/*  --bluegreen-fade-75: hsla(180, 51%, 71%, .95);*/
+/*  --bluegreen-fade-50: hsla(180, 51%, 71%, .50);*/
+/*  --bluegreen-fade-30: hsla(180, 51%, 71%, .30);*/
+/*  --bluegreen-fade-20: hsla(180, 51%, 71%, .20);*/
+/*  --bluegreen-fade-15: hsla(180, 51%, 71%, .15);*/
 
-  --cream-100: hsl(37, 13%, 61%);
-  --cream-500: hsl(37, 13%, 81%);
-  --cream-900: hsl(30, 41%, 93%);
-  --cream-fade-75: hsla(37, 13%, 81%, .75);
-  --cream-fade-50: hsla(37, 13%, 81%, .50);
+/*  --cream-100: hsl(37, 13%, 61%);*/
+/*  --cream-500: hsl(37, 13%, 81%);*/
+/*  --cream-900: hsl(30, 41%, 93%);*/
+/*  --cream-fade-75: hsla(37, 13%, 81%, .75);*/
+/*  --cream-fade-50: hsla(37, 13%, 81%, .50);*/
 
-  --red-100: hsl(9, 100%, 44%);
-  --red-500: hsl(9, 100%, 64%);
-  --red-900: hsl(9, 100%, 80%);
-  --red-fade-75: hsla(9, 100%, 64%, .75);
-  --red-fade-50: hsla(13, 100%, 50%, 0.5);
-}
+/*  --red-100: hsl(9, 100%, 44%);*/
+/*  --red-500: hsl(9, 100%, 64%);*/
+/*  --red-900: hsl(9, 100%, 80%);*/
+/*  --red-fade-75: hsla(9, 100%, 64%, .75);*/
+/*  --red-fade-50: hsla(13, 100%, 50%, 0.5);*/
+/*}*/
 /* ----   html & body styles    ---- */
-::before, ::after {
-  box-sizing: border-box;
-}
-* {
-  box-sizing: border-box;
-}
-html,
-body {
-  height: 100vh;
-  width: 100vw;
-  font-size: x-small;
-  margin: 0 0;
-}
-body {
-  font-family: Quicksand, sans-serif;
-  --bg-canvas: var(--darkgray-500);
-  --bg-panel: var(--darkgray-500);
-  --bg-panel-light: hsl(45, 4%, 38%);
-  --bg-sidebar: var(--bluegreen-900);
-  --bg-tab: var(--darkgray-100);
-  --bg-active: var(--darkgray-500);
-  --bg-input-background: var(--gray-500);
-  --bg-input-options: var(--gray-500);
-  --bg-input-shadow: var(--darkgray-100);
-  --bg-input-outline: rgb(144, 219, 219);
-  --bg-button: var(--darkgray-500);
-  --bg-button-hover: var(--darkgray-100);
-  --bg-button-border: rgb(144, 219, 219);
-  --font-light: var(--cream-500);
-  --font-dark: var(--darkgray-100);
-  --font-placeholder: var(--cream-900);
-  --accent: var(--bluegreen-500);
-  --warning-red: var(--red-fade-50);
-  --notice-red: var(--red-900);
-  --polar-grid-stroke: var(--bluegreen-fade-15);
-  --button-shadow-thin: var(--darkgray-fade-50) 0px 4px 6px -2px, rgba(0, 0, 0, 0.3) 0px 1px 5px -3px;
-  --button-shadow: var(--darkgray-fade-50) 0px 6px 8px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  --button-shadow-circle: var(--darkgray-fade-20) 0px 5px 18px 0px, var(--darkgray-fade-15) 0px 5px 29px 0px;
-  --panel-shadow: var(--darkgray-fade-75) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  --tooltip-text-color: var(--cream-500);
-  --tooltip-background-color: var(--darkgray-100);
-  --tooltip-margin: 30px;
-  --tooltip-arrow-size: 6px;
-  --svg-text: hsl(245, 10%, 26%)
-  /*--panel-shadow: var(--darkgray-100) 0px 3px 8px;*/
-}
-#root {
-  align-items: start;
-  height: 100vh;
-}
+/*::before, ::after {*/
+/*  box-sizing: border-box;*/
+/*}*/
+/** {*/
+/*  box-sizing: border-box;*/
+/*}*/
+/*html,*/
+/*body {*/
+/*  height: 100vh;*/
+/*  width: 100vw;*/
+/*  font-size: x-small;*/
+/*  margin: 0 0;*/
+/*}*/
+/*body {*/
+/*  font-family: Quicksand, sans-serif;*/
+/*  --bg-canvas: var(--darkgray-500);*/
+/*  --bg-panel: var(--darkgray-500);*/
+/*  --bg-panel-light: hsl(45, 4%, 38%);*/
+/*  --bg-sidebar: var(--bluegreen-900);*/
+/*  --bg-tab: var(--darkgray-100);*/
+/*  --bg-active: var(--darkgray-500);*/
+/*  --bg-input-background: var(--gray-500);*/
+/*  --bg-input-options: var(--gray-500);*/
+/*  --bg-input-shadow: var(--darkgray-100);*/
+/*  --bg-input-outline: rgb(144, 219, 219);*/
+/*  --bg-button: var(--darkgray-500);*/
+/*  --bg-button-hover: var(--darkgray-100);*/
+/*  --bg-button-border: rgb(144, 219, 219);*/
+/*  --font-light: var(--cream-500);*/
+/*  --font-dark: var(--darkgray-100);*/
+/*  --font-placeholder: var(--cream-900);*/
+/*  --accent: var(--bluegreen-500);*/
+/*  --warning-red: var(--red-fade-50);*/
+/*  --notice-red: var(--red-900);*/
+/*  --polar-grid-stroke: var(--bluegreen-fade-15);*/
+/*  --button-shadow-thin: var(--darkgray-fade-50) 0px 4px 6px -2px, rgba(0, 0, 0, 0.3) 0px 1px 5px -3px;*/
+/*  --button-shadow: var(--darkgray-fade-50) 0px 6px 8px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;*/
+/*  --button-shadow-circle: var(--darkgray-fade-20) 0px 5px 18px 0px, var(--darkgray-fade-15) 0px 5px 29px 0px;*/
+/*  --panel-shadow: var(--darkgray-fade-75) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;*/
+/*  --tooltip-text-color: var(--cream-500);*/
+/*  --tooltip-background-color: var(--darkgray-100);*/
+/*  --tooltip-margin: 30px;*/
+/*  --tooltip-arrow-size: 6px;*/
+/*  --svg-text: hsl(245, 10%, 26%)*/
+/*  !*--panel-shadow: var(--darkgray-100) 0px 3px 8px;*!*/
+/*}*/
+/*#root {*/
+/*  align-items: start;*/
+/*  height: 100vh;*/
+/*}*/
 
-/* ----   App component styles    ---- */
-.app {
-  padding: 0 0;
-  margin: 0 0;
-  height: 100vh;
-  background-color: var(--bg-canvas);
+/*!* ----   App component styles    ---- *!*/
+/*.app {*/
+/*  padding: 0 0;*/
+/*  margin: 0 0;*/
+/*  height: 100vh;*/
+/*  background-color: var(--bg-canvas);*/
 
-}
-.app__panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex: 3 3;
-  max-width: 25%;
-  overflow: hidden;
-  min-height: 100%;
-}
-.app__canvas {
-  overflow: hidden;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  flex: 8 3;
-}
-.app__display {
-  margin: 0 0;
-  padding: 0 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.help{
-  border: none;
-  background: none;
-  position: absolute;
-  left: 1%;
-  top: 1.5%;
-  color: var(--font-light);
-}
-.help-landing {
-  position: relative;
-}
-.help:hover {
-  color: var(--bg-button-hover)
-}
-.help__icon {
-  font-size: 2.5rem !important;
-}
-.help__icon-landing {
-  font-size: 4rem !important;
-}
-.cr {
-  position: fixed;
-  left: 15px;
-  bottom: 0px;
-  color: black;
-}
+/*}*/
+/*.app__panel {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: space-evenly;*/
+/*  flex: 3 3;*/
+/*  max-width: 25%;*/
+/*  overflow: hidden;*/
+/*  min-height: 100%;*/
+/*}*/
+/*.app__canvas {*/
+/*  overflow: hidden;*/
+/*  text-align: center;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  flex: 8 3;*/
+/*}*/
+/*.app__display {*/
+/*  margin: 0 0;*/
+/*  padding: 0 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: center;*/
+/*}*/
+/*.help{*/
+/*  border: none;*/
+/*  background: none;*/
+/*  position: absolute;*/
+/*  left: 1%;*/
+/*  top: 1.5%;*/
+/*  color: var(--font-light);*/
+/*}*/
+/*.help-landing {*/
+/*  position: relative;*/
+/*}*/
+/*.help:hover {*/
+/*  color: var(--bg-button-hover)*/
+/*}*/
+/*.help__icon {*/
+/*  font-size: 2.5rem !important;*/
+/*}*/
+/*.help__icon-landing {*/
+/*  font-size: 4rem !important;*/
+/*}*/
+/*.cr {*/
+/*  position: fixed;*/
+/*  left: 15px;*/
+/*  bottom: 0px;*/
+/*  color: black;*/
+/*}*/

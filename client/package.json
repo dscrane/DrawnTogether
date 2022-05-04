@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "build-server": "react-scripts build && rm -r ../server/src/public/* && mv build/* ../server/src/public",
     "": "react-scripts build && rm -r ../../herokuCircles/src/public/* && cp -R build/* ../../herokuCircles/src/public/",
-    "flight": "react-scripts build && rm -r ../../dsc-circle-server/src/public/* && cp -R build/* ../../dsc-circle-server/src/public/",
+    "flight": "react-scripts build && \\cp -v ./build/* ../../dsc-circle-server/src/public/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
