@@ -4,8 +4,12 @@
 
 
 Drawn Together is a collaboration between Carrie and Daegan Crane. The project is an interactive game designed to generate a geometric design based on human connections.
+
 <br/>
 <br/>
+
+<img src="images/demo.gif" alt="Drawn Together Demo" width="500px" >
+
 
 ## **Try it for yourself:**
 
@@ -34,14 +38,14 @@ personal data into an image.
 # Artistic Implementation
 
 Below is an installation piece which Drawn Together was created to inspire.
-<figure align="center">
-    <img src="images/beyond-measure.jpeg" alt="Orbital Networks" width="400px">
-</figure>
+
+<img src="images/beyond-measure.jpeg" alt="Orbital Networks" width="500px">
+<br />  
 
 Below is the final result when 5 player complete the game.
-<figure align="center">
-    <img src="images/drawn_together_results.png" alt="Drawn Together Result" width="400px">
-</figure>
+
+<img src="images/drawn_together_results.png" alt="Drawn Together Result" width="500px">
+
 
 <br/>  
 <br/>

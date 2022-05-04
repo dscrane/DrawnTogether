@@ -1,5 +1,4 @@
 export * from "./circleUtilities";
-export * from "./createPlayerIcons";
 export * from "./debounce";
 export * from "./api";
 export * from "./responseSchema";

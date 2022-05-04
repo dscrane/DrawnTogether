@@ -7,14 +7,13 @@ const logger = createLogger({
   collapsed: true,
 });
 
-// export const store = createStore(reducers, composeEnhancers(applyMiddleware(reduxThunk)));
 export const store = configureStore({
   reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoreActions: [UPDATE_PLAYER_RESPONSES, ADD_PLAYER_CIRCLE, NEXT_PLAYER],
-        ignoredPaths: ["session.circles"],
+        ignoredPaths: ["session.circles", "session.finalCircles"],
       },
     }).concat(logger),
 });

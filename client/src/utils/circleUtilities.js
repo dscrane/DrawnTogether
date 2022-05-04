@@ -274,7 +274,6 @@ function createSecondaryGradient(id, secondaryColor, design, designThickness, ra
       </radialGradient>
     );
   }
-  console.log(designThickness / radius);
   if (designThickness / radius > 0.22) {
     return (
       <radialGradient id={`secondaryRadialGradient${id}`} spreadMethod="repeat">

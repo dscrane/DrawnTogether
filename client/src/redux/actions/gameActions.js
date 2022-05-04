@@ -203,7 +203,6 @@ export const updatePolarGrid = (width, centerPoint) => async (dispatch) => {
 export const finalDisplay = (gameId) => async (dispatch, getState) => {
   const { display, currentForm } = getState().session;
   const { data } = await api.post("/games/fetchCircleData", { gameId });
-  console.log(data);
   const finalForm = currentForm + 1;
   const finalCircles = data.map((circle) => createCircleDesign(circle, display.centerPoint, currentForm));
 
@@ -226,7 +225,6 @@ export const updateDisplayDimensions =
   };
 // UPDATE_SCREENSHOT ACTION CREATOR
 export const updateScreenshot = (gameId, screenshotData) => async (dispatch) => {
-  console.log(gameId, screenshotData);
   const { data } = await api.post("/games/updateScreenshot", { gameId, screenshotData });
   dispatch({
     type: UPDATE_SCREENSHOT,

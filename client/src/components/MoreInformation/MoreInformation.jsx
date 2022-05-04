@@ -9,14 +9,17 @@ import WebsiteQRC from "../../assets/carriecraneQR.png";
 export const MoreInformation = () => {
   return (
     <div className="info">
-      <img
-        className="info__image"
-        width={"40%"}
-        src={BeyondMeasure}
-        alt="Orbital Networks"
-        aria-label="Orbital Networks"
-        title="Orbital Networks"
-      />
+      <div className="info__hero">
+        <img
+          className="info__image"
+          width={"40%"}
+          src={BeyondMeasure}
+          alt="Orbital Networks"
+          aria-label="Orbital Networks"
+          title="Orbital Networks"
+        />
+        <span className="hero__caption">Photo By: Charles Sternaimolo</span>
+      </div>
 
       <p className="info__text">
         The idea for the computer game Drawn Together began several years ago when I made a series of sketches for an
