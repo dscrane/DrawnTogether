@@ -42,5 +42,4 @@
 .svg__text {
   font: bold 1.75rem "Quicksand";
   fill: var(--bluegreen-fade-30);
-  filter: drop-shadow(1px 1px 1px rgba(0,0,0,1));
 }

@@ -26,7 +26,7 @@ const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreensho
     if (currentForm > 0 && currentForm <= 8) {
       return (
         <>
-          <InfoButton toggleModal={toggleModal} />
+          <InfoButton toggleModal={toggleModal} style={"panel"} />
           <FormContainer />
         </>
       );

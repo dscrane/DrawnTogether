@@ -1,8 +1,5 @@
 import { validateResponses } from "../utils/validateResponses.js";
 import { User } from "../models/user.js";
-import { log } from "../utils/logs.js";
-import { Game } from "../models/game.js";
-import { Circle } from "../models/circle.js";
 
 export const validateAndUpdateResponses = async (req, res, next) => {
   try {

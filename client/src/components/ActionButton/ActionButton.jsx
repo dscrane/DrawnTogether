@@ -9,28 +9,12 @@ export const ActionButton = ({ onClick, text, buttonType }) => {
       return `button button__${buttonType}`;
     }
   };
-  const formatText = () => {
-    if (text.includes(" ")) {
-      const textArray = text.split(" ");
-      if (buttonType === "add" || buttonType === "next") {
-        return text;
-      } else {
-        return (
-          <>
-            {textArray[0]}
-            <br />
-            {textArray[1]}
-          </>
-        );
-      }
-    } else {
-      return text;
-    }
-  };
 
   return (
     <button type={buttonType === "next" ? "submit" : "button"} className={classNames()} onClick={onClick || null}>
-      <span>{formatText()}</span>
+      <div className="button__content">
+        <div className={buttonType === "add" ? "button__text-add" : "button__text"}>{text}</div>
+      </div>
     </button>
   );
 };

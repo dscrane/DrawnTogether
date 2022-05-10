@@ -4,6 +4,7 @@ import BeyondMeasure from "../../assets/beyond-measure.jpeg";
 import "./moreInformation.css";
 import InstagramQRC from "../../assets/carriecraneinstagramQR.png";
 import WebsiteQRC from "../../assets/carriecraneQR.png";
+import RepoQRC from "../../assets/drawntogether-repoQR.png";
 /* ------ */
 
 export const MoreInformation = () => {
@@ -20,7 +21,6 @@ export const MoreInformation = () => {
         />
         <span className="hero__caption">Photo By: Charles Sternaimolo</span>
       </div>
-
       <p className="info__text">
         The idea for the computer game Drawn Together began several years ago when I made a series of sketches for an
         installation at the Fitchburg Art Museum. I was thinking about geometry and planetary orbital systems as a way
@@ -38,23 +38,30 @@ export const MoreInformation = () => {
         As a programmer, my son, Daegan Crane, was open to the challenge to make this happen. We have been working on
         this on and off for a year and a half. Through several iterations Drawn Together has become a more polished,
         user-friendly application. An exhibition at ArtsWorcester, an art galley in Worcester, Massachusetts served as a
-        catalyst to put the finishing touches on the project to present it to the public. This is the result of that
-        time and revision, we hope you enjoy.
+        catalyst to put the finishing touches on the project and present it to the public. Enjoy!
       </p>
-
-      <p className="info__text">See more about Carrie’s work...</p>
-      <div className="links">
-        <div className="links__item">
-          <span className="links__text">On Instagram:</span>
-          <img className="links__code" src={InstagramQRC} />
+      <div className="info__footer">
+        <div className="links">
+          <p className="info__text info__text-footer">See more about Carrie’s work...</p>
+          <div className="links__row">
+            <div className="links__item">
+              <span className="links__text">Instagram:</span>
+              <img className="links__code" src={InstagramQRC} />
+            </div>
+            <div className="links__item">
+              <span className="links__text">Website:</span>
+              <img className="links__code" src={WebsiteQRC} />
+            </div>
+          </div>
         </div>
-        <div className="links__item">
-          <span className="links__text">Her Website:</span>
-          <img className="links__code" src={WebsiteQRC} />
+        <div className="links">
+          <p className="info__text info__text-footer">Learn more about the project at…</p>
+          <div className="links__item">
+            <span className="links__text">GitHub:</span>
+            <img className="links__code" src={RepoQRC} />
+          </div>
         </div>
       </div>
-
-      <p className="info__text">Learn more about Daegan’s work at…</p>
     </div>
   );
 };

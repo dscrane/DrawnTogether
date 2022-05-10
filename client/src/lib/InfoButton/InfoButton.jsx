@@ -1,12 +1,12 @@
 /* IMPORTS */
 import React from "react";
-import { HelpOutlineRounded } from "@mui/icons-material";
+import { InfoRounded } from "@mui/icons-material";
 /* ------ */
 
-export const InfoButton = ({ toggleModal }) => {
+export const InfoButton = ({ toggleModal, style }) => {
   return (
-    <button className="help" onClick={toggleModal}>
-      <HelpOutlineRounded className="help__icon" />
+    <button className={`help ${style ? "help-" + style : ""}`} onClick={toggleModal}>
+      <InfoRounded className={`help__icon ${style ? "help__icon-" + style : ""} `} />
     </button>
   );
 };

@@ -1,8 +1,6 @@
 import React from "react";
 import { PanelHeader } from "../PanelHeader";
 import { PanelContent } from "../PanelContent";
-import { MoreInformation } from "../MoreInformation";
-import { Modal } from "../../lib/Modal";
 import "./panel.css";
 
 const PanelLayout = () => {

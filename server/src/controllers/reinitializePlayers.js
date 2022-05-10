@@ -30,7 +30,8 @@ export const reinitializePlayers = async (
         }
         // Update player association if association value changed
         if (player.responses.association !== playerFormValues.association) {
-          player.responses.association = playerFormValues.association;
+          player.responses.association =
+            playerFormValues.association.match(/(\d+)/)[0];
         }
         // Save updated player document and add to resetPlayers object
         resetPlayers[i] = await player.save();
@@ -40,6 +41,7 @@ export const reinitializePlayers = async (
     // Send update player data to client
     res.send({ ...resetPlayers });
   } catch (err) {
+    console.log(err);
     log.controllerFailure("Reinitializing players for", "", "failed");
   }
 };

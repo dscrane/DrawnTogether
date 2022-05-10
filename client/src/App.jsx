@@ -9,7 +9,9 @@ export const App = () => {
         <PanelLayout />
         <Canvas />
       </div>
-      <div className="cr">C 2020-2022 - Drawn Together - Created by Carrie and Daegan Crane</div>
+      <div id="copyright" className="cr">
+        C 2020-2022 - Drawn Together - Created by Carrie and Daegan Crane
+      </div>
     </div>
   );
 };

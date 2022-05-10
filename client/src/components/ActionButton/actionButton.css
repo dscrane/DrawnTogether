@@ -65,3 +65,17 @@
     padding: .5rem .75rem;
     box-shadow: var(--button-shadow-thin);
 }
+
+.button__content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.button__text {
+    width: 60%;
+}
+
+.button__text-add {
+    width: 100%;
+}
