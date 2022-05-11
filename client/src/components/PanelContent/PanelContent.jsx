@@ -18,7 +18,7 @@ const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreensho
     if (currentForm > 8) {
       return (
         <>
-          <InfoButton toggleModal={toggleModal} />
+          <InfoButton toggleModal={toggleModal} style={"panel"} />
           <DisplayResults gameId={_id} screenshot={screenshot} updateScreenshot={updateScreenshot} endGame={endGame} />
         </>
       );

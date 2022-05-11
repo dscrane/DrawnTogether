@@ -40,7 +40,7 @@
     "start-auto": "REACT_APP_AUTOFILL=true REACT_APP_SERVER=http://192.168.1.62:5500 react-scripts start",
     "build": "react-scripts build",
     "build-server": "react-scripts build && rm -r ../server/src/public/* && mv build/* ../server/src/public",
-    "": "react-scripts build && rm -r ../../herokuCircles/src/public/* && cp -R build/* ../../herokuCircles/src/public/",
+    "heroku": "react-scripts build && rm -r ../../drawntogetherapp/src/public/static && \\cp -v -R ./build/* ../../drawntogetherapp/src/public/",
     "flight": "react-scripts build && rm -r ../../dsc-circle-server/src/public/static && \\cp -v -R ./build/* ../../dsc-circle-server/src/public/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

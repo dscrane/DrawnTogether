@@ -33,9 +33,7 @@ const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
         },
       };
       const apiUrl =
-        process.env.NODE_ENV === "production"
-          ? "https://dsc-circle-server.herokuapp.com"
-          : process.env.REACT_APP_SERVER;
+        process.env.NODE_ENV === "production" ? "https://drawntogetherapp.herokuapp.com" : process.env.REACT_APP_SERVER;
       const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${gameId}`, opts);
 
       setQrcode(urlData);
