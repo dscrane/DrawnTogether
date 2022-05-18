@@ -1,6 +1,6 @@
 import React from "react";
 import { ErrorMessage, Field, FieldArray } from "formik";
-import { validateString, validateNumber, validateInterest, validateAssociation } from "../../../utils/validators";
+import { validateString, validateInterest, validateAssociation } from "../../../utils/validators";
 import { responseSchema } from "../../../utils";
 import { ActionButton } from "../../ActionButton";
 import { Tooltip } from "../../../lib/Tooltip/Tooltip";
@@ -41,6 +41,7 @@ export const PlayerForm = ({ values }) => {
             component="input"
             type="text"
             validate={validateInterest}
+            autocomplete="off"
           />
           <ErrorMessage name="interest">{(msg) => <span className="control__error">{msg}</span>}</ErrorMessage>
         </div>
@@ -73,6 +74,7 @@ export const PlayerForm = ({ values }) => {
                     label="Name"
                     validate={validateString}
                     index={index}
+                    autocomplete="off"
                   />
                 </div>
                 <div className="form__item">
@@ -83,6 +85,7 @@ export const PlayerForm = ({ values }) => {
                     component={renderField}
                     label={"Time"}
                     validate={validateAssociation}
+                    autocomplete="off"
                   />
                 </div>
               </div>
