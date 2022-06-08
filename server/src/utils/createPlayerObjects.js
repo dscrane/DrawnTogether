@@ -11,7 +11,7 @@ export const createPlayerObjects = async (players, gameId) => {
       const newUser = await new User({
         responses: {
           name: player.name,
-          association: player.association.match(/(\d+)/)[0],
+          association: player.association,
         },
         timestamp: Date.now(),
       });

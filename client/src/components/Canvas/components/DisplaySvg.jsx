@@ -1,7 +1,6 @@
 /* IMPORTS */
 import React, { useEffect } from "react";
 import { PolarGrid } from "../../PolarGrid";
-import { CircleDisplay } from "../../CircleDisplay";
 import { FinalCircle } from "../../../lib/circles";
 import { createFinalText } from "../../../utils";
 /* ------ */
@@ -34,16 +33,11 @@ const DisplaySvg = ({ display, session, resizePlayerCircles, updatePolarGrid }) 
         displayGrid={session.displayGrid}
       />
       {finalDisplays}
-      {session.currentForm > 2 ? (
-        <CircleDisplay
-          currentForm={session.currentForm}
-          playerCircles={session.finalCircles.length ? session.finalCircles : session.circles}
-          centerPoint={centerPoint}
-          resizeRatio={display.resizeRatio}
-          resizeCircles={session.resizeCircles}
-          resizePlayerCircles={resizePlayerCircles}
-        />
-      ) : null}
+      {session.currentForm > 1
+        ? session.finalCircles.length
+          ? session.finalCircles.map((circle) => circle)
+          : session.circles.map((circle) => circle)
+        : null}
     </svg>
   );
 };

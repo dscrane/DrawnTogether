@@ -30,8 +30,7 @@ export const reinitializePlayers = async (
         }
         // Update player association if association value changed
         if (player.responses.association !== playerFormValues.association) {
-          player.responses.association =
-            playerFormValues.association.match(/(\d+)/)[0];
+          player.responses.association = playerFormValues.association;
         }
         // Save updated player document and add to resetPlayers object
         resetPlayers[i] = await player.save();

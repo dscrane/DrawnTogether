@@ -27,7 +27,7 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(path.resolve(), "/src/public/index.html"));
 });
 
-app.listen(PORT, "192.168.1.62", () =>
+app.listen(PORT, "127.0.0.1", () =>
   log.yellow(`[APP]: Listening on localhost:${PORT}`)
 );
 

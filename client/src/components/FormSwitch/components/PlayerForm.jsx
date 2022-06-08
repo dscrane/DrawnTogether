@@ -28,7 +28,7 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   );
 };
 
-export const PlayerForm = ({ values }) => {
+export const PlayerForm = ({ values, formProps }) => {
   return (
     <>
       <div className="form__row">
@@ -41,7 +41,7 @@ export const PlayerForm = ({ values }) => {
             component="input"
             type="text"
             validate={validateInterest}
-            autocomplete="off"
+            autoComplete="off"
           />
           <ErrorMessage name="interest">{(msg) => <span className="control__error">{msg}</span>}</ErrorMessage>
         </div>
@@ -74,7 +74,7 @@ export const PlayerForm = ({ values }) => {
                     label="Name"
                     validate={validateString}
                     index={index}
-                    autocomplete="off"
+                    autoComplete="off"
                   />
                 </div>
                 <div className="form__item">
@@ -83,6 +83,10 @@ export const PlayerForm = ({ values }) => {
                     name={`players.${index}.association`}
                     type="text"
                     component={renderField}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      formProps.setFieldValue(`players.${index}.association`, e.target.value.match(/(\d+)/)[0]);
+                    }}
                     label={"Time"}
                     validate={validateAssociation}
                     autocomplete="off"
