@@ -1,15 +1,22 @@
 /* IMPORTS */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PolarGrid } from "../../PolarGrid";
 import { FinalCircle } from "../../../lib/circles";
 import { createFinalText } from "../../../utils";
+import { updatePolarGrid } from "../../../redux/reducers/displaySlice";
+import { useDispatch } from "react-redux";
 /* ------ */
 
-const DisplaySvg = ({ display, session, resizePlayerCircles, updatePolarGrid }) => {
+const DisplaySvg = ({ display, session, resizePlayerCircles }) => {
   /* Update the display grid based on new view dimensions */
+  const dispatch = useDispatch();
   const { width, centerPoint, polarGridPath, partialPath } = display;
+
   useEffect(() => {
-    updatePolarGrid(width, centerPoint);
+    const gridDispatch = async () => {
+      await dispatch(updatePolarGrid({ width: display.width, centerPoint: display.centerPoint }));
+    };
+    gridDispatch();
   }, [centerPoint, width]);
 
   const finalDisplays =

@@ -1,6 +1,7 @@
 // Game Action Types
 export const GENERATE_SESSION = "GENERATE_SESSION";
 export const INITIALIZE_PLAYERS = "INITIALIZE_PLAYERS";
+export const GENERATE_MOCKS = "GENERATE_MOCKS";
 export const REINITIALIZE_PLAYERS = "REINITIALIZE_PLAYERS";
 export const START_GAME = "START_GAME";
 export const END_GAME = "END_GAME";
@@ -37,6 +38,7 @@ export const INITIAL_STATE = {
   currentPlayer: 0,
 
   players: {},
+  mocks: {},
   circles: [],
   finalCircles: [],
 

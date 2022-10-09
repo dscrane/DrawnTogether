@@ -3,6 +3,7 @@ import { log } from "../utils/logs.js";
 
 export const fetchPolarGrid = async (res, gridData) => {
   // Create new PolarGrid instance
+  console.log(gridData);
   const polarGrid = new PolarGrid(gridData);
   // Send new polar grid data to client
   res.send({

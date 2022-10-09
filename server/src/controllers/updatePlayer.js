@@ -12,13 +12,13 @@ export const updatePlayer = async (res, updateData, user) => {
       responses: user.currentFormData(updateData.updateStep),
     });
     log.updateSuccess(`Alteration for`, updateData.playerId, "complete");
-    if (updateData.currentPlayer === updateData.numPlayers - 1) {
-      log.controllerSuccess(
-        `Alteration #${updateData.updateStep} for`,
-        updateData.gameId,
-        "success"
-      );
-    }
+    // if (updateData.currentPlayer === updateData.numPlayers - 1) {
+    //   log.controllerSuccess(
+    //     `Alteration #${updateData.updateStep} for`,
+    //     updateData.gameId,
+    //     "success"
+    //   );
+    // }
     return;
   } catch (err) {
     log.controllerFailure(

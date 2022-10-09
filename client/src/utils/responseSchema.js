@@ -19,9 +19,8 @@ export const responseSchema = {
   color: "",
 };
 
-const getValue = (vals, i) => {
-  return i ? vals[i] : vals[Math.floor(Math.random() * vals.length)];
-};
+const getValue = (vals) => vals[Math.floor(Math.random() * vals.length)];
+
 const names = [
   "Gonzales",
   "Harrell",
@@ -71,26 +70,56 @@ const religionVals = ["solid", "round", "dotted", "uneven", "dashed"];
 const cultureVals = [1, 2, 3, 4];
 const colorVals = ["chartreuse", "vermilion", "cobalt", "teal", "kellyGreen", "aubergine"];
 
-export const createResponseSchema = (i) =>
-  !process.env.REACT_APP_AUTOFILL
-    ? responseSchema
-    : {
-        name: getValue(names, i),
-        association: Math.floor(Math.random() * 100).toString(),
-        height: getValue(heightVals, i),
-        curiosity: getValue(curiosityVals, i),
-        hair: getValue(hairVals, i),
-        age: getValue(ageVals, i),
-        diet: getValue(dietVals, i),
-        personality: getValue(personalityVals, i),
-        leaning: getValue(leaningVals, i),
-        productivity: getValue(productivityVals, i),
-        money: getValue(moneyVals, i),
-        food: getValue(foodVals, i),
-        nature: getValue(natureVals, i),
-        media: getValue(mediaVals, i),
-        progress: getValue(progressVals, i),
-        religion: getValue(religionVals, i),
-        culture: getValue(cultureVals, i),
-        color: getValue(colorVals, i),
-      };
+export const createResponseSchema = () => {
+  return responseSchema;
+};
+
+export const createMockResponseSchema = (numPlayers) => {
+  const mocks = [];
+  for (let i = numPlayers; i < 5; i++) {
+    mocks.push({
+      mock: true,
+      name: getValue(names, Math.floor(Math.random() * 29)),
+      association: Math.floor(Math.random() * 100).toString(),
+      height: getValue(heightVals, i),
+      curiosity: getValue(curiosityVals, i),
+      hair: getValue(hairVals, i),
+      age: getValue(ageVals, i),
+      diet: getValue(dietVals, i),
+      personality: getValue(personalityVals, i),
+      leaning: getValue(leaningVals, i),
+      productivity: getValue(productivityVals, i),
+      money: getValue(moneyVals, i),
+      food: getValue(foodVals, i),
+      nature: getValue(natureVals, i),
+      media: getValue(mediaVals, i),
+      progress: getValue(progressVals, i),
+      religion: getValue(religionVals, i),
+      culture: getValue(cultureVals, i),
+      color: getValue(colorVals, i),
+    });
+  }
+  return mocks;
+};
+// !process.env.REACT_APP_AUTOFILL
+//   ? responseSchema
+//   : {
+//       name: getValue(names, Math.floor(Math.random() * 29)),
+//       association: Math.floor(Math.random() * 100).toString(),
+//       height: getValue(heightVals, i),
+//       curiosity: getValue(curiosityVals, i),
+//       hair: getValue(hairVals, i),
+//       age: getValue(ageVals, i),
+//       diet: getValue(dietVals, i),
+//       personality: getValue(personalityVals, i),
+//       leaning: getValue(leaningVals, i),
+//       productivity: getValue(productivityVals, i),
+//       money: getValue(moneyVals, i),
+//       food: getValue(foodVals, i),
+//       nature: getValue(natureVals, i),
+//       media: getValue(mediaVals, i),
+//       progress: getValue(progressVals, i),
+//       religion: getValue(religionVals, i),
+//       culture: getValue(cultureVals, i),
+//       color: getValue(colorVals, i),
+//     };

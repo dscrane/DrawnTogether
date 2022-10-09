@@ -3,10 +3,9 @@ import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
 import { default as connectDatabase } from "./db/db.js";
-import { userRouter } from "./routes/userControllers.js";
 import { gameRouter } from "./routes/gameControllers.js";
-
 import { log } from "./utils/logs.js";
+import { adminRouter } from "./routes/authRoutes.js";
 
 // Set port
 const PORT = process.env.PORT || 5500;
@@ -15,13 +14,16 @@ const PORT = process.env.PORT || 5500;
 const app = express();
 
 // Connect middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(path.resolve(), "/src/public")));
-app.use(bodyParser.json({ limit: "5mb" }));
+app.use(bodyParser.json({ limit: "250mb" }));
+app.use(bodyParser.urlencoded({ limit: "25mb" }));
 app.use(cors({ origin: "http://localhost:3000" }));
 
 // Connect routers
 app.use(gameRouter);
-// app.use(userRouter);
+app.use(adminRouter);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(path.resolve(), "/src/public/index.html"));

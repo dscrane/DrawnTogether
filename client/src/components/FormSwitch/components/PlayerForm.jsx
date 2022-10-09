@@ -15,7 +15,7 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
       ) : (
         <div className="tooltip__wrapper">
           <label className="item__label item__label-tooltip">{label}</label>
-          <Tooltip content="In hours, months, or years">
+          <Tooltip content="Number of hours, months, or years">
             <HelpTwoTone className="tooltip__icon" />
           </Tooltip>
         </div>

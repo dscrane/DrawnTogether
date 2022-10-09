@@ -26,12 +26,12 @@ router.post("/games/generateSession", async (req, res) => {
 });
 
 router.post("/games/initializePlayers", async (req, res) => {
-  log.controller("Initializing players for", req.body.gameId, "begun");
+  log.controller("Initializing players for", req.body._id, "begun");
   await initializePlayers(res, req.body);
 });
 
 router.post("/games/reinitializePlayers", async (req, res) => {
-  log.controller("Reinitializing players for", req.body.gameId, "begun");
+  log.controller("Reinitializing players for", req.body._id, "begun");
   await reinitializePlayers(res, req.body);
 });
 
@@ -40,6 +40,7 @@ router.post(
   validateAndUpdateResponses,
   async (req, res) => {
     log.controller(`Circle creation for`, req.body.playerId, "begun");
+    console.log(req.body);
     await addPlayerCircle(res, req.body, req.user);
   }
 );
@@ -51,7 +52,7 @@ router.post(
     if (req.body.currentPlayer === 0) {
       log.controller(
         `Alteration #${req.body.updateStep} for`,
-        req.body.gameId,
+        req.body._id,
         "begun"
       );
     }
@@ -60,17 +61,19 @@ router.post(
 );
 
 router.post("/games/updateScreenshot", async (req, res) => {
-  log.controller("Updating screenshot for", req.body.gameId, "begun");
+  console.log(req.body);
+  log.controller("Updating screenshot for", req.body._id, "begun");
+
   await updateScreenshot(res, req.body);
 });
 
 router.post("/games/endGame", async (req, res) => {
-  log.controller("Ending game for", req.body.gameId, "begun");
+  log.controller("Ending game for", req.body._id, "begun");
   await endGame(res, req.body);
 });
 
 router.post("/games/fetchCircleData", async (req, res) => {
-  log.controller("Fetching circle data for", req.body.gameId, "begun");
+  log.controller("Fetching circle data for", req.body._id, "begun");
   await fetchCircleData(res, req.body);
 });
 

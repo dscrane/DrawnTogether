@@ -3,7 +3,7 @@ import { Circle } from "../models/circle.js";
 import { circleAlterations } from "./circleModifiers.js";
 
 export const findAndUpdateCircle = async (
-  { gameId, playerId, updateStep, centerPoint },
+  { _id: gameId, playerId, updateStep, centerPoint },
   responses
 ) => {
   log.update(`Alteration for`, playerId, "begun");

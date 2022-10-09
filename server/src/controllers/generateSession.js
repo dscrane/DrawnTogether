@@ -5,7 +5,6 @@ import { log } from "../utils/logs.js";
 export const generateSession = async (res, gridData) => {
   try {
     // Create new polar grid instance
-    const polarGrid = new PolarGrid(gridData);
 
     // Create new Game document
     const newGame = await new Game({
@@ -17,10 +16,6 @@ export const generateSession = async (res, gridData) => {
     // Send Game and polar grid data to client
     res.send({
       game: newGame,
-      gridPaths: {
-        partialPath: polarGrid.partialPath,
-        polarGridPath: polarGrid.polarGridPath,
-      },
     });
 
     // Save new Game document

@@ -1,33 +1,27 @@
 /* IMPORTS */
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Landing } from "../Landing";
 import { DisplayResults } from "../DisplayResults";
 import { MoreInformation } from "../MoreInformation";
 import { FormContainer } from "../FormContainer";
 import { Modal } from "../../lib/Modal";
 import { InfoButton } from "../../lib/InfoButton";
-import { endGame, toggleModal, updateScreenshot } from "../../redux/actions";
+import { toggleModal, endGame, updateScreenshot } from "../../redux/reducers/sessionSlice";
+// import { endGame, toggleModal, updateScreenshot } from "../../redux/actions";
 /* ------ */
 
-const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreenshot, toggleModal, endGame }) => {
+const PanelContent = () => {
+  const dispatch = useDispatch();
+  const { _id, currentForm, screenshot, showModal } = useSelector((state) => state.session);
   const defineView = () => {
     if (currentForm === 0) {
       return <Landing toggleModal={toggleModal} />;
-    }
-    if (currentForm > 8) {
+    } else {
       return (
         <>
-          <InfoButton toggleModal={toggleModal} style={"panel"} />
-          <DisplayResults gameId={_id} screenshot={screenshot} updateScreenshot={updateScreenshot} endGame={endGame} />
-        </>
-      );
-    }
-    if (currentForm > 0 && currentForm <= 8) {
-      return (
-        <>
-          <InfoButton toggleModal={toggleModal} style={"panel"} />
-          <FormContainer />
+          <InfoButton toggleModal={() => dispatch({ type: "session/toggleModal" })} style={"panel"} />
+          {currentForm > 8 ? <DisplayResults gameId={_id} screenshot={screenshot} /> : <FormContainer />}
         </>
       );
     }
@@ -43,9 +37,4 @@ const PanelContent = ({ _id, currentForm, showModal, screenshot, updateScreensho
   );
 };
 
-const mapStateToProps = ({ session }) => {
-  const { _id, currentForm, screenshot, showModal } = session;
-  return { _id, currentForm, screenshot, showModal };
-};
-
-export default connect(mapStateToProps, { updateScreenshot, endGame, toggleModal })(PanelContent);
+export default PanelContent;

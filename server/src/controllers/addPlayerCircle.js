@@ -5,7 +5,7 @@ import { log } from "../utils/logs.js";
 
 export const addPlayerCircle = async (
   res,
-  { gameId, playerId, centerPoint, updateStep },
+  { _id: gameId, playerId, centerPoint, updateStep },
   user
 ) => {
   try {
@@ -51,6 +51,6 @@ export const addPlayerCircle = async (
     });
   } catch (err) {
     log.controllerFailure(`Circle creation for`, playerId, "failed");
-    console.log(Object.keys(err));
+    console.log(err);
   }
 };

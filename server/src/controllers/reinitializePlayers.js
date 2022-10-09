@@ -1,10 +1,7 @@
 import { User } from "../models/user.js";
 import { log } from "../utils/logs.js";
 
-export const reinitializePlayers = async (
-  res,
-  { gameId, playerIds, values }
-) => {
+export const reinitializePlayers = async (res, { _id, playerIds, players }) => {
   try {
     // Create object to populate with updated player data
     const resetPlayers = {};
@@ -14,10 +11,10 @@ export const reinitializePlayers = async (
       // Find player by _id
       const player = await User.findById(playerId);
       // Get current iteration player values
-      const playerFormValues = values.players[i];
+      const playerFormValues = players[i];
       // Check if update is necessary
       const noUpdate =
-        player.name === playerFormValues.name &&
+        player.responses.name === playerFormValues.name &&
         player.responses.association === playerFormValues.association;
 
       // If noUpdate add current player data to resetPlayers object
@@ -25,8 +22,8 @@ export const reinitializePlayers = async (
         resetPlayers[i] = player;
       } else {
         // Update player name if name value changed
-        if (player.name !== playerFormValues.name) {
-          player.name = playerFormValues.name;
+        if (player.responses.name !== playerFormValues.name) {
+          player.responses.name = playerFormValues.name;
         }
         // Update player association if association value changed
         if (player.responses.association !== playerFormValues.association) {
@@ -36,7 +33,8 @@ export const reinitializePlayers = async (
         resetPlayers[i] = await player.save();
       }
     }
-    log.controllerSuccess("Reinitializing players for", gameId, "complete");
+
+    log.controllerSuccess("Reinitializing players for", _id, "complete");
     // Send update player data to client
     res.send({ ...resetPlayers });
   } catch (err) {
