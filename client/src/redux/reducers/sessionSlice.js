@@ -45,10 +45,8 @@ export const updatePlayerCircle = createAsyncThunk("session/updatePlayerCircle",
     circleSvg: createCircleDesign(data.circle, centerPoint, currentForm),
   };
 });
-export const updateScreenshot = createAsyncThunk("session/updateScreenshot", async ({ gameId, dataUrl }, thunkApi) => {
-  const partialDataUrl = dataUrl.slice(0, dataUrl.length / 4);
-
-  const { data } = await api.post("/games/updateScreenshot", { gameId, dataUrl: partialDataUrl });
+export const updateScreenshot = createAsyncThunk("session/updateScreenshot", async (screenshotData, thunkApi) => {
+  const { data } = await api.post("/games/updateScreenshot", screenshotData);
   return data;
 });
 export const finalDisplay = createAsyncThunk(

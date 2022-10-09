@@ -14,8 +14,8 @@ const DisplayResults = ({ gameId, screenshot }) => {
   const [loading, setLoading] = useState(true);
 
   const sendScreenshot = async () => {
-    const dataUrl = await toPng(document.getElementById("canvas"), { quality: 1 });
-    await dispatch(updateScreenshot({ gameId, dataUrl }));
+    const screenshotData = await toPng(document.getElementById("canvas"));
+    await dispatch(updateScreenshot({ gameId, screenshotData }));
   };
 
   useEffect(() => {

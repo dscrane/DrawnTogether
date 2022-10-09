@@ -14,11 +14,8 @@ const PORT = process.env.PORT || 5500;
 const app = express();
 
 // Connect middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(path.resolve(), "/src/public")));
-app.use(bodyParser.json({ limit: "250mb" }));
-app.use(bodyParser.urlencoded({ limit: "25mb" }));
+app.use(bodyParser.json({ limit: "5mb" }));
 app.use(cors({ origin: "http://localhost:3000" }));
 
 // Connect routers
