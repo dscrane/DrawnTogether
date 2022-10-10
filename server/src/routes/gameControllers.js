@@ -40,7 +40,6 @@ router.post(
   validateAndUpdateResponses,
   async (req, res) => {
     log.controller(`Circle creation for`, req.body.playerId, "begun");
-    console.log(req.body);
     await addPlayerCircle(res, req.body, req.user);
   }
 );
@@ -62,7 +61,6 @@ router.post(
 
 router.post("/games/updateScreenshot", async (req, res) => {
   log.controller("Updating screenshot for", req.body._id, "begun");
-
   await updateScreenshot(res, req.body);
 });
 

@@ -14,7 +14,6 @@ export const createPlayerObjects = async (players, gameId) => {
         },
         timestamp: Date.now(),
       });
-      console.log(newUser);
       newUser.history.push({ gameId: gameId, circles: [] });
       await newUser.save();
 

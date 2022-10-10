@@ -23,7 +23,6 @@ export const circleAlterations = {
   5: circleAlterationThree,
   6: circleAlterationFour,
   7: circleAlterationFive,
-  // 8: finalCircleDisplay,
 };
 
 /**
@@ -204,32 +203,16 @@ function circleAlterationFour(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFive(responses, circleData) {
-  const averageColor = averageColors(
-    responses.color,
-    circleData.hue,
-    circleData.saturation,
-    circleData.lightness
-  );
+  let colorToAverage =
+    circleData.design === "hollow"
+      ? circleData.secondaryColor
+      : circleData.color;
+  const { color, ...rest } = averageColors(responses.color, colorToAverage);
   circleData = {
     ...circleData,
-    ...averageColor,
+    ...rest,
+    secondaryColor:
+      circleData.design === "hollow" ? color : circleData.secondaryColor,
   };
   return { circleData };
 }
-
-/**
- * CA#6 -- final display
- * @function circleAlterationSix
- * @param {object} player -- Current player object
- * */
-// function finalCircleDisplay(player, circleData) {
-//   let { circle, circles } = player;
-//   circle = {
-//     ...circle,
-//   };
-//   circle.lineDesign = createLineDesign(player.religion, circle.initial.color);
-//   console.log(circle.lineDesign);
-//   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-//   circles.push(circleSVG);
-//   return circles;
-// }

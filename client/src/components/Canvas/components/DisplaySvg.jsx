@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from "react";
 import { PolarGrid } from "../../PolarGrid";
 import { FinalCircle } from "../../../lib/circles";
-import { createFinalText } from "../../../utils";
+import { createCircleDesign, createFinalText } from "../../../utils";
 import { updatePolarGrid } from "../../../redux/reducers/displaySlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 /* ------ */
 
 const DisplaySvg = ({ display, session, resizePlayerCircles }) => {
   /* Update the display grid based on new view dimensions */
   const dispatch = useDispatch();
+  const { currentForm } = useSelector((state) => state.session);
   const { width, centerPoint, polarGridPath, partialPath } = display;
 
   useEffect(() => {
@@ -42,8 +43,8 @@ const DisplaySvg = ({ display, session, resizePlayerCircles }) => {
       {finalDisplays}
       {session.currentForm > 1
         ? session.finalCircles.length
-          ? session.finalCircles.map((circle) => circle)
-          : session.circles.map((circle) => circle)
+          ? session.finalCircles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
+          : session.circles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
         : null}
     </svg>
   );

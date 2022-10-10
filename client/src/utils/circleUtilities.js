@@ -64,11 +64,11 @@ function resizeAllCircles(playerCircles, resizeRatio) {
  * */
 function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit = false, currentForm) {
   const stops = [
-    `hsl(${hue}, ${saturation}%, ${lightness * 1.6}%`,
-    `hsl(${hue}, ${saturation}%, ${lightness * 1.45}%`,
-    `hsl(${hue}, ${saturation}%, ${lightness * 1.3}%`,
-    `hsl(${hue}, ${saturation}%, ${lightness * 1.15}%`,
-    `hsl(${hue}, ${saturation}%, ${lightness}%`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.6}%)`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.45}%)`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.3}%)`,
+    `hsl(${hue}, ${saturation}%, ${lightness * 1.15}%)`,
+    `hsl(${hue}, ${saturation}%, ${lightness}%)`,
   ];
   const offsets = ["0%", "25%", "50%", "75%", "100%"];
 

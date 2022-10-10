@@ -279,7 +279,15 @@ export function createLineDesign(religion, culture, color) {
  * @param lightness -- Current player's circle lightness
  * @returns {{saturation: number, hue: number, lightness: number}} Returns alternate hsl() components
  */
-export function averageColors(color, hue, saturation, lightness) {
+export function averageColors(color, colorToAverage) {
+  const values = colorToAverage.match(
+    /^hsl\((0|360|35\d|3[0-4]\d|[12]\d\d|0?\d?\d),(0|100|\d{1,2})%,(0|100|\d{1,2})%\)$/
+  );
+  console.log(values);
+  const hue = parseInt(values[1]);
+  const saturation = parseInt(values[2]);
+  const lightness = parseInt(values[3]);
+
   let averageHue, averageSaturation, averageLightness;
   switch (color) {
     case "chartreuse":
@@ -315,6 +323,7 @@ export function averageColors(color, hue, saturation, lightness) {
     default:
       console.info("%c[ERROR]: Switch - averageColors", "color: red");
   }
+
   return {
     hue: averageHue.toFixed(0),
     saturation: averageSaturation.toFixed(0),

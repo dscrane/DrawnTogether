@@ -42,7 +42,7 @@ export const updatePlayerCircle = createAsyncThunk("session/updatePlayerCircle",
   return {
     currentPlayer: currentPlayer,
     responses: data.responses,
-    circleSvg: createCircleDesign(data.circle, centerPoint, currentForm),
+    circleSvgData: data.circle,
   };
 });
 export const updateScreenshot = createAsyncThunk("session/updateScreenshot", async (screenshotData, thunkApi) => {
@@ -52,9 +52,9 @@ export const updateScreenshot = createAsyncThunk("session/updateScreenshot", asy
 export const finalDisplay = createAsyncThunk("session/finalDisplay", async (displayData, thunkApi) => {
   const { _id, currentForm, centerPoint } = displayData;
   const { data } = await api.post("/games/fetchCircleData", { gameId: _id });
-  const finalCircles = data.map((circle) => createCircleDesign(circle, centerPoint, currentForm));
+
   return {
-    finalCircles,
+    finalCircles: data,
     displayGrid: false,
     currentForm: currentForm + 1,
   };
@@ -161,7 +161,7 @@ const sessionSlice = createSlice({
         },
         circles: [
           ...state.circles.slice(0, action.payload.currentPlayer),
-          action.payload.circleSvg,
+          action.payload.circleSvgData,
           ...state.circles.slice(action.payload.currentPlayer + 1),
         ],
       };
