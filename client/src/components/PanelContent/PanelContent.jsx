@@ -21,7 +21,7 @@ const PanelContent = () => {
       return (
         <>
           <InfoButton toggleModal={() => dispatch({ type: "session/toggleModal" })} style={"panel"} />
-          {currentForm > 8 ? <DisplayResults gameId={_id} screenshot={screenshot} /> : <FormContainer />}
+          {currentForm > 8 ? <DisplayResults _id={_id} screenshot={screenshot} /> : <FormContainer />}
         </>
       );
     }

@@ -49,20 +49,19 @@ export const updateScreenshot = createAsyncThunk("session/updateScreenshot", asy
   const { data } = await api.post("/games/updateScreenshot", screenshotData);
   return data;
 });
-export const finalDisplay = createAsyncThunk(
-  "session/finalDisplay",
-  async ({ _id, currentForm, centerPoint }, thunkApi) => {
-    const { data } = await api.post("/games/fetchCircleData", { gameId: _id });
-    const finalCircles = data.map((circle) => createCircleDesign(circle, centerPoint, currentForm));
-    return {
-      finalCircles,
-      displayGrid: false,
-      currentForm: currentForm + 1,
-    };
-  }
-);
+export const finalDisplay = createAsyncThunk("session/finalDisplay", async (displayData, thunkApi) => {
+  const { _id, currentForm, centerPoint } = displayData;
+  const { data } = await api.post("/games/fetchCircleData", { gameId: _id });
+  const finalCircles = data.map((circle) => createCircleDesign(circle, centerPoint, currentForm));
+  return {
+    finalCircles,
+    displayGrid: false,
+    currentForm: currentForm + 1,
+  };
+});
 export const endGame = createAsyncThunk("session/endGame", async (_id, thunkApi) => {
-  await api.post("/games/endGame", { gameId: _id });
+  console.log(_id);
+  await api.post("/games/endGame", { _id });
   return initialState;
 });
 

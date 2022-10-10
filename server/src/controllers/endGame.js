@@ -1,10 +1,10 @@
 import { Game } from "../models/game.js";
 import { log } from "../utils/logs.js";
 
-export const endGame = async (res, { gameId }) => {
+export const endGame = async (res, { _id }) => {
   try {
     // Find the current game
-    let game = await Game.findById(gameId);
+    let game = await Game.findById(_id);
 
     // Update the game to be complete
     game.complete = true;
@@ -15,6 +15,6 @@ export const endGame = async (res, { gameId }) => {
     // Save the newly ended game
     await game.save();
   } catch (err) {
-    log.controllerFailure("Ending game for", gameId, "failed");
+    log.controllerFailure("Ending game for", _id, "failed");
   }
 };

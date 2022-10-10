@@ -1,10 +1,10 @@
 import { Game } from "../models/game.js";
 import { log } from "../utils/logs.js";
 
-export const updateScreenshot = async (res, { gameId, screenshotData }) => {
+export const updateScreenshot = async (res, { _id, screenshotData }) => {
   try {
     // Find game by _id
-    const game = await Game.findById(gameId);
+    const game = await Game.findById(_id);
     // Update game document screenshot string
     game.screenshot = screenshotData.split(";base64,").pop();
     // Save updated game document
@@ -12,7 +12,7 @@ export const updateScreenshot = async (res, { gameId, screenshotData }) => {
 
     // Return status to client
     res.send({ screenshot: true });
-    log.controllerSuccess("Updating screenshot for", gameId, "success");
+    log.controllerSuccess("Updating screenshot for", _id, "success");
   } catch (err) {
     log.red(err);
   }

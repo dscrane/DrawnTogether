@@ -61,7 +61,6 @@ router.post(
 );
 
 router.post("/games/updateScreenshot", async (req, res) => {
-  console.log(req.body);
   log.controller("Updating screenshot for", req.body._id, "begun");
 
   await updateScreenshot(res, req.body);

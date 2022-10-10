@@ -14,7 +14,7 @@ import "./formContainer.css";
 const formResponseSchema = {
   interest: "",
   // players: [createResponseSchema(), createResponseSchema()],
-  players: createMockResponseSchema(2),
+  players: createMockResponseSchema(0),
 };
 
 const FormContainer = () => {
@@ -25,7 +25,7 @@ const FormContainer = () => {
 
   const handlePrevious = async () => {
     if (currentForm === 1) {
-      await dispatch(endGame({ _id }));
+      await dispatch(endGame(_id));
     } else if (currentPlayer === 0) {
       dispatch({ type: "session/prevForm", payload: { currentForm: session.currentForm - 1 } });
     } else {
@@ -36,6 +36,9 @@ const FormContainer = () => {
     // First Form Submit
     if (currentForm === 1) {
       if (!Object.keys(session.players).length) {
+        const numMocks = 5 - players.length;
+        const mocks = numMocks ? createMockResponseSchema(numMocks) : [];
+        players = [...players, ...mocks];
         await dispatch(initializePlayers({ _id, interest, players }));
       } else {
         await dispatch(reinitializePlayers({ _id, players, playerIds: session.playerIds }));
@@ -57,7 +60,7 @@ const FormContainer = () => {
           centerPoint,
           currentPlayer,
           playerId: playerIds[currentPlayer],
-          responses: players[currentPlayer],
+          responses: players[currentPlayer] || session.players[currentPlayer].responses,
           newCircle: !session.circles[currentPlayer],
         })
       );

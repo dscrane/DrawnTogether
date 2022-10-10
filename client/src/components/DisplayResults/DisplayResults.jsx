@@ -7,7 +7,7 @@ import { ActionButton } from "../ActionButton";
 import { endGame, updateScreenshot } from "../../redux/reducers/sessionSlice";
 import "./displayResults.css";
 
-const DisplayResults = ({ gameId, screenshot }) => {
+const DisplayResults = ({ _id, screenshot }) => {
   const dispatch = useDispatch();
 
   const [qrcode, setQrcode] = useState(null);
@@ -15,7 +15,7 @@ const DisplayResults = ({ gameId, screenshot }) => {
 
   const sendScreenshot = async () => {
     const screenshotData = await toPng(document.getElementById("canvas"));
-    await dispatch(updateScreenshot({ gameId, screenshotData }));
+    await dispatch(updateScreenshot({ _id, screenshotData }));
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const DisplayResults = ({ gameId, screenshot }) => {
       };
       const apiUrl =
         process.env.NODE_ENV === "production" ? "https://drawntogetherapp.herokuapp.com" : process.env.REACT_APP_SERVER;
-      const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${gameId}`, opts);
+      const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${_id}`, opts);
 
       setQrcode(urlData);
       setLoading(false);
@@ -64,11 +64,7 @@ const DisplayResults = ({ gameId, screenshot }) => {
       <div className="results__restart">
         <p className="restart__text">Play again. Results may vary!</p>
         {/*<p className="restart__text restart__text-smaller"></p>*/}
-        <ActionButton
-          onClick={async () => await dispatch(endGame({ gameId }))}
-          buttonType={"restart"}
-          text={"Play\nAgain"}
-        />
+        <ActionButton onClick={async () => await dispatch(endGame(_id))} buttonType={"restart"} text={"Play\nAgain"} />
       </div>
     </div>
   );
