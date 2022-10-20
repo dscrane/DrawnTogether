@@ -18,7 +18,11 @@ export const findAndUpdateCircle = async (
     // Run the alterations for the current step
     const { circleData } =
       updateStep === 2
-        ? circleAlterations[updateStep](responses, centerPoint)
+        ? circleAlterations[updateStep](
+            responses,
+            centerPoint,
+            radiusMultiplier
+          )
         : circleAlterations[updateStep](
             responses,
             userCircle.toObject(),

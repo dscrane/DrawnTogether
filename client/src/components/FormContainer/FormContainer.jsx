@@ -13,8 +13,7 @@ import "./formContainer.css";
 
 const formResponseSchema = {
   interest: "",
-  // players: [createResponseSchema(), createResponseSchema()],
-  players: [...createMockResponseSchema(1)],
+  players: [createResponseSchema(), createResponseSchema()],
 };
 
 const FormContainer = () => {
@@ -27,7 +26,10 @@ const FormContainer = () => {
     if (currentForm === 1) {
       await dispatch(endGame(_id));
     } else if (currentPlayer === 0) {
-      dispatch({ type: "session/prevForm", payload: { currentForm: session.currentForm - 1 } });
+      dispatch({
+        type: "session/prevForm",
+        payload: { currentForm: session.currentForm - 1, currentPlayer: numPlayers - 1 },
+      });
     } else {
       dispatch({ type: "session/prevPlayer", payload: { currentPlayer: currentPlayer - 1 } });
     }
