@@ -19,6 +19,7 @@ const initialState = {
   finalCircles: [],
 };
 
+// Thunk actions
 export const generateSession = createAsyncThunk("session/generateSession", async (display, thunkApi) => {
   const { data } = await api.post("/games/generateSession", { ...display });
   return data;
@@ -44,6 +45,10 @@ export const updatePlayerCircle = createAsyncThunk("session/updatePlayerCircle",
     responses: data.responses,
     circleSvgData: data.circle,
   };
+});
+export const resizePlayerCircle = createAsyncThunk("session/resizePlayerCircle", async (resizeData, thunkApi) => {
+  const { data } = await api.post("/games/resizePlayerCircle", { ...resizeData });
+  return data.resizedCircles;
 });
 export const updateScreenshot = createAsyncThunk("session/updateScreenshot", async (screenshotData, thunkApi) => {
   const { data } = await api.post("/games/updateScreenshot", screenshotData);
@@ -164,6 +169,12 @@ const sessionSlice = createSlice({
           action.payload.circleSvgData,
           ...state.circles.slice(action.payload.currentPlayer + 1),
         ],
+      };
+    });
+    builder.addCase(resizePlayerCircle.fulfilled, (state, action) => {
+      return {
+        ...state,
+        circles: [...action.payload],
       };
     });
     builder.addCase(updateScreenshot.fulfilled, (state, action) => {

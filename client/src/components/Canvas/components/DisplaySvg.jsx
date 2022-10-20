@@ -5,46 +5,41 @@ import { FinalCircle } from "../../../lib/circles";
 import { createCircleDesign, createFinalText } from "../../../utils";
 import { updatePolarGrid } from "../../../redux/reducers/displaySlice";
 import { useDispatch, useSelector } from "react-redux";
+import { resizePlayerCircle } from "../../../redux/reducers/sessionSlice";
 /* ------ */
 
-const DisplaySvg = ({ display, session, resizePlayerCircles }) => {
+const DisplaySvg = () => {
   /* Update the display grid based on new view dimensions */
   const dispatch = useDispatch();
-  const { currentForm } = useSelector((state) => state.session);
-  const { width, centerPoint, polarGridPath, partialPath } = display;
+  const { _id, circles, finalCircles, interest, players, displayGrid, currentForm } = useSelector(
+    (state) => state.session
+  );
+  const { width, centerPoint, polarGridPath, partialPath, previousWidth } = useSelector((state) => state.display);
 
   useEffect(() => {
     const gridDispatch = async () => {
-      await dispatch(updatePolarGrid({ width: display.width, centerPoint: display.centerPoint }));
+      await dispatch(updatePolarGrid({ width, centerPoint }));
+      await dispatch(resizePlayerCircle({ circles, centerPoint, ratio: width / previousWidth }));
     };
     gridDispatch();
   }, [centerPoint, width]);
 
   const finalDisplays =
-    session.currentForm === 9 ? (
+    currentForm === 9 ? (
       <>
-        {createFinalText(session)}
-        <FinalCircle
-          key={`final_circle`}
-          gameId={session._id}
-          width={display.width}
-          centerPoint={display.centerPoint}
-        />
+        {createFinalText(interest, players)}
+        <FinalCircle key={`final_circle`} gameId={_id} width={width} centerPoint={centerPoint} />
       </>
     ) : null;
 
   return (
     <svg className={`svg__canvas svg__canvas-light`}>
-      <PolarGrid
-        path={polarGridPath}
-        partialPath={!session.displayGrid ? partialPath : null}
-        displayGrid={session.displayGrid}
-      />
+      <PolarGrid path={polarGridPath} partialPath={!displayGrid ? partialPath : null} displayGrid={displayGrid} />
       {finalDisplays}
-      {session.currentForm > 1
-        ? session.finalCircles.length
-          ? session.finalCircles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
-          : session.circles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
+      {currentForm > 1
+        ? finalCircles.length
+          ? finalCircles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
+          : circles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
         : null}
     </svg>
   );

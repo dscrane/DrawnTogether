@@ -42,7 +42,7 @@ const Canvas = () => {
     <div className="app__canvas" data-testid="component-Canvas">
       <div id="canvas" className="canvas__container" ref={displaySVG}>
         {session.currentForm !== 0 ? (
-          <DisplaySvg session={session} display={display} />
+          <DisplaySvg />
         ) : (
           <ActionButton
             onClick={async () => await dispatch(generateSession())}

@@ -9,7 +9,7 @@ export const updatePolarGrid = createAsyncThunk("display/updatePolarGrid", async
 const displaySlice = createSlice({
   name: "display",
   initialState: {
-    resizeRatio: 1,
+    radiusMultiplier: 1,
     centerPoint: { x: 0, y: 0 },
     height: 0,
     width: 0,
@@ -23,12 +23,13 @@ const displaySlice = createSlice({
       return {
         ...state,
         ...action.payload,
+        radiusMultiplier: action.payload.width * 0.04,
         centerPoint: {
           y: parseFloat((action.payload.height / 2).toFixed(4)),
           x: parseFloat((action.payload.width / 2).toFixed(4)),
         },
-        oldHeight: state.height,
-        oldWidth: state.width,
+        previousHeight: state.height,
+        previousWidth: state.width,
       };
     },
     displayCircles: (state, action) => {

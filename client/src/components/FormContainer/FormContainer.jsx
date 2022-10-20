@@ -14,14 +14,14 @@ import "./formContainer.css";
 const formResponseSchema = {
   interest: "",
   // players: [createResponseSchema(), createResponseSchema()],
-  players: createMockResponseSchema(0),
+  players: [...createMockResponseSchema(1)],
 };
 
 const FormContainer = () => {
   const dispatch = useDispatch();
   const { session, display } = useSelector((state) => state);
   const { _id, currentForm, currentPlayer, numPlayers, playerIds, mocks } = session;
-  const { centerPoint } = display;
+  const { centerPoint, radiusMultiplier } = display;
 
   const handlePrevious = async () => {
     if (currentForm === 1) {
@@ -36,9 +36,8 @@ const FormContainer = () => {
     // First Form Submit
     if (currentForm === 1) {
       if (!Object.keys(session.players).length) {
-        const numMocks = 5 - players.length;
-        const mocks = numMocks ? createMockResponseSchema(numMocks) : [];
-        players = [...players, ...mocks];
+        console.log(5 - players.length);
+        players = [...players, ...createMockResponseSchema(5 - players.length)];
         await dispatch(initializePlayers({ _id, interest, players }));
       } else {
         await dispatch(reinitializePlayers({ _id, players, playerIds: session.playerIds }));
@@ -59,6 +58,7 @@ const FormContainer = () => {
           currentForm,
           centerPoint,
           currentPlayer,
+          radiusMultiplier,
           playerId: playerIds[currentPlayer],
           responses: players[currentPlayer] || session.players[currentPlayer].responses,
           newCircle: !session.circles[currentPlayer],
