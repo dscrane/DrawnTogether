@@ -5,7 +5,7 @@ import { log } from "../utils/logs.js";
 
 export const addPlayerCircle = async (
   res,
-  { _id: gameId, playerId, centerPoint, updateStep },
+  { _id: gameId, playerId, centerPoint, updateStep, radiusMultiplier },
   user
 ) => {
   try {
@@ -15,7 +15,8 @@ export const addPlayerCircle = async (
     // Create circle data objects
     const circleData = circleAlterations[updateStep](
       user.responses,
-      centerPoint
+      centerPoint,
+      radiusMultiplier
     );
 
     // Create new circle document

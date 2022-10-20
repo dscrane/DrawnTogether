@@ -115,11 +115,11 @@ export function setPlayerDegree(curiosity, hair, diet) {
  * @param {number} association -- Current player's association value
  * @return {number} Initial value for playerCircle's radius
  */
-export function setCircleRadius(association) {
-  const initRadius = 40;
+export function setCircleRadius(association, radiusMultiplier) {
+  console.log(radiusMultiplier);
   const randomness = 10 * (association / 100);
-  const min = initRadius - randomness;
-  const max = initRadius + randomness;
+  const min = radiusMultiplier - randomness;
+  const max = radiusMultiplier + randomness;
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -280,6 +280,7 @@ export function createLineDesign(religion, culture, color) {
  * @returns {{saturation: number, hue: number, lightness: number}} Returns alternate hsl() components
  */
 export function averageColors(color, colorToAverage) {
+  console.log(colorToAverage);
   const values = colorToAverage.match(
     /^hsl\((0|360|35\d|3[0-4]\d|[12]\d\d|0?\d?\d),(0|100|\d{1,2})%,(0|100|\d{1,2})%\)$/
   );

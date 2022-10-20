@@ -32,8 +32,8 @@ export const circleAlterations = {
  * @param {object} centerPoint -- Current center of the display grid
  * @return {Object} circle -- Updated player circle object
  * */
-function initialCircleVariables(responses, centerPoint) {
-  const radius = setCircleRadius(responses.association);
+function initialCircleVariables(responses, centerPoint, radiusMultiplier) {
+  const radius = setCircleRadius(responses.association, radiusMultiplier);
   const radian = createRadian(responses.age, radius);
 
   const { degree, slice } = setPlayerDegree(

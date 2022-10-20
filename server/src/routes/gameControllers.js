@@ -11,6 +11,12 @@ import { endGame } from "../controllers/endGame.js";
 import { fetchPolarGrid } from "../controllers/fetchPolarGrid.js";
 import { validateAndUpdateResponses } from "../middleware/validateAndUpdateResponses.js";
 import { log } from "../utils/logs.js";
+import {
+  convertToCartesian,
+  createLinearDPath,
+  setCircleRadius,
+} from "../utils/circleHelpers.js";
+import { resizePlayerCircles } from "../controllers/resizePlayerCircles.js";
 
 // Router initialization
 const router = new express.Router();
@@ -58,6 +64,10 @@ router.post(
     await updatePlayer(res, req.body, req.user);
   }
 );
+router.post("/games/resizePlayerCircle", async (req, res) => {
+  log.white("Resizing circles begun");
+  resizePlayerCircles(res, req.body);
+});
 
 router.post("/games/updateScreenshot", async (req, res) => {
   log.controller("Updating screenshot for", req.body._id, "begun");
