@@ -183,11 +183,16 @@ function circleAlterationThree(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFour(responses, circleData) {
-  const lineDesign = createLineDesign(responses.religion, responses.culture, {
-    hue: circleData.hue,
-    saturation: circleData.saturation,
-    lightness: circleData.lightness,
-  });
+  const lineDesign = createLineDesign(
+    responses.religion,
+    responses.culture,
+    {
+      hue: circleData.hue,
+      saturation: circleData.saturation,
+      lightness: circleData.lightness,
+    },
+    3
+  );
   circleData = {
     ...circleData,
     lineDesign,
@@ -213,6 +218,7 @@ function circleAlterationFive(responses, circleData) {
     ...rest,
     secondaryColor:
       circleData.design === "hollow" ? color : circleData.secondaryColor,
+    isAnimated: false,
   };
   return { circleData };
 }

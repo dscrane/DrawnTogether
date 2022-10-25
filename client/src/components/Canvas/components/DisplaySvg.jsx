@@ -32,14 +32,18 @@ const DisplaySvg = () => {
       </>
     ) : null;
 
+  const finalCirclesDisplay = () => {
+    return Object.keys(finalCircles).length
+      ? [...finalCircles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))]
+      : null;
+  };
+
   return (
     <svg className={`svg__canvas svg__canvas-light`}>
-      <PolarGrid path={polarGridPath} partialPath={!displayGrid ? partialPath : null} displayGrid={displayGrid} />
+      <PolarGrid path={polarGridPath} partialPath={!displayGrid ? null : null} displayGrid={displayGrid} />
       {finalDisplays}
       {currentForm > 1
-        ? finalCircles.length
-          ? finalCircles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
-          : circles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
+        ? finalCirclesDisplay() || circles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))
         : null}
     </svg>
   );

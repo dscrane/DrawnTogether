@@ -4,9 +4,14 @@ import {
 } from "../utils/circleHelpers.js";
 import { log } from "../utils/logs.js";
 
-export const resizePlayerCircles = (res, { circles, ratio, centerPoint }) => {
+export const resizePlayerCircles = (
+  res,
+  { circles, ratio, centerPoint },
+  backgroundOpacity = null
+) => {
   let resizedCircles = [];
-  for (let circle of circles) {
+  for (let circleData of circles) {
+    const circle = circleData._doc || circleData;
     let newCartesian = convertToCartesian(
       centerPoint,
       circle.radian,
@@ -26,9 +31,18 @@ export const resizePlayerCircles = (res, { circles, ratio, centerPoint }) => {
       ...newCartesian,
       linearDPath: newLinearDPath,
       radius: newRadius,
+      designThickness: circle.designThickness * ratio,
+      lineDesign: { ...circle.lineDesign, strokeWidth: `${3 * ratio}px` },
+      opacity: backgroundOpacity,
     });
   }
+
+  // console.log(resizedCircles);
   log.green("Resizing circles successful");
 
-  res.send({ resizedCircles });
+  if (res) {
+    res.send({ resizedCircles });
+  } else {
+    return resizedCircles;
+  }
 };

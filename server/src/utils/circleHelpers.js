@@ -280,9 +280,8 @@ export function createLineDesign(religion, culture, color) {
  * @returns {{saturation: number, hue: number, lightness: number}} Returns alternate hsl() components
  */
 export function averageColors(color, colorToAverage) {
-  console.log(colorToAverage);
   const values = colorToAverage.match(
-    /^hsl\((0|360|35\d|3[0-4]\d|[12]\d\d|0?\d?\d),(0|100|\d{1,2})%,(0|100|\d{1,2})%\)$/
+    /^hsl\((-?\d{1,3}),(0|100|\d{1,2})%,(0|100|\d{1,2})%\)$/
   );
   console.log(values);
   const hue = parseInt(values[1]);
@@ -381,10 +380,13 @@ export function createLinearDPath(
   const r = alteration ? Math.floor(Math.random() * (radian / 1.75)) : 0;
   const theta = degree * (Math.PI / 180);
   // Get the line starting y point
-  const xStartPoint = () =>
-    parseFloat((centerPoint.x + r * -Math.cos(theta)).toFixed(1));
+  const xStartPoint = parseFloat(
+    (centerPoint.x + r * -Math.cos(theta)).toFixed(1)
+  );
   // Get the line starting y point
-  const yStartPoint = () =>
-    parseFloat((centerPoint.y + r * Math.sin(theta)).toFixed(1));
-  return `m${xCartesian},${yCartesian} L${xStartPoint()},${yStartPoint()} ${xCartesian},${yCartesian}`;
+  const yStartPoint = parseFloat(
+    (centerPoint.y + r * Math.sin(theta)).toFixed(1)
+  );
+
+  return `m${xCartesian},${yCartesian} L${xStartPoint},${yStartPoint} ${xCartesian},${yCartesian}`;
 }

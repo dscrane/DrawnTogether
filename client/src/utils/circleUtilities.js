@@ -59,10 +59,11 @@ function resizeAllCircles(playerCircles, resizeRatio) {
  * @param {number} saturation -- playerCircle's saturation
  * @param {number} lightness -- playerCircle's lightness
  * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {boolean} isInit -- is initial circle
+ * @param {number} currentForm -- current form value
  * @returns {JSX.Element} <radialGradient />
  * */
-function createRadialGradient(id, centerPoint, hue, saturation, lightness, isInit = false, currentForm) {
+function createRadialGradient(id, hue, saturation, lightness, isInit = false, currentForm = 3) {
   const stops = [
     `hsl(${hue}, ${saturation}%, ${lightness * 1.6}%)`,
     `hsl(${hue}, ${saturation}%, ${lightness * 1.45}%)`,
@@ -184,9 +185,9 @@ function createEssPath(x, y, r, id, centerPoint) {
 
 /**
  * Creates the complex SVG design for each playerCircle
- * @param {string} playerId -- Player ID
  * @param {Object} circleData -- Player circle object
  * @param {Object} centerPoint -- display grid's center position along x and y axis
+ * @param {number} currentForm -- currentForm value
  * @returns {JSX.Element}
  */
 function createCircleDesign(circleData, centerPoint, currentForm) {

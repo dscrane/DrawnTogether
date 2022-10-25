@@ -7,7 +7,7 @@ export const endGame = async (res, { _id }) => {
     let game = await Game.findById(_id);
 
     // Update the game to be complete
-    game.complete = true;
+
     game.inProgress = false;
 
     res.send({ inProgress: true });

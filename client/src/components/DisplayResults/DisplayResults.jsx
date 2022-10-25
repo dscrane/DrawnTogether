@@ -14,12 +14,15 @@ const DisplayResults = ({ _id, screenshot }) => {
   const [loading, setLoading] = useState(true);
 
   const sendScreenshot = async () => {
+    console.log("sendscreenshot fired");
     const screenshotData = await toPng(document.getElementById("canvas"));
+    console.log(screenshotData);
     await dispatch(updateScreenshot({ _id, screenshotData }));
   };
 
   useEffect(() => {
     const screenshotTimer = setTimeout(async () => {
+      console.log("screenshot timed fired");
       await sendScreenshot();
     }, 4000);
     return () => clearTimeout(screenshotTimer);

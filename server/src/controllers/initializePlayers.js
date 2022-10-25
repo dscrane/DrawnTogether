@@ -1,5 +1,6 @@
 import { Game } from "../models/game.js";
 import { createPlayerObjects } from "../utils/createPlayerObjects.js";
+import { interestCategoryChecker } from "../utils/interestCategoryChecker.js";
 import { log } from "../utils/logs.js";
 
 export const initializePlayers = async (res, { _id, interest, players }) => {
@@ -14,8 +15,16 @@ export const initializePlayers = async (res, { _id, interest, players }) => {
     game.numPlayers = playerIds.length;
     game.playerIds = playerIds;
 
+    // const interestCategory = await interestCategoryChecker();
+
     // Send new player data to client
-    res.send({ numPlayers: playerIds.length, playerIds, playersObj, interest });
+    res.send({
+      numPlayers: playerIds.length,
+      playerIds,
+      playersObj,
+      interest,
+      // interestCategory,
+    });
 
     // Save updated game document
     await game.save();

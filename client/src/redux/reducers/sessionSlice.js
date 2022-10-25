@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api, createCircleDesign } from "../../utils";
+import { api } from "../../utils";
 
 const initialState = {
   _id: "",
@@ -55,8 +55,40 @@ export const updateScreenshot = createAsyncThunk("session/updateScreenshot", asy
   return data;
 });
 export const finalDisplay = createAsyncThunk("session/finalDisplay", async (displayData, thunkApi) => {
-  const { _id, currentForm, centerPoint } = displayData;
-  const { data } = await api.post("/games/fetchCircleData", { gameId: _id });
+  const { _id, currentForm } = displayData;
+  // TODO look for a way to generate locations
+  const { data } = await api.post("/games/fetchCircleData", {
+    gameId: _id,
+    ratio: 0.15,
+    centerPoint: [
+      // current game
+      { x: 800, y: 350 },
+      // // recent games
+      { x: 390, y: 125 },
+      { x: 915, y: 825 },
+      { x: 150, y: 500 },
+      { x: 1275, y: 410 },
+      // top row small
+      { x: 150, y: 100 },
+      { x: 625, y: 75 },
+      { x: 1125, y: 110 },
+      // middle row small
+      { x: 690, y: 370 },
+      // bottom row small
+      { x: 105, y: 900 },
+      { x: 700, y: 775 },
+      { x: 1300, y: 810 },
+      // top row tiny
+      { x: 425, y: 175 },
+      { x: 1111, y: 140 },
+      // middle row tiny
+      { x: 590, y: 390 },
+      { x: 890, y: 270 },
+      // bottom row tiny
+      { x: 205, y: 900 },
+      { x: 735, y: 715 },
+    ],
+  });
 
   return {
     finalCircles: data,
@@ -65,7 +97,6 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
   };
 });
 export const endGame = createAsyncThunk("session/endGame", async (_id, thunkApi) => {
-  console.log(_id);
   await api.post("/games/endGame", { _id });
   return initialState;
 });

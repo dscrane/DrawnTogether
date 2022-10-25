@@ -11,6 +11,7 @@
 }
 .svg__canvas-light {
   background: var(--bg-panel-light);
+  background: hsl(60, 5%, 7.8%);
 }
 .circle {
   opacity: 1;
@@ -42,4 +43,16 @@
 .svg__text {
   font: bold 1.75rem "Quicksand";
   fill: var(--bluegreen-fade-30);
+}
+.faded_1 {
+  opacity: 1;
+}
+.faded_75 {
+  opacity: 0.75
+}
+.faded_50 {
+  opacity: 0.25;
+}
+.faded_25 {
+  opacity: 0.50;
 }
