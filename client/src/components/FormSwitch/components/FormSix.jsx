@@ -4,22 +4,79 @@ import { Field } from "formik";
 export const FormSix = ({ currentPlayer }) => {
   return (
     <>
-      <div className="form__row">
+      <div className="form__row" role="group">
         <label className="item__label item__label-select">Which hue is you</label>
-        <Field
-          className="form__control form__control-select"
-          name={`players.${currentPlayer}.color`}
-          id="formColor"
-          as="select"
-        >
-          <option value="DEFAULT">Choose...</option>
-          <option value="chartreuse">Chartreuse</option>
-          <option value="vermilion">Vermilion</option>
-          <option value="cobalt">Cobalt</option>
-          <option value="teal">Teal</option>
-          <option value="kellyGreen">Kelly Green</option>
-          <option value="aubergine">Aubergine</option>
-        </Field>
+
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="DEFAULT"
+          />
+          Choose...
+        </label>
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="chartreuse"
+          />
+          Chartreuse
+        </label>
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="vermilion"
+          />
+          Vermilion
+        </label>
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="cobalt"
+          />
+          Cobalt
+        </label>
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="teal"
+          />
+          Teal
+        </label>
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="kellyGreen"
+          />
+          Kelly Green
+        </label>
+        <label className="form__radio">
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.color`}
+            id="formColor"
+            value="aubergine"
+          />
+          Aubergine
+        </label>
       </div>
     </>
   );
