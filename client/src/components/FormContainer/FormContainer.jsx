@@ -39,7 +39,6 @@ const FormContainer = () => {
     // First Form Submit
     if (currentForm === 1) {
       if (!Object.keys(session.players).length) {
-        console.log(5 - players.length);
         players = [...players, ...createMockResponseSchema(5 - players.length)];
         await dispatch(initializePlayers({ _id, interest, players }));
       } else {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toPng } from "html-to-image";
 import QRCode from "qrcode";
 import { ClipLoader } from "react-spinners";
@@ -14,15 +14,12 @@ const DisplayResults = ({ _id, screenshot }) => {
   const [loading, setLoading] = useState(true);
 
   const sendScreenshot = async () => {
-    console.log("sendscreenshot fired");
     const screenshotData = await toPng(document.getElementById("canvas"));
-    console.log(screenshotData);
     await dispatch(updateScreenshot({ _id, screenshotData }));
   };
 
   useEffect(() => {
     const screenshotTimer = setTimeout(async () => {
-      console.log("screenshot timed fired");
       await sendScreenshot();
     }, 4000);
     return () => clearTimeout(screenshotTimer);
