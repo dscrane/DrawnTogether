@@ -5,7 +5,9 @@ import { resizePlayerCircles } from "./resizePlayerCircles.js";
 
 export const fetchCircleData = async (res, { gameId, ratio, centerPoint }) => {
   try {
-    const games = await Game.find({ __v: { $gte: 6 } })
+    await Game.updateOne({ _id: gameId }, { complete: true }).exec();
+
+    const games = await Game.find({ complete: true })
       .sort({ timestamp: -1 })
       .limit(18)
       .exec();

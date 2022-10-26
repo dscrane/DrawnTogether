@@ -7,7 +7,6 @@ export const updateScreenshot = async (res, { _id, screenshotData }) => {
     const game = await Game.findById(_id);
     // Update game document screenshot string
     game.screenshot = screenshotData.split(";base64,").pop();
-    game.complete = true;
     // Save updated game document
     await game.save();
 

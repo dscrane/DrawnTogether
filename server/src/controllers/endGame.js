@@ -7,13 +7,12 @@ export const endGame = async (res, { _id }) => {
     let game = await Game.findById(_id);
 
     // Update the game to be complete
-
     game.inProgress = false;
-
-    res.send({ inProgress: true });
 
     // Save the newly ended game
     await game.save();
+
+    res.send({ inProgress: true });
   } catch (err) {
     log.controllerFailure("Ending game for", _id, "failed");
   }
