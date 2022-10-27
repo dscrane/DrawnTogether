@@ -19,8 +19,6 @@ export const responseSchema = {
   color: "",
 };
 
-const getValue = (vals) => vals[Math.floor(Math.random() * vals.length)];
-
 const names = [
   "Gonzales",
   "Harrell",
@@ -56,7 +54,6 @@ const names = [
 const heightVals = [16, 32, 48];
 const curiosityVals = [27, 36, 18, 9, 0];
 const hairVals = [2, 1, 0];
-const ageVals = [400, 40, 360, 80, 320, 120, 280, 160, 240, 200];
 const dietVals = ["omnivore", "vegetarian", "pescatarian", "vegan"];
 const leaningVals = [18, 45];
 const personalityVals = [60, 31, 18];
@@ -74,6 +71,12 @@ export const createResponseSchema = () => {
   return responseSchema;
 };
 
+const getValue = (vals, q) => {
+  const i = Math.floor(Math.random() * vals.length);
+  console.log(i);
+  return vals[i];
+};
+
 export const createMockResponseSchema = (numMocks) => {
   if (numMocks === 0) {
     return [];
@@ -83,11 +86,10 @@ export const createMockResponseSchema = (numMocks) => {
     mocks.push({
       mock: true,
       name: getValue(names, Math.floor(Math.random() * 29)),
-      association: Math.floor(Math.random() * 100).toString(),
+      age: Math.floor(Math.random() * 100).toString(),
       height: getValue(heightVals, i),
       curiosity: getValue(curiosityVals, i),
       hair: getValue(hairVals, i),
-      age: getValue(ageVals, i),
       diet: getValue(dietVals, i),
       personality: getValue(personalityVals, i),
       leaning: getValue(leaningVals, i),
