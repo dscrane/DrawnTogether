@@ -6,21 +6,59 @@
  * @returns {number} Radian set for player circle
  */
 export function createRadian(age, radius) {
-  const min = radius > age - 20 ? age + radius * 1.25 : age - 20;
+  let ageValue;
+  switch (true) {
+    case age < 10:
+      ageValue = 400;
+      break;
+    case 10 < age <= 20:
+      ageValue = 40;
+      break;
+    case 20 < age <= 30:
+      ageValue = 360;
+      break;
+    case 30 < age <= 40:
+      ageValue = 80;
+      break;
+    case 40 < age <= 50:
+      ageValue = 320;
+      break;
+    case 50 < age <= 60:
+      ageValue = 120;
+      break;
+    case 60 < age <= 70:
+      ageValue = 280;
+      break;
+    case 70 < age <= 80:
+      ageValue = 160;
+      break;
+    case 80 < age <= 90:
+      ageValue = 240;
+      break;
+    case 90 < age:
+      ageValue = 200;
+      break;
+    default:
+      // TODO error handling if no age submitted somehow
+      console.log("age value switch error");
+      console.log("this should not be logged");
+  }
+
+  const min = radius > ageValue - 20 ? ageValue + radius * 1.25 : ageValue - 20;
   const max = min + 40;
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  const radian = Math.floor(Math.random() * (max - min + 1) + min);
+  return radian;
 }
 
 /**
  * Converts initial player position to cartesian points for plotting
  * @function convertToCartesian
  * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @param {number} age -- Current player's age value
+ * @param {number} radian -- Current player's calculated radian value
  * @param {number} degree -- Current player's circle position in degrees
  * @returns {{yCartesian: number, xCartesian: number}} Cartesian coordinates for current player's circle on grid
  */
-export function convertToCartesian(centerPoint, age, degree) {
-  const radian = age; //initialXLocation();
+export function convertToCartesian(centerPoint, radian, degree) {
   const theta = degree * (Math.PI / 180); //initialYLocation();
 
   let xCartesian = centerPoint.x + Math.round(radian * -Math.cos(theta));
@@ -112,12 +150,11 @@ export function setPlayerDegree(curiosity, hair, diet) {
 /**
  * Creates initial radius for playerCircle
  * @function setCircleRadius
- * @param {number} association -- Current player's association value
+ * @param {number} radiusMultiplier -- Value with which to scale radius value
  * @return {number} Initial value for playerCircle's radius
  */
-export function setCircleRadius(association, radiusMultiplier) {
-  console.log(radiusMultiplier);
-  const randomness = 10 * (association / 100);
+export function setCircleRadius(radiusMultiplier) {
+  const randomness = 10 * (Math.floor(Math.random() * 99) / 100);
   const min = radiusMultiplier - randomness;
   const max = radiusMultiplier + randomness;
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -274,9 +311,7 @@ export function createLineDesign(religion, culture, color) {
  * Creates an average between playerCircle's fill color and the color chosen by the player
  * @function averageColors
  * @param {string} color -- Current player's color value
- * @param {number} hue -- Current player's circle current hue
- * @param {number} saturation -- Current player's circle saturation
- * @param lightness -- Current player's circle lightness
+ * @param {string} colorToAverage -- Which circle color should be average (primary or secondary)
  * @returns {{saturation: number, hue: number, lightness: number}} Returns alternate hsl() components
  */
 export function averageColors(color, colorToAverage) {

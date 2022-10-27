@@ -33,7 +33,7 @@ export const circleAlterations = {
  * @return {Object} circle -- Updated player circle object
  * */
 function initialCircleVariables(responses, centerPoint, radiusMultiplier) {
-  const radius = setCircleRadius(responses.association, radiusMultiplier);
+  const radius = setCircleRadius(radiusMultiplier);
   const radian = createRadian(responses.age, radius);
 
   const { degree, slice } = setPlayerDegree(
