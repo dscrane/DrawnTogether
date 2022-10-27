@@ -28,7 +28,9 @@ export const StrokeCircle = ({ id, playerCircle }) => {
           playerCircle.radius
         )}
       </defs>
-      {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
+      {playerCircle.lineDesign ? (
+        <use href={`#linearPath${id}`} style={{ opacity: playerCircle.opacity / 100 }} />
+      ) : null}
       <g id={`circle_${id}`}>
         <path
           key={`circle_${id}_inner`}

@@ -25,7 +25,9 @@ export const HollowCircle = ({ id, playerCircle }) => {
           playerCircle.radius
         )}
       </defs>
-      {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
+      {playerCircle.lineDesign ? (
+        <use href={`#linearPath${id}`} style={{ opacity: playerCircle.opacity / 100 }} />
+      ) : null}
       <path
         key={`circle_${id}`}
         id={`circle_${id}`}
