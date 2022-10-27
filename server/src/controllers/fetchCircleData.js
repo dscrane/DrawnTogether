@@ -22,12 +22,12 @@ export const fetchCircleData = async (res, { gameId, ratio, centerPoint }) => {
       });
       const displayParams =
         i === 0
-          ? { size: 0.75, opacity: "1" }
+          ? { size: 0.75, opacity: 100 }
           : i < 5
-          ? { size: ratio, opacity: "55" }
+          ? { size: ratio, opacity: 55 }
           : i < 12
-          ? { size: 0.05, opacity: "50" }
-          : { size: 0.01, opacity: "25" };
+          ? { size: 0.15, opacity: 50 }
+          : { size: 0.05, opacity: 75 };
       gameCircles.push(
         ...resizePlayerCircles(
           null,
