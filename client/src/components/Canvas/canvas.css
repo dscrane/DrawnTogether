@@ -11,7 +11,7 @@
 }
 .svg__canvas-light {
   background: var(--bg-panel-light);
-  background: hsl(60, 5%, 7.8%);
+  background: #0F273D;
 }
 .circle {
   opacity: 1;
