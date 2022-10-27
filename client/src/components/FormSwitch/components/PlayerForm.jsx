@@ -1,10 +1,9 @@
 import React from "react";
 import { ErrorMessage, Field, FieldArray } from "formik";
+import { ErrorOutlineRounded, CloseRounded } from "@mui/icons-material";
+import { ActionButton } from "../../ActionButton";
 import { validateString, validateInterest, validateAssociation } from "../../../utils/validators";
 import { responseSchema } from "../../../utils";
-import { ActionButton } from "../../ActionButton";
-import { Tooltip } from "../../../lib/Tooltip/Tooltip";
-import { HelpTwoTone, ErrorOutlineRounded, CloseRounded } from "@mui/icons-material";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
@@ -15,9 +14,6 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
       ) : (
         <div className="tooltip__wrapper">
           <label className="item__label item__label-tooltip">{label}</label>
-          <Tooltip content="Number of hours, months, or years">
-            <HelpTwoTone className="tooltip__icon" />
-          </Tooltip>
         </div>
       )}
       <div className="item__control">
@@ -80,14 +76,14 @@ export const PlayerForm = ({ values, formProps }) => {
                 <div className="form__item">
                   <Field
                     className={`form__control form__control-input `}
-                    name={`players.${index}.association`}
+                    name={`players.${index}.age`}
                     type="text"
                     component={renderField}
                     onChange={(e) => {
                       e.preventDefault();
-                      formProps.setFieldValue(`players.${index}.association`, e.target.value.match(/(\d+)/)[0]);
+                      formProps.setFieldValue(`players.${index}.age`, e.target.value.match(/(\d+)/)[0]);
                     }}
-                    label={"Time"}
+                    label={"Age"}
                     validate={validateAssociation}
                     autocomplete="off"
                   />
