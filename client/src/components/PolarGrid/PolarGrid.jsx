@@ -1,11 +1,10 @@
 import React from "react";
 import "./polarGrid.css";
 
-const PolarGrid = ({ path, partialPath, displayGrid }) => {
+const PolarGrid = ({ path, displayGrid }) => {
   return (
     <>
       <path className={`polar-grid ${displayGrid ? "" : "polar-grid__transparent"}`} d={path} />
-      {partialPath ? <path className={`polar-grid`} d={partialPath} /> : null}
     </>
   );
 };

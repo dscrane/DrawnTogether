@@ -5,9 +5,9 @@ import QRCode from "qrcode";
 import { ClipLoader } from "react-spinners";
 import { ActionButton } from "../ActionButton";
 import { endGame, updateScreenshot } from "../../redux/reducers/sessionSlice";
-import "./displayResults.css";
+import "./finalPanel.css";
 
-const DisplayResults = ({ _id, screenshot }) => {
+const FinalPanel = ({ _id, screenshot }) => {
   const dispatch = useDispatch();
 
   const [qrcode, setQrcode] = useState(null);
@@ -70,4 +70,4 @@ const DisplayResults = ({ _id, screenshot }) => {
   );
 };
 
-export default DisplayResults;
+export default FinalPanel;

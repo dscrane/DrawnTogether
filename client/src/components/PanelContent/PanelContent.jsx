@@ -2,13 +2,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Landing } from "../Landing";
-import { DisplayResults } from "../DisplayResults";
+import { FinalPanel } from "../FinalPanel";
 import { MoreInformation } from "../MoreInformation";
 import { FormContainer } from "../FormContainer";
 import { Modal } from "../../lib/Modal";
 import { InfoButton } from "../../lib/InfoButton";
-import { toggleModal, endGame, updateScreenshot } from "../../redux/reducers/sessionSlice";
-// import { endGame, toggleModal, updateScreenshot } from "../../redux/actions";
 /* ------ */
 
 const PanelContent = () => {
@@ -16,19 +14,19 @@ const PanelContent = () => {
   const { _id, currentForm, screenshot, showModal } = useSelector((state) => state.session);
   const defineView = () => {
     if (currentForm === 0) {
-      return <Landing toggleModal={toggleModal} />;
+      return <Landing toggleModal={() => dispatch({ type: "session/toggleModal" })} />;
     } else {
       return (
         <>
           <InfoButton toggleModal={() => dispatch({ type: "session/toggleModal" })} style={"panel"} />
-          {currentForm > 8 ? <DisplayResults _id={_id} screenshot={screenshot} /> : <FormContainer />}
+          {currentForm > 8 ? <FinalPanel _id={_id} screenshot={screenshot} /> : <FormContainer />}
         </>
       );
     }
   };
   return (
     <>
-      <Modal show={showModal} onClose={toggleModal}>
+      <Modal show={showModal} onClose={() => dispatch({ type: "session/toggleModal" })}>
         <span>Drawn Together</span>
         <MoreInformation />
       </Modal>

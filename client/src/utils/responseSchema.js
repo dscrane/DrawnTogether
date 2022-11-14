@@ -73,7 +73,6 @@ export const createResponseSchema = () => {
 
 const getValue = (vals, q) => {
   const i = Math.floor(Math.random() * vals.length);
-  console.log(i);
   return vals[i];
 };
 
@@ -83,6 +82,7 @@ export const createMockResponseSchema = (numMocks) => {
   }
   const mocks = [];
   for (let i = numMocks; i <= 5; i++) {
+    console.log("Mock", i, "data: ");
     mocks.push({
       mock: true,
       name: getValue(names, Math.floor(Math.random() * 29)),
@@ -104,5 +104,6 @@ export const createMockResponseSchema = (numMocks) => {
       color: getValue(colorVals, i),
     });
   }
+  console.log(mocks);
   return mocks;
 };

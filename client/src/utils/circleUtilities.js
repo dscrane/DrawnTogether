@@ -260,12 +260,12 @@ function createSecondaryGradient(id, secondaryColor, design, designThickness, ra
   const offsets = ["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"];
   const offsetsThick = ["0%", "25%", "50%", "75%", "100%"];
   const secondaryLightColor = secondaryColor.replace(/([0-9]*)%\)/g, (match, p0) => {
-    return `${parseInt(p0) * 1.3}%)`;
+    return `${parseInt(p0) * 0.5}%)`;
   });
 
   if (design === "dot") {
     const secondaryLightestColor = secondaryColor.replace(/([0-9]*)%\)/g, (match, p0) => {
-      return `${parseInt(p0) * 1.4}%)`;
+      return `${parseInt(p0) * 0.5}%)`;
     });
     return (
       <radialGradient id={`secondaryRadialGradient${id}`}>

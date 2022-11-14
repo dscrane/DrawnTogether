@@ -17,11 +17,26 @@ const initialState = {
   mocks: {},
   circles: [],
   finalCircles: [],
+  backgroundCircles: [],
+  error: {},
 };
 
 // Thunk actions
 export const generateSession = createAsyncThunk("session/generateSession", async (display, thunkApi) => {
-  const { data } = await api.post("/games/generateSession", { ...display });
+  const { data } = await api.post("/games/generateSession", {
+    ...display,
+    centerPoint: [
+      // top row tiny
+      { x: 425, y: 175 },
+      { x: 1111, y: 140 },
+      // middle row tiny
+      { x: 590, y: 390 },
+      { x: 890, y: 270 },
+      // bottom row tiny
+      { x: 205, y: 900 },
+      { x: 735, y: 715 },
+    ],
+  });
   return data;
 });
 export const initializePlayers = createAsyncThunk("session/initializePlayers", async (responses, thunkApi) => {
@@ -59,7 +74,7 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
   // TODO look for a way to generate locations
   const { data } = await api.post("/games/fetchCircleData", {
     gameId: _id,
-    ratio: 0.15,
+    ratio: 0.2,
     centerPoint: [
       // current game
       { x: 800, y: 350 },
@@ -78,20 +93,12 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
       { x: 105, y: 900 },
       { x: 700, y: 775 },
       { x: 1300, y: 810 },
-      // top row tiny
-      { x: 425, y: 175 },
-      { x: 1111, y: 140 },
-      // middle row tiny
-      { x: 590, y: 390 },
-      { x: 890, y: 270 },
-      // bottom row tiny
-      { x: 205, y: 900 },
-      { x: 735, y: 715 },
     ],
   });
 
   return {
-    finalCircles: data,
+    finalCircles: data.finalCircles,
+    backgroundCircles: data.backgroundCircles,
     displayGrid: false,
     currentForm: currentForm + 1,
   };
@@ -132,7 +139,7 @@ const sessionSlice = createSlice({
     toggleModal: (state, action) => {
       return {
         ...state,
-        showModal: action.payload,
+        showModal: !state.showModal,
       };
     },
     updatePlayerResponses: (state, action) => {
@@ -159,6 +166,14 @@ const sessionSlice = createSlice({
         currentForm: 1,
         displayGrid: true,
         currentPlayer: 0,
+        backgroundCircles: [...action.payload.backgroundCircles],
+      };
+    });
+    builder.addCase(generateSession.rejected, (state, action) => {
+      console.log("SERVER IS OFF LINE PLEASE TRY AGAIN LATER");
+      return {
+        ...state,
+        error: action.payload,
       };
     });
     builder.addCase(initializePlayers.fulfilled, (state, action) => {
@@ -173,6 +188,12 @@ const sessionSlice = createSlice({
         playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
     });
+    builder.addCase(initializePlayers.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    });
     builder.addCase(reinitializePlayers.fulfilled, (state, action) => {
       return {
         ...state,
@@ -180,6 +201,12 @@ const sessionSlice = createSlice({
           ...state.players,
           ...action.payload,
         },
+      };
+    });
+    builder.addCase(reinitializePlayers.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
       };
     });
     builder.addCase(updatePlayerCircle.fulfilled, (state, action) => {
@@ -202,10 +229,22 @@ const sessionSlice = createSlice({
         ],
       };
     });
+    builder.addCase(updatePlayerCircle.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    });
     builder.addCase(resizePlayerCircle.fulfilled, (state, action) => {
       return {
         ...state,
         circles: [...action.payload],
+      };
+    });
+    builder.addCase(resizePlayerCircle.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
       };
     });
     builder.addCase(updateScreenshot.fulfilled, (state, action) => {
@@ -214,10 +253,22 @@ const sessionSlice = createSlice({
         screenshot: action.payload,
       };
     });
+    builder.addCase(updateScreenshot.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    });
     builder.addCase(endGame.fulfilled, (state, action) => {
       return {
         ...state,
         ...action.payload,
+      };
+    });
+    builder.addCase(endGame.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
       };
     });
     builder.addCase(finalDisplay.fulfilled, (state, action) => {
@@ -226,6 +277,13 @@ const sessionSlice = createSlice({
         currentForm: action.payload.currentForm,
         displayGrid: action.payload.displayGrid,
         finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
+        backgroundCircles: [...state.backgroundCircles, ...action.payload.backgroundCircles],
+      };
+    });
+    builder.addCase(finalDisplay.rejected, (state, action) => {
+      return {
+        ...state,
+        error: action.payload,
       };
     });
   },
