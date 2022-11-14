@@ -11,7 +11,7 @@ import { resizePlayerCircles } from "../controllers/resizePlayerCircles.js";
 import { updatePlayer } from "../controllers/updatePlayer.js";
 import { updateScreenshot } from "../controllers/updateScreenshot.js";
 import { validateAndUpdateResponses } from "../middleware/validateAndUpdateResponses.js";
-import { log } from "../utils/logs.js";
+import { log } from "../utils/appUtils/logs.js";
 
 // Router initialization
 const router = new express.Router();

@@ -4,7 +4,7 @@ import path from "path";
 import cors from "cors";
 import { default as connectDatabase } from "./db/db.js";
 import { gameRouter } from "./routes/gameControllers.js";
-import { log } from "./utils/logs.js";
+import { log } from "./utils/appUtils/logs.js";
 import { adminRouter } from "./routes/authRoutes.js";
 
 // Set port

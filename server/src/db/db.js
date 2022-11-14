@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { log } from "../utils/logs.js";
+import { log } from "../utils/appUtils/logs.js";
 
 const connectionURL =
   process.env.NODE_ENV === "production"
