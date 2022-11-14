@@ -1,4 +1,4 @@
-import { Circle } from "../models/circle.js";
+import { Circle } from "../../models/circle.js";
 
 export const createCircleDocument = async (playerId, gameId, initial) => {
   const circle = await new Circle({

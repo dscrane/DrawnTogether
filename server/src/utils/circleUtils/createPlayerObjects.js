@@ -1,5 +1,5 @@
-import { User } from "../models/user.js";
-import { log } from "./logs.js";
+import { User } from "../../models/user.js";
+import { log } from "../appUtils/logs.js";
 
 export const createPlayerObjects = async (players, gameId) => {
   try {

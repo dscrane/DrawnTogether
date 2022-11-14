@@ -1,5 +1,5 @@
-import { log } from "./logs.js";
-import { Circle } from "../models/circle.js";
+import { log } from "../appUtils/logs.js";
+import { Circle } from "../../models/circle.js";
 import { circleAlterations } from "./circleModifiers.js";
 
 export const findAndUpdateCircle = async (
