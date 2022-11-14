@@ -1,5 +1,5 @@
 import { User } from "../models/user.js";
-import { log } from "../utils/logs.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const reinitializePlayers = async (res, { _id, playerIds, players }) => {
   try {

@@ -1,5 +1,5 @@
 import { Game } from "../models/game.js";
-import { log } from "../utils/logs.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const endGame = async (res, { _id }) => {
   try {

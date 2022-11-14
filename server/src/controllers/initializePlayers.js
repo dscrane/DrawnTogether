@@ -1,7 +1,7 @@
 import { Game } from "../models/game.js";
-import { createPlayerObjects } from "../utils/createPlayerObjects.js";
-import { interestCategoryChecker } from "../utils/interestCategoryChecker.js";
-import { log } from "../utils/logs.js";
+import { createPlayerObjects } from "../utils/circleUtils/createPlayerObjects.js";
+import { interestCategoryChecker } from "../lib/interestCategoryChecker.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const initializePlayers = async (res, { _id, interest, players }) => {
   try {

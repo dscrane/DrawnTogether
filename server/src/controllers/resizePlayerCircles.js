@@ -1,13 +1,14 @@
 import {
   convertToCartesian,
   createLinearDPath,
-} from "../utils/circleHelpers.js";
-import { log } from "../utils/logs.js";
+} from "../utils/circleUtils/circleHelpers.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const resizePlayerCircles = (
   res,
   { circles, ratio, centerPoint },
-  backgroundOpacity = null
+  backgroundOpacity = null,
+  lines = true
 ) => {
   let resizedCircles = [];
   for (let circleData of circles) {
@@ -29,7 +30,7 @@ export const resizePlayerCircles = (
     resizedCircles.push({
       ...circle,
       ...newCartesian,
-      linearDPath: newLinearDPath,
+      linearDPath: lines ? newLinearDPath : null,
       radius: newRadius,
       designThickness: circle.designThickness * ratio,
       lineDesign: { ...circle.lineDesign, strokeWidth: `${3 * ratio}px` },

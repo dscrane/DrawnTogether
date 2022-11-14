@@ -1,5 +1,5 @@
-import { findAndUpdateCircle } from "../utils/findAndUpdateCircle.js";
-import { log } from "../utils/logs.js";
+import { findAndUpdateCircle } from "../utils/circleUtils/findAndUpdateCircle.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const updatePlayer = async (res, updateData, user) => {
   try {

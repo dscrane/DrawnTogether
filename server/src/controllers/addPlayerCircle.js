@@ -1,7 +1,7 @@
 import { Circle } from "../models/circle.js";
 import { Game } from "../models/game.js";
-import { circleAlterations } from "../utils/circleModifiers.js";
-import { log } from "../utils/logs.js";
+import { circleAlterations } from "../utils/circleUtils/circleModifiers.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const addPlayerCircle = async (
   res,
