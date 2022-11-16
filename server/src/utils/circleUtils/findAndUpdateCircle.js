@@ -39,8 +39,25 @@ export const findAndUpdateCircle = async (
     // Save the user's updated circle data
     const newCircle = await userCircle.save();
 
+    // Fetch final circle if on last update step
+    let finalCircle;
+    if (updateStep === 7) {
+      finalCircle = await Circle.findOne({
+        playerId,
+        gameId,
+        initial: true,
+      }).exec();
+      finalCircle = finalCircle.toJson();
+      return {
+        finalCircle,
+        newCircle: newCircle.toJson(),
+      };
+    }
+
     // Return the user's updated circle data
-    return newCircle;
+    return {
+      newCircle: newCircle.toJson(),
+    };
   } catch (err) {
     console.log(err);
     throw {

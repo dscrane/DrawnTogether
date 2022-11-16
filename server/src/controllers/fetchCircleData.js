@@ -5,7 +5,6 @@ import { createBackground } from "../utils/circleUtils/createBackground.js";
 export const fetchCircleData = async (res, { gameId, ratio, centerPoint }) => {
   try {
     const displayParams = [
-      { size: 0.75, opacity: 100 },
       { size: ratio, opacity: 55 },
       { size: 0.15, opacity: 50 },
     ];
@@ -14,8 +13,8 @@ export const fetchCircleData = async (res, { gameId, ratio, centerPoint }) => {
 
     // Create background display
     const backgroundCircles = await createBackground(
-      0,
-      12,
+      1,
+      11,
       centerPoint,
       displayParams,
       ratio

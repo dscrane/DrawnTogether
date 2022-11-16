@@ -12,7 +12,7 @@ export const generateSession = async (res, { centerPoint }) => {
     });
 
     // Create background display
-    const backgroundCircles = await createBackground(12, 6, centerPoint, {
+    const { backgroundCircles } = await createBackground(12, 6, centerPoint, {
       size: 0.05,
       opacity: 75,
     });
@@ -20,14 +20,16 @@ export const generateSession = async (res, { centerPoint }) => {
     // Send Game and polar grid data to client
     res.send({
       game: newGame,
-      circles: backgroundCircles,
+      backgroundCircles: backgroundCircles,
     });
 
     // Save new Game document
     await newGame.save();
     log.controllerSuccess("Generate game session", newGame._id, "success");
   } catch (e) {
-    console.log(e);
+    res.status(206);
+    res.send({ error: { ...e } });
+    console.log({ ...e });
   } finally {
   }
 };
