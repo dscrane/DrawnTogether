@@ -1,39 +1,21 @@
 import React from "react";
 import { Field } from "formik";
 
-export const FormOne = ({ currentPlayer }) => {
+export const FormOne = ({ currentPlayer, values }) => {
   return (
     <>
       <div className="form__row" role="group">
         <label className="item__label item__label-select">Tallness</label>
         <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.height`}
-            id="formHeight"
-            value={16}
-          />
+          <Field className="item__radio" type="radio" name={`players.${currentPlayer}.height`} value={"16"} />
           How's the weather up there?
         </label>
         <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.height`}
-            id="formHeight"
-            value={32}
-          />
+          <Field className="item__radio" type="radio" name={`players.${currentPlayer}.height`} value={"32"} />
           Regular
         </label>
         <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.height`}
-            id="formHeight"
-            value={48}
-          />
+          <Field className="item__radio" type="radio" name={`players.${currentPlayer}.height`} value={"48"} />
           Small but mighty
         </label>
       </div>
@@ -45,7 +27,7 @@ export const FormOne = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.curiosity`}
             id="formCuriosity"
-            value={27}
+            value={"27"}
           />
           Numbers
         </label>
@@ -55,7 +37,7 @@ export const FormOne = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.curiosity`}
             id="formCuriosity"
-            value={36}
+            value={"36"}
           />
           Letters
         </label>
@@ -65,7 +47,7 @@ export const FormOne = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.curiosity`}
             id="formCuriosity"
-            value={18}
+            value={"18"}
           />
           Thoughts
         </label>
@@ -75,7 +57,7 @@ export const FormOne = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.curiosity`}
             id="formCuriosity"
-            value={9}
+            value={"9"}
           />
           Sights
         </label>
@@ -85,7 +67,7 @@ export const FormOne = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.curiosity`}
             id="formCuriosity"
-            value={0}
+            value={"0"}
           />
           Humans
         </label>
@@ -93,15 +75,33 @@ export const FormOne = ({ currentPlayer }) => {
       <div className="form__row" role="group">
         <label className="item__label item__label-select">Best Hair Day</label>
         <label className="form__radio">
-          <Field className="item__radio" type="radio" name={`players.${currentPlayer}.hair`} id="formHair" value={2} />
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.hair`}
+            id="formHair"
+            value={"2"}
+          />
           Curly
         </label>
         <label className="form__radio">
-          <Field className="item__radio" type="radio" name={`players.${currentPlayer}.hair`} id="formHair" value={1} />
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.hair`}
+            id="formHair"
+            value={"1"}
+          />
           Straight
         </label>
         <label className="form__radio">
-          <Field className="item__radio" type="radio" name={`players.${currentPlayer}.hair`} id="formHair" value={0} />
+          <Field
+            className="item__radio"
+            type="radio"
+            name={`players.${currentPlayer}.hair`}
+            id="formHair"
+            value={"0"}
+          />
           Wavy
         </label>
       </div>

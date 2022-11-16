@@ -12,16 +12,6 @@ export const FormFive = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.religion`}
             id="formReligion"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.religion`}
-            id="formReligion"
             value="solid"
           />
           Practitioner
@@ -75,17 +65,7 @@ export const FormFive = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.culture`}
             id="formCulture"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.culture`}
-            id="formCulture"
-            value={1}
+            value={"1"}
           />
           People Magazine reader
         </label>
@@ -95,7 +75,7 @@ export const FormFive = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.culture`}
             id="formCulture"
-            value={2}
+            value={"2"}
           />
           Netflix binger
         </label>
@@ -105,7 +85,7 @@ export const FormFive = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.culture`}
             id="formCulture"
-            value={3}
+            value={"3"}
           />
           Museum Crawler
         </label>
@@ -115,7 +95,7 @@ export const FormFive = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.culture`}
             id="formCulture"
-            value={4}
+            value={"4"}
           />
           Cultural Practitioner
         </label>

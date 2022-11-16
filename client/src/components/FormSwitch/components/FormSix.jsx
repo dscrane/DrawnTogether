@@ -6,17 +6,6 @@ export const FormSix = ({ currentPlayer }) => {
     <>
       <div className="form__row" role="group">
         <label className="item__label item__label-select">Which hue is you</label>
-
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.color`}
-            id="formColor"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
         <label className="form__radio">
           <Field
             className="item__radio"

@@ -12,17 +12,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.leaning`}
             id="formLeaning"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.leaning`}
-            id="formLeaning"
-            value={18}
+            value={"18"}
           />
           Right-Brain
         </label>
@@ -32,7 +22,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.leaning`}
             id="formLeaning"
-            value={45}
+            value={"45"}
           />
           Left-Brain
         </label>
@@ -45,17 +35,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.productivity`}
             id="formProductivity"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.productivity`}
-            id="formProductivity"
-            value={2}
+            value={"2"}
           />
           Up with the sun
         </label>
@@ -65,7 +45,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.productivity`}
             id="formProductivity"
-            value={-1}
+            value={"-1"}
           />
           Night owl
         </label>
@@ -78,17 +58,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.personality`}
             id="formPersonality"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.personality`}
-            id="formPersonality"
-            value={60}
+            value={"60"}
           />
           Introvert
         </label>
@@ -98,7 +68,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.personality`}
             id="formPersonality"
-            value={31}
+            value={"31"}
           />
           Extrovert
         </label>
@@ -108,7 +78,7 @@ export const FormTwo = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.personality`}
             id="formPersonality"
-            value={18}
+            value={"18"}
           />
           It Depends
         </label>

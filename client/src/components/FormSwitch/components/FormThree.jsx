@@ -12,17 +12,7 @@ export const FormThree = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.money`}
             id="formMoney"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.money`}
-            id="formMoney"
-            value={0}
+            value={"0"}
           />
           Miserly
         </label>
@@ -32,7 +22,7 @@ export const FormThree = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.money`}
             id="formMoney"
-            value={2}
+            value={"2"}
           />
           Spend-thrift
         </label>
@@ -42,7 +32,7 @@ export const FormThree = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.money`}
             id="formMoney"
-            value={1}
+            value={"1"}
           />
           What's mine is yours
         </label>
@@ -52,7 +42,7 @@ export const FormThree = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.money`}
             id="formMoney"
-            value={3}
+            value={"3"}
           />
           Capitalistic
         </label>
@@ -65,17 +55,7 @@ export const FormThree = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.food`}
             id="formFood"
-            value="DEFAULT"
-          />
-          Choose...
-        </label>
-        <label className="form__radio">
-          <Field
-            className="item__radio"
-            type="radio"
-            name={`players.${currentPlayer}.food`}
-            id="formFood"
-            value={135}
+            value={"135"}
           />
           A foodie
         </label>
@@ -89,7 +69,7 @@ export const FormThree = ({ currentPlayer }) => {
             type="radio"
             name={`players.${currentPlayer}.food`}
             id="formFood"
-            value={270}
+            value={"270"}
           />
           Vanilla
         </label>
