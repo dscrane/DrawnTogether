@@ -28,13 +28,16 @@
 .circle__inner {
   filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, .25));
 }
-.circle__outer {
+.circle__ring {
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .5));
+}
+.circle__hollow {
   filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, .5));
 }
 .circle__stroke {
   filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, .55));
 }
-.circle__over {
+.circle__dot {
   filter: drop-shadow(3px 3px 3px rgba(0,0,0,.65));
 }
 .circle__glow {

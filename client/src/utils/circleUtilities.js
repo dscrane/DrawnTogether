@@ -1,5 +1,13 @@
 import React from "react";
-import { DefaultCircle, DotCircle, HollowCircle, RingCircle, StrokeCircle } from "../lib/circles";
+import {
+  BasicCircle,
+  DefaultCircle,
+  DotCircle,
+  HollowCircle,
+  LayeredCircle,
+  RingCircle,
+  StrokeCircle,
+} from "../lib/circles";
 
 /**
  * Function that draws the player circles
@@ -20,36 +28,6 @@ function rerenderCircles(players, currentForm) {
   });
   console.log(allCircles);
   return allCircles;
-}
-
-/**
- * Alter the size of the circles if the browser window resizes
- * @param {object} players
- * @param {object} display
- */
-function resizeAllCircles(playerCircles, resizeRatio) {
-  // const toResize = ['radius', 'xCartesian', 'yCartesian']
-  // console.log("resize all circles");
-  // console.log(playerCircles, resizeRatio);
-  // playerCircles.forEach(playerCircle => {
-  //   console.log(playerCircle)
-  //   console.log(playerCircle.props.playerCircle)
-  //   for (const circleData in playerCircle.props.playerCircle) {
-  //     console.log(`${circleData}: ${playerCircle.props.playerCircle[circleData]}`)
-  //     if (toResize.includes(circleData)) {
-  //       playerCircle[circleData] = playerCircle[circleData] * resizeRatio
-  //     }
-  //   }
-  //
-  // })
-  // for (const circle of playerCircles) {
-  //   const playerCircleData = playerCircles[circle];
-  //   for (const data of playerCircleData) {
-  //     playerCircleData[data] = playerCircleData[data] * resizeRatio;
-  //   }
-  // }
-  // console.log(playerCircles);
-  return playerCircles;
 }
 
 /**
@@ -123,67 +101,6 @@ function circlePathTemplate(cx, cy, r) {
 }
 
 /**
- * Creates the path and adds animation if .isAnimated === true
- * @param {object} playerCircle
- * @param {string} id
- * @param {number?} innerRadius
- * @param {number?} outerRadius
- * @returns {{path: string, animation: JSX.Element}}
- */
-function createPathAndAnimation(playerCircle, id, innerRadius, outerRadius) {
-  let path, innerPath, outerPath, animation;
-
-  if (innerRadius && outerRadius) {
-    if (playerCircle.isAnimated) {
-      animation = (
-        <animateMotion dur="10s" repeatCount="indefinite">
-          <mpath href={`#animationPath${id}`} />
-        </animateMotion>
-      );
-      innerPath = circlePathTemplate(0, 0, innerRadius);
-      outerPath = circlePathTemplate(0, 0, outerRadius);
-    } else if (!playerCircle.isAnimated) {
-      animation = null;
-      innerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, innerRadius);
-      outerPath = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, outerRadius);
-    }
-  } else {
-    if (playerCircle.isAnimated) {
-      animation = (
-        <animateMotion dur="10s" repeatCount="indefinite">
-          <mpath href={playerCircle.animationDPath ? `#animationPath${id}` : `#linearPath${id}`} />
-        </animateMotion>
-      );
-      path = circlePathTemplate(0, 0, playerCircle.radius);
-    } else {
-      animation = null;
-      path = circlePathTemplate(playerCircle.xCartesian, playerCircle.yCartesian, playerCircle.radius);
-    }
-  }
-  return { path, innerPath, outerPath, animation };
-}
-
-/**
- * Alters the animation path for the player's circle
- * @param {number} x -- playerCircle's x location
- * @param {number} y - playerCircle's y location
- * @param {number} r -- playerCircle's radius
- * @param {number} id -- playerCircle's player id
- * @param {Object} centerPoint -- display grid's center position along x and y axis
- * @returns {JSX.Element} <path />
- */
-function createEssPath(x, y, r, id, centerPoint) {
-  return (
-    <path
-      id={`essPath${id}`}
-      d={`m${x},${y} Q ${1},${1} ${centerPoint.x} ${centerPoint.y}`}
-      stroke="grey"
-      strokeWidth="2px"
-    />
-  );
-}
-
-/**
  * Creates the complex SVG design for each playerCircle
  * @param {Object} circleData -- Player circle object
  * @param {Object} centerPoint -- display grid's center position along x and y axis
@@ -192,57 +109,27 @@ function createEssPath(x, y, r, id, centerPoint) {
  */
 function createCircleDesign(circleData, centerPoint, currentForm) {
   const { design, playerId } = circleData;
-  switch (design) {
-    case "initialCircle": {
-      return (
-        <DefaultCircle
-          key={`init_circle_${playerId}`}
-          id={playerId}
-          playerCircle={circleData}
-          centerPoint={centerPoint}
-          isInit={true}
-        />
-      );
-    }
-    case "defaultCircle":
-      return (
-        <DefaultCircle
-          key={`default_circle_${playerId}`}
-          id={playerId}
-          playerCircle={circleData}
-          centerPoint={centerPoint}
-          isInit={false}
-          currentForm={currentForm}
-        />
-      );
-    case "hollow":
-      return (
-        <HollowCircle
-          key={`hollow_circle_${playerId}`}
-          id={playerId}
-          playerCircle={circleData}
-          centerPoint={centerPoint}
-        />
-      );
-    case "stroke":
-      return (
-        <StrokeCircle
-          key={`stroke_circle_${playerId}`}
-          id={playerId}
-          playerCircle={circleData}
-          centerPoint={centerPoint}
-        />
-      );
-    case "ring":
-      return (
-        <RingCircle key={`ring_circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
-      );
-    case "dot":
-      return (
-        <DotCircle key={`dot_circle_${playerId}`} id={playerId} playerCircle={circleData} centerPoint={centerPoint} />
-      );
-    default:
-      console.info("%c[ERROR]: Switch - createCircleDesign", "color: red");
+
+  if (design === "defaultCircle" || design === "hollow" || design === "initialCircle") {
+    return (
+      <BasicCircle
+        key={`default_circle_${playerId}`}
+        id={playerId}
+        playerCircle={circleData}
+        centerPoint={centerPoint}
+        isInit={design === "initialCircle"}
+        currentForm={currentForm}
+      />
+    );
+  } else {
+    return (
+      <LayeredCircle
+        key={`${circleData.design}_circle_${playerId}`}
+        id={playerId}
+        playerCircle={circleData}
+        centerPoint={centerPoint}
+      />
+    );
   }
 }
 
@@ -307,12 +194,9 @@ function createSecondaryGradient(id, secondaryColor, design, designThickness, ra
 /* Export necessary pieces */
 export {
   rerenderCircles,
-  resizeAllCircles,
   circlePathTemplate,
-  createPathAndAnimation,
   createRadialGradient,
   createLinearPath,
-  createEssPath,
   createCircleDesign,
   createAnimationPath,
   createSecondaryGradient,
