@@ -51,20 +51,20 @@ const names = [
   "Michael",
   "Mack",
 ];
-const heightVals = [16, 32, 48];
-const curiosityVals = [27, 36, 18, 9, 0];
-const hairVals = [2, 1, 0];
+const heightVals = ["16", "32", "48"];
+const curiosityVals = ["27", "36", "18", "9", "0"];
+const hairVals = ["2", "1", "0"];
 const dietVals = ["omnivore", "vegetarian", "pescatarian", "vegan"];
-const leaningVals = [18, 45];
-const personalityVals = [60, 31, 18];
-const productivityVals = [2, -1];
-const moneyVals = [0, 1, 2, 3];
-const foodVals = [45, 135, 45, 270];
+const leaningVals = ["18", "45"];
+const personalityVals = ["60", "31", "18"];
+const productivityVals = ["2", "-1"];
+const moneyVals = ["0", "1", "2", "3"];
+const foodVals = ["45", "135", "45", "270"];
 const natureVals = ["hollow", "stroke", "ring", "dot"];
 const mediaVals = ["thinner", "thicker", "thin", "thick"];
 const progressVals = ["complimentary", "triadic", "monochromatic", "analogous"];
 const religionVals = ["solid", "round", "dotted", "uneven", "dashed"];
-const cultureVals = [1, 2, 3, 4];
+const cultureVals = ["1", "2", "3", "4"];
 const colorVals = ["chartreuse", "vermilion", "cobalt", "teal", "kellyGreen", "aubergine"];
 
 export const createResponseSchema = () => {

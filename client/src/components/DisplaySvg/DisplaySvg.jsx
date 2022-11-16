@@ -23,7 +23,7 @@ const DisplaySvg = () => {
   }, [centerPoint, width]);
 
   const displayCircles =
-    currentForm <= 8 ? [...backgroundCircles, ...circles] : [...backgroundCircles, ...finalCircles];
+    currentForm < 7 ? [...backgroundCircles, ...circles] : [...backgroundCircles, ...circles, ...finalCircles];
 
   return (
     <svg className={`svg__canvas svg__canvas-light`}>
