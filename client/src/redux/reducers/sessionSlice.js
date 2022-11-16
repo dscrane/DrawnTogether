@@ -55,10 +55,19 @@ export const updatePlayerCircle = createAsyncThunk("session/updatePlayerCircle",
     centerPoint,
     updateStep: currentForm,
   });
+  if (data.finalCircle) {
+    return {
+      currentPlayer: currentPlayer,
+      responses: data.responses,
+      circleSvgData: data.circle,
+      finalCircle: [data.finalCircle],
+    };
+  }
   return {
     currentPlayer: currentPlayer,
     responses: data.responses,
     circleSvgData: data.circle,
+    finalCircle: [],
   };
 });
 export const resizePlayerCircle = createAsyncThunk("session/resizePlayerCircle", async (resizeData, thunkApi) => {
@@ -77,7 +86,7 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
     ratio: 0.2,
     centerPoint: [
       // current game
-      { x: 800, y: 350 },
+      // { x: 800, y: 350 },
       // // recent games
       { x: 390, y: 125 },
       { x: 915, y: 825 },
@@ -97,7 +106,6 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
   });
 
   return {
-    finalCircles: data.finalCircles,
     backgroundCircles: data.backgroundCircles,
     displayGrid: false,
     currentForm: currentForm + 1,
@@ -170,7 +178,6 @@ const sessionSlice = createSlice({
       };
     });
     builder.addCase(generateSession.rejected, (state, action) => {
-      console.log("SERVER IS OFF LINE PLEASE TRY AGAIN LATER");
       return {
         ...state,
         error: action.payload,
@@ -227,6 +234,7 @@ const sessionSlice = createSlice({
           action.payload.circleSvgData,
           ...state.circles.slice(action.payload.currentPlayer + 1),
         ],
+        finalCircles: [...state.finalCircles, ...action.payload.finalCircle],
       };
     });
     builder.addCase(updatePlayerCircle.rejected, (state, action) => {
@@ -276,7 +284,6 @@ const sessionSlice = createSlice({
         ...state,
         currentForm: action.payload.currentForm,
         displayGrid: action.payload.displayGrid,
-        finalCircles: [...state.finalCircles, ...action.payload.finalCircles],
         backgroundCircles: [...state.backgroundCircles, ...action.payload.backgroundCircles],
       };
     });
