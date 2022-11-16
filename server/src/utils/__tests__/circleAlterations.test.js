@@ -11,8 +11,8 @@ import {
   setAlternateDesignWeight,
   setCircleRadius,
   setPlayerDegree,
-} from "../circleHelpers.js";
-import { circleAlterations } from "../circleModifiers.js";
+} from "../circleUtils/circleHelpers.js";
+import { circleAlterations } from "../circleUtils/circleModifiers.js";
 
 const createDataModel = (changes = {}) => {
   return {
@@ -258,12 +258,18 @@ export const circleAlterationsSuite = () => {
     const lineDesignModel = () => ({
       strokeDasharray: expect.stringMatching(/(([0-9])?\.?[0-9]*)%\s?/g),
       strokeLinecap: expect.stringMatching(/square||round/),
-      stroke: expect.stringMatching(/hsla\([0-9]{1,3},([0-9]{1,2}%,?){2},\.[0-9]{2}\)/g),
+      stroke: expect.stringMatching(
+        /hsla\([0-9]{1,3},([0-9]{1,2}%,?){2},\.[0-9]{2}\)/g
+      ),
       strokeWidth: expect.stringMatching(/[0-5]px/),
     });
     describe("Alteration #4 Helpers", () => {
       it("Should create a lineDesign object", () => {
-        const result = createLineDesign(responses.religion, responses.culture,{hue: circleDataResult.hue, saturation: circleDataResult.saturation, lightness: circleDataResult.lightness });
+        const result = createLineDesign(responses.religion, responses.culture, {
+          hue: circleDataResult.hue,
+          saturation: circleDataResult.saturation,
+          lightness: circleDataResult.lightness,
+        });
         expect(lineDesignModel()).toMatchObject(result);
       });
     });

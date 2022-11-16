@@ -9,12 +9,12 @@ import {
 } from "../../utils";
 /* ------ */
 
-export const HollowCircle = ({ id, playerCircle, centerPoint }) => {
+export const HollowCircle = ({ id, playerCircle }) => {
   const { path, animation } = createPathAndAnimation(playerCircle, id);
   return (
     <>
       <defs>
-        {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
+        {createRadialGradient(id, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
         {createAnimationPath(id, playerCircle.animationDPath)}
         {createSecondaryGradient(
@@ -25,11 +25,13 @@ export const HollowCircle = ({ id, playerCircle, centerPoint }) => {
           playerCircle.radius
         )}
       </defs>
-      {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
+      {playerCircle.lineDesign ? (
+        <use href={`#linearPath${id}`} style={{ opacity: playerCircle.opacity / 100 }} />
+      ) : null}
       <path
         key={`circle_${id}`}
         id={`circle_${id}`}
-        className="circle__outer"
+        className={`circle__outer ${playerCircle.opacity ? "faded_" + playerCircle.opacity : null}`}
         d={path}
         fill="none"
         strokeWidth={playerCircle.designThickness}

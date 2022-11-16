@@ -9,14 +9,14 @@ import {
 } from "../../utils";
 /* ------ */
 
-export const DotCircle = ({ id, playerCircle, centerPoint }) => {
+export const DotCircle = ({ id, playerCircle }) => {
   const innerRadius = playerCircle.designThickness;
   const outerRadius = playerCircle.radius;
   const { innerPath, outerPath, animation } = createPathAndAnimation(playerCircle, id, innerRadius, outerRadius);
   return (
     <>
       <defs>
-        {createRadialGradient(id, centerPoint, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
+        {createRadialGradient(id, playerCircle.hue, playerCircle.saturation, playerCircle.lightness)}
         {createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign)}
         {createAnimationPath(id, playerCircle.animationDPath)}
         {createSecondaryGradient(
@@ -27,17 +27,19 @@ export const DotCircle = ({ id, playerCircle, centerPoint }) => {
           playerCircle.radius
         )}
       </defs>
-      {playerCircle.lineDesign ? <use href={`#linearPath${id}`} /> : null}
+      {playerCircle.lineDesign ? (
+        <use href={`#linearPath${id}`} style={{ opacity: playerCircle.opacity / 100 }} />
+      ) : null}
       <g id={`circle_${id}`}>
         <path
           key={`circle_${id}_outer`}
-          className="circle circle__inner"
+          className={`circle circle__inner ${playerCircle.opacity ? "faded_" + playerCircle.opacity : null}`}
           d={outerPath}
           fill={`url(#radialGradient${id})`}
         />
         <path
           key={`circle_${id}_inner`}
-          className=" circle circle__over"
+          className={`circle circle__over ${playerCircle.opacity ? "faded_" + playerCircle.opacity : null}`}
           d={innerPath}
           fill={`url(#secondaryRadialGradient${id})`}
         />

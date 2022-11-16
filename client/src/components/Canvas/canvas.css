@@ -11,6 +11,7 @@
 }
 .svg__canvas-light {
   background: var(--bg-panel-light);
+  background: #0F273D;
 }
 .circle {
   opacity: 1;
@@ -36,10 +37,29 @@
 .circle__over {
   filter: drop-shadow(3px 3px 3px rgba(0,0,0,.65));
 }
+.circle__glow {
+  border-radius: 50%;
+  box-shadow:
+          0 0 60px 30px #fff,  /* inner white */
+          0 0 100px 60px #f0f, /* middle magenta */
+          0 0 140px 90px #0ff; /* outer cyan */
+}
 .svg__test-header {
   font: bold 2rem "Quicksand";
 }
 .svg__text {
   font: bold 1.75rem "Quicksand";
   fill: var(--bluegreen-fade-30);
+}
+.faded_1 {
+  opacity: 1;
+}
+.faded_75 {
+  opacity: 0.75
+}
+.faded_50 {
+  opacity: 0.25;
+}
+.faded_25 {
+  opacity: 0.50;
 }

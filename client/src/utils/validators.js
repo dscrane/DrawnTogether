@@ -5,8 +5,8 @@ const number = (value) => (value && isNaN(Number(value)) ? "Must be a number" : 
 const maxLength = (value, length) =>
   value && value.length > length ? `Unfortunately names must be under ${length} characters long` : undefined;
 
-export const validateNumber = (value) => {
-  return required(value) || number(value) || maxValue(value) || minValue(value);
+export const validateAssociation = (value) => {
+  return required(value);
 };
 
 export const validateString = (value) => {

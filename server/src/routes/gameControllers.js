@@ -1,16 +1,17 @@
 import express from "express";
-import { getScreenshot } from "../controllers/getScreenshot.js";
+import { addPlayerCircle } from "../controllers/addPlayerCircle.js";
+import { endGame } from "../controllers/endGame.js";
+import { fetchCircleData } from "../controllers/fetchCircleData.js";
+import { fetchPolarGrid } from "../controllers/fetchPolarGrid.js";
 import { generateSession } from "../controllers/generateSession.js";
+import { getScreenshot } from "../controllers/getScreenshot.js";
 import { initializePlayers } from "../controllers/initializePlayers.js";
 import { reinitializePlayers } from "../controllers/reinitializePlayers.js";
-import { addPlayerCircle } from "../controllers/addPlayerCircle.js";
+import { resizePlayerCircles } from "../controllers/resizePlayerCircles.js";
 import { updatePlayer } from "../controllers/updatePlayer.js";
-import { fetchCircleData } from "../controllers/fetchCircleData.js";
 import { updateScreenshot } from "../controllers/updateScreenshot.js";
-import { endGame } from "../controllers/endGame.js";
-import { fetchPolarGrid } from "../controllers/fetchPolarGrid.js";
 import { validateAndUpdateResponses } from "../middleware/validateAndUpdateResponses.js";
-import { log } from "../utils/logs.js";
+import { log } from "../utils/appUtils/logs.js";
 
 // Router initialization
 const router = new express.Router();
@@ -26,12 +27,12 @@ router.post("/games/generateSession", async (req, res) => {
 });
 
 router.post("/games/initializePlayers", async (req, res) => {
-  log.controller("Initializing players for", req.body.gameId, "begun");
+  log.controller("Initializing players for", req.body._id, "begun");
   await initializePlayers(res, req.body);
 });
 
 router.post("/games/reinitializePlayers", async (req, res) => {
-  log.controller("Reinitializing players for", req.body.gameId, "begun");
+  log.controller("Reinitializing players for", req.body._id, "begun");
   await reinitializePlayers(res, req.body);
 });
 
@@ -51,26 +52,36 @@ router.post(
     if (req.body.currentPlayer === 0) {
       log.controller(
         `Alteration #${req.body.updateStep} for`,
-        req.body.gameId,
+        req.body._id,
         "begun"
       );
     }
     await updatePlayer(res, req.body, req.user);
   }
 );
+router.post("/games/resizePlayerCircle", async (req, res) => {
+  log.white("Resizing circles begun");
+  resizePlayerCircles(res, req.body);
+});
+
+router.post("/games/finalDisplay", async (req, res) => {
+  log.white("Fetching final displays");
+  // TODO get most recent 2 game displays
+  // TODO
+});
 
 router.post("/games/updateScreenshot", async (req, res) => {
-  log.controller("Updating screenshot for", req.body.gameId, "begun");
+  log.controller("Updating screenshot for", req.body._id, "begun");
   await updateScreenshot(res, req.body);
 });
 
 router.post("/games/endGame", async (req, res) => {
-  log.controller("Ending game for", req.body.gameId, "begun");
+  log.controller("Ending game for", req.body._id, "begun");
   await endGame(res, req.body);
 });
 
 router.post("/games/fetchCircleData", async (req, res) => {
-  log.controller("Fetching circle data for", req.body.gameId, "begun");
+  log.controller("Fetching circle data for", req.body._id, "begun");
   await fetchCircleData(res, req.body);
 });
 

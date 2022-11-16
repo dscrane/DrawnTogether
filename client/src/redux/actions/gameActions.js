@@ -1,6 +1,7 @@
 import {
   GENERATE_SESSION,
   INITIALIZE_PLAYERS,
+  GENERATE_MOCKS,
   REINITIALIZE_PLAYERS,
   START_GAME,
   END_GAME,
@@ -19,7 +20,7 @@ import {
   TOGGLE_MODAL,
   // RESIZE_PLAYER_CIRCLES,
 } from "../types";
-import { createCircleDesign, checkResponse } from "../../utils";
+import { createCircleDesign, checkResponse, createMockResponseSchema } from "../../utils";
 import { api } from "../../utils";
 // TODO think about aspect ratio for resizing circles if that is possible
 /* ----   Game Actions    ---- */
@@ -39,14 +40,23 @@ export const generateSession = () => async (dispatch, getState) => {
 };
 // INITIALIZE_PLAYERS ACTION CREATOR
 export const initializePlayers = (gameId, values) => async (dispatch) => {
+  console.log(values.players);
   const { data } = await api.post("/games/initializePlayers", {
     gameId,
     interest: values.interest,
-    players: values.players,
+    players: [...values.players, ...createMockResponseSchema(values.players.length)],
   });
   await dispatch({
     type: INITIALIZE_PLAYERS,
     payload: { ...data },
+  });
+};
+// GENERATE_MOCKS ACTION CREATOR
+export const generateMocks = (numMocks) => async (dispatch) => {
+  const mocks = createMockResponseSchema(numMocks);
+  await dispatch({
+    type: GENERATE_MOCKS,
+    payload: { mocks },
   });
 };
 // REINITIALIZE_PLAYERS ACTION CREATOR
@@ -130,6 +140,8 @@ export const displayCircles = (circles) => (dispatch, getState) => {
 };
 // ADD_PLAYER_CIRCLE
 export const addPlayerCircle = (playerId, formData, currentForm, centerPoint) => async (dispatch, getState) => {
+  console.log("FORMDATA");
+  console.log(formData);
   const { display, _id, currentPlayer, players } = getState().session;
   const { isNewResponse, isUpdatedResponse, noUpdate } = checkResponse(formData, players[currentPlayer], currentForm);
   if (noUpdate) {

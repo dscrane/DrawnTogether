@@ -32,7 +32,7 @@ body {
     --accent: var(--bluegreen-500);
     --warning-red: var(--red-fade-50);
     --notice-red: var(--red-900);
-    --polar-grid-stroke: var(--bluegreen-fade-15);
+    --polar-grid-stroke: #0a182a;
     --button-shadow-thin: var(--darkgray-fade-50) 0px 4px 6px -2px, rgba(0, 0, 0, 0.3) 0px 1px 5px -3px;
     --button-shadow: var(--darkgray-fade-50) 0px 6px 8px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     --button-shadow-circle: var(--darkgray-fade-20) 0px 5px 18px 0px, var(--darkgray-fade-15) 0px 5px 29px 0px;

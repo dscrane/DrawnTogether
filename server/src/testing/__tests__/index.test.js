@@ -1,4 +1,4 @@
-import { circleAlterations } from "../../utils/circleModifiers.js";
+import { circleAlterations } from "../../utils/circleUtils/circleModifiers.js";
 
 import { mockResponses } from "../mockData/mockResponses.js";
 import {
@@ -7,7 +7,7 @@ import {
   createFillColor,
   setCircleRadius,
   setPlayerDegree,
-} from "../../utils/circleHelpers.js";
+} from "../../utils/circleUtils/circleHelpers.js";
 describe.skip("", () => {
   it("", () => {});
 });

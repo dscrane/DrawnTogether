@@ -61,12 +61,19 @@
 .form__item-addCTA {
   width: auto;
 }
+.form__radio {
+  display: flex;
+  align-items: center;
+  font-size: medium;
+  width: 75%;
+  color: var(--font-light);
+}
 .item__label {
   color: var(--font-light);
   margin: 0 0 2px 0;
   font-size: 1.7rem;
   font-weight: bold;
-  width: 75%;
+  width: 85%;
   flex: 1;
   flex-shrink: 0;
 }
@@ -78,6 +85,9 @@
   width: 75%;
   flex: 1;
   flex-shrink: 0;
+}
+.item__radio {
+  margin: 5px !important;
 }
 .item__label-tooltip {
   flex: .65;

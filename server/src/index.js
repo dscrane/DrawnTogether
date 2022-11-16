@@ -3,10 +3,9 @@ import bodyParser from "body-parser";
 import path from "path";
 import cors from "cors";
 import { default as connectDatabase } from "./db/db.js";
-import { userRouter } from "./routes/userControllers.js";
 import { gameRouter } from "./routes/gameControllers.js";
-
-import { log } from "./utils/logs.js";
+import { log } from "./utils/appUtils/logs.js";
+import { adminRouter } from "./routes/authRoutes.js";
 
 // Set port
 const PORT = process.env.PORT || 5500;
@@ -21,13 +20,13 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 // Connect routers
 app.use(gameRouter);
-// app.use(userRouter);
+app.use(adminRouter);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(path.resolve(), "/src/public/index.html"));
 });
 
-app.listen(PORT, "192.168.1.62", () =>
+app.listen(PORT, "127.0.0.1", () =>
   log.yellow(`[APP]: Listening on localhost:${PORT}`)
 );
 

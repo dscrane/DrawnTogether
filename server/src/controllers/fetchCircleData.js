@@ -1,37 +1,30 @@
-import { Circle } from "../models/circle.js";
 import { Game } from "../models/game.js";
-import { log } from "../utils/logs.js";
+import { log } from "../utils/appUtils/logs.js";
+import { createBackground } from "../utils/circleUtils/createBackground.js";
 
-export const fetchCircleData = async (res, { gameId }) => {
+export const fetchCircleData = async (res, { gameId, ratio, centerPoint }) => {
   try {
-    // Find the current game
-    const game = await Game.findById(gameId);
+    const displayParams = [
+      { size: ratio, opacity: 55 },
+      { size: 0.15, opacity: 50 },
+    ];
+    // Update the current game to be complete
+    await Game.updateOne({ _id: gameId }, { complete: true }).exec();
 
-    // Get the circle id's in the current game
-    const gameCircles = game.circles.map((circle) => circle._id);
-
-    // Turn animations off for final display
-    await Circle.updateMany(
-      { _id: { $in: gameCircles } },
-      { isAnimated: false }
+    // Create background display
+    const backgroundCircles = await createBackground(
+      1,
+      11,
+      centerPoint,
+      displayParams,
+      ratio
     );
-
-    // Fetch newly updated circles
-    const circles = await Circle.find({ _id: { $in: gameCircles } });
-
-    // Recreate initial circles for final display
-    const initialGameCircles = game.initialCircles.map(
-      (initialCircle) => initialCircle._id
-    );
-    const initialCircles = await Circle.find({
-      _id: { $in: initialGameCircles },
-    });
 
     // Send circle data to client
-    res.send([...initialCircles, ...circles]);
+    res.send(backgroundCircles);
     log.controllerSuccess("Fetching final circle data for", gameId, "complete");
-    return;
   } catch (err) {
+    console.log(err);
     log.controllerFailure("Fetching circle data for", gameId, "failed");
   }
 };

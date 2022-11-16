@@ -23,7 +23,6 @@ export const circleAlterations = {
   5: circleAlterationThree,
   6: circleAlterationFour,
   7: circleAlterationFive,
-  // 8: finalCircleDisplay,
 };
 
 /**
@@ -33,8 +32,8 @@ export const circleAlterations = {
  * @param {object} centerPoint -- Current center of the display grid
  * @return {Object} circle -- Updated player circle object
  * */
-function initialCircleVariables(responses, centerPoint) {
-  const radius = setCircleRadius(responses.association);
+function initialCircleVariables(responses, centerPoint, radiusMultiplier) {
+  const radius = setCircleRadius(radiusMultiplier);
   const radian = createRadian(responses.age, radius);
 
   const { degree, slice } = setPlayerDegree(
@@ -184,11 +183,16 @@ function circleAlterationThree(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFour(responses, circleData) {
-  const lineDesign = createLineDesign(responses.religion, responses.culture, {
-    hue: circleData.hue,
-    saturation: circleData.saturation,
-    lightness: circleData.lightness,
-  });
+  const lineDesign = createLineDesign(
+    responses.religion,
+    responses.culture,
+    {
+      hue: circleData.hue,
+      saturation: circleData.saturation,
+      lightness: circleData.lightness,
+    },
+    3
+  );
   circleData = {
     ...circleData,
     lineDesign,
@@ -204,32 +208,17 @@ function circleAlterationFour(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFive(responses, circleData) {
-  const averageColor = averageColors(
-    responses.color,
-    circleData.hue,
-    circleData.saturation,
-    circleData.lightness
-  );
+  let colorToAverage =
+    circleData.design === "hollow"
+      ? circleData.secondaryColor
+      : circleData.color;
+  const { color, ...rest } = averageColors(responses.color, colorToAverage);
   circleData = {
     ...circleData,
-    ...averageColor,
+    ...rest,
+    secondaryColor:
+      circleData.design === "hollow" ? color : circleData.secondaryColor,
+    isAnimated: false,
   };
   return { circleData };
 }
-
-/**
- * CA#6 -- final display
- * @function circleAlterationSix
- * @param {object} player -- Current player object
- * */
-// function finalCircleDisplay(player, circleData) {
-//   let { circle, circles } = player;
-//   circle = {
-//     ...circle,
-//   };
-//   circle.lineDesign = createLineDesign(player.religion, circle.initial.color);
-//   console.log(circle.lineDesign);
-//   let circleSVG = createCircleDesign(currentPlayerId, circle, centerPoint);
-//   circles.push(circleSVG);
-//   return circles;
-// }

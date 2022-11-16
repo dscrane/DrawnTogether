@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { toPng } from "html-to-image";
 import QRCode from "qrcode";
 import { ClipLoader } from "react-spinners";
 import { ActionButton } from "../ActionButton";
-import "./displayResults.css";
+import { endGame, updateScreenshot } from "../../redux/reducers/sessionSlice";
+import "./finalPanel.css";
 
-const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
+const FinalPanel = ({ _id, screenshot }) => {
+  const dispatch = useDispatch();
+
   const [qrcode, setQrcode] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const sendScreenshot = async () => {
-    const dataUrl = await toPng(document.getElementById("canvas"));
-    await updateScreenshot(gameId, dataUrl);
+    const screenshotData = await toPng(document.getElementById("canvas"));
+    await dispatch(updateScreenshot({ _id, screenshotData }));
   };
 
   useEffect(() => {
@@ -33,10 +37,8 @@ const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
         },
       };
       const apiUrl =
-        process.env.NODE_ENV === "production"
-          ? "https://dsc-circle-server.herokuapp.com"
-          : process.env.REACT_APP_SERVER;
-      const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${gameId}`, opts);
+        process.env.NODE_ENV === "production" ? "https://drawntogetherapp.herokuapp.com" : process.env.REACT_APP_SERVER;
+      const urlData = await QRCode.toDataURL(`${apiUrl}/games/screenshot/${_id}`, opts);
 
       setQrcode(urlData);
       setLoading(false);
@@ -62,10 +64,10 @@ const DisplayResults = ({ gameId, updateScreenshot, screenshot, endGame }) => {
       <div className="results__restart">
         <p className="restart__text">Play again. Results may vary!</p>
         {/*<p className="restart__text restart__text-smaller"></p>*/}
-        <ActionButton onClick={() => endGame(gameId)} buttonType={"restart"} text={"Play\nAgain"} />
+        <ActionButton onClick={async () => await dispatch(endGame(_id))} buttonType={"restart"} text={"Play\nAgain"} />
       </div>
     </div>
   );
 };
 
-export default DisplayResults;
+export default FinalPanel;

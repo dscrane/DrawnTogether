@@ -1,4 +1,4 @@
-import { validateResponses } from "../utils/validateResponses.js";
+import { validateResponses } from "../utils/appUtils/validateResponses.js";
 import { User } from "../models/user.js";
 
 export const validateAndUpdateResponses = async (req, res, next) => {

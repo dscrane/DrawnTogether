@@ -1,10 +1,9 @@
 import React from "react";
 import { ErrorMessage, Field, FieldArray } from "formik";
-import { validateString, validateNumber, validateInterest } from "../../../utils/validators";
-import { responseSchema } from "../../../utils";
+import { ErrorOutlineRounded, CloseRounded } from "@mui/icons-material";
 import { ActionButton } from "../../ActionButton";
-import { Tooltip } from "../../../lib/Tooltip/Tooltip";
-import { HelpTwoTone, ErrorOutlineRounded, CloseRounded } from "@mui/icons-material";
+import { validateString, validateInterest, validateAssociation } from "../../../utils/validators";
+import { responseSchema } from "../../../utils";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {
@@ -15,9 +14,6 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
       ) : (
         <div className="tooltip__wrapper">
           <label className="item__label item__label-tooltip">{label}</label>
-          <Tooltip content="In hours, months, or years">
-            <HelpTwoTone className="tooltip__icon" />
-          </Tooltip>
         </div>
       )}
       <div className="item__control">
@@ -28,7 +24,7 @@ const renderField = ({ index, field, form, label, placeholder, ...props }) => {
   );
 };
 
-export const PlayerForm = ({ values }) => {
+export const PlayerForm = ({ values, formProps }) => {
   return (
     <>
       <div className="form__row">
@@ -41,7 +37,7 @@ export const PlayerForm = ({ values }) => {
             component="input"
             type="text"
             validate={validateInterest}
-            autocomplete="off"
+            autoComplete="off"
           />
           <ErrorMessage name="interest">{(msg) => <span className="control__error">{msg}</span>}</ErrorMessage>
         </div>
@@ -74,18 +70,22 @@ export const PlayerForm = ({ values }) => {
                     label="Name"
                     validate={validateString}
                     index={index}
-                    autocomplete="off"
+                    autoComplete="off"
                   />
                 </div>
                 <div className="form__item">
                   <Field
                     className={`form__control form__control-input `}
-                    name={`players.${index}.association`}
+                    name={`players.${index}.age`}
                     type="text"
                     component={renderField}
-                    label={"Time"}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      formProps.setFieldValue(`players.${index}.age`, e.target.value.match(/(\d+)/)[0]);
+                    }}
+                    label={"Age"}
+                    validate={validateAssociation}
                     autocomplete="off"
-                    // validate={validateNumber}
                   />
                 </div>
               </div>

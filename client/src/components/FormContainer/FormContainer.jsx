@@ -1,85 +1,78 @@
 import React from "react";
 import { FormDisplay } from "../FormDisplay";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createMockResponseSchema, createResponseSchema } from "../../utils";
 import {
+  initializePlayers,
+  reinitializePlayers,
+  updatePlayerCircle,
   endGame,
   finalDisplay,
-  initializePlayers,
-  nextForm,
-  nextPlayer,
-  prevForm,
-  prevPlayer,
-  reinitializePlayers,
-  addPlayerCircle,
-  updatePlayerCircle,
-} from "../../redux/actions";
-import { createResponseSchema } from "../../utils";
+} from "../../redux/reducers/sessionSlice";
 import "./formContainer.css";
 
 const formResponseSchema = {
   interest: "",
-  players: [createResponseSchema(), createResponseSchema()],
+  // players: [createResponseSchema(), createResponseSchema()],
+  players: [...createMockResponseSchema(1)],
 };
 
-const FormContainer = ({
-  session,
-  gameId,
-  players,
-  nextPlayer,
-  prevPlayer,
-  nextForm,
-  prevForm,
-  endGame,
-  display,
-  initializePlayers,
-  reinitializePlayers,
-  addPlayerCircle,
-  updatePlayerCircle,
-  finalDisplay,
-}) => {
-  const { currentForm, currentPlayer, numPlayers } = session;
+const FormContainer = () => {
+  const dispatch = useDispatch();
+  const { session, display } = useSelector((state) => state);
+  const { _id, currentForm, currentPlayer, numPlayers, playerIds, mocks } = session;
+  const { centerPoint, radiusMultiplier } = display;
+
   const handlePrevious = async () => {
     if (currentForm === 1) {
-      await endGame(gameId);
+      await dispatch(endGame(_id));
     } else if (currentPlayer === 0) {
-      await prevForm(currentForm);
+      dispatch({
+        type: "session/prevForm",
+        payload: { currentForm: session.currentForm - 1, currentPlayer: numPlayers - 1 },
+      });
     } else {
-      await prevPlayer(currentPlayer);
+      dispatch({ type: "session/prevPlayer", payload: { currentPlayer: currentPlayer - 1 } });
     }
   };
-  const handleSubmit = async (values) => {
+  const handleSubmit = async ({ interest, players }) => {
+    // First Form Submit
     if (currentForm === 1) {
-      if (!Object.keys(players).length) {
-        await initializePlayers(gameId, values);
+      if (!Object.keys(session.players).length) {
+        players = [...players, ...createMockResponseSchema(5 - players.length)];
+        await dispatch(initializePlayers({ _id, interest, players }));
       } else {
-        await reinitializePlayers(gameId, session.playerIds, values);
+        await dispatch(reinitializePlayers({ _id, players, playerIds: session.playerIds }));
       }
-      await nextForm(currentForm);
+      dispatch({ type: "session/nextForm", payload: { currentForm: session.currentForm + 1, currentPlayer: 0 } });
       return;
     }
+    // Final Form Submit
     if (currentForm === 8) {
-      await finalDisplay(gameId);
+      await dispatch(finalDisplay({ _id, currentForm, centerPoint }));
       return;
     }
-    if (currentForm === 2) {
-      await addPlayerCircle(
-        session.playerIds[currentPlayer],
-        values.players[currentPlayer],
-        currentForm,
-        display.centerPoint
-      );
-    } else if (currentForm > 2 && currentForm <= 7) {
-      await updatePlayerCircle(
-        session.playerIds[currentPlayer],
-        values.players[currentPlayer],
-        currentForm,
-        display.centerPoint
+    // Normal Form Submit
+    if (currentForm >= 2 && currentForm <= 7) {
+      await dispatch(
+        updatePlayerCircle({
+          _id,
+          currentForm,
+          centerPoint,
+          currentPlayer,
+          radiusMultiplier,
+          playerId: playerIds[currentPlayer],
+          responses: players[currentPlayer] || session.players[currentPlayer].responses,
+          newCircle: !session.circles[currentPlayer],
+        })
       );
     }
+
+    // Handle next player or form
     if (currentPlayer < numPlayers - 1) {
-      await nextPlayer(currentPlayer);
+      dispatch({ type: "session/nextPlayer", payload: { currentPlayer: currentPlayer + 1 } });
     } else {
-      await nextForm(currentForm);
+      dispatch({ type: "session/nextForm", payload: { currentPlayer: 0, currentForm: session.currentForm + 1 } });
     }
   };
 
@@ -93,32 +86,12 @@ const FormContainer = ({
           currentForm={currentForm}
           currentPlayer={currentPlayer}
           numPlayers={numPlayers}
-          players={players}
+          players={session.players}
+          mocks={mocks}
         />
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ session }) => {
-  const { _id, display, players, ...rest } = session;
-  return {
-    display,
-    players,
-    gameId: _id,
-    session: rest,
-  };
-};
-
-export default connect(mapStateToProps, {
-  nextPlayer,
-  prevPlayer,
-  nextForm,
-  prevForm,
-  endGame,
-  finalDisplay,
-  initializePlayers,
-  reinitializePlayers,
-  addPlayerCircle,
-  updatePlayerCircle,
-})(FormContainer);
+export default FormContainer;

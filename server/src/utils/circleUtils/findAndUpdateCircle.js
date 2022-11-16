@@ -1,9 +1,9 @@
-import { log } from "./logs.js";
-import { Circle } from "../models/circle.js";
+import { log } from "../appUtils/logs.js";
+import { Circle } from "../../models/circle.js";
 import { circleAlterations } from "./circleModifiers.js";
 
 export const findAndUpdateCircle = async (
-  { gameId, playerId, updateStep, centerPoint },
+  { _id: gameId, playerId, updateStep, centerPoint, radiusMultiplier },
   responses
 ) => {
   log.update(`Alteration for`, playerId, "begun");
@@ -18,7 +18,11 @@ export const findAndUpdateCircle = async (
     // Run the alterations for the current step
     const { circleData } =
       updateStep === 2
-        ? circleAlterations[updateStep](responses, centerPoint)
+        ? circleAlterations[updateStep](
+            responses,
+            centerPoint,
+            radiusMultiplier
+          )
         : circleAlterations[updateStep](
             responses,
             userCircle.toObject(),
@@ -35,8 +39,25 @@ export const findAndUpdateCircle = async (
     // Save the user's updated circle data
     const newCircle = await userCircle.save();
 
+    // Fetch final circle if on last update step
+    let finalCircle;
+    if (updateStep === 7) {
+      finalCircle = await Circle.findOne({
+        playerId,
+        gameId,
+        initial: true,
+      }).exec();
+      finalCircle = finalCircle.toJson();
+      return {
+        finalCircle,
+        newCircle: newCircle.toJson(),
+      };
+    }
+
     // Return the user's updated circle data
-    return newCircle;
+    return {
+      newCircle: newCircle.toJson(),
+    };
   } catch (err) {
     console.log(err);
     throw {

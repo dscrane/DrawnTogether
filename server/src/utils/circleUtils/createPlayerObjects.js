@@ -1,5 +1,5 @@
-import { User } from "../models/user.js";
-import { log } from "./logs.js";
+import { User } from "../../models/user.js";
+import { log } from "../appUtils/logs.js";
 
 export const createPlayerObjects = async (players, gameId) => {
   try {
@@ -10,8 +10,7 @@ export const createPlayerObjects = async (players, gameId) => {
     for (const player of players) {
       const newUser = await new User({
         responses: {
-          name: player.name,
-          association: player.association.match(/(\d+)/)[0],
+          ...player,
         },
         timestamp: Date.now(),
       });

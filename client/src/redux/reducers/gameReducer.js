@@ -2,6 +2,7 @@ import {
   INITIAL_STATE,
   GENERATE_SESSION,
   INITIALIZE_PLAYERS,
+  GENERATE_MOCKS,
   REINITIALIZE_PLAYERS,
   START_GAME,
   END_GAME,
@@ -19,6 +20,7 @@ import {
   ADD_PLAYER_CIRCLE,
   UPDATE_PLAYER_RESPONSES,
 } from "../types";
+import { createSlice } from "@reduxjs/toolkit";
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -42,6 +44,14 @@ export default (state = INITIAL_STATE, action) => {
           ...action.payload.playersObj,
         },
         playerIds: [...state.playerIds, ...action.payload.playerIds],
+      };
+    case GENERATE_MOCKS:
+      return {
+        ...state,
+        players: {
+          ...state.players,
+          ...action.payload.mocks,
+        },
       };
     case REINITIALIZE_PLAYERS:
       return {

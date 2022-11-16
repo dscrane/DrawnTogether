@@ -1,7 +1,7 @@
 const formResponses = [
   null,
   ["name", "association"],
-  ["height", "curiosity", "hair", "age", "diet"],
+  ["height", "curiosity", "hair", "diet"],
   ["personality", "leaning", "productivity"],
   ["money", "food"],
   ["nature", "media", "progress"],
@@ -24,7 +24,7 @@ export const validateResponses = (
       `${savedResponses[response]}`
     );
     return (
-      !savedResponses[response] ||
+      !savedResponses[response].toString() ||
       updatedResponses[response].toString() !==
         savedResponses[response].toString()
     );

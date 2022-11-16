@@ -1,11 +1,11 @@
 import { Circle } from "../models/circle.js";
 import { Game } from "../models/game.js";
-import { circleAlterations } from "../utils/circleModifiers.js";
-import { log } from "../utils/logs.js";
+import { circleAlterations } from "../utils/circleUtils/circleModifiers.js";
+import { log } from "../utils/appUtils/logs.js";
 
 export const addPlayerCircle = async (
   res,
-  { gameId, playerId, centerPoint, updateStep },
+  { _id: gameId, playerId, centerPoint, updateStep, radiusMultiplier },
   user
 ) => {
   try {
@@ -15,7 +15,8 @@ export const addPlayerCircle = async (
     // Create circle data objects
     const circleData = circleAlterations[updateStep](
       user.responses,
-      centerPoint
+      centerPoint,
+      radiusMultiplier
     );
 
     // Create new circle document
@@ -51,6 +52,6 @@ export const addPlayerCircle = async (
     });
   } catch (err) {
     log.controllerFailure(`Circle creation for`, playerId, "failed");
-    console.log(Object.keys(err));
+    console.log(err);
   }
 };
