@@ -46,8 +46,7 @@ export function createRadian(age, radius) {
 
   const min = radius > ageValue - 20 ? ageValue + radius * 1.25 : ageValue - 20;
   const max = min + 40;
-  const radian = Math.floor(Math.random() * (max - min + 1) + min);
-  return radian;
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 /**
@@ -412,7 +411,7 @@ export function createLinearDPath(
   degree,
   alteration = false
 ) {
-  const r = alteration ? Math.floor(Math.random() * (radian / 1.75)) : 0;
+  const r = Math.floor(Math.random() * (radian / 1.75));
   const theta = degree * (Math.PI / 180);
   // Get the line starting y point
   const xStartPoint = parseFloat(

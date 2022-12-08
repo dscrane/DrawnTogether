@@ -21,7 +21,7 @@ const FinalPanel = ({ _id, screenshot }) => {
   useEffect(() => {
     const screenshotTimer = setTimeout(async () => {
       await sendScreenshot();
-    }, 4000);
+    }, 6000);
     return () => clearTimeout(screenshotTimer);
   }, []);
 

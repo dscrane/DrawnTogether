@@ -57,7 +57,7 @@ function createRadialGradient(id, hue, saturation, lightness, isInit = false, cu
   }
 
   return (
-    <radialGradient id={`radialGradient${id}${isInit ? "_init" : ""}`}>
+    <radialGradient id={`radialGradient${id}${isInit ? "__init" : ""}`}>
       {shuffle().map((el, i) => (
         <stop key={`gradient_stop_${i}`} offset={offsets[i]} stopColor={el} stopOpacity={1} />
       ))}
@@ -113,7 +113,7 @@ function createCircleDesign(circleData, centerPoint, currentForm) {
   if (design === "defaultCircle" || design === "hollow" || design === "initialCircle") {
     return (
       <BasicCircle
-        key={`default_circle_${playerId}`}
+        key={`${design === "hollow" ? "hollow" : "default"}_circle_${playerId}`}
         id={playerId}
         playerCircle={circleData}
         centerPoint={centerPoint}
@@ -128,6 +128,7 @@ function createCircleDesign(circleData, centerPoint, currentForm) {
         id={playerId}
         playerCircle={circleData}
         centerPoint={centerPoint}
+        currentForm={currentForm}
       />
     );
   }
@@ -191,6 +192,36 @@ function createSecondaryGradient(id, secondaryColor, design, designThickness, ra
   );
 }
 
+/**
+ * Creates the SVG <defs> elements for each circle
+ * @param id {string} -- playerId
+ * @param playerCircle {object} -- player's circle data
+ * @param hasDesign {boolean} -- flag for design circle or not
+ * @param isInit {boolean} -- flag for initial circle or not
+ * @param currentForm {number} -- current form number
+ * @returns {JSX.Element} -- <defs> element
+ */
+function createSVGDefs(id, playerCircle, hasDesign = true, isInit, currentForm) {
+  return (
+    <defs>
+      {createRadialGradient(id, playerCircle.hue, playerCircle.saturation, playerCircle.lightness, isInit, currentForm)}
+      {createAnimationPath(id, playerCircle.animationDPath)}
+      // if circle is not initialCircle display line from center
+      {!isInit ? createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign) : null}
+      // if circle has a design create the secondary gradient
+      {hasDesign
+        ? createSecondaryGradient(
+            id,
+            playerCircle.secondaryColor,
+            playerCircle.design,
+            playerCircle.designThickness,
+            playerCircle.radius
+          )
+        : null}
+    </defs>
+  );
+}
+
 /* Export necessary pieces */
 export {
   rerenderCircles,
@@ -200,4 +231,5 @@ export {
   createCircleDesign,
   createAnimationPath,
   createSecondaryGradient,
+  createSVGDefs,
 };

@@ -1,61 +1,44 @@
 /* IMPORTS */
 import React from "react";
-import {
-  createLinearPath,
-  createRadialGradient,
-  createPathAndAnimation,
-  createAnimationPath,
-  createSecondaryGradient,
-} from "../../utils";
+import { createSVGDefs } from "../../utils";
+import { FinalAnimation } from "../FinalAnimation";
+import { CircleLayer } from "./LayeredCircle";
 /* ------ */
 
 export const BasicCircle = ({ id, playerCircle, isInit, currentForm }) => {
-  let { design, opacity, radius, designThickness, animationDPath, xCartesian, yCartesian, isAnimated } = playerCircle;
-  const init = isInit ? "_init" : "";
+  let { design, opacity, radius, designThickness, originalData } = playerCircle;
   const hasDesign = design === "hollow";
+  const init = isInit ? "__init" : "";
+
   return (
     <>
-      <defs>
-        {createRadialGradient(
-          id,
-          playerCircle.hue,
-          playerCircle.saturation,
-          playerCircle.lightness,
-          isInit,
-          currentForm
-        )}
-        {createAnimationPath(id, animationDPath)}
-        // if circle is not initialCircle display line from center
-        {!isInit ? createLinearPath(id, playerCircle.linearDPath, playerCircle.lineDesign) : null}
-        // if circle has a design create the secondary gradient
-        {hasDesign
-          ? createSecondaryGradient(
-              id,
-              playerCircle.secondaryColor,
-              playerCircle.design,
-              playerCircle.designThickness,
-              playerCircle.radius
-            )
-          : null}
-      </defs>
+      {createSVGDefs(id, playerCircle, hasDesign, isInit, currentForm)}
       {playerCircle.lineDesign ? <use href={`#linearPath${id}`} style={{ opacity: opacity / 100 }} /> : null}
-      <circle
-        key={`circle_${id}${init}`}
-        id={`circle_${id}${init}`}
-        className={`circle circle__${design} circle_${init} ${opacity ? "faded_" + opacity : null}`}
-        cx={isAnimated ? null : xCartesian}
-        cy={isAnimated ? null : yCartesian}
-        r={radius}
-        fill={hasDesign ? "none" : `url(#radialGradient${id}${isInit ? "_init" : ""})`}
+      <CircleLayer
+        id={id}
+        design={hasDesign ? "hollow" : isInit ? "init" : "default"}
+        radius={originalData ? originalData.radius : radius}
+        fill={hasDesign ? "none" : `url(#radialGradient${id}${init})`}
         stroke={hasDesign ? `url(#secondaryRadialGradient${id})` : "none"}
         strokeWidth={hasDesign ? designThickness : "none"}
+        playerCircle={playerCircle}
       >
         {playerCircle.isAnimated ? (
           <animateMotion dur="10s" repeatCount="indefinite">
             <mpath href={playerCircle.animationDPath ? `#animationPath${id}` : `#linearPath${id}`} />
           </animateMotion>
         ) : null}
-      </circle>
+        {currentForm === 9 && originalData ? (
+          <FinalAnimation
+            cxFrom={originalData.xCartesian}
+            cxTo={playerCircle.xCartesian}
+            cyFrom={originalData.yCartesian}
+            cyTo={playerCircle.yCartesian}
+            rFrom={originalData.radius}
+            rTo={playerCircle.radius}
+          />
+        ) : null}
+      </CircleLayer>
     </>
   );
 };

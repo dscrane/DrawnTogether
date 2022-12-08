@@ -21,7 +21,7 @@ const FormContainer = () => {
   const dispatch = useDispatch();
   const { session, display } = useSelector((state) => state);
   const { _id, currentForm, currentPlayer, numPlayers, playerIds, mocks } = session;
-  const { centerPoint, radiusMultiplier } = display;
+  const { centerPoint, radiusMultiplier, height, width } = display;
 
   const handlePrevious = async () => {
     if (currentForm === 1) {
@@ -49,7 +49,7 @@ const FormContainer = () => {
     }
     // Final Form Submit
     if (currentForm === 8) {
-      await dispatch(finalDisplay({ _id, currentForm, centerPoint }));
+      await dispatch(finalDisplay({ _id, currentForm, height, width }));
       return;
     }
     // Normal Form Submit

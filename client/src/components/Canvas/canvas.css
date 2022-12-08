@@ -13,6 +13,14 @@
   background: var(--bg-panel-light);
   background: #0F273D;
 }
+.circle__shrink {
+
+}
+
+.svg__circles {
+  width: 75%;
+}
+
 .circle {
   opacity: 1;
   fill-rule: evenodd;

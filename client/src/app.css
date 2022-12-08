@@ -41,7 +41,17 @@ body {
     --tooltip-background-color: var(--darkgray-100);
     --tooltip-margin: 30px;
     --tooltip-arrow-size: 6px;
-    --svg-text: hsl(245, 10%, 26%)
+    --svg-text: hsl(245, 10%, 26%);
+    --radius-1: none;
+    --radius-1-small: none;
+    --radius-2: none;
+    --radius-2-small: none;
+    --radius-3: none;
+    --radius-3-small: none;
+    --radius-4: none;
+    --radius-4-small: none;
+    --radius-5: none;
+    --radius-5-small: none;
     /*--panel-shadow: var(--darkgray-100) 0px 3px 8px;*/
 }
 #root {
@@ -107,4 +117,44 @@ body {
     left: 15px;
     bottom: 0px;
     color: black;
+}
+@keyframes shrink-1 {
+    from {
+        r: var(--radius-1);
+    }
+    to {
+        r: var(--radius-1-small);
+    }
+}
+@keyframes shrink-2 {
+    from {
+        r: var(--radius-2);
+    }
+    to {
+        r: var(--radius-2-small);
+    }
+}
+@keyframes shrink-3 {
+    from {
+        r: var(--radius-3);
+    }
+    to {
+        r: var(--radius-3-small);
+    }
+}
+@keyframes shrink-4 {
+    from {
+        r: var(--radius-4);
+    }
+    to {
+        r: var(--radius-4-small);
+    }
+}
+@keyframes shrink-5 {
+    from {
+        r: var(--radius-5);
+    }
+    to {
+        r: var(--radius-5-small);
+    }
 }

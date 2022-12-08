@@ -2,7 +2,7 @@ import { Game } from "../models/game.js";
 import { log } from "../utils/appUtils/logs.js";
 import { createBackground } from "../utils/circleUtils/createBackground.js";
 
-export const generateSession = async (res, { centerPoint }) => {
+export const generateSession = async (res, { display }) => {
   try {
     // Create new Game document
     const newGame = await new Game({
@@ -12,10 +12,7 @@ export const generateSession = async (res, { centerPoint }) => {
     });
 
     // Create background display
-    const { backgroundCircles } = await createBackground(12, 6, centerPoint, {
-      size: 0.05,
-      opacity: 75,
-    });
+    const { backgroundCircles } = await createBackground(11, 6, display, true);
 
     // Send Game and polar grid data to client
     res.send({

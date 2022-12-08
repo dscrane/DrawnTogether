@@ -22,20 +22,12 @@ const initialState = {
 };
 
 // Thunk actions
-export const generateSession = createAsyncThunk("session/generateSession", async (display, thunkApi) => {
+export const generateSession = createAsyncThunk("session/generateSession", async (displayData, thunkApi) => {
   const { data } = await api.post("/games/generateSession", {
-    ...display,
-    centerPoint: [
-      // top row tiny
-      { x: 425, y: 175 },
-      { x: 1111, y: 140 },
-      // middle row tiny
-      { x: 590, y: 390 },
-      { x: 890, y: 270 },
-      // bottom row tiny
-      { x: 205, y: 900 },
-      { x: 735, y: 715 },
-    ],
+    display: {
+      xMultiplier: Math.floor(displayData.width / 6),
+      yMultiplier: Math.floor(displayData.height / 6),
+    },
   });
   return data;
 });
@@ -83,29 +75,13 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
   // TODO look for a way to generate locations
   const { data } = await api.post("/games/fetchCircleData", {
     gameId: _id,
-    ratio: 0.2,
-    centerPoint: [
-      // current game
-      // { x: 800, y: 350 },
-      // // recent games
-      { x: 390, y: 125 },
-      { x: 915, y: 825 },
-      { x: 150, y: 500 },
-      { x: 1275, y: 410 },
-      // top row small
-      { x: 150, y: 100 },
-      { x: 625, y: 75 },
-      { x: 1125, y: 110 },
-      // middle row small
-      { x: 690, y: 370 },
-      // bottom row small
-      { x: 105, y: 900 },
-      { x: 700, y: 775 },
-      { x: 1300, y: 810 },
-    ],
+    display: {
+      xMultiplier: Math.floor(displayData.width / 6),
+      yMultiplier: Math.floor(displayData.height / 6),
+    },
   });
-
   return {
+    currentCircles: data.currentCircles,
     backgroundCircles: data.backgroundCircles,
     displayGrid: false,
     currentForm: currentForm + 1,
@@ -284,6 +260,7 @@ const sessionSlice = createSlice({
         ...state,
         currentForm: action.payload.currentForm,
         displayGrid: action.payload.displayGrid,
+        finalCircles: [...action.payload.currentCircles],
         backgroundCircles: [...state.backgroundCircles, ...action.payload.backgroundCircles],
       };
     });

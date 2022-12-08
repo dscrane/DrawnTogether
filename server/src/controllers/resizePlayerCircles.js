@@ -8,7 +8,8 @@ export const resizePlayerCircles = (
   res,
   { circles, ratio, centerPoint },
   backgroundOpacity = null,
-  lines = true
+  lines = true,
+  isBackground
 ) => {
   let resizedCircles = [];
   for (let circleData of circles) {
@@ -35,6 +36,14 @@ export const resizePlayerCircles = (
       designThickness: circle.designThickness * ratio,
       lineDesign: { ...circle.lineDesign, strokeWidth: `${3 * ratio}px` },
       opacity: backgroundOpacity,
+      originalData: !isBackground
+        ? {
+            radius: circle.radius,
+            xCartesian: circle.xCartesian,
+            yCartesian: circle.yCartesian,
+            designThickness: circle.designThickness,
+          }
+        : null,
     });
   }
 

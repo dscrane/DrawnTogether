@@ -45,7 +45,7 @@ const Canvas = () => {
           <DisplaySvg />
         ) : (
           <ActionButton
-            onClick={async () => await dispatch(generateSession())}
+            onClick={async () => await dispatch(generateSession({ height: display.height, width: display.width }))}
             text={"Begin Game"}
             buttonType={"start"}
           />
