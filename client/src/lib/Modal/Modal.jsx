@@ -4,7 +4,6 @@ import "./modal.css";
 /* ------ */
 
 export const Modal = ({ show, onClose, children, type }) => {
-  console.log(children);
   return (
     <>
       {show ? (

@@ -1,7 +1,7 @@
 /* IMPORTS */
 import React, { useEffect, useState } from "react";
-import "./countdownModal.css";
 import { ActionButton } from "../ActionButton";
+import "./countdownModal.css";
 /* ------ */
 
 export const CountdownModal = ({ initCounter, onClose, onEnd }) => {

@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ActionButton } from "../ActionButton";
+import { CountdownModal } from "../CountdownModal";
+import { QRContainer } from "./components/QRContainer";
+import { Modal } from "../../lib/Modal";
 import { endGame } from "../../redux/reducers/sessionSlice";
 import "./finalPanel.css";
-import { Modal } from "../../lib/Modal";
-import { QRContainer } from "./components/QRContainer";
-import { CountdownModal } from "../CountdownModal";
 
 const FinalPanel = ({ _id, screenshot, currentForm }) => {
   const dispatch = useDispatch();
-
   const [showModal, toggleShowModal] = useState(false);
 
   // Game timeout countdown
   useEffect(() => {
     const reloadTimer = setTimeout(async () => {
-      // await endGame({_id, currentForm})
       toggleShowModal(!showModal);
-    }, 1000 * 10 + 6000);
+    }, 1000 * 60 * 5 + 6000);
     return () => clearTimeout(reloadTimer);
   }, []);
 
@@ -40,7 +38,6 @@ const FinalPanel = ({ _id, screenshot, currentForm }) => {
         </div>
         <div className="results__restart">
           <p className="restart__text">Play again. Results may vary!</p>
-          {/*<p className="restart__text restart__text-smaller"></p>*/}
           <ActionButton
             onClick={async () => await dispatch(endGame({ _id, currentForm }))}
             buttonType={"restart"}
