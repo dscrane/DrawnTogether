@@ -1,7 +1,7 @@
 import { Game } from "../models/game.js";
 import { log } from "../utils/appUtils/logs.js";
 
-export const endGame = async (res, { _id }) => {
+export const endGame = async (res, { _id, currentForm }) => {
   try {
     // Find the current game
     let game = await Game.findById(_id);

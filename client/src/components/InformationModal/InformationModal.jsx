@@ -1,13 +1,13 @@
 /* IMPORTS */
 import React from "react";
 import BeyondMeasure from "../../assets/beyond-measure.jpeg";
-import "./moreInformation.css";
+import "./informationModal.css";
 import InstagramQRC from "../../assets/carriecraneinstagramQR.png";
 import WebsiteQRC from "../../assets/carriecraneQR.png";
 import RepoQRC from "../../assets/drawntogether-repoQR.png";
 /* ------ */
 
-export const MoreInformation = () => {
+export const InformationModal = () => {
   return (
     <div className="info">
       <div className="info__hero">

@@ -66,10 +66,22 @@
     box-shadow: var(--button-shadow-thin);
 }
 
+.button__modal {
+    font-size: 1.5rem;
+    border-radius: 5px;
+    padding: .5rem .75rem;
+    box-shadow: var(--button-shadow-thin);
+    width: 50%;
+}
+
 .button__content {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
+}
+.button__content-modal {
+    width: 50%;
 }
 
 .button__text {

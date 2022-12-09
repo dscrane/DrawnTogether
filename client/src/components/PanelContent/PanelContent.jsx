@@ -1,9 +1,9 @@
 /* IMPORTS */
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Landing } from "../Landing";
 import { FinalPanel } from "../FinalPanel";
-import { MoreInformation } from "../MoreInformation";
+import { InformationModal } from "../InformationModal";
 import { FormContainer } from "../FormContainer";
 import { Modal } from "../../lib/Modal";
 import { InfoButton } from "../../lib/InfoButton";
@@ -11,25 +11,32 @@ import { InfoButton } from "../../lib/InfoButton";
 
 const PanelContent = () => {
   const dispatch = useDispatch();
-  const { _id, currentForm, screenshot, showModal } = useSelector((state) => state.session);
+  const [showModal, toggleShowModal] = useState(false);
+  const { _id, currentForm, screenshot } = useSelector((state) => state.session);
   const defineView = () => {
     if (currentForm === 0) {
       return <Landing toggleModal={() => dispatch({ type: "session/toggleModal" })} />;
     } else {
       return (
         <>
-          <InfoButton toggleModal={() => dispatch({ type: "session/toggleModal" })} style={"panel"} />
-          {currentForm > 8 ? <FinalPanel _id={_id} screenshot={screenshot} /> : <FormContainer />}
+          <InfoButton toggleModal={() => toggleShowModal(!showModal)} styleType={"panel"} />
+          {currentForm > 8 ? (
+            <FinalPanel _id={_id} screenshot={screenshot} currentForm={currentForm} />
+          ) : (
+            <FormContainer />
+          )}
         </>
       );
     }
   };
   return (
     <>
-      <Modal show={showModal} onClose={() => dispatch({ type: "session/toggleModal" })}>
-        <span>Drawn Together</span>
-        <MoreInformation />
-      </Modal>
+      {showModal ? (
+        <Modal show={showModal} onClose={() => toggleShowModal(!showModal)} type={"large"}>
+          <span>Drawn Together</span>
+          <InformationModal />
+        </Modal>
+      ) : null}
       {defineView()}
     </>
   );

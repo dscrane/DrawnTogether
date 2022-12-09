@@ -87,8 +87,8 @@ export const finalDisplay = createAsyncThunk("session/finalDisplay", async (disp
     currentForm: currentForm + 1,
   };
 });
-export const endGame = createAsyncThunk("session/endGame", async (_id, thunkApi) => {
-  await api.post("/games/endGame", { _id });
+export const endGame = createAsyncThunk("session/endGame", async ({ _id, currentForm }, thunkApi) => {
+  await api.post("/games/endGame", { _id, currentForm });
   return initialState;
 });
 
@@ -153,12 +153,6 @@ const sessionSlice = createSlice({
         backgroundCircles: [...action.payload.backgroundCircles],
       };
     });
-    builder.addCase(generateSession.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
-      };
-    });
     builder.addCase(initializePlayers.fulfilled, (state, action) => {
       return {
         ...state,
@@ -171,12 +165,6 @@ const sessionSlice = createSlice({
         playerIds: [...state.playerIds, ...action.payload.playerIds],
       };
     });
-    builder.addCase(initializePlayers.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
-      };
-    });
     builder.addCase(reinitializePlayers.fulfilled, (state, action) => {
       return {
         ...state,
@@ -184,12 +172,6 @@ const sessionSlice = createSlice({
           ...state.players,
           ...action.payload,
         },
-      };
-    });
-    builder.addCase(reinitializePlayers.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
       };
     });
     builder.addCase(updatePlayerCircle.fulfilled, (state, action) => {
@@ -213,22 +195,10 @@ const sessionSlice = createSlice({
         finalCircles: [...state.finalCircles, ...action.payload.finalCircle],
       };
     });
-    builder.addCase(updatePlayerCircle.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
-      };
-    });
     builder.addCase(resizePlayerCircle.fulfilled, (state, action) => {
       return {
         ...state,
         circles: [...action.payload],
-      };
-    });
-    builder.addCase(resizePlayerCircle.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
       };
     });
     builder.addCase(updateScreenshot.fulfilled, (state, action) => {
@@ -237,22 +207,10 @@ const sessionSlice = createSlice({
         screenshot: action.payload,
       };
     });
-    builder.addCase(updateScreenshot.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
-      };
-    });
     builder.addCase(endGame.fulfilled, (state, action) => {
       return {
         ...state,
         ...action.payload,
-      };
-    });
-    builder.addCase(endGame.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
       };
     });
     builder.addCase(finalDisplay.fulfilled, (state, action) => {
@@ -262,12 +220,6 @@ const sessionSlice = createSlice({
         displayGrid: action.payload.displayGrid,
         finalCircles: [...action.payload.currentCircles],
         backgroundCircles: [...state.backgroundCircles, ...action.payload.backgroundCircles],
-      };
-    });
-    builder.addCase(finalDisplay.rejected, (state, action) => {
-      return {
-        ...state,
-        error: action.payload,
       };
     });
   },

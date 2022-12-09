@@ -9,7 +9,7 @@ export const CircleLayer = ({ id, type, design, radius, fill, stroke, strokeWidt
 
   return (
     <circle
-      key={`circle_${id}${design}`}
+      key={`circle_${id}${design}${type}`}
       id={id}
       className={`circle circle__${design} ${opacity ? "faded_" + opacity : ""}`}
       cx={!isAnimated ? xCartesian : null}

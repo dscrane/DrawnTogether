@@ -3,12 +3,13 @@ import { CloseRounded } from "@mui/icons-material";
 import "./modal.css";
 /* ------ */
 
-export const Modal = ({ show, onClose, children }) => {
+export const Modal = ({ show, onClose, children, type }) => {
+  console.log(children);
   return (
     <>
       {show ? (
-        <div className="modal visible" onClick={onClose}>
-          <main className="modal__content visible" onClick={(e) => e.stopPropagation()}>
+        <div key={`modal__${type}`} className={`modal modal__${type} visible`} onClick={onClose}>
+          <main className={`modal__content modal__content-${type} visible`} onClick={(e) => e.stopPropagation()}>
             <header className="modal__header">
               <div className="modal__close">
                 <button className="modal__close-cta" onClick={onClose}>
