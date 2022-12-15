@@ -1,36 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { ActionButton } from "../ActionButton";
-import { CountdownModal } from "../CountdownModal";
 import { QRContainer } from "./components/QRContainer";
-import { Modal } from "../../lib/Modal";
 import { endGame } from "../../redux/reducers/sessionSlice";
 import "./finalPanel.css";
 
 const FinalPanel = ({ _id, screenshot, currentForm }) => {
   const dispatch = useDispatch();
-  const [showModal, toggleShowModal] = useState(false);
-
-  // Game timeout countdown
-  useEffect(() => {
-    const reloadTimer = setTimeout(async () => {
-      toggleShowModal(!showModal);
-    }, 1000 * 60 * 5 + 6000);
-    return () => clearTimeout(reloadTimer);
-  }, []);
 
   return (
     <>
-      {showModal ? (
-        <Modal key="countdown__modal" show={showModal} onClose={() => toggleShowModal(!showModal)} type={"small"}>
-          <span>Still here?</span>
-          <CountdownModal
-            initCounter={15}
-            onClose={() => toggleShowModal(!showModal)}
-            onEnd={async () => await dispatch(endGame({ _id, currentForm }))}
-          />
-        </Modal>
-      ) : null}
       <div className="results">
         <div className="results__content">
           <p className="landing__text">The final results for your group...</p>

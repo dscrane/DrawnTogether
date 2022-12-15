@@ -24,6 +24,7 @@ const FormContainer = () => {
   const { centerPoint, radiusMultiplier, height, width } = display;
 
   const handlePrevious = async () => {
+    dispatch({ type: "session/resetTimeout" });
     if (currentForm === 1) {
       await dispatch(endGame(_id));
     } else if (currentPlayer === 0) {
@@ -36,6 +37,7 @@ const FormContainer = () => {
     }
   };
   const handleSubmit = async ({ interest, players }) => {
+    dispatch({ type: "session/resetTimeout" });
     // First Form Submit
     if (currentForm === 1) {
       if (!Object.keys(session.players).length) {

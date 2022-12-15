@@ -3,11 +3,13 @@ import { api } from "../../utils";
 
 const initialState = {
   _id: "",
+  timeoutCounter: 5000,
   inProgress: false,
   complete: false,
   screenshot: false,
   displayGrid: false,
-  showModal: false,
+  showInfoModal: false,
+  showTimeoutModal: false,
   numPlayers: 0,
   currentForm: 0,
   playerIds: [],
@@ -96,6 +98,12 @@ const sessionSlice = createSlice({
   name: "session",
   initialState: initialState,
   reducers: {
+    resetTimeout: (state, action) => {
+      return {
+        ...state,
+        timeoutCounter: initialState.timeoutCounter,
+      };
+    },
     nextForm: (state, action) => {
       return {
         ...state,
@@ -120,10 +128,16 @@ const sessionSlice = createSlice({
         ...action.payload,
       };
     },
-    toggleModal: (state, action) => {
+    toggleInfoModal: (state, action) => {
       return {
         ...state,
-        showModal: !state.showModal,
+        showInfoModal: !state.showInfoModal,
+      };
+    },
+    toggleTimeoutModal: (state, action) => {
+      return {
+        ...state,
+        showTimeoutModal: !state.showTimeoutModal,
       };
     },
     updatePlayerResponses: (state, action) => {
@@ -207,12 +221,6 @@ const sessionSlice = createSlice({
         screenshot: action.payload,
       };
     });
-    builder.addCase(endGame.fulfilled, (state, action) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    });
     builder.addCase(finalDisplay.fulfilled, (state, action) => {
       return {
         ...state,
@@ -220,6 +228,12 @@ const sessionSlice = createSlice({
         displayGrid: action.payload.displayGrid,
         finalCircles: [...action.payload.currentCircles],
         backgroundCircles: [...state.backgroundCircles, ...action.payload.backgroundCircles],
+      };
+    });
+    builder.addCase(endGame.fulfilled, (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
       };
     });
   },

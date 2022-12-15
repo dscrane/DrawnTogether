@@ -1,6 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../utils";
 
+const initialState = {
+  radiusMultiplier: 1,
+  centerPoint: { x: 0, y: 0 },
+  height: 0,
+  width: 0,
+  previousHeight: 0,
+  previousWidth: 0,
+  polarGridPath: "",
+  partialPath: "",
+};
+
+// Thunk actions
 export const updatePolarGrid = createAsyncThunk("display/updatePolarGrid", async (display, thunkApi) => {
   const { data } = await api.post("/games/fetchPolarGrid", { ...display });
   return data;
@@ -8,16 +20,7 @@ export const updatePolarGrid = createAsyncThunk("display/updatePolarGrid", async
 
 const displaySlice = createSlice({
   name: "display",
-  initialState: {
-    radiusMultiplier: 1,
-    centerPoint: { x: 0, y: 0 },
-    height: 0,
-    width: 0,
-    previousHeight: 0,
-    previousWidth: 0,
-    polarGridPath: "",
-    partialPath: "",
-  },
+  initialState: initialState,
   reducers: {
     updateDimensions: (state, action) => {
       return {
