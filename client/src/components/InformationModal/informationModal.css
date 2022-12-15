@@ -1,10 +1,11 @@
 .info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    width: 90%;
-    min-width: 1000px;
+    overflow-x: hidden;
+    scrollbar-color: #7f7f7f transparent;
+    scrollbar-width: thin;
 }
 
 .info__hero{

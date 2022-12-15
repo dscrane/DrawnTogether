@@ -20,7 +20,7 @@
 .button__game {
     font-size: 1.75rem;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: .75rem;
     line-height: 1.5rem;
     box-shadow: var(--button-shadow);
 }
@@ -61,7 +61,7 @@
 
 .button__add {
     font-size: 1.5rem;
-    border-radius: 5px;
+    border-radius: .75rem;
     padding: .5rem .75rem;
     box-shadow: var(--button-shadow-thin);
 }
@@ -71,21 +71,21 @@
     border-radius: 5px;
     padding: .5rem .75rem;
     box-shadow: var(--button-shadow-thin);
-    width: 50%;
+    width: 25%;
 }
 
 .button__content {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 100%;
+    /*width: 100%;*/
 }
 .button__content-modal {
-    width: 50%;
+    /*width: 100%;*/
 }
 
 .button__text {
-    width: 60%;
+    /*width: 60%;*/
 }
 
 .button__text-add {

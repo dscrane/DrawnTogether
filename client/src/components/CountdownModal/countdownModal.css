@@ -13,6 +13,6 @@
 
 .countdown__buttons {
     display: flex;
-    width: 90%;
+    width: 75%;
     justify-content: space-evenly;
 }

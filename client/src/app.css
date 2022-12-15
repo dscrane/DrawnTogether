@@ -22,13 +22,16 @@ body {
     --bg-input-background: var(--gray-500);
     --bg-input-options: var(--gray-500);
     --bg-input-shadow: var(--darkgray-100);
+    /*--bg-input-outline: hsl(214, 62%, 60%);*/
     --bg-input-outline: rgb(144, 219, 219);
     --bg-button: var(--darkgray-500);
     --bg-button-hover: var(--darkgray-100);
+    /*--bg-button-border: hsl(214, 62%, 60%);*/
     --bg-button-border: rgb(144, 219, 219);
     --font-light: var(--cream-500);
     --font-dark: var(--darkgray-100);
     --font-placeholder: var(--cream-900);
+    /*--accent: hsl(214, 62%, 60%);*/
     --accent: var(--bluegreen-500);
     --warning-red: var(--red-fade-50);
     --notice-red: var(--red-900);
@@ -42,16 +45,6 @@ body {
     --tooltip-margin: 30px;
     --tooltip-arrow-size: 6px;
     --svg-text: hsl(245, 10%, 26%);
-    --radius-1: none;
-    --radius-1-small: none;
-    --radius-2: none;
-    --radius-2-small: none;
-    --radius-3: none;
-    --radius-3-small: none;
-    --radius-4: none;
-    --radius-4-small: none;
-    --radius-5: none;
-    --radius-5-small: none;
     /*--panel-shadow: var(--darkgray-100) 0px 3px 8px;*/
 }
 #root {
@@ -117,44 +110,4 @@ body {
     left: 15px;
     bottom: 0px;
     color: black;
-}
-@keyframes shrink-1 {
-    from {
-        r: var(--radius-1);
-    }
-    to {
-        r: var(--radius-1-small);
-    }
-}
-@keyframes shrink-2 {
-    from {
-        r: var(--radius-2);
-    }
-    to {
-        r: var(--radius-2-small);
-    }
-}
-@keyframes shrink-3 {
-    from {
-        r: var(--radius-3);
-    }
-    to {
-        r: var(--radius-3-small);
-    }
-}
-@keyframes shrink-4 {
-    from {
-        r: var(--radius-4);
-    }
-    to {
-        r: var(--radius-4-small);
-    }
-}
-@keyframes shrink-5 {
-    from {
-        r: var(--radius-5);
-    }
-    to {
-        r: var(--radius-5-small);
-    }
 }

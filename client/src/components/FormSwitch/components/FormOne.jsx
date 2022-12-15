@@ -5,7 +5,7 @@ export const FormOne = ({ currentPlayer, values }) => {
   return (
     <>
       <div className="form__row" role="group">
-        <label className="item__label item__label-select">Tallness</label>
+        <label className="item__label item__label-select">Tallness:</label>
         <label className="form__radio">
           <Field className="item__radio" type="radio" name={`players.${currentPlayer}.height`} value={"16"} />
           How's the weather up there?
@@ -20,7 +20,7 @@ export const FormOne = ({ currentPlayer, values }) => {
         </label>
       </div>
       <div className="form__row" role="group">
-        <label className="item__label item__label-select">Most Distracted by</label>
+        <label className="item__label item__label-select">Most Distracted by:</label>
         <label className="form__radio">
           <Field
             className="item__radio"
@@ -73,7 +73,7 @@ export const FormOne = ({ currentPlayer, values }) => {
         </label>
       </div>
       <div className="form__row" role="group">
-        <label className="item__label item__label-select">Best Hair Day</label>
+        <label className="item__label item__label-select">Best Hair Day:</label>
         <label className="form__radio">
           <Field
             className="item__radio"
@@ -106,7 +106,7 @@ export const FormOne = ({ currentPlayer, values }) => {
         </label>
       </div>
       <div className="form__row" role="group">
-        <label className="item__label item__label-select">Dietary Predilection</label>
+        <label className="item__label item__label-select">Dietary Predilection:</label>
         <label className="form__radio">
           <Field
             className="item__radio"

@@ -1,9 +1,11 @@
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
-  width: 100%;
+  width: 96%;
+  height: 100%;
+  margin-left: 2%;
 }
 .form__screenshot {
   display: flex;
@@ -28,11 +30,22 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 1rem 0;
+  margin-top: .75rem;
+  padding-bottom: .75rem;
+  /*border-top: 1px solid #0a182a;*/
+}
+.form__row-border {
+  border-bottom: 1px solid #0a182a;
 }
 .form__row-buttons {
+  align-self: flex-end;
   margin-bottom: 2rem;
   flex: 1 0;
+
+}
+.form__row-add {
+  margin-top: 2rem;
+
 }
 .form__row-instructions {
   margin: 0 0;
@@ -49,17 +62,29 @@
 .form__item {
   display: flex;
   flex-direction: row;
+  align-self: flex-end;
   align-items: center;
+  width: 85%;
+  margin: .25rem 7% .25rem 0%;
+}
+.form__item-header {
   width: 90%;
+  align-self: center;
   margin: .25rem 0;
+
 }
 .form__item-interest {
   flex-direction: column;
   align-items: center;
   width: 75%;
+  margin: .25rem 0;
+  align-self: center;
 }
 .form__item-addCTA {
+  align-self: center;
   width: auto;
+  margin: 1rem 0 0 0;
+
 }
 .form__radio {
   display: flex;
@@ -73,7 +98,7 @@
   margin: 0 0 2px 0;
   font-size: 1.7rem;
   font-weight: bold;
-  width: 85%;
+  text-align: center;
   flex: 1;
   flex-shrink: 0;
 }
@@ -97,6 +122,8 @@
   font-size: 1.75rem;
 }
 .item__label-select {
+  margin-left: 5%;
+  align-self: flex-start;
   flex: 0;
 }
 .item__name {
@@ -140,7 +167,7 @@
   font-size: 1.25rem;
   display: block;
   width: 100%;
-  border-radius: 0.33rem;
+  border-radius: 0.75rem;
   padding: 0.475rem 0.75rem;
   font-weight: 400;
   line-height: 1.75;

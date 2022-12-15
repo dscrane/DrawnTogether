@@ -47,8 +47,8 @@ export const PlayerForm = ({ values, formProps }) => {
         render={({ remove, push }) => (
           <>
             {values.players.map((player, index) => (
-              <div key={`player_${index}`} className="form__row">
-                <div className="form__item">
+              <div key={`player_${index}`} className="form__row form__row-border">
+                <div className="form__item form__item-header">
                   <div className="item__name">Player {index + 1}</div>
                   {values.players.length < 3 ? null : (
                     <button
@@ -90,7 +90,7 @@ export const PlayerForm = ({ values, formProps }) => {
                 </div>
               </div>
             ))}
-            <div className="form__row">
+            <div className="form__row form__row-add">
               <div className={`form__item form__item-addCTA ${values.players.length === 5 ? "invisible" : ""}`}>
                 <ActionButton onClick={() => push(responseSchema)} text={"Add Player"} buttonType={"add"} />
               </div>
