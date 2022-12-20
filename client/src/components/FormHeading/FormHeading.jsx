@@ -1,9 +1,12 @@
 /* IMPORTS */
 import React from "react";
 import "./formHeading.css";
+import { useDispatch } from "react-redux";
 /* ------ */
 
 export const FormHeading = ({ currentPlayer, numPlayers, players }) => {
+  const dispatch = useDispatch();
+
   let formTabs = [];
   if (numPlayers === 0) {
   }
@@ -12,6 +15,7 @@ export const FormHeading = ({ currentPlayer, numPlayers, players }) => {
       <div
         key={`${players[i].responses.name}_${i}`}
         className={`heading__tab ${i === currentPlayer ? "heading__tab-active" : ""}`}
+        onClick={() => dispatch({ type: "session/setPlayer", payload: { currentPlayer: i } })}
       >
         {players[i].responses.name}
       </div>

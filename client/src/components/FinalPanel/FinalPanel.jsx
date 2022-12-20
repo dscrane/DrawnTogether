@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { ActionButton } from "../ActionButton";
+import { ActionButton } from "../../lib/ActionButton";
 import { QRContainer } from "./components/QRContainer";
-import { endGame } from "../../redux/reducers/sessionSlice";
+import { endGame } from "../../redux/sessionSlice";
 import "./finalPanel.css";
 
 const FinalPanel = ({ _id, screenshot, currentForm }) => {

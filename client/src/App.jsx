@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Canvas } from "./components/Canvas";
 import { PanelLayout } from "./components/PanelLayout";
-import { CountdownModal } from "./components/CountdownModal";
-import { endGame } from "./redux/reducers/sessionSlice";
-import { InformationModal } from "./components/InformationModal";
+import { CountdownModal } from "./lib/CountdownModal";
+import { endGame } from "./redux/sessionSlice";
+import { InformationModal } from "./lib/InformationModal";
 
 export const App = () => {
   const dispatch = useDispatch();

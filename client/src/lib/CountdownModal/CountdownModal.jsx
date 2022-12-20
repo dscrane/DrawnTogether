@@ -1,7 +1,7 @@
 /* IMPORTS */
 import React, { useEffect, useState } from "react";
 import { ActionButton } from "../ActionButton";
-import { Modal } from "../../lib/Modal";
+import { Modal } from "../Modal";
 import "./countdownModal.css";
 /* ------ */
 

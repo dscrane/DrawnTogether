@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
 import QRCode from "qrcode";
 import { toPng } from "html-to-image";
-import { updateScreenshot } from "../../../../redux/reducers/sessionSlice";
+import { updateScreenshot } from "../../../../redux/sessionSlice";
 /* ------ */
 
 export const QRContainer = ({ _id, screenshot }) => {

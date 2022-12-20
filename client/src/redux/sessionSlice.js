@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../utils";
+import { api } from "../utils";
 
 const initialState = {
   _id: "",
@@ -123,6 +123,12 @@ const sessionSlice = createSlice({
       };
     },
     prevPlayer: (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+    setPlayer: (state, action) => {
       return {
         ...state,
         ...action.payload,

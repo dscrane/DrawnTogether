@@ -1,9 +1,8 @@
 import React from "react";
 import { ErrorMessage, Field, FieldArray } from "formik";
 import { ErrorOutlineRounded, CloseRounded } from "@mui/icons-material";
-import { ActionButton } from "../../ActionButton";
-import { validateString, validateInterest, validateAssociation } from "../../../utils/validators";
-import { responseSchema } from "../../../utils";
+import { ActionButton } from "../../../lib/ActionButton";
+import { validateString, validateInterest, validateAssociation, responseSchema } from "../../../utils";
 
 // Create the inputs for each player field
 const renderField = ({ index, field, form, label, placeholder, ...props }) => {

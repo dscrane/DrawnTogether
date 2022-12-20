@@ -1,5 +1,5 @@
 import React from "react";
-import { ActionButton } from "../ActionButton";
+import { ActionButton } from "../../lib/ActionButton";
 import "./panelButtonRow.css";
 
 export const PanelButtonRow = ({ nextText, prevText, handlePrevious }) => {

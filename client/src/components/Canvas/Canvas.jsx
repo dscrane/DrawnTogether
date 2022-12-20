@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ActionButton } from "../ActionButton";
+import { ActionButton } from "../../lib/ActionButton";
 import { DisplaySvg } from "../DisplaySvg";
 import { debounce } from "../../utils";
-import { generateSession } from "../../redux/reducers/sessionSlice";
+import { generateSession } from "../../redux/sessionSlice";
 import "./canvas.css";
 
 const Canvas = () => {

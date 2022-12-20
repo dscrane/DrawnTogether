@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { PolarGrid } from "../PolarGrid";
 import { FinalDisplay } from "./components/FinalDisplay";
 import { createCircleDesign } from "../../utils";
-import { updatePolarGrid } from "../../redux/reducers/displaySlice";
-import { resizePlayerCircle } from "../../redux/reducers/sessionSlice";
+import { updatePolarGrid } from "../../redux/displaySlice";
+import { resizePlayerCircle } from "../../redux/sessionSlice";
 /* ------ */
 
 const CircleDisplay = ({ circles, centerPoint, currentForm }) => {

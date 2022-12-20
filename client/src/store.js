@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import sessionReducer from "./redux/reducers/sessionSlice";
-import displayReducer from "./redux/reducers/displaySlice";
+import sessionReducer from "./redux/sessionSlice";
+import displayReducer from "./redux/displaySlice";
 import { createLogger } from "redux-logger/src";
 
 const logger = createLogger({

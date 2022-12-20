@@ -3,23 +3,8 @@ import { Formik, Form } from "formik";
 import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";
 import { FormHeading } from "../FormHeading";
-import { formInstructions } from "../../lib/instructions";
+import { InstructionText } from "../../lib/InstructionText";
 import "./formDisplay.css";
-
-const Instructions = ({ currentForm }) => {
-  const form = currentForm <= 1 ? currentForm : 2;
-  return (
-    <div className="form__row form__row-instructions">
-      <div className="form__instructions">
-        {formInstructions[form].split("\n").map((line, i) => (
-          <p className="instruction__line" key={`instruction-line-${i}`}>
-            {line}
-          </p>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, currentPlayer, numPlayers, players }) => {
   const buttonRowRef = useRef(null);
@@ -37,7 +22,7 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
               )}
               <div className="form__scroll">
                 <Form className={`form ${currentForm > 1 ? "form__stretch" : ""}`}>
-                  <Instructions currentForm={currentForm} />
+                  {/*<InstructionText currentForm={currentForm} />*/}
                   <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
                     <FormSwitch form={currentForm} currentPlayer={currentPlayer} values={values} formProps={props} />
                   </div>

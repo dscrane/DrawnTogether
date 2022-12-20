@@ -6,9 +6,9 @@ import {
   initializePlayers,
   reinitializePlayers,
   updatePlayerCircle,
-  endGame,
   finalDisplay,
-} from "../../redux/reducers/sessionSlice";
+  endGame,
+} from "../../redux/sessionSlice";
 import "./formContainer.css";
 
 const formResponseSchema = {

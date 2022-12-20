@@ -52,10 +52,12 @@ function createRadialGradient(id, hue, saturation, lightness, isInit = false, cu
   const offsets = ["0%", "25%", "50%", "75%", "100%"];
 
   function shuffle() {
+    if (isInit) {
+      return stops;
+    }
     const toMove = stops.splice(0, currentForm - 3);
     return [...stops, ...toMove];
   }
-
   return (
     <radialGradient id={`radialGradient${id}${isInit ? "__init" : ""}`}>
       {shuffle().map((el, i) => (

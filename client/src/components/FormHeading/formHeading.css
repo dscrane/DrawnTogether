@@ -17,6 +17,11 @@
   color: var(--bluegreen-fade-50);
   cursor: pointer;
 }
+.heading__tab:hover {
+  background-color: hsl(0, 0%, 22%);
+  color: var(--bluegreen-fade-75);
+
+}
 .heading__tab:first-child {
   border-style: solid none none none;
 }
@@ -35,6 +40,10 @@
   border-width: 1px;
   background: var(--bg-active);
   color: var(--accent);
+}
+.heading__tab-active:hover {
+  background: var(--bg-active);
+
 }
 .heading__tab-active:first-child {
   border-style: solid none none none;

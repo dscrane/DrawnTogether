@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { api } from "../../utils";
+import { api } from "../utils";
 
 const initialState = {
   radiusMultiplier: 1,

@@ -1,6 +1,6 @@
 /* IMPORTS */
 import React from "react";
-import { Modal } from "../../lib/Modal";
+import { Modal } from "../Modal";
 import BeyondMeasure from "../../assets/beyond-measure.jpeg";
 import InstagramQRC from "../../assets/carriecraneinstagramQR.png";
 import WebsiteQRC from "../../assets/carriecraneQR.png";
