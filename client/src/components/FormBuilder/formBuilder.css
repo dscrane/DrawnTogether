@@ -1,0 +1,198 @@
+.form__row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: .75rem;
+    padding-bottom: .75rem;
+}
+.form__row-border {
+    border-bottom: 1px solid var(--accent);
+}
+.form__row-buttons {
+    align-self: flex-end;
+    margin-bottom: 2rem;
+    /*flex: 1 0;*/
+}
+.form__row-add {
+    margin-top: 2rem;
+}
+.form__row-instructions {
+    margin: 0 0;
+    flex: 1.5 0;
+}
+.form__instructions {
+    padding-top: 1rem;
+    color: var(--font-light);
+    width: 90%;
+    font-size: 1.7rem;
+    text-align: center;
+}
+.form__item {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    width: 85%;
+    margin: .25rem 7% .25rem 0%;
+}
+.form__item-header {
+    width: 90%;
+    align-self: center;
+    margin: .25rem 0;
+
+}
+.form__item-interest {
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    margin: .25rem 0;
+    align-self: center;
+}
+.form__item-addCTA {
+    align-self: center;
+    width: auto;
+    margin: 1rem 0 0 0;
+
+}
+.form__radio {
+    display: flex;
+    align-items: center;
+    font-size: medium;
+    width: 75%;
+    color: var(--font-light);
+}
+.item__label {
+    color: var(--font-light);
+    margin: 0 0 2px 0;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+    flex-shrink: 0;
+}
+.label__wrapper {
+    color: var(--font-light);
+    margin: 0 0 2px 0;
+    font-size: 1.7rem;
+    font-weight: bold;
+    width: 75%;
+    flex: 1;
+    flex-shrink: 0;
+}
+.item__radio {
+    margin: 5px !important;
+}
+.item__label-tooltip {
+    flex: .65;
+}
+.item__label-interest {
+    text-align: center;
+    font-size: 1.75rem;
+}
+.item__label-select {
+    margin-left: 5%;
+    align-self: flex-start;
+    flex: 0;
+}
+.item__name {
+    color: var(--font-light);
+    font-size: 1.85rem;
+    font-weight: bold;
+    flex: 1;
+    text-align: left;
+}
+.item__removeCTA {
+    margin: 0 0;
+    padding: 0 0;
+    background: none;
+    border: none;
+    color: var(--notice-red);
+}
+.removeCTA__icon {
+    font-size: 2rem !important;
+}
+.item__addCTA {
+    font-size: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background-color: var(--bg-button);
+    padding: .5rem .75rem;
+    box-shadow: .25rem .25rem 1rem var(--font-dark);
+    transition: background-color 750ms;
+}
+.item__addCTA:hover {
+    color: var(--accent);
+    background-color: var(--bg-button-hover);
+}
+.item__control {
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+.form__control {
+    flex: 10;
+    font-size: 1.25rem;
+    display: block;
+    width: 100%;
+    border-radius: 0.75rem;
+    padding: 0.475rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.75;
+    background-clip: padding-box;
+    border: none;
+    box-shadow: inset .1rem .1rem .25rem var(--bg-input-shadow);
+}
+.control__error {
+    flex: 1;
+    color: var(--warning-red);
+    font-size: 1.1rem;
+}
+.form__control:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px var(--bg-input-outline);
+}
+.form__control-input {
+    color: var(--font-dark);
+    background-color: var(--bg-input-background);
+    background-clip: padding-box;
+    transition: border-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
+}
+.form__control-input_screenshot {
+    flex: 1;
+    width: 100%;
+    margin-bottom: 25px;
+}
+.form__control-input::placeholder {
+    color: var(--font-placeholder);
+}
+.form__control-select {
+    width: 75%;
+    flex: 0;
+    font-size: 1.45rem;
+    margin: 2px;
+    background-color: var(--bg-input-background);
+
+}
+.form__control-select option {
+    font-size: 1.65rem;
+}
+.form__control-select:hover {
+    cursor:pointer;
+}
+.form__control-invalid {
+    box-shadow: 0 0 2px 2px var(--warning-red);
+}
+.form__control-invalid:focus {
+    border: none;
+}
+.invisible {
+    display: none;
+}
+.form__message-error {
+    width: 15%;
+    text-align: right;
+    color: var(--warning-red);
+}

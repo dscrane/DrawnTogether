@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { Formik, Form } from "formik";
-import { FormSwitch } from "../FormSwitch";
 import { PanelButtonRow } from "../PanelButtonRow";
 import { FormHeading } from "../FormHeading";
 import { InstructionText } from "../../lib/InstructionText";
+import { FormBuilder } from "../FormBuilder";
 import "./formDisplay.css";
 
 const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, currentPlayer, numPlayers, players }) => {
@@ -24,7 +24,12 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
                 <Form className={`form ${currentForm > 1 ? "form__stretch" : ""}`}>
                   {/*<InstructionText currentForm={currentForm} />*/}
                   <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
-                    <FormSwitch form={currentForm} currentPlayer={currentPlayer} values={values} formProps={props} />
+                    <FormBuilder
+                      values={values}
+                      currentPlayer={currentPlayer}
+                      formProps={props}
+                      currentForm={currentForm}
+                    />
                   </div>
                   <div ref={buttonRowRef} className="form__row form__row-buttons">
                     <PanelButtonRow
