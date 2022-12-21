@@ -47,7 +47,6 @@ export const resizePlayerCircles = (
     });
   }
 
-  // console.log(resizedCircles);
   log.green("Resizing circles successful");
 
   if (res) {

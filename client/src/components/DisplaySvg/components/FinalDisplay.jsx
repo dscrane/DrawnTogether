@@ -3,7 +3,7 @@ import { createFinalText } from "../../../utils";
 import { FinalCircle } from "../../../lib/circles";
 import { useSelector } from "react-redux";
 
-export const FinalDisplay = ({ width, height, centerPoint }) => {
+export const FinalDisplay = ({ width, height }) => {
   const { _id, interest, players } = useSelector((state) => state.session);
   return (
     <>

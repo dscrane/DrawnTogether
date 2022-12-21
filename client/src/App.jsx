@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Canvas } from "./components/Canvas";
 import { PanelLayout } from "./components/PanelLayout";
 import { CountdownModal } from "./lib/CountdownModal";
-import { endGame } from "./redux/sessionSlice";
 import { InformationModal } from "./lib/InformationModal";
+import { endGame } from "./redux/sessionSlice";
 
 export const App = () => {
   const dispatch = useDispatch();

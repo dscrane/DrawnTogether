@@ -1,5 +1,5 @@
 /* IMPORTS */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Landing } from "../Landing";
 import { FormContainer } from "../FormContainer";
@@ -9,7 +9,6 @@ import { InfoButton } from "../../lib/InfoButton";
 
 const PanelContent = () => {
   const dispatch = useDispatch();
-
   const { _id, currentForm, screenshot } = useSelector((state) => state.session);
 
   const defineView = () => {

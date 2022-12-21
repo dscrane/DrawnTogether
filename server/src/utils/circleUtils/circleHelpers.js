@@ -317,7 +317,6 @@ export function averageColors(color, colorToAverage) {
   const values = colorToAverage.match(
     /^hsl\((-?\d{1,3}),(0|100|\d{1,2})%,(0|100|\d{1,2})%\)$/
   );
-  console.log(values);
   const hue = parseInt(values[1]);
   const saturation = parseInt(values[2]);
   const lightness = parseInt(values[3]);

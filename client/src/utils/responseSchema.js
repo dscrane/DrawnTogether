@@ -85,7 +85,7 @@ export const createMockResponseSchema = (numMocks) => {
     console.log("Mock", i, "data: ");
     mocks.push({
       mock: true,
-      name: getValue(names, Math.floor(Math.random() * 29)),
+      name: `Demo #${i}`,
       age: Math.floor(Math.random() * 100).toString(),
       height: getValue(heightVals, i),
       curiosity: getValue(curiosityVals, i),

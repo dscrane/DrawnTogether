@@ -26,7 +26,7 @@ const FormContainer = () => {
   const handlePrevious = async () => {
     dispatch({ type: "session/resetTimeout" });
     if (currentForm === 1) {
-      await dispatch(endGame(_id));
+      await dispatch(endGame({ _id }));
     } else if (currentPlayer === 0) {
       dispatch({
         type: "session/prevForm",

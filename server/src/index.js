@@ -4,8 +4,8 @@ import path from "path";
 import cors from "cors";
 import { default as connectDatabase } from "./db/db.js";
 import { gameRouter } from "./routes/gameControllers.js";
-import { log } from "./utils/appUtils/logs.js";
 import { adminRouter } from "./routes/authRoutes.js";
+import { log } from "./utils/appUtils/logs.js";
 
 // Set port
 const PORT = process.env.PORT || 5500;
@@ -26,9 +26,9 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(path.resolve(), "/src/public/index.html"));
 });
 
+// Initialize Database connection
+await connectDatabase();
+
 app.listen(PORT, "127.0.0.1", () =>
   log.yellow(`[APP]: Listening on localhost:${PORT}`)
 );
-
-// Initialize Database connection
-await connectDatabase();

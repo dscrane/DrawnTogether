@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*margin-bottom: 4rem;*/
 }
 
 .results__restart {
@@ -37,7 +36,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*padding-bottom: 25px;*/
 }
 
 .results__qrcode {

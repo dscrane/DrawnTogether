@@ -1,9 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { PanelHeaderIcons } from "../PanelHeaderIcons";
 import "./header.css";
 
-const PanelHeader = ({ currentForm }) => {
+export const PanelHeader = () => {
+  const { currentForm } = useSelector((state) => state.session);
   return (
     <div className="header" data-testid="component-PanelHeader">
       <div className="header__title">
@@ -15,10 +16,3 @@ const PanelHeader = ({ currentForm }) => {
     </div>
   );
 };
-
-const mapStateToProps = ({ session }) => {
-  const { currentForm } = session;
-  return { currentForm };
-};
-
-export default connect(mapStateToProps, null)(PanelHeader);

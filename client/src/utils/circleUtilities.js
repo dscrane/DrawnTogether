@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  BasicCircle,
-  DefaultCircle,
-  DotCircle,
-  HollowCircle,
-  LayeredCircle,
-  RingCircle,
-  StrokeCircle,
-} from "../lib/circles";
+import { BasicCircle, LayeredCircle } from "../lib/circles";
 
 /**
  * Function that draws the player circles

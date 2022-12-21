@@ -2,7 +2,7 @@ import { Game } from "../models/game.js";
 import { log } from "../utils/appUtils/logs.js";
 import { deleteGameDocuments } from "../utils/appUtils/deleteGameDocuments.js";
 
-export const endGame = async (res, { _id, currentForm }) => {
+export const endGame = async (res, { _id }) => {
   try {
     // Find the current game
     let game = await Game.findById(_id);
@@ -19,6 +19,7 @@ export const endGame = async (res, { _id, currentForm }) => {
 
     res.send({ inProgress: true });
   } catch (err) {
+    console.log(Object.keys(err));
     log.controllerFailure("Ending game for", _id, "failed");
   }
 };

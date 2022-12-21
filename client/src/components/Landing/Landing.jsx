@@ -1,7 +1,6 @@
 import React from "react";
-import { InfoRounded } from "@mui/icons-material";
-import "./landing.css";
 import { InfoButton } from "../../lib/InfoButton";
+import "./landing.css";
 
 export const Landing = ({ toggleModal }) => {
   return (

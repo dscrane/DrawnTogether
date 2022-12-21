@@ -6,7 +6,7 @@ const allScreenshots = async () => {
     screenshot: { $ne: null },
     complete: true,
   }).exec();
-  console.log(typeof games);
+
   let screenshots = [];
   for (let game in games) {
     screenshots.push(

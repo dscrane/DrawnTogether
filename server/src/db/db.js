@@ -35,11 +35,11 @@ export default async () => {
   });
 
   db.once("open", () => {
-    console.info("MongoDB connection opened!");
+    log.yellow("MongoDB connection opened!");
   });
 
   db.on("reconnected", () => {
-    console.info("MongoDB reconnected!");
+    log.yellow("MongoDB reconnected!");
   });
 
   db.on("disconnected", () => {

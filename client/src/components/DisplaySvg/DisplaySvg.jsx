@@ -12,8 +12,6 @@ const CircleDisplay = ({ circles, centerPoint, currentForm }) => {
   return <>{circles.map((circle) => createCircleDesign(circle, centerPoint, currentForm))}</>;
 };
 
-const CurrentDisplay = {};
-
 const DisplaySvg = () => {
   /* Update the display grid based on new view dimensions */
   const dispatch = useDispatch();

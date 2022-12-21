@@ -30,6 +30,7 @@ export const circleAlterations = {
  * @function initialCircleVariable
  * @param {object} responses -- Current player responses
  * @param {object} centerPoint -- Current center of the display grid
+ * @param {number} radiusMultiplier -- Multiplier for defining radius
  * @return {Object} circle -- Updated player circle object
  * */
 function initialCircleVariables(responses, centerPoint, radiusMultiplier) {
