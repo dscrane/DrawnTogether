@@ -7,6 +7,9 @@
     margin-top: .75rem;
     padding-bottom: .75rem;
 }
+.form__row-faded {
+    opacity: .6;
+}
 .form__row-border {
     border-bottom: 1px solid var(--accent);
 }
@@ -62,6 +65,7 @@
     font-size: medium;
     width: 75%;
     color: var(--font-light);
+
 }
 .item__label {
     color: var(--font-light);
@@ -82,7 +86,17 @@
     flex-shrink: 0;
 }
 .item__radio {
-    margin: 5px !important;
+    appearance: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--accent);
+    transition: 0.2s all linear;
+    margin: 5px 8px;
+}
+.item__radio:checked {
+    border: 1px solid var(--accent);
+    background: radial-gradient(var(--accent) 0%, var(--accent) 40%, transparent 50%, transparent);
 }
 .item__label-tooltip {
     flex: .65;

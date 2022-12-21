@@ -26,6 +26,7 @@ const FormDisplay = ({ onSubmit, initialValues, handlePrevious, currentForm, cur
                   <div className={`form__group ${currentForm > 1 ? "form__group-center" : ""}`}>
                     <FormBuilder
                       values={values}
+                      players={players}
                       currentPlayer={currentPlayer}
                       formProps={props}
                       currentForm={currentForm}

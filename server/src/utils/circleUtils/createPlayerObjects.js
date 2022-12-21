@@ -2,6 +2,7 @@ import { User } from "../../models/user.js";
 import { log } from "../appUtils/logs.js";
 
 export const createPlayerObjects = async (players, gameId) => {
+  console.log(players);
   try {
     let index = 0;
     let playersObj = {};
@@ -9,6 +10,7 @@ export const createPlayerObjects = async (players, gameId) => {
 
     for (const player of players) {
       const newUser = await new User({
+        mock: player.mock || false,
         responses: {
           ...player,
         },

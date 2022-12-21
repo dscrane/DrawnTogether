@@ -5,6 +5,7 @@ Int32.loadType(mongoose);
 
 export const userSchema = new mongoose.Schema({
   hasProfile: Boolean,
+  mock: Boolean,
   responses: {
     name: String,
     age: Int32,
