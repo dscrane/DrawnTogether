@@ -51,10 +51,10 @@ const names = [
   "Michael",
   "Mack",
 ];
-const heightVals = ["16", "32", "48"];
-const curiosityVals = ["27", "36", "18", "9", "0"];
-const hairVals = ["2", "1", "0"];
-const dietVals = ["omnivore", "vegetarian", "pescatarian", "vegan"];
+const heightVals = ["1", "3", "2"];
+const curiosityVals = ["144", "216", "288", "0", "72"];
+const hairVals = ["8", "16", "24"];
+const dietVals = ["0", "48", "72", "24"];
 const leaningVals = ["18", "45"];
 const personalityVals = ["60", "31", "18"];
 const productivityVals = ["2", "-1"];

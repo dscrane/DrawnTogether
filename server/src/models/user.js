@@ -12,7 +12,7 @@ export const userSchema = new mongoose.Schema({
     association: Int32,
     color: String,
     culture: Int32,
-    diet: String,
+    diet: Int32,
     food: Int32,
     productivity: Int32,
     hair: Int32,

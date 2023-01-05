@@ -12,9 +12,9 @@ import {
 import "./formContainer.css";
 
 const formResponseSchema = {
-  interest: "",
-  players: [createResponseSchema(), createResponseSchema()],
-  // players: [...createMockResponseSchema(1)],
+  interest: "Testing",
+  // players: [createResponseSchema(), createResponseSchema()],
+  players: [...createMockResponseSchema(1)],
 };
 
 const FormContainer = () => {

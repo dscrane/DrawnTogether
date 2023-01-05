@@ -5,15 +5,15 @@ export const formData = {
       name: "height",
       options: [
         {
-          value: "16",
+          value: "2",
           text: "How's the weather up there?",
         },
         {
-          value: "32",
+          value: "1",
           text: "Regular",
         },
         {
-          value: "48",
+          value: "3",
           text: "Small but mighty",
         },
       ],
@@ -23,23 +23,23 @@ export const formData = {
       name: "curiosity",
       options: [
         {
-          value: "27",
+          value: "144",
           text: "Numbers",
         },
         {
-          value: "36",
+          value: "216",
           text: "Letters",
         },
         {
-          value: "18",
+          value: "288",
           text: "Thoughts",
         },
         {
-          value: "9",
+          value: "0",
           text: "Sights",
         },
         {
-          value: "0",
+          value: "72",
           text: "Humans",
         },
       ],
@@ -49,15 +49,15 @@ export const formData = {
       name: "hair",
       options: [
         {
-          value: "2",
+          value: "8",
           text: "Curly",
         },
         {
-          value: "1",
+          value: "16",
           text: "Straight",
         },
         {
-          value: "0",
+          value: "24",
           text: "Wavy",
         },
       ],
@@ -67,19 +67,19 @@ export const formData = {
       name: "diet",
       options: [
         {
-          value: "omnivore",
+          value: "0",
           text: "Meat and salad",
         },
         {
-          value: "vegetarian",
+          value: "48",
           text: "Salad and salad",
         },
         {
-          value: "pescatarian",
+          value: "72",
           text: "Fish and salad",
         },
         {
-          value: "vegan",
+          value: "24",
           text: "No dairy, no eggs but salad",
         },
       ],

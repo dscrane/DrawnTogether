@@ -2,51 +2,24 @@
  * Creates the radian the circle is set on based off of players age
  * @function convertToCartesian
  * @param {number} age -- Current player's age value
+ * @param {number} tallness -- Current player height value
  * @param {number} radius -- Current player circle's radius
+ * @param {number} height -- Current display height
  * @returns {number} Radian set for player circle
  */
-export function createRadian(age, radius) {
-  let ageValue;
-  switch (true) {
-    case age < 10:
-      ageValue = 400;
-      break;
-    case 10 < age <= 20:
-      ageValue = 40;
-      break;
-    case 20 < age <= 30:
-      ageValue = 360;
-      break;
-    case 30 < age <= 40:
-      ageValue = 80;
-      break;
-    case 40 < age <= 50:
-      ageValue = 320;
-      break;
-    case 50 < age <= 60:
-      ageValue = 120;
-      break;
-    case 60 < age <= 70:
-      ageValue = 280;
-      break;
-    case 70 < age <= 80:
-      ageValue = 160;
-      break;
-    case 80 < age <= 90:
-      ageValue = 240;
-      break;
-    case 90 < age:
-      ageValue = 200;
-      break;
-    default:
-      // TODO error handling if no age submitted somehow
-      console.log("age value switch error");
-      console.log("this should not be logged");
-  }
+export function createRadian(age, tallness, radius, height) {
+  // Define length of radius segment
+  let segmentLength = height / 3;
 
-  const min = radius > ageValue - 20 ? ageValue + radius * 1.25 : ageValue - 20;
-  const max = min + 40;
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  // Define the bounds for the radius segment
+  let segmentUpperBound = segmentLength * tallness;
+  let segmentLowerBound = segmentLength * (tallness - 1);
+
+  // Use the bounds to generate a random radian value
+  return Math.floor(
+    Math.random() * (segmentUpperBound - segmentLowerBound + 1) +
+      segmentLowerBound
+  );
 }
 
 /**
@@ -93,57 +66,17 @@ export function altCartesian(centerPoint, degree, radian, food, productivity) {
  * @function setPlayerDegree
  * @param {number} curiosity -- Current player's curiosity value
  * @param {number} hair -- Current player's productivity value
- * @param {string} diet -- Current player's diet value
- * @returns {{slice: number, degree: number}} playerCircle's positional values
+ * @param {number} diet -- Current player's diet value
+ * @param {number} age -- Current player's age value
+ * @returns { number} playerCircle's positional values
  */
-export function setPlayerDegree(curiosity, hair, diet) {
-  let degree = 0;
-  if (curiosity === undefined || hair === undefined || diet === undefined) {
-    return { degree: 0, slice: 0 };
-  }
-  const slice = Math.floor(Math.random() * 9) + curiosity;
-  switch (diet) {
-    case "omnivore":
-      if (hair === 0) {
-        degree = slice;
-      } else if (hair % 2 === 0) {
-        degree = 136 + slice;
-      } else {
-        degree = slice;
-      }
-      break;
-    case "vegetarian":
-      if (hair === 0) {
-        degree = 181 + slice;
-      } else if (hair % 2 === 0) {
-        degree = 316 + slice;
-      } else {
-        degree = 181 + slice;
-      }
-      break;
-    case "pescatarian":
-      if (hair === 0) {
-        degree = 226 + slice;
-      } else if (hair % 2 === 0) {
-        degree = 226 + slice;
-      } else {
-        degree = 91 + slice;
-      }
-      break;
-    case "vegan":
-      if (hair === 0) {
-        degree = 46 + slice;
-      } else if (hair % 2 === 0) {
-        degree = 46 + slice;
-      } else {
-        degree = 271 + slice;
-      }
-      break;
-    default:
-      console.info("%c[ERROR]: Switch - setPlayerDegree", "color: red");
-  }
+export function setPlayerDegree(curiosity, hair, diet, age) {
+  let variationDirection = age % 2 === 0 ? -1 : 1;
+  let slice = curiosity;
+  let variation = hair * variationDirection;
+  let subSlice = diet + variation;
 
-  return { degree, slice };
+  return slice + subSlice;
 }
 
 /**

@@ -35,12 +35,18 @@ export const circleAlterations = {
  * */
 function initialCircleVariables(responses, centerPoint, radiusMultiplier) {
   const radius = setCircleRadius(radiusMultiplier);
-  const radian = createRadian(responses.age, radius);
+  const radian = createRadian(
+    responses.age,
+    responses.height,
+    radius,
+    centerPoint.y
+  );
 
-  const { degree, slice } = setPlayerDegree(
+  const degree = setPlayerDegree(
     responses.curiosity,
     responses.hair,
-    responses.diet
+    responses.diet,
+    responses.age
   );
   const { xCartesian, yCartesian } = convertToCartesian(
     centerPoint,
@@ -59,7 +65,6 @@ function initialCircleVariables(responses, centerPoint, radiusMultiplier) {
   const initialCircleData = {
     linearDPath,
     degree: degree,
-    slice: slice,
     xCartesian: xCartesian,
     yCartesian: yCartesian,
     radian,
@@ -184,16 +189,11 @@ function circleAlterationThree(responses, circleData) {
  * @param {object} circleData -- Current player circle
  * */
 function circleAlterationFour(responses, circleData) {
-  const lineDesign = createLineDesign(
-    responses.religion,
-    responses.culture,
-    {
-      hue: circleData.hue,
-      saturation: circleData.saturation,
-      lightness: circleData.lightness,
-    },
-    3
-  );
+  const lineDesign = createLineDesign(responses.religion, responses.culture, {
+    hue: circleData.hue,
+    saturation: circleData.saturation,
+    lightness: circleData.lightness,
+  });
   circleData = {
     ...circleData,
     lineDesign,
